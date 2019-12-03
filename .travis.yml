@@ -1,0 +1,35 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+cache:
+  directories:
+    - node_modules
+
+script:
+  - npm run build
+
+before-deploy:
+  - >
+    if ! [ "$BEFORE_DEPLOY_RUN" ]; then
+      export BEFORE_DEPLOY_RUN=1;
+      npm run deploy-storybook -- -o site;
+    fi
+
+deploy:
+  - provider: pages
+    edge: false
+    github_token: ${GITHUB_TOKEN}
+    local_dir: site
+    skip_cleanup: true
+    on:
+      all_branches: true
+  - provider: npm
+    edge: true
+    email: "${NPM_EMAIL}"
+    api_key: "${NPM_API_TOKEN}"
+    skip_cleanup: true
+    on:
+      tags: true
+      all_branches: true

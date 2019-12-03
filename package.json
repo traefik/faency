@@ -1,0 +1,74 @@
+{
+  "name": "@containous/faency",
+  "description": "Containous React component library",
+  "version": "0.0.1-alpha.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://containous.github.io/faency/",
+  "repository": "https://github.com/containous/faency",
+  "bugs": {
+    "url": "https://github.com/containous/faency/issues"
+  },
+  "keywords": [
+    "containous",
+    "faency",
+    "react",
+    "components",
+    "component library",
+    "design system"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "storybook": "start-storybook -p 9009 --ci",
+    "build-storybook": "build-storybook",
+    "build": "rollup -c",
+    "watch": "rollup -cw",
+    "prepublishOnly": "npm run build",
+    "deploy-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "dependencies": {
+    "@modulz/radix-system": "^0.0.1-alpha.9",
+    "@styled-system/css": "5.0.23",
+    "@styled-system/theme-get": "^5.0.21",
+    "lodash.merge": "^4.6.1",
+    "lodash.omit": "^4.5.0",
+    "lodash.pick": "^4.4.0",
+    "mdlz-prmtz": "^0.0.38",
+    "polished": "^3.4.1",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@modulz/radix-icons": "^0.8.2",
+    "@storybook/addon-options": "5.2.6",
+    "@storybook/addon-storysource": "5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/react": "5.2.6",
+    "@storybook/storybook-deployer": "^2.8.1",
+    "@types/node": "^12.0.10",
+    "@types/react": "^16.8.22",
+    "@types/react-dom": "^16.8.4",
+    "@types/storybook__react": "^4.0.2",
+    "@types/styled-components": "^4.1.16",
+    "babel-loader": "8.0.6",
+    "csstype": "^2.6.6",
+    "rollup": "^1.19.4",
+    "rollup-plugin-typescript2": "^0.22.1",
+    "rollup-plugin-url": "^2.2.2",
+    "typescript": "3.5.3",
+    "yalc": "^1.0.0-pre.32"
+  },
+  "author": "",
+  "license": "MIT"
+}
