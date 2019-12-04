@@ -27,7 +27,6 @@ export const Nav = styled('nav')<NavProps>(
     height: 64,
     backgroundColor: 'dark',
     display: 'flex',
-    paddingY: 1,
     paddingX: 0
   }),
   styleProps
@@ -68,8 +67,12 @@ export const NavItem = styled('button')<NavItemProps>(
     textDecoration: 'none',
     userSelect: 'none',
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+    transition: 'transition: color 0.3s, background-color 0.3s',
     '&::-moz-focus-inner': {
       border: 0,
+    },
+    '&:hover': {
+      backgroundColor: 'blues.7',
     },
   }),
   variant({
