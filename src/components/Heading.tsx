@@ -30,27 +30,27 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>((props
             textIndent: '-.05em',
           },
           1: {
-            fontSize: 5,
+            fontSize: 4,
             letterSpacing: '-.005em',
             textIndent: '-.06em',
           },
           2: {
-            fontSize: 7,
+            fontSize: 5,
             letterSpacing: '-.012em',
             textIndent: '-.075em',
           },
           3: {
-            fontSize: 8,
+            fontSize: 6,
             letterSpacing: '-.028em',
             textIndent: '-.085em',
           },
           4: {
-            fontSize: 9,
+            fontSize: 7,
             letterSpacing: '-.042em',
             textIndent: '-.088em',
           },
           5: {
-            fontSize: 10,
+            fontSize: 8,
             letterSpacing: '-.052em',
             textIndent: '-.09em',
           },
