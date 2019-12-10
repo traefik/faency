@@ -49,7 +49,7 @@ export const Input = withTheme(
             color: 'gray',
             cursor: 'not-allowed',
           },
-          '&:focus': {
+          '&:focus:not(:read-only), &:hover:not(:disabled):not(:read-only)': {
             border: '2px solid',
             borderColor: 'black',
             cursor: 'text',
