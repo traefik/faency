@@ -71,7 +71,7 @@ export const NavItem = styled('button')<NavItemProps>(
     '&::-moz-focus-inner': {
       border: 0,
     },
-    '&:hover': {
+    '&:hover, &:active': {
       backgroundColor: 'blues.7',
     },
   }),
