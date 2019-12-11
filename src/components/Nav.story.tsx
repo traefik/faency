@@ -58,6 +58,14 @@ function NavStory() {
           </NavGroup>
         </Nav>
       </Box>
+
+      <Box mb="4">
+        <Nav>
+          <NavGroup variant="left">
+            <NavItem as="a" href="https://containo.us">Containous Website</NavItem>
+          </NavGroup>
+        </Nav>
+      </Box>
     </>
   );
 }
