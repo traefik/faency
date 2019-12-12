@@ -4,7 +4,7 @@ import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prm
 import { variant, Prop } from '@modulz/radix-system';
 
 type TextProps = TextPrimitiveProps & {
-  fontWeight?: Prop<400 | 500>;
+  fontWeight?: Prop<400 | 600 | 700>;
   size?: Prop<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>;
   truncate?: Prop<boolean>;
   as?: any;
