@@ -2,11 +2,9 @@ import React from 'react';
 import css from '@styled-system/css';
 import { Box as BoxPrimitive, BoxProps as BoxPrimitiveProps } from 'mdlz-prmtz';
 import { variant, Prop } from '@modulz/radix-system';
-import { setLightness } from 'polished';
-import {theme} from '../theme';
 
 type ChipProps = BoxPrimitiveProps & {
-  variant?: Prop<'gray' | 'primary' | 'blue' | 'lightBlue' | 'green' | 'purple' | 'orange'>;
+  variant?: Prop<'gray' | 'blue' | 'lightBlue' | 'green' | 'purple' | 'orange'>;
   size?: Prop<0 | 1 | 2>;
   truncate?: Prop<boolean>;
 };
@@ -29,31 +27,27 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>((props, ref) => 
         variant: {
           gray: {
             color: 'grays.5',
-            backgroundColor: setLightness(0.90, theme.colors.gray),
-          },
-          primary: {
-            color: 'primary',
-            backgroundColor: setLightness(0.90, theme.colors.primary),
+            backgroundColor: 'grays.2',
           },
           blue: {
             color: 'blue',
-            backgroundColor: setLightness(0.90, theme.colors.blue),
+            backgroundColor: 'blues.2',
           },
           lightBlue: {
             color: 'lightBlue',
-            backgroundColor: setLightness(0.90, theme.colors.lightBlue),
+            backgroundColor: 'lightBlues.2',
           },
           green: {
             color: 'green',
-            backgroundColor: setLightness(0.90, theme.colors.green),
+            backgroundColor: 'greens.2',
           },
           purple: {
             color: 'purple',
-            backgroundColor: setLightness(0.90, theme.colors.purple),
+            backgroundColor: 'purples.2',
           },
           orange: {
             color: 'orange',
-            backgroundColor: setLightness(0.90, theme.colors.orange),
+            backgroundColor: 'oranges.2',
           }
         },
       }),
@@ -61,14 +55,12 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>((props, ref) => 
         size: {
           0: {
             fontSize: 1,
-            letterSpacing: '.032em',
-            height: 3,
             lineHeight: 1,
+            height: 3,
           },
           1: {
             fontSize: 1,
             lineHeight: 2,
-            letterSpacing: '.032em',
             height: 4,
           },
           2: {
