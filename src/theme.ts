@@ -18,6 +18,7 @@ export const theme = {
   radii: ['0', '3px', '6px', '8px', '12px'],
   colors: {
     primary: 'hsl(222, 67%, 51%)',
+    dark: 'hsl(223, 675%, 9%)',
     black: 'hsl(0, 0%, 0%)',
     blacks: [
       'hsla(0, 0%, 0%, .9)',
@@ -55,8 +56,8 @@ export const theme = {
       'hsl(222, 67%, 51%)',
       'hsl(222, 82%, 45%)',
       'hsl(222, 67%, 35%)',
-      'hsl(222, 67%, 12%)',
-      'hsl(222, 67%, 10%)',
+      'hsl(226, 27%, 22%)',
+      'hsl(223, 675%, 9%)',
     ],
     green: 'hsl(175, 100%, 33%)',
     greens: [
