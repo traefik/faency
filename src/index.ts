@@ -3,6 +3,7 @@ export { Provider } from './Provider';
 export { Box } from './components/Box';
 export { Button } from './components/Button';
 export { Card } from './components/Card';
+export { Chip } from './components/Chip';
 export { Flex } from './components/Flex';
 export { Heading } from './components/Heading';
 export { Input } from './components/Input';
