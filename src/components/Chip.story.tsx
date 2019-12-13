@@ -48,13 +48,16 @@ storiesOf('Components|Chip', module).add('default', () => (
 storiesOf('Components|Chip', module).add('colors', () => (
   <>
     <Flex mb="2" flexWrap="wrap">
-      <Chip mr={1} variant="primary">Primary</Chip>
-      <Chip mr={1} variant="blue">Blue</Chip>
-      <Chip mr={1} variant="lightBlue">Light Blue</Chip>
-      <Chip mr={1} variant="green">Green</Chip>
-      <Chip mr={1} variant="purple">Purple</Chip>
-      <Chip mr={1} variant="orange">Orange</Chip>
-      <Chip mr={1} variant="gray">Gray</Chip>
+      <Chip mr={2} variant="blue">Blue chip</Chip>
+      <Chip mr={2} variant="purple">Purple chip</Chip>
+    </Flex>
+    <Flex mb="2" flexWrap="wrap">
+      <Chip mr={2} variant="orange">Orange chip</Chip>
+      <Chip mr={2} variant="lightBlue">Light blue chip</Chip>
+    </Flex>
+    <Flex mb="2" flexWrap="wrap">
+      <Chip mr={2} variant="green">Green chip</Chip>
+      <Chip mr={2} variant="gray">Gray chip</Chip>
     </Flex>
   </>
 ));
