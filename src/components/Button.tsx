@@ -60,6 +60,7 @@ export const BaseButton = React.forwardRef<HTMLButtonElement, ButtonProps>((prop
             },
           },
           secondary: {
+            backgroundColor: 'transparent',
             color: 'blue',
           },
           transparent: {
