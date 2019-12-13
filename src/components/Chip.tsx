@@ -1,25 +1,24 @@
 import React from 'react';
 import css from '@styled-system/css';
-import { Box as BoxPrimitive, BoxProps as BoxPrimitiveProps } from 'mdlz-prmtz';
+import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prmtz';
 import { variant, Prop } from '@modulz/radix-system';
 import { setLightness } from 'polished';
 import {theme} from '../theme';
 
-type ChipProps = BoxPrimitiveProps & {
+type ChipProps = TextPrimitiveProps & {
   variant?: Prop<'gray' | 'primary' | 'blue' | 'lightBlue' | 'green' | 'purple' | 'orange'>;
   size?: Prop<0 | 1 | 2>;
   truncate?: Prop<boolean>;
 };
 
 export const Chip = React.forwardRef<HTMLDivElement, ChipProps>((props, ref) => (
-  <BoxPrimitive
+  <TextPrimitive
     {...props}
     ref={ref}
     css={[
       css({
         fontWeight: 600,
-        alignSelf: 'flex-start',
-        display: 'block',
+        display: 'inline-block',
         minWidth: 4,
         textAlign: 'center',
         borderRadius: 3,
