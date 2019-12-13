@@ -7,7 +7,7 @@ type LoadingProps = BoxPrimitiveProps & {
   progress?: number;
 };
 
-const loadingAnimation = (props: LoadingProps) => keyframes`
+const loadingAnimation = () => keyframes`
   50% {
     width: 100%;
     margin-left: 0;
@@ -37,7 +37,7 @@ export const Loading = React.forwardRef<HTMLDivElement, LoadingProps>((props, re
       }
     }) : _css`
       &::after {
-        animation: ${loadingAnimation(props)} 2s ease-in-out infinite
+        animation: ${loadingAnimation()} 2s ease-in-out infinite
       }
     `,
   ]} />
