@@ -21,6 +21,7 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>((props, ref) => 
         textAlign: 'center',
         borderRadius: 3,
         padding: 1,
+        whiteSpace: 'nowrap',
       }),
       variant({
         variant: {
