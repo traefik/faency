@@ -24,7 +24,7 @@ storiesOf('Components|Box', module).add('default', () => (
     </Box>
 
     <Box my={4} p={4} bg="black" textColor="blue">
-      Radix.
+      Faency
     </Box>
 
     <Box flexShrink={0} flexGrow={1} flexBasis="100%">

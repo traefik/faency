@@ -10,7 +10,7 @@ function NavStory() {
       <Box mb="4">
         <Nav>
           <NavGroup variant="right">
-            <NavItem variant="active">
+            <NavItem>
               Documentation
               {/* <Text size={2} textColor="grays.5" fontWeight={600}>Documentation</Text> */}
             </NavItem>
@@ -22,7 +22,7 @@ function NavStory() {
             <NavItem>
               <Text size={2} textColor="grays.5" fontWeight={600}>Box</Text>
             </NavItem>
-            <NavItem variant="active">
+            <NavItem>
               <Text size={2} textColor="white" fontWeight={600}>Layout</Text>
             </NavItem>
             <NavItem>
@@ -49,7 +49,7 @@ function NavStory() {
             <NavItem>
               <Text size={2} textColor="grays.5" fontWeight={600}>Box</Text>
             </NavItem>
-            <NavItem variant="active">
+            <NavItem>
               <Text size={2} textColor="white" fontWeight={600}>Layout</Text>
             </NavItem>
             <NavItem>

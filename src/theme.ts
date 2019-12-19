@@ -11,6 +11,19 @@ export const theme = {
     normal:
       'Nunito, -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, arial, sans-serif'
   },
+  fontSizes: [
+    '12px',
+    '14px',
+    '16px',
+    '18px',
+    '20px',
+    '22px',
+    '24px',
+    '28px',
+    '36px',
+    '42px',
+    '58px',
+  ],
   space: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   sizes: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   lineHeights: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],

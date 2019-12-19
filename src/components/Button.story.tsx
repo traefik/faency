@@ -48,11 +48,11 @@ storiesOf('Components|Button', module).add('default', () => (
     </Box>
 
     <Box mb="4">
-      <Button isActive mr="4">
-        Active
+      <Button variant="gray" mr="4">
+        Gray
       </Button>
-      <Button isActive size={1}>
-        Active
+      <Button variant="gray" size={1}>
+        Gray
       </Button>
     </Box>
 
