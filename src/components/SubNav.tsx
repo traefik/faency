@@ -26,7 +26,7 @@ export const SubNav = styled('nav')<SubNavProps>(
     height: 48,
     display: 'flex',
     boxShadow: '0 1px 0 0 #dcdcdc',
-    padding: 0,
+    backgroundColor: 'white',
   }),
   styleProps
 );
