@@ -1,37 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import css from '@styled-system/css';
-import { Box, BoxProps, LinkProps, ButtonProps } from 'mdlz-prmtz';
+import { variant } from 'styled-system';
 import {
-  margin,
-  MarginProps,
-  padding,
-  PaddingProps,
-  height,
-  HeightProps,
-  minHeight,
-  MinHeightProps,
-  variant,
-  compose
-} from '@modulz/radix-system';
+  Button as ButtonPrimitive,
+  ButtonProps as ButtonPrimitiveProps,
+  LinkProps as LinkPrimitiveProps,
+} from 'mdlz-prmtz';
+import { theme } from '../theme';
 
-type NavProps = MarginProps & PaddingProps & HeightProps & MinHeightProps;
-
-const styleProps = compose(margin, padding, height, minHeight);
-
-export const Nav = styled('nav')<NavProps>(
+export const Nav = styled('nav')(
   css({
     height: 64,
     backgroundColor: 'dark',
     display: 'flex',
     paddingX: 0
-  }),
-  styleProps
+  })
 );
 
-type NavItemProps = BoxProps & LinkProps & ButtonProps & {
-  variant?: 'normal' | 'active';
+type NavItemProps = ButtonPrimitiveProps & LinkPrimitiveProps & {
   as?: 'button'| 'a';
+  variant?: 'left' | 'right';
 };
 
 type NavGroupProps = {
@@ -40,56 +29,51 @@ type NavGroupProps = {
 
 const navGroupStyleProps = {};
 
-export const NavItem = React.forwardRef<HTMLDivElement, NavItemProps>(
-  (props, ref) => (
-    <Box
+export const NavItem = React.forwardRef<HTMLButtonElement, NavItemProps>(
+  ({ ...props }, forwardedRef) => (
+    <ButtonPrimitive
       {...props}
-      ref={ref}
-      css={[
-        css({
-          alignItems: 'center',
-          appearance: 'none',
-          backgroundColor: 'transparent',
-          border: 0,
-          boxSizing: 'border-box',
-          fontWeight: 600,
-          cursor: 'pointer',
-          display: 'flex',
-          outline: '1px solid transparent',
-          outlineOffset: '-1px',
-          paddingY: 1,
-          paddingX: 3,
-          position: 'relative',
-          textAlign: 'left',
-          textDecoration: 'none',
-          userSelect: 'none',
-          WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-          transition: 'color 0.3s, background-color 0.3s',
-          '&::-moz-focus-inner': {
-            border: 0
-          },
-          '&:hover, &:active': {
-            backgroundColor: 'blues.7'
-          }
-        }),
-        variant({
-          variant: {
+      ref={forwardedRef}
+      styleConfig={{
+        base: {
+          button: {
             normal: {
-              color: 'grays.5'
+              alignItems: 'center',
+              backgroundColor: 'transparent',
+              border: 0,
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              outline: '1px solid transparent',
+              outlineOffset: '-1px',
+              paddingTop: theme.space[1],
+              paddingBottom: theme.space[1],
+              paddingLeft: theme.space[3],
+              paddingRight: theme.space[3],
+              color: theme.colors.grays[5],
+              textDecoration: 'none',
+              WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+              transition: 'color 0.3s, background-color 0.3s',
+              '&::-moz-focus-inner': {
+                border: 0
+              },
+              '&:hover, &:active': {
+                backgroundColor: theme.colors.blues[7]
+              }
             },
             active: {
               color: 'white'
             }
           }
-        })
-      ]}
+        }
+      }}
     />
   )
 );
 
 NavItem.defaultProps = {
-  variant: 'normal',
   as: 'button',
+  variant: 'left',
 };
 
 export const NavGroup = styled('div')<NavGroupProps>(
@@ -97,7 +81,7 @@ export const NavGroup = styled('div')<NavGroupProps>(
     display: 'flex',
   }),
   variant({
-    variant: {
+    variants: {
       left: {
         order: 1,
       },

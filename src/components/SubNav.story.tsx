@@ -16,7 +16,9 @@ function SubNavStory() {
             This is a button
           </SubNavItem>
           <SubNavItem>
-            <Text size={2} textColor="grays.5">Defaults to Button</Text>
+            <Text size={2} textColor="grays.5">
+              Defaults to Button
+            </Text>
           </SubNavItem>
         </SubNav>
       </Box>

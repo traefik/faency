@@ -1,84 +1,64 @@
 import styled from 'styled-components';
 import css from '@styled-system/css';
-import {
-  compose,
-  height,
-  HeightProps,
-  margin,
-  MarginProps,
-  minHeight,
-  MinHeightProps,
-  minWidth,
-  MinWidthProps,
-  padding,
-  PaddingProps,
-  variant,
-  width,
-  WidthProps,
-} from '@modulz/radix-system';
+import { variant } from 'styled-system';
+import { theme } from '../theme';
 
-type SubNavProps = MarginProps & PaddingProps & HeightProps & MinHeightProps;
+type SubNavItemProps = {
+  as?: 'button' | 'a';
+  variant?: 'active' | 'normal';
+};
 
-const styleProps = compose(margin, padding, height, minHeight);
-
-export const SubNav = styled('nav')<SubNavProps>(
+export const SubNav = styled('nav')(
   css({
     height: 48,
     display: 'flex',
     boxShadow: '0 1px 0 0 #dcdcdc',
     padding: 0,
-  }),
-  styleProps
-);
-
-type SubNavItemProps = PaddingProps & WidthProps & MinWidthProps & {
-  variant?: 'active' | 'normal';
-  as?: 'a' | 'button';
-};
-
-const subNavItemStyleProps = compose(
-  padding,
-  minWidth,
-  width,
+    backgroundColor: 'white'
+  })
 );
 
 export const SubNavItem = styled('a')<SubNavItemProps>(
   css({
     alignItems: 'center',
-    backgroundColor: 'transparent',
     border: 0,
     boxSizing: 'border-box',
     cursor: 'pointer',
     display: 'flex',
     fontWeight: 600,
     outline: 'none',
-    paddingX: 3,
-    paddingY: 0,
+    paddingTop: theme.space[0],
+    paddingBottom: theme.space[0],
+    paddingLeft: theme.space[3],
+    paddingRight: theme.space[3],
     textDecoration: 'none',
     transition: 'color 0.3s, background-color 0.3s',
     userSelect: 'none',
+    backgroundColor: 'white',
+    color: theme.colors.grays[5],
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     '&::-moz-focus-inner': {
-      border: 0,
+      border: 0
     },
     '&:hover, &:active': {
-      backgroundColor: 'grays.2',
-    },
-  }),
-  variant({
-    variant: {
-      normal: {
-        color: 'grays.5',
-      },
-      active: {
-        color: 'primary',
-      },
+      backgroundColor: theme.colors.grays[2]
     }
   }),
-  subNavItemStyleProps
+  variant({
+    variants: {
+      normal: {
+        backgroundColor: 'white',
+        color: theme.colors.grays[5]
+      },
+      active: {
+        color: theme.colors.primary,
+        fontWeight: 700
+      }
+    }
+  })
 );
 
 SubNavItem.defaultProps = {
-  variant: 'normal',
   as: 'button',
+  variant: 'normal'
 };

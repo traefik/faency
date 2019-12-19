@@ -1,9 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import Icon from 'react-eva-icons';
 import { Box } from './Box';
 import { Flex } from './Flex';
 import { Input } from './Input';
-import { MagnifyingGlassIcon } from '@modulz/radix-icons';
+import { theme } from '../theme';
 
 storiesOf('Components|Input', module).add('default', () => (
   <Box maxWidth="300px">
@@ -23,7 +24,7 @@ storiesOf('Components|Input', module).add('default', () => (
         style={{ pointerEvents: 'none' }}
       >
         <Flex alignItems="center" height="100%">
-          <MagnifyingGlassIcon />
+          <Icon name="search" size="large" fill={theme.colors.grays[5]} />
         </Flex>
       </Box>
     </Box>
@@ -33,7 +34,7 @@ storiesOf('Components|Input', module).add('default', () => (
     </Box>
 
     <Box mb="4" position="relative">
-      <Input size={1} placeholder="size 1 input with icon" type="text" paddingLeft={6} />
+      <Input size={1} placeholder="size 1 input with icon" type="text" paddingLeft={5} />
 
       <Box
         position="absolute"
@@ -44,7 +45,7 @@ storiesOf('Components|Input', module).add('default', () => (
         style={{ pointerEvents: 'none' }}
       >
         <Flex alignItems="center" height="100%">
-          <MagnifyingGlassIcon />
+          <Icon name="search" size="large" fill={theme.colors.grays[5]} />
         </Flex>
       </Box>
     </Box>

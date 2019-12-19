@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Chip } from './Chip';
 import { Button } from './Button';
 import { Flex } from './Flex';
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './Table';
+import { Table, Tr, Th, Td } from './Table';
 
 storiesOf('Components|Chip', module).add('default', () => (
   <>
