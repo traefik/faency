@@ -26,7 +26,7 @@ export const Input = withTheme(
       css={[
         css({
           appearance: 'none',
-          backgroundColor: 'transparent',
+          backgroundColor: 'white',
           cursor: 'default',
           color: 'black',
           fontFamily: 'normal',
