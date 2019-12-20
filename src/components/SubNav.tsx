@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import css from '@styled-system/css';
-import { variant } from 'styled-system';
+import variant from '@styled-system/variant';
 import { theme } from '../theme';
 
 type SubNavItemProps = {

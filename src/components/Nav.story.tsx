@@ -10,9 +10,8 @@ function NavStory() {
       <Box mb="4">
         <Nav>
           <NavGroup variant="right">
-            <NavItem>
+            <NavItem variant="active">
               Documentation
-              {/* <Text size={2} textColor="grays.5" fontWeight={600}>Documentation</Text> */}
             </NavItem>
             <NavItem>
               <Text size={2} textColor="grays.5" fontWeight={600}>Github</Text>
@@ -22,7 +21,7 @@ function NavStory() {
             <NavItem>
               <Text size={2} textColor="grays.5" fontWeight={600}>Box</Text>
             </NavItem>
-            <NavItem>
+            <NavItem variant="active">
               <Text size={2} textColor="white" fontWeight={600}>Layout</Text>
             </NavItem>
             <NavItem>
@@ -34,8 +33,8 @@ function NavStory() {
       <Box mb="4">
         <Nav>
           <NavGroup variant="right">
-            <NavItem>
-              <Text size={2} textColor="grays.5" fontWeight={600}>Documentation</Text>
+            <NavItem variant="active">
+              <Text size={2} textColor="white" fontWeight={600}>Documentation</Text>
             </NavItem>
             <NavItem>
               <Text size={2} textColor="grays.5" fontWeight={600}>Github</Text>
@@ -49,7 +48,7 @@ function NavStory() {
             <NavItem>
               <Text size={2} textColor="grays.5" fontWeight={600}>Box</Text>
             </NavItem>
-            <NavItem>
+            <NavItem variant="active">
               <Text size={2} textColor="white" fontWeight={600}>Layout</Text>
             </NavItem>
             <NavItem>

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import css from '@styled-system/css';
-import { variant } from 'styled-system';
+import variant from '@styled-system/variant';
 import {
   Button as ButtonPrimitive,
   ButtonProps as ButtonPrimitiveProps,
-  LinkProps as LinkPrimitiveProps,
+  LinkProps as LinkPrimitiveProps
 } from 'mdlz-prmtz';
 import { theme } from '../theme';
 
@@ -18,10 +18,11 @@ export const Nav = styled('nav')(
   })
 );
 
-type NavItemProps = ButtonPrimitiveProps & LinkPrimitiveProps & {
-  as?: 'button'| 'a';
-  variant?: 'left' | 'right';
-};
+type NavItemProps = ButtonPrimitiveProps &
+  LinkPrimitiveProps & {
+    as?: 'button' | 'a';
+    variant?: 'active' | 'normal';
+  };
 
 type NavGroupProps = {
   variant?: 'left' | 'right';
@@ -65,6 +66,17 @@ export const NavItem = React.forwardRef<HTMLButtonElement, NavItemProps>(
               color: 'white'
             }
           }
+        },
+        variants: {
+          variant: {
+            active: {
+              button: {
+                normal: {
+                  color: 'white'
+                }
+              }
+            }
+          }
         }
       }}
     />
@@ -73,22 +85,22 @@ export const NavItem = React.forwardRef<HTMLButtonElement, NavItemProps>(
 
 NavItem.defaultProps = {
   as: 'button',
-  variant: 'left',
+  variant: 'normal'
 };
 
 export const NavGroup = styled('div')<NavGroupProps>(
   css({
-    display: 'flex',
+    display: 'flex'
   }),
   variant({
     variants: {
       left: {
-        order: 1,
+        order: 1
       },
       right: {
         order: 2,
-        marginLeft: 'auto',
-      },
+        marginLeft: 'auto'
+      }
     }
   }),
   navGroupStyleProps
