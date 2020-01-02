@@ -59,6 +59,9 @@ storiesOf('Components|Chip', module).add('colors', () => (
       <Chip mr={2} variant="green">Green chip</Chip>
       <Chip mr={2} variant="gray">Gray chip</Chip>
     </Flex>
+    <Flex mb="2" flexWrap="wrap">
+      <Chip mr={2} variant="red">Red chip</Chip>
+    </Flex>
   </>
 ));
 
