@@ -5,7 +5,14 @@ import {
 } from 'mdlz-prmtz';
 import { theme } from '../theme';
 
-type Variant = 'gray' | 'blue' | 'lightBlue' | 'green' | 'purple' | 'orange';
+type Variant =
+  | 'gray'
+  | 'blue'
+  | 'lightBlue'
+  | 'green'
+  | 'purple'
+  | 'orange'
+  | 'red';
 type Size = 0 | 1 | 2;
 
 type ChipProps = TextPrimitiveProps & {
@@ -80,6 +87,14 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
                 normal: {
                   color: theme.colors.orange,
                   backgroundColor: theme.colors.oranges[2]
+                }
+              }
+            },
+            red: {
+              text: {
+                normal: {
+                  color: theme.colors.red,
+                  backgroundColor: theme.colors.reds[2]
                 }
               }
             }
