@@ -30,6 +30,9 @@ export const theme = {
   radii: ['0', '3px', '6px', '8px', '12px'],
   colors: {
     primary: 'hsl(222, 67%, 51%)',
+    positive: '#00a697',
+    warning: '#db7d11',
+    negative: '#ff0039',
     dark: 'hsl(223, 675%, 9%)',
     black: 'hsl(0, 0%, 0%)',
     blacks: [
