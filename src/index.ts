@@ -11,5 +11,6 @@ export { Nav, NavItem, NavGroup } from './components/Nav';
 export { SubNav, SubNavItem } from './components/SubNav';
 export { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './components/Table';
 export { Text } from './components/Text';
+export { Tooltip } from './components/Tooltip';
 
 export { theme } from './theme';
