@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import css from '@styled-system/css';
 import variant from '@styled-system/variant';
 import { theme } from '../theme';
+import breakpoints from '../breakpoints';
 
 type SubNavItemProps = {
   as?: 'button' | 'a';
@@ -10,16 +11,21 @@ type SubNavItemProps = {
 
 export const SubNav = styled('nav')(
   css({
-    height: 48,
+    minHeight: 48,
     display: 'flex',
+    flexWrap: 'wrap',
     boxShadow: '0 1px 0 0 #dcdcdc',
     padding: 0,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    [`@media (max-width: ${breakpoints.tablet})`]: {
+      justifyContent: 'center'
+    }
   })
 );
 
 export const SubNavItem = styled('a')<SubNavItemProps>(
   css({
+    height: 48,
     alignItems: 'center',
     border: 0,
     boxSizing: 'border-box',
