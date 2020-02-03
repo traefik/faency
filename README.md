@@ -21,13 +21,26 @@ yarn add @containous/faency
 
 ## Usage
 
-Import components from the lib and start using them:
+- Wrap your app with the Faency provider
+
+```js
+import React from 'react';
+import { Provider as FaencyProvider } from '@containous/faency';
+
+const Root = () => (
+  <FaencyProvider>
+    <App />
+  </FaencyProvider>
+);
+```
+
+- In your app you can now import and use Faency components:
 
 ```js
 import React from 'react';
 import { Button } from '@containous/faency';
 
-const Component = () => (
+const App = () => (
   <>
     <Button variant="primary">Click me</Button>
   </>
