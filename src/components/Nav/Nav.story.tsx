@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Box } from './Box';
+import { Box } from '../Box';
 import { Nav, NavItem, NavGroup } from './Nav';
-import { Text } from './Text';
+import { Text } from '../Text';
 
 function NavStory() {
   return (

@@ -7,16 +7,12 @@ import {
   ButtonProps as ButtonPrimitiveProps,
   LinkProps as LinkPrimitiveProps
 } from 'mdlz-prmtz';
-import { theme } from '../theme';
-
-export const Nav = styled('nav')(
-  css({
-    height: 64,
-    backgroundColor: 'dark',
-    display: 'flex',
-    paddingX: 0
-  })
-);
+import { theme } from '../../theme';
+import breakpoints from '../../breakpoints';
+import uuidv4 from './utils/uuidv4';
+import MenuButton from './components/MenuButton';
+import MenuIcon from './components/MenuIcon';
+import Menu from './components/Menu';
 
 type NavItemProps = ButtonPrimitiveProps &
   LinkPrimitiveProps & {
@@ -39,6 +35,7 @@ export const NavItem = React.forwardRef<HTMLButtonElement, NavItemProps>(
         base: {
           button: {
             normal: {
+              height: 64,
               alignItems: 'center',
               backgroundColor: 'transparent',
               border: 0,
@@ -90,7 +87,12 @@ NavItem.defaultProps = {
 
 export const NavGroup = styled('div')<NavGroupProps>(
   css({
-    display: 'flex'
+    display: 'flex',
+    flexWrap: 'wrap',
+    [`@media (max-width: ${breakpoints.tablet})`]: {
+      flexDirection: 'column',
+      marginLeft: 'inherit'
+    }
   }),
   variant({
     variants: {
@@ -104,4 +106,38 @@ export const NavGroup = styled('div')<NavGroupProps>(
     }
   }),
   navGroupStyleProps
+);
+
+const NavWrapper = styled('nav')(
+  css({
+    minHeight: 64,
+    backgroundColor: 'dark',
+    display: 'flex',
+    flexWrap: 'wrap',
+    paddingX: 0
+  })
+);
+
+const ResponsiveWrapper = styled.div`
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+`;
+
+export const Nav = React.forwardRef<HTMLDivElement>(
+  ({ children, ...props }, forwardedRef) => {
+    const uuid = uuidv4();
+
+    return (
+      <NavWrapper {...props} ref={forwardedRef}>
+        <ResponsiveWrapper>
+          <MenuButton uuid={uuid} />
+          <MenuIcon uuid={uuid} />
+          <Menu>{children}</Menu>
+        </ResponsiveWrapper>
+      </NavWrapper>
+    );
+  }
 );
