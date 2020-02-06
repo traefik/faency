@@ -28,7 +28,7 @@
   "scripts": {
     "storybook": "start-storybook -p 9009 --ci",
     "build-storybook": "build-storybook",
-    "build": "rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "watch": "rollup -cw",
     "prepublishOnly": "npm run build",
     "deploy-storybook": "build-storybook"

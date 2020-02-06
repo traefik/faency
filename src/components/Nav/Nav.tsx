@@ -5,6 +5,7 @@ import variant from '@styled-system/variant';
 import {
   Button as ButtonPrimitive,
   ButtonProps as ButtonPrimitiveProps,
+  Flex,
   LinkProps as LinkPrimitiveProps
 } from 'mdlz-prmtz';
 import { theme } from '../../theme';
@@ -12,7 +13,8 @@ import breakpoints from '../../breakpoints';
 import uuidv4 from './utils/uuidv4';
 import MenuButton from './components/MenuButton';
 import MenuIcon from './components/MenuIcon';
-import Menu from './components/Menu';
+import Menu, { NavContainer } from './components/Menu';
+export { NavContainer };
 
 type NavItemProps = ButtonPrimitiveProps &
   LinkPrimitiveProps & {
@@ -121,22 +123,43 @@ const NavWrapper = styled('nav')(
 const ResponsiveWrapper = styled.div`
   position: relative;
   flex: 1;
+  flex-direction: column;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    flex-direction: row;
+  }
 `;
 
-export const Nav = React.forwardRef<HTMLDivElement>(
+type NavGroupsProps = {
+  children: React.ReactNode;
+};
+
+type NavProps = {
+  children: React.ReactNode;
+};
+
+
+export const NavGroups = React.forwardRef<HTMLDivElement, NavGroupsProps>(
   ({ children, ...props }, forwardedRef) => {
     const uuid = uuidv4();
 
     return (
+      <Flex flex={1} {...props} ref={forwardedRef}>
+        <MenuButton uuid={uuid} />
+        <MenuIcon uuid={uuid} />
+        <Menu>{children}</Menu>
+      </Flex>
+    );
+  }
+);
+
+export const Nav = React.forwardRef<HTMLDivElement, NavProps>(
+  ({ children, ...props }, forwardedRef) => {
+    return (
       <NavWrapper {...props} ref={forwardedRef}>
-        <ResponsiveWrapper>
-          <MenuButton uuid={uuid} />
-          <MenuIcon uuid={uuid} />
-          <Menu>{children}</Menu>
-        </ResponsiveWrapper>
+        <ResponsiveWrapper>{children}</ResponsiveWrapper>
       </NavWrapper>
     );
   }
