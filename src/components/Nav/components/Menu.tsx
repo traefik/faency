@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 import breakpoints from '../../../breakpoints';
 
-const Menu = styled.div`
+export const NavContainer = styled.div`
+  flex-direction: column;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    flex-direction: row;
+  }
+`;
+
+const Menu = styled(NavContainer)`
   height: 100%;
   flex: 1;
   display: none;
   flex-wrap: wrap;
-  flex-direction: column;
-  padding: 60px 0 20px 0;
+  padding: 20px 0;
 
   @media (min-width: ${breakpoints.tablet}) {
     display: flex;
-    flex-direction: row;
     padding: 0;
   }
 `;
