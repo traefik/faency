@@ -21,7 +21,7 @@ type ChipProps = TextPrimitiveProps & {
   truncate?: boolean;
 };
 
-export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
+export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>(
   (props, ref) => (
     <TextPrimitive
       {...props}
