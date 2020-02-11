@@ -1,4 +1,4 @@
-import React, { LabelHTMLAttributes } from "react";
+import React from "react";
 import { theme } from "../theme";
 import { Checkbox as CheckboxPrimitive, CheckboxProps } from "mdlz-prmtz";
 
