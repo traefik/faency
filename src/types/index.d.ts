@@ -6,3 +6,4 @@ declare module 'lodash.omit';
 declare module 'lodash.pick';
 declare module '*.woff';
 declare module '*.woff2';
+declare module 'react-eva-icons';
