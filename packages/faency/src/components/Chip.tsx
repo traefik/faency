@@ -5,7 +5,7 @@ import { theme } from '../theme'
 type Variant = 'gray' | 'blue' | 'lightBlue' | 'green' | 'purple' | 'orange' | 'red'
 type Size = 0 | 1 | 2
 
-type ChipProps = TextPrimitiveProps & {
+export type ChipProps = TextPrimitiveProps & {
   variant?: Variant
   size?: Size
   truncate?: boolean
@@ -36,6 +36,9 @@ export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, ref) =>
               normal: {
                 color: theme.colors.grays[5],
                 backgroundColor: theme.colors.grays[2],
+                svg: {
+                  fill: theme.colors.grays[5],
+                },
               },
             },
           },
@@ -44,6 +47,9 @@ export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, ref) =>
               normal: {
                 color: theme.colors.blue,
                 backgroundColor: theme.colors.blues[2],
+                svg: {
+                  fill: theme.colors.blue,
+                },
               },
             },
           },
@@ -52,6 +58,9 @@ export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, ref) =>
               normal: {
                 color: theme.colors.lightBlue,
                 backgroundColor: theme.colors.lightBlues[2],
+                svg: {
+                  fill: theme.colors.lightBlue,
+                },
               },
             },
           },
@@ -60,6 +69,9 @@ export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, ref) =>
               normal: {
                 color: theme.colors.green,
                 backgroundColor: theme.colors.greens[2],
+                svg: {
+                  fill: theme.colors.green,
+                },
               },
             },
           },
@@ -68,6 +80,9 @@ export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, ref) =>
               normal: {
                 color: theme.colors.purple,
                 backgroundColor: theme.colors.purples[2],
+                svg: {
+                  fill: theme.colors.purple,
+                },
               },
             },
           },
@@ -76,6 +91,9 @@ export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, ref) =>
               normal: {
                 color: theme.colors.orange,
                 backgroundColor: theme.colors.oranges[2],
+                svg: {
+                  fill: theme.colors.orange,
+                },
               },
             },
           },
@@ -84,6 +102,9 @@ export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>((props, ref) =>
               normal: {
                 color: theme.colors.red,
                 backgroundColor: theme.colors.reds[2],
+                svg: {
+                  fill: theme.colors.red,
+                },
               },
             },
           },
