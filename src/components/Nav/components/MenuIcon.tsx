@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import NavIcon from './NavIcon';
-import breakpoints from '../../../breakpoints';
+import React from 'react'
+import styled from 'styled-components'
+import NavIcon from './NavIcon'
+import breakpoints from '../../../breakpoints'
 
 type MenuIconProps = {
   uuid: string
@@ -10,7 +10,7 @@ type MenuIconProps = {
 const MenuIcon = styled.label.attrs((props: MenuIconProps) => ({
   for: `menu-${props.uuid}`,
   type: 'checkbox',
-  children: <NavIcon />
+  children: <NavIcon />,
 }))<MenuIconProps>`
   position: absolute;
   top: 0;
@@ -24,7 +24,6 @@ const MenuIcon = styled.label.attrs((props: MenuIconProps) => ({
   @media (min-width: ${breakpoints.tablet}) {
     display: none;
   }
-`;
+`
 
-
-export default MenuIcon;
+export default MenuIcon

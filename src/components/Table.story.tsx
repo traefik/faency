@@ -1,7 +1,7 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Box } from './Box';
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './Table';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Box } from './Box'
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './Table'
 
 storiesOf('Components|Table', module).add('default', () => (
   <>
@@ -69,4 +69,4 @@ storiesOf('Components|Table', module).add('default', () => (
       </Table>
     </Box>
   </>
-));
+))

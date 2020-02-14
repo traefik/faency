@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const NavIcon = styled.span`
   background: white;
@@ -26,6 +26,6 @@ const NavIcon = styled.span`
   &:after {
     top: -5px;
   }
-`;
+`
 
-export default NavIcon;
+export default NavIcon

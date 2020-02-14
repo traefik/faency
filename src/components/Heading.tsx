@@ -1,16 +1,16 @@
-import React from 'react';
-import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prmtz';
-import { theme } from '../theme';
+import React from 'react'
+import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prmtz'
+import { theme } from '../theme'
 
-type FontWeight = 400 | 500;
-type Size = 0 | 1 | 2 | 3 | 4 | 5;
+type FontWeight = 400 | 500
+type Size = 0 | 1 | 2 | 3 | 4 | 5
 
 export type HeadingProps = TextPrimitiveProps & {
-  fontWeight?: FontWeight;
-  size?: Size;
-  truncate?: boolean;
-  as?: any;
-};
+  fontWeight?: FontWeight
+  size?: Size
+  truncate?: boolean
+  as?: any
+}
 
 export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>((props, forwardedRef) => (
   <TextPrimitive
@@ -104,10 +104,12 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>((props
       },
     }}
   />
-));
+))
+
+Heading.displayName = 'Heading'
 
 Heading.defaultProps = {
   as: 'h1',
   truncate: false,
   size: 2,
-};
+}

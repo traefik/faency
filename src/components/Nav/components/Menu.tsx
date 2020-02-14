@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import breakpoints from '../../../breakpoints';
+import styled from 'styled-components'
+import breakpoints from '../../../breakpoints'
 
 export const NavContainer = styled.div`
   flex-direction: column;
@@ -7,7 +7,7 @@ export const NavContainer = styled.div`
   @media (min-width: ${breakpoints.tablet}) {
     flex-direction: row;
   }
-`;
+`
 
 const Menu = styled(NavContainer)`
   height: 100%;
@@ -20,6 +20,6 @@ const Menu = styled(NavContainer)`
     display: flex;
     padding: 0;
   }
-`;
+`
 
-export default Menu;
+export default Menu

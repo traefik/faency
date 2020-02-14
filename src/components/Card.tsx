@@ -1,72 +1,8 @@
-import React from 'react';
-import { CSSObject } from 'styled-components';
-import { transparentize } from 'polished';
-import {
-  Card as CardPrimitive,
-  CardProps as CardPrimitiveProps,
-  StyleConfig,
-  CardParts
-} from 'mdlz-prmtz';
-import { theme } from '../theme';
-
-export type Variant = 'border' | 'shadow' | 'ghost';
-
-type CardProps = CardPrimitiveProps & {
-  variant?: Variant;
-  as?: any;
-};
-
-export const cardStyleConfig: StyleConfig<CardParts> = {
-  base: {
-    card: {
-      normal: {
-        backgroundColor: theme.colors.white,
-        padding: theme.space[4],
-        borderRadius: theme.radii[2],
-        border: '1px solid transparent'
-      }
-    }
-  },
-  variants: {
-    variant: {
-      border: {
-        card: {
-          normal: {
-            borderColor: theme.colors.grays[3]
-          }
-        }
-      },
-      shadow: {
-        card: {
-          normal: {
-            ...createShadow(1)
-          }
-        }
-      },
-      ghost: {
-        card: {
-          normal: {
-            ...createShadow(0)
-          }
-        }
-      }
-    }
-  }
-};
-
-export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  (props, forwardedRef) => (
-    <CardPrimitive
-      {...props}
-      ref={forwardedRef}
-      styleConfig={cardStyleConfig}
-    />
-  )
-);
-
-Card.defaultProps = {
-  variant: 'border'
-};
+import React from 'react'
+import { CSSObject } from 'styled-components'
+import { transparentize } from 'polished'
+import { Card as CardPrimitive, CardProps as CardPrimitiveProps, StyleConfig, CardParts } from 'mdlz-prmtz'
+import { theme } from '../theme'
 
 function createShadow(defaultOpacity: number): CSSObject {
   return {
@@ -89,5 +25,60 @@ function createShadow(defaultOpacity: number): CSSObject {
       0 10px 20px -15px ${transparentize(0.8, theme.colors.grays[8])}`,
       opacity: defaultOpacity,
     },
-  };
+  }
+}
+
+export type Variant = 'border' | 'shadow' | 'ghost'
+
+type CardProps = CardPrimitiveProps & {
+  variant?: Variant
+  as?: any
+}
+
+export const cardStyleConfig: StyleConfig<CardParts> = {
+  base: {
+    card: {
+      normal: {
+        backgroundColor: theme.colors.white,
+        padding: theme.space[4],
+        borderRadius: theme.radii[2],
+        border: '1px solid transparent',
+      },
+    },
+  },
+  variants: {
+    variant: {
+      border: {
+        card: {
+          normal: {
+            borderColor: theme.colors.grays[3],
+          },
+        },
+      },
+      shadow: {
+        card: {
+          normal: {
+            ...createShadow(1),
+          },
+        },
+      },
+      ghost: {
+        card: {
+          normal: {
+            ...createShadow(0),
+          },
+        },
+      },
+    },
+  },
+}
+
+export const Card = React.forwardRef<HTMLDivElement, CardProps>((props, forwardedRef) => (
+  <CardPrimitive {...props} ref={forwardedRef} styleConfig={cardStyleConfig} />
+))
+
+Card.displayName = 'Card'
+
+Card.defaultProps = {
+  variant: 'border',
 }

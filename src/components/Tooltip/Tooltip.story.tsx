@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Tooltip } from './Tooltip';
-import { Box } from '../Box';
-import { Flex } from '../Flex';
-import { Text } from '../Text';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Tooltip } from './Tooltip'
+import { Box } from '../Box'
+import { Flex } from '../Flex'
+import { Text } from '../Text'
 
 storiesOf('Components|Tooltip', module).add('default', () => (
   <>
@@ -64,4 +64,4 @@ storiesOf('Components|Tooltip', module).add('default', () => (
       </Tooltip>
     </Box>
   </>
-));
+))

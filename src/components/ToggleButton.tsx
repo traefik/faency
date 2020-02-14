@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 import {
   ToggleButtonGroup as ToggleButtonGroupPrimitive,
-  ToggleButtonGroupProps as ToggleButtonGroupPrimitiveProps
-} from 'mdlz-prmtz';
-import { transparentize } from 'polished';
-import { theme } from '../theme';
+  ToggleButtonGroupProps as ToggleButtonGroupPrimitiveProps,
+} from 'mdlz-prmtz'
+import { transparentize } from 'polished'
+import { theme } from '../theme'
 
-export { ToggleButton } from 'mdlz-prmtz';
+export { ToggleButton } from 'mdlz-prmtz'
 
 export type ToggleButtonGroupProps<T> = ToggleButtonGroupPrimitiveProps<T>
 
 export const ToggleButtonGroup = <T extends string | string[] | null>(
-  props: ToggleButtonGroupProps<T>
-) => (
+  props: ToggleButtonGroupProps<T>,
+): JSX.Element => (
   <ToggleButtonGroupPrimitive
     {...props}
     styleConfig={{
@@ -29,18 +29,18 @@ export const ToggleButtonGroup = <T extends string | string[] | null>(
             fontWeight: 600,
             fontSize: theme.fontSizes[1],
             transition:
-              'background-color 0.3s cubic-bezier(0.25, 0.8, 0.5, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.5, 1)'
+              'background-color 0.3s cubic-bezier(0.25, 0.8, 0.5, 1), opacity 0.4s cubic-bezier(0.25, 0.8, 0.5, 1)',
           },
           hover: {
             background: theme.colors.grays[1],
-            cursor: 'pointer'
+            cursor: 'pointer',
           },
           toggled: {
             background: transparentize(0.9, theme.colors.primary),
-            color: theme.colors.primary
-          }
-        }
+            color: theme.colors.primary,
+          },
+        },
       },
     }}
   />
-);
+)

@@ -1,29 +1,16 @@
 type Breakpoints<T> = Array<T> & {
-  small: 0;
-  medium: '38em';
-  large: '62em';
-  xlarge: '68em';
-};
+  small: 0
+  medium: '38em'
+  large: '62em'
+  xlarge: '68em'
+}
 
 export const theme = {
   breakpoints: ['38em', '62em', '68em', '110em'] as Breakpoints<any>,
   fonts: {
-    normal:
-      'Nunito, -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, arial, sans-serif'
+    normal: 'Nunito, -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, arial, sans-serif',
   },
-  fontSizes: [
-    '12px',
-    '14px',
-    '16px',
-    '18px',
-    '20px',
-    '22px',
-    '24px',
-    '28px',
-    '36px',
-    '42px',
-    '58px',
-  ],
+  fontSizes: ['12px', '14px', '16px', '18px', '20px', '22px', '24px', '28px', '36px', '42px', '58px'],
   space: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   sizes: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   lineHeights: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
@@ -134,5 +121,5 @@ export const theme = {
       'hsl(32, 86%, 12%)',
       'hsl(32, 86%, 10%)',
     ],
-  }
-} as const;
+  },
+} as const

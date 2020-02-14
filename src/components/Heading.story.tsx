@@ -1,7 +1,7 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Box } from './Box';
-import { Heading } from './Heading';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Box } from './Box'
+import { Heading } from './Heading'
 
 storiesOf('Components|Heading', module).add('default', () => (
   <>
@@ -61,12 +61,7 @@ storiesOf('Components|Heading', module).add('default', () => (
 
     <Box my={8}>
       <Box width={200}>
-        <Heading
-          size={1}
-          mb="3"
-          truncate
-          title="Close the gap Close the gap Close the gap Close the gap"
-        >
+        <Heading size={1} mb="3" truncate title="Close the gap Close the gap Close the gap Close the gap">
           Close the gap Close the gap Close the gap Close the gap
         </Heading>
       </Box>
@@ -75,4 +70,4 @@ storiesOf('Components|Heading', module).add('default', () => (
       </Heading>
     </Box>
   </>
-));
+))

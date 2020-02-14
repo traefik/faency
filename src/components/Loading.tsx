@@ -1,12 +1,10 @@
-import React from 'react';
-import styled, { css as _css, keyframes } from 'styled-components';
-import css from '@styled-system/css';
-import { Box, BoxProps as BoxPrimitiveProps } from 'mdlz-prmtz';
-import { theme } from '../theme';
+import styled, { css as _css, keyframes, SimpleInterpolation } from 'styled-components'
+import { Box, BoxProps as BoxPrimitiveProps } from 'mdlz-prmtz'
+import { theme } from '../theme'
 
 type LoadingProps = BoxPrimitiveProps & {
-  progress?: number;
-};
+  progress?: number
+}
 
 const loadingAnimation = keyframes`
   50% {
@@ -17,13 +15,13 @@ const loadingAnimation = keyframes`
     width: 0%;
     margin-left: 100%;
   }
-`;
+`
 
 export const Loading = styled(Box)<LoadingProps>`
   height: 4px;
   width: 0;
   background-color: ${theme.colors.primary};
-  ${props =>
+  ${(props): SimpleInterpolation =>
     props.progress
       ? `
           width: ${props.progress}%;
@@ -33,4 +31,4 @@ export const Loading = styled(Box)<LoadingProps>`
           width: 0;
           animation: ${loadingAnimation} 2s ease-in-out infinite
       `}
-`;
+`
