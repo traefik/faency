@@ -1,64 +1,60 @@
-import React, { ReactNode, useRef, useState } from 'react';
-import {
-  Box as BoxPrimitive,
-  BoxProps,
-  Text as TextPrimitive
-} from 'mdlz-prmtz';
-import useToggle from '../../hooks/use-toggle';
-import { Button } from '../Button';
-import Portal from './components/Portal';
-import TooltipOverlay from './components/TooltipOverlay';
-import { PreferredPosition, PreferredAlignment } from './utils/math';
+import React, { ReactNode, useRef, useState } from 'react'
+import { Box as BoxPrimitive, BoxProps, Text as TextPrimitive } from 'mdlz-prmtz'
+import useToggle from '../../hooks/use-toggle'
+import { Button } from '../Button'
+import Portal from './components/Portal'
+import TooltipOverlay from './components/TooltipOverlay'
+import { PreferredPosition, PreferredAlignment } from './utils/math'
 
 export type TooltipProps = BoxProps & {
-  label: string;
-  children: ReactNode;
-  preferredPosition?: PreferredPosition;
-  preferredAlignment?: PreferredAlignment;
-  active?: boolean;
-  action?: 'copy';
-};
+  label: string
+  children: ReactNode
+  preferredPosition?: PreferredPosition
+  preferredAlignment?: PreferredAlignment
+  active?: boolean
+  action?: 'copy'
+}
 
-export const Tooltip = (props: TooltipProps) => {
-  const {
-    value: active,
-    setTrue: handleFocus,
-    setFalse: handleBlur
-  } = useToggle(Boolean(props.active));
+interface RefObject<T> {
+  current: T | null
+}
 
-  const [activatorNode, setActivatorNode] = useState<HTMLElement | null>(null);
-  const activatorContainer = useRef<HTMLElement>(null);
-  const mouseEntered = useRef(false);
+export const Tooltip: React.FC<TooltipProps> = props => {
+  const { value: active, setTrue: handleFocus, setFalse: handleBlur } = useToggle(Boolean(props.active))
 
-  const setActivator = (node: HTMLElement | null) => {
-    const activatorContainerRef: any = activatorContainer;
+  const [activatorNode, setActivatorNode] = useState<HTMLElement | null>(null)
+  const activatorContainer = useRef<HTMLElement>(null)
+  const mouseEntered = useRef(false)
+
+  const setActivator = (node: HTMLElement | null): void => {
+    const activatorContainerRef: RefObject<HTMLElement> = activatorContainer
     if (node == null) {
-      activatorContainerRef.current = null;
-      setActivatorNode(null);
-      return;
+      activatorContainerRef.current = null
+      setActivatorNode(null)
+      return
     }
 
-    setActivatorNode(node.firstElementChild as HTMLElement);
-    activatorContainerRef.current = node;
-  };
+    setActivatorNode(node.firstElementChild as HTMLElement)
+    activatorContainerRef.current = node
+  }
 
-  const renderAction = () => {
+  const renderAction = (): JSX.Element | null => {
     if (props.action === 'copy') {
       return (
         <Button
           style={{ height: 0, padding: 0, marginLeft: 8 }}
-          onClick={e => {
-            e.stopPropagation();
-            navigator.clipboard.writeText(props.label);
+          onClick={(e: React.MouseEvent): void => {
+            e.stopPropagation()
+            navigator.clipboard.writeText(props.label)
           }}
         >
           Copy
         </Button>
-      );
+      )
     }
 
-    return null;
-  };
+    return null
+  }
 
   const portal = activatorNode ? (
     <Portal>
@@ -76,22 +72,22 @@ export const Tooltip = (props: TooltipProps) => {
         </TooltipOverlay>
       ) : null}
     </Portal>
-  ) : null;
+  ) : null
 
-  function handleMouseLeave() {
-    mouseEntered.current = false;
-    handleBlur();
+  function handleMouseLeave(): void {
+    mouseEntered.current = false
+    handleBlur()
   }
 
-  function handleMouseEnter() {
-    mouseEntered.current = true;
-    handleFocus();
+  function handleMouseEnter(): void {
+    mouseEntered.current = true
+    handleFocus()
   }
 
   // https://github.com/facebook/react/issues/10109
   // Mouseenter event not triggered when cursor moves from disabled button
-  function handleMouseEnterFix() {
-    !mouseEntered.current && handleMouseEnter();
+  function handleMouseEnterFix(): void {
+    !mouseEntered.current && handleMouseEnter()
   }
 
   return (
@@ -105,14 +101,14 @@ export const Tooltip = (props: TooltipProps) => {
         base: {
           text: {
             normal: {
-              position: 'relative'
-            }
-          }
-        }
+              position: 'relative',
+            },
+          },
+        },
       }}
     >
       {portal}
       {props.children}
     </TextPrimitive>
-  );
-};
+  )
+}

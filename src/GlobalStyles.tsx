@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
-import css from '@styled-system/css';
-import { fontStyles } from './fonts';
+import { createGlobalStyle } from 'styled-components'
+import css from '@styled-system/css'
+import { fontStyles } from './fonts'
 
 export const GlobalStyles = createGlobalStyle(
   css({
@@ -30,5 +30,5 @@ export const GlobalStyles = createGlobalStyle(
   {
     html: { lineHeight: 1.2 },
   },
-  fontStyles
-);
+  fontStyles,
+)

@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import css from '@styled-system/css';
-import variant from '@styled-system/variant';
-import { theme } from '../theme';
-import breakpoints from '../breakpoints';
+import styled from 'styled-components'
+import css from '@styled-system/css'
+import variant from '@styled-system/variant'
+import { theme } from '../theme'
+import breakpoints from '../breakpoints'
 
 type SubNavItemProps = {
-  as?: 'button' | 'a';
-  variant?: 'active' | 'normal';
-};
+  as?: 'button' | 'a'
+  variant?: 'active' | 'normal'
+}
 
 export const SubNav = styled('nav')(
   css({
@@ -18,10 +18,10 @@ export const SubNav = styled('nav')(
     padding: 0,
     backgroundColor: 'white',
     [`@media (max-width: ${breakpoints.tablet})`]: {
-      justifyContent: 'center'
-    }
-  })
-);
+      justifyContent: 'center',
+    },
+  }),
+)
 
 export const SubNavItem = styled('a')<SubNavItemProps>(
   css({
@@ -44,27 +44,27 @@ export const SubNavItem = styled('a')<SubNavItemProps>(
     color: theme.colors.grays[5],
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
     '&::-moz-focus-inner': {
-      border: 0
+      border: 0,
     },
     '&:hover, &:active': {
-      backgroundColor: theme.colors.grays[2]
-    }
+      backgroundColor: theme.colors.grays[2],
+    },
   }),
   variant({
     variants: {
       normal: {
         backgroundColor: 'white',
-        color: theme.colors.grays[5]
+        color: theme.colors.grays[5],
       },
       active: {
         color: theme.colors.primary,
-        fontWeight: 700
-      }
-    }
-  })
-);
+        fontWeight: 700,
+      },
+    },
+  }),
+)
 
 SubNavItem.defaultProps = {
   as: 'button',
-  variant: 'normal'
-};
+  variant: 'normal',
+}

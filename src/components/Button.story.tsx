@@ -1,8 +1,7 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Box } from './Box';
-import { Text } from './Text';
-import { Button } from './Button';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Box } from './Box'
+import { Button } from './Button'
 
 storiesOf('Components|Button', module).add('default', () => (
   <>
@@ -86,8 +85,8 @@ storiesOf('Components|Button', module).add('default', () => (
             xmlns="http://www.w3.org/2000/svg"
             style={{ display: 'block' }}
           >
-            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round"  stroke-width="3" />
-            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round"  stroke-width="3" />
+            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round" strokeWidth="3" />
+            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round" strokeWidth="3" />
           </svg>
         </Box>
         Follow
@@ -103,8 +102,8 @@ storiesOf('Components|Button', module).add('default', () => (
             xmlns="http://www.w3.org/2000/svg"
             style={{ display: 'block' }}
           >
-            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round" stroke-width="2" />
-            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round" stroke-width="2" />
+            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round" strokeWidth="2" />
+            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round" strokeWidth="2" />
           </svg>
         </Box>
         Follow
@@ -124,8 +123,8 @@ storiesOf('Components|Button', module).add('default', () => (
             xmlns="http://www.w3.org/2000/svg"
             style={{ display: 'block' }}
           >
-            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round" stroke-width="2" />
-            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round" stroke-width="2" />
+            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round" strokeWidth="2" />
+            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round" strokeWidth="2" />
           </svg>
         </Box>
       </Button>
@@ -141,11 +140,11 @@ storiesOf('Components|Button', module).add('default', () => (
             xmlns="http://www.w3.org/2000/svg"
             style={{ display: 'block' }}
           >
-            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round" stroke-width="2" />
-            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round" stroke-width="2" />
+            <path d="M0 0H14" transform="translate(5.5 12.5)" strokeLinecap="round" strokeWidth="2" />
+            <path d="M0 14V0" transform="translate(12.5 5.5)" strokeLinecap="round" strokeWidth="2" />
           </svg>
         </Box>
       </Button>
     </Box>
   </>
-));
+))

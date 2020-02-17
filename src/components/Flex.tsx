@@ -1,1 +1,1 @@
-export { Flex } from 'mdlz-prmtz';
+export { Flex } from 'mdlz-prmtz'

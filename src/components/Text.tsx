@@ -1,17 +1,16 @@
-import React from 'react';
-import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prmtz';
-import { theme } from '../theme';
+import React from 'react'
+import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prmtz'
+import { theme } from '../theme'
 
-type FontWeight = 500 | 600 | 700;
-type Size = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+type FontWeight = 500 | 600 | 700
+type Size = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 export type TextProps = TextPrimitiveProps & {
-  fontWeight?: FontWeight;
-  size?: Size;
-  truncate?: boolean;
-  as?: any;
-};
-
+  fontWeight?: FontWeight
+  size?: Size
+  truncate?: boolean
+  as?: any
+}
 
 export const Text = React.forwardRef<HTMLSpanElement, TextProps>((props, forwardedRef) => (
   <TextPrimitive
@@ -132,6 +131,8 @@ export const Text = React.forwardRef<HTMLSpanElement, TextProps>((props, forward
       },
     }}
   />
-));
+))
 
-Text.defaultProps = { truncate: false };
+Text.displayName = 'Text'
+
+Text.defaultProps = { truncate: false }

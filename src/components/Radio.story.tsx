@@ -1,10 +1,10 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { Radio } from "./Radio";
-import { Flex } from "./Flex";
-import {Text} from './Text'
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Radio } from './Radio'
+import { Flex } from './Flex'
+import { Text } from './Text'
 
-storiesOf("Components|Radio", module).add("default", () => (
+storiesOf('Components|Radio', module).add('default', () => (
   <>
     <Flex flexDirection="column" mb={2}>
       <label>
@@ -22,4 +22,4 @@ storiesOf("Components|Radio", module).add("default", () => (
       <Radio name="nolabel" />
     </Flex>
   </>
-));
+))

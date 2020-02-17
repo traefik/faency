@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import css from '@styled-system/css';
+import styled from 'styled-components'
+import css from '@styled-system/css'
 
 export const Table = styled('table')(
   css({
@@ -12,34 +12,34 @@ export const Table = styled('table')(
     borderSpacing: 0,
     boxShadow: '0 1px 5px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12)',
     margin: '4px',
-  })
-);
+  }),
+)
 
-export const Thead = styled('thead')({});
+export const Thead = styled('thead')({})
 export const Tbody = styled('tbody')(
   css({
     '& tr:hover': {
       backgroundColor: 'blues.1',
     },
-  })
-);
+  }),
+)
 export const Tr = styled('tr')(
   css({
     height: 6,
     fontSize: 1,
-  })
-);
+  }),
+)
 export const Td = styled('td')(
   css({
     borderX: '1px solid',
     borderTop: '1px solid',
     borderColor: 'grays.3',
     paddingX: 2,
-    paddingY: 1, 
+    paddingY: 1,
     fontSize: 1,
     color: 'black',
-  })
-);
+  }),
+)
 
 export const Th = styled(Td)(
   css({
@@ -51,8 +51,8 @@ export const Th = styled(Td)(
     opacity: 0.54,
     transition: 'opacity 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)',
     color: 'black',
-  })
-).withComponent('th');
+  }),
+).withComponent('th')
 
 export const Tfoot = styled('tfoot')(
   css({
@@ -60,9 +60,9 @@ export const Tfoot = styled('tfoot')(
       borderTop: '1px solid',
       borderColor: 'grays.3',
       paddingX: 2,
-      paddingY: 1, 
+      paddingY: 1,
       fontSize: 1,
       color: 'black',
-    }
-  })
-);
+    },
+  }),
+)

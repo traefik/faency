@@ -1,10 +1,10 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { Checkbox } from "./Checkbox";
-import { Box } from "./Box";
-import { Text } from "./Text";
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Checkbox } from './Checkbox'
+import { Box } from './Box'
+import { Text } from './Text'
 
-storiesOf("Components|Checkbox", module).add("default", () => (
+storiesOf('Components|Checkbox', module).add('default', () => (
   <>
     <Box mb={2}>
       <Checkbox />
@@ -19,4 +19,4 @@ storiesOf("Components|Checkbox", module).add("default", () => (
       </label>
     </Box>
   </>
-));
+))

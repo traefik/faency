@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import Menu from './Menu';
-import MenuIcon from './MenuIcon';
-import NavIcon from './NavIcon';
+import styled from 'styled-components'
+import Menu from './Menu'
+import MenuIcon from './MenuIcon'
+import NavIcon from './NavIcon'
 
 type MenuButtonProps = {
   uuid: string
@@ -9,7 +9,7 @@ type MenuButtonProps = {
 
 const MenuButton = styled.input.attrs((props: MenuButtonProps) => ({
   id: `menu-${props.uuid}`,
-  type: 'checkbox'
+  type: 'checkbox',
 }))<MenuButtonProps>`
   display: none;
 
@@ -29,14 +29,9 @@ const MenuButton = styled.input.attrs((props: MenuButtonProps) => ({
     transform: rotate(-45deg);
   }
 
-  &:checked
-    ~ ${MenuIcon}
-    ${NavIcon}:before,
-    &:checked
-    ~ ${MenuIcon}
-    ${NavIcon}:after {
+  &:checked ~ ${MenuIcon} ${NavIcon}:before, &:checked ~ ${MenuIcon} ${NavIcon}:after {
     top: 0;
   }
-`;
+`
 
-export default MenuButton;
+export default MenuButton

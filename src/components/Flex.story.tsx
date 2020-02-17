@@ -1,7 +1,7 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Box } from './Box';
-import { Flex } from './Flex';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Box } from './Box'
+import { Flex } from './Flex'
 
 storiesOf('Components|Flex', module).add('default', () => (
   <>
@@ -21,4 +21,4 @@ storiesOf('Components|Flex', module).add('default', () => (
       </Flex>
     </Box>
   </>
-));
+))
