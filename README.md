@@ -5,7 +5,7 @@
 
 Faency is the [Containous](https://containo.us/) React component library.
 
-## Installation
+### Installation
 
 Run the following command using [npm](https://www.npmjs.com/):
 
@@ -19,35 +19,63 @@ If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead
 yarn add @containous/faency
 ```
 
-## Usage
+### Usage
 
 - Wrap your app with the Faency provider
 
 ```js
-import React from 'react';
-import { Provider as FaencyProvider } from '@containous/faency';
+import React from 'react'
+import { Provider as FaencyProvider } from '@containous/faency'
 
 const Root = () => (
   <FaencyProvider>
     <App />
   </FaencyProvider>
-);
+)
 ```
 
 - In your app you can now import and use Faency components:
 
 ```js
-import React from 'react';
-import { Button } from '@containous/faency';
+import React from 'react'
+import { Button } from '@containous/faency'
 
 const App = () => (
   <>
     <Button variant="primary">Click me</Button>
   </>
-);
+)
 ```
 
-## Development
+### Development
 
-We use Storybook to create a simple, hot-reloading playground for development on these components.
-You can edit/create a `*.story.tsx` file to preview and document usage of a component.
+We use Storybook to create a simple, hot-reloading playground for development on Faency components.
+You can edit/create a `*.story.tsx` file to preview a component.
+
+#### Install dependencies using
+
+```sh
+  yarn
+```
+
+#### Run documentation website + storybook
+
+```sh
+  yarn start
+```
+
+During this process Faency will be in watch mode which means that any change you made will be automatically applied to storybook and the documentation website.
+
+### Build & Release
+
+#### Build
+
+```sh
+yarn build
+```
+
+#### Release
+
+```sh
+yarn release
+```

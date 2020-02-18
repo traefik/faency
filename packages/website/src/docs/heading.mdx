@@ -1,0 +1,69 @@
+---
+title: Heading
+component: Heading
+description: Useful for rendering headlines.
+---
+
+```js live
+<Heading>Heading component</Heading>
+```
+
+<PropsTable
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    size: {
+      type: '0 | 1 | 2 | 3 | 4 | 5',
+      default: '2',
+      description: 'The size to apply',
+    },
+    fontWeight: {
+      type: '500 | 600 | 700',
+      default: '700',
+      description: 'The font weight to apply',
+    },
+    truncate: {
+      type: 'Boolean',
+      default: 'false',
+      description: 'Whether it should truncate or not',
+    },
+  }}
+/>
+<SystemProps props={['textColor', 'margin', 'padding', 'textAlign', 'fontWeight', 'lineHeight']} />
+
+## Examples
+
+### Size
+
+There are 6 sizes to choose from. Each size handles its own `font-size`, `letter-spacing` and `text-indent` accordingly.
+
+```js live
+<Heading size={0}>Heading component</Heading>
+<Heading size={1} mt={1}>Heading component</Heading>
+<Heading size={2} mt={1}>Heading component</Heading>
+<Heading size={3} mt={1}>Heading component</Heading>
+<Heading size={4} mt={1}>Heading component</Heading>
+<Heading size={5} mt={1}>Heading component</Heading>
+```
+
+### Font weight
+
+There are 3 weight options to choose from.
+
+```js live
+<Heading fontWeight="500">Heading component</Heading>
+<Heading fontWeight="600">Heading component</Heading>
+<Heading fontWeight="700">Heading component</Heading>
+```
+
+### Text truncation
+
+When `true` this will truncate your text based on its maximum width.
+
+```js live
+<Box width={100}>
+  <Heading truncate>Heading component</Heading>
+</Box>
+```

@@ -1,0 +1,88 @@
+---
+title: Chip
+component: Chip
+description: Useful to emphasise information to the user, works best with single word values.
+---
+
+```js live
+<Chip variant="green">At Containous, our goal is to make networking boring.</Chip>
+```
+
+<PropsTable
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render inside the Chip',
+    },
+    variant: {
+      type: 'gray | blue | lightBlue | purple | green | orange | red',
+      default: 'gray',
+      description: 'The variant to apply',
+    },
+    size: {
+      type: '0 | 1 | 2',
+      default: '0',
+      description: 'The size to apply',
+    },
+    truncate: {
+      type: 'Boolean',
+      default: 'false',
+      description: 'Whether it should truncate or not',
+    },
+  }}
+/>
+<SystemProps
+  props={['textColor', 'margin', 'padding', 'fontStyle', 'fontFamily', 'fontWeight', 'textAlign', 'lineHeight']}
+/>
+
+## Examples
+
+### Size
+
+There are 3 sizes to choose from.
+
+```js live
+<Chip as="p" size={0}>Chip component</Chip>
+<Chip as="p" ml={3} size={1}>Chip component</Chip>
+<Chip as="p" ml={3} size={2}>Chip component</Chip>
+```
+
+### Colors
+
+There are 7 colors to choose from.
+
+```js live
+<Chip variant="gray">
+  Gray
+</Chip>
+<Chip variant="blue" ml={3}>
+  Blue
+</Chip>
+<Chip variant="lightBlue" ml={3}>
+  Light Blue
+</Chip>
+<Chip variant="purple" ml={3}>
+  Purple
+</Chip>
+<Chip variant="green" ml={3}>
+  Green
+</Chip>
+<Chip variant="orange" ml={3}>
+  Orange
+</Chip>
+<Chip variant="red" ml={3}>
+  Red
+</Chip>
+```
+
+### Text truncation
+
+When `true` this will truncate your text based on its maximum width.
+
+```js live
+<Flex mb="2" maxWidth="150px">
+  <Chip truncate title="At Containous, our goal is to make networking boring.">
+    At Containous, our goal is to make networking boring.
+  </Chip>
+</Flex>
+```

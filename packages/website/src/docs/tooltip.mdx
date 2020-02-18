@@ -1,0 +1,110 @@
+---
+title: Tooltip
+component: Tooltip
+description: An accessible Tooltip component that shows information related to an element when it is hovered or focused.
+---
+
+```js live
+<Tooltip label="Default tooltip">
+  <Button size={1}>Hover me</Button>
+</Tooltip>
+```
+
+<PropsTable
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render as target',
+    },
+    label: {
+      type: 'String',
+      description: 'The content to render in the Tooltip',
+    },
+    preferredPosition: {
+      type: 'top | bottom',
+      default: 'bottom',
+      description: 'The position of the tooltip compared to the target',
+    },
+    preferredAlignment: {
+      type: 'left | center | right',
+      default: 'bottom',
+      description: 'The alignment of the tooltip compared to the target',
+    },
+    active: {
+      type: 'boolean',
+      description: 'The default state of the Tooltip. If active the tooltip will displayed.',
+    },
+    action: {
+      type: 'copy',
+      description: 'Actions are giving super powers to the toolip',
+    },
+  }}
+/>
+
+## Examples
+
+### Preferred Alignment
+
+There are 2 position options to choose from.
+
+```js live
+<Box mb="6">
+  <Tooltip label="Tooltip" preferredPosition="bottom">
+    <Text>Bottom (default)</Text>
+  </Tooltip>
+</Box>
+
+<Box>
+  <Tooltip label="Tooltip" preferredPosition="top">
+    <Text>Top</Text>
+  </Tooltip>
+</Box>
+```
+
+### Preferred Alignment
+
+There are 3 alignment options to choose from.
+
+```js live
+<Box mb="6">
+  <Tooltip label="Tooltip" preferredAlignment="left">
+    <Text>Left</Text>
+  </Tooltip>
+</Box>
+
+<Box mb="6">
+  <Tooltip label="Tooltip" preferredAlignment="center">
+    <Text>Center</Text>
+  </Tooltip>
+</Box>
+
+<Box>
+  <Tooltip label="Tooltip" preferredAlignment="right">
+    <Text>Right</Text>
+  </Tooltip>
+</Box>
+```
+
+### Active
+
+The default state of the Tooltip. If active the tooltip will displayed.
+
+```js live
+<Box>
+  <Tooltip label="Tooltip" active>
+    <Text>Active by default</Text>
+  </Tooltip>
+</Box>
+```
+
+### Action
+
+Actions are giving super powers to the toolip
+
+```js live
+<Box>
+  <Tooltip label="Copiable Tooltip content" action="copy">
+    <Text>Will add a copy button to add tooltip content to the user clipboard.</Text>
+  </Tooltip>
+</Box>
+```

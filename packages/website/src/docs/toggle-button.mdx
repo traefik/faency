@@ -1,0 +1,46 @@
+---
+title: ToggleButton
+component: ToggleButton
+description: Useful for allowing users to select one or more options from a set.
+---
+
+```js live
+<Box width="135px">
+  <ToggleButtonGroup value="left" onChange={alert}>
+    <ToggleButton value="left">Left</ToggleButton>
+    <ToggleButton value="center">Center</ToggleButton>
+    <ToggleButton value="right">Right</ToggleButton>
+  </ToggleButtonGroup>
+</Box>
+```
+
+<PropsTable
+  title="ToggleButtonGroup Props"
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    value: {
+      type: 'any',
+      description: 'The current selected value',
+    },
+    onChange: {
+      type: 'function',
+      description: 'Callback triggered with the selected ToggleButton value as parameter',
+    },
+  }}
+/>
+<PropsTable
+  title="ToggleButton Props"
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    value: {
+      type: 'any',
+      description: 'The assigned value',
+    },
+  }}
+/>

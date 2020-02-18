@@ -1,0 +1,63 @@
+---
+title: SubNav
+component: SubNav
+description: A sub navigation bar
+---
+
+```js live
+<SubNav>
+  <SubNavItem as="a" href="#">
+    This is a link
+  </SubNavItem>
+  <SubNavItem as="button" variant="active" onClick={() => alert('clicked!')}>
+    This is a button
+  </SubNavItem>
+  <SubNavItem>
+    <Text size={2} textColor="grays.5">
+      Defaults to Button
+    </Text>
+  </SubNavItem>
+</SubNav>
+```
+
+<PropsTable
+  title="SubNavItem Props"
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    variant: {
+      type: 'active | normal',
+      default: 'normal',
+      description: 'The navigation state of this item',
+    },
+    as: {
+      type: 'a | button',
+      default: 'button',
+      description: 'The HTML element to use to render the navigation item',
+    },
+  }}
+/>
+
+## Examples
+
+### NavItem As
+
+There are 2 variants to choose from.
+
+```js live
+<SubNav>
+  <SubNavItem as="button" onClick={() => alert('clicked!')}>
+    As a button
+  </SubNavItem>
+</SubNav>
+```
+
+```js live
+<SubNav>
+  <SubNavItem as="a" href="https://containo.us">
+    As a link
+  </SubNavItem>
+</SubNav>
+```

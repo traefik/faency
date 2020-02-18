@@ -4,6 +4,7 @@ node_js:
   - "stable"
 
 cache:
+  yarn: true
   directories:
     - node_modules
 
@@ -13,20 +14,14 @@ branches:
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 
 script:
-  - npm run build
-
-before-deploy:
-  - >
-    if ! [ "$BEFORE_DEPLOY_RUN" ]; then
-      export BEFORE_DEPLOY_RUN=1;
-      npm run deploy-storybook -- -o site;
-    fi
+  - yarn lint
+  - yarn build
 
 deploy:
   - provider: pages
     edge: false
     github_token: ${GITHUB_TOKEN}
-    local_dir: site
+    local_dir: packages/website/public
     skip_cleanup: true
     on:
       all_branches: true
