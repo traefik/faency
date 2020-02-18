@@ -25,7 +25,7 @@ const CustomInput = ({ onEnter, ...props }: CustomInputType) => {
     }
   }
 
-  return <StyledInput {...props} onKeyPress={handlePressEnter} />
+  return <StyledInput {...props} onKeyPress={handlePressEnter}/>
 }
 
 const Container = styled('div')<{ hasFocus: boolean }>`
@@ -39,13 +39,11 @@ const Container = styled('div')<{ hasFocus: boolean }>`
   flex-wrap: wrap;
 
   ${({ hasFocus }) =>
-    hasFocus &&
-    `
+  hasFocus &&
+  `
     box-shadow: 0 0 0 2px ${theme.colors.black};    
   `}
 `
-
-const SyledDismissableChip = styled(DismissableChip)``
 
 const ChipsContainer = styled('div')`
   display: flex;
@@ -56,7 +54,7 @@ const ChipsContainer = styled('div')`
     max-width: 60%;
   }
 
-  ${SyledDismissableChip} {
+  > * {
     margin: 0 ${theme.space[1]} ${theme.space[1]} 0;
   }
 `
@@ -64,9 +62,9 @@ const ChipsContainer = styled('div')`
 type RenderTagType = (props: { tag: string; removeTag: () => void }) => ReactNode
 
 const defaultRenderTag: RenderTagType = ({ tag, removeTag }) => (
-  <SyledDismissableChip key={tag} dismiss={() => removeTag()}>
+  <DismissableChip key={tag} dismiss={() => removeTag()}>
     {tag}
-  </SyledDismissableChip>
+  </DismissableChip>
 )
 
 type InputTagsProps = {
