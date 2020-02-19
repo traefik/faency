@@ -1,8 +1,9 @@
-import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState } from 'react'
 import { DismissableChip } from './DismissableChip'
 import { InputProps } from 'mdlz-prmtz'
 import styled from 'styled-components'
 import { theme } from '../theme'
+import { Box } from './Box'
 
 const StyledInput = styled('input')`
   border: none;
@@ -13,20 +14,6 @@ const StyledInput = styled('input')`
   max-height: ${theme.sizes[3]};
   margin: 0 ${theme.space[1]} ${theme.space[1]} 0;
 `
-
-type CustomInputType = InputProps & {
-  onEnter?: () => void
-}
-
-const CustomInput = ({ onEnter, ...props }: CustomInputType) => {
-  const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && onEnter) {
-      onEnter()
-    }
-  }
-
-  return <StyledInput {...props} onKeyPress={handlePressEnter}/>
-}
 
 const Container = styled('div')<{ hasFocus: boolean }>`
   position: relative;
@@ -59,60 +46,137 @@ const ChipsContainer = styled('div')`
   }
 `
 
-type RenderTagType = (props: { tag: string; removeTag: () => void }) => ReactNode
+const SelectContainer = styled(Box)`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 3px;
+  background: ${theme.colors.white};
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  z-index: 10;
+`
 
-const defaultRenderTag: RenderTagType = ({ tag, removeTag }) => (
-  <DismissableChip key={tag} dismiss={() => removeTag()}>
+const SelectItem = styled(Box)`
+  padding: ${theme.space[1]};
+  transition: all 100ms ease-in;
+
+  &:hover {
+    background: ${theme.colors.blue};
+    color: ${theme.colors.white};
+    cursor: pointer;
+  }
+`
+
+type CustomInputType = InputProps & {
+  onEnter?: (value: string) => void
+}
+
+const CustomInput = ({ onEnter, ...props }: CustomInputType) => {
+  const [value, setValue] = useState(props.value as string)
+
+  const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && onEnter) {
+      onEnter(value)
+    }
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+    if (props.onChange) {
+      props.onChange(e)
+    }
+  }
+
+  return <StyledInput {...props} onChange={handleChange} onKeyPress={handlePressEnter}/>
+}
+
+type RenderTagType = (tag: string, onDeleteTag: (tag: string) => void) => ReactNode
+
+const defaultRenderTag: RenderTagType = (tag, onDeleteTag) => (
+  <DismissableChip key={tag} dismiss={() => onDeleteTag(tag)}>
     {tag}
   </DismissableChip>
 )
 
-type InputTagsProps = {
+type RenderOptionType = (tag: string, onClick: (v: string) => void) => ReactNode
+
+const defaultRenderOption: RenderOptionType = (option, onClick) => (
+  <SelectItem key={option} onClick={() => onClick(option)}>
+    {option}
+  </SelectItem>
+)
+
+interface InputTagsProps {
+  value?: string
   placeholder?: string
   tags?: string[]
-  renderTag?: RenderTagType
+  options?: string[]
+  maxTags?: number
   maxInlineTags?: number
+  renderTag?: RenderTagType
+  renderOption?: RenderOptionType
+  onChange?: (value: string) => void
+  onSubmit?: (value: string) => void
+  onDeleteTag?: (tag: string) => void
 }
 
 export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
-  ({ placeholder = '', tags = [], renderTag = defaultRenderTag, maxInlineTags = 3 }, forwardedRef) => {
-    const [values, setValues] = useState<string[]>(tags)
-    const [fieldValue, setFieldValue] = useState('')
+  (
+    {
+      value = '',
+      placeholder = '',
+      tags = [],
+      options = [],
+      maxTags = Infinity,
+      maxInlineTags = 3,
+      renderTag = defaultRenderTag,
+      renderOption = defaultRenderOption,
+      onChange,
+      onSubmit = () => null,
+      onDeleteTag = () => null,
+    },
+    forwardedRef,
+  ) => {
     const [hasFocus, setFocus] = useState(false)
-    const addValue = () => {
-      setValues(prevValues => (!prevValues.includes(fieldValue) ? [...prevValues, fieldValue] : prevValues))
-      setFieldValue('')
+    const [inputValue, setValue] = useState(value)
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value)
+      if (onChange) onChange(e.target.value)
     }
-    const removeValue = (i: number) =>
-      setValues(prevValues => prevValues.slice(0, i).concat(prevValues.slice(i + 1, prevValues.length)))
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => setFieldValue(e.target.value)
+
+    useEffect(() => {
+      setValue(value)
+    }, [value, setValue])
 
     return (
       <Container hasFocus={hasFocus}>
         <CustomInput
           ref={forwardedRef}
-          onEnter={addValue}
-          onChange={handleChange}
-          value={fieldValue}
+          onEnter={onSubmit}
+          value={inputValue}
+          onChange={handleInputChange}
           placeholder={placeholder}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
         />
-        {values.length > 0 && (
+        {tags.length > 0 && (
           <>
             <ChipsContainer>
-              {values.map(
-                (tag, index) => index < maxInlineTags && renderTag({ tag, removeTag: () => removeValue(index) }),
-              )}
+              {tags.map((tag, index) => index < maxInlineTags && renderTag(tag, onDeleteTag))}
             </ChipsContainer>
             <ChipsContainer>
-              {values.map(
-                (tag, index) => index >= maxInlineTags && renderTag({ tag, removeTag: () => removeValue(index) }),
-              )}
+              {tags.map((tag, index) => index >= maxInlineTags && renderTag(tag, onDeleteTag))}
             </ChipsContainer>
           </>
+        )}
+        {inputValue.length > 0 && options.length > 0 && (
+          <SelectContainer>{options.map(option => renderOption(option, onSubmit))}</SelectContainer>
         )}
       </Container>
     )
   },
 )
+
+InputTags.displayName = 'InputTags'

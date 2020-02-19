@@ -32,11 +32,13 @@ type DismissableChipProps = ChipProps & {
   dismiss: () => void
 }
 
-export const DismissableChip = ({ children, dismiss, ...props }: DismissableChipProps) => (
-  <Chip {...props} variant="blue">
+export const DismissableChip: React.FC<DismissableChipProps> = ({ children, dismiss, ...props }) => (
+  <Chip {...props} variant={props.variant || 'blue'}>
     <span>{children}</span>
     <CloseButton onClick={() => dismiss()}>
       <Icon name="close-outline" />
     </CloseButton>
   </Chip>
 )
+
+DismissableChip.displayName = 'DismissableChip'
