@@ -77,13 +77,13 @@ const InputTagsAddTagsFromInput = () => {
 storiesOf('Components|InputTags', module).add('default', () => (
   <Box>
     <Box mb={1}>
-      <InputTagsWithAutocomplete/>
+      <InputTagsWithAutocomplete />
     </Box>
     <Box mb={1}>
-      <InputTagsCustomTagRender/>
+      <InputTagsCustomTagRender />
     </Box>
     <Box mb={1}>
-      <InputTagsAddTagsFromInput/>
+      <InputTagsAddTagsFromInput />
     </Box>
   </Box>
 ))
