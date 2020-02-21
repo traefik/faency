@@ -39,7 +39,8 @@
     "react-live": "^2.2.2",
     "remark-autolink-headings": "^5.2.1",
     "remark-slug": "^5.1.2",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
     "gh-pages": "^2.2.0"

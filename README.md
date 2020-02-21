@@ -58,6 +58,12 @@ You can edit/create a `*.story.tsx` file to preview a component.
   yarn
 ```
 
+#### Initialize a Faency build
+
+```sh
+  yarn run init
+```
+
 #### Run documentation website + storybook
 
 ```sh

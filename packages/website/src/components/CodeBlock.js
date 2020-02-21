@@ -1,16 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Box, theme as faencyTheme } from '@containous/faency'
+import useDarkMode from 'use-dark-mode'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
 import { useMDXComponents, mdx } from '@mdx-js/react'
-import { Box, theme as faencyTheme } from '@containous/faency'
 import nightOwl from 'prism-react-renderer/themes/nightOwl'
 
 const CodeBlock = ({ children, live, removeFragment }) => {
   const components = useMDXComponents()
+  const darkMode = useDarkMode()
 
   const liveProviderProps = {
     transformCode: code => (removeFragment ? code : `<>${code}</>`),
     scope: { mdx, ...components },
+  }
+
+  if (darkMode.value) {
+    nightOwl.plain.backgroundColor = '#111726'
   }
 
   if (live) {

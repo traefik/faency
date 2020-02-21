@@ -2,6 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import favicon from '../../static/favicon.png'
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  body, #gatsby-focus-wrapper {
+    min-height: 100vh;
+  }
+`
 
 function Layout({ children }) {
   return (
@@ -21,6 +28,7 @@ function Layout({ children }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@containous" />
       </Helmet>
+      <GlobalStyle />
       {children}
     </>
   )

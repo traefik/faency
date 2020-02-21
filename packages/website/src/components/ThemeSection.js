@@ -98,7 +98,7 @@ const ColorCard = ({ color, name, props }) => (
         }}
       />
       <Box mt={1}>
-        <FaencyHeading as="h4" size={0} fontWeight={500} mt={2} mb={1}>
+        <FaencyHeading as="h4" size={0} mt={2} mb={1}>
           <span style={{ textTransform: 'capitalize' }}>{name}</span>
         </FaencyHeading>
         <Text as="p" size={0} textColor="gray700" mb={2}>
@@ -115,9 +115,9 @@ ColorCard.propTypes = {
   props: PropTypes.object,
 }
 
-const Heading = props => <FaencyHeading as="h2" fontWeight={500} size={2} mt={8} mb={4} {...props} />
+const Heading = props => <FaencyHeading as="h2" size={2} mt={8} mb={4} {...props} />
 
-const Subheading = props => <FaencyHeading as="h3" fontWeight={500} size={1} mt={6} mb={4} {...props} />
+const Subheading = props => <FaencyHeading as="h3" size={1} mt={6} mb={4} {...props} />
 
 const SectionTitle = props => (
   <Text size={2} marginY={0} textColor="gray700" style={{ textTransform: 'capitalize' }} {...props} />

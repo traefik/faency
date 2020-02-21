@@ -27,6 +27,7 @@ export const Tr = styled('tr')(
   css({
     height: 6,
     fontSize: 1,
+    overflow: 'hidden',
   }),
 )
 export const Td = styled('td')(

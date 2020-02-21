@@ -7,7 +7,7 @@ function ThemeComponent({ children }) {
   const [currentTheme, setCurrentTheme] = useState(theme);
   return (
     <Provider theme={currentTheme}>
-      <Box p={3} backgroundColor="#F2F3F5">{children}</Box>
+      <Box p={3} backgroundColor="bg">{children}</Box>
     </Provider>
   );
 }
