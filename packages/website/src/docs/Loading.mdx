@@ -1,0 +1,40 @@
+---
+title: Loading
+component: Loading
+description: A primitive useful for rendering text.
+---
+
+```js live
+<Loading />
+```
+
+<PropsTable
+  data={{
+    progress: {
+      type: 'number',
+      description: 'The percentage already loaded',
+    },
+  }}
+/>
+
+## Examples
+
+### Progress
+
+```js live
+<Box>
+  <Loading progress={33} />
+</Box>
+```
+
+```js live
+<Box>
+  <Loading progress={66} />
+</Box>
+```
+
+```js live
+<Box>
+  <Loading progress={100} />
+</Box>
+```

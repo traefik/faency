@@ -1,0 +1,38 @@
+---
+title: Getting Started
+pinned: 'true'
+description: Faency is the React component library used at Containous.
+---
+
+### Installing Faency
+
+Faency is currently under heavy development, but can be installed by running either of these commands:
+
+```
+npm install @containous/faency
+```
+
+<br />
+or
+
+```
+yarn add @containous/faency
+```
+
+### Faency Provider
+
+Make sure to wrap your app in the Faency `Provider` to get the default theme:
+
+```js
+import { Provider as FaencyProvider } from '@containous/faency'
+
+const App = () => <FaencyProvider>Hey there👋</FaencyProvider>
+```
+
+### Importing components from Faency
+
+All components can be imported directly:
+
+```js
+import { Heading, Text, Link } from '@containous/faency'
+```

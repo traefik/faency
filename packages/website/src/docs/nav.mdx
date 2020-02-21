@@ -1,0 +1,139 @@
+---
+title: Nav
+component: Nav
+description: A main navigation bar
+---
+
+```js live
+<Nav>
+  <NavItem>
+    <img src="https://containo.us/assets/img/traefik-logo.svg" height="30px" />
+  </NavItem>
+  <NavGroups>
+    <NavGroup variant="right">
+      <NavItem variant="active">Documentation</NavItem>
+      <NavItem>
+        <Text size={2} textColor="grays.5" fontWeight={600}>
+          Github
+        </Text>
+      </NavItem>
+    </NavGroup>
+    <NavGroup variant="left">
+      <NavItem>
+        <Text size={2} textColor="grays.5" fontWeight={600}>
+          Box
+        </Text>
+      </NavItem>
+      <NavItem variant="active">
+        <Text size={2} textColor="white" fontWeight={600}>
+          Layout
+        </Text>
+      </NavItem>
+      <NavItem>
+        <Text size={2} textColor="grays.5" fontWeight={600}>
+          Button
+        </Text>
+      </NavItem>
+    </NavGroup>
+  </NavGroups>
+</Nav>
+```
+
+<PropsTable
+  title="NavGroup Props"
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    variant: {
+      type: 'left | right',
+      default: 'left',
+      description: 'The position of children in the navigaion bar',
+    },
+  }}
+/>
+<PropsTable
+  title="NavItem Props"
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    variant: {
+      type: 'active | normal',
+      default: 'normal',
+      description: 'The navigation state of this item',
+    },
+    as: {
+      type: 'a | button',
+      default: 'button',
+      description: 'The HTML element to use to render the navigation item',
+    },
+  }}
+/>
+
+## Examples
+
+### NavGroup Variant
+
+There are 2 variants to choose from.
+
+```js live
+<Nav>
+  <NavGroup variant="right">
+    <NavItem>
+      <Text size={2} textColor="grays.5" fontWeight={600}>
+        Button on the right
+      </Text>
+    </NavItem>
+  </NavGroup>
+</Nav>
+```
+
+```js live
+<Nav>
+  <NavGroup variant="left">
+    <NavItem>
+      <Text size={2} textColor="grays.5" fontWeight={600}>
+        Button on the left (default)
+      </Text>
+    </NavItem>
+  </NavGroup>
+</Nav>
+```
+
+```js live
+<Nav>
+  <NavGroup variant="right">
+    <NavItem>Button on the right</NavItem>
+  </NavGroup>
+  <NavGroup variant="left">
+    <NavItem>Button on the left</NavItem>
+  </NavGroup>
+</Nav>
+```
+
+### NavItem As
+
+There are 2 variants to choose from.
+
+```js live
+<Nav>
+  <NavGroup variant="left">
+    <NavItem as="button" onClick={() => alert('clicked!')}>
+      As a button
+    </NavItem>
+  </NavGroup>
+</Nav>
+```
+
+```js live
+<Nav>
+  <NavGroup variant="left">
+    <NavItem as="a" href="https://containo.us">
+      As a link
+    </NavItem>
+  </NavGroup>
+</Nav>
+```

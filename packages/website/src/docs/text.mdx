@@ -1,0 +1,78 @@
+---
+title: Text
+component: Text
+description: A primitive useful for rendering text.
+---
+
+```js live
+<Text>At Containous, our goal is to make networking boring.</Text>
+```
+
+<PropsTable
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    size: {
+      type: '0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10',
+      default: '2',
+      description: 'The size to apply',
+    },
+    fontWeight: {
+      type: '500 | 600 | 700',
+      default: '500',
+      description: 'The font weight to apply',
+    },
+    truncate: {
+      type: 'Boolean',
+      default: 'false',
+      description: 'Whether it should truncate or not',
+    },
+  }}
+/>
+<SystemProps
+  props={['textColor', 'margin', 'padding', 'fontStyle', 'fontFamily', 'fontWeight', 'textAlign', 'lineHeight']}
+/>
+
+## Examples
+
+### Size
+
+There are 11 sizes to choose from. Each size handles its own `font-size` and `letter-spacing` accordingly.
+
+```js live
+<Text as="p" mt={1} size={0}>Text component</Text>
+<Text as="p" mt={1} size={1}>Text component</Text>
+<Text as="p" mt={1} size={2}>Text component</Text>
+<Text as="p" mt={1} size={3}>Text component</Text>
+<Text as="p" mt={1} size={4}>Text component</Text>
+<Text as="p" mt={1} size={5}>Text component</Text>
+<Text as="p" mt={1} size={6}>Text component</Text>
+<Text as="p" mt={1} size={7}>Text component</Text>
+<Text as="p" mt={1} size={8}>Text component</Text>
+<Text as="p" mt={1} size={9}>Text component</Text>
+<Text as="p" mt={1} size={10}>Text component</Text>
+```
+
+### Font weight
+
+There are 3 weight options to choose from.
+
+```js live
+<Text as="p" fontWeight="500">Text component</Text>
+<Text as="p" fontWeight="600">Text component</Text>
+<Text as="p" fontWeight="700">Text component</Text>
+```
+
+### Text truncation
+
+When `true` this will truncate your text based on its maximum width.
+
+```js live
+<Box width={100}>
+  <Text as="p" truncate>
+    At Containous, our goal is to make networking boring.
+  </Text>
+</Box>
+```
