@@ -13,15 +13,16 @@ branches:
     - master
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 
+before_script:
+  -  yarn global add gatsby-cli
+
 script:
   - yarn lint
   - yarn build
 
 deploy:
-  - provider: pages
-    edge: false
-    github_token: ${GITHUB_TOKEN}
-    local_dir: packages/website/public
+  - provider: script
+    script: yarn website:deploy
     skip_cleanup: true
     on:
       all_branches: true

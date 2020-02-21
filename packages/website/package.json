@@ -12,6 +12,7 @@
   "version": "0.3.3",
   "scripts": {
     "build": "gatsby build",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GH_TOKEN@github.com/containous/faency.git",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
@@ -25,7 +26,6 @@
     "gatsby": "^2.19.17",
     "gatsby-plugin-catch-links": "^2.1.25",
     "gatsby-plugin-mdx": "^1.0.72",
-    "gatsby-plugin-netlify": "^2.1.32",
     "gatsby-plugin-nprogress": "^2.1.19",
     "gatsby-plugin-react-helmet": "^3.1.22",
     "gatsby-plugin-styled-components": "^3.1.19",
@@ -40,6 +40,9 @@
     "remark-autolink-headings": "^5.2.1",
     "remark-slug": "^5.1.2",
     "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
   },
   "license": "Apache-2.0"
 }

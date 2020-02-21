@@ -8,6 +8,7 @@ import List from './components/List'
 import NavItem from './components/NavItem'
 import Divider from './components/Divider'
 import pkg from '../package.json'
+import logo from '../static/logo.png'
 
 function App({ element, props: appProps }) {
   const [navOpen, setNavOpen] = useState(false)
@@ -64,7 +65,7 @@ function App({ element, props: appProps }) {
               <Box pt="1em" px={16}>
                 <Flex alignItems="center">
                   <Box>
-                    <img src="/logo.png" alt="Containous Logo" height="35px" />
+                    <img src={logo} alt="Containous Logo" height="35px" />
                   </Box>
                   <Chip ml={1} variant="blue">
                     v{pkg.version}
