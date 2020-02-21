@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { Box } from './Box'
 import { InputTags } from './InputTags'
 import { DismissableChip } from './DismissableChip'
@@ -19,7 +19,7 @@ const InputTagsWithAutocomplete = () => {
         options={options}
         onChange={v => setOptions(() => allOptions.filter(o => o.includes(v)))}
         onSubmit={v => saveSubmit(current => [...current, v])}
-        onDeleteTag={(tag) => setTags(current => current.filter(t => t !== tag))}
+        onDeleteTag={tag => setTags(current => current.filter(t => t !== tag))}
       />
       <Box mt={1}>
         <Text>Submitted: {JSON.stringify(submitted)}</Text>
@@ -40,17 +40,16 @@ const InputTagsCustomTagRender = () => {
           {tag}
         </DismissableChip>
       )}
-      onDeleteTag={(tag) => setTags(current => current.filter(t => t !== tag))}
+      onDeleteTag={tag => setTags(current => current.filter(t => t !== tag))}
     />
   )
 }
 
 const InputTagsAddTagsFromInput = () => {
   const [tags, setTags] = useState(['Traefik'])
-  const memoTags = useMemo(() => tags, [tags])
   const allOptions = ['Traefik EE', 'Yaegi', 'Maesh']
   const [options, setOptions] = useState(allOptions)
-  const [value, setValue] = useState('asdasdasdasd')
+  const [value, setValue] = useState('')
   const addTag = (v: string) => v !== '' && setTags(current => (!current.includes(v) ? [...current, v] : current))
   const handleSubmit = (v: string) => {
     addTag(v)

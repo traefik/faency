@@ -26,8 +26,8 @@ const Container = styled('div')<{ hasFocus: boolean }>`
   flex-wrap: wrap;
 
   ${({ hasFocus }) =>
-  hasFocus &&
-  `
+    hasFocus &&
+    `
     box-shadow: 0 0 0 2px ${theme.colors.black};    
   `}
 `
@@ -89,7 +89,7 @@ const CustomInput = ({ onEnter, ...props }: CustomInputType) => {
     }
   }
 
-  return <StyledInput {...props} onChange={handleChange} onKeyPress={handlePressEnter}/>
+  return <StyledInput {...props} onChange={handleChange} onKeyPress={handlePressEnter} />
 }
 
 type RenderTagType = (tag: string, onDeleteTag: (tag: string) => void) => ReactNode
