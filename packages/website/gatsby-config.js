@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/faency',
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
@@ -25,6 +26,5 @@ module.exports = {
         path: `${__dirname}/src/docs/`,
       },
     },
-    'gatsby-plugin-netlify',
   ],
 }

@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import favicon from '../../static/favicon.png'
 
 function Layout({ children }) {
   return (
     <>
       <Helmet>
         <title>Faency</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="stylesheet" href="https://cdn.containous.app/fonts/fonts.css" />
+        <link rel="icon" type="image/png" href={favicon} />
 
         <meta property="og:url" content="https://faency.containous.app/" />
         <meta property="og:title" content="Faency" />

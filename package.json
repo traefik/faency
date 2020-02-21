@@ -8,8 +8,9 @@
   "scripts": {
     "init": "yarn faency:build",
     "start": "npm-run-all --parallel faency faency:storybook website",
-    "website": "lerna exec --scope website -- npm start",
-    "website:build": "lerna exec --scope website -- npm build",
+    "website": "lerna exec --scope website -- yarn start",
+    "website:deploy": "lerna exec --scope website -- yarn deploy",
+    "website:build": "lerna exec --scope website -- yarn build",
     "faency": "lerna exec --scope @containous/faency -- yarn run watch",
     "faency:storybook": "lerna exec --scope @containous/faency -- yarn storybook",
     "faency:build": "lerna exec --scope @containous/faency -- yarn build",
