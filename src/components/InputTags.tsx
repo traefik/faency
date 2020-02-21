@@ -133,7 +133,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
       maxInlineTags = 3,
       renderTag = defaultRenderTag,
       renderOption = defaultRenderOption,
-      onChange,
+      onChange = () => null,
       onSubmit = () => null,
       onDeleteTag = () => null,
     },
@@ -143,7 +143,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const [inputValue, setValue] = useState(value)
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value)
-      if (onChange) onChange(e.target.value)
+      onChange(e.target.value)
     }
 
     useEffect(() => {
