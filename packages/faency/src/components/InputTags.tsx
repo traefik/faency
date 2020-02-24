@@ -142,14 +142,33 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const [hasFocus, setFocus] = useState(false)
     const [selectFocus, setSelectFocus] = useState(false)
     const [inputValue, setValue] = useState(value)
+    const selectRef = useRef(null)
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setValue(e.target.value)
       onInputChange(e.target.value)
     }
 
+    const handleClickOutside = (event: MouseEvent): void => {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setSelectFocus(false)
+      }
+    }
+
     useEffect(() => {
       setValue(value)
     }, [value, setValue])
+
+    useEffect(() => {
+      if (hasFocus) {
+        setSelectFocus(true)
+      }
+    }, [hasFocus])
+
+    useEffect(() => {
+      document.addEventListener('mousedown', handleClickOutside)
+
+      return (): void => document.removeEventListener('mousedown', handleClickOutside)
+    })
 
     return (
       <Container hasFocus={hasFocus}>
@@ -173,7 +192,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
           </>
         )}
         {selectFocus && options.length > 0 && (
-          <SelectContainer>{options.map(option => renderOption(option, onChange))}</SelectContainer>
+          <SelectContainer ref={selectRef}>{options.map(option => renderOption(option, onChange))}</SelectContainer>
         )}
       </Container>
     )
