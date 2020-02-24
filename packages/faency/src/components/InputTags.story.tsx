@@ -5,6 +5,9 @@ import { InputTags } from './InputTags'
 import { DismissibleChip } from './DismissibleChip'
 import { Text } from './Text'
 
+const filterCaseInsensitive = (value: string, values: string[]): string[] =>
+  values.filter(v => v.toLowerCase().includes(value.toLowerCase()))
+
 const InputTagsWithAutocomplete = (): JSX.Element => {
   const [tags, setTags] = useState(['Traefik', 'Compression'])
   const allOptions = ['Redirect Path', 'Redirect Regex', 'Redirect Scheme']
@@ -17,7 +20,7 @@ const InputTagsWithAutocomplete = (): JSX.Element => {
         placeholder="Input with autocomplete"
         tags={tags}
         options={options}
-        onInputChange={(v): void => setOptions(() => allOptions.filter(o => o.includes(v)))}
+        onInputChange={(v): void => setOptions(() => filterCaseInsensitive(v, allOptions))}
         onChange={(v): void => saveSubmit(current => [...current, v])}
         onDeleteTag={(tag): void => setTags(current => current.filter(t => t !== tag))}
       />
@@ -58,7 +61,7 @@ const InputTagsAddTagsFromInput = (): JSX.Element => {
 
   const handleChange = (value: string): void => {
     setValue(value)
-    setOptions(() => allOptions.filter(o => o.includes(value)))
+    setOptions(() => filterCaseInsensitive(value, allOptions))
   }
 
   return (
