@@ -1,0 +1,62 @@
+---
+title: CardLink
+component: CardLink
+description: Useful to group information about a subject and link it to another route.
+---
+
+```js live
+<CardLink maxWidth={275} href="" target="">
+  <Heading size={1}>Card heading</Heading>
+  <Text as="p" mt={2} mb={4} size={3}>
+    Card content
+  </Text>
+</CardLink>
+```
+
+<PropsTable
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'The content to render',
+    },
+    variant: {
+      type: 'normal | shadow | ghost',
+      default: 'normal',
+      description: 'The variant to apply',
+    },
+  }}
+/>
+<SystemProps props={['href', 'target', 'onClick', 'textColor', 'backgroundColor', 'margin', 'padding', 'width', 'maxWidth']} />
+
+## Examples
+
+### Variants
+
+There are 3 variants to choose from.
+
+```js live
+<CardLink maxWidth={275} variant="border" href="" target="">
+  <Heading size={1}>Bordered card (default)</Heading>
+  <Text as="p" mt={2} mb={4} size={3}>
+    Card content
+  </Text>
+</CardLink>
+```
+
+```js live
+<CardLink maxWidth={275} variant="shadow" href="" target="">
+  <Heading size={1}>Shadow card</Heading>
+  <Text as="p" mt={2} mb={4} size={3}>
+    Card content
+  </Text>
+</CardLink>
+```
+
+```js live
+<CardLink maxWidth={275} variant="ghost" href="" target="">
+  <Heading size={1}>Ghost card</Heading>
+  <Text as="p" mt={2} mb={4} size={3}>
+    Card content
+  </Text>
+</CardLink>
+```
