@@ -1,7 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState } from 'react'
-import { DismissableChip } from './DismissableChip'
+import { DismissibleChip } from './DismissibleChip'
 import { InputProps } from 'mdlz-prmtz'
-import styled from 'styled-components'
+import styled, { SimpleInterpolation } from 'styled-components'
 import { theme } from '../theme'
 import { Box } from './Box'
 
@@ -24,8 +24,9 @@ const Container = styled('div')<{ hasFocus: boolean }>`
   box-shadow: 0 0 0 1px ${theme.colors.gray};
   display: flex;
   flex-wrap: wrap;
+  background-color: ${theme.colors.white};
 
-  ${({ hasFocus }) =>
+  ${({ hasFocus }): SimpleInterpolation =>
     hasFocus &&
     `
     box-shadow: 0 0 0 2px ${theme.colors.black};    
@@ -73,16 +74,16 @@ type CustomInputType = InputProps & {
   onEnter?: (value: string) => void
 }
 
-const CustomInput = ({ onEnter, ...props }: CustomInputType) => {
+const CustomInput = ({ onEnter, ...props }: CustomInputType): JSX.Element => {
   const [value, setValue] = useState(props.value as string)
 
-  const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter' && onEnter) {
       onEnter(value)
     }
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setValue(e.target.value)
     if (props.onChange) {
       props.onChange(e)
@@ -95,15 +96,15 @@ const CustomInput = ({ onEnter, ...props }: CustomInputType) => {
 type RenderTagType = (tag: string, onDeleteTag: (tag: string) => void) => ReactNode
 
 const defaultRenderTag: RenderTagType = (tag, onDeleteTag) => (
-  <DismissableChip key={tag} dismiss={() => onDeleteTag(tag)}>
+  <DismissibleChip key={tag} dismiss={(): void => onDeleteTag(tag)}>
     {tag}
-  </DismissableChip>
+  </DismissibleChip>
 )
 
 type RenderOptionType = (tag: string, onClick: (v: string) => void) => ReactNode
 
 const defaultRenderOption: RenderOptionType = (option, onClick) => (
-  <SelectItem key={option} onClick={() => onClick(option)}>
+  <SelectItem key={option} onClick={(): void => onClick(option)}>
     {option}
   </SelectItem>
 )
@@ -129,19 +130,18 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
       placeholder = '',
       tags = [],
       options = [],
-      maxTags = Infinity,
       maxInlineTags = 3,
       renderTag = defaultRenderTag,
       renderOption = defaultRenderOption,
-      onChange = () => null,
-      onSubmit = () => null,
-      onDeleteTag = () => null,
+      onChange = (): void => null,
+      onSubmit = (): void => null,
+      onDeleteTag = (): void => null,
     },
     forwardedRef,
   ) => {
     const [hasFocus, setFocus] = useState(false)
     const [inputValue, setValue] = useState(value)
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setValue(e.target.value)
       onChange(e.target.value)
     }
@@ -158,8 +158,8 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
           value={inputValue}
           onChange={handleInputChange}
           placeholder={placeholder}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
+          onFocus={(): void => setFocus(true)}
+          onBlur={(): void => setFocus(false)}
         />
         {tags.length > 0 && (
           <>

@@ -28,17 +28,17 @@ const CloseButton = styled(Button)`
   }
 `
 
-type DismissableChipProps = ChipProps & {
+type DismissibleChipProps = ChipProps & {
   dismiss: () => void
 }
 
-export const DismissableChip: React.FC<DismissableChipProps> = ({ children, dismiss, ...props }) => (
+export const DismissibleChip: React.FC<DismissibleChipProps> = ({ children, dismiss, ...props }) => (
   <Chip {...props} variant={props.variant || 'blue'}>
     <span>{children}</span>
-    <CloseButton onClick={() => dismiss()}>
+    <CloseButton onClick={(): void => dismiss()}>
       <Icon name="close-outline" />
     </CloseButton>
   </Chip>
 )
 
-DismissableChip.displayName = 'DismissableChip'
+DismissibleChip.displayName = 'DismissibleChip'

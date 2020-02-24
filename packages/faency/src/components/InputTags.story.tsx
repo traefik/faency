@@ -2,10 +2,10 @@ import { storiesOf } from '@storybook/react'
 import React, { useState } from 'react'
 import { Box } from './Box'
 import { InputTags } from './InputTags'
-import { DismissableChip } from './DismissableChip'
+import { DismissibleChip } from './DismissibleChip'
 import { Text } from './Text'
 
-const InputTagsWithAutocomplete = () => {
+const InputTagsWithAutocomplete = (): JSX.Element => {
   const [tags, setTags] = useState(['Traefik', 'Compression'])
   const allOptions = ['Redirect Path', 'Redirect Regex', 'Redirect Scheme']
   const [options, setOptions] = useState(allOptions)
@@ -17,9 +17,9 @@ const InputTagsWithAutocomplete = () => {
         placeholder="Input with autocomplete"
         tags={tags}
         options={options}
-        onChange={v => setOptions(() => allOptions.filter(o => o.includes(v)))}
-        onSubmit={v => saveSubmit(current => [...current, v])}
-        onDeleteTag={tag => setTags(current => current.filter(t => t !== tag))}
+        onChange={(v): void => setOptions(() => allOptions.filter(o => o.includes(v)))}
+        onSubmit={(v): void => saveSubmit(current => [...current, v])}
+        onDeleteTag={(tag): void => setTags(current => current.filter(t => t !== tag))}
       />
       <Box mt={1}>
         <Text>Submitted: {JSON.stringify(submitted)}</Text>
@@ -28,35 +28,35 @@ const InputTagsWithAutocomplete = () => {
   )
 }
 
-const InputTagsCustomTagRender = () => {
+const InputTagsCustomTagRender = (): JSX.Element => {
   const [tags, setTags] = useState(['Traefik', 'Compression'])
 
   return (
     <InputTags
       placeholder="Custom Tag Render"
       tags={tags}
-      renderTag={(tag, dismiss) => (
-        <DismissableChip key={tag} dismiss={() => dismiss(tag)} variant="purple">
+      renderTag={(tag, dismiss): JSX.Element => (
+        <DismissibleChip key={tag} dismiss={(): void => dismiss(tag)} variant="purple">
           {tag}
-        </DismissableChip>
+        </DismissibleChip>
       )}
-      onDeleteTag={tag => setTags(current => current.filter(t => t !== tag))}
+      onDeleteTag={(tag): void => setTags(current => current.filter(t => t !== tag))}
     />
   )
 }
 
-const InputTagsAddTagsFromInput = () => {
+const InputTagsAddTagsFromInput = (): JSX.Element => {
   const [tags, setTags] = useState(['Traefik'])
   const allOptions = ['Traefik EE', 'Yaegi', 'Maesh']
   const [options, setOptions] = useState(allOptions)
   const [value, setValue] = useState('')
-  const addTag = (v: string) => v !== '' && setTags(current => (!current.includes(v) ? [...current, v] : current))
-  const handleSubmit = (v: string) => {
+  const addTag = (v: string): void => v !== '' && setTags(current => (!current.includes(v) ? [...current, v] : current))
+  const handleSubmit = (v: string): void => {
     addTag(v)
     setValue('')
   }
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: string): void => {
     setValue(value)
     setOptions(() => allOptions.filter(o => o.includes(value)))
   }
@@ -69,7 +69,7 @@ const InputTagsAddTagsFromInput = () => {
       options={options}
       onChange={handleChange}
       onSubmit={handleSubmit}
-      onDeleteTag={tag => setTags(current => current.filter(t => t !== tag))}
+      onDeleteTag={(tag): void => setTags(current => current.filter(t => t !== tag))}
     />
   )
 }
