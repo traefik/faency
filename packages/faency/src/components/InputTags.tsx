@@ -104,7 +104,11 @@ const defaultRenderTag: RenderTagType = (tag, onDeleteTag) => (
 type RenderOptionType = (tag: string, onClick: (v: string) => void) => ReactNode
 
 const defaultRenderOption: RenderOptionType = (option, onClick) => (
-  <SelectItem key={option} onClick={(): void => onClick(option)}>
+  <SelectItem
+    key={option}
+    onClick={(): void => onClick(option)}
+    onKeyPress={(e: KeyboardEvent): void => e.key === 'Enter' && onClick(option)}
+  >
     {option}
   </SelectItem>
 )
