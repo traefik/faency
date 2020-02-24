@@ -17,8 +17,8 @@ const InputTagsWithAutocomplete = (): JSX.Element => {
         placeholder="Input with autocomplete"
         tags={tags}
         options={options}
-        onChange={(v): void => setOptions(() => allOptions.filter(o => o.includes(v)))}
-        onSubmit={(v): void => saveSubmit(current => [...current, v])}
+        onInputChange={(v): void => setOptions(() => allOptions.filter(o => o.includes(v)))}
+        onChange={(v): void => saveSubmit(current => [...current, v])}
         onDeleteTag={(tag): void => setTags(current => current.filter(t => t !== tag))}
       />
       <Box mt={1}>
@@ -67,8 +67,8 @@ const InputTagsAddTagsFromInput = (): JSX.Element => {
       placeholder="Add tags from input submit with Autocomplete"
       tags={tags}
       options={options}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
+      onInputChange={handleChange}
+      onChange={handleSubmit}
       onDeleteTag={(tag): void => setTags(current => current.filter(t => t !== tag))}
     />
   )

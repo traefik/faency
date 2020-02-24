@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState, useRef } from 'react'
 import { DismissibleChip } from './DismissibleChip'
 import { InputProps } from 'mdlz-prmtz'
 import styled, { SimpleInterpolation } from 'styled-components'
@@ -118,8 +118,8 @@ interface InputTagsProps {
   maxInlineTags?: number
   renderTag?: RenderTagType
   renderOption?: RenderOptionType
+  onInputChange?: (value: string) => void
   onChange?: (value: string) => void
-  onSubmit?: (value: string) => void
   onDeleteTag?: (tag: string) => void
 }
 
@@ -133,17 +133,18 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
       maxInlineTags = 3,
       renderTag = defaultRenderTag,
       renderOption = defaultRenderOption,
+      onInputChange = (): void => null,
       onChange = (): void => null,
-      onSubmit = (): void => null,
       onDeleteTag = (): void => null,
     },
     forwardedRef,
   ) => {
     const [hasFocus, setFocus] = useState(false)
+    const [selectFocus, setSelectFocus] = useState(false)
     const [inputValue, setValue] = useState(value)
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setValue(e.target.value)
-      onChange(e.target.value)
+      onInputChange(e.target.value)
     }
 
     useEffect(() => {
@@ -154,7 +155,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
       <Container hasFocus={hasFocus}>
         <CustomInput
           ref={forwardedRef}
-          onEnter={onSubmit}
+          onEnter={onChange}
           value={inputValue}
           onChange={handleInputChange}
           placeholder={placeholder}
@@ -171,8 +172,8 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
             </ChipsContainer>
           </>
         )}
-        {inputValue.length > 0 && options.length > 0 && (
-          <SelectContainer>{options.map(option => renderOption(option, onSubmit))}</SelectContainer>
+        {selectFocus && options.length > 0 && (
+          <SelectContainer>{options.map(option => renderOption(option, onChange))}</SelectContainer>
         )}
       </Container>
     )
