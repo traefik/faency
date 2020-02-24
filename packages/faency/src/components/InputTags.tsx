@@ -4,6 +4,7 @@ import { InputProps } from 'mdlz-prmtz'
 import styled, { SimpleInterpolation } from 'styled-components'
 import { theme } from '../theme'
 import { Box } from './Box'
+import ArrowNav from 'react-arrow-nav'
 
 const StyledInput = styled('input')`
   border: none;
@@ -11,6 +12,7 @@ const StyledInput = styled('input')`
   outline: none;
   flex-grow: 1;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  min-width: 40%;
   max-height: ${theme.sizes[3]};
   margin: 0 ${theme.space[1]} ${theme.space[1]} 0;
 `
@@ -63,7 +65,9 @@ const SelectItem = styled(Box)`
   padding: ${theme.space[1]};
   transition: all 100ms ease-in;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     background: ${theme.colors.blue};
     color: ${theme.colors.white};
     cursor: pointer;
@@ -146,7 +150,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const [hasFocus, setFocus] = useState(false)
     const [selectFocus, setSelectFocus] = useState(false)
     const [inputValue, setValue] = useState(value)
-    const selectRef = useRef(null)
+    const selectRef = useRef<HTMLDivElement>(null)
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setValue(e.target.value)
       onInputChange(e.target.value)
@@ -155,12 +159,6 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const handleOptionSelection = (value: string): void => {
       onChange(value)
       setSelectFocus(false)
-    }
-
-    const handleClickOutside = (event: MouseEvent): void => {
-      if (selectRef.current && !selectRef.current.contains(event.target)) {
-        setSelectFocus(false)
-      }
     }
 
     useEffect(() => {
@@ -174,6 +172,36 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     }, [hasFocus])
 
     useEffect(() => {
+      const handleKeys: EventListener = (event: unknown) => {
+        const { key } = event as KeyboardEvent
+
+        if (key && hasFocus) {
+          if (key === 'Tab') {
+            setSelectFocus(false)
+          }
+
+          if (selectRef.current) {
+            const arrowNavContainer = selectRef.current.firstChild
+
+            if (arrowNavContainer.firstChild instanceof HTMLElement && key === 'ArrowDown') {
+              arrowNavContainer.firstChild.focus()
+            }
+          }
+        }
+      }
+
+      document.addEventListener('keydown', handleKeys)
+
+      return (): void => document.removeEventListener('keydown', handleKeys)
+    }, [hasFocus, selectRef, setSelectFocus])
+
+    useEffect(() => {
+      const handleClickOutside: EventListener = (event: MouseEvent) => {
+        if (selectRef.current && event.target instanceof Node && !selectRef.current.contains(event.target)) {
+          setSelectFocus(false)
+        }
+      }
+
       document.addEventListener('mousedown', handleClickOutside)
 
       return (): void => document.removeEventListener('mousedown', handleClickOutside)
@@ -203,7 +231,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
         )}
         {selectFocus && options.length > 0 && (
           <SelectContainer ref={selectRef}>
-            {options.map(option => renderOption(option, handleOptionSelection))}
+            <ArrowNav>{options.map(option => renderOption(option, handleOptionSelection))}</ArrowNav>
           </SelectContainer>
         )}
       </Container>

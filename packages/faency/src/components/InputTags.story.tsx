@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box } from './Box'
 import { InputTags } from './InputTags'
 import { DismissibleChip } from './DismissibleChip'
@@ -54,6 +54,9 @@ const InputTagsAddTagsFromInput = (): JSX.Element => {
   const [options, setOptions] = useState(allOptions)
   const [value, setValue] = useState('')
   const addTag = (v: string): void => v !== '' && setTags(current => (!current.includes(v) ? [...current, v] : current))
+  const filterSelectedOptions = (currentOptions: string[]): string[] =>
+    currentOptions.filter((o: string) => !tags.includes(o))
+  const getOptions = (): string[] => filterCaseInsensitive(value, filterSelectedOptions(allOptions))
   const handleSubmit = (v: string): void => {
     addTag(v)
     setValue('')
@@ -61,8 +64,12 @@ const InputTagsAddTagsFromInput = (): JSX.Element => {
 
   const handleChange = (value: string): void => {
     setValue(value)
-    setOptions(() => filterCaseInsensitive(value, allOptions))
+    setOptions(() => getOptions())
   }
+
+  useEffect(() => {
+    setOptions(() => getOptions())
+  }, [tags])
 
   return (
     <InputTags
