@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { Box } from './Box'
-import { FormError } from './FormError'
+import { FormMessage } from './FormMessage'
 import { Input } from './Input'
+import Icon from 'react-eva-icons'
 
 const hasOnlyLetters = (value: string): boolean => /^[a-zA-Z]+$/.test(value)
 
@@ -12,12 +13,17 @@ const InputValidationExample = (): JSX.Element => {
   return (
     <>
       <Input placeholder="Only letters input" value={value} onChange={(e): void => setValue(e.target.value)} mb={1} />
-      {value && !hasOnlyLetters(value) && <FormError message="Invalid input value. Only letters are allowed." />}
+      {value && !hasOnlyLetters(value) && (
+        <FormMessage
+          message="Invalid input value. Only letters are allowed."
+          icon={<Icon name="alert-triangle" color="#FFF" />}
+        />
+      )}
     </>
   )
 }
 
-storiesOf('Components|Input', module).add('default', () => (
+storiesOf('Components|FormMessage', module).add('default', () => (
   <Box>
     <InputValidationExample />
   </Box>

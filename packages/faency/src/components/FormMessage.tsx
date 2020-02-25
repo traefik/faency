@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Text } from './Text'
 import styled, { SimpleInterpolation } from 'styled-components'
 import { theme } from '../theme'
 import { Flex } from './Flex'
-import Icon from 'react-eva-icons'
 
 const IconContainer = styled(Flex)<{ color: string }>`
   border-radius: ${theme.radii[1]};
@@ -22,24 +21,19 @@ const ColoredMessage = styled(Text)<{ color: string }>`
   `}
 `
 
-type FormErrorProps = {
+type FormMessageProps = {
   message: string
   color?: string
-  iconColor?: string
-  icon?: string
+  icon?: ReactNode
 }
 
-export const FormError = React.forwardRef<HTMLDivElement, FormErrorProps>(
-  ({ message, color = theme.colors.red, icon = 'alert-triangle', iconColor = theme.colors.white }, forwardedRef) => (
+export const FormMessage = React.forwardRef<HTMLDivElement, FormMessageProps>(
+  ({ message, color = theme.colors.red, icon }, forwardedRef) => (
     <Flex ref={forwardedRef} alignItems="center">
-      {icon && (
-        <IconContainer color={color}>
-          <Icon name={icon} fill={iconColor} />
-        </IconContainer>
-      )}
+      {icon && <IconContainer color={color}>{icon}</IconContainer>}
       <ColoredMessage color={color}>{message}</ColoredMessage>
     </Flex>
   ),
 )
 
-FormError.displayName = 'FormError'
+FormMessage.displayName = 'FormMessage'

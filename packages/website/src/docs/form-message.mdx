@@ -1,0 +1,81 @@
+---
+title: FormMessage
+component: FormMessage
+description: Useful for displaying messages under form fields.
+---
+
+```js live
+<FormMessage message="Invalid input value. Only letters are allowed." icon={<Icon name="alert-triangle" color="#FFF" />} />
+```
+
+<PropsTable
+  data={{
+    message: {
+      type: 'string',
+      description: 'Required. The message to show.',
+    },
+    color: {
+      type: 'string',
+      default: 'red',
+      description: 'Optional. The color to apply to the message and icon background if present.',
+    },
+    icon: {
+      type: 'ReactNode',
+      description: 'Optional. The icon to display with the message.',
+    },
+  }}
+/>
+
+## Examples
+
+### Colors
+
+The color prop accepts any color as string.
+
+```js live
+<FormMessage message="Error message." color={theme.colors.red} />
+```
+
+```js live
+<FormMessage message="Warning message." color={theme.colors.orange} />
+```
+
+```js live
+<FormMessage message="Information message." color={theme.colors.blue} />
+```
+
+### Icons
+
+The icon prop accepts a ReactNode and displays it inside a colored container.
+
+```js live
+<FormMessage 
+  message="Error message." 
+  color={theme.colors.red} 
+  icon={<Icon name="alert-triangle" color="#FFF" />}
+/>
+```
+
+```js live
+<FormMessage 
+  message="Warning message." 
+  color={theme.colors.orange} 
+  icon={<Icon name="alert-triangle" color="#FFF" />}
+/>
+```
+
+```js live
+<FormMessage 
+  message="Information message." 
+  color={theme.colors.blue} 
+  icon={<Icon name="alert-circle" color="#FFF" />}
+/>
+```
+
+```js live
+<FormMessage 
+  message="Success message." 
+  color={theme.colors.positive} 
+  icon={<Icon name="checkmark-circle-2" color="#FFF" />}
+/>
+```
