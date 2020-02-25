@@ -4,6 +4,6 @@ import { FormMessage } from './FormMessage'
 
 describe('FormMessage component', () => {
   test('renders without crashing', () => {
-    render(<FormMessage message="Message" />)
+    render(<FormMessage message="Message" variant="error" />)
   })
 })

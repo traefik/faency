@@ -14,10 +14,10 @@ description: Useful for displaying messages under form fields.
       type: 'string',
       description: 'Required. The message to show.',
     },
-    color: {
-      type: 'string',
-      default: 'red',
-      description: 'Optional. The color to apply to the message and icon background if present.',
+    variant: {
+      type: 'error | warning | info | success',
+      default: 'error',
+      description: 'Optional. Defines which color to apply to the message and icon background if present.',
     },
     icon: {
       type: 'ReactNode',
@@ -33,15 +33,19 @@ description: Useful for displaying messages under form fields.
 The color prop accepts any color as string.
 
 ```js live
-<FormMessage message="Error message." color={theme.colors.red} />
+<FormMessage message="Error message." />
 ```
 
 ```js live
-<FormMessage message="Warning message." color={theme.colors.orange} />
+<FormMessage message="Warning message." variant="warning" />
 ```
 
 ```js live
-<FormMessage message="Information message." color={theme.colors.blue} />
+<FormMessage message="Information message." variant="info" />
+```
+
+```js live
+<FormMessage message="Success message." variant="success" />
 ```
 
 ### Icons
@@ -51,7 +55,7 @@ The icon prop accepts a ReactNode and displays it inside a colored container.
 ```js live
 <FormMessage 
   message="Error message." 
-  color={theme.colors.red} 
+  variant="error" 
   icon={<Icon name="alert-triangle" color="#FFF" />}
 />
 ```
@@ -59,7 +63,7 @@ The icon prop accepts a ReactNode and displays it inside a colored container.
 ```js live
 <FormMessage 
   message="Warning message." 
-  color={theme.colors.orange} 
+  variant="warning"
   icon={<Icon name="alert-triangle" color="#FFF" />}
 />
 ```
@@ -67,7 +71,7 @@ The icon prop accepts a ReactNode and displays it inside a colored container.
 ```js live
 <FormMessage 
   message="Information message." 
-  color={theme.colors.blue} 
+  variant="info"
   icon={<Icon name="alert-circle" color="#FFF" />}
 />
 ```
@@ -75,7 +79,7 @@ The icon prop accepts a ReactNode and displays it inside a colored container.
 ```js live
 <FormMessage 
   message="Success message." 
-  color={theme.colors.positive} 
+  variant="success"
   icon={<Icon name="checkmark-circle-2" color="#FFF" />}
 />
 ```

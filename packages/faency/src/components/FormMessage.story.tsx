@@ -16,6 +16,7 @@ const InputValidationExample = (): JSX.Element => {
       {value && !hasOnlyLetters(value) && (
         <FormMessage
           message="Invalid input value. Only letters are allowed."
+          variant="error"
           icon={<Icon name="alert-triangle" color="#FFF" />}
         />
       )}
@@ -25,6 +26,21 @@ const InputValidationExample = (): JSX.Element => {
 
 storiesOf('Components|FormMessage', module).add('default', () => (
   <Box>
-    <InputValidationExample />
+    <Box mb={4}>
+      <InputValidationExample />
+    </Box>
+    <Box mb={1}>
+      <FormMessage message="Warning message." variant="warning" icon={<Icon name="alert-triangle" color="#FFF" />} />
+    </Box>
+    <Box mb={1}>
+      <FormMessage message="Information message." variant="info" icon={<Icon name="alert-circle" color="#FFF" />} />
+    </Box>
+    <Box mb={1}>
+      <FormMessage
+        message="Success message."
+        variant="success"
+        icon={<Icon name="checkmark-circle-2" color="#FFF" />}
+      />
+    </Box>
   </Box>
 ))

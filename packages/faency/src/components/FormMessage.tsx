@@ -23,15 +23,22 @@ const ColoredMessage = styled(Text)<{ color: string }>`
 
 type FormMessageProps = {
   message: string
-  color?: string
+  variant?: 'error' | 'warning' | 'info' | 'success'
   icon?: ReactNode
 }
 
+const variantColors = {
+  error: theme.colors.red,
+  warning: theme.colors.orange,
+  info: theme.colors.blue,
+  success: theme.colors.positive,
+}
+
 export const FormMessage = React.forwardRef<HTMLDivElement, FormMessageProps>(
-  ({ message, color = theme.colors.red, icon }, forwardedRef) => (
+  ({ message, variant = 'error', icon }, forwardedRef) => (
     <Flex ref={forwardedRef} alignItems="center">
-      {icon && <IconContainer color={color}>{icon}</IconContainer>}
-      <ColoredMessage color={color}>{message}</ColoredMessage>
+      {icon && <IconContainer color={variantColors[variant]}>{icon}</IconContainer>}
+      <ColoredMessage color={variantColors[variant]}>{message}</ColoredMessage>
     </Flex>
   ),
 )
