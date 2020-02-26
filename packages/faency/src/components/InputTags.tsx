@@ -97,10 +97,10 @@ const CustomInput = ({ onEnter, ...props }: CustomInputType): JSX.Element => {
   return <StyledInput {...props} onChange={handleChange} onKeyPress={handlePressEnter} />
 }
 
-type RenderTagType = (tag: string, onDeleteTag: (tag: string) => void) => ReactNode
+type RenderTagType = (tag: string, onDeleteTag?: (tag: string) => void) => ReactNode
 
 const defaultRenderTag: RenderTagType = (tag, onDeleteTag) => (
-  <DismissibleChip key={tag} dismiss={(): void => onDeleteTag(tag)}>
+  <DismissibleChip key={tag} dismiss={(): void => onDeleteTag && onDeleteTag(tag)}>
     {tag}
   </DismissibleChip>
 )
@@ -111,7 +111,7 @@ const defaultRenderOption: RenderOptionType = (option, onClick) => (
   <SelectItem
     key={option}
     onClick={(): void => onClick(option)}
-    onKeyPress={(e: KeyboardEvent): void => e.key === 'Enter' && onClick(option)}
+    onKeyPress={(e: KeyboardEvent): false | void => e.key === 'Enter' && onClick(option)}
   >
     {option}
   </SelectItem>
@@ -122,7 +122,6 @@ interface InputTagsProps {
   placeholder?: string
   tags?: string[]
   options?: string[]
-  maxTags?: number
   maxInlineTags?: number
   renderTag?: RenderTagType
   renderOption?: RenderOptionType
@@ -141,9 +140,9 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
       maxInlineTags = 3,
       renderTag = defaultRenderTag,
       renderOption = defaultRenderOption,
-      onInputChange = (): void => null,
-      onChange = (): void => null,
-      onDeleteTag = (): void => null,
+      onInputChange,
+      onChange,
+      onDeleteTag,
     },
     forwardedRef,
   ) => {
@@ -153,11 +152,15 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const selectRef = useRef<HTMLDivElement>(null)
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setValue(e.target.value)
-      onInputChange(e.target.value)
+      if (onInputChange) {
+        onInputChange(e.target.value)
+      }
     }
 
     const handleOptionSelection = (value: string): void => {
-      onChange(value)
+      if (onChange) {
+        onChange(value)
+      }
       setSelectFocus(false)
     }
 
@@ -183,7 +186,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
           if (selectRef.current) {
             const arrowNavContainer = selectRef.current.firstChild
 
-            if (arrowNavContainer.firstChild instanceof HTMLElement && key === 'ArrowDown') {
+            if (arrowNavContainer && arrowNavContainer.firstChild instanceof HTMLElement && key === 'ArrowDown') {
               arrowNavContainer.firstChild.focus()
             }
           }
@@ -196,8 +199,9 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     }, [hasFocus, selectRef, setSelectFocus])
 
     useEffect(() => {
-      const handleClickOutside: EventListener = (event: MouseEvent) => {
-        if (selectRef.current && event.target instanceof Node && !selectRef.current.contains(event.target)) {
+      const handleClickOutside: EventListener = (event: unknown) => {
+        const { target } = event as MouseEvent
+        if (selectRef.current && target instanceof Node && !selectRef.current.contains(target)) {
           setSelectFocus(false)
         }
       }
