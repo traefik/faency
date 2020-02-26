@@ -1,0 +1,86 @@
+---
+title: FormMessage
+component: FormMessage
+description: Useful for displaying messages under form fields.
+---
+
+```js live
+<FormMessage message="Invalid input value. Only letters are allowed." hasIcon />
+```
+
+<PropsTable
+  data={{
+    message: {
+      type: 'string',
+      description: 'Required. The message to show.',
+    },
+    variant: {
+      type: 'error | warning | info | success',
+      default: 'error',
+      description: 'Optional. Defines which color to apply to the message and icon background if present.',
+    },
+    hasIcon: {
+      type: 'boolean',
+      default: 'false',
+      description: 'Optional. Determines whether or not it should show the icon.',
+    },
+    icon: {
+      type: 'ReactNode',
+      description: 'Optional. Element to use in the Icon slot. If this property is used, hasIcon is ignored.',
+    },
+  }}
+/>
+
+## Examples
+
+### Colors
+
+The color prop accepts any color as string.
+
+```js live
+<FormMessage message="Error message." />
+```
+
+```js live
+<FormMessage message="Warning message." variant="warning" />
+```
+
+```js live
+<FormMessage message="Information message." variant="info" />
+```
+
+```js live
+<FormMessage message="Success message." variant="success" />
+```
+
+### Icons
+
+The icon prop accepts a ReactNode and displays it inside a colored container.
+
+```js live
+<FormMessage message="Error message." variant="error" hasIcon />
+```
+
+```js live
+<FormMessage message="Warning message." variant="warning" hasIcon />
+```
+
+```js live
+<FormMessage message="Information message." variant="info" hasIcon />
+```
+
+```js live
+<FormMessage message="Success message." variant="success" hasIcon />
+```
+
+```js live
+<FormMessage
+  message="Saved successfully."
+  variant="success"
+  icon={
+    <Flex mr={1}>
+      <Icon name="save" fill={theme.colors.positive} />
+    </Flex>
+  }
+/>
+```

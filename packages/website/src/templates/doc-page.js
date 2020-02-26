@@ -7,6 +7,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import * as FC from '@containous/faency'
 import Layout from '../components/Layout'
 import CodeBlock from '../components/CodeBlock'
+import Icon from 'react-eva-icons'
 import { SystemPropsTable } from '../components/SystemPropsTable'
 import { PropsTable } from '../components/PropsTable'
 import { ThemeSection } from '../components/ThemeSection'
@@ -37,6 +38,7 @@ export const components = {
   pre: function Pre(props) {
     return <div {...props} />
   },
+  Icon,
   code: CodeBlock,
   table: FC.Table,
   thead: FC.Thead,
