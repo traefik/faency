@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react'
 import { Box } from './Box'
 import { FormMessage } from './FormMessage'
 import { Input } from './Input'
-import Icon from 'react-eva-icons'
 
 const hasOnlyLetters = (value: string): boolean => /^[a-zA-Z]+$/.test(value)
 
@@ -14,11 +13,7 @@ const InputValidationExample = (): JSX.Element => {
     <>
       <Input placeholder="Only letters input" value={value} onChange={(e): void => setValue(e.target.value)} mb={1} />
       {value && !hasOnlyLetters(value) && (
-        <FormMessage
-          message="Invalid input value. Only letters are allowed."
-          variant="error"
-          icon={<Icon name="alert-triangle" color="#FFF" />}
-        />
+        <FormMessage message="Invalid input value. Only letters are allowed." variant="error" hasIcon />
       )}
     </>
   )
@@ -30,17 +25,13 @@ storiesOf('Components|FormMessage', module).add('default', () => (
       <InputValidationExample />
     </Box>
     <Box mb={1}>
-      <FormMessage message="Warning message." variant="warning" icon={<Icon name="alert-triangle" color="#FFF" />} />
+      <FormMessage message="Warning message." variant="warning" hasIcon />
     </Box>
     <Box mb={1}>
-      <FormMessage message="Information message." variant="info" icon={<Icon name="alert-circle" color="#FFF" />} />
+      <FormMessage message="Information message." variant="info" hasIcon />
     </Box>
     <Box mb={1}>
-      <FormMessage
-        message="Success message."
-        variant="success"
-        icon={<Icon name="checkmark-circle-2" color="#FFF" />}
-      />
+      <FormMessage message="Success message." variant="success" hasIcon />
     </Box>
   </Box>
 ))

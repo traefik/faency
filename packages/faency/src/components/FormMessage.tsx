@@ -3,6 +3,7 @@ import { Text } from './Text'
 import styled, { SimpleInterpolation } from 'styled-components'
 import { theme } from '../theme'
 import { Flex } from './Flex'
+import Icon from 'react-eva-icons'
 
 const IconContainer = styled(Flex)<{ color: string }>`
   border-radius: ${theme.radii[1]};
@@ -24,21 +25,39 @@ const ColoredMessage = styled(Text)<{ color: string }>`
 type FormMessageProps = {
   message: string
   variant?: 'error' | 'warning' | 'info' | 'success'
+  hasIcon?: boolean
   icon?: ReactNode
 }
 
-const variantColors = {
-  error: theme.colors.red,
-  warning: theme.colors.orange,
-  info: theme.colors.blue,
-  success: theme.colors.positive,
+const variantProps = {
+  error: {
+    color: theme.colors.red,
+    icon: 'alert-triangle',
+  },
+  warning: {
+    color: theme.colors.orange,
+    icon: 'alert-triangle',
+  },
+  info: {
+    color: theme.colors.blue,
+    icon: 'alert-circle',
+  },
+  success: {
+    color: theme.colors.positive,
+    icon: 'checkmark-circle-2',
+  },
 }
 
 export const FormMessage = React.forwardRef<HTMLDivElement, FormMessageProps>(
-  ({ message, variant = 'error', icon }, forwardedRef) => (
+  ({ message, variant = 'error', hasIcon, icon }, forwardedRef) => (
     <Flex ref={forwardedRef} alignItems="center">
-      {icon && <IconContainer color={variantColors[variant]}>{icon}</IconContainer>}
-      <ColoredMessage color={variantColors[variant]}>{message}</ColoredMessage>
+      {icon ||
+        (hasIcon && (
+          <IconContainer color={variantProps[variant].color}>
+            <Icon name={variantProps[variant].icon} fill="#FFF" />
+          </IconContainer>
+        ))}
+      <ColoredMessage color={variantProps[variant].color}>{message}</ColoredMessage>
     </Flex>
   ),
 )

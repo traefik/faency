@@ -5,7 +5,7 @@ description: Useful for displaying messages under form fields.
 ---
 
 ```js live
-<FormMessage message="Invalid input value. Only letters are allowed." icon={<Icon name="alert-triangle" color="#FFF" />} />
+<FormMessage message="Invalid input value. Only letters are allowed." hasIcon />
 ```
 
 <PropsTable
@@ -19,9 +19,14 @@ description: Useful for displaying messages under form fields.
       default: 'error',
       description: 'Optional. Defines which color to apply to the message and icon background if present.',
     },
+    hasIcon: {
+      type: 'boolean',
+      default: 'false',
+      description: 'Optional. Determines whether or not it should show the icon.',
+    },
     icon: {
       type: 'ReactNode',
-      description: 'Optional. The icon to display with the message.',
+      description: 'Optional. Element to use in the Icon slot. If this property is used, hasIcon is ignored.',
     },
   }}
 />
@@ -53,33 +58,29 @@ The color prop accepts any color as string.
 The icon prop accepts a ReactNode and displays it inside a colored container.
 
 ```js live
-<FormMessage 
-  message="Error message." 
-  variant="error" 
-  icon={<Icon name="alert-triangle" color="#FFF" />}
-/>
+<FormMessage message="Error message." variant="error" hasIcon />
 ```
 
 ```js live
-<FormMessage 
-  message="Warning message." 
-  variant="warning"
-  icon={<Icon name="alert-triangle" color="#FFF" />}
-/>
+<FormMessage message="Warning message." variant="warning" hasIcon />
 ```
 
 ```js live
-<FormMessage 
-  message="Information message." 
-  variant="info"
-  icon={<Icon name="alert-circle" color="#FFF" />}
-/>
+<FormMessage message="Information message." variant="info" hasIcon />
 ```
 
 ```js live
-<FormMessage 
-  message="Success message." 
+<FormMessage message="Success message." variant="success" hasIcon />
+```
+
+```js live
+<FormMessage
+  message="Saved successfully."
   variant="success"
-  icon={<Icon name="checkmark-circle-2" color="#FFF" />}
+  icon={
+    <Flex mr={1}>
+      <Icon name="save" fill={theme.colors.positive} />
+    </Flex>
+  }
 />
 ```
