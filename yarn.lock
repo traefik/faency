@@ -14448,6 +14448,13 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-arrow-nav@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-arrow-nav/-/react-arrow-nav-0.0.2.tgz#5cad8a54b2fbdfb2337e837e2c369ab150f23fef"
+  integrity sha512-Yp2GqUX0px+PTaTz3hfqztZ4+bP1XVUlQXeOzCXQFvOAmB6ddcUtUZzE0Da5OAYoY2jrn74SfwT83/zKNhdFsw==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+
 react-clientside-effect@^1.2.0, react-clientside-effect@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.2.tgz#6212fb0e07b204e714581dd51992603d1accc837"
