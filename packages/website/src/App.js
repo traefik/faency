@@ -5,6 +5,7 @@ import { Flex, Box, Chip, Button, Heading, Text, useTheme } from '@containous/fa
 import useDarkMode from 'use-dark-mode'
 import Icon from 'react-eva-icons'
 import Container from './components/Container'
+import Link from './components/Link'
 import List from './components/List'
 import NavItem from './components/NavItem'
 import Divider from './components/Divider'
@@ -140,17 +141,17 @@ function App({ element, props: appProps }) {
                 <Box px={16} mt={3} minHeight={4}>
                   <Text size={2}>
                     Powered by{' '}
-                    <a href="https://containo.us" title="Containous">
+                    <Link href="https://containo.us" title="Containous">
                       Containous
-                    </a>
+                    </Link>
                   </Text>
                 </Box>
                 <Box px={16} mb={2} minHeight={4}>
                   <Text size={2}>
                     Highy inspired by{' '}
-                    <a href="https://radix.modulz.app/" title="Radix Design System">
+                    <Link href="https://radix.modulz.app/" title="Radix Design System">
                       Radix
-                    </a>
+                    </Link>
                   </Text>
                 </Box>
               </Box>
