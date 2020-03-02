@@ -20,17 +20,18 @@ script:
   - yarn lint
   - yarn build
 
+before_deploy:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+  - echo "//registry.npmjs.org/:email=\${NPM_EMAIL}" >> $HOME/.npmrc 2> /dev/null
+
 deploy:
   - provider: script
     script: yarn website:deploy
     skip_cleanup: true
     on:
       all_branches: true
-  - provider: npm
-    edge: true
-    email: "${NPM_EMAIL}"
-    api_key: "${NPM_API_TOKEN}"
+  - provider: script
+    script: yarn release -y from-git
     skip_cleanup: true
     on:
       tags: true
-      all_branches: true
