@@ -205,8 +205,8 @@ const Waiting = styled('div')<ButtonProps>(
       backgroundImage: `linear-gradient(
                 -45deg,
                 transparent 33%,
-                rgba(0, 0, 0, 0.03) 33%,
-                rgba(0, 0, 0, 0.03) 66%,
+                ${props.theme.colors.grays[3]} 33%,
+                ${props.theme.colors.grays[3]} 66%,
                 transparent 66%
               )`,
       backgroundSize:
