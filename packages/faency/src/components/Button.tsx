@@ -90,11 +90,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
             gray: {
               button: {
                 normal: {
-                  backgroundColor: themeContext.colors.gray,
+                  backgroundColor: themeContext.colors.grays[4],
                   color: 'white',
                 },
                 active: {
-                  backgroundColor: themeContext.colors.grays[2],
+                  backgroundColor: themeContext.colors.grays[3],
                 },
               },
             },
