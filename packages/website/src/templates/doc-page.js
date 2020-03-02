@@ -65,7 +65,7 @@ export const components = {
     return <FC.Heading {...props} as="h4" fontWeight={500} size={0} mt={6} mb={1} lineHeight={2} />
   },
   p: function P(props) {
-    return <FC.Text {...props} as="p" size={3} lineHeight={3} textColor={FC.theme.colors.grays[7]} />
+    return <FC.Text {...props} as="p" size={3} lineHeight={3} />
   },
   Prop,
   ThemeSection,

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
+import React, { useEffect, useRef, useState, useLayoutEffect, useContext } from 'react'
+import { ThemeContext } from 'styled-components'
 import { getRectForNode, Rect } from '../utils/geometry'
 import {
   calculateVerticalPosition,
@@ -7,7 +8,6 @@ import {
   PreferredAlignment,
   StyleByAlignmentType,
 } from '../utils/math'
-import { theme } from '../../../theme'
 
 type Position = {
   left?: number
@@ -43,6 +43,8 @@ function getMarginsForNode(node: HTMLElement): Margins {
 }
 
 const TooltipOverlay: React.FC<TooltipOverlayProps> = props => {
+  const theme = useContext(ThemeContext)
+
   const { preferredPosition = 'bottom', preferredAlignment = 'center' } = props
   const [measurementIsInit, setMeasurementInit] = useState(false)
   const [overlayNode, setOverlayNode] = useState<HTMLElement | null>(null)

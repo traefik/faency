@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from 'styled-components'
 import styled, { css as _css, keyframes, Keyframes } from 'styled-components'
 import css from '@styled-system/css'
 import { Button as ButtonPrimitive, ButtonProps as ButtonPrimitiveProps } from 'mdlz-prmtz'
-import { theme } from '../theme'
+import { transparentize } from 'polished'
 
 type Variant = 'gray' | 'blue' | 'green' | 'red' | 'transparent' | 'primary' | 'secondary'
 type Size = 0 | 1
@@ -11,165 +12,174 @@ type ButtonProps = ButtonPrimitiveProps & {
   variant?: Variant
   isWaiting?: boolean
   size?: Size
+  theme?: any
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ children, ...props }, forwardedRef) => (
-  <ButtonPrimitive
-    {...props}
-    ref={forwardedRef}
-    styleConfig={{
-      base: {
-        button: {
-          normal: {
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: 'none',
-            borderRadius: theme.radii[1],
-            cursor: 'pointer',
-            fontFamily: theme.fonts.normal,
-            fontWeight: 700,
-            outline: 'none',
-            paddingY: 0,
-            position: 'relative',
-            userSelect: 'none',
-            whiteSpace: 'nowrap',
-            textDecoration: 'none',
-            WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-          },
-          disabled: {
-            color: theme.colors.gray,
-            cursor: 'not-allowed',
-          },
-        },
-      },
-      variants: {
-        variant: {
-          primary: {
-            button: {
-              normal: {
-                backgroundColor: theme.colors.blue,
-                color: 'white',
-              },
-              active: {
-                backgroundColor: theme.colors.blues[3],
-              },
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ children, ...props }, forwardedRef) => {
+  const themeContext = useContext(ThemeContext)
+
+  return (
+    <ButtonPrimitive
+      {...props}
+      ref={forwardedRef}
+      styleConfig={{
+        base: {
+          button: {
+            normal: {
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: 'none',
+              borderRadius: themeContext.radii[1],
+              cursor: 'pointer',
+              fontFamily: themeContext.fonts.normal,
+              fontWeight: 700,
+              outline: 'none',
+              paddingY: 0,
+              position: 'relative',
+              userSelect: 'none',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             },
-          },
-          secondary: {
-            button: {
-              normal: {
-                backgroundColor: 'transparent',
-                color: theme.colors.blue,
-              },
-              active: {
-                color: theme.colors.blues[3],
-              },
-            },
-          },
-          transparent: {
-            button: {
-              normal: {
-                backgroundColor: 'transparent',
-                color: theme.colors.blue,
-              },
-              active: {
-                color: theme.colors.blues[3],
-              },
-            },
-          },
-          gray: {
-            button: {
-              normal: {
-                backgroundColor: theme.colors.gray,
-                color: 'white',
-              },
-              active: {
-                backgroundColor: theme.colors.grays[3],
-              },
-            },
-          },
-          blue: {
-            button: {
-              normal: {
-                backgroundColor: theme.colors.blue,
-                color: 'white',
-              },
-              active: {
-                backgroundColor: theme.colors.blues[3],
-              },
-            },
-          },
-          green: {
-            button: {
-              normal: {
-                backgroundColor: theme.colors.green,
-                color: 'white',
-              },
-              active: {
-                backgroundColor: theme.colors.greens[1],
-              },
-            },
-          },
-          red: {
-            button: {
-              normal: {
-                backgroundColor: theme.colors.red,
-                color: 'white',
-              },
-              active: {
-                backgroundColor: theme.colors.reds[1],
-              },
+            disabled: {
+              color: themeContext.colors.gray,
+              cursor: 'not-allowed',
             },
           },
         },
-        size: {
-          0: {
-            button: {
-              normal: {
-                fontSize: theme.fontSizes[2],
-                paddingLeft: theme.space[2],
-                paddingRight: theme.space[2],
-                height: theme.sizes[5],
-                minWidth: theme.sizes[5],
+        variants: {
+          variant: {
+            primary: {
+              button: {
+                normal: {
+                  backgroundColor: themeContext.colors.blue,
+                  color: 'white',
+                },
+                active: {
+                  backgroundColor: themeContext.colors.blues[3],
+                },
+              },
+            },
+            secondary: {
+              button: {
+                normal: {
+                  backgroundColor: 'transparent',
+                  color: themeContext.colors.blue,
+                },
+                active: {
+                  backgroundColor: transparentize(0.9, themeContext.colors.blue),
+                  color: themeContext.colors.blues[3],
+                },
+                hover: {
+                  backgroundColor: transparentize(0.9, themeContext.colors.blue),
+                },
+              },
+            },
+            transparent: {
+              button: {
+                normal: {
+                  backgroundColor: 'transparent',
+                  color: themeContext.colors.blue,
+                },
+                active: {
+                  color: themeContext.colors.blues[2],
+                },
+              },
+            },
+            gray: {
+              button: {
+                normal: {
+                  backgroundColor: themeContext.colors.grays[4],
+                  color: 'white',
+                },
+                active: {
+                  backgroundColor: themeContext.colors.grays[3],
+                },
+              },
+            },
+            blue: {
+              button: {
+                normal: {
+                  backgroundColor: themeContext.colors.blue,
+                  color: 'white',
+                },
+                active: {
+                  backgroundColor: themeContext.colors.blues[2],
+                },
+              },
+            },
+            green: {
+              button: {
+                normal: {
+                  backgroundColor: themeContext.colors.green,
+                  color: 'white',
+                },
+                active: {
+                  backgroundColor: themeContext.colors.greens[2],
+                },
+              },
+            },
+            red: {
+              button: {
+                normal: {
+                  backgroundColor: themeContext.colors.red,
+                  color: 'white',
+                },
+                active: {
+                  backgroundColor: themeContext.colors.reds[2],
+                },
               },
             },
           },
-          1: {
-            button: {
-              normal: {
-                fontSize: theme.fontSizes[3],
-                paddingLeft: theme.space[3],
-                paddingRight: theme.space[3],
-                height: theme.sizes[6],
-                minWidth: theme.sizes[8],
+          size: {
+            0: {
+              button: {
+                normal: {
+                  fontSize: themeContext.fontSizes[2],
+                  paddingLeft: themeContext.space[2],
+                  paddingRight: themeContext.space[2],
+                  height: themeContext.sizes[5],
+                  minWidth: themeContext.sizes[5],
+                },
+              },
+            },
+            1: {
+              button: {
+                normal: {
+                  fontSize: themeContext.fontSizes[3],
+                  paddingLeft: themeContext.space[3],
+                  paddingRight: themeContext.space[3],
+                  height: themeContext.sizes[6],
+                  minWidth: themeContext.sizes[8],
+                },
+              },
+            },
+          },
+          isWaiting: {
+            true: {
+              button: {
+                normal: {
+                  backgroundColor: themeContext.colors.grays[2],
+                  boxShadow: `inset 0 0 0 1px ${themeContext.colors.grays[3]}`,
+                  color: 'transparent',
+                  overflow: 'hidden',
+                  pointerEvents: 'none',
+                },
+                focus: {
+                  boxShadow: `inset 0 0 0 1px ${themeContext.colors.grays[3]}`,
+                },
               },
             },
           },
         },
-        isWaiting: {
-          true: {
-            button: {
-              normal: {
-                backgroundColor: theme.colors.grays[2],
-                boxShadow: `inset 0 0 0 1px ${theme.colors.grays[3]}`,
-                color: 'transparent',
-                overflow: 'hidden',
-                pointerEvents: 'none',
-              },
-              focus: {
-                boxShadow: `inset 0 0 0 1px ${theme.colors.grays[3]}`,
-              },
-            },
-          },
-        },
-      },
-    }}
-  >
-    {children}
-    {props.isWaiting && <Waiting size={props.size} />}
-  </ButtonPrimitive>
-))
+      }}
+    >
+      {children}
+      {props.isWaiting && <Waiting theme={themeContext} size={props.size} />}
+    </ButtonPrimitive>
+  )
+})
 
 Button.displayName = 'Button'
 
@@ -180,7 +190,7 @@ Button.defaultProps = {
 
 const waitingAnimation = (props: ButtonProps): Keyframes => keyframes`
   100% {
-    transform: translateX(${props.size === 1 ? theme.space[9] : theme.space[7]});
+    transform: translateX(${props.size === 1 ? props.theme.space[9] : props.theme.space[7]});
 	}
 `
 
@@ -195,11 +205,14 @@ const Waiting = styled('div')<ButtonProps>(
       backgroundImage: `linear-gradient(
                 -45deg,
                 transparent 33%,
-                rgba(0, 0, 0, 0.03) 33%,
-                rgba(0, 0, 0, 0.03) 66%,
+                ${props.theme.colors.grays[3]} 33%,
+                ${props.theme.colors.grays[3]} 66%,
                 transparent 66%
               )`,
-      backgroundSize: props.size === 1 ? `${theme.space[9]} ${theme.space[6]}` : `${theme.space[7]} ${theme.space[5]}`,
+      backgroundSize:
+        props.size === 1
+          ? `${props.theme.space[9]} ${props.theme.space[6]}`
+          : `${props.theme.space[7]} ${props.theme.space[5]}`,
     })(props),
 
   props => _css`

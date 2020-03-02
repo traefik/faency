@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import { Flex, Box, Chip, Button, Heading, Text, theme } from '@containous/faency'
+import { Flex, Box, Chip, Button, Heading, Text, useTheme } from '@containous/faency'
+import useDarkMode from 'use-dark-mode'
 import Icon from 'react-eva-icons'
 import Container from './components/Container'
+import Link from './components/Link'
 import List from './components/List'
 import NavItem from './components/NavItem'
 import Divider from './components/Divider'
 import pkg from '../package.json'
 import logo from '../static/logo.png'
+import whiteLogo from '../static/logo-white.png'
 
 function App({ element, props: appProps }) {
   const [navOpen, setNavOpen] = useState(false)
+  const theme = useTheme()
+  const darkMode = useDarkMode()
 
   const query = graphql`
     fragment mdxContent on MdxConnection {
@@ -61,11 +66,12 @@ function App({ element, props: appProps }) {
               borderBottom={['1px solid', 0]}
               borderColor={[theme.colors.grays[3], theme.colors.grays[3]]}
               style={{ WebkitOverflowScrolling: 'touch', overflowX: 'hidden' }}
+              backgroundColor={darkMode.value ? '#121826' : 'white'}
             >
               <Box pt="1em" px={16}>
                 <Flex alignItems="center">
                   <Box>
-                    <img src={logo} alt="Containous Logo" height="35px" />
+                    <img src={darkMode.value ? whiteLogo : logo} alt="Containous Logo" height="35px" />
                   </Box>
                   <Chip ml={1} variant="blue">
                     v{pkg.version}
@@ -135,17 +141,17 @@ function App({ element, props: appProps }) {
                 <Box px={16} mt={3} minHeight={4}>
                   <Text size={2}>
                     Powered by{' '}
-                    <a href="https://containo.us" title="Containous">
+                    <Link href="https://containo.us" title="Containous">
                       Containous
-                    </a>
+                    </Link>
                   </Text>
                 </Box>
                 <Box px={16} mb={2} minHeight={4}>
                   <Text size={2}>
                     Highy inspired by{' '}
-                    <a href="https://radix.modulz.app/" title="Radix Design System">
+                    <Link href="https://radix.modulz.app/" title="Radix Design System">
                       Radix
-                    </a>
+                    </Link>
                   </Text>
                 </Box>
               </Box>
@@ -156,8 +162,9 @@ function App({ element, props: appProps }) {
               pb={9}
               marginLeft={[0, 200, 250]}
               maxWidth={['100%']}
+              minHeight={['100vh']}
               display={[navOpen ? 'none' : 'block', 'block']}
-              backgroundColor="#F2F3F5"
+              backgroundColor="bg"
             >
               <Container size={1}>{element}</Container>
             </Box>

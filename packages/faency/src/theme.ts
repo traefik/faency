@@ -5,7 +5,9 @@ type Breakpoints<T> = Array<T> & {
   xlarge: '68em'
 }
 
-export const theme = {
+export type ThemeType = any
+
+export const theme: ThemeType = {
   breakpoints: ['38em', '62em', '68em', '110em'] as Breakpoints<any>,
   fonts: {
     normal: 'Nunito, -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, arial, sans-serif',
@@ -16,6 +18,8 @@ export const theme = {
   lineHeights: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   radii: ['0', '3px', '6px', '8px', '12px'],
   colors: {
+    bg: 'hsl(220, 13%, 95%)',
+    menuBg: 'white',
     primary: 'hsl(222, 67%, 51%)',
     positive: '#00a697',
     warning: '#db7d11',
@@ -53,11 +57,11 @@ export const theme = {
     blues: [
       'hsl(220, 67%, 99%)',
       'hsl(220, 71%, 96%)',
-      'hsl(222, 50%, 91%)',
+      'hsl(222, 76%, 91%)',
       'hsl(220, 76%, 68%)',
       'hsl(220, 67%, 51%)',
       'hsl(220, 91%, 45%)',
-      'hsl(220, 67%, 35%)',
+      'hsl(220, 61%, 18%)',
       'hsl(226, 27%, 22%)',
       'hsl(223, 675%, 9%)',
     ],

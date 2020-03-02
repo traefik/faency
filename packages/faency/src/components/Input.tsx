@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from 'styled-components'
 import { Input as InputPrimitive, InputProps as InputPrimitiveProps } from 'mdlz-prmtz'
-import { theme } from '../theme'
 
 type Variant = 'normal' | 'ghost'
 type Size = 0 | 1
@@ -10,99 +10,103 @@ export type InputProps = InputPrimitiveProps & {
   size?: Size & any
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => (
-  <InputPrimitive
-    {...props}
-    ref={forwardedRef}
-    styleConfig={{
-      base: {
-        input: {
-          normal: {
-            appearance: 'none',
-            cursor: 'default',
-            color: theme.colors.black,
-            fontFamily: theme.fonts.normal,
-            outline: 'none',
-            paddingTop: theme.space[0],
-            paddingBottom: theme.space[0],
-            borderRadius: theme.radii[4],
-            verticalAlign: 'middle',
-            width: '100%',
-            boxSizing: 'border-box',
-            WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-            transition: 'border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
-          },
-          readOnly: {
-            borderColor: theme.colors.gray,
-            color: 'black',
-          },
-          disabled: {
-            borderColor: theme.colors.gray,
-            color: 'gray',
-            cursor: 'not-allowed',
-          },
-          focus: {
-            backgroundColor: 'white',
-            border: '2px solid',
-            borderColor: 'black',
-            cursor: 'text',
-          },
-        },
-        placeholder: {
-          normal: {
-            color: theme.colors.grays[5],
-          },
-        },
-      },
-      variants: {
-        variant: {
-          normal: {
-            input: {
-              normal: {
-                backgroundColor: 'white',
-                border: '1px solid',
-                borderColor: theme.colors.gray,
-              },
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => {
+  const themeContext = useContext(ThemeContext)
+
+  return (
+    <InputPrimitive
+      {...props}
+      ref={forwardedRef}
+      styleConfig={{
+        base: {
+          input: {
+            normal: {
+              appearance: 'none',
+              cursor: 'default',
+              color: themeContext.colors.black,
+              fontFamily: themeContext.fonts.normal,
+              outline: 'none',
+              paddingTop: themeContext.space[0],
+              paddingBottom: themeContext.space[0],
+              borderRadius: themeContext.radii[4],
+              verticalAlign: 'middle',
+              width: '100%',
+              boxSizing: 'border-box',
+              WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+              transition: 'border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
+            },
+            readOnly: {
+              borderColor: themeContext.colors.gray,
+              color: themeContext.colors.black,
+            },
+            disabled: {
+              borderColor: themeContext.colors.gray,
+              color: 'gray',
+              cursor: 'not-allowed',
+            },
+            focus: {
+              backgroundColor: themeContext.colors.white,
+              border: '2px solid',
+              borderColor: themeContext.colors.black,
+              cursor: 'text',
             },
           },
-          ghost: {
-            input: {
-              normal: {
-                cursor: 'text',
-              },
+          placeholder: {
+            normal: {
+              color: themeContext.colors.grays[5],
             },
           },
         },
-        size: {
-          0: {
-            input: {
-              normal: {
-                fontSize: theme.fontSizes[1],
-                letterSpacing: '-0.01em',
-                height: theme.sizes[5],
-                lineHeight: theme.sizes[2],
-                paddingLeft: '12px',
-                paddingRight: '12px',
+        variants: {
+          variant: {
+            normal: {
+              input: {
+                normal: {
+                  backgroundColor: themeContext.colors.white,
+                  border: '1px solid',
+                  borderColor: themeContext.colors.gray,
+                },
+              },
+            },
+            ghost: {
+              input: {
+                normal: {
+                  cursor: 'text',
+                },
               },
             },
           },
-          1: {
-            input: {
-              normal: {
-                fontSize: theme.fontSizes[2],
-                letterSpacing: '-0.01em',
-                height: theme.sizes[6],
-                lineHeight: theme.sizes[4],
-                paddingLeft: theme.space[2],
-                paddingRight: theme.space[2],
+          size: {
+            0: {
+              input: {
+                normal: {
+                  fontSize: themeContext.fontSizes[1],
+                  letterSpacing: '-0.01em',
+                  height: themeContext.sizes[5],
+                  lineHeight: themeContext.sizes[2],
+                  paddingLeft: '12px',
+                  paddingRight: '12px',
+                },
+              },
+            },
+            1: {
+              input: {
+                normal: {
+                  fontSize: themeContext.fontSizes[2],
+                  letterSpacing: '-0.01em',
+                  height: themeContext.sizes[6],
+                  lineHeight: themeContext.sizes[4],
+                  paddingLeft: themeContext.space[2],
+                  paddingRight: themeContext.space[2],
+                },
               },
             },
           },
         },
-      },
-    }}
-  />
-))
+      }}
+    />
+  )
+})
 
 Input.displayName = 'Input'
 

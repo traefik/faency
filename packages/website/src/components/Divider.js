@@ -1,7 +1,9 @@
 import React from 'react'
-import { theme } from '@containous/faency'
+import { useTheme } from '@containous/faency'
 
 function Divider({ ...props }) {
+  const theme = useTheme()
+
   return (
     <hr
       style={{

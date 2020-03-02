@@ -113,7 +113,7 @@ export const NavGroup = styled('div')<NavGroupProps>(
 const NavWrapper = styled('nav')(
   css({
     minHeight: 64,
-    backgroundColor: 'dark',
+    backgroundColor: theme.colors.dark,
     display: 'flex',
     flexWrap: 'wrap',
     paddingX: 0,

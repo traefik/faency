@@ -1,5 +1,5 @@
-import React from 'react'
-import { CSSObject } from 'styled-components'
+import React, { useContext } from 'react'
+import { CSSObject, ThemeContext } from 'styled-components'
 import { transparentize } from 'polished'
 import { Card as CardPrimitive, CardProps as CardPrimitiveProps, StyleConfig, CardParts } from 'mdlz-prmtz'
 import { theme } from '../theme'
@@ -35,7 +35,7 @@ type CardProps = CardPrimitiveProps & {
   as?: any
 }
 
-export const cardStyleConfig: StyleConfig<CardParts> = {
+export const getCardStyleConfig = (theme: any): StyleConfig<CardParts> => ({
   base: {
     card: {
       normal: {
@@ -71,11 +71,13 @@ export const cardStyleConfig: StyleConfig<CardParts> = {
       },
     },
   },
-}
+})
 
-export const Card = React.forwardRef<HTMLDivElement, CardProps>((props, forwardedRef) => (
-  <CardPrimitive {...props} ref={forwardedRef} styleConfig={cardStyleConfig} />
-))
+export const Card = React.forwardRef<HTMLDivElement, CardProps>((props, forwardedRef) => {
+  const theme = useContext(ThemeContext)
+
+  return <CardPrimitive {...props} ref={forwardedRef} styleConfig={getCardStyleConfig(theme)} />
+})
 
 Card.displayName = 'Card'
 

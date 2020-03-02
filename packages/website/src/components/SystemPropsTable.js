@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Table, Tr, Tbody, Td, Text, Heading, theme } from '@containous/faency'
+import { Box, Table, Tr, Tbody, Td, Thead, Th, Text, Heading } from '@containous/faency'
 
 export function SystemPropsTable({ props: systemProps }) {
   return (
@@ -10,11 +10,16 @@ export function SystemPropsTable({ props: systemProps }) {
       </Heading>
       <Box my={4}>
         <Table>
+          <Thead>
+            <Tr>
+              <Th>Prop</Th>
+            </Tr>
+          </Thead>
           <Tbody>
             {systemProps.sort().map(prop => (
               <Tr key={prop}>
                 <Td>
-                  <Text textColor={theme.colors.grays[7]}>
+                  <Text>
                     <code>{prop}</code>
                   </Text>
                 </Td>

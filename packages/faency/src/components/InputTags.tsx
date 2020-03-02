@@ -15,6 +15,7 @@ const StyledInput = styled('input')`
   min-width: 40%;
   max-height: ${theme.sizes[3]};
   margin: 0 ${theme.space[1]} ${theme.space[1]} 0;
+  color: ${(props: any): string => props.theme.colors.black};
 `
 
 const Container = styled('div')<{ hasFocus: boolean }>`
@@ -23,16 +24,11 @@ const Container = styled('div')<{ hasFocus: boolean }>`
   transition: box-shadow 360ms cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
   border-radius: ${theme.radii[4]};
-  box-shadow: 0 0 0 1px ${theme.colors.gray};
   display: flex;
   flex-wrap: wrap;
-  background-color: ${theme.colors.white};
-
-  ${({ hasFocus }): SimpleInterpolation =>
-    hasFocus &&
-    `
-    box-shadow: 0 0 0 2px ${theme.colors.black};    
-  `}
+  background-color: ${(props: any): string => props.theme.colors.white};
+  box-shadow: ${(props: any): string =>
+    props.hasFocus ? `0 0 0 2px ${props.theme.colors.black}` : `0 0 0 1px ${props.theme.colors.gray}`};
 `
 
 const ChipsContainer = styled('div')`
