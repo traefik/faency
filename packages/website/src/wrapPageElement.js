@@ -18,6 +18,4 @@ const Wrapper = props => {
   )
 }
 
-export const wrapPageElement = props => (
-  <Wrapper {...props} />
-)
+export const wrapPageElement = props => <Wrapper {...props} />
