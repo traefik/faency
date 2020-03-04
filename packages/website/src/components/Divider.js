@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useTheme } from '@containous/faency'
 
-function Divider({ ...props }) {
+function Divider({ style = {}, ...props }) {
   const theme = useTheme()
 
   return (
@@ -12,10 +13,15 @@ function Divider({ ...props }) {
         height: 1,
         marginTop: '1em',
         marginBottom: '1em',
+        ...style,
       }}
       {...props}
     />
   )
+}
+
+Divider.propTypes = {
+  style: PropTypes.object,
 }
 
 export default Divider
