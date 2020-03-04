@@ -8,7 +8,14 @@ const Wrapper = props => {
 
   return (
     <FaencyProvider useDarkTheme={darkMode.value}>
-      <Box position={('absolute', 'absolute', 'fixed')} top={[70, 2]} right={['6px', 2]}>
+      <Box
+        position={('absolute', 'absolute', 'fixed')}
+        top={[0, 2]}
+        left={['50%', 'inherit']}
+        right={[null, 2]}
+        height={49}
+        ml={['-42px', 'inherit']}
+      >
         <Button size={1} onClick={darkMode.toggle}>
           {darkMode.value ? 'light' : 'dark'}
         </Button>

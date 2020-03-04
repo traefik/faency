@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { Flex, Box, Chip, Button, Heading, Text, useTheme } from '@containous/faency'
 import useDarkMode from 'use-dark-mode'
-import Icon from 'react-eva-icons'
 import Container from './components/Container'
 import Link from './components/Link'
 import List from './components/List'
 import NavItem from './components/NavItem'
 import Divider from './components/Divider'
+import MenuToggle from './components/MenuToggle'
 import pkg from '../package.json'
 import logo from '../static/logo.png'
 import whiteLogo from '../static/logo-white.png'
@@ -68,7 +68,7 @@ function App({ element, props: appProps }) {
               style={{ WebkitOverflowScrolling: 'touch', overflowX: 'hidden' }}
               backgroundColor={darkMode.value ? '#121826' : 'white'}
             >
-              <Box pt="1em" px={16}>
+              <Box pt={[0, '1em']} px={16}>
                 <Flex alignItems="center">
                   <Box>
                     <img src={darkMode.value ? whiteLogo : logo} alt="Containous Logo" height="35px" />
@@ -78,15 +78,14 @@ function App({ element, props: appProps }) {
                   </Chip>
                   <Box ml="auto" display={['block', 'none']}>
                     <Button size={1} variant={navOpen ? 'active' : undefined} onClick={() => setNavOpen(!navOpen)}>
-                      {!navOpen && <Icon name="menu-outline" size="medium" fill="black" />}
-                      {navOpen && <Icon name="close-outline" size="medium" fill="black" />}
+                      <MenuToggle isOpen={navOpen} />
                     </Button>
                   </Box>
                 </Flex>
               </Box>
 
               <Box display={[navOpen ? 'block' : 'none', 'block']}>
-                <Divider />
+                <Divider style={{ marginTop: navOpen ? 0 : '1em' }} />
                 <List>
                   <Heading size={1} my={10} mx={16}>
                     Overview
