@@ -16,7 +16,7 @@ import whiteLogo from '../static/logo-white.png'
 function App({ element, props: appProps }) {
   const [navOpen, setNavOpen] = useState(false)
   const theme = useTheme()
-  const darkMode = useDarkMode()
+  const darkMode = useDarkMode(true)
 
   const query = graphql`
     fragment mdxContent on MdxConnection {
