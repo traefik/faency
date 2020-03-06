@@ -8,7 +8,7 @@ import nightOwl from 'prism-react-renderer/themes/nightOwl'
 
 const CodeBlock = ({ children, live, removeFragment }) => {
   const components = useMDXComponents()
-  const darkMode = useDarkMode()
+  const darkMode = useDarkMode(false)
 
   const liveProviderProps = {
     transformCode: code => (removeFragment ? code : `<>${code}</>`),
