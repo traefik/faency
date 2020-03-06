@@ -33,6 +33,7 @@ export {
 export { Radio } from './components/Radio'
 export { Option, OptionProps, OptionGroup, OptionGroupProps, Select } from './components/Select'
 export { SubNav, SubNavItem } from './components/SubNav'
+export { Switch, SwitchProps } from './components/Switch'
 export { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './components/Table'
 export { Text } from './components/Text'
 export { ToggleButtonGroup, ToggleButton } from './components/ToggleButton'

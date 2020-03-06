@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { Select as SelectPrimitive, SelectProps as SelectPrimitiveProps, StyleConfig, SelectParts } from 'mdlz-prmtz'
+import { Select as SelectPrimitive, SelectProps as SelectPrimitiveProps, StyleConfig, SelectParts } from '@modulz/primitives'
 import merge from 'lodash.merge'
 import { menuStyleConfig } from './Menu'
 
-export { Option, OptionProps, OptionGroup, OptionGroupProps } from 'mdlz-prmtz'
+export { Option, OptionProps, OptionGroup, OptionGroupProps } from '@modulz/primitives'
 
 type Variant = 'normal' | 'ghost'
 type Size = 0 | 1

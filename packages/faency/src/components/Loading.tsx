@@ -1,5 +1,5 @@
 import styled, { css as _css, keyframes, SimpleInterpolation } from 'styled-components'
-import { Box, BoxProps as BoxPrimitiveProps } from 'mdlz-prmtz'
+import { Box, BoxProps as BoxPrimitiveProps } from '@modulz/primitives'
 import { theme } from '../theme'
 
 type LoadingProps = BoxPrimitiveProps & {

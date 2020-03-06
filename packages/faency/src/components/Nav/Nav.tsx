@@ -7,7 +7,7 @@ import {
   ButtonProps as ButtonPrimitiveProps,
   Flex,
   LinkProps as LinkPrimitiveProps,
-} from 'mdlz-prmtz'
+} from '@modulz/primitives'
 import { theme } from '../../theme'
 import breakpoints from '../../breakpoints'
 import uuidv4 from './utils/uuidv4'

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { CardLink as CardLinkPrimitive, CardLinkProps as CardLinkPrimitiveProps } from 'mdlz-prmtz'
+import { CardLink as CardLinkPrimitive, CardLinkProps as CardLinkPrimitiveProps } from '@modulz/primitives'
 import { getCardStyleConfig } from './Card'
 
 export type Variant = 'border' | 'shadow' | 'ghost'
