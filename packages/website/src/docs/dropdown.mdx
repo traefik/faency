@@ -1,0 +1,58 @@
+---
+title: Dropdown Menu
+component: DropdownMenu
+description: Useful for displaying a list of contextual actions on right click.
+---
+
+```js live
+<DropdownMenu
+  button={<Button variant="primary">Open Menu</Button>}
+  menu={
+    <Menu onItemSelected={item => alert(item.label)}>
+      <MenuItem label="Simple item one" />
+      <MenuItem label="Simple item two" />
+      <MenuItem label="Simple item three" />
+      <MenuItemSeparator />
+      <MenuItemLabel>An item label</MenuItemLabel>
+      <MenuItemSeparator />
+      <MenuItemCheckbox label="Checkbox item" checked={true} />
+      <MenuItemSeparator />
+      <MenuItemRadioGroup value="1">
+        <MenuItemRadio value="1" label="Radio item one" />
+        <MenuItemRadio value="2" label="Radio item two" />
+        <MenuItemRadio value="3" label="Radio item three" />
+      </MenuItemRadioGroup>
+    </Menu>
+  }
+/>
+```
+
+<PropsTable
+  data={{
+    button: {
+      type: `Button`,
+      description: 'The button element to attach the menu to.',
+    },
+    menu: {
+      type: 'Menu',
+      description: 'The menu to render (check Menu component documentation for usage)',
+    },
+  }}
+/>
+
+## Examples
+
+### Other button variants
+
+```js live
+<DropdownMenu
+  button={<Button variant="green">Open Menu</Button>}
+  menu={
+    <Menu onItemSelected={item => alert(item.label)}>
+      <MenuItem label="Option 1" />
+      <MenuItem label="Option 2" />
+      <MenuItem label="Option 3" />
+    </Menu>
+  }
+/>
+```

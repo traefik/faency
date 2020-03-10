@@ -1,6 +1,22 @@
+import React from 'react'
 import { transparentize } from 'polished'
-import { StyleConfig, MenuParts } from 'mdlz-prmtz'
+import { StyleConfig, MenuParts, Menu as MenuPrimitive, MenuProps as MenuPrimitiveProps } from 'mdlz-prmtz'
 import { theme } from '../theme'
+
+export {
+  MenuItem,
+  MenuItemProps,
+  MenuItemCheckbox,
+  MenuItemCheckboxProps,
+  MenuItemSeparator,
+  MenuItemSeparatorProps,
+  MenuItemLabel,
+  MenuItemLabelProps,
+  MenuItemRadio,
+  MenuItemRadioProps,
+  MenuItemRadioGroup,
+  MenuItemRadioGroupProps,
+} from 'mdlz-prmtz'
 
 export const menuStyleConfig: StyleConfig<MenuParts> = {
   base: {
@@ -19,7 +35,7 @@ export const menuStyleConfig: StyleConfig<MenuParts> = {
         fontFamily: theme.fonts.normal,
         fontSize: theme.fontSizes[1],
         letterSpacing: '-0.01em',
-        height: theme.sizes[5],
+        height: theme.sizes[4],
         paddingLeft: theme.space[5],
         paddingRight: theme.space[6],
       },
@@ -63,3 +79,11 @@ export const menuStyleConfig: StyleConfig<MenuParts> = {
     },
   },
 }
+
+export type MenuProps = MenuPrimitiveProps
+
+export const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, forwardedRef) => (
+  <MenuPrimitive ref={forwardedRef} {...props} styleConfig={menuStyleConfig} />
+))
+
+Menu.displayName = 'Menu'
