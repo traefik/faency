@@ -72,7 +72,7 @@ const CodeBlock = ({ children, live, removeFragment }) => {
 CodeBlock.propTypes = {
   children: PropTypes.elementType,
   live: PropTypes.bool,
-  removeFragment: PropTypes.func,
+  removeFragment: PropTypes.bool,
 }
 
 export default CodeBlock

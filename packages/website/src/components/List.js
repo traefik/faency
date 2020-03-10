@@ -11,7 +11,7 @@ function List({ children, ...props }) {
 }
 
 List.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.node,
   props: PropTypes.object,
 }
 

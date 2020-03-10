@@ -17,7 +17,7 @@
     "faency:test": "lerna exec --scope @containous/faency -- yarn test",
     "faency:test:watch": "lerna exec --scope @containous/faency -- yarn test:watch",
     "build": "yarn faency:build && yarn website:build",
-    "test": "yarn faency:test src/components/Switch",
+    "test": "yarn faency:test",
     "test:watch": "yarn faency:test:watch",
     "prettier": "prettier './**/*.{js,jsx,ts,tsx,json,yml,yaml,css,md,mdx}' --write",
     "lint": "eslint './packages/**/*.{js,jsx,ts,tsx}'",

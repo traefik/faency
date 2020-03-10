@@ -147,7 +147,7 @@ function App({ element, props: appProps }) {
                 </Box>
                 <Box px={16} mb={2} minHeight={4}>
                   <Text size={2}>
-                    Highy inspired by{' '}
+                    Highly inspired by{' '}
                     <Link href="https://radix.modulz.app/" title="Radix Design System">
                       Radix
                     </Link>
@@ -175,7 +175,7 @@ function App({ element, props: appProps }) {
 }
 
 App.propTypes = {
-  element: PropTypes.elementType,
+  element: PropTypes.node,
   props: PropTypes.shape({
     location: PropTypes.shape({
       pathname: PropTypes.string,
