@@ -33,7 +33,10 @@ export function PropsTable({ data, title = 'Props' }) {
                       <Chip variant="blue">{value.type}</Chip>
                     </Td>
                     <Td>
-                      <Text>{value.description}</Text>
+                      <Text>
+                        {value.description}
+                        {value.default && ` (Default: '${value.default}')`}
+                      </Text>
                     </Td>
                   </Tr>
                 )
@@ -50,5 +53,9 @@ export function PropsTable({ data, title = 'Props' }) {
 
 PropsTable.propTypes = {
   title: PropTypes.string,
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    default: PropTypes.string,
+  }),
 }
