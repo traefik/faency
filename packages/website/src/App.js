@@ -94,7 +94,7 @@ function App({ element, props: appProps }) {
                     <NavItem
                       key={node.frontmatter.title}
                       to={node.fields.slug}
-                      active={pathname === node.fields.slug}
+                      active={pathname.includes(node.fields.slug)}
                       onClick={() => setNavOpen(false)}
                     >
                       {node.frontmatter.title}
@@ -112,7 +112,7 @@ function App({ element, props: appProps }) {
                     <NavItem
                       key={node.frontmatter.title}
                       to={node.fields.slug}
-                      active={pathname === node.fields.slug}
+                      active={pathname.includes(node.fields.slug)}
                       onClick={() => setNavOpen(false)}
                     >
                       {node.frontmatter.title}
