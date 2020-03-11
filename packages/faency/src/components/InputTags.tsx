@@ -1,5 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState, useRef } from 'react'
-import { InputProps } from 'mdlz-prmtz'
+import { InputProps } from '@modulz/primitives'
 import ArrowNav from 'react-arrow-nav'
 import { DismissibleChip } from './DismissibleChip'
 import styled from 'styled-components'

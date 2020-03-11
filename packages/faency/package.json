@@ -36,7 +36,7 @@
     "prepublishOnly": "npm run build",
     "deploy-storybook": "build-storybook",
     "test": "jest",
-    "test:watch": "jest --watch --no-cache"
+    "test:watch": "jest --watch"
   },
   "peerDependencies": {
     "react": "^16.8.6",
@@ -52,8 +52,8 @@
     "lodash.pick": "^4.4.0",
     "polished": "^3.4.4",
     "react-arrow-nav": "^0.0.2",
-    "styled-components": "^5.0.1"
-    "react-eva-icons": "^0.0.8",
+    "styled-components": "^5.0.1",
+    "react-eva-icons": "^0.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
