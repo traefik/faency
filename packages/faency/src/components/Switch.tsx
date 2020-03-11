@@ -26,7 +26,7 @@ const SwitchWrapper = styled('label')<MarginProps>(
   css({
     position: 'relative',
     display: 'inline-block',
-    width: 6,
+    width: 5,
     height: 3,
     boxSizing: 'content-box',
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
@@ -83,7 +83,7 @@ const FakeSwitch = styled('div')(props =>
         backgroundColor: 'blue',
       },
       '&::after': {
-        transform: `translateX(${themeGet('space.3')(props)})`,
+        transform: `translateX(${themeGet('space.2')(props)})`,
       },
     },
     [`${Input}:not(:disabled):active + &`]: {
