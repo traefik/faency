@@ -1,6 +1,11 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { Select as SelectPrimitive, SelectProps as SelectPrimitiveProps, StyleConfig, SelectParts } from '@modulz/primitives'
+import {
+  Select as SelectPrimitive,
+  SelectProps as SelectPrimitiveProps,
+  StyleConfig,
+  SelectParts,
+} from '@modulz/primitives'
 import merge from 'lodash.merge'
 import { menuStyleConfig } from './Menu'
 
