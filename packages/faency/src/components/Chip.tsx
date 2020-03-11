@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prmtz'
+import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from '@modulz/primitives'
 
 type Variant = 'gray' | 'blue' | 'lightBlue' | 'green' | 'purple' | 'orange' | 'red'
 type Size = 0 | 1 | 2

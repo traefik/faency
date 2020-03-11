@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { CSSObject, ThemeContext } from 'styled-components'
 import { transparentize } from 'polished'
-import { Card as CardPrimitive, CardProps as CardPrimitiveProps, StyleConfig, CardParts } from 'mdlz-prmtz'
+import { Card as CardPrimitive, CardProps as CardPrimitiveProps, StyleConfig, CardParts } from '@modulz/primitives'
 import { theme } from '../theme'
 
 function createShadow(defaultOpacity: number): CSSObject {

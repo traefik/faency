@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import styled, { css as _css, keyframes, Keyframes } from 'styled-components'
 import css from '@styled-system/css'
-import { Button as ButtonPrimitive, ButtonProps as ButtonPrimitiveProps } from 'mdlz-prmtz'
+import { Button as ButtonPrimitive, ButtonProps as ButtonPrimitiveProps } from '@modulz/primitives'
 import { transparentize } from 'polished'
 
 type Variant = 'gray' | 'blue' | 'green' | 'red' | 'transparent' | 'primary' | 'secondary'

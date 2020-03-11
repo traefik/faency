@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { Input as InputPrimitive, InputProps as InputPrimitiveProps } from 'mdlz-prmtz'
+import { Input as InputPrimitive, InputProps as InputPrimitiveProps } from '@modulz/primitives'
 
 type Variant = 'normal' | 'ghost'
 type Size = 0 | 1

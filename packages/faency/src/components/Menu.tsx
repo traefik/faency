@@ -1,6 +1,6 @@
 import React from 'react'
 import { transparentize } from 'polished'
-import { StyleConfig, MenuParts, Menu as MenuPrimitive, MenuProps as MenuPrimitiveProps } from 'mdlz-prmtz'
+import { StyleConfig, MenuParts, Menu as MenuPrimitive, MenuProps as MenuPrimitiveProps } from '@modulz/primitives'
 import { theme } from '../theme'
 
 export {
@@ -16,7 +16,7 @@ export {
   MenuItemRadioProps,
   MenuItemRadioGroup,
   MenuItemRadioGroupProps,
-} from 'mdlz-prmtz'
+} from '@modulz/primitives'
 
 export const menuStyleConfig: StyleConfig<MenuParts> = {
   base: {

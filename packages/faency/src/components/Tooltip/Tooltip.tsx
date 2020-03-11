@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef, useState } from 'react'
-import { Box as BoxPrimitive, BoxProps, Text as TextPrimitive } from 'mdlz-prmtz'
+import { Box as BoxPrimitive, BoxProps, Text as TextPrimitive } from '@modulz/primitives'
 import useToggle from '../../hooks/use-toggle'
 import { Button } from '../Button'
 import Portal from './components/Portal'

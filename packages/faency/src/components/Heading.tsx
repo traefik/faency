@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from 'mdlz-prmtz'
+import { Text as TextPrimitive, TextProps as TextPrimitiveProps } from '@modulz/primitives'
 
 type FontWeight = 400 | 500
 type Size = 0 | 1 | 2 | 3 | 4 | 5

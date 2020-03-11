@@ -3,9 +3,9 @@ import { ThemeContext } from 'styled-components'
 import {
   ToggleButtonGroup as ToggleButtonGroupPrimitive,
   ToggleButtonGroupProps as ToggleButtonGroupPrimitiveProps,
-} from 'mdlz-prmtz'
+} from '@modulz/primitives'
 
-export { ToggleButton } from 'mdlz-prmtz'
+export { ToggleButton } from '@modulz/primitives'
 
 export type ToggleButtonGroupProps<T> = ToggleButtonGroupPrimitiveProps<T>
 

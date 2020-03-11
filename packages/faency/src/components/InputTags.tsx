@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState, useRef } from 'react'
 import { DismissibleChip } from './DismissibleChip'
-import { InputProps } from 'mdlz-prmtz'
+import { InputProps } from '@modulz/primitives'
 import styled, { SimpleInterpolation } from 'styled-components'
 import { theme } from '../theme'
 import { Box } from './Box'

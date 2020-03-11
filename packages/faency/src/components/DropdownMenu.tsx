@@ -1,1 +1,1 @@
-export { DropdownMenu, DropdownMenuProps } from 'mdlz-prmtz'
+export { DropdownMenu, DropdownMenuProps } from '@modulz/primitives'
