@@ -16,11 +16,6 @@ function SwitchStory() {
       </Box>
 
       <Box mb="4">
-        <Text as="p">Uncontrolled and without children</Text>
-        <Switch value="true" defaultChecked />
-      </Box>
-
-      <Box mb="4">
         <Text as="p">Controlled</Text>
         <Box>
           <Switch value="accept" checked={checked} onChange={e => setChecked(e.target.checked)} />
