@@ -1,0 +1,187 @@
+---
+title: Menu
+component: Menu
+description: Useful for displaying a list of actions. Typically not used directly but in conjunction with other components like RightClickMenu or DropdownMenu.
+---
+
+```js live removeFragment
+<DropdownMenu
+  button={<Button variant="primary">Open Menu</Button>}
+  menu={
+    <Menu onItemSelected={item => alert(item.label)}>
+      <MenuItem label="Option 1" />
+      <MenuItem label="Option 2" />
+      <MenuItem label="Option 3" />
+    </Menu>
+  }
+/>
+```
+
+<PropsTable
+  data={{
+    children: {
+      type: `MenuItem*`,
+      description:
+        'The options to display. *Accepted values are MenuItem and other components exported along with Menu',
+    },
+    buttonRef: {
+      type: 'React.RefObject',
+      description: 'A reference to a button element used to position the menu below',
+    },
+    buttonRef: {
+      type: 'React.RefObject',
+      description:
+        'A reference to the text element inside of a button, used as extra positioning information when the menu is used to build a Select',
+    },
+    anchorPoint: {
+      type: 'Point (x, y)',
+      description:
+        'An alternative way to position the menu directly by referencing a point in space, used when opening a menu via right click',
+    },
+    isOpen: {
+      type: 'Boolean',
+      default: 'false',
+      description: 'Whether it is open or not',
+    },
+    onDismiss: {
+      type: 'Function',
+      description: 'A function to be called when it is dismissed',
+    },
+    highlightedIndex: {
+      type: 'Number',
+      description: 'The index of the highlighted item (if controlled)',
+    },
+    defaultHighlightedIndex: {
+      type: 'Number',
+      description: 'A function called when the highlighted item changes',
+    },
+    onHighlightedIndexChange: {
+      type: '(index?: number) => void	',
+      description: 'The index of the item to highlithed by default (if uncontrolled)',
+    },
+    onItemSelected: {
+      type: '(item: Item) => void',
+      description: 'The index of the item to highlithed by default (if uncontrolled)',
+    },
+    calculateMenuPosition: {
+      type: '(options: Options) => MenuPosition | undefined',
+      description: 'A function used to specify how to calculate the menu position',
+    },
+    unstable__disableLock: {
+      type: 'boolean',
+      description: 'Used to stop locking the clickable area inside the menu container.',
+    },
+  }}
+/>
+
+## Examples
+
+The following examples use the Dropdown component as a helper to display different use cases.
+
+### MenuItemCheckbox
+
+```js live removeFragment
+function CheckboxExample() {
+  const [option1, setOption1] = React.useState(true)
+  const [option2, setOption2] = React.useState(false)
+  const [option3, setOption3] = React.useState(true)
+
+  return (
+    <DropdownMenu
+      button={<Button variant="primary">Open Menu</Button>}
+      menu={
+        <Menu>
+          <MenuItemCheckbox label="Option 1" checked={option1} onChange={setOption1} />
+          <MenuItemCheckbox label="Option 2" checked={option2} onChange={setOption2} />
+          <MenuItemCheckbox label="Option 3" checked={option3} onChange={setOption3} />
+        </Menu>
+      }
+    />
+  )
+}
+```
+
+### MenuItemRadioGroup and MenuItemRadio
+
+```js live removeFragment
+function CheckboxExample() {
+  const [value, setValue] = React.useState('2')
+
+  return (
+    <DropdownMenu
+      button={<Button variant="primary">Open Menu</Button>}
+      menu={
+        <Menu>
+          <MenuItemRadioGroup value={value} onChange={setValue}>
+            <MenuItemRadio value="1" label="Radio item one" />
+            <MenuItemRadio value="2" label="Radio item two" />
+            <MenuItemRadio value="3" label="Radio item three" />
+          </MenuItemRadioGroup>
+        </Menu>
+      }
+    />
+  )
+}
+```
+
+### MenuItemSeparator and MenuItemLabel
+
+```js live
+<DropdownMenu
+  button={<Button variant="primary">Open Menu</Button>}
+  menu={
+    <Menu>
+      <MenuItem label="Option 1" />
+      <MenuItemSeparator />
+      <MenuItemLabel>Section label</MenuItemLabel>
+      <MenuItem label="Option 2" />
+      <MenuItem label="Option 3" />
+    </Menu>
+  }
+/>
+```
+
+### Preselected option
+
+```js live
+<DropdownMenu
+  button={<Button variant="primary">Open Menu</Button>}
+  menu={
+    <Menu defaultHighlightedIndex={1} onItemSelected={item => alert(item.label)}>
+      <MenuItem label="Option 1" />
+      <MenuItem label="Option 2" />
+      <MenuItem label="Option 3" />
+    </Menu>
+  }
+/>
+```
+
+### OnItemSelected callback
+
+```js live
+<DropdownMenu
+  button={<Button variant="primary">Open Menu</Button>}
+  menu={
+    <Menu onItemSelected={item => alert(item.label)}>
+      <MenuItem label="Option 1" />
+      <MenuItem label="Option 2" />
+      <MenuItem label="Option 3" />
+    </Menu>
+  }
+/>
+```
+
+### OnDismiss callback
+
+```js live
+<DropdownMenu
+  button={<Button variant="primary">Open Menu</Button>}
+  menu={
+    <Menu onDismiss={() => alert('Menu closed')}>
+      <MenuItem label="Option 1" />
+      <MenuItem label="Option 2" />
+      <MenuItem label="Option 3" />
+    </Menu>
+  }
+/>
+```

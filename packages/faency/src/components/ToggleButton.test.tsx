@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { render } from '@testing-library/react'
 import { ToggleButton, ToggleButtonGroup } from './ToggleButton'
+import { ThemeProvider } from 'styled-components'
+import { theme as defaultTheme } from '../theme'
+import { theme as defaultDarkTheme } from '../dark-theme'
 
 const Component: React.FC = () => {
   const [value, setValue] = useState<string>('center')
@@ -18,6 +21,18 @@ const Component: React.FC = () => {
 
 describe('ToggleButton component', () => {
   test('renders without crashing', () => {
-    render(<Component />)
+    render(
+      <ThemeProvider theme={defaultTheme}>
+        <Component />
+      </ThemeProvider>,
+    )
+  })
+
+  test('renders without crashing on dark theme', () => {
+    render(
+      <ThemeProvider theme={defaultDarkTheme}>
+        <Component />
+      </ThemeProvider>,
+    )
   })
 })
