@@ -17,12 +17,12 @@ storiesOf('Components|Avatar', module).add('default', () => (
 
     <Box mb={4}>
       <Heading>Avatar using non-existing image with fallback to initials</Heading>
-      <Avatar src="https://avatars0.githubusercontent.com/u/invalid-user">KS</Avatar>
+      <Avatar src="">KS</Avatar>
     </Box>
 
     <Box mb={4}>
       <Heading>Avatar using non-existing image with fallback to custom initials</Heading>
-      <Avatar src="https://avatars0.githubusercontent.com/u/invalid-user">
+      <Avatar src="">
         <Text textColor="white" marginBottom={1}>
           K
         </Text>
@@ -41,7 +41,7 @@ storiesOf('Components|Avatar', module).add('default', () => (
 
     <Box mb={4} backgroundColor="dark" padding={2}>
       <Heading textColor="white">Avatar using non-existing image with fallback to initials on a dark variant</Heading>
-      <Avatar src="https://avatars0.githubusercontent.com/u/invalid-user" variant="dark">
+      <Avatar src="" variant="dark">
         KS
       </Avatar>
     </Box>
