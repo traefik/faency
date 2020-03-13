@@ -31,6 +31,7 @@ export {
   MenuItemSeparator,
   MenuItemSeparatorProps,
 } from './components/Menu'
+export { PropRender, PropRenderProps } from './components/PropRender'
 export { Radio } from './components/Radio'
 export { Option, OptionProps, OptionGroup, OptionGroupProps, Select } from './components/Select'
 export { SkeletonBox, SkeletonText, SkeletonTextGroup } from './components/Skeleton'
