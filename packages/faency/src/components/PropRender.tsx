@@ -2,13 +2,22 @@ import React, { ReactNode } from 'react'
 import { Text } from './Text'
 import { Box } from './Box'
 import { Flex } from './Flex'
+import color from 'color'
+import { useTheme } from '../hooks/use-theme'
 
 const isNumeric = (value: any): boolean => !isNaN(value)
 const isBoolean = (value: any): boolean => ['true', 'false'].includes(value)
-const isColor = (strColor: any): boolean => {
-  const s = new Option().style
-  s.color = strColor
-  return s.color == strColor
+const isColor = (value: any, themeContext: any): boolean => {
+  if (Object.keys(themeContext.colors).includes(value)) {
+    return true
+  }
+
+  try {
+    color(value)
+    return true
+  } catch (e) {
+    return false
+  }
 }
 
 export type PropRenderProps = {
@@ -55,7 +64,7 @@ export const PropRender: React.FC<PropRenderProps> = ({
   bool,
   color,
 }) => {
-  let renderType = type
+  const themeContext = useTheme()
   const booleanPresent = string && number && boolean && bool && color
   const renderMap = {
     string: renderString,
@@ -63,6 +72,7 @@ export const PropRender: React.FC<PropRenderProps> = ({
     boolean: renderBoolean,
     color: renderColor,
   }
+  let renderType = type
 
   if (renderType === 'auto' || booleanPresent) {
     renderType = 'string'
@@ -75,7 +85,7 @@ export const PropRender: React.FC<PropRenderProps> = ({
       renderType = 'boolean'
     }
 
-    if (color || isColor(children)) {
+    if (color || isColor(children, themeContext)) {
       renderType = 'color'
     }
 

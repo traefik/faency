@@ -38,7 +38,7 @@ export function PropsTable({ data, title = 'Props' }) {
                         {value.default && (
                           <Text>
                             {' '}
-                            (Default: <PropRender>{value.default}</PropRender>)
+                            (Default: <PropRender type={value.defaultType}>{value.default}</PropRender>)
                           </Text>
                         )}
                       </Text>
@@ -62,5 +62,6 @@ PropsTable.propTypes = {
     type: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     default: PropTypes.string,
+    defaultType: PropTypes.string,
   }),
 }
