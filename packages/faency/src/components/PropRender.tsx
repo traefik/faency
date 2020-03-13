@@ -22,7 +22,7 @@ export type PropRenderProps = {
 }
 
 const renderString = (children: ReactNode): JSX.Element => (
-  <Text fontWeight={700} textColor="orange">
+  <Text fontWeight={700} textColor="green">
     &quot;{children}&quot;
   </Text>
 )

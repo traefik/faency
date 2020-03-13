@@ -1,41 +1,41 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Flex } from './Flex'
+import { Box } from './Box'
 import { Heading } from './Heading'
 import { PropRender } from './PropRender'
 
 storiesOf('Components|PropRender', module).add('default', () => (
   <>
-    <Flex flexDirection="column" mb={2}>
+    <Box mb={2}>
       <Heading>Auto detected types from content</Heading>
-      <span>
+      <Box>
         String prop: <PropRender>value</PropRender>
-      </span>
-      <span>
+      </Box>
+      <Box>
         Number prop: <PropRender>123</PropRender>
-      </span>
-      <span>
+      </Box>
+      <Box>
         Boolean prop: <PropRender>true</PropRender>
-      </span>
-      <span>
+      </Box>
+      <Box>
         Color prop: <PropRender>blue</PropRender>
-      </span>
-    </Flex>
+      </Box>
+    </Box>
 
-    <Flex flexDirection="column">
+    <Box>
       <Heading>Explicit types</Heading>
-      <span>
+      <Box>
         Forced string prop: <PropRender string>123</PropRender>
-      </span>
-      <span>
+      </Box>
+      <Box>
         Forced Number prop: <PropRender number>NaN</PropRender>
-      </span>
-      <span>
-        Forced Boolean prop: <PropRender boolean>bool</PropRender>
-      </span>
-      <span>
+      </Box>
+      <Box>
+        Forced Boolean prop: <PropRender bool>bool</PropRender>
+      </Box>
+      <Box>
         Forced Color prop: <PropRender color>primary</PropRender>
-      </span>
-    </Flex>
+      </Box>
+    </Box>
   </>
 ))
