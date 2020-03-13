@@ -5,7 +5,7 @@ description: Useful for presenting profile images and initials.
 ---
 
 ```js live
-<Avatar src="https://images.unsplash.com/photo-1579380287268-aa88d096651c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80" />
+<Avatar src={getValidImageUrl()} />
 ```
 
 <PropsTable
@@ -44,13 +44,13 @@ description: Useful for presenting profile images and initials.
 ### Avatar using non-existing image with fallback to initials
 
 ```js live
-<Avatar src="https://avatars0.githubusercontent.com/u/invalid-user">KS</Avatar>
+<Avatar src="">KS</Avatar>
 ```
 
 ### Avatar using non-existing image with fallback to custom initials
 
 ```js live
-<Avatar src="https://avatars0.githubusercontent.com/u/invalid-user">
+<Avatar src="">
   <Text textColor="white" marginBottom={1}>
     K
   </Text>
@@ -60,26 +60,36 @@ description: Useful for presenting profile images and initials.
 </Avatar>
 ```
 
-### Avatar using existing image on a dark variant
+### Avatar using existing image on an alternative variant
 
-```js live
-<Box backgroundColor="dark" padding={2}>
-  <Avatar
-    src="https://images.unsplash.com/photo-1579380287268-aa88d096651c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80"
-    backgroundColor="purple"
-    variant="dark"
-  >
-    KS
-  </Avatar>
-</Box>
+```js live removeFragment
+function AlternativeVariant() {
+  const darkMode = useDarkMode()
+  const isDarkMode = darkMode.value
+
+  return (
+    <Box backgroundColor="dark" padding={2}>
+      <Avatar src={getValidImageUrl()} backgroundColor="purple" variant={isDarkMode ? 'light' : 'dark'}>
+        KS
+      </Avatar>
+    </Box>
+  )
+}
 ```
 
-### Avatar using non-existing image with fallback to initials on a dark variant
+### Avatar using non-existing image with fallback to initials on an alternative variant
 
-```js live
-<Box backgroundColor="dark" padding={2}>
-  <Avatar src="https://avatars0.githubusercontent.com/u/invalid-user" variant="dark">
-    KS
-  </Avatar>
-</Box>
+```js live removeFragment
+function AnotherAlternativeVariant() {
+  const darkMode = useDarkMode()
+  const isDarkMode = darkMode.value
+
+  return (
+    <Box backgroundColor="dark" padding={2}>
+      <Avatar src="" variant={isDarkMode ? 'light' : 'dark'}>
+        KS
+      </Avatar>
+    </Box>
+  )
+}
 ```
