@@ -32,6 +32,7 @@ export {
 } from './components/Menu'
 export { Radio } from './components/Radio'
 export { Option, OptionProps, OptionGroup, OptionGroupProps, Select } from './components/Select'
+export { SkeletonBox, SkeletonText, SkeletonTextGroup } from './components/Skeleton'
 export { SubNav, SubNavItem } from './components/SubNav'
 export { Switch, SwitchProps } from './components/Switch'
 export { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './components/Table'

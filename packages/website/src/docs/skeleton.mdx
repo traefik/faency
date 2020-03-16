@@ -1,0 +1,69 @@
+---
+title: Skeleton
+component: Skeleton
+description: Useful for displaying during content loading
+---
+
+```js live
+  <Card mb="4">
+    <SkeletonText size={8} />
+  </Card>
+
+  <Card mb="4">
+    <SkeletonTextGroup lines={5} />
+  </Card>
+
+  <SkeletonBox width={60} height={60} borderRadius={30} />
+```
+
+<Heading as="h2" size={4} fontWeight={500} mb={2} mt={6} lineHeight={4}>
+  SkeletonText
+</Heading>
+<PropsTable
+  data={{
+    size: {
+      type: '0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10',
+      default: '2',
+      description: 'The size to apply',
+    },
+  }}
+/>
+<Heading as="h2" size={4} fontWeight={500} mb={2} mt={6} lineHeight={4}>
+  SkeletonTextGroup
+</Heading>
+<PropsTable
+  data={{
+    lines: {
+      type: 'number',
+      default: '3',
+      description: 'The number of lines to display',
+    },
+  }}
+/>
+<Heading as="h2" size={4} fontWeight={500} mb={2} mt={6} lineHeight={4}>
+  SkeletonBox
+</Heading>
+<SystemProps
+  props={[
+    'border',
+    'borderRadius',
+    'boxShadow',
+    'backgroundColor',
+    'display',
+    'opacity',
+    'height',
+    'justifySelf',
+    'margin',
+    'maxWidth',
+    'maxHeight',
+    'minHeight',
+    'minWidth',
+    'overflow',
+    'padding',
+    'positionSet',
+    'textAlign',
+    'textColor',
+    'width',
+    'flexItemSet',
+  ]}
+/>
