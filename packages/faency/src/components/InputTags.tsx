@@ -1,10 +1,12 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState, useRef } from 'react'
-import { DismissibleChip } from './DismissibleChip'
 import { InputProps } from '@modulz/primitives'
-import styled, { SimpleInterpolation } from 'styled-components'
+import ArrowNav from 'react-arrow-nav'
+import { DismissibleChip } from './DismissibleChip'
+import styled from 'styled-components'
 import { theme } from '../theme'
 import { Box } from './Box'
-import ArrowNav from 'react-arrow-nav'
+import useClickOutside from '../hooks/use-click-outside'
+import useKeyListener from '../hooks/use-key-listener'
 
 const StyledInput = styled('input')`
   border: none;
@@ -160,6 +162,22 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
       setSelectFocus(false)
     }
 
+    useClickOutside(selectRef, () => setSelectFocus(false))
+
+    useKeyListener(key => {
+      if (key === 'Tab') {
+        setSelectFocus(false)
+      }
+
+      if (hasFocus && key === 'ArrowDown') {
+        const arrowNavContainer = selectRef.current?.firstChild
+
+        if (arrowNavContainer && arrowNavContainer.firstChild instanceof HTMLElement) {
+          arrowNavContainer.firstChild.focus()
+        }
+      }
+    })
+
     useEffect(() => {
       setValue(value)
     }, [value, setValue])
@@ -169,43 +187,6 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
         setSelectFocus(true)
       }
     }, [hasFocus])
-
-    useEffect(() => {
-      const handleKeys: EventListener = (event: unknown) => {
-        const { key } = event as KeyboardEvent
-
-        if (key && hasFocus) {
-          if (key === 'Tab') {
-            setSelectFocus(false)
-          }
-
-          if (selectRef.current) {
-            const arrowNavContainer = selectRef.current.firstChild
-
-            if (arrowNavContainer && arrowNavContainer.firstChild instanceof HTMLElement && key === 'ArrowDown') {
-              arrowNavContainer.firstChild.focus()
-            }
-          }
-        }
-      }
-
-      document.addEventListener('keydown', handleKeys)
-
-      return (): void => document.removeEventListener('keydown', handleKeys)
-    }, [hasFocus, selectRef, setSelectFocus])
-
-    useEffect(() => {
-      const handleClickOutside: EventListener = (event: unknown) => {
-        const { target } = event as MouseEvent
-        if (selectRef.current && target instanceof Node && !selectRef.current.contains(target)) {
-          setSelectFocus(false)
-        }
-      }
-
-      document.addEventListener('mousedown', handleClickOutside)
-
-      return (): void => document.removeEventListener('mousedown', handleClickOutside)
-    })
 
     return (
       <Container hasFocus={hasFocus}>

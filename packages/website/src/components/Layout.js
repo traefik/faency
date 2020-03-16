@@ -35,7 +35,7 @@ function Layout({ children }) {
 }
 
 Layout.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.node,
 }
 
 export default Layout

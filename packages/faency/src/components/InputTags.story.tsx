@@ -56,7 +56,11 @@ const InputTagsAddTagsFromInput = (): JSX.Element => {
   const addTag = (v: string): void => v !== '' && setTags(current => (!current.includes(v) ? [...current, v] : current))
   const filterSelectedOptions = (currentOptions: string[]): string[] =>
     currentOptions.filter((o: string) => !tags.includes(o))
-  const getOptions = (): string[] => filterCaseInsensitive(value, filterSelectedOptions(allOptions))
+  const getOptions = (v?: string): string[] => {
+    const selectedOptions = filterSelectedOptions(allOptions)
+    const currentValue = typeof v !== 'undefined' ? v : value
+    return filterCaseInsensitive(currentValue, selectedOptions)
+  }
   const handleSubmit = (v: string): void => {
     addTag(v)
     setValue('')
@@ -64,7 +68,7 @@ const InputTagsAddTagsFromInput = (): JSX.Element => {
 
   const handleChange = (value: string): void => {
     setValue(value)
-    setOptions(() => getOptions())
+    setOptions(() => getOptions(value))
   }
 
   useEffect(() => {

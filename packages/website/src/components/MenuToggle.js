@@ -70,7 +70,7 @@ const MenuToggle = styled.div.attrs(() => ({
 `
 
 MenuToggle.propTypes = {
-  isOpen: PropTypes.boolean,
+  isOpen: PropTypes.bool,
 }
 
 export default MenuToggle
