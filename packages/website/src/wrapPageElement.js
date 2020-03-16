@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Provider as FaencyProvider } from '@containous/faency'
+import { Flex, Text, Provider as FaencyProvider, Switch } from '@containous/faency'
 import useDarkMode from 'use-dark-mode'
 import App from './App'
 
@@ -8,18 +8,20 @@ const Wrapper = props => {
 
   return (
     <FaencyProvider useDarkTheme={darkMode.value}>
-      <Box
+      <Flex
         position={('absolute', 'absolute', 'fixed')}
         top={[0, 2]}
         left={['50%', 'inherit']}
         right={[null, 2]}
         height={49}
         ml={['-42px', 'inherit']}
+        alignItems="center"
       >
-        <Button size={1} onClick={darkMode.toggle}>
-          {darkMode.value ? 'light' : 'dark'}
-        </Button>
-      </Box>
+        <Text mr={1} onClick={darkMode.toggle} style={{ cursor: 'default' }}>
+          Dark Mode {darkMode.value ? 'On' : 'Off'}
+        </Text>
+        <Switch checked={darkMode.value} onChange={darkMode.toggle} />
+      </Flex>
       <App {...props} />
     </FaencyProvider>
   )
