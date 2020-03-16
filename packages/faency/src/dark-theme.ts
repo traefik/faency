@@ -4,6 +4,9 @@ export const theme = {
   ...lightTheme,
   colors: {
     ...lightTheme.colors,
+    borderColor: lightTheme.colors.white,
+    primaryHoverBg: lightTheme.colors.primary,
+    primaryHoverText: lightTheme.colors.white,
     bg: 'hsl(222, 36%, 7%);',
     menuBg: 'hsl(222, 36%, 11%);',
     dark: lightTheme.colors.white,
