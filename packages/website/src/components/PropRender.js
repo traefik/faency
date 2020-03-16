@@ -1,13 +1,11 @@
-import React, { ReactNode } from 'react'
-import { Text } from './Text'
-import { Box } from './Box'
-import { Flex } from './Flex'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Flex, Box, Text, useTheme } from '@containous/faency'
 import color from 'color'
-import { useTheme } from '../hooks/use-theme'
 
-const isNumeric = (value: any): boolean => !isNaN(value)
-const isBoolean = (value: any): boolean => ['true', 'false'].includes(value)
-const isColor = (value: any, themeContext: any): boolean => {
+const isNumeric = value => !isNaN(value)
+const isBoolean = value => ['true', 'false'].includes(value)
+const isColor = (value, themeContext) => {
   if (Object.keys(themeContext.colors).includes(value)) {
     return true
   }
@@ -20,50 +18,32 @@ const isColor = (value: any, themeContext: any): boolean => {
   }
 }
 
-export type PropRenderProps = {
-  children: ReactNode
-  type?: 'auto' | 'string' | 'number' | 'boolean' | 'color'
-  string?: boolean
-  number?: boolean
-  boolean?: boolean
-  bool?: boolean
-  color?: boolean
-}
-
-const renderString = (children: ReactNode): JSX.Element => (
+const renderString = children => (
   <Text fontWeight={700} textColor="green">
     &quot;{children}&quot;
   </Text>
 )
 
-const renderNumber = (children: ReactNode): JSX.Element => (
+const renderNumber = children => (
   <Text fontWeight={700} textColor="blue">
     {children}
   </Text>
 )
 
-const renderBoolean = (children: ReactNode): JSX.Element => (
+const renderBoolean = children => (
   <Text fontWeight={700} textColor="lightBlue">
     {children}
   </Text>
 )
 
-const renderColor = (children: ReactNode): JSX.Element => (
+const renderColor = children => (
   <Flex alignItems="center" style={{ display: 'inline-flex' }}>
-    <Box bg={children as string} height="8px" width="8px" mr="4px" boxShadow="0 0 0 1px black" />
+    <Box bg={children} height="8px" width="8px" mr="4px" boxShadow="0 0 0 1px black" />
     <Text fontWeight={700}>{children}</Text>
   </Flex>
 )
 
-export const PropRender: React.FC<PropRenderProps> = ({
-  children,
-  type = 'auto',
-  string,
-  number,
-  boolean,
-  bool,
-  color,
-}) => {
+export const PropRender = ({ children, type = 'auto', string, number, boolean, bool, color }) => {
   const themeContext = useTheme()
   const booleanPresent = string && number && boolean && bool && color
   const renderMap = {
@@ -96,3 +76,14 @@ export const PropRender: React.FC<PropRenderProps> = ({
 
   return renderMap[renderType](children)
 }
+
+PropRender.propTypes = {
+  type: PropTypes.oneOf(['auto', 'string', 'number', 'boolean', 'color']),
+  string: PropTypes.bool,
+  number: PropTypes.bool,
+  boolean: PropTypes.bool,
+  bool: PropTypes.bool,
+  color: PropTypes.bool,
+}
+
+export default PropRender

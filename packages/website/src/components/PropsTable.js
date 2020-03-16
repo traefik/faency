@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Chip, Table, Thead, Tr, Th, Tbody, Td, Text, Heading, PropRender } from '@containous/faency'
+import { Box, Chip, Table, Thead, Tr, Th, Tbody, Td, Text, Heading } from '@containous/faency'
+import { PropRender } from './PropRender'
 
 export function PropsTable({ data, title = 'Props' }) {
   const hasProps = Object.keys(data).length > 0

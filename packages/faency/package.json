@@ -48,14 +48,13 @@
     "@styled-system/theme-get": "5.1.2",
     "@styled-system/variant": "^5.1.4",
     "@types/color": "^3.0.1",
-    "color": "^3.1.2",
     "lodash.merge": "^4.6.2",
     "lodash.omit": "^4.5.0",
     "lodash.pick": "^4.4.0",
     "polished": "^3.4.4",
     "react-arrow-nav": "^0.0.2",
-    "styled-components": "^5.0.1",
-    "react-eva-icons": "^0.0.8"
+    "react-eva-icons": "^0.0.8",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
