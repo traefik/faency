@@ -11,6 +11,7 @@ import Icon from 'react-eva-icons'
 import { SystemPropsTable } from '../components/SystemPropsTable'
 import { PropsTable } from '../components/PropsTable'
 import { ThemeSection } from '../components/ThemeSection'
+import useDarkMode from 'use-dark-mode'
 
 function Prop(props) {
   return (
@@ -69,6 +70,9 @@ export const components = {
   },
   Prop,
   ThemeSection,
+  useDarkMode,
+  getValidImageUrl: () =>
+    'https://images.unsplash.com/photo-1579380287268-aa88d096651c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80',
 }
 
 function DocPageTemplate({ data, location }) {

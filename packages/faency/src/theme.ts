@@ -19,6 +19,9 @@ export const theme: ThemeType = {
   radii: ['0', '3px', '6px', '8px', '12px'],
   colors: {
     bg: 'hsl(220, 13%, 95%)',
+    borderColor: 'hsl(222, 67%, 51%)',
+    primaryHoverBg: 'white',
+    primaryHoverText: 'hsl(222, 67%, 51%)',
     menuBg: 'white',
     primary: 'hsl(222, 67%, 51%)',
     positive: '#00a697',

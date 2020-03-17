@@ -1,0 +1,99 @@
+---
+title: Avatar
+component: Avatar
+description: Useful for presenting profile images and initials.
+---
+
+```js live
+<Avatar src={getValidImageUrl()} />
+```
+
+<PropsTable
+  data={{
+    children: {
+      type: 'ReactNode',
+      description: 'Fallback content to show if the image could not be loaded.',
+    },
+    src: {
+      type: 'string',
+      description: 'The URL of the image to use.',
+    },
+    alt: {
+      type: 'string',
+      description: 'A text description of the image.',
+    },
+    variant: {
+      type: 'light | dark',
+      description: 'The variant to use, it changes the colors and hover effect. The default value is the current theme.'
+    }
+  }}
+/>
+<SystemProps
+  props={[
+    'backgroundColor',
+    'margin',
+    'marginTop',
+    'marginRight',
+    'marginBottom',
+    'marginLeft',
+    'marginX',
+    'marginY',
+    'width',
+    'height',
+  ]}
+/>
+
+## Examples
+
+### Avatar using non-existing image with fallback to initials
+
+```js live
+<Avatar src="">KS</Avatar>
+```
+
+### Avatar using non-existing image with fallback to custom initials
+
+```js live
+<Avatar src="">
+  <Text textColor="white" marginBottom={1}>
+    K
+  </Text>
+  <Text textColor="white" marginTop={1}>
+    S
+  </Text>
+</Avatar>
+```
+
+### Avatar using existing image on an alternative variant
+
+```js live removeFragment
+function AlternativeVariant() {
+  const darkMode = useDarkMode()
+  const isDarkMode = darkMode.value
+
+  return (
+    <Box backgroundColor="dark" padding={2}>
+      <Avatar src={getValidImageUrl()} backgroundColor="purple" variant={isDarkMode ? 'light' : 'dark'}>
+        KS
+      </Avatar>
+    </Box>
+  )
+}
+```
+
+### Avatar using non-existing image with fallback to initials on an alternative variant
+
+```js live removeFragment
+function AnotherAlternativeVariant() {
+  const darkMode = useDarkMode()
+  const isDarkMode = darkMode.value
+
+  return (
+    <Box backgroundColor="dark" padding={2}>
+      <Avatar src="" variant={isDarkMode ? 'light' : 'dark'}>
+        KS
+      </Avatar>
+    </Box>
+  )
+}
+```

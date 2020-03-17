@@ -1,5 +1,6 @@
 export { Provider } from './Provider'
 
+export { Avatar } from './components/Avatar'
 export { Box } from './components/Box'
 export { Button } from './components/Button'
 export { Card } from './components/Card'
