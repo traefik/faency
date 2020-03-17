@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Box, Chip, Table, Thead, Tr, Th, Tbody, Td, Text, Heading } from '@containous/faency'
+import { PropRender } from './PropRender'
 
 export function PropsTable({ data, title = 'Props' }) {
   const hasProps = Object.keys(data).length > 0
@@ -35,7 +36,12 @@ export function PropsTable({ data, title = 'Props' }) {
                     <Td>
                       <Text>
                         {value.description}
-                        {value.default && ` (Default: '${value.default}')`}
+                        {value.default && (
+                          <Text>
+                            {' '}
+                            (Default: <PropRender type={value.defaultType}>{value.default}</PropRender>)
+                          </Text>
+                        )}
                       </Text>
                     </Td>
                   </Tr>
@@ -57,5 +63,6 @@ PropsTable.propTypes = {
     type: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     default: PropTypes.string,
+    defaultType: PropTypes.string,
   }),
 }

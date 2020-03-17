@@ -1,0 +1,89 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Flex, Box, Text, useTheme } from '@containous/faency'
+import color from 'color'
+
+const isNumeric = value => !isNaN(value)
+const isBoolean = value => ['true', 'false'].includes(value)
+const isColor = (value, themeContext) => {
+  if (Object.keys(themeContext.colors).includes(value)) {
+    return true
+  }
+
+  try {
+    color(value)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+const renderString = children => (
+  <Text fontWeight={700} textColor="green">
+    &quot;{children}&quot;
+  </Text>
+)
+
+const renderNumber = children => (
+  <Text fontWeight={700} textColor="blue">
+    {children}
+  </Text>
+)
+
+const renderBoolean = children => (
+  <Text fontWeight={700} textColor="lightBlue">
+    {children}
+  </Text>
+)
+
+const renderColor = children => (
+  <Flex alignItems="center" style={{ display: 'inline-flex' }}>
+    <Box bg={children} height="8px" width="8px" mr="4px" boxShadow="0 0 0 1px black" />
+    <Text fontWeight={700}>{children}</Text>
+  </Flex>
+)
+
+export const PropRender = ({ children, type = 'auto', string, number, boolean, bool, color }) => {
+  const themeContext = useTheme()
+  const booleanPresent = string && number && boolean && bool && color
+  const renderMap = {
+    string: renderString,
+    number: renderNumber,
+    boolean: renderBoolean,
+    color: renderColor,
+  }
+  let renderType = type
+
+  if (renderType === 'auto' || booleanPresent) {
+    renderType = 'string'
+
+    if (number || isNumeric(children)) {
+      renderType = 'number'
+    }
+
+    if (bool || boolean || isBoolean(children)) {
+      renderType = 'boolean'
+    }
+
+    if (color || isColor(children, themeContext)) {
+      renderType = 'color'
+    }
+
+    if (string) {
+      renderType = 'string'
+    }
+  }
+
+  return renderMap[renderType](children)
+}
+
+PropRender.propTypes = {
+  type: PropTypes.oneOf(['auto', 'string', 'number', 'boolean', 'color']),
+  string: PropTypes.bool,
+  number: PropTypes.bool,
+  boolean: PropTypes.bool,
+  bool: PropTypes.bool,
+  color: PropTypes.bool,
+}
+
+export default PropRender
