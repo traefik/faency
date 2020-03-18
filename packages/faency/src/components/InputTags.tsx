@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState, useRef } from 'react'
 import { InputProps } from '@modulz/primitives'
-import ArrowNav from 'react-arrow-nav'
+import { ArrowNav } from './ArrowNav'
 import { DismissibleChip } from './DismissibleChip'
 import styled from 'styled-components'
 import { theme } from '../theme'
@@ -148,6 +148,7 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const [selectFocus, setSelectFocus] = useState(false)
     const [inputValue, setValue] = useState(value)
     const selectRef = useRef<HTMLDivElement>(null)
+
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
       setValue(e.target.value)
       if (onInputChange) {
@@ -175,6 +176,10 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
         if (arrowNavContainer && arrowNavContainer.firstChild instanceof HTMLElement) {
           arrowNavContainer.firstChild.focus()
         }
+      }
+
+      if (selectFocus && key === 'Enter') {
+        setValue('')
       }
     })
 
