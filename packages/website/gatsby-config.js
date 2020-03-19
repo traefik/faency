@@ -3,6 +3,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-use-dark-mode',
     {
       resolve: 'gatsby-plugin-nprogress',
       options: {

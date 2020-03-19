@@ -6,7 +6,7 @@ import useDarkMode from 'use-dark-mode'
 
 function NavItem({ children, isExternal, active, ...props }) {
   const theme = useTheme()
-  const darkMode = useDarkMode(false)
+  const darkMode = useDarkMode()
 
   return (
     <Button as={Link} {...props} variant="secondary" px={5} minHeight={6} style={{ justifyContent: 'flex-start' }}>
