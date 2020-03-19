@@ -4,7 +4,7 @@ import useDarkMode from 'use-dark-mode'
 import App from './App'
 
 const Wrapper = props => {
-  const darkMode = useDarkMode(false)
+  const darkMode = useDarkMode()
 
   return (
     <FaencyProvider useDarkTheme={darkMode.value}>
