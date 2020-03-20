@@ -8,7 +8,7 @@ import { transparentize } from 'polished'
 type Variant = 'gray' | 'blue' | 'green' | 'red' | 'transparent' | 'primary' | 'secondary'
 type Size = 0 | 1
 
-type ButtonProps = ButtonPrimitiveProps & {
+export type ButtonProps = ButtonPrimitiveProps & {
   variant?: Variant
   isWaiting?: boolean
   size?: Size

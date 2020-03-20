@@ -5,7 +5,7 @@ import { transparentize } from 'polished'
 import { theme } from '../theme'
 import breakpoints from '../breakpoints'
 
-type SubNavItemProps = {
+export type SubNavItemProps = {
   as?: 'button' | 'a'
   variant?: 'active' | 'normal'
 }

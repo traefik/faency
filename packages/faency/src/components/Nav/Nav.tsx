@@ -16,13 +16,13 @@ import MenuIcon from './components/MenuIcon'
 import Menu, { NavContainer } from './components/Menu'
 export { NavContainer }
 
-type NavItemProps = ButtonPrimitiveProps &
+export type NavItemProps = ButtonPrimitiveProps &
   LinkPrimitiveProps & {
     as?: 'button' | 'a'
     variant?: 'active' | 'normal'
   }
 
-type NavGroupProps = {
+export type NavGroupProps = {
   variant?: 'left' | 'right'
 }
 
@@ -132,11 +132,11 @@ const ResponsiveWrapper = styled.div`
   }
 `
 
-type NavGroupsProps = {
+export type NavGroupsProps = {
   children: React.ReactNode
 }
 
-type NavProps = {
+export type NavProps = {
   children: React.ReactNode
 }
 

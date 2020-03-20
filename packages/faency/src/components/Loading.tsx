@@ -2,7 +2,7 @@ import styled, { css as _css, keyframes, SimpleInterpolation } from 'styled-comp
 import { Box, BoxProps as BoxPrimitiveProps } from '@modulz/primitives'
 import { theme } from '../theme'
 
-type LoadingProps = BoxPrimitiveProps & {
+export type LoadingProps = BoxPrimitiveProps & {
   progress?: number
 }
 

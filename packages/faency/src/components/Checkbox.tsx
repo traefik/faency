@@ -2,6 +2,8 @@ import React from 'react'
 import { theme } from '../theme'
 import { Checkbox as CheckboxPrimitive, CheckboxProps } from '@modulz/primitives'
 
+export { CheckboxProps } from '@modulz/primitives'
+
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, forwardedRef) => (
   <CheckboxPrimitive
     {...props}

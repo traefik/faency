@@ -30,7 +30,7 @@ function createShadow(defaultOpacity: number): CSSObject {
 
 export type Variant = 'border' | 'shadow' | 'ghost'
 
-type CardProps = CardPrimitiveProps & {
+export type CardProps = CardPrimitiveProps & {
   variant?: Variant
   as?: any
 }

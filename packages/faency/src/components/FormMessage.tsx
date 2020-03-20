@@ -22,7 +22,7 @@ const ColoredMessage = styled(Text)<{ color: string }>`
   `}
 `
 
-type FormMessageProps = {
+export type FormMessageProps = {
   message: string
   variant?: 'error' | 'warning' | 'info' | 'success'
   hasIcon?: boolean
