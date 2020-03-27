@@ -2,7 +2,7 @@ import React, { useContext, forwardRef } from 'react'
 import { Avatar as AvatarPrimitive, AvatarProps as AvatarPrimitiveProps } from '@modulz/primitives'
 import { ThemeContext } from 'styled-components'
 
-type AvatarProps = AvatarPrimitiveProps & {
+export type AvatarProps = AvatarPrimitiveProps & {
   textColor?: string
   variant?: 'normal' | 'dark' | 'light'
 }

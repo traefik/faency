@@ -2,6 +2,8 @@ import React from 'react'
 import { Radio as RadioPrimitive, RadioProps } from '@modulz/primitives'
 import { theme } from '../theme'
 
+export { RadioProps } from '@modulz/primitives'
+
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>((props, forwardedRef) => (
   <RadioPrimitive
     {...props}

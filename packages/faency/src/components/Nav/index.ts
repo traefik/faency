@@ -1,1 +1,11 @@
-export { Nav, NavContainer, NavGroups, NavGroup, NavItem } from './Nav'
+export {
+  Nav,
+  NavContainer,
+  NavGroups,
+  NavGroup,
+  NavItem,
+  NavGroupProps,
+  NavGroupsProps,
+  NavItemProps,
+  NavProps,
+} from './Nav'

@@ -1,7 +1,6 @@
 import React from 'react'
 import themeGet from '@styled-system/theme-get'
 import styled, { keyframes } from 'styled-components'
-import { transparentize } from 'polished'
 import { Box as BoxPrimitive } from '../components/Box'
 
 const shimmerAnimation = keyframes`
@@ -13,7 +12,7 @@ const shimmerAnimation = keyframes`
   }
 `
 
-type SkeletonTextProps = {
+export type SkeletonTextProps = {
   size?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 }
 
@@ -51,7 +50,7 @@ SkeletonText.defaultProps = {
   size: 2,
 }
 
-type SkeletonTextGroupProps = {
+export type SkeletonTextGroupProps = {
   lines?: number
 }
 

@@ -115,7 +115,7 @@ const defaultRenderOption: RenderOptionType = (option, onClick) => (
   </SelectItem>
 )
 
-interface InputTagsProps {
+export type InputTagsProps = {
   value?: string
   placeholder?: string
   tags?: string[]
