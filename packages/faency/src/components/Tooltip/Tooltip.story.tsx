@@ -34,27 +34,27 @@ storiesOf('Components|Tooltip', module).add('default', () => (
     </Box>
     <Box mb="6">
       <Tooltip label="default tooltip">
-        <Box width={120} height={120} bg="blue" />
+        <Box sx={{ width: 120, height: 120, bg: 'blue' }} />
       </Tooltip>
     </Box>
     <Box mb="6">
       <Tooltip label="tooltip left" preferredAlignment="left">
-        <Box width={120} height={120} bg="blue" />
+        <Box sx={{ width: 120, height: 120, bg: 'blue' }} />
       </Tooltip>
     </Box>
     <Box mb="6">
       <Tooltip label="tooltip right" preferredAlignment="right">
-        <Box width={120} height={120} bg="blue" />
+        <Box sx={{ width: 120, height: 120, bg: 'blue' }} />
       </Tooltip>
     </Box>
     <Box mb="6">
       <Tooltip label="tooltip right but too long" preferredAlignment="right">
-        <Box width={120} height={120} bg="blue" />
+        <Box sx={{ width: 120, height: 120, bg: 'blue' }} />
       </Tooltip>
     </Box>
-    <Flex mb="6" justifyContent="flex-end">
+    <Flex mb="6" sx={{ justifyContent: 'flex-end' }}>
       <Tooltip label="tooltip left but too long" preferredAlignment="left">
-        <Box width={120} height={120} bg="blue" />
+        <Box sx={{ width: 120, height: 120, bg: 'blue' }} />
       </Tooltip>
     </Flex>
 

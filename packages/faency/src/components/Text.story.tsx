@@ -40,38 +40,38 @@ storiesOf('Components|Text', module).add('default', () => (
     </Box>
 
     <Box mb="4">
-      <Text as="p" fontStyle="italic">
+      <Text as="p" sx={{ fontStyle: 'italic' }}>
         Enabling the Cloud.
       </Text>
-      <Text as="p" fontWeight={500}>
+      <Text as="p" sx={{ fontWeight: 500 }}>
         Enabling the Cloud.
       </Text>
     </Box>
 
     <Box mb="4">
       <Text as="p">We are Containous</Text>
-      <Text as="p" textColor="blue">
+      <Text as="p" sx={{ color: 'blue' }}>
         We are Containous
       </Text>
-      <Text as="p" textColor="red">
+      <Text as="p" sx={{ color: 'red' }}>
         We are Containous
       </Text>
-      <Text as="p" textColor="green">
+      <Text as="p" sx={{ color: 'green' }}>
         We are Containous
       </Text>
-      <Text as="p" textColor="gray">
+      <Text as="p" sx={{ color: 'gray' }}>
         We are Containous
       </Text>
     </Box>
 
     <Box mb="4">
-      <Text as="p" textAlign="center" padding="4">
+      <Text as="p" sx={{ textAlign: 'center' }} padding="4">
         We are Containous. We strive to provide the cloud with the most powerful tools to ease the demanding
         infrastructures strain on your IT.
       </Text>
     </Box>
-    <Box mb="4" width={200}>
-      <Text as="p" textAlign="center" padding="4" truncate>
+    <Box mb="4" sx={{ width: 200 }}>
+      <Text as="p" sx={{ textAlign: 'center' }} padding="4" truncate>
         We are Containous. We strive to provide the cloud with the most powerful tools to ease the demanding
         infrastructures strain on your IT.
       </Text>

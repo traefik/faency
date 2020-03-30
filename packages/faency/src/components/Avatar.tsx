@@ -3,7 +3,6 @@ import { Avatar as AvatarPrimitive, AvatarProps as AvatarPrimitiveProps } from '
 import { ThemeContext } from 'styled-components'
 
 export type AvatarProps = AvatarPrimitiveProps & {
-  textColor?: string
   variant?: 'normal' | 'dark' | 'light'
 }
 
@@ -27,7 +26,7 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>((props, forwarded
               color: '#fff',
               transition: 'all 200ms ease-in-out',
               '*': {
-                color: '#fff !important',
+                color: '#fff',
               },
             },
           },

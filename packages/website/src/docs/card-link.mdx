@@ -5,7 +5,7 @@ description: Useful to group information about a subject and link it to another 
 ---
 
 ```js live
-<CardLink maxWidth={275} href="" target="">
+<CardLink sx={{ maxWidth: 275 }} href="" target="">
   <Heading size={1}>Card heading</Heading>
   <Text as="p" mt={2} mb={4} size={3}>
     Card content
@@ -26,7 +26,6 @@ description: Useful to group information about a subject and link it to another 
     },
   }}
 />
-<SystemProps props={['href', 'target', 'onClick', 'textColor', 'backgroundColor', 'margin', 'padding', 'width', 'maxWidth']} />
 
 ## Examples
 
@@ -35,7 +34,7 @@ description: Useful to group information about a subject and link it to another 
 There are 3 variants to choose from.
 
 ```js live
-<CardLink maxWidth={275} variant="border" href="" target="">
+<CardLink sx={{ maxWidth: 275 }} variant="border" href="" target="">
   <Heading size={1}>Bordered card (default)</Heading>
   <Text as="p" mt={2} mb={4} size={3}>
     Card content
@@ -44,7 +43,7 @@ There are 3 variants to choose from.
 ```
 
 ```js live
-<CardLink maxWidth={275} variant="shadow" href="" target="">
+<CardLink sx={{ maxWidth: 275 }} variant="shadow" href="" target="">
   <Heading size={1}>Shadow card</Heading>
   <Text as="p" mt={2} mb={4} size={3}>
     Card content
@@ -53,7 +52,7 @@ There are 3 variants to choose from.
 ```
 
 ```js live
-<CardLink maxWidth={275} variant="ghost" href="" target="">
+<CardLink sx={{ maxWidth: 275 }} variant="ghost" href="" target="">
   <Heading size={1}>Ghost card</Heading>
   <Text as="p" mt={2} mb={4} size={3}>
     Card content

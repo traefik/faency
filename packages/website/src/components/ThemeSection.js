@@ -37,7 +37,7 @@ export function ThemeSection() {
 
       <Heading my={4}>Line heights</Heading>
       {Object.entries(theme.lineHeights).map(([key, value]) => (
-        <Text size={8} mr={4} fontWeight={500} key={key}>
+        <Text size={8} mr={4} weigth={500} key={key}>
           {removeUnit(value)}
         </Text>
       ))}
@@ -46,7 +46,7 @@ export function ThemeSection() {
 
       <Heading my={4}>Space scale</Heading>
       {Object.entries(theme.space).map(([key, value]) => (
-        <Text size={8} mr={4} fontWeight={500} key={key}>
+        <Text size={8} mr={4} weigth={500} key={key}>
           {removeUnit(value)}
         </Text>
       ))}
@@ -55,7 +55,7 @@ export function ThemeSection() {
 
       <Heading my={4}>Size scale</Heading>
       {Object.entries(theme.sizes).map(([key, value]) => (
-        <Text size={8} mr={4} fontWeight={500} key={key}>
+        <Text size={8} mr={4} weigth={500} key={key}>
           {removeUnit(value)}
         </Text>
       ))}
@@ -64,7 +64,7 @@ export function ThemeSection() {
 
       <Heading my={4}>Radii scale</Heading>
       {Object.entries(theme.radii).map(([key, value]) => (
-        <Text size={8} mr={4} fontWeight={500} key={key}>
+        <Text size={8} mr={4} weigth={500} key={key}>
           {typeof value === 'string' ? removeUnit(value) : value}
         </Text>
       ))}
@@ -86,10 +86,10 @@ const ColorCard = ({ color, name, props }) => (
   <Box {...props}>
     <Box>
       <Box
-        bg={color}
-        width={50}
-        height={50}
-        css={{
+        sx={{
+          width: 50,
+          height: 50,
+          bg: color,
           borderRadius: 'inherit',
           '& > *': {
             borderRadius: 'inherit',
@@ -120,5 +120,5 @@ const Heading = props => <FaencyHeading as="h2" size={2} mt={8} mb={4} {...props
 const Subheading = props => <FaencyHeading as="h3" size={1} mt={6} mb={4} {...props} />
 
 const SectionTitle = props => (
-  <Text size={2} marginY={0} textColor="gray700" style={{ textTransform: 'capitalize' }} {...props} />
+  <Text size={2} marginY={0} sx={{ textColor: 'gray700', textTransform: 'capitalize' }} {...props} />
 )

@@ -144,7 +144,7 @@ export const NavGroups = React.forwardRef<HTMLDivElement, NavGroupsProps>(({ chi
   const uuid = uuidv4()
 
   return (
-    <Flex flex={1} {...props} ref={forwardedRef}>
+    <Flex sx={{ flex: 1 }} {...props} ref={forwardedRef}>
       <MenuButton uuid={uuid} />
       <MenuIcon uuid={uuid} />
       <Menu>{children}</Menu>

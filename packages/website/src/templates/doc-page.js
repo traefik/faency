@@ -11,16 +11,17 @@ import Icon from 'react-eva-icons'
 import { SystemPropsTable } from '../components/SystemPropsTable'
 import { PropsTable } from '../components/PropsTable'
 import { ThemeSection } from '../components/ThemeSection'
+import { APISection } from '../components/APISection'
 import useDarkMode from 'use-dark-mode'
 
 function Prop(props) {
   return (
     <FC.Box mb={3}>
-      <FC.Text as="p" size={2} lineHeight={2} textColor={FC.theme.colors.grays[7]}>
+      <FC.Text as="p" size={2} sx={{ lineHeight: 2, color: FC.theme.colors.grays[7] }}>
         {props.isOptional && 'optional'} <code>{props.children}</code>
       </FC.Text>
       {props.default && (
-        <FC.Text as="p" size={2} lineHeight={2} textColor="gray700">
+        <FC.Text as="p" size={2} sx={{ lineHeight: 2, color: 'gray700' }}>
           default <code>{props.default}</code>
         </FC.Text>
       )}
@@ -60,16 +61,17 @@ export const components = {
     return <FC.Heading {...props} as="h2" size={2} mt={8} mb={26} />
   },
   h3: function H3(props) {
-    return <FC.Heading {...props} as="h3" size={1} mt={7} mb={22} lineHeight={1} />
+    return <FC.Heading {...props} as="h3" size={1} mt={7} mb={22} sx={{ lineHeight: 1 }} />
   },
   h4: function H4(props) {
-    return <FC.Heading {...props} as="h4" fontWeight={500} size={0} mt={6} mb={1} lineHeight={2} />
+    return <FC.Heading {...props} as="h4" weight={500} size={0} mt={6} mb={1} sx={{ lineHeight: 2 }} />
   },
   p: function P(props) {
     return <FC.Text {...props} as="p" size={3} lineHeight={3} />
   },
   Prop,
   ThemeSection,
+  APISection,
   useDarkMode,
   getValidImageUrl: () =>
     'https://images.unsplash.com/photo-1579380287268-aa88d096651c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80',

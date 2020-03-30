@@ -50,7 +50,7 @@ const variantProps = {
 
 export const FormMessage = React.forwardRef<HTMLDivElement, FormMessageProps>(
   ({ message, variant = 'error', hasIcon, icon }, forwardedRef) => (
-    <Flex ref={forwardedRef} alignItems="center">
+    <Flex ref={forwardedRef} sx={{ alignItems: 'center' }}>
       {icon ||
         (hasIcon && (
           <IconContainer color={variantProps[variant].color}>

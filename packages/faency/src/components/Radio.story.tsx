@@ -6,7 +6,7 @@ import { Text } from './Text'
 
 storiesOf('Components|Radio', module).add('default', () => (
   <>
-    <Flex flexDirection="column" mb={2}>
+    <Flex sx={{ flexDirection: 'column' }} mb={2}>
       <label>
         <Radio name="direction" />
         <Text ml={1}>Up</Text>

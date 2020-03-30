@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "private": false,
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/containous/faency"
@@ -19,7 +19,7 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "@containous/faency": "^0.5.0",
+    "@containous/faency": "0.5.0",
     "@mdx-js/mdx": "^1.5.5",
     "@mdx-js/react": "^1.5.5",
     "babel-plugin-styled-components": "^1.10.7",

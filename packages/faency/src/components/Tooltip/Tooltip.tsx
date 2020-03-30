@@ -65,7 +65,7 @@ export const Tooltip: React.FC<TooltipProps> = props => {
           preferredAlignment={props.preferredAlignment}
         >
           <>
-            <BoxPrimitive bg="dark" textColor="white" borderRadius={2} p="1">
+            <BoxPrimitive sx={{ backgroundColor: 'dark', color: 'white', borderRadius: 2 }} p="1">
               {props.label} {renderAction()}
             </BoxPrimitive>
           </>
