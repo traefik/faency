@@ -21,54 +21,56 @@ storiesOf('Components|Avatar', module).add('default', () => {
           KS
         </Avatar>
         <Avatar src="">
-          <Text textColor="white" marginBottom={1}>
+          <Text sx={{ color: 'white' }} mb={1}>
             K
           </Text>
-          <Text textColor="white" marginTop={1}>
+          <Text sx={{ color: 'white' }} mt={1}>
             S
           </Text>
         </Avatar>
       </Box>
 
-      <Box mb={4} backgroundColor="white" padding={2}>
+      <Box mb={4} sx={{ backgroundColor: 'white' }} p={2}>
         <Heading>Avatar using existing image on a light variant</Heading>
         <Avatar src={SAMPLE_IMAGE} variant="light">
           KS
         </Avatar>
       </Box>
 
-      <Box mb={4} backgroundColor="white" padding={2}>
+      <Box mb={4} sx={{ backgroundColor: 'white' }} p={2}>
         <Heading>Avatar using non-existing image with fallback to initials on a light variant</Heading>
         <Avatar mr={1} src="" variant="light">
           KS
         </Avatar>
         <Avatar src="" variant="light">
-          <Text textColor="white" marginBottom={1}>
+          <Text sx={{ color: 'white' }} mb={1}>
             K
           </Text>
-          <Text textColor="white" marginTop={1}>
+          <Text sx={{ color: 'white' }} mt={1}>
             S
           </Text>
         </Avatar>
       </Box>
 
-      <Box mb={4} backgroundColor="dark" padding={2}>
-        <Heading textColor="white">Avatar using existing image on a dark variant</Heading>
+      <Box mb={4} sx={{ backgroundColor: 'dark' }} p={2}>
+        <Heading sx={{ color: 'white' }}>Avatar using existing image on a dark variant</Heading>
         <Avatar src={SAMPLE_IMAGE} variant="dark">
           KS
         </Avatar>
       </Box>
 
-      <Box mb={4} backgroundColor="dark" padding={2}>
-        <Heading textColor="white">Avatar using non-existing image with fallback to initials on a dark variant</Heading>
+      <Box mb={4} sx={{ backgroundColor: 'dark' }} p={2}>
+        <Heading sx={{ color: 'white' }}>
+          Avatar using non-existing image with fallback to initials on a dark variant
+        </Heading>
         <Avatar mr={1} src="" variant="dark">
           KS
         </Avatar>
         <Avatar src="" variant="dark">
-          <Text textColor="white" marginBottom={1}>
+          <Text sx={{ color: 'white' }} mb={1}>
             K
           </Text>
-          <Text textColor="white" marginTop={1}>
+          <Text sx={{ color: 'white' }} mt={1}>
             S
           </Text>
         </Avatar>

@@ -9,13 +9,15 @@ const Wrapper = props => {
   return (
     <FaencyProvider useDarkTheme={darkMode.value}>
       <Flex
-        position={('absolute', 'absolute', 'fixed')}
-        top={[0, 2]}
-        left={['50%', 'inherit']}
-        right={[null, 2]}
-        height={49}
         ml={['-42px', 'inherit']}
-        alignItems="center"
+        sx={{
+          alignItems: 'center',
+          position: ['absolute', 'absolute', 'fixed'],
+          top: [0, 2],
+          left: ['50%', 'inherit'],
+          right: [null, 2],
+          height: 49,
+        }}
       >
         <Text mr={1} onClick={darkMode.toggle} style={{ cursor: 'default' }}>
           Dark Mode {darkMode.value ? 'On' : 'Off'}

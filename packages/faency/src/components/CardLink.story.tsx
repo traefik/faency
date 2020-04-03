@@ -11,7 +11,7 @@ storiesOf('Components|CardLink', module).add('default', () => (
       href="https://jaxenter.com/containous-ambassador-program-traefik-164647.html"
       target="_blank"
       m={4}
-      maxWidth="300px"
+      sx={{ maxWidth: '300px' }}
     >
       <Heading size={1} mb="3">
         CardLink
@@ -30,7 +30,7 @@ storiesOf('Components|CardLink', module).add('default', () => (
       target="_blank"
       variant="shadow"
       m={4}
-      maxWidth="300px"
+      sx={{ maxWidth: '300px' }}
     >
       <Heading size={1} mb="3">
         CardLink
@@ -49,7 +49,7 @@ storiesOf('Components|CardLink', module).add('default', () => (
       target="_blank"
       variant="ghost"
       m={4}
-      maxWidth="300px"
+      sx={{ maxWidth: '300px' }}
     >
       <Heading size={1} mb="3">
         CardLink

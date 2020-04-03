@@ -18,28 +18,16 @@ const isColor = (value, themeContext) => {
   }
 }
 
-const renderString = children => (
-  <Text fontWeight={700} textColor="green">
-    &quot;{children}&quot;
-  </Text>
-)
+const renderString = children => <Text sx={{ fontWeight: 700, color: 'green' }}>&quot;{children}&quot;</Text>
 
-const renderNumber = children => (
-  <Text fontWeight={700} textColor="blue">
-    {children}
-  </Text>
-)
+const renderNumber = children => <Text sx={{ fontWeight: 700, color: 'blue' }}>{children}</Text>
 
-const renderBoolean = children => (
-  <Text fontWeight={700} textColor="lightBlue">
-    {children}
-  </Text>
-)
+const renderBoolean = children => <Text sx={{ fontWeight: 700, color: 'lightblue' }}>{children}</Text>
 
 const renderColor = children => (
-  <Flex alignItems="center" style={{ display: 'inline-flex' }}>
-    <Box bg={children} height="8px" width="8px" mr="4px" boxShadow="0 0 0 1px black" />
-    <Text fontWeight={700}>{children}</Text>
+  <Flex sx={{ display: 'inline-flex', alignItems: 'center' }}>
+    <Box sx={{ backgroundColor: children, height: '8px', width: '8px', boxShadow: '0 0 0 1px black' }} mr="4px" />
+    <Text sx={{ fontWeight: 700 }}>{children}</Text>
   </Flex>
 )
 

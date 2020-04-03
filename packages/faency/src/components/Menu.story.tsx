@@ -18,9 +18,9 @@ storiesOf('Components|Menu', module).add('default', () => {
 
   return (
     <>
-      <Box mb="4" height="360px">
+      <Box mb="4" sx={{ height: '360px' }}>
         <div ref={targetRef} />
-        <Menu isOpen buttonRef={targetRef} unstable__disableLock>
+        <Menu isOpen buttonRef={targetRef} anchorPoint={{ x: 0, y: 0 }}>
           <MenuItem label="Simple item one" />
           <MenuItem label="Simple item two" />
           <MenuItem label="Simple item three" />

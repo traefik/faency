@@ -12,7 +12,7 @@ function NavItem({ children, isExternal, active, ...props }) {
     <Button as={Link} {...props} variant="secondary" px={5} minHeight={6} style={{ justifyContent: 'flex-start' }}>
       <Text
         size={2}
-        textColor={active ? 'blue' : darkMode.value ? theme.colors.grays[4] : undefined}
+        sx={{ color: active ? 'blue' : darkMode.value ? theme.colors.grays[4] : undefined }}
         mr={isExternal ? 1 : 0}
       >
         {children}

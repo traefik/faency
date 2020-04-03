@@ -1,19 +1,38 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { Box } from './Box'
-import { ToggleButtonGroup, ToggleButton } from './ToggleButton'
+import { ToggleButton } from './ToggleButton'
 
 storiesOf('Components|ToggleButton', module).add('default', () => {
   const [value, setValue] = useState('center')
 
   return (
     <>
-      <Box width="135px" my={6}>
-        <ToggleButtonGroup value={value} onChange={(value): void => setValue(value)}>
-          <ToggleButton value="left">Left</ToggleButton>
-          <ToggleButton value="center">Center</ToggleButton>
-          <ToggleButton value="right">Right</ToggleButton>
-        </ToggleButtonGroup>
+      <Box sx={{ width: '135px', my: 6 }}>
+        <ToggleButton
+          onToggle={(): void => {
+            setValue('left')
+          }}
+          isToggled={value === 'left'}
+        >
+          Left
+        </ToggleButton>
+        <ToggleButton
+          onToggle={(): void => {
+            setValue('center')
+          }}
+          isToggled={value === 'left'}
+        >
+          Center
+        </ToggleButton>
+        <ToggleButton
+          onToggle={(): void => {
+            setValue('right')
+          }}
+          isToggled={value === 'right'}
+        >
+          Right
+        </ToggleButton>
       </Box>
     </>
   )

@@ -7,12 +7,12 @@ import { Table, Tr, Th, Td } from './Table'
 
 storiesOf('Components|Chip', module).add('default', () => (
   <>
-    <Flex mb="2" flexWrap="wrap">
+    <Flex mb="2" sx={{ flexWrap: 'wrap' }}>
       <Chip mr={1}>Default Chip</Chip>
       <Chip mr={1}>1</Chip>
       <Chip>123</Chip>
     </Flex>
-    <Flex mb="2" maxWidth="150px">
+    <Flex mb="2" sx={{ maxWidth: '150px' }}>
       <Chip truncate title="Some very long text that could be collapsed or truncated">
         Some very long text that could be collapsed or truncated
       </Chip>
@@ -51,7 +51,7 @@ storiesOf('Components|Chip', module).add('default', () => (
 
 storiesOf('Components|Chip', module).add('colors', () => (
   <>
-    <Flex mb="2" flexWrap="wrap">
+    <Flex mb="2" sx={{ flexWrap: 'wrap' }}>
       <Chip mr={2} variant="blue">
         Blue chip
       </Chip>
@@ -59,7 +59,7 @@ storiesOf('Components|Chip', module).add('colors', () => (
         Purple chip
       </Chip>
     </Flex>
-    <Flex mb="2" flexWrap="wrap">
+    <Flex mb="2" sx={{ flexWrap: 'wrap' }}>
       <Chip mr={2} variant="orange">
         Orange chip
       </Chip>
@@ -67,7 +67,7 @@ storiesOf('Components|Chip', module).add('colors', () => (
         Light blue chip
       </Chip>
     </Flex>
-    <Flex mb="2" flexWrap="wrap">
+    <Flex mb="2" sx={{ flexWrap: 'wrap' }}>
       <Chip mr={2} variant="green">
         Green chip
       </Chip>
@@ -75,7 +75,7 @@ storiesOf('Components|Chip', module).add('colors', () => (
         Gray chip
       </Chip>
     </Flex>
-    <Flex mb="2" flexWrap="wrap">
+    <Flex mb="2" sx={{ flexWrap: 'wrap' }}>
       <Chip mr={2} variant="red">
         Red chip
       </Chip>

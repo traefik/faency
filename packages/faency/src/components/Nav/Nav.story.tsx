@@ -33,24 +33,24 @@ storiesOf('Components|Nav', module).add('default', () => (
             <NavGroup variant="right">
               <NavItem variant="active">Documentation</NavItem>
               <NavItem>
-                <Text size={2} textColor="grays.5" fontWeight={600}>
+                <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
                   Github
                 </Text>
               </NavItem>
             </NavGroup>
             <NavGroup variant="left">
               <NavItem>
-                <Text size={2} textColor="grays.5" fontWeight={600}>
+                <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
                   Box
                 </Text>
               </NavItem>
               <NavItem variant="active">
-                <Text size={2} textColor="white" fontWeight={600}>
+                <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
                   Layout
                 </Text>
               </NavItem>
               <NavItem>
-                <Text size={2} textColor="grays.5" fontWeight={600}>
+                <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
                   Button
                 </Text>
               </NavItem>
@@ -63,12 +63,12 @@ storiesOf('Components|Nav', module).add('default', () => (
       <Nav>
         <NavGroup variant="right">
           <NavItem variant="active">
-            <Text size={2} textColor="white" fontWeight={600}>
+            <Text size={2} sx={{ color: 'white', fontWeight: 600 }}>
               Documentation
             </Text>
           </NavItem>
           <NavItem>
-            <Text size={2} textColor="grays.5" fontWeight={600}>
+            <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
               Github
             </Text>
           </NavItem>
@@ -79,17 +79,17 @@ storiesOf('Components|Nav', module).add('default', () => (
       <Nav>
         <NavGroup variant="left">
           <NavItem>
-            <Text size={2} textColor="grays.5" fontWeight={600}>
+            <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
               Box
             </Text>
           </NavItem>
           <NavItem variant="active">
-            <Text size={2} textColor="white" fontWeight={600}>
+            <Text size={2} sx={{ color: 'white', fontWeight: 600 }}>
               Layout
             </Text>
           </NavItem>
           <NavItem>
-            <Text size={2} textColor="grays.5" fontWeight={600}>
+            <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
               Button
             </Text>
           </NavItem>

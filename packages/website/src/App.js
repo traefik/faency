@@ -34,7 +34,7 @@ function App({ element, props: appProps }) {
     }
     query {
       pinned: allMdx(
-        sort: { order: ASC, fields: [frontmatter___title] }
+        sort: { order: ASC, fields: [frontmatter___order] }
         filter: { frontmatter: { pinned: { ne: null } } }
       ) {
         ...mdxContent
@@ -57,26 +57,29 @@ function App({ element, props: appProps }) {
         return (
           <>
             <Box
-              position={['static', 'fixed']}
-              width={['100%', 200, 250]}
-              height={['auto', '100vh']}
-              overflow={['auto', 'scroll']}
               pb={[0, 8]}
-              borderRight={[0, '1px solid']}
-              borderBottom={['1px solid', 0]}
-              borderColor={[theme.colors.grays[3], theme.colors.grays[3]]}
-              style={{ WebkitOverflowScrolling: 'touch', overflowX: 'hidden' }}
-              backgroundColor={darkMode.value ? '#121826' : 'white'}
+              sx={{
+                position: ['static', 'fixed'],
+                width: ['100%', 200, 250],
+                height: ['auto', '100vh'],
+                overflow: ['auto', 'scroll'],
+                borderRight: [0, '1px solid'],
+                borderBottom: ['1px solid', 0],
+                borderColor: [theme.colors.grays[3], theme.colors.grays[3]],
+                WebkitOverflowScrolling: 'touch',
+                overflowX: 'hidden',
+                bg: darkMode.value ? '#121826' : 'white',
+              }}
             >
               <Box pt={[0, '1em']} px={16}>
-                <Flex alignItems="center">
+                <Flex sx={{ alignItems: 'center' }}>
                   <Box>
                     <img src={darkMode.value ? whiteLogo : logo} alt="Containous Logo" height="35px" />
                   </Box>
                   <Chip ml={1} variant="blue">
                     v{pkg.version}
                   </Chip>
-                  <Box ml="auto" display={['block', 'none']}>
+                  <Box ml="auto" sx={{ display: ['block', 'none'] }}>
                     <Button size={1} variant={navOpen ? 'active' : undefined} onClick={() => setNavOpen(!navOpen)}>
                       <MenuToggle isOpen={navOpen} />
                     </Button>
@@ -84,8 +87,8 @@ function App({ element, props: appProps }) {
                 </Flex>
               </Box>
 
-              <Box display={[navOpen ? 'block' : 'none', 'block']}>
-                <Divider style={{ marginTop: navOpen ? 0 : '1em' }} />
+              <Box sx={{ display: [navOpen ? 'block' : 'none', 'block'] }}>
+                <Divider marginTop={navOpen ? 0 : '1em'} />
                 <List>
                   <Heading size={1} my={10} mx={16}>
                     Overview
@@ -137,7 +140,7 @@ function App({ element, props: appProps }) {
 
                 <Divider />
 
-                <Box px={16} mt={3} minHeight={4}>
+                <Box px={16} mt={3} sx={{ minHeight: 4 }}>
                   <Text size={2}>
                     Powered by{' '}
                     <Link href="https://containo.us" title="Containous">
@@ -145,7 +148,7 @@ function App({ element, props: appProps }) {
                     </Link>
                   </Text>
                 </Box>
-                <Box px={16} mb={2} minHeight={4}>
+                <Box px={16} mb={2} sx={{ minHeight: 4 }}>
                   <Text size={2}>
                     Highly inspired by{' '}
                     <Link href="https://radix.modulz.app/" title="Radix Design System">
@@ -160,10 +163,12 @@ function App({ element, props: appProps }) {
               pt={8}
               pb={9}
               marginLeft={[0, 200, 250]}
-              maxWidth={['100%']}
-              minHeight={['100vh']}
-              display={[navOpen ? 'none' : 'block', 'block']}
-              backgroundColor="bg"
+              sx={{
+                bg: 'bg',
+                maxWidth: ['100%'],
+                minHeight: ['100vh'],
+                display: [navOpen ? 'none' : 'block', 'block'],
+              }}
             >
               <Container size={1}>{element}</Container>
             </Box>

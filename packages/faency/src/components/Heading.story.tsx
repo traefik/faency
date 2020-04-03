@@ -9,7 +9,7 @@ storiesOf('Components|Heading', module).add('default', () => (
       <Heading as="p" size={0}>
         Heading 0
       </Heading>
-      <Heading as="p" size={0} fontWeight={500}>
+      <Heading as="p" size={0} sx={{ fontWeight: 500 }}>
         Heading 0
       </Heading>
     </Box>
@@ -18,7 +18,7 @@ storiesOf('Components|Heading', module).add('default', () => (
       <Heading as="p" size={1}>
         Heading 1
       </Heading>
-      <Heading as="p" size={1} fontWeight={500}>
+      <Heading as="p" size={1} sx={{ fontWeight: 500 }}>
         Heading 1
       </Heading>
     </Box>
@@ -27,7 +27,7 @@ storiesOf('Components|Heading', module).add('default', () => (
       <Heading as="p" size={2}>
         Heading 2
       </Heading>
-      <Heading as="p" size={2} fontWeight={500}>
+      <Heading as="p" size={2} sx={{ fontWeight: 500 }}>
         Heading 2
       </Heading>
     </Box>
@@ -36,7 +36,7 @@ storiesOf('Components|Heading', module).add('default', () => (
       <Heading as="p" size={3}>
         Heading 3
       </Heading>
-      <Heading as="p" size={3} fontWeight={500}>
+      <Heading as="p" size={3} sx={{ fontWeight: 500 }}>
         Heading 3
       </Heading>
     </Box>
@@ -45,7 +45,7 @@ storiesOf('Components|Heading', module).add('default', () => (
       <Heading as="p" size={4}>
         Heading 4
       </Heading>
-      <Heading as="p" size={4} fontWeight={500}>
+      <Heading as="p" size={4} sx={{ fontWeight: 500 }}>
         Heading 4
       </Heading>
     </Box>
@@ -54,7 +54,7 @@ storiesOf('Components|Heading', module).add('default', () => (
       <Heading as="p" size={5}>
         Heading 5
       </Heading>
-      <Heading as="p" size={5} fontWeight={500}>
+      <Heading as="p" size={5} sx={{ fontWeight: 500 }}>
         Heading 5
       </Heading>
     </Box>
@@ -65,7 +65,7 @@ storiesOf('Components|Heading', module).add('default', () => (
           Close the gap Close the gap Close the gap Close the gap
         </Heading>
       </Box>
-      <Heading fontWeight={500} mb="3" as="h2">
+      <Heading sx={{ fontWeight: 500 }} mb="3" as="h2">
         Bold
       </Heading>
     </Box>

@@ -24,23 +24,10 @@ description: Useful for presenting profile images and initials.
     },
     variant: {
       type: 'light | dark',
-      description: 'The variant to use, it changes the colors and hover effect. The default value is the current theme.'
-    }
+      description:
+        'The variant to use, it changes the colors and hover effect. The default value is the current theme.',
+    },
   }}
-/>
-<SystemProps
-  props={[
-    'backgroundColor',
-    'margin',
-    'marginTop',
-    'marginRight',
-    'marginBottom',
-    'marginLeft',
-    'marginX',
-    'marginY',
-    'width',
-    'height',
-  ]}
 />
 
 ## Examples
@@ -55,10 +42,10 @@ description: Useful for presenting profile images and initials.
 
 ```js live
 <Avatar src="">
-  <Text textColor="white" marginBottom={1}>
+  <Text sx={{ color: 'white' }} marginBottom={1}>
     K
   </Text>
-  <Text textColor="white" marginTop={1}>
+  <Text sx={{ color: 'white' }} marginTop={1}>
     S
   </Text>
 </Avatar>
@@ -72,8 +59,8 @@ function AlternativeVariant() {
   const isDarkMode = darkMode.value
 
   return (
-    <Box backgroundColor="dark" padding={2}>
-      <Avatar src={getValidImageUrl()} backgroundColor="purple" variant={isDarkMode ? 'light' : 'dark'}>
+    <Box sx={{ bg: 'dark' }} p={2}>
+      <Avatar src={getValidImageUrl()} sx={{ bg: 'purple' }} variant={isDarkMode ? 'light' : 'dark'}>
         KS
       </Avatar>
     </Box>
@@ -89,7 +76,7 @@ function AnotherAlternativeVariant() {
   const isDarkMode = darkMode.value
 
   return (
-    <Box backgroundColor="dark" padding={2}>
+    <Box sx={{ bg: 'dark' }} p={2}>
       <Avatar src="" variant={isDarkMode ? 'light' : 'dark'}>
         KS
       </Avatar>

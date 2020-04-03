@@ -16,7 +16,7 @@ storiesOf('Components|SubNav', module).add('default', () => (
           This is a button
         </SubNavItem>
         <SubNavItem>
-          <Text size={2} textColor="grays.5">
+          <Text size={2} sx={{ color: 'grays.5' }}>
             Defaults to Button
           </Text>
         </SubNavItem>
@@ -28,24 +28,24 @@ storiesOf('Components|SubNav', module).add('default', () => (
         <NavGroup variant="right">
           <NavItem variant="active">Documentation</NavItem>
           <NavItem>
-            <Text size={2} textColor="grays.5" fontWeight={600}>
+            <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
               Github
             </Text>
           </NavItem>
         </NavGroup>
         <NavGroup variant="left">
           <NavItem>
-            <Text size={2} textColor="grays.5" fontWeight={600}>
+            <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
               Box
             </Text>
           </NavItem>
           <NavItem variant="active">
-            <Text size={2} textColor="white" fontWeight={600}>
+            <Text size={2} sx={{ color: 'white', fontWeight: 600 }}>
               Layout
             </Text>
           </NavItem>
           <NavItem>
-            <Text size={2} textColor="grays.5" fontWeight={600}>
+            <Text size={2} sx={{ color: 'grays.5', fontWeight: 600 }}>
               Button
             </Text>
           </NavItem>
@@ -59,7 +59,7 @@ storiesOf('Components|SubNav', module).add('default', () => (
           This is a button
         </SubNavItem>
         <SubNavItem>
-          <Text size={2} textColor="grays.5">
+          <Text size={2} sx={{ color: 'grays.5' }}>
             Defaults to Button
           </Text>
         </SubNavItem>

@@ -31,9 +31,6 @@ description: Useful to emphasise information to the user, works best with single
     },
   }}
 />
-<SystemProps
-  props={['textColor', 'margin', 'padding', 'fontStyle', 'fontFamily', 'fontWeight', 'textAlign', 'lineHeight']}
-/>
 
 ## Examples
 
@@ -80,7 +77,7 @@ There are 7 colors to choose from.
 When `true` this will truncate your text based on its maximum width.
 
 ```js live
-<Flex mb="2" maxWidth="150px">
+<Flex mb="2" sx={{ maxWidth: 150 }}>
   <Chip truncate title="At Containous, our goal is to make networking boring.">
     At Containous, our goal is to make networking boring.
   </Chip>

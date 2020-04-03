@@ -1,22 +1,25 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import {
-  ToggleButtonGroup as ToggleButtonGroupPrimitive,
-  ToggleButtonGroupProps as ToggleButtonGroupPrimitiveProps,
+  ToggleButton as ToggleButtonPrimitive,
+  ToggleButtonProps as ToggleButtonPrimitiveProps,
 } from '@modulz/primitives'
 
-export { ToggleButton } from '@modulz/primitives'
+type Size = 0 | 1
+type Variant = 'normal' | 'fade'
 
-export type ToggleButtonGroupProps<T> = ToggleButtonGroupPrimitiveProps<T>
+export type ToggleButtonProps = ToggleButtonPrimitiveProps & {
+  size?: Size
+  variant?: Variant
+}
 
-export const ToggleButtonGroup = <T extends string | string[] | null>(
-  props: ToggleButtonGroupProps<T>,
-): JSX.Element => {
+export const ToggleButton = React.forwardRef<HTMLButtonElement, ToggleButtonProps>((props, forwardedRef) => {
   const themeContext = useContext(ThemeContext)
 
   return (
-    <ToggleButtonGroupPrimitive
+    <ToggleButtonPrimitive
       {...props}
+      ref={forwardedRef}
       styleConfig={{
         base: {
           button: {
@@ -46,4 +49,11 @@ export const ToggleButtonGroup = <T extends string | string[] | null>(
       }}
     />
   )
+})
+
+ToggleButton.displayName = 'ToggleButton'
+
+ToggleButton.defaultProps = {
+  size: 1,
+  variant: 'normal',
 }

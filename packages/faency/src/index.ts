@@ -55,7 +55,7 @@ export { SubNav, SubNavItem, SubNavItemProps } from './components/SubNav'
 export { Switch, SwitchProps } from './components/Switch'
 export { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './components/Table'
 export { Text, TextProps } from './components/Text'
-export { ToggleButtonGroup, ToggleButton, ToggleButtonGroupProps } from './components/ToggleButton'
+export { ToggleButton, ToggleButtonProps } from './components/ToggleButton'
 export { Tooltip, TooltipProps } from './components/Tooltip'
 
 export { theme } from './theme'

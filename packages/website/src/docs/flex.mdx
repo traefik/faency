@@ -6,9 +6,9 @@ description: A primitive useful for flexible layouts.
 
 ```js live
 <Flex>
-  <Box flex="1" height={35} bg="blues.6" />
-  <Box flex="1" height={35} bg="blues.6" mx={6} />
-  <Box flex="1" height={35} bg="blues.6" />
+  <Box sx={{ flex: 1, height: 35, bg: 'blues.6' }} />
+  <Box sx={{ flex: 1, height: 35, bg: 'blues.6' }} mx={6} />
+  <Box sx={{ flex: 1, height: 35, bg: 'blues.6' }} />
 </Flex>
 ```
 
@@ -19,30 +19,4 @@ description: A primitive useful for flexible layouts.
       description: 'The content to render',
     },
   }}
-/>
-<SystemProps
-  props={[
-    'flexContainerSet',
-    // everything below is from Box
-    'border',
-    'borderRadius',
-    'boxShadow',
-    'backgroundColor',
-    'display',
-    'opacity',
-    'height',
-    'justifySelf',
-    'margin',
-    'maxWidth',
-    'maxHeight',
-    'minHeight',
-    'minWidth',
-    'overflow',
-    'padding',
-    'positionSet',
-    'textAlign',
-    'textColor',
-    'width',
-    'flexItemSet',
-  ]}
 />

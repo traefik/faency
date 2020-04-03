@@ -5,7 +5,7 @@ import { Table, Thead, Tbody, Tfoot, Tr, Th, Td } from './Table'
 
 storiesOf('Components|Table', module).add('default', () => (
   <>
-    <Box maxWidth="300px" mb={4}>
+    <Box sx={{ maxWidth: '300px' }} mb={4}>
       <Table>
         <Thead>
           <Tr>
@@ -37,7 +37,7 @@ storiesOf('Components|Table', module).add('default', () => (
       </Table>
     </Box>
 
-    <Box maxWidth="100%" width="100%" overflow="auto">
+    <Box sx={{ maxWidth: '100%', width: '100%', overflow: 'auto' }}>
       <Table>
         <Thead>
           <Tr>
