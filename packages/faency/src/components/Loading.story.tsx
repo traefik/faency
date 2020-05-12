@@ -19,6 +19,10 @@ storiesOf('Components|Loading', module).add('default', () => {
         Continuous:
         <Loading />
       </Box>
+      <Box mb={1}>
+        Custom color:
+        <Loading color="orange" />
+      </Box>
       <Box>
         Percentage ({progress}%):
         <Loading progress={progress} />

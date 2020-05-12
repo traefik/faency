@@ -14,10 +14,24 @@ description: A primitive useful for rendering text.
       type: 'number',
       description: 'The percentage already loaded',
     },
+    color: {
+      type: 'string',
+      default: 'primary',
+      description: 'The percentage already loaded',
+    },
   }}
 />
 
 ## Examples
+
+### Continuous
+
+
+```js live
+<Box>
+  <Loading />
+</Box>
+```
 
 ### Progress
 
@@ -36,5 +50,19 @@ description: A primitive useful for rendering text.
 ```js live
 <Box>
   <Loading progress={100} />
+</Box>
+```
+
+### Custom color
+
+```js live
+<Box>
+  <Loading progress={75} color="orange" />
+</Box>
+```
+
+```js live
+<Box>
+  <Loading color="orange" />
 </Box>
 ```
