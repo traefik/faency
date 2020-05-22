@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex, Box, Text, useTheme } from '@containous/faency'
+import { Box, Text, useTheme } from '@containous/faency'
 import color from 'color'
 
 const isNumeric = value => !isNaN(value)
@@ -25,10 +25,10 @@ const renderNumber = children => <Text sx={{ fontWeight: 700, color: 'blue' }}>{
 const renderBoolean = children => <Text sx={{ fontWeight: 700, color: 'lightblue' }}>{children}</Text>
 
 const renderColor = children => (
-  <Flex sx={{ display: 'inline-flex', alignItems: 'center' }}>
+  <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
     <Box sx={{ backgroundColor: children, height: '8px', width: '8px', boxShadow: '0 0 0 1px black' }} mr="4px" />
     <Text sx={{ fontWeight: 700 }}>{children}</Text>
-  </Flex>
+  </Box>
 )
 
 export const PropRender = ({ children, type = 'auto', string, number, boolean, bool, color }) => {
