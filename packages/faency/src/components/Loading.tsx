@@ -4,6 +4,7 @@ import { theme } from '../theme'
 
 export type LoadingProps = BoxPrimitiveProps & {
   progress?: number
+  color?: string
 }
 
 const loadingAnimation = keyframes`
@@ -20,7 +21,11 @@ const loadingAnimation = keyframes`
 export const Loading = styled(Box)<LoadingProps>`
   height: 4px;
   width: 0;
-  background-color: ${theme.colors.primary};
+
+  ${({ color = theme.colors.primary }): SimpleInterpolation => `
+    background-color: ${color};
+  `}
+
   ${(props): SimpleInterpolation =>
     props.progress
       ? `
