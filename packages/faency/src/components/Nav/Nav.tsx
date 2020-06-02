@@ -91,7 +91,7 @@ export const NavGroup = styled('div')<NavGroupProps>(
   css({
     display: 'flex',
     flexWrap: 'wrap',
-    [`@media (max-width: ${breakpoints.tablet})`]: {
+    [`@media (max-width: calc(${breakpoints.tablet} - 1px))`]: {
       flexDirection: 'column',
       marginLeft: 'inherit',
     },
