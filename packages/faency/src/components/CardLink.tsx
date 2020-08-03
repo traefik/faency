@@ -23,6 +23,7 @@ export const CardLink = React.forwardRef<HTMLAnchorElement, CardLinkProps>((prop
             normal: {
               ...cardStyleConfig.base.card?.normal,
               transition: 'border-color 150ms ease-in-out',
+              borderColor: theme.colors.grays[3],
             },
             hover: {
               cursor: 'pointer',
