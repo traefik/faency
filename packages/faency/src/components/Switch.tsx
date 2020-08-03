@@ -64,7 +64,8 @@ const FakeSwitch = styled('div')(props =>
       width: '100%',
       backgroundColor: 'rgba(255, 255, 255)',
       borderRadius: 9999,
-      transition: 'background-color 100ms ease-out',
+      boxShadow: `inset 0 0 0 1px ${themeGet('colors.gray')(props)}`,
+      transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
     },
     '&::after': {
       content: `''`,
@@ -76,14 +77,23 @@ const FakeSwitch = styled('div')(props =>
       borderRadius: 9999,
       backgroundColor: 'white',
       boxShadow: `0px 0px 1px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.2)`,
-      transition: 'background-color 100ms ease-out, transform 100ms ease-out',
+      transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
     },
     [`${Input}:checked + &`]: {
       '&::before': {
         backgroundColor: 'blue',
+        boxShadow: `inset 0 0 0 1px ${themeGet('colors.blue')(props)}`,
       },
       '&::after': {
         transform: `translateX(${themeGet('space.2')(props)})`,
+      },
+    },
+    [`${Input}:not(:disabled):not(:checked):hover + &`]: {
+      '&::before': {
+        boxShadow: `inset 0 0 0 1px ${themeGet('colors.grays.5')(props)}`,
+      },
+      '&::after': {
+        boxShadow: `0px 0px 1px rgba(0, 0, 0, 0.4), 0px 1px 2px rgba(0, 0, 0, 0.3)`,
       },
     },
     [`${Input}:not(:disabled):active + &`]: {
@@ -102,11 +112,8 @@ const FakeSwitch = styled('div')(props =>
     [`${Input}:disabled + &`]: {
       cursor: 'not-allowed',
       '&::before': {
-        backgroundColor: 'grays.4',
-      },
-      '&::after': {
-        backgroundColor: 'grays.2',
-        boxShadow: 'none',
+        backgroundColor: 'grays.1',
+        boxShadow: `inset 0 0 0 1px ${themeGet('colors.gray')(props)}`,
       },
     },
   }),
