@@ -33,21 +33,25 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
               width: '100%',
               boxSizing: 'border-box',
               WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-              transition: 'border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
+            },
+            hover: {
+              boxShadow: `inset 0 0 0 1px ${themeContext.colors.grays[5]}`,
             },
             readOnly: {
-              borderColor: themeContext.colors.gray,
+              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
               color: themeContext.colors.black,
             },
             disabled: {
-              borderColor: themeContext.colors.gray,
+              backgroundColor: themeContext.colors.grays[1],
+              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
               color: 'gray',
               cursor: 'not-allowed',
             },
             focus: {
               backgroundColor: themeContext.colors.white,
-              border: '2px solid',
-              borderColor: themeContext.colors.black,
+              boxShadow: `inset 0 0 0 2px ${themeContext.colors.black}`,
               cursor: 'text',
             },
           },
@@ -63,14 +67,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
               input: {
                 normal: {
                   backgroundColor: themeContext.colors.white,
-                  border: '1px solid',
-                  borderColor: themeContext.colors.gray,
                 },
               },
             },
             ghost: {
               input: {
                 normal: {
+                  boxShadow: 'none',
                   cursor: 'text',
                 },
               },

@@ -14,17 +14,19 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>((props, forw
           normal: {
             height: theme.sizes[3],
             width: theme.sizes[3],
-            borderColor: theme.colors.grays[3],
-            transition: 'all 200ms ease-in-out',
+            borderColor: theme.colors.gray,
+            backgroundColor: 'white !important',
+            transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
           },
           checked: {
             borderColor: theme.colors.blue,
             '> div': {
               backgroundColor: theme.colors.blue,
+              transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
             },
           },
           hover: {
-            borderColor: `${theme.colors.grays[5]} !important`,
+            borderColor: `${theme.colors.grays[5]}`,
           },
         },
         icon: {

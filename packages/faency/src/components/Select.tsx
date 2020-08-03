@@ -32,6 +32,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, f
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           color: theme.colors.black,
+          transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         focus: {
           boxShadow: `inset 0 0 0 1px ${theme.colors.black}, 0 0 0 1px ${theme.colors.black}`,
@@ -59,12 +60,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, f
           button: {
             normal: {
               backgroundColor: theme.colors.white,
-              // boxShadow: `inset 0 0 0 1px ${theme.colors.grays[2]}`,
-              border: '1px solid',
-              borderColor: theme.colors.gray,
+              boxShadow: `inset 0 0 0 1px ${theme.colors.gray}`,
             },
             hover: {
-              boxShadow: `inset 0 0 0 1px ${theme.colors.grays[3]}`,
+              boxShadow: `inset 0 0 0 1px ${theme.colors.grays[5]}`,
             },
           },
         },
