@@ -6,75 +6,31 @@ export type AvatarProps = AvatarPrimitiveProps & {
   variant?: 'normal' | 'dark' | 'light'
 }
 
+export const getBaseStyleConfig = (theme: any) => ({
+  base: {
+    avatar: {
+      normal: {
+        backgroundColor: theme.colors.primary,
+        borderRadius: '50%',
+        height: theme.space[8],
+        width: theme.space[8],
+        fontSize: theme.sizes[3],
+        fontWeight: 'bold',
+        color: '#fff',
+        transition: 'all 200ms ease-in-out',
+        '*': {
+          color: '#fff',
+        },
+      },
+    },
+  },
+})
+
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>((props, forwardedRef) => {
   const theme = useContext(ThemeContext)
+  const baseStyleConfig: any = getBaseStyleConfig(theme)
 
-  return (
-    <AvatarPrimitive
-      {...props}
-      ref={forwardedRef}
-      styleConfig={{
-        base: {
-          avatar: {
-            normal: {
-              backgroundColor: theme.colors.primary,
-              borderRadius: '50%',
-              height: theme.space[8],
-              width: theme.space[8],
-              fontSize: theme.sizes[3],
-              fontWeight: 'bold',
-              color: '#fff',
-              transition: 'all 200ms ease-in-out',
-              '*': {
-                color: '#fff',
-              },
-            },
-          },
-        },
-        variants: {
-          variant: {
-            normal: {
-              avatar: {
-                normal: {
-                  '&:hover': {
-                    boxShadow: `0 0 0 2px ${theme.colors.borderColor}`,
-                    backgroundColor: theme.colors.primaryHoverBg,
-                    color: theme.colors.primaryHoverText,
-                    '*': {
-                      color: `${theme.colors.primaryHoverText} !important`,
-                    },
-                  },
-                },
-              },
-            },
-            light: {
-              avatar: {
-                normal: {
-                  '&:hover': {
-                    boxShadow: `0 0 0 2px ${theme.colors.blue}`,
-                    backgroundColor: '#fff',
-                    color: theme.colors.blue,
-                    '*': {
-                      color: `${theme.colors.blue} !important`,
-                    },
-                  },
-                },
-              },
-            },
-            dark: {
-              avatar: {
-                normal: {
-                  '&:hover': {
-                    boxShadow: '0 0 0 2px #fff',
-                  },
-                },
-              },
-            },
-          },
-        },
-      }}
-    />
-  )
+  return <AvatarPrimitive {...props} ref={forwardedRef} styleConfig={baseStyleConfig} />
 })
 
 Avatar.displayName = 'Avatar'
