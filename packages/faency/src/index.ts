@@ -1,6 +1,7 @@
 export { Provider } from './Provider'
 
 export { Avatar, AvatarProps } from './components/Avatar'
+export { AvatarLink, AvatarLinkProps } from './components/AvatarLink'
 export { Box, BoxProps } from './components/Box'
 export { Button, ButtonProps } from './components/Button'
 export { Card, CardProps } from './components/Card'
