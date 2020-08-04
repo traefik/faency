@@ -13,7 +13,7 @@ export { Flex, FlexProps } from './components/Flex'
 export { Grid, GridProps } from './components/Grid'
 export { Heading, HeadingProps } from './components/Heading'
 export { Input, InputProps } from './components/Input'
-export { InputTags, InputTagsProps } from './components/InputTags'
+export { Autocomplete, AutocompleteProps } from './components/Autocomplete'
 export { FormMessage, FormMessageProps } from './components/FormMessage'
 export { Loading, LoadingProps } from './components/Loading'
 export {

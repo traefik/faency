@@ -29,8 +29,16 @@ const Container = styled('div')<{ hasFocus: boolean }>`
   display: flex;
   flex-wrap: wrap;
   background-color: ${(props: any): string => props.theme.colors.white};
+  transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: ${(props: any): string =>
-    props.hasFocus ? `0 0 0 2px ${props.theme.colors.black}` : `0 0 0 1px ${props.theme.colors.gray}`};
+    props.hasFocus ? `inset 0 0 0 2px ${props.theme.colors.black};` : `0 0 0 1px ${props.theme.colors.gray};`}
+  
+  &:hover {
+    box-shadow:  ${(props: any): string =>
+      props.hasFocus
+        ? `inset 0 0 0 2px ${props.theme.colors.black};`
+        : `inset 0 0 0 1px ${props.theme.colors.grays[5]};`}
+  }
 `
 
 const ChipsContainer = styled('div')`
@@ -115,7 +123,7 @@ const defaultRenderOption: RenderOptionType = (option, onClick) => (
   </SelectItem>
 )
 
-export type InputTagsProps = {
+export type AutocompleteProps = {
   value?: string
   placeholder?: string
   tags?: string[]
@@ -128,7 +136,7 @@ export type InputTagsProps = {
   onDeleteTag?: (tag: string) => void
 }
 
-export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
+export const Autocomplete = React.forwardRef<HTMLInputElement, AutocompleteProps>(
   (
     {
       value = '',
@@ -147,9 +155,11 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const [hasFocus, setFocus] = useState(false)
     const [selectFocus, setSelectFocus] = useState(false)
     const [inputValue, setValue] = useState(value)
+    const containerRef = useRef<HTMLDivElement>(null)
     const selectRef = useRef<HTMLDivElement>(null)
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+      setSelectFocus(true)
       setValue(e.target.value)
       if (onInputChange) {
         onInputChange(e.target.value)
@@ -163,7 +173,13 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
       setSelectFocus(false)
     }
 
-    useClickOutside(selectRef, () => setSelectFocus(false))
+    useClickOutside(selectRef, () => {
+      setSelectFocus(false)
+    })
+
+    useClickOutside(containerRef, () => {
+      setFocus(false)
+    })
 
     useKeyListener(key => {
       if (key === 'Tab') {
@@ -177,24 +193,14 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
           arrowNavContainer.firstChild.focus()
         }
       }
-
-      if (selectFocus && key === 'Enter') {
-        setValue('')
-      }
     })
 
     useEffect(() => {
       setValue(value)
     }, [value, setValue])
 
-    useEffect(() => {
-      if (hasFocus) {
-        setSelectFocus(true)
-      }
-    }, [hasFocus])
-
     return (
-      <Container hasFocus={hasFocus}>
+      <Container ref={containerRef} hasFocus={hasFocus} onClick={(): void => setFocus(true)}>
         <CustomInput
           ref={forwardedRef}
           onEnter={onChange}
@@ -225,4 +231,4 @@ export const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
   },
 )
 
-InputTags.displayName = 'InputTags'
+Autocomplete.displayName = 'Autocomplete'
