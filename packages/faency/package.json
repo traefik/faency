@@ -81,7 +81,7 @@
     "rollup-plugin-typescript2": "^0.25.3",
     "rollup-plugin-url": "^3.0.1",
     "ts-jest": "^25.2.1",
-    "typescript": "3.7.3",
+    "typescript": "3.8.3",
     "yalc": "^1.0.0-pre.32"
   },
   "license": "Apache-2.0"
