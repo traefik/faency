@@ -1,11 +1,11 @@
 ---
-title: InputTags
-component: InputTags
+title: Autocomplete
+component: Autocomplete
 description: Useful for getting input and showing contextual Tags aside.
 ---
 
 ```js live
-<InputTags
+<Autocomplete
   placeholder="Input Tags Placeholder"
   tags={['Traefik', 'Compression']}
   onChange={value => alert(`onChange called with '${value}'`)}
@@ -63,7 +63,7 @@ description: Useful for getting input and showing contextual Tags aside.
 ## Example
 
 ```js live
-<InputTags
+<Autocomplete
   placeholder="Input with autocomplete"
   tags={['Traefik', 'Compression']}
   options={['Redirect Path', 'Redirect Scheme']}
