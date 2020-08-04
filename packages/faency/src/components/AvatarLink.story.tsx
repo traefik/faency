@@ -14,13 +14,13 @@ storiesOf('Components|AvatarLink', module).add('default', () => {
       <Box mb={4} padding={2}>
         <Heading>Using the current theme by default</Heading>
 
-        <AvatarLink mr={1} src={SAMPLE_IMAGE}>
+        <AvatarLink mr={1} src={SAMPLE_IMAGE} href="https://traefik.io">
           KS
         </AvatarLink>
-        <AvatarLink mr={1} src="">
+        <AvatarLink mr={1} src="" href="https://traefik.io">
           KS
         </AvatarLink>
-        <AvatarLink src="">
+        <AvatarLink src="" href="https://traefik.io">
           <Text sx={{ color: 'white' }} mb={1}>
             K
           </Text>
@@ -32,17 +32,17 @@ storiesOf('Components|AvatarLink', module).add('default', () => {
 
       <Box mb={4} sx={{ backgroundColor: 'white' }} p={2}>
         <Heading>AvatarLink using existing image on a light variant</Heading>
-        <AvatarLink src={SAMPLE_IMAGE} variant="light">
+        <AvatarLink src={SAMPLE_IMAGE} variant="light" href="https://traefik.io">
           KS
         </AvatarLink>
       </Box>
 
       <Box mb={4} sx={{ backgroundColor: 'white' }} p={2}>
         <Heading>AvatarLink using non-existing image with fallback to initials on a light variant</Heading>
-        <AvatarLink mr={1} src="" variant="light">
+        <AvatarLink mr={1} src="" variant="light" href="https://traefik.io">
           KS
         </AvatarLink>
-        <AvatarLink src="" variant="light">
+        <AvatarLink src="" variant="light" href="https://traefik.io">
           <Text sx={{ color: 'white' }} mb={1}>
             K
           </Text>
@@ -54,7 +54,7 @@ storiesOf('Components|AvatarLink', module).add('default', () => {
 
       <Box mb={4} sx={{ backgroundColor: 'dark' }} p={2}>
         <Heading sx={{ color: 'white' }}>AvatarLink using existing image on a dark variant</Heading>
-        <AvatarLink src={SAMPLE_IMAGE} variant="dark">
+        <AvatarLink src={SAMPLE_IMAGE} variant="dark" href="https://traefik.io">
           KS
         </AvatarLink>
       </Box>
@@ -63,10 +63,10 @@ storiesOf('Components|AvatarLink', module).add('default', () => {
         <Heading sx={{ color: 'white' }}>
           AvatarLink using non-existing image with fallback to initials on a dark variant
         </Heading>
-        <AvatarLink mr={1} src="" variant="dark">
+        <AvatarLink mr={1} src="" variant="dark" href="https://traefik.io">
           KS
         </AvatarLink>
-        <AvatarLink src="" variant="dark">
+        <AvatarLink src="" variant="dark" href="https://traefik.io">
           <Text sx={{ color: 'white' }} mb={1}>
             K
           </Text>
