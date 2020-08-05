@@ -1,15 +1,15 @@
 import React from 'react'
-import { render, getByPlaceholderText } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { theme as defaultTheme } from '../theme'
 import { theme as defaultDarkTheme } from '../dark-theme'
-import { InputTags } from './InputTags'
+import { Autocomplete } from './Autocomplete'
 
-describe('InputTags component', () => {
+describe('Autocomplete component', () => {
   test('renders without crashing', () => {
     render(
       <ThemeProvider theme={defaultTheme}>
-        <InputTags />
+        <Autocomplete />
       </ThemeProvider>,
     )
   })
@@ -17,7 +17,7 @@ describe('InputTags component', () => {
   test('renders without crashing on dark theme', () => {
     render(
       <ThemeProvider theme={defaultDarkTheme}>
-        <InputTags />
+        <Autocomplete />
       </ThemeProvider>,
     )
   })
@@ -25,7 +25,7 @@ describe('InputTags component', () => {
   test('should show tags when provided', () => {
     const { container } = render(
       <ThemeProvider theme={defaultTheme}>
-        <InputTags tags={['Sample 1', 'Sample 2', 'Sample 3']} />
+        <Autocomplete tags={['Sample 1', 'Sample 2', 'Sample 3']} />
       </ThemeProvider>,
     )
 
@@ -37,7 +37,7 @@ describe('InputTags component', () => {
   test('should show options when provided and input focused', () => {
     const { container, getByPlaceholderText } = render(
       <ThemeProvider theme={defaultTheme}>
-        <InputTags placeholder="input-tags" options={['Option 1', 'Option 2', 'Option 3']} />
+        <Autocomplete placeholder="input-tags" options={['Option 1', 'Option 2', 'Option 3']} />
       </ThemeProvider>,
     )
 
@@ -45,9 +45,9 @@ describe('InputTags component', () => {
     expect(container.innerHTML).not.toContain('Option 2')
     expect(container.innerHTML).not.toContain('Option 3')
 
-    const inputTagsInstance = getByPlaceholderText('input-tags')
+    const AutocompleteInstance = getByPlaceholderText('input-tags')
 
-    inputTagsInstance.click()
+    AutocompleteInstance.click()
 
     expect(container.innerHTML).toContain('Option 1')
     expect(container.innerHTML).toContain('Option 2')
