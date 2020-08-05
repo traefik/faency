@@ -3,11 +3,15 @@ import { InputProps } from '@modulz/primitives'
 import { ArrowNav } from './ArrowNav'
 import { DismissibleChip } from './DismissibleChip'
 import styled from 'styled-components'
-import { theme } from '../theme'
+import mergeRefs from 'react-merge-refs'
+import { theme, ThemeType } from '../theme'
 import { Box } from './Box'
 import useClickOutside from '../hooks/use-click-outside'
 import useKeyListener from '../hooks/use-key-listener'
 
+type StyledInputProps = {
+  theme: ThemeType
+}
 const StyledInput = styled('input')`
   border: none;
   background: none;
@@ -17,9 +21,13 @@ const StyledInput = styled('input')`
   min-width: 40%;
   max-height: ${theme.sizes[3]};
   margin: 0 ${theme.space[1]} ${theme.space[1]} 0;
-  color: ${(props: any): string => props.theme.colors.black};
+  color: ${(props: StyledInputProps): string => props.theme.colors.black};
 `
 
+type ContainerProps = {
+  theme: ThemeType
+  hasFocus: boolean
+}
 const Container = styled('div')<{ hasFocus: boolean }>`
   position: relative;
   padding: ${theme.space[1]} 0 0 ${theme.space[1]};
@@ -28,13 +36,13 @@ const Container = styled('div')<{ hasFocus: boolean }>`
   border-radius: ${theme.radii[4]};
   display: flex;
   flex-wrap: wrap;
-  background-color: ${(props: any): string => props.theme.colors.white};
+  background-color: ${(props: ContainerProps): string => props.theme.colors.white};
   transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: ${(props: any): string =>
+  box-shadow: ${(props: ContainerProps): string =>
     props.hasFocus ? `inset 0 0 0 2px ${props.theme.colors.black};` : `0 0 0 1px ${props.theme.colors.gray};`}
   
   &:hover {
-    box-shadow:  ${(props: any): string =>
+    box-shadow:  ${(props: ContainerProps): string =>
       props.hasFocus
         ? `inset 0 0 0 2px ${props.theme.colors.black};`
         : `inset 0 0 0 1px ${props.theme.colors.grays[5]};`}
@@ -84,7 +92,7 @@ type CustomInputType = InputProps & {
   onEnter?: (value: string) => void
 }
 
-const CustomInput = ({ onEnter, ...props }: CustomInputType): JSX.Element => {
+const CustomInput = React.forwardRef<HTMLInputElement, CustomInputType>(({ onEnter, ...props }, forwardedRef) => {
   const [value, setValue] = useState(props.value as string)
 
   const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>): void => {
@@ -100,8 +108,10 @@ const CustomInput = ({ onEnter, ...props }: CustomInputType): JSX.Element => {
     }
   }
 
-  return <StyledInput {...props} onChange={handleChange} onKeyPress={handlePressEnter} />
-}
+  return <StyledInput ref={forwardedRef} {...props} onChange={handleChange} onKeyPress={handlePressEnter} />
+})
+
+CustomInput.displayName = 'CustomInput'
 
 type RenderTagType = (tag: string, onDeleteTag?: (tag: string) => void) => ReactNode
 
@@ -155,6 +165,7 @@ export const Autocomplete = React.forwardRef<HTMLInputElement, AutocompleteProps
     const [hasFocus, setFocus] = useState(false)
     const [selectFocus, setSelectFocus] = useState(false)
     const [inputValue, setValue] = useState(value)
+    const inputRef = useRef<HTMLInputElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const selectRef = useRef<HTMLDivElement>(null)
 
@@ -200,9 +211,9 @@ export const Autocomplete = React.forwardRef<HTMLInputElement, AutocompleteProps
     }, [value, setValue])
 
     return (
-      <Container ref={containerRef} hasFocus={hasFocus} onClick={(): void => setFocus(true)}>
+      <Container ref={containerRef} hasFocus={hasFocus} onClick={(): void => inputRef.current?.focus()}>
         <CustomInput
-          ref={forwardedRef}
+          ref={mergeRefs([inputRef, forwardedRef])}
           onEnter={onChange}
           value={inputValue}
           onChange={handleInputChange}

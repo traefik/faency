@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, getByPlaceholderText } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { theme as defaultTheme } from '../theme'
 import { theme as defaultDarkTheme } from '../dark-theme'

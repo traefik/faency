@@ -54,6 +54,7 @@
     "lodash.pick": "^4.4.0",
     "polished": "^3.4.4",
     "react-eva-icons": "^0.0.8",
+    "react-merge-refs": "^1.1.0",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
