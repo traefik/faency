@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTheme } from '@containous/faency'
+import { useTheme } from '@traefiklabs/faency'
 
 function Divider({ style = {}, ...props }) {
   const theme = useTheme()

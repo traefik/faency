@@ -100,8 +100,8 @@ storiesOf('Components|Nav', module).add('default', () => (
     <Box mb="4">
       <Nav>
         <NavGroup variant="left">
-          <NavItem as="a" href="https://containo.us">
-            Containous Website
+          <NavItem as="a" href="https://traefik.io">
+            Traefik Labs Website
           </NavItem>
         </NavGroup>
       </Nav>

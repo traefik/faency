@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading as FaencyHeading, Text, code, Table, Thead, Tbody, Tr, Th, Td } from '@containous/faency'
+import { Heading as FaencyHeading, Text, code, Table, Thead, Tbody, Tr, Th, Td } from '@traefiklabs/faency'
 
 export function APISection() {
   return (

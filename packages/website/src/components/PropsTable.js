@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Button, Chip, Table, Thead, Tr, Th, Tbody, Td, Text, Heading } from '@containous/faency'
+import { Box, Button, Chip, Table, Thead, Tr, Th, Tbody, Td, Text, Heading } from '@traefiklabs/faency'
 import { Link as GatsbyLink } from 'gatsby'
 import { PropRender } from './PropRender'
 

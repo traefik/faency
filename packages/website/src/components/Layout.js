@@ -17,16 +17,16 @@ function Layout({ children }) {
         <title>Faency</title>
         <link rel="icon" type="image/png" href={favicon} />
 
-        <meta property="og:url" content="https://faency.containous.app/" />
+        <meta property="og:url" content="https://traefik.github.io/faency/" />
         <meta property="og:title" content="Faency" />
-        <meta property="og:description" content="Containous Design System and Component Library" />
+        <meta property="og:description" content="Traefik Labs Design System and Component Library" />
 
-        <meta name="twitter:url" content="https://faency.containous.app/" />
+        <meta name="twitter:url" content="https://traefik.github.io/faency/" />
         <meta name="twitter:title" content="Faency" />
-        <meta name="twitter:description" content="Containous Design System and Component Library" />
-        <meta name="twitter:site" content="@containous" />
+        <meta name="twitter:description" content="Traefik Labs Design System and Component Library" />
+        <meta name="twitter:site" content="@traefik" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:creator" content="@containous" />
+        <meta name="twitter:creator" content="@traefik" />
       </Helmet>
       <GlobalStyle />
       {children}

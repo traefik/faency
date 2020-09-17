@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box } from '@containous/faency'
+import { Box } from '@traefiklabs/faency'
 
 function Container({ children, ...props }) {
   return (

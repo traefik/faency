@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex } from '@containous/faency'
+import { Flex } from '@traefiklabs/faency'
 
 function List({ children, ...props }) {
   return (

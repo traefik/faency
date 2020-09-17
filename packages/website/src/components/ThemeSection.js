@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { theme, Heading as FaencyHeading, Box, Text } from '@containous/faency'
+import { theme, Heading as FaencyHeading, Box, Text } from '@traefiklabs/faency'
 
 import Divider from './Divider'
 
