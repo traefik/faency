@@ -38,12 +38,12 @@ const Root = () => (
 
 ```js
 import React from 'react'
-import { Button } from '@traefiklabs/faency'
+import { Box, Button } from '@traefiklabs/faency'
 
 const App = () => (
-  <>
+  <Box p={2}>
     <Button variant="primary">Click me</Button>
-  </>
+  </Box>
 )
 ```
 
