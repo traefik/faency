@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Text, Provider as FaencyProvider, Switch } from '@containous/faency'
+import { Flex, Text, Provider as FaencyProvider, Switch } from '@traefiklabs/faency'
 import useDarkMode from 'use-dark-mode'
 import App from './App'
 

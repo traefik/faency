@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import { Button, Text, useTheme } from '@containous/faency'
+import { Button, Text, useTheme } from '@traefiklabs/faency'
 import useDarkMode from 'use-dark-mode'
 
 function NavItem({ children, isExternal, active, ...props }) {

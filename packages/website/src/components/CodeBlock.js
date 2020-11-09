@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, theme as faencyTheme } from '@containous/faency'
+import { Box, theme as faencyTheme } from '@traefiklabs/faency'
 import useDarkMode from 'use-dark-mode'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
 import { useMDXComponents, mdx } from '@mdx-js/react'

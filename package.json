@@ -11,11 +11,11 @@
     "website": "lerna exec --scope website -- yarn start",
     "website:deploy": "lerna exec --scope website -- yarn deploy",
     "website:build": "lerna exec --scope website -- yarn build",
-    "faency": "lerna exec --scope @containous/faency -- yarn run watch",
-    "faency:storybook": "lerna exec --scope @containous/faency -- yarn storybook",
-    "faency:build": "lerna exec --scope @containous/faency -- yarn build",
-    "faency:test": "lerna exec --scope @containous/faency -- yarn test",
-    "faency:test:watch": "lerna exec --scope @containous/faency -- yarn test:watch",
+    "faency": "lerna exec --scope @traefiklabs/faency -- yarn run watch",
+    "faency:storybook": "lerna exec --scope @traefiklabs/faency -- yarn storybook",
+    "faency:build": "lerna exec --scope @traefiklabs/faency -- yarn build",
+    "faency:test": "lerna exec --scope @traefiklabs/faency -- yarn test",
+    "faency:test:watch": "lerna exec --scope @traefiklabs/faency -- yarn test:watch",
     "build": "yarn faency:build && yarn website:build",
     "test": "yarn faency:test",
     "test:watch": "yarn faency:test:watch",
@@ -58,7 +58,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "lerna exec --scope @containous/faency -- npm run build && npm run test"
+      "pre-push": "lerna exec --scope @traefiklabs/faency -- npm run build && npm run test"
     }
   }
 }

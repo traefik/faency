@@ -1,22 +1,22 @@
-# [Faency](https://containous.github.io/faency/)
+# [Faency](https://traefik.github.io/faency/)
 
 [![Build Status](https://travis-ci.com/containous/faency.svg?branch=master)](https://travis-ci.com/containous/faency)
-[![npm](https://img.shields.io/npm/v/@containous/faency)](https://www.npmjs.com/package/@containous/faency)
+[![npm](https://img.shields.io/npm/v/@traefiklabs/faency)](https://www.npmjs.com/package/@traefiklabs/faency)
 
-Faency is the [Containous](https://containo.us/) React component library.
+Faency is the [Traefik Labs](https://traefik.io) React component library.
 
 ### Installation
 
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install @containous/faency --save
+npm install @traefiklabs/faency --save
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
 
 ```bash
-yarn add @containous/faency
+yarn add @traefiklabs/faency
 ```
 
 ### Usage
@@ -25,7 +25,7 @@ yarn add @containous/faency
 
 ```js
 import React from 'react'
-import { Provider as FaencyProvider } from '@containous/faency'
+import { Provider as FaencyProvider } from '@traefiklabs/faency'
 
 const Root = () => (
   <FaencyProvider>
@@ -38,12 +38,12 @@ const Root = () => (
 
 ```js
 import React from 'react'
-import { Button } from '@containous/faency'
+import { Box, Button } from '@traefiklabs/faency'
 
 const App = () => (
-  <>
+  <Box p={2}>
     <Button variant="primary">Click me</Button>
-  </>
+  </Box>
 )
 ```
 

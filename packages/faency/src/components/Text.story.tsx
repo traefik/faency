@@ -11,31 +11,31 @@ storiesOf('Components|Text', module).add('default', () => (
 
     <Box mb="4">
       <Text as="p" size={0}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={1}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={2}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={3}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={4}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={5}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={6}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={7}>
-        Containous
+        Traefik Labs
       </Text>
       <Text as="p" size={8}>
-        Containous
+        Traefik Labs
       </Text>
     </Box>
 
@@ -49,37 +49,37 @@ storiesOf('Components|Text', module).add('default', () => (
     </Box>
 
     <Box mb="4">
-      <Text as="p">We are Containous</Text>
+      <Text as="p">We are Traefik Labs</Text>
       <Text as="p" sx={{ color: 'blue' }}>
-        We are Containous
+        We are Traefik Labs
       </Text>
       <Text as="p" sx={{ color: 'red' }}>
-        We are Containous
+        We are Traefik Labs
       </Text>
       <Text as="p" sx={{ color: 'green' }}>
-        We are Containous
+        We are Traefik Labs
       </Text>
       <Text as="p" sx={{ color: 'gray' }}>
-        We are Containous
+        We are Traefik Labs
       </Text>
     </Box>
 
     <Box mb="4">
       <Text as="p" sx={{ textAlign: 'center' }} padding="4">
-        We are Containous. We strive to provide the cloud with the most powerful tools to ease the demanding
+        We are Traefik Labs. We strive to provide the cloud with the most powerful tools to ease the demanding
         infrastructures strain on your IT.
       </Text>
     </Box>
     <Box mb="4" sx={{ width: 200 }}>
       <Text as="p" sx={{ textAlign: 'center' }} padding="4" truncate>
-        We are Containous. We strive to provide the cloud with the most powerful tools to ease the demanding
+        We are Traefik Labs. We strive to provide the cloud with the most powerful tools to ease the demanding
         infrastructures strain on your IT.
       </Text>
     </Box>
 
     <Box mb="4">
       <Text size={5}>
-        We are Containous. We strive to provide the cloud with the most powerful tools to ease the demanding
+        We are Traefik Labs. We strive to provide the cloud with the most powerful tools to ease the demanding
         infrastructures strain on your IT.
       </Text>
     </Box>

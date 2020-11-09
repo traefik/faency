@@ -3,23 +3,23 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/containous/faency"
+    "url": "https://github.com/traefik/faency"
   },
   "bugs": {
-    "url": "https://github.com/containous/faency/issues"
+    "url": "https://github.com/traefik/faency/issues"
   },
   "description": "A website for Faency Design System",
   "version": "0.7.0",
   "scripts": {
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GITHUB_TOKEN@github.com/containous/faency.git",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GITHUB_TOKEN@github.com/traefik/faency.git",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "@containous/faency": "0.7.0",
+    "@traefiklabs/faency": "0.7.0",
     "@mdx-js/mdx": "^1.5.5",
     "@mdx-js/react": "^1.5.5",
     "babel-plugin-styled-components": "^1.10.7",

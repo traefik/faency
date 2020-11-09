@@ -1,21 +1,21 @@
 {
-  "name": "@containous/faency",
-  "description": "Containous React component library",
+  "name": "@traefiklabs/faency",
+  "description": "Traefik Labs React component library",
   "version": "0.7.0",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://containous.github.io/faency/",
+  "homepage": "https://traefik.github.io/faency/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/containous/faency"
+    "url": "https://github.com/traefik/faency"
   },
   "bugs": {
-    "url": "https://github.com/containous/faency/issues"
+    "url": "https://github.com/traefik/faency/issues"
   },
   "keywords": [
-    "containous",
+    "traefiklabs",
     "faency",
     "react",
     "components",

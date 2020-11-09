@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Text, useTheme } from '@containous/faency'
+import { Box, Text, useTheme } from '@traefiklabs/faency'
 import color from 'color'
 
 const isNumeric = value => !isNaN(value)

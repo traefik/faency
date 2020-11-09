@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import { Flex, Box, Chip, Button, Heading, Text, useTheme } from '@containous/faency'
+import { Flex, Box, Chip, Button, Heading, Text, useTheme } from '@traefiklabs/faency'
 import useDarkMode from 'use-dark-mode'
 import Container from './components/Container'
 import Link from './components/Link'
@@ -71,16 +71,22 @@ function App({ element, props: appProps }) {
                 bg: darkMode.value ? '#121826' : 'white',
               }}
             >
-              <Box pt={[0, '1em']} px={16}>
+              <Box pt={[0, '1em']} px={[25, 40]}>
                 <Flex sx={{ alignItems: 'center' }}>
                   <Box>
-                    <img src={darkMode.value ? whiteLogo : logo} alt="Containous Logo" height="35px" />
+                    <img src={darkMode.value ? whiteLogo : logo} alt="Traefik Labs Logo" height="35px" />
                   </Box>
-                  <Chip ml={1} variant="blue">
+                  <Chip ml={2} variant="blue">
                     v{pkg.version}
                   </Chip>
                   <Box ml="auto" sx={{ display: ['block', 'none'] }}>
-                    <Button size={1} variant={navOpen ? 'active' : undefined} onClick={() => setNavOpen(!navOpen)}>
+                    <Button
+                      size={1}
+                      p={0}
+                      mr={[-25, 0]}
+                      variant={navOpen ? 'active' : undefined}
+                      onClick={() => setNavOpen(!navOpen)}
+                    >
                       <MenuToggle isOpen={navOpen} />
                     </Button>
                   </Box>
@@ -130,10 +136,10 @@ function App({ element, props: appProps }) {
                     Github links
                   </Heading>
 
-                  <NavItem as="a" href="https://github.com/containous/faency" isExternal>
+                  <NavItem as="a" href="https://github.com/traefik/faency" isExternal>
                     Faency
                   </NavItem>
-                  <NavItem as="a" href="https://github.com/containous/faency/tree/master/packages/website" isExternal>
+                  <NavItem as="a" href="https://github.com/traefik/faency/tree/master/packages/website" isExternal>
                     Faency Docs
                   </NavItem>
                 </List>
@@ -143,8 +149,8 @@ function App({ element, props: appProps }) {
                 <Box px={16} mt={3} sx={{ minHeight: 4 }}>
                   <Text size={2}>
                     Powered by{' '}
-                    <Link href="https://containo.us" title="Containous">
-                      Containous
+                    <Link href="https://traefik.io" title="Traefik Labs">
+                      Traefik Labs
                     </Link>
                   </Text>
                 </Box>

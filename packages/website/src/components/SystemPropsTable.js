@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Table, Tr, Tbody, Td, Thead, Th, Text, Heading } from '@containous/faency'
+import { Box, Table, Tr, Tbody, Td, Thead, Th, Text, Heading } from '@traefiklabs/faency'
 
 export function SystemPropsTable({ props: systemProps }) {
   return (
