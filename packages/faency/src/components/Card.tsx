@@ -7,8 +7,7 @@ import { theme } from '../theme'
 function createShadow(defaultOpacity: number): CSSObject {
   return {
     position: 'relative',
-    transition: 'opacity 80ms linear, transform 150ms ease',
-    borderColor: 'transparent',
+    transition: 'opacity 80ms linear, transform 150ms ease, border-color 150ms ease-in-out',
     '&::before': {
       content: `""`,
       position: 'absolute',
@@ -21,8 +20,7 @@ function createShadow(defaultOpacity: number): CSSObject {
       transitionProperty: 'all',
       transitionDuration: '80ms',
       transitionTimingFunction: 'linear',
-      boxShadow: `0 10px 38px -10px ${transparentize(0.65, theme.colors.grays[8])},
-      0 10px 20px -15px ${transparentize(0.8, theme.colors.grays[8])}`,
+      boxShadow: `0 4px 12px 0px ${transparentize(0.9, theme.colors.black)}`,
       opacity: defaultOpacity,
     },
   }
@@ -58,6 +56,7 @@ export const getCardStyleConfig = (theme: any): StyleConfig<CardParts> => ({
       shadow: {
         card: {
           normal: {
+            borderColor: theme.colors.grays[3],
             ...createShadow(1),
           },
         },
@@ -65,6 +64,7 @@ export const getCardStyleConfig = (theme: any): StyleConfig<CardParts> => ({
       ghost: {
         card: {
           normal: {
+            borderColor: 'transparent',
             ...createShadow(0),
           },
         },
