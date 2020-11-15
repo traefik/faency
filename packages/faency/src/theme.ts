@@ -16,7 +16,7 @@ export const theme: ThemeType = {
   space: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   sizes: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   lineHeights: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
-  radii: ['0', '3px', '6px', '8px', '12px'],
+  radii: ['0', '4px', '6px', '8px', '12px'],
   colors: {
     bg: 'hsl(220, 13%, 95%)',
     borderColor: 'hsl(222, 67%, 51%)',

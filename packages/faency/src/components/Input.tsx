@@ -8,10 +8,20 @@ type Size = 0 | 1
 export type InputProps = InputPrimitiveProps & {
   variant?: Variant
   size?: Size & any
+  shadow?: boolean
+  error?: boolean
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => {
   const themeContext = useContext(ThemeContext)
+  const getBorderStyle = (defaultColor: string): string => {
+    const borderStyle = props.error
+      ? `inset 0 0 0 1px ${themeContext.colors.reds[5]}`
+      : `inset 0 0 0 1px ${defaultColor}`
+    const shadowStyle = props.shadow ? `, 0 2px 4px 0 rgba(0, 0, 0, 0.05)` : ''
+
+    return `${borderStyle}${shadowStyle}`
+  }
 
   return (
     <InputPrimitive
@@ -28,30 +38,31 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
               outline: 'none',
               paddingTop: themeContext.space[0],
               paddingBottom: themeContext.space[0],
-              borderRadius: themeContext.radii[4],
+              borderRadius: themeContext.radii[1],
               verticalAlign: 'middle',
               width: '100%',
               boxSizing: 'border-box',
               WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
               transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
+              boxShadow: getBorderStyle(themeContext.colors.gray),
             },
             hover: {
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.grays[5]}`,
+              boxShadow: getBorderStyle(themeContext.colors.grays[5]),
             },
             readOnly: {
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
+              boxShadow: getBorderStyle(themeContext.colors.gray),
               color: themeContext.colors.black,
+              cursor: 'default',
             },
             disabled: {
               backgroundColor: themeContext.colors.grays[1],
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
+              boxShadow: getBorderStyle(themeContext.colors.gray),
               color: 'gray',
               cursor: 'not-allowed',
             },
             focus: {
               backgroundColor: themeContext.colors.white,
-              boxShadow: `inset 0 0 0 2px ${themeContext.colors.black}`,
+              boxShadow: getBorderStyle(themeContext.colors.primary),
               cursor: 'text',
             },
           },
