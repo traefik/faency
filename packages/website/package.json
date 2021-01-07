@@ -9,7 +9,7 @@
     "url": "https://github.com/traefik/faency/issues"
   },
   "description": "A website for Faency Design System",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GITHUB_TOKEN@github.com/traefik/faency.git",
@@ -19,7 +19,7 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "@traefiklabs/faency": "0.7.0",
+    "@traefiklabs/faency": "0.8.0",
     "@mdx-js/mdx": "^1.5.5",
     "@mdx-js/react": "^1.5.5",
     "babel-plugin-styled-components": "^1.10.7",
