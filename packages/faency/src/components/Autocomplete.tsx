@@ -1,5 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState, useRef } from 'react'
 import { InputProps } from '@modulz/primitives'
+import { getInputBorderStyle } from '../components/Input'
 import { ArrowNav } from './ArrowNav'
 import { DismissibleChip } from './DismissibleChip'
 import styled from 'styled-components'
@@ -20,7 +21,7 @@ const StyledInput = styled('input')`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   min-width: 40%;
   max-height: ${theme.sizes[3]};
-  margin: 0 ${theme.space[1]} ${theme.space[1]} 0;
+  margin: 0 12px 12px 0;
   color: ${(props: StyledInputProps): string => props.theme.colors.black};
 `
 
@@ -30,22 +31,30 @@ type ContainerProps = {
 }
 const Container = styled('div')<{ hasFocus: boolean }>`
   position: relative;
-  padding: ${theme.space[1]} 0 0 ${theme.space[1]};
+  padding: 12px 0 0 12px;
   transition: box-shadow 360ms cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
-  border-radius: ${theme.radii[4]};
+  border-radius: ${theme.radii[1]};
   display: flex;
   flex-wrap: wrap;
   background-color: ${(props: ContainerProps): string => props.theme.colors.white};
   transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: ${(props: ContainerProps): string =>
-    props.hasFocus ? `inset 0 0 0 2px ${props.theme.colors.black};` : `0 0 0 1px ${props.theme.colors.gray};`}
-  
+    getInputBorderStyle({
+      mode: props.hasFocus ? 'focus' : 'normal',
+      variant: 'shadow',
+      error: false,
+      themeContext: theme,
+    })};
+
   &:hover {
-    box-shadow:  ${(props: ContainerProps): string =>
-      props.hasFocus
-        ? `inset 0 0 0 2px ${props.theme.colors.black};`
-        : `inset 0 0 0 1px ${props.theme.colors.grays[5]};`}
+    box-shadow: ${(props: ContainerProps): string =>
+      getInputBorderStyle({
+        mode: props.hasFocus ? 'focus' : 'hover',
+        variant: 'shadow',
+        error: false,
+        themeContext: theme,
+      })};
   }
 `
 
@@ -59,7 +68,7 @@ const ChipsContainer = styled('div')`
   }
 
   > * {
-    margin: 0 ${theme.space[1]} ${theme.space[1]} 0;
+    margin: 0 12px 12px 0;
   }
 `
 
