@@ -122,8 +122,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
               input: {
                 normal: {
                   backgroundColor: themeContext.colors.white,
-                }
-              }
+                },
+              },
             },
             ghost: {
               input: {
