@@ -16,7 +16,7 @@ export const theme: ThemeType = {
   space: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   sizes: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
   lineHeights: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
-  radii: ['0', '3px', '6px', '8px', '12px'],
+  radii: ['0', '4px', '6px', '8px', '12px'],
   colors: {
     bg: 'hsl(220, 13%, 95%)',
     borderColor: 'hsl(222, 67%, 51%)',
@@ -60,7 +60,7 @@ export const theme: ThemeType = {
     blues: [
       'hsl(220, 67%, 99%)',
       'hsl(220, 71%, 96%)',
-      'hsl(222, 76%, 91%)',
+      'hsl(222, 100%, 94%)',
       'hsl(220, 76%, 68%)',
       'hsl(220, 67%, 51%)',
       'hsl(220, 91%, 45%)',
@@ -108,7 +108,7 @@ export const theme: ThemeType = {
     purples: [
       'hsl(297, 100%, 99%)',
       'hsl(297, 100%, 97%)',
-      'hsl(291, 38%, 90%)',
+      'hsl(293, 38%, 90%)',
       'hsl(297, 100%, 60%)',
       'hsl(297, 100%, 36%)',
       'hsl(297, 100%, 24%)',

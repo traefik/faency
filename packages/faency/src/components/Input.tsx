@@ -2,12 +2,34 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { Input as InputPrimitive, InputProps as InputPrimitiveProps } from '@modulz/primitives'
 
-type Variant = 'normal' | 'ghost'
+type Variant = 'normal' | 'ghost' | 'shadow'
 type Size = 0 | 1
 
 export type InputProps = InputPrimitiveProps & {
   variant?: Variant
   size?: Size & any
+  error?: boolean
+}
+
+type getInputBorderStyleProps = {
+  mode: 'normal' | 'hover' | 'readOnly' | 'disabled' | 'focus'
+  themeContext: any
+  variant?: Variant
+  error?: boolean
+}
+
+export const getInputBorderStyle = ({ mode, themeContext, variant, error }: getInputBorderStyleProps): string => {
+  const colorsByMode = {
+    normal: themeContext.colors.gray,
+    hover: themeContext.colors.grays[5],
+    readOnly: themeContext.colors.gray,
+    disabled: themeContext.colors.gray,
+    focus: themeContext.colors.primary,
+  }
+  const borderStyle = error ? `inset 0 0 0 1px ${themeContext.colors.reds[5]}` : `inset 0 0 0 1px ${colorsByMode[mode]}`
+  const shadowStyle = variant === 'shadow' ? `, 0 2px 4px 0 rgba(0, 0, 0, 0.05)` : ''
+
+  return `${borderStyle}${shadowStyle}`
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => {
@@ -28,30 +50,56 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
               outline: 'none',
               paddingTop: themeContext.space[0],
               paddingBottom: themeContext.space[0],
-              borderRadius: themeContext.radii[4],
+              borderRadius: themeContext.radii[1],
               verticalAlign: 'middle',
               width: '100%',
               boxSizing: 'border-box',
               WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
               transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
+              boxShadow: getInputBorderStyle({
+                mode: 'normal',
+                variant: props.variant,
+                error: props.error,
+                themeContext,
+              }),
             },
             hover: {
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.grays[5]}`,
+              boxShadow: getInputBorderStyle({
+                mode: 'hover',
+                variant: props.variant,
+                error: props.error,
+                themeContext,
+              }),
             },
             readOnly: {
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
+              boxShadow: getInputBorderStyle({
+                mode: 'readOnly',
+                variant: props.variant,
+                error: props.error,
+                themeContext,
+              }),
               color: themeContext.colors.black,
+              cursor: 'default',
             },
             disabled: {
               backgroundColor: themeContext.colors.grays[1],
-              boxShadow: `inset 0 0 0 1px ${themeContext.colors.gray}`,
+              boxShadow: getInputBorderStyle({
+                mode: 'disabled',
+                variant: props.variant,
+                error: props.error,
+                themeContext,
+              }),
               color: 'gray',
               cursor: 'not-allowed',
             },
             focus: {
               backgroundColor: themeContext.colors.white,
-              boxShadow: `inset 0 0 0 2px ${themeContext.colors.black}`,
+              boxShadow: getInputBorderStyle({
+                mode: 'focus',
+                variant: props.variant,
+                error: props.error,
+                themeContext,
+              }),
               cursor: 'text',
             },
           },
@@ -73,8 +121,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
             ghost: {
               input: {
                 normal: {
-                  boxShadow: 'none',
+                  ...(!props.error ? { boxShadow: 'none' } : {}),
                   cursor: 'text',
+                },
+                disabled: {
+                  boxShadow: 'none',
+                },
+                readOnly: {
+                  boxShadow: 'none',
                 },
               },
             },

@@ -8,6 +8,7 @@ import {
 } from '@modulz/primitives'
 import merge from 'lodash.merge'
 import { menuStyleConfig } from './Menu'
+import { getInputBorderStyle } from './Input'
 
 export { Option, OptionProps, OptionGroup, OptionGroupProps } from '@modulz/primitives'
 
@@ -27,19 +28,36 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, f
       button: {
         normal: {
           fontFamily: theme.fonts.normal,
-          borderRadius: theme.radii[4],
+          borderRadius: theme.radii[1],
           letterSpacing: '-0.01em',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           color: theme.colors.black,
           transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
+          boxShadow: getInputBorderStyle({
+            mode: 'normal',
+            variant: props.variant,
+            error: false,
+            themeContext: theme,
+          }),
         },
         focus: {
-          boxShadow: `inset 0 0 0 1px ${theme.colors.black}, 0 0 0 1px ${theme.colors.black}`,
+          boxShadow: getInputBorderStyle({
+            mode: 'focus',
+            variant: props.variant,
+            error: false,
+            themeContext: theme,
+          }),
         },
         disabled: {
           color: theme.colors.grays[4],
           cursor: 'not-allowed',
+          boxShadow: getInputBorderStyle({
+            mode: 'disabled',
+            variant: props.variant,
+            error: false,
+            themeContext: theme,
+          }),
         },
       },
       buttonIcon: {
