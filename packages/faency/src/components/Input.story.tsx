@@ -38,14 +38,6 @@ storiesOf('Components|Input', module).add('default', () => (
       </Box>
 
       <Box mb="4">
-        <Input variant="ghost" placeholder="Ghost input" />
-      </Box>
-
-      <Box mb="4">
-        <Input variant="ghost" size={1} placeholder="Ghost input" />
-      </Box>
-
-      <Box mb="4">
         <Input disabled placeholder="Disabled" />
       </Box>
       <Box mb="4">
@@ -55,13 +47,14 @@ storiesOf('Components|Input', module).add('default', () => (
         <Input error value="Error" />
       </Box>
     </Box>
-    <Box sx={{ width: '300px' }}>
+  
+    <Box sx={{ width: '300px', mr: 2 }}>
       <Box mb="4">
-        <Input shadow placeholder="Normal input" />
+        <Input variant="shadow" placeholder="Normal input" />
       </Box>
 
       <Box mb="4" sx={{ position: 'relative' }}>
-        <Input shadow placeholder="input with icon on the right" type="email" paddingRight={5} />
+        <Input variant="shadow" placeholder="input with icon on the right" type="email" paddingRight={5} />
 
         <Box sx={{ position: 'absolute', height: '100%', top: 0, right: 1, color: 'grays.4', pointerEvents: 'none' }}>
           <Flex sx={{ alignItems: 'center', height: '100%' }}>
@@ -71,11 +64,11 @@ storiesOf('Components|Input', module).add('default', () => (
       </Box>
 
       <Box mb="4">
-        <Input shadow size={1} placeholder="size 1 input" />
+        <Input variant="shadow" size={1} placeholder="size 1 input" />
       </Box>
 
       <Box mb="4" sx={{ position: 'relative' }}>
-        <Input shadow size={1} placeholder="size 1 input with icon" type="text" paddingLeft={5} />
+        <Input variant="shadow" size={1} placeholder="size 1 input with icon" type="text" paddingLeft={5} />
 
         <Box sx={{ position: 'absolute', height: '100%', top: 0, left: 1, color: 'grays.4', pointerEvents: 'none' }}>
           <Flex sx={{ alignItems: 'center', height: '100%' }}>
@@ -85,21 +78,53 @@ storiesOf('Components|Input', module).add('default', () => (
       </Box>
 
       <Box mb="4">
-        <Input shadow variant="ghost" placeholder="Ghost input" />
+        <Input variant="shadow" disabled placeholder="Disabled" />
+      </Box>
+      <Box mb="4">
+        <Input variant="shadow" readOnly value="Read only" />
+      </Box>
+      <Box mb="4">
+        <Input variant="shadow" error value="Error" />
+      </Box>
+    </Box>
+
+    <Box sx={{ width: '300px' }}>
+      <Box mb="4">
+        <Input variant="ghost" placeholder="Normal input" />
+      </Box>
+
+      <Box mb="4" sx={{ position: 'relative' }}>
+        <Input variant="ghost" placeholder="input with icon on the right" type="email" paddingRight={5} />
+
+        <Box sx={{ position: 'absolute', height: '100%', top: 0, right: 1, color: 'grays.4', pointerEvents: 'none' }}>
+          <Flex sx={{ alignItems: 'center', height: '100%' }}>
+            <Icon name="search" size="large" fill={theme.colors.grays[5]} />
+          </Flex>
+        </Box>
       </Box>
 
       <Box mb="4">
-        <Input shadow variant="ghost" size={1} placeholder="Ghost input" />
+        <Input variant="ghost" size={1} placeholder="size 1 input" />
+      </Box>
+
+      <Box mb="4" sx={{ position: 'relative' }}>
+        <Input variant="ghost" size={1} placeholder="size 1 input with icon" type="text" paddingLeft={5} />
+
+        <Box sx={{ position: 'absolute', height: '100%', top: 0, left: 1, color: 'grays.4', pointerEvents: 'none' }}>
+          <Flex sx={{ alignItems: 'center', height: '100%' }}>
+            <Icon name="search" size="large" fill={theme.colors.grays[5]} />
+          </Flex>
+        </Box>
       </Box>
 
       <Box mb="4">
-        <Input shadow disabled placeholder="Disabled" />
+        <Input variant="ghost" disabled placeholder="Disabled" />
       </Box>
       <Box mb="4">
-        <Input shadow readOnly value="Read only" />
+        <Input variant="ghost" readOnly value="Read only" />
       </Box>
       <Box mb="4">
-        <Input shadow error value="Error" />
+        <Input variant="ghost" error value="Error" />
       </Box>
     </Box>
   </Flex>
