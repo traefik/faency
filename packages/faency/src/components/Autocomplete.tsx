@@ -1,12 +1,12 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useState, useRef } from 'react'
 import { InputProps } from '@modulz/primitives'
-import { getInputBorderStyle } from '../components/Input'
 import { ArrowNav } from './ArrowNav'
 import { DismissibleChip } from './DismissibleChip'
 import styled from 'styled-components'
 import mergeRefs from 'react-merge-refs'
 import { theme, ThemeType } from '../theme'
 import { Box } from './Box'
+import { getInputBorderStyle } from './Input'
 import useClickOutside from '../hooks/use-click-outside'
 import useKeyListener from '../hooks/use-key-listener'
 
