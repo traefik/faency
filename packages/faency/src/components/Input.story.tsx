@@ -47,7 +47,7 @@ storiesOf('Components|Input', module).add('default', () => (
         <Input error value="Error" />
       </Box>
     </Box>
-  
+
     <Box sx={{ width: '300px', mr: 2 }}>
       <Box mb="4">
         <Input variant="shadow" placeholder="Normal input" />
