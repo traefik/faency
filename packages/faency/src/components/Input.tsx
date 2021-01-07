@@ -118,6 +118,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
                 },
               },
             },
+            shadow: {
+              input: {
+                normal: {
+                  backgroundColor: themeContext.colors.white,
+                }
+              }
+            },
             ghost: {
               input: {
                 normal: {

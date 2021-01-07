@@ -4,10 +4,10 @@ import { Provider } from '../src/Provider';
 import { Box, Button, theme } from '../src';
 
 function ThemeComponent({ children }) {
-  const [currentTheme, setCurrentTheme] = useState(theme);
+  const [currentTheme] = useState(theme);
   return (
     <Provider theme={currentTheme}>
-      <Box p={3} backgroundColor="bg">{children}</Box>
+      <Box p={3} sx={{ backgroundColor: 'bg' }}>{children}</Box>
     </Provider>
   );
 }
