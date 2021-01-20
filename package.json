@@ -60,5 +60,6 @@
       "pre-commit": "lint-staged",
       "pre-push": "lerna exec --scope @traefiklabs/faency -- npm run build && npm run test"
     }
-  }
+  },
+  "version": "0.0.0"
 }
