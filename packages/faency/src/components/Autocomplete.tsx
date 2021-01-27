@@ -34,7 +34,7 @@ const Container = styled('div')<{ hasFocus: boolean }>`
   padding: 12px 0 0 12px;
   transition: box-shadow 360ms cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
-  border-radius: ${theme.radii[1]};
+  border-radius: ${theme.radii[2]};
   display: flex;
   flex-wrap: wrap;
   background-color: ${(props: ContainerProps): string => props.theme.colors.white};

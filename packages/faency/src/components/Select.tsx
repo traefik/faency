@@ -28,7 +28,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, f
       button: {
         normal: {
           fontFamily: theme.fonts.normal,
-          borderRadius: theme.radii[1],
+          borderRadius: theme.radii[2],
           letterSpacing: '-0.01em',
           justifyContent: 'space-between',
           flexWrap: 'wrap',

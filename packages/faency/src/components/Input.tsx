@@ -50,7 +50,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
               outline: 'none',
               paddingTop: themeContext.space[0],
               paddingBottom: themeContext.space[0],
-              borderRadius: themeContext.radii[1],
+              borderRadius: themeContext.radii[2],
               verticalAlign: 'middle',
               width: '100%',
               boxSizing: 'border-box',
