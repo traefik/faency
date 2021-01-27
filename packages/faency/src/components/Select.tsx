@@ -32,7 +32,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, f
           letterSpacing: '-0.01em',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          color: theme.colors.black,
+          color: theme.colors.dark,
           transition: 'all 0.36s cubic-bezier(0.4, 0, 0.2, 1)',
           boxShadow: getInputBorderStyle({
             mode: 'normal',
@@ -91,9 +91,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, f
           button: {
             normal: {
               fontSize: theme.fontSizes[1],
-              height: theme.sizes[5],
-              paddingLeft: theme.space[1],
-              paddingRight: theme.space[1],
+              height: theme.sizes[6],
+              paddingLeft: '12px',
+              paddingRight: '12px',
             },
           },
         },
@@ -101,7 +101,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, f
           button: {
             normal: {
               fontSize: theme.fontSizes[2],
-              height: theme.sizes[6],
+              height: theme.sizes[7],
               paddingLeft: theme.space[2],
               paddingRight: theme.space[2],
             },

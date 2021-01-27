@@ -10,7 +10,7 @@ export type ThemeType = any
 export const theme: ThemeType = {
   breakpoints: ['38em', '62em', '68em', '110em'] as Breakpoints<any>,
   fonts: {
-    normal: 'Nunito, -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, arial, sans-serif',
+    normal: 'Rubik, -apple-system, system-ui, "Segoe UI", "Helvetica Neue", helvetica, arial, sans-serif',
   },
   fontSizes: ['12px', '14px', '16px', '18px', '20px', '22px', '24px', '28px', '36px', '42px', '58px'],
   space: ['0', '8px', '16px', '24px', '32px', '40px', '48px', '54px', '62px', '70px'],
@@ -27,7 +27,7 @@ export const theme: ThemeType = {
     positive: '#00a697',
     warning: '#db7d11',
     negative: '#ff0039',
-    dark: 'hsl(223, 675%, 9%)',
+    dark: '#06102a',
     black: 'hsl(0, 0%, 0%)',
     blacks: [
       'hsla(0, 0%, 0%, .9)',

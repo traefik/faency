@@ -21,8 +21,9 @@ const StyledInput = styled('input')`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   min-width: 40%;
   max-height: ${theme.sizes[3]};
+  height: ${theme.sizes[6]};
   margin: 0 12px 12px 0;
-  color: ${(props: StyledInputProps): string => props.theme.colors.black};
+  color: ${(props: StyledInputProps): string => props.theme.colors.dark};
 `
 
 type ContainerProps = {
