@@ -45,12 +45,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
             normal: {
               appearance: 'none',
               cursor: 'default',
-              color: themeContext.colors.black,
+              color: themeContext.colors.dark,
               fontFamily: themeContext.fonts.normal,
               outline: 'none',
               paddingTop: themeContext.space[0],
               paddingBottom: themeContext.space[0],
-              borderRadius: themeContext.radii[1],
+              borderRadius: themeContext.radii[2],
               verticalAlign: 'middle',
               width: '100%',
               boxSizing: 'border-box',
@@ -146,7 +146,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
                 normal: {
                   fontSize: themeContext.fontSizes[1],
                   letterSpacing: '-0.01em',
-                  height: themeContext.sizes[5],
+                  height: themeContext.sizes[6],
                   lineHeight: themeContext.sizes[2],
                   paddingLeft: '12px',
                   paddingRight: '12px',
@@ -158,7 +158,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
                 normal: {
                   fontSize: themeContext.fontSizes[2],
                   letterSpacing: '-0.01em',
-                  height: themeContext.sizes[6],
+                  height: themeContext.sizes[7],
                   lineHeight: themeContext.sizes[4],
                   paddingLeft: themeContext.space[2],
                   paddingRight: themeContext.space[2],
