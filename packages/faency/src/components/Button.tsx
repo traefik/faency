@@ -256,8 +256,8 @@ const Waiting = styled('div')<ButtonProps>(
               )`,
       backgroundSize:
         props.size === 1
-          ? `${props.theme.space[9]} ${props.theme.space[6]}`
-          : `${props.theme.space[7]} ${props.theme.space[5]}`,
+          ? `${props.theme.space[9]} ${props.theme.space[7]}`
+          : `${props.theme.space[7]} ${props.theme.space[6]}`,
     })(props),
 
   props => _css`

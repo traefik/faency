@@ -12,7 +12,7 @@ storiesOf('Components|Button', module).add('default', () => (
 
     <Box mb="4">
       <Button variant="primary" mr="4">
-        register new traefik instance
+       Primary
       </Button>
       <Button variant="primary" size={1} mr="4">
         Primary
