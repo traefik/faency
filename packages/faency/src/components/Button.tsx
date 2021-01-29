@@ -71,12 +71,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
             secondary: {
               button: {
                 normal: {
+                  boxShadow: `0 7px 16px -3px ${transparentize(0.9, themeContext.colors.black)}`,
+                  border: 'solid 1px #e5e5e5',
                   backgroundColor: 'white',
                   color: themeContext.colors.dark,
-                  border: 'solid 1px #e5e5e5',
                 },
                 hover: {
-                  border: 'solid 1px #c6c6c7'
+                  border: 'solid 1px #c6c6c7',
                 },
                 active: {
                   border: 'solid 1px #c6c6c7',
@@ -118,7 +119,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
             gray: {
               button: {
                 normal: {
-                  boxShadow: 'none',
+                  boxShadow: `0 7px 16px -3px ${transparentize(0.9, themeContext.colors.black)}`,
                   backgroundColor: themeContext.colors.grays[5],
                   color: 'white',
                 },
@@ -133,6 +134,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
             blue: {
               button: {
                 normal: {
+                  boxShadow: `0 7px 16px -3px ${transparentize(0.9, themeContext.colors.black)}`,
                   backgroundColor: themeContext.colors.blue,
                   color: 'white',
                 },
@@ -147,6 +149,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
             green: {
               button: {
                 normal: {
+                  boxShadow: `0 7px 16px -3px ${transparentize(0.9, themeContext.colors.black)}`,
                   backgroundColor: themeContext.colors.green,
                   color: 'white',
                 },
@@ -161,6 +164,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
             red: {
               button: {
                 normal: {
+                  boxShadow: `0 7px 16px -3px ${transparentize(0.9, themeContext.colors.black)}`,
                   backgroundColor: themeContext.colors.red,
                   color: 'white',
                 },
