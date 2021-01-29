@@ -58,7 +58,7 @@ export const theme: ThemeType = {
     ],
     blue: 'hsl(220, 90%, 45%)',
     blues: [
-      'hsl(220, 67%, 99%)',
+      'hsl(240, 4%, 95%)',
       'hsl(220, 71%, 96%)',
       'hsl(222, 100%, 94%)',
       'hsl(220, 76%, 68%)',

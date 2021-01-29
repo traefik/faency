@@ -5,7 +5,7 @@ import css from '@styled-system/css'
 import { Button as ButtonPrimitive, ButtonProps as ButtonPrimitiveProps } from '@modulz/primitives'
 import { transparentize } from 'polished'
 
-type Variant = 'gray' | 'blue' | 'green' | 'red' | 'primary' | 'secondary' | 'ghost'
+type Variant = 'gray' | 'blue' | 'green' | 'red' | 'primary' | 'secondary' | 'ghost' | 'outline'
 type Size = 0 | 1
 
 export type ButtonProps = ButtonPrimitiveProps & {
@@ -33,6 +33,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
               borderRadius: themeContext.radii[3],
               cursor: 'pointer',
               fontFamily: themeContext.fonts.normal,
+              textTransform: 'uppercase',
               fontWeight: 500,
               outline: 'none',
               paddingY: 0,
@@ -40,6 +41,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
               userSelect: 'none',
               whiteSpace: 'nowrap',
               textDecoration: 'none',
+              transition: 'background 0.3s ease-out',
               WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             },
             disabled: {
@@ -73,8 +75,29 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
                   color: themeContext.colors.dark,
                   border: 'solid 1px #e5e5e5',
                 },
+                hover: {
+                  border: 'solid 1px #c6c6c7'
+                },
                 active: {
-                  backgroundColor: '#f0f0f1',
+                  border: 'solid 1px #c6c6c7',
+                  backgroundColor: themeContext.colors.blues[0],
+                },
+              },
+            },
+            outline: {
+              button: {
+                normal: {
+                  backgroundColor: 'transparent',
+                  color: themeContext.colors.blue,
+                  border: `solid 2px ${themeContext.colors.blue}`,
+                },
+                hover: {
+                  backgroundColor: themeContext.colors.blue,
+                  color: 'white',
+                },
+                active: {
+                  backgroundColor: themeContext.colors.blues[4],
+                  color: 'white',
                 },
               },
             },
@@ -157,7 +180,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
                   fontSize: themeContext.fontSizes[1],
                   paddingLeft: themeContext.space[2],
                   paddingRight: themeContext.space[2],
-                  height: themeContext.sizes[5],
+                  height: themeContext.sizes[6],
                   minWidth: themeContext.sizes[5],
                 },
               },
@@ -168,7 +191,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
                   fontSize: themeContext.fontSizes[2],
                   paddingLeft: themeContext.space[3],
                   paddingRight: themeContext.space[3],
-                  height: themeContext.sizes[6],
+                  height: themeContext.sizes[7],
                   minWidth: themeContext.sizes[8],
                 },
               },
