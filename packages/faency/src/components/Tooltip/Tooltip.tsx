@@ -42,6 +42,7 @@ export const Tooltip: React.FC<TooltipProps> = props => {
     if (props.action === 'copy') {
       return (
         <Button
+          variant="ghost"
           style={{ height: 0, padding: 0, marginLeft: 8 }}
           onClick={(e: React.MouseEvent): void => {
             e.stopPropagation()
