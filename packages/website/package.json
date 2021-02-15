@@ -12,7 +12,7 @@
   "version": "0.8.1",
   "scripts": {
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GITHUB_TOKEN@github.com/traefik/faency.git",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://${GITHUB_TOKEN}@github.com/traefik/faency.git",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
