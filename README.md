@@ -1,6 +1,5 @@
 # [Faency](https://traefik.github.io/faency/)
 
-[![Build Status](https://travis-ci.com/traefik/faency.svg?branch=master)](https://travis-ci.com/traefik/faency)
 [![npm](https://img.shields.io/npm/v/@traefiklabs/faency)](https://www.npmjs.com/package/@traefiklabs/faency)
 
 Faency is the [Traefik Labs](https://traefik.io) React component library.
