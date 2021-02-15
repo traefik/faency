@@ -1,11 +1,11 @@
-name: Main
+name: Pull Request
 
 on:
   pull_request:
 
 jobs:
   faency:
-    name: Deploy
+    name: Test, lint and build
     runs-on: ubuntu-latest
 
     steps:
