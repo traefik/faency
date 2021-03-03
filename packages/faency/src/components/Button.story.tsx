@@ -29,6 +29,24 @@ storiesOf('Components|Button', module).add('default', () => (
     </Box>
 
     <Box mb="4">
+      <Button variant="outline" mr="4">
+        Outline
+      </Button>
+      <Button variant="outline" size={1} mr="4">
+        Outline
+      </Button>
+    </Box>
+
+    <Box mb="4">
+      <Button variant="ghost" mr="4">
+        Ghost
+      </Button>
+      <Button variant="ghost" size={1} mr="4">
+        Ghost
+      </Button>
+    </Box>
+
+    <Box mb="4">
       <Button variant="green" mr="4">
         Green
       </Button>
@@ -56,10 +74,10 @@ storiesOf('Components|Button', module).add('default', () => (
     </Box>
 
     <Box mb="4">
-      <Button disabled={true} mr="4">
+      <Button variant="primary" mr="4" disabled>
         Disabled
       </Button>
-      <Button disabled={true} size={1}>
+      <Button variant="primary" size={1} disabled>
         Disabled
       </Button>
     </Box>
