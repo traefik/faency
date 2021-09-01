@@ -1,0 +1,5 @@
+node_modules
+.next
+out
+.mdx-data
+.parcel-cache
