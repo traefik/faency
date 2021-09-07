@@ -1,43 +1,100 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Text} from '../Text';
 
-import { CardForStory } from './Card';
+import {Card, CardForStory} from './Card';
+import {Heading} from "../Heading";
+import {Flex} from "../Flex";
 
 export default {
   title: 'Components/Card',
   component: CardForStory,
-  argTypes: { onClick: { action: 'clicked' } },
 } as ComponentMeta<typeof CardForStory>;
 
-export const Template: ComponentStory<typeof CardForStory> = (args) => (
-  <CardForStory {...args}>Card</CardForStory>
+export const Basic: ComponentStory<typeof CardForStory> = (args) => (
+  <CardForStory {...args}>
+    <Heading size="2" css={{mb: '$3'}}>Card</Heading>
+    <Text>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+      dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+      nulla
+      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </Text>
+  </CardForStory>
 );
 
-export const Basic = Template.bind({});
+Basic.args = {
+  interactive: false
+}
 
-Basic.args = {};
-
-export const Ghost = Template.bind({});
+export const Ghost: ComponentStory<typeof CardForStory> = (args) => (
+  <CardForStory {...args}>
+    <Heading size="2" css={{mb: '$3'}}>Card</Heading>
+    <Text>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+      dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+      nulla
+      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </Text>
+  </CardForStory>
+);
 
 Ghost.args = {
   variant: 'ghost',
-};
+  interactive: false
+}
 
-export const Active = Template.bind({});
+export const Inner: ComponentStory<typeof CardForStory> = (args) => (
+  <CardForStory>
+    <Heading size="2" css={{mb: '$3'}}>Card</Heading>
+    <Flex css={{gap: '$3'}}>
+      <Card variant="inner">
+        <Text css={{mb: '$3'}}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </Text>
+        <Card {...args}>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </Text>
+        </Card>
+      </Card>
+      <Card variant="inner">
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </Text>
+      </Card>
+      <Card variant="inner">
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </Text>
+      </Card>
+    </Flex>
+  </CardForStory>
+);
 
-Active.args = {
-  variant: 'active',
-};
-
-export const Interactive = Template.bind({});
-
-Interactive.args = {
-  interactive: true,
-};
-
-export const GhostInteractive = Template.bind({});
-
-GhostInteractive.args = {
-  variant: 'ghost',
-  interactive: true,
-};
+Inner.args = {
+  variant: 'inner',
+  interactive: false
+}

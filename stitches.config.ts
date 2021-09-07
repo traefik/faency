@@ -29,6 +29,10 @@ import {
   dark as buttonDarkTheme,
   light as buttonLightTheme,
 } from './components/Button/Button.themes';
+import {
+  dark as cardDarkTheme,
+  light as cardLightTheme,
+} from './components/Card/Card.themes';
 
 const red = {
   red1: 'hsl(359 100% 99.0%)',
@@ -120,9 +124,9 @@ const neonDark = {
   neon12: 'hsl(68, 53%, 12%)',
 };
 
-const deepBlue = {
+export const deepBlue = {
   deepBlue1: 'hsl(180, 9%, 98%)',
-  deepBlue2: 'hsl(180 7% 92%)',
+  deepBlue2: 'hsl(180, 7%, 92%)',
   deepBlue3: 'hsl(183 8% 85%)',
   deepBlue4: 'hsl(187 8% 76%)',
   deepBlue5: 'hsl(192 9% 65%)',
@@ -135,7 +139,7 @@ const deepBlue = {
   deepBlue12: 'hsl(208, 89%, 7%)',
 };
 
-const deepBlueDark = {
+export const deepBlueDark = {
   deepBlue12: 'hsl(180, 9%, 98%)',
   deepBlue11: 'hsl(180 7% 92%)',
   deepBlue10: 'hsl(183 8% 85%)',
@@ -178,6 +182,7 @@ const stitches = createStitches({
       loContrast: 'white',
 
       ...buttonLightTheme,
+      ...cardLightTheme,
     },
     fonts: {
       rubik:
@@ -391,6 +396,7 @@ export const customColors = (primary: string) => {
       loContrast: '$deepBlue2',
 
       ...buttonDarkTheme,
+      ...cardDarkTheme,
     },
   });
 
@@ -398,6 +404,7 @@ export const customColors = (primary: string) => {
     colors: {
       primary,
       ...buttonLightTheme,
+      ...cardLightTheme,
     },
   });
 
