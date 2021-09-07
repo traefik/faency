@@ -21,6 +21,8 @@
  * export const ButtonForStory = modifyVariantsForStory<ButtonVariants, ButtonProps>(Button);
  */
 
+import React from 'react';
+
 interface StitchesMedia {
   [x: string]: any;
   initial?: any;

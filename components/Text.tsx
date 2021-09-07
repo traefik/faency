@@ -5,7 +5,6 @@ export const Text = styled('span', {
   lineHeight: '1',
   margin: '0',
   fontFamily: '$rubik',
-  fontWeight: 400,
   fontVariantNumeric: 'tabular-nums',
   display: 'block',
 

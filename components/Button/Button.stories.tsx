@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ButtonForStory } from './Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
-import { FontBoldIcon } from '@radix-ui/react-icons';
+import { InfoCircledIcon } from '@radix-ui/react-icons';
 
 export default {
   title: 'Components/Button',
@@ -26,10 +26,29 @@ Secondary.args = {
   variant: 'secondary',
 };
 
+export const Red = Template.bind({});
+
+Red.args = {
+  variant: 'red',
+};
+
+export const Ghost = Template.bind({});
+
+Ghost.args = {
+  ghost: true,
+  variant: 'secondary',
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  disabled: true,
+};
+
 const TemplateWithIcon: ComponentStory<typeof ButtonForStory> = (args) => (
   <ButtonForStory {...args}>
-    <Flex css={{ gap: '$2', alignItems: 'center' }}>
-      <FontBoldIcon />
+    <Flex css={{ gap: '$1', alignItems: 'center' }}>
+      <InfoCircledIcon />
       <Text css={{ color: 'currentColor', lineHeight: 'normal' }}>Button</Text>
     </Flex>
   </ButtonForStory>
