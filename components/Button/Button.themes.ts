@@ -1,4 +1,4 @@
-import tinycolor from "tinycolor2";
+import tinycolor from 'tinycolor2';
 
 export namespace Theme {
   type Colors = {
@@ -22,8 +22,8 @@ export namespace Theme {
     buttonPrimaryBg: '$deepBlue11',
     buttonPrimaryHoverBg: '$deepBlue9',
     buttonPrimaryText: '$primary',
-    buttonPrimaryGhostHoverText: '$primary',
-    buttonPrimaryGhostText: tinycolor(primaryColor).darken(10).toString(),
+    buttonPrimaryGhostHoverText: tinycolor(primaryColor).darken(16).toString(),
+    buttonPrimaryGhostText: tinycolor(primaryColor).darken(26).toString(),
 
     buttonSecondaryBg: '$deepBlue3',
     buttonSecondaryHoverBg: '$deepBlue4',

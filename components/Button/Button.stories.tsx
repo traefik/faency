@@ -5,6 +5,7 @@ import { ButtonForStory } from './Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { Tabs } from '@radix-ui/react-tabs';
 
 export default {
   title: 'Components/Button',
@@ -47,7 +48,7 @@ Disabled.args = {
 
 const TemplateWithIcon: ComponentStory<typeof ButtonForStory> = (args) => (
   <ButtonForStory {...args}>
-    <Flex css={{ gap: '$1', alignItems: 'center' }}>
+    <Flex css={{ gap: '$2', alignItems: 'center' }}>
       <InfoCircledIcon />
       <Text css={{ color: 'currentColor', lineHeight: 'normal' }}>Button</Text>
     </Flex>
@@ -56,4 +57,27 @@ const TemplateWithIcon: ComponentStory<typeof ButtonForStory> = (args) => (
 
 export const WithIcon = TemplateWithIcon.bind({});
 
-WithIcon.args = {};
+const TemplateWithActive: ComponentStory<typeof ButtonForStory> = ({ state, ...args }) => {
+  const [active, setActive] = React.useState(0);
+
+  return (
+    <>
+      <Text css={{ pb: '$3' }}>Tab {active + 1} is active</Text>
+      <Flex css={{ gap: '$3' }}>
+        {[...Array(4)].map((_, i) => (
+          <ButtonForStory
+            {...args}
+            {...(active === i ? { state: 'active' } : {})}
+            onClick={() => setActive(i)}
+          >
+            Tab {i + 1}
+          </ButtonForStory>
+        ))}
+      </Flex>
+    </>
+  );
+};
+
+export const Active = TemplateWithActive.bind({});
+
+Active.args = {};

@@ -23,6 +23,7 @@ export const Button = styled('button', {
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
   // Custom
+  position: 'relative',
   height: '$5',
   px: '$2',
   fontFamily: '$rubik',
@@ -39,6 +40,30 @@ export const Button = styled('button', {
   '&:disabled': {
     pointerEvents: 'none',
     opacity: 0.5,
+  },
+
+  '&:focus': {
+    '&::after': {
+      boxSizing: 'border-box',
+      content: '""',
+      position: 'absolute',
+      zIndex: 1,
+      top: '-1px',
+      right: '-1px',
+      bottom: '-1px',
+      left: '-1px',
+      display: 'block',
+      pointerEvents: 'none',
+      boxShadow: '0 0 0 2px $colors$focusOutline',
+      transition: 'box-shadow .1s ease-in-out',
+      borderRadius: '$3',
+    },
+  },
+
+  '&:active': {
+    '&::after': {
+      boxShadow: 'none',
+    },
   },
 
   variants: {
@@ -96,20 +121,20 @@ export const Button = styled('button', {
     },
     state: {
       active: {
-        backgroundColor: '$slate4',
-        boxShadow: 'inset 0 0 0 1px $colors$slate8',
-        color: '$slate11',
+        backgroundColor: '$deepBlue5',
+        color: '$deepBlue11',
         '@hover': {
           '&:hover': {
-            backgroundColor: '$slate5',
-            boxShadow: 'inset 0 0 0 1px $colors$slate8',
+            backgroundColor: '$deepBlue5',
           },
         },
         '&:active': {
-          backgroundColor: '$slate5',
+          backgroundColor: '$deepBlue5',
         },
         '&:focus': {
-          boxShadow: 'inset 0 0 0 1px $colors$slate8, 0 0 0 1px $colors$slate8',
+          '&::after': {
+            boxShadow: 'none',
+          },
         },
       },
       waiting: {
@@ -125,9 +150,6 @@ export const Button = styled('button', {
         },
         '&:active': {
           backgroundColor: '$slate5',
-        },
-        '&:focus': {
-          boxShadow: 'inset 0 0 0 1px $colors$slate8',
         },
       },
     },
@@ -162,16 +184,6 @@ export const Button = styled('button', {
             backgroundColor: 'transparent',
           },
         },
-        // '&:active': {
-        //   backgroundColor: '$slateA4',
-        // },
-        // '&:focus': {
-        //   boxShadow: 'inset 0 0 0 1px $colors$slateA8, 0 0 0 1px $colors$slateA8',
-        // },
-        // '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-        //   backgroundColor: '$slateA4',
-        //   boxShadow: 'none',
-        // },
       },
     },
     {
@@ -186,16 +198,19 @@ export const Button = styled('button', {
             backgroundColor: 'transparent',
           },
         },
-        // '&:active': {
-        //   backgroundColor: '$slateA4',
-        // },
-        // '&:focus': {
-        //   boxShadow: 'inset 0 0 0 1px $colors$slateA8, 0 0 0 1px $colors$slateA8',
-        // },
-        // '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-        //   backgroundColor: '$slateA4',
-        //   boxShadow: 'none',
-        // },
+      },
+    },
+    {
+      variant: 'secondary',
+      state: 'active',
+      css: {
+        backgroundColor: '$buttonPrimaryBg',
+        color: '$buttonPrimaryText',
+        '@hover': {
+          '&:hover': {
+            backgroundColor: '$buttonPrimaryHoverBg',
+          },
+        },
       },
     },
     {
@@ -210,16 +225,22 @@ export const Button = styled('button', {
             backgroundColor: 'transparent',
           },
         },
-        // '&:active': {
-        //   backgroundColor: '$slateA4',
-        // },
-        // '&:focus': {
-        //   boxShadow: 'inset 0 0 0 1px $colors$slateA8, 0 0 0 1px $colors$slateA8',
-        // },
-        // '&[data-radix-popover-trigger][data-state="open"], &[data-radix-dropdown-menu-trigger][data-state="open"]': {
-        //   backgroundColor: '$slateA4',
-        //   boxShadow: 'none',
-        // },
+      },
+    },
+    {
+      variant: 'red',
+      state: 'active',
+      css: {
+        backgroundColor: '$deepBlue5',
+        color: '$deepBlue11',
+        '@hover': {
+          '&:hover': {
+            backgroundColor: '$deepBlue5',
+          },
+        },
+        '&:active': {
+          backgroundColor: '$deepBlue5',
+        },
       },
     },
   ],

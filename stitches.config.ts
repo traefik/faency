@@ -176,6 +176,7 @@ const colors = {
   contentBg: '$deepBlue1', // to delete
   hiContrast: '$deepBlue11',
   loContrast: 'white',
+  focusOutline: 'hsl(216, 100%, 64%)',
 };
 
 const primaryColor = getColorFromToken(colors, defaultPrimary);
@@ -417,4 +418,3 @@ export const customColors = (primary: string) => {
     light: lightTheme,
   };
 };
-
