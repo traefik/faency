@@ -26,13 +26,11 @@ import {
 import type * as Stitches from '@stitches/react';
 export type { VariantProps } from '@stitches/react';
 import {
-  dark as buttonDarkTheme,
-  light as buttonLightTheme,
+  getDark as getButtonDarkTheme,
+  getLight as getButtonLightTheme,
 } from './components/Button/Button.themes';
-import {
-  dark as cardDarkTheme,
-  light as cardLightTheme,
-} from './components/Card/Card.themes';
+import { dark as cardDarkTheme, light as cardLightTheme } from './components/Card/Card.themes';
+import { getColorFromToken } from './utils/getColorFromToken';
 
 const red = {
   red1: 'hsl(359 100% 99.0%)',
@@ -154,34 +152,41 @@ export const deepBlueDark = {
   deepBlue1: 'hsl(208, 89%, 7%)',
 };
 
+const defaultPrimary = '$blue8';
+
+const colors = {
+  ...gray,
+  ...red,
+  ...blue,
+  ...green,
+  ...orange,
+  ...slate,
+  ...neon,
+  ...deepBlue,
+
+  ...grayA,
+  ...redA,
+  ...blueA,
+  ...greenA,
+  ...orangeA,
+  ...slateA,
+  ...whiteA,
+  ...blackA,
+
+  // Semantic colors
+  primary: defaultPrimary,
+  contentBg: '$deepBlue1', // to delete
+  hiContrast: '$deepBlue11',
+  loContrast: 'white',
+};
+
+const primaryColor = getColorFromToken(colors, defaultPrimary);
+
 const stitches = createStitches({
   theme: {
     colors: {
-      ...gray,
-      ...red,
-      ...blue,
-      ...green,
-      ...orange,
-      ...slate,
-      ...neon,
-      ...deepBlue,
-
-      ...grayA,
-      ...redA,
-      ...blueA,
-      ...greenA,
-      ...orangeA,
-      ...slateA,
-      ...whiteA,
-      ...blackA,
-
-      // Semantic colors
-      primary: '$blue8',
-      contentBg: '$deepBlue1', // to delete
-      hiContrast: '$deepBlue11',
-      loContrast: 'white',
-
-      ...buttonLightTheme,
+      ...colors,
+      ...getButtonLightTheme(primaryColor),
       ...cardLightTheme,
     },
     fonts: {
@@ -371,6 +376,7 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 export const utils = config.utils;
 
 export const customColors = (primary: string) => {
+  const primaryColor = getColorFromToken(config.theme.colors, primary);
   const darkTheme = createTheme('dark', {
     colors: {
       ...grayDark,
@@ -395,7 +401,7 @@ export const customColors = (primary: string) => {
       hiContrast: 'white',
       loContrast: '$deepBlue2',
 
-      ...buttonDarkTheme,
+      ...getButtonDarkTheme(primaryColor),
       ...cardDarkTheme,
     },
   });
@@ -403,7 +409,7 @@ export const customColors = (primary: string) => {
   const lightTheme = createTheme('light', {
     colors: {
       primary,
-      ...buttonLightTheme,
+      ...getButtonLightTheme(primaryColor),
       ...cardLightTheme,
     },
   });
@@ -413,3 +419,4 @@ export const customColors = (primary: string) => {
     light: lightTheme,
   };
 };
+

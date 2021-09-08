@@ -45,7 +45,8 @@
     "@radix-ui/react-tooltip": "0.0.9",
     "@radix-ui/react-use-layout-effect": "^0.0.1",
     "@stitches/react": "1.0.0",
-    "lodash.merge": "^4.6.2"
+    "lodash.merge": "^4.6.2",
+    "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.4",

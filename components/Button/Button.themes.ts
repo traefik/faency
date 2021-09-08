@@ -1,14 +1,30 @@
-type ButtonTheme = {};
+import tinycolor from 'tinycolor2';
 
-export const light: ButtonTheme = {
+type ButtonTheme = {
+  buttonPrimaryBg: string;
+  buttonPrimaryHoverBg: string;
+  buttonPrimaryText: string;
+  buttonPrimaryGhostHoverText: string;
+  buttonSecondaryBg: string;
+  buttonSecondaryHoverBg: string;
+  buttonSecondaryText: string;
+  buttonSecondaryGhostHoverText: string;
+  buttonSecondaryGhostText: string;
+  buttonRedBg: string;
+  buttonRedHoverBg: string;
+  buttonRedText: string;
+};
+type ThemeGetter = (primaryColor: string) => ButtonTheme;
+
+export const getLight: ThemeGetter = (primaryColor) => ({
   buttonPrimaryBg: '$deepBlue11',
   buttonPrimaryHoverBg: '$deepBlue9',
   buttonPrimaryText: '$primary',
-  buttonPrimaryGhostHoverText: '$neon8',
-  buttonPrimaryGhostText: '$neon9',
+  buttonPrimaryGhostHoverText: '$primary',
+  buttonPrimaryGhostText: tinycolor(primaryColor).darken(10).toString(),
 
-  buttonSecondaryBg: '$deepBlue2',
-  buttonSecondaryHoverBg: '$deepBlue3',
+  buttonSecondaryBg: '$deepBlue3',
+  buttonSecondaryHoverBg: '$deepBlue4',
   buttonSecondaryText: '$hiContrast',
   buttonSecondaryGhostHoverText: '$deepBlue7',
   buttonSecondaryGhostText: '$deepBlue6',
@@ -16,14 +32,14 @@ export const light: ButtonTheme = {
   buttonRedBg: '$red9',
   buttonRedHoverBg: '$red10',
   buttonRedText: '$loContrast',
-};
+});
 
-export const dark: ButtonTheme = {
+export const getDark: ThemeGetter = (primaryColor) => ({
   buttonPrimaryBg: '$primary',
-  buttonPrimaryHoverBg: '$neon7',
+  buttonPrimaryHoverBg: tinycolor(primaryColor).lighten(10).toString(),
   buttonPrimaryText: '$deepBlue2',
-  buttonPrimaryGhostHoverText: '$neon8',
-  buttonPrimaryGhostText: '$neon7',
+  buttonPrimaryGhostHoverText: '$primary',
+  buttonPrimaryGhostText: tinycolor(primaryColor).lighten(10).toString(),
 
   buttonSecondaryBg: '$deepBlue4',
   buttonSecondaryHoverBg: '$deepBlue5',
@@ -34,4 +50,4 @@ export const dark: ButtonTheme = {
   buttonRedBg: '$red10',
   buttonRedHoverBg: '$red11',
   buttonRedText: '$hiContrast',
-};
+});
