@@ -1,6 +1,6 @@
-import {styled} from '../../stitches.config';
-import {VariantProps} from "@stitches/react";
-import {modifyVariantsForStory} from "../../utils/modifyVariantsForStory";
+import { styled } from '../../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const Badge = styled('span', {
   // Reset
@@ -22,7 +22,7 @@ export const Badge = styled('span', {
   borderRadius: '5px',
   whiteSpace: 'nowrap',
   fontVariantNumeric: 'tabular-nums',
-  position: "relative",
+  position: 'relative',
 
   '&:disabled': {
     backgroundColor: '$slate3',
@@ -33,25 +33,12 @@ export const Badge = styled('span', {
   variants: {
     interactive: {
       true: {
-        '&:focus': {
-          '&::after': {
-            boxSizing: 'border-box',
-            content: '""',
-            position: 'absolute',
-            zIndex: 1,
-            top: '-1px',
-            right: '-1px',
-            bottom: '-1px',
-            left: '-1px',
-            display: 'block',
-            pointerEvents: 'none',
-            boxShadow: '0 0 0 1px $colors$focusOutline',
-            transition: 'box-shadow .1s ease-in-out',
-            borderRadius: '4px',
-          },
+        '&:focus-visible': {
+          boxShadow: '0 0 0 1px $colors$focusOutline',
         },
-        "&:hover": {
-          "&::before": {
+        '&:hover': {
+          cursor: 'pointer',
+          '&::before': {
             backgroundColor: '$badgeInteractiveBackground',
             boxSizing: 'border-box',
             content: '""',
@@ -61,10 +48,9 @@ export const Badge = styled('span', {
             bottom: 0,
             left: 0,
             borderRadius: '5px',
-            cursor: 'pointer',
-          }
-        }
-      }
+          },
+        },
+      },
     },
     size: {
       small: {
@@ -78,7 +64,7 @@ export const Badge = styled('span', {
         fontWeight: '300',
         px: '$3',
         py: '$2',
-      }
+      },
     },
     color: {
       gray: {
@@ -103,33 +89,52 @@ export const Badge = styled('span', {
       },
       orange: {
         backgroundColor: '$amber6',
-        color: '$amber10'
-      }
+        color: '$amber10',
+      },
     },
   },
   compoundVariants: [
     {
       interactive: true,
       color: 'gray',
-      css: {'&:focus': {'&::after': {boxShadow: '0 0 0 1px $colors$badgeDefaultText'}}}
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$badgeDefaultText' } },
     },
-    {interactive: true, color: 'red', css: {'&:focus': {'&::after': {boxShadow: '0 0 0 1px $colors$red10'}}}},
-    {interactive: true, color: 'blue', css: {'&:focus': {'&::after': {boxShadow: '0 0 0 1px $colors$blue9'}}}},
-    {interactive: true, color: 'green', css: {'&:focus': {'&::after': {boxShadow: '0 0 0 1px $colors$grass10'}}}},
-    {interactive: true, color: 'neon', css: {'&:focus': {'&::after': {boxShadow: '0 0 0 1px $colors$badgeNeonText'}}}},
-    {interactive: true, color: 'orange', css: {'&:focus': {'&::after': {boxShadow: '0 0 0 1px $colors$amber10'}}}}
+    {
+      interactive: true,
+      color: 'red',
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$red10' } },
+    },
+    {
+      interactive: true,
+      color: 'blue',
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$blue9' } },
+    },
+    {
+      interactive: true,
+      color: 'green',
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$grass10' } },
+    },
+    {
+      interactive: true,
+      color: 'neon',
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$badgeNeonText' } },
+    },
+    {
+      interactive: true,
+      color: 'orange',
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$amber10' } },
+    },
   ],
   defaultVariants: {
     size: 'small',
     interactive: false,
     color: 'gray',
-  }
+  },
 });
 
 type BadgeVariants = VariantProps<typeof Badge>;
 
-export interface BadgeProps extends BadgeVariants {
-}
+export interface BadgeProps extends BadgeVariants {}
 
 const BaseBadge = (props: BadgeProps): JSX.Element => <Badge {...props} />;
 export const BadgeForStory = modifyVariantsForStory<BadgeVariants, BadgeProps>(BaseBadge);

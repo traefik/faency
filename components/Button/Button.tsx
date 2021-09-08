@@ -42,7 +42,7 @@ export const Button = styled('button', {
     opacity: 0.5,
   },
 
-  '&:focus': {
+  '&:focus-visible': {
     '&::after': {
       boxSizing: 'border-box',
       content: '""',
@@ -57,12 +57,6 @@ export const Button = styled('button', {
       boxShadow: '0 0 0 2px $colors$focusOutline',
       transition: 'box-shadow .1s ease-in-out',
       borderRadius: '$3',
-    },
-  },
-
-  '&:active': {
-    '&::after': {
-      boxShadow: 'none',
     },
   },
 
@@ -130,11 +124,6 @@ export const Button = styled('button', {
         },
         '&:active': {
           backgroundColor: '$deepBlue5',
-        },
-        '&:focus': {
-          '&::after': {
-            boxShadow: 'none',
-          },
         },
       },
       waiting: {
@@ -224,22 +213,6 @@ export const Button = styled('button', {
             color: '$buttonRedHoverBg',
             backgroundColor: 'transparent',
           },
-        },
-      },
-    },
-    {
-      variant: 'red',
-      state: 'active',
-      css: {
-        backgroundColor: '$deepBlue5',
-        color: '$deepBlue11',
-        '@hover': {
-          '&:hover': {
-            backgroundColor: '$deepBlue5',
-          },
-        },
-        '&:active': {
-          backgroundColor: '$deepBlue5',
         },
       },
     },
