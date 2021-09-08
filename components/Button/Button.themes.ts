@@ -1,53 +1,56 @@
-import tinycolor from 'tinycolor2';
+import tinycolor from "tinycolor2";
 
-type ButtonTheme = {
-  buttonPrimaryBg: string;
-  buttonPrimaryHoverBg: string;
-  buttonPrimaryText: string;
-  buttonPrimaryGhostHoverText: string;
-  buttonSecondaryBg: string;
-  buttonSecondaryHoverBg: string;
-  buttonSecondaryText: string;
-  buttonSecondaryGhostHoverText: string;
-  buttonSecondaryGhostText: string;
-  buttonRedBg: string;
-  buttonRedHoverBg: string;
-  buttonRedText: string;
-};
-type ThemeGetter = (primaryColor: string) => ButtonTheme;
+export namespace Theme {
+  type Colors = {
+    buttonPrimaryBg: string;
+    buttonPrimaryHoverBg: string;
+    buttonPrimaryText: string;
+    buttonPrimaryGhostHoverText: string;
+    buttonSecondaryBg: string;
+    buttonSecondaryHoverBg: string;
+    buttonSecondaryText: string;
+    buttonSecondaryGhostHoverText: string;
+    buttonSecondaryGhostText: string;
+    buttonRedBg: string;
+    buttonRedHoverBg: string;
+    buttonRedText: string;
+  };
 
-export const getLight: ThemeGetter = (primaryColor) => ({
-  buttonPrimaryBg: '$deepBlue11',
-  buttonPrimaryHoverBg: '$deepBlue9',
-  buttonPrimaryText: '$primary',
-  buttonPrimaryGhostHoverText: '$primary',
-  buttonPrimaryGhostText: tinycolor(primaryColor).darken(10).toString(),
+  type Factory = (primaryColor: string) => Colors;
 
-  buttonSecondaryBg: '$deepBlue3',
-  buttonSecondaryHoverBg: '$deepBlue4',
-  buttonSecondaryText: '$hiContrast',
-  buttonSecondaryGhostHoverText: '$deepBlue7',
-  buttonSecondaryGhostText: '$deepBlue6',
+  export const getLight: Factory = (primaryColor) => ({
+    buttonPrimaryBg: '$deepBlue11',
+    buttonPrimaryHoverBg: '$deepBlue9',
+    buttonPrimaryText: '$primary',
+    buttonPrimaryGhostHoverText: '$primary',
+    buttonPrimaryGhostText: tinycolor(primaryColor).darken(10).toString(),
 
-  buttonRedBg: '$red9',
-  buttonRedHoverBg: '$red10',
-  buttonRedText: '$loContrast',
-});
+    buttonSecondaryBg: '$deepBlue3',
+    buttonSecondaryHoverBg: '$deepBlue4',
+    buttonSecondaryText: '$hiContrast',
+    buttonSecondaryGhostHoverText: '$deepBlue7',
+    buttonSecondaryGhostText: '$deepBlue6',
 
-export const getDark: ThemeGetter = (primaryColor) => ({
-  buttonPrimaryBg: '$primary',
-  buttonPrimaryHoverBg: tinycolor(primaryColor).lighten(10).toString(),
-  buttonPrimaryText: '$deepBlue2',
-  buttonPrimaryGhostHoverText: '$primary',
-  buttonPrimaryGhostText: tinycolor(primaryColor).lighten(10).toString(),
+    buttonRedBg: '$red9',
+    buttonRedHoverBg: '$red10',
+    buttonRedText: '$loContrast',
+  });
 
-  buttonSecondaryBg: '$deepBlue4',
-  buttonSecondaryHoverBg: '$deepBlue5',
-  buttonSecondaryText: '$hiContrast',
-  buttonSecondaryGhostHoverText: '$deepBlue6',
-  buttonSecondaryGhostText: '$deepBlue7',
+  export const getDark: Factory = (primaryColor) => ({
+    buttonPrimaryBg: '$primary',
+    buttonPrimaryHoverBg: tinycolor(primaryColor).lighten(10).toString(),
+    buttonPrimaryText: '$deepBlue2',
+    buttonPrimaryGhostHoverText: '$primary',
+    buttonPrimaryGhostText: tinycolor(primaryColor).lighten(10).toString(),
 
-  buttonRedBg: '$red10',
-  buttonRedHoverBg: '$red11',
-  buttonRedText: '$hiContrast',
-});
+    buttonSecondaryBg: '$deepBlue4',
+    buttonSecondaryHoverBg: '$deepBlue5',
+    buttonSecondaryText: '$hiContrast',
+    buttonSecondaryGhostHoverText: '$deepBlue6',
+    buttonSecondaryGhostText: '$deepBlue7',
+
+    buttonRedBg: '$red10',
+    buttonRedHoverBg: '$red11',
+    buttonRedText: '$hiContrast',
+  });
+}

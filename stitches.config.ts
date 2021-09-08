@@ -1,36 +1,34 @@
-import { createStitches, CSS as StitchesCSS } from '@stitches/react';
-import {
-  gray,
-  slate,
-  blue,
-  green,
-  grayA,
-  slateA,
-  redA,
-  blueA,
-  greenA,
-  orangeA,
-  whiteA,
-  blackA,
-  grayDark,
-  slateDark,
-  blueDark,
-  greenDark,
-  grayDarkA,
-  slateDarkA,
-  redDarkA,
-  blueDarkA,
-  greenDarkA,
-  orangeDarkA,
-} from '@radix-ui/colors';
 import type * as Stitches from '@stitches/react';
-export type { VariantProps } from '@stitches/react';
+import {createStitches, CSS as StitchesCSS} from '@stitches/react';
 import {
-  getDark as getButtonDarkTheme,
-  getLight as getButtonLightTheme,
-} from './components/Button/Button.themes';
-import { dark as cardDarkTheme, light as cardLightTheme } from './components/Card/Card.themes';
-import { getColorFromToken } from './utils/getColorFromToken';
+  blackA,
+  blue,
+  blueA,
+  blueDark,
+  blueDarkA,
+  gray,
+  grayA,
+  grayDark,
+  grayDarkA,
+  green,
+  greenA,
+  greenDark,
+  greenDarkA,
+  orangeA,
+  orangeDarkA,
+  redA,
+  redDarkA,
+  slate,
+  slateA,
+  slateDark,
+  slateDarkA,
+  whiteA,
+} from '@radix-ui/colors';
+import {getColorFromToken} from './utils/getColorFromToken';
+import {Theme as ButtonTheme} from './components/Button/Button.themes';
+import {Theme as CardTheme} from './components/Card/Card.themes';
+
+export type {VariantProps} from '@stitches/react';
 
 const red = {
   red1: 'hsl(359 100% 99.0%)',
@@ -186,8 +184,8 @@ const stitches = createStitches({
   theme: {
     colors: {
       ...colors,
-      ...getButtonLightTheme(primaryColor),
-      ...cardLightTheme,
+      ...ButtonTheme.getLight(primaryColor),
+      ...CardTheme.light,
     },
     fonts: {
       rubik:
@@ -302,18 +300,18 @@ const stitches = createStitches({
       marginBottom: value,
     }),
 
-    ta: (value: Stitches.PropertyValue<'textAlign'>) => ({ textAlign: value }),
+    ta: (value: Stitches.PropertyValue<'textAlign'>) => ({textAlign: value}),
 
-    fd: (value: Stitches.PropertyValue<'flexDirection'>) => ({ flexDirection: value }),
-    fw: (value: Stitches.PropertyValue<'flexWrap'>) => ({ flexWrap: value }),
+    fd: (value: Stitches.PropertyValue<'flexDirection'>) => ({flexDirection: value}),
+    fw: (value: Stitches.PropertyValue<'flexWrap'>) => ({flexWrap: value}),
 
-    ai: (value: Stitches.PropertyValue<'alignItems'>) => ({ alignItems: value }),
-    ac: (value: Stitches.PropertyValue<'alignContent'>) => ({ alignContent: value }),
-    jc: (value: Stitches.PropertyValue<'justifyContent'>) => ({ justifyContent: value }),
-    as: (value: Stitches.PropertyValue<'alignSelf'>) => ({ alignSelf: value }),
-    fg: (value: Stitches.PropertyValue<'flexGrow'>) => ({ flexGrow: value }),
-    fs: (value: Stitches.PropertyValue<'flexShrink'>) => ({ flexShrink: value }),
-    fb: (value: Stitches.PropertyValue<'flexBasis'>) => ({ flexBasis: value }),
+    ai: (value: Stitches.PropertyValue<'alignItems'>) => ({alignItems: value}),
+    ac: (value: Stitches.PropertyValue<'alignContent'>) => ({alignContent: value}),
+    jc: (value: Stitches.PropertyValue<'justifyContent'>) => ({justifyContent: value}),
+    as: (value: Stitches.PropertyValue<'alignSelf'>) => ({alignSelf: value}),
+    fg: (value: Stitches.PropertyValue<'flexGrow'>) => ({flexGrow: value}),
+    fs: (value: Stitches.PropertyValue<'flexShrink'>) => ({flexShrink: value}),
+    fb: (value: Stitches.PropertyValue<'flexBasis'>) => ({flexBasis: value}),
 
     bc: (value: Stitches.PropertyValue<'backgroundColor'>) => ({
       backgroundColor: value,
@@ -335,14 +333,14 @@ const stitches = createStitches({
       borderTopLeftRadius: value,
     }),
 
-    bs: (value: Stitches.PropertyValue<'boxShadow'>) => ({ boxShadow: value }),
+    bs: (value: Stitches.PropertyValue<'boxShadow'>) => ({boxShadow: value}),
 
-    lh: (value: Stitches.PropertyValue<'lineHeight'>) => ({ lineHeight: value }),
+    lh: (value: Stitches.PropertyValue<'lineHeight'>) => ({lineHeight: value}),
 
-    ox: (value: Stitches.PropertyValue<'overflowX'>) => ({ overflowX: value }),
-    oy: (value: Stitches.PropertyValue<'overflowY'>) => ({ overflowY: value }),
+    ox: (value: Stitches.PropertyValue<'overflowX'>) => ({overflowX: value}),
+    oy: (value: Stitches.PropertyValue<'overflowY'>) => ({overflowY: value}),
 
-    pe: (value: Stitches.PropertyValue<'pointerEvents'>) => ({ pointerEvents: value }),
+    pe: (value: Stitches.PropertyValue<'pointerEvents'>) => ({pointerEvents: value}),
     us: (value: Stitches.PropertyValue<'userSelect'>) => ({
       WebkitUserSelect: value,
       userSelect: value,
@@ -371,7 +369,7 @@ const stitches = createStitches({
 
 export type CSS = StitchesCSS<typeof stitches.config>;
 
-export const { styled, css, createTheme, getCssText, globalCss, keyframes, config } = stitches;
+export const {styled, css, createTheme, getCssText, globalCss, keyframes, config} = stitches;
 
 export const utils = config.utils;
 
@@ -401,16 +399,16 @@ export const customColors = (primary: string) => {
       hiContrast: 'white',
       loContrast: '$deepBlue2',
 
-      ...getButtonDarkTheme(primaryColor),
-      ...cardDarkTheme,
+      ...ButtonTheme.getDark(primaryColor),
+      ...CardTheme.dark,
     },
   });
 
   const lightTheme = createTheme('light', {
     colors: {
       primary,
-      ...getButtonLightTheme(primaryColor),
-      ...cardLightTheme,
+      ...ButtonTheme.getLight(primaryColor),
+      ...CardTheme.light,
     },
   });
 
