@@ -185,7 +185,7 @@ const stitches = createStitches({
     colors: {
       ...colors,
       ...ButtonTheme.getLight(primaryColor),
-      ...CardTheme.light,
+      ...CardTheme.getLight(primaryColor),
     },
     fonts: {
       rubik:
@@ -400,7 +400,7 @@ export const customColors = (primary: string) => {
       loContrast: '$deepBlue2',
 
       ...ButtonTheme.getDark(primaryColor),
-      ...CardTheme.dark,
+      ...CardTheme.getDark(primaryColor),
     },
   });
 
@@ -408,7 +408,7 @@ export const customColors = (primary: string) => {
     colors: {
       primary,
       ...ButtonTheme.getLight(primaryColor),
-      ...CardTheme.light,
+      ...CardTheme.getLight(primaryColor),
     },
   });
 
