@@ -1,11 +1,13 @@
-import { styled } from '../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { styled } from '../../stitches.config';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const TextField = styled('input', {
   // Reset
   appearance: 'none',
   borderWidth: '0',
   boxSizing: 'border-box',
-  fontFamily: 'inherit',
+  fontFamily: '$rubik',
   margin: '0',
   outline: 'none',
   padding: '0',
@@ -19,8 +21,8 @@ export const TextField = styled('input', {
   },
 
   // Custom
-  backgroundColor: '$loContrast',
-  boxShadow: 'inset 0 0 0 1px $colors$slate7',
+  backgroundColor: '$textFieldBg',
+  boxShadow: 'inset 0 0 0 1px $colors$textFieldBorder',
   color: '$hiContrast',
   fontVariantNumeric: 'tabular-nums',
 
@@ -61,7 +63,7 @@ export const TextField = styled('input', {
 
   variants: {
     size: {
-      '1': {
+      small: {
         borderRadius: '$1',
         height: '$5',
         fontSize: '$1',
@@ -71,12 +73,22 @@ export const TextField = styled('input', {
           fontSize: '$1',
         },
       },
-      '2': {
+      medium: {
         borderRadius: '$2',
-        height: '$6',
+        height: '$7',
         fontSize: '$3',
         px: '$2',
-        lineHeight: '$sizes$6',
+        lineHeight: '$sizes$7',
+        '&:-webkit-autofill::first-line': {
+          fontSize: '$3',
+        },
+      },
+      large: {
+        borderRadius: '$2',
+        height: '$8',
+        fontSize: '$3',
+        px: '$2',
+        lineHeight: '$sizes$8',
         '&:-webkit-autofill::first-line': {
           fontSize: '$3',
         },
@@ -130,6 +142,14 @@ export const TextField = styled('input', {
     },
   },
   defaultVariants: {
-    size: '1',
+    size: 'medium',
   },
 });
+
+type TextFieldVariants = VariantProps<typeof TextField>;
+export interface TextFieldProps extends TextFieldVariants {}
+const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
+export const TextFieldForStory = modifyVariantsForStory<
+  TextFieldVariants,
+  TextFieldProps & React.InputHTMLAttributes<any>
+>(BaseTextField);
