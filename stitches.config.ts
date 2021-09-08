@@ -23,10 +23,14 @@ import {
   slateDark,
   slateDarkA,
   whiteA,
+  amber,
+  amberDark,
+  grass, grassDark,
 } from '@radix-ui/colors';
 import {getColorFromToken} from './utils/getColorFromToken';
 import {Theme as ButtonTheme} from './components/Button/Button.themes';
 import {Theme as CardTheme} from './components/Card/Card.themes';
+import {Theme as BadgeTheme} from './components/Badge/Badge.themes';
 
 export type {VariantProps} from '@stitches/react';
 
@@ -161,6 +165,8 @@ const colors = {
   ...slate,
   ...neon,
   ...deepBlue,
+  ...amber,
+  ...grass,
 
   ...grayA,
   ...redA,
@@ -187,6 +193,7 @@ const stitches = createStitches({
       ...colors,
       ...ButtonTheme.getLight(primaryColor),
       ...CardTheme.getLight(primaryColor),
+      ...BadgeTheme.getLight(primaryColor),
     },
     fonts: {
       rubik:
@@ -386,6 +393,8 @@ export const customColors = (primary: string) => {
       ...slateDark,
       ...neonDark,
       ...deepBlueDark,
+      ...amberDark,
+      ...grassDark,
 
       ...grayDarkA,
       ...redDarkA,
@@ -402,6 +411,7 @@ export const customColors = (primary: string) => {
 
       ...ButtonTheme.getDark(primaryColor),
       ...CardTheme.getDark(primaryColor),
+      ...BadgeTheme.getDark(primaryColor),
     },
   });
 
@@ -410,6 +420,7 @@ export const customColors = (primary: string) => {
       primary,
       ...ButtonTheme.getLight(primaryColor),
       ...CardTheme.getLight(primaryColor),
+      ...BadgeTheme.getLight(primaryColor),
     },
   });
 

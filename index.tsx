@@ -10,7 +10,7 @@ export {
 } from './components/AlertDialog';
 export { Avatar, AvatarGroup, AvatarNestedItem } from './components/Avatar';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
-export { Badge } from './components/Badge';
+export { Badge } from './components/Badge/Badge';
 export { Box } from './components/Box';
 export { Button } from './components/Button';
 export { Card } from './components/Card';
