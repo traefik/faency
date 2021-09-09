@@ -27,6 +27,8 @@ import {
   amberDark,
   grass,
   grassDark,
+  purple,
+  purpleDark
 } from '@radix-ui/colors';
 import { getColorFromToken } from './utils/getColorFromToken';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
@@ -170,6 +172,7 @@ const colors = {
   ...deepBlue,
   ...amber,
   ...grass,
+  ...purple,
 
   ...grayA,
   ...redA,
@@ -401,6 +404,7 @@ export const customColors = (primary: string) => {
       ...deepBlueDark,
       ...amberDark,
       ...grassDark,
+      ...purpleDark,
 
       ...grayDarkA,
       ...redDarkA,
