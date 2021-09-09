@@ -1,8 +1,6 @@
 import React from 'react';
-import { Badge } from '../../components/Badge';
-import { TextField } from '../../components/TextField';
 
-import { Box, Button, Card, Flex, Heading, Text } from '../../index';
+import { Badge, Box, Button, Card, Flex, Heading, Text, TextField } from '../../index';
 
 export const Dashboard = () => (
   <Box css={{ p: '$6' }}>

@@ -28,12 +28,13 @@ import {
   grass,
   grassDark,
   purple,
-  purpleDark
+  purpleDark,
 } from '@radix-ui/colors';
 import { getColorFromToken } from './utils/getColorFromToken';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
+import { Theme as TextTheme } from './components/Text/Text.themes';
 import { Theme as TextFieldTheme } from './components/TextField/TextField.themes';
 import { Theme as TableTheme } from './components/Table/Table.themes';
 
@@ -202,6 +203,7 @@ const stitches = createStitches({
       ...BadgeTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
+      ...TextTheme.getLight(primaryColor),
     },
     fonts: {
       rubik:
@@ -231,6 +233,7 @@ const stitches = createStitches({
       10: '80px',
     },
     fontSizes: {
+      0: '11px',
       1: '12px',
       2: '13px',
       3: '14px',
@@ -241,6 +244,8 @@ const stitches = createStitches({
       8: '24px',
       9: '26px',
       10: '28px',
+      11: '32px',
+      12: '38px',
     },
     radii: {
       1: '4px',
@@ -424,6 +429,7 @@ export const customColors = (primary: string) => {
       ...BadgeTheme.getDark(primaryColor),
       ...TextFieldTheme.getDark(primaryColor),
       ...TableTheme.getDark(primaryColor),
+      ...TextTheme.getDark(primaryColor),
     },
   });
 
@@ -435,6 +441,7 @@ export const customColors = (primary: string) => {
       ...BadgeTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
+      ...TextTheme.getLight(primaryColor),
     },
   });
 
