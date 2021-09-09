@@ -8,26 +8,26 @@ export default {
   component: BadgeForStory,
   argTypes: {
     size: { control: 'inline-radio' },
-    color: { control: 'select' },
+    variant: { control: 'select' },
   },
 } as ComponentMeta<typeof BadgeForStory>;
 
 export const Colors: ComponentStory<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Badge {...args}>Default</Badge>
-    <Badge {...args} color="red">
+    <Badge {...args} variant="red">
       Red
     </Badge>
-    <Badge {...args} color="green">
+    <Badge {...args} variant="green">
       Green
     </Badge>
-    <Badge {...args} color="blue">
+    <Badge {...args} variant="blue">
       Blue
     </Badge>
-    <Badge {...args} color="neon">
+    <Badge {...args} variant="neon">
       Neon
     </Badge>
-    <Badge {...args} color="orange">
+    <Badge {...args} variant="orange">
       Orange
     </Badge>
   </Flex>
@@ -36,7 +36,7 @@ export const Colors: ComponentStory<typeof BadgeForStory> = (args) => (
 Colors.args = {
   interactive: false,
   size: 'small',
-  color: 'gray',
+  variant: 'gray',
 };
 
 export const Small: ComponentStory<typeof BadgeForStory> = (args) => (
@@ -46,7 +46,7 @@ export const Small: ComponentStory<typeof BadgeForStory> = (args) => (
 Small.args = {
   interactive: false,
   size: 'small',
-  color: 'blue',
+  variant: 'blue',
 };
 
 export const Large: ComponentStory<typeof BadgeForStory> = (args) => (
@@ -56,7 +56,7 @@ export const Large: ComponentStory<typeof BadgeForStory> = (args) => (
 Large.args = {
   interactive: false,
   size: 'large',
-  color: 'green',
+  variant: 'green',
 };
 
 export const Interactive: ComponentStory<typeof BadgeForStory> = (args) => (
@@ -64,19 +64,19 @@ export const Interactive: ComponentStory<typeof BadgeForStory> = (args) => (
     <Badge as="button" {...args}>
       Default
     </Badge>
-    <Badge as="button" {...args} color="red">
+    <Badge as="button" {...args} variant="red">
       Red
     </Badge>
-    <Badge as="button" {...args} color="green">
+    <Badge as="button" {...args} variant="green">
       Green
     </Badge>
-    <Badge as="button" {...args} color="blue">
+    <Badge as="button" {...args} variant="blue">
       Blue
     </Badge>
-    <Badge as="button" {...args} color="neon">
+    <Badge as="button" {...args} variant="neon">
       Neon
     </Badge>
-    <Badge as="button" {...args} color="orange">
+    <Badge as="button" {...args} variant="orange">
       Orange
     </Badge>
   </Flex>
@@ -85,5 +85,5 @@ export const Interactive: ComponentStory<typeof BadgeForStory> = (args) => (
 Interactive.args = {
   interactive: true,
   size: 'small',
-  color: 'gray',
+  variant: 'gray',
 };

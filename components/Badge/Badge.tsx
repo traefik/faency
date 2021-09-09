@@ -54,19 +54,19 @@ export const Badge = styled('span', {
     },
     size: {
       small: {
+        height: '$4',
+        px: '$2',
         fontSize: '$2',
         fontWeight: '300',
-        px: '$2',
-        py: '$1',
       },
       large: {
+        height: '$5',
+        px: '$3',
         fontSize: '$3',
         fontWeight: '300',
-        px: '$3',
-        py: '$2',
       },
     },
-    color: {
+    variant: {
       gray: {
         backgroundColor: '$badgeDefaultBackground',
         color: '$badgeDefaultText',
@@ -128,7 +128,7 @@ export const Badge = styled('span', {
   defaultVariants: {
     size: 'small',
     interactive: false,
-    color: 'gray',
+    variant: 'gray',
   },
 });
 
