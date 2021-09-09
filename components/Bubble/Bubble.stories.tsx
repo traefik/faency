@@ -16,16 +16,19 @@ export const Colors: ComponentStory<typeof BubbleForStory> = (args) => (
     <Bubble {...args} variant="blue"/>
     <Bubble {...args} variant="yellow"/>
     <Bubble {...args} variant="purple"/>
+    <Bubble {...args} variant="gray"/>
   </Flex>
 );
 
 Colors.args = {
   size: "small",
+  noAnimation: false,
 }
 
 Colors.argTypes = {
   size: {
     control: "inline-radio",
+    options: ["x-small", "small", "medium", "large"]
   },
   variant: {
     control: true
@@ -46,7 +49,8 @@ Sizes.args = {
 
 Sizes.argTypes = {
   size: {
-    control: false
+    control: false,
+    noAnimation: false,
   },
   variant: {
     control: "select",
