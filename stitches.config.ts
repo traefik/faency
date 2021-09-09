@@ -33,6 +33,7 @@ import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as TextFieldTheme } from './components/TextField/TextField.themes';
+import { Theme as TableTheme } from './components/Table/Table.themes';
 
 export type { VariantProps } from '@stitches/react';
 
@@ -197,6 +198,7 @@ const stitches = createStitches({
       ...CardTheme.getLight(primaryColor),
       ...BadgeTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),
+      ...TableTheme.getLight(primaryColor),
     },
     fonts: {
       rubik:
@@ -417,6 +419,7 @@ export const customColors = (primary: string) => {
       ...CardTheme.getDark(primaryColor),
       ...BadgeTheme.getDark(primaryColor),
       ...TextFieldTheme.getDark(primaryColor),
+      ...TableTheme.getDark(primaryColor),
     },
   });
 
@@ -427,6 +430,7 @@ export const customColors = (primary: string) => {
       ...CardTheme.getLight(primaryColor),
       ...BadgeTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),
+      ...TableTheme.getLight(primaryColor),
     },
   });
 

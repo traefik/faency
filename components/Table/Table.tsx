@@ -1,0 +1,122 @@
+import React from 'react';
+import {styled, VariantProps} from '../../stitches.config';
+import {modifyVariantsForStory} from "../../utils/modifyVariantsForStory";
+
+export const Caption = styled('caption', {
+  textAlign: 'start',
+  marginBottom: '$5',
+});
+
+export const Tbody = styled('tbody', {
+  width: '100%',
+});
+
+export const Tfoot = styled('tfoot', {});
+
+export const Tr = styled('tr', {
+  variants: {
+    interactive: {
+      true: {
+        '&:hover': {
+          backgroundColor: '$tableHoverBackground',
+          cursor: 'pointer'
+        }
+      }
+    },
+    active: {
+      true: {
+        backgroundColor: '$tableHoverBackground',
+        color: '$tableActiveText',
+      }
+    }
+  },
+  compoundVariants: [
+    {
+      interactive: true,
+      active: true,
+      css: {
+        '&:hover': {
+          color: '$tableActiveHoverText'
+        }
+      }
+    }
+  ]
+});
+
+export const Th = styled('th', {
+  fontWeight: 'unset',
+  textAlign: 'start',
+  fontSize: '$2',
+  pt: '$2',
+  pb: '$3',
+  borderBottom: '1px solid $deepBlue3',
+  variants: {
+    align: {
+      start: {
+        textAlign: 'start',
+      },
+      center: {
+        textAlign: 'center',
+      },
+      end: {
+        textAlign: 'end',
+      },
+    },
+  },
+  defaultVariants: {
+    align: 'start',
+  },
+});
+
+export const Td = styled('td', {
+  py: '$2',
+  borderBottom: '1px solid $deepBlue3',
+  fontSize: '$2',
+  variants: {
+    align: {
+      start: {
+        textAlign: 'start',
+      },
+      center: {
+        textAlign: 'center',
+      },
+      end: {
+        textAlign: 'end',
+      },
+    },
+  },
+  defaultVariants: {
+    align: 'start',
+  },
+});
+
+export const Thead = styled('thead', {
+  [`& ${Th}`]: {
+    fontSize: '$1',
+    color: '$deepBlue6',
+    textTransform: 'uppercase',
+    fontWeight: '300',
+  },
+  [`& ${Td}`]: {
+    fontSize: '$1',
+    color: '$deepBlue6',
+    textTransform: 'uppercase',
+    fontWeight: '300',
+  },
+});
+
+export const Table = styled("table", {
+  width: '100%',
+  tableLayout: 'fixed',
+  borderSpacing: 0,
+  fontFamily: '$rubik',
+  color: '$tableText',
+});
+
+type TableVariants = VariantProps<typeof Table>;
+
+export interface TableProps extends TableVariants {
+}
+
+const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
+export const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);

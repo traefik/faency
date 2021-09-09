@@ -71,7 +71,7 @@ export { Status } from './components/Status';
 export { Sup } from './components/Sup';
 export { Sub } from './components/Sub';
 export { Switch } from './components/Switch';
-export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Table';
+export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Table/Table';
 export { TabLink } from './components/TabLink';
 export { Tabs, TabsList, TabsPanel, TabsTab } from './components/Tabs';
 export { Text } from './components/Text';
