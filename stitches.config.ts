@@ -128,11 +128,11 @@ const neonDark = {
 
 export const deepBlue = {
   deepBlue1: 'hsl(180, 9%, 98%)',
-  deepBlue2: 'hsl(180, 7%, 92%)',
-  deepBlue3: 'hsl(183 8% 85%)',
-  deepBlue4: 'hsl(187 8% 76%)',
-  deepBlue5: 'hsl(192 9% 65%)',
-  deepBlue6: 'hsl(197 10% 51%)',
+  deepBlue2: 'hsl(210, 10%, 96%)',
+  deepBlue3: 'hsl(204, 11%, 91%)',
+  deepBlue4: 'hsl(207, 10%, 82%)',
+  deepBlue5: 'hsl(208, 9%, 73%)',
+  deepBlue6: 'hsl(208, 9%, 64%)',
   deepBlue7: 'hsl(208, 11%, 45%)',
   deepBlue8: 'hsl(208, 16%, 36%)',
   deepBlue9: 'hsl(208, 24%, 27%)',
@@ -143,11 +143,11 @@ export const deepBlue = {
 
 export const deepBlueDark = {
   deepBlue12: 'hsl(180, 9%, 98%)',
-  deepBlue11: 'hsl(180 7% 92%)',
-  deepBlue10: 'hsl(183 8% 85%)',
-  deepBlue9: 'hsl(187 8% 76%)',
-  deepBlue8: 'hsl(192 9% 65%)',
-  deepBlue7: 'hsl(197 10% 51%)',
+  deepBlue11: 'hsl(210, 10%, 96%)',
+  deepBlue10: 'hsl(204, 11%, 91%)',
+  deepBlue9: 'hsl(207, 10%, 82%)',
+  deepBlue8: 'hsl(208, 9%, 73%)',
+  deepBlue7: 'hsl(208, 9%, 64%)',
   deepBlue6: 'hsl(208, 11%, 45%)',
   deepBlue5: 'hsl(208, 16%, 36%)',
   deepBlue4: 'hsl(208, 24%, 27%)',

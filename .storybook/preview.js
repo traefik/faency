@@ -14,7 +14,7 @@ export const parameters = {
   darkMode: {
     stylePreview: true,
     dark: { ...themes.dark, appContentBg: deepBlueDark.deepBlue1 },
-    light: { ...themes.light, appContentBg: deepBlue.deepBlue2 },
+    light: { ...themes.light, appContentBg: deepBlue.deepBlue1 },
   },
   docs: {
     container: DocsContainer,

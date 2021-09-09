@@ -21,13 +21,14 @@ export const TextField = styled('input', {
   },
 
   // Custom
+  position: 'relative',
   backgroundColor: '$textFieldBg',
-  boxShadow: 'inset 0 0 0 1px $colors$textFieldBorder',
-  color: '$hiContrast',
+  boxShadow: 'inset 0 0 0 2px $colors$textFieldBorder',
+  color: '$textFieldText',
   fontVariantNumeric: 'tabular-nums',
 
   '&:-webkit-autofill': {
-    boxShadow: 'inset 0 0 0 1px $colors$blue6, inset 0 0 0 100px $colors$blue3',
+    boxShadow: 'inset 0 0 0 2px $colors$textFieldBorder, inset 0 0 0 100px $colors$textFieldBg',
   },
 
   '&:-webkit-autofill::first-line': {
@@ -35,29 +36,42 @@ export const TextField = styled('input', {
     color: '$hiContrast',
   },
 
+  '&:hover': {
+    backgroundColor: '$textFieldHoverBg',
+  },
+
   '&:focus': {
-    boxShadow: 'inset 0px 0px 0px 1px $colors$blue8, 0px 0px 0px 1px $colors$blue8',
+    backgroundColor: '$textFieldFocusBg',
+  },
+
+  '&:focus-visible': {
+    backgroundColor: '$textFieldFocusBg',
+    boxShadow:
+      'inset 0px 0px 0px 1px $colors$textFieldFocusBorder, 0px 0px 0px 1px $colors$textFieldFocusBorder',
+    transition: 'box-shadow .1s ease-in-out',
     '&:-webkit-autofill': {
       boxShadow:
-        'inset 0px 0px 0px 1px $colors$blue8, 0px 0px 0px 1px $colors$blue8, inset 0 0 0 100px $colors$blue3',
+        'inset 0 0 0 2px $colors$textFieldFocusBorder, inset 0 0 0 100px $colors$textFieldBg',
     },
   },
   '&::placeholder': {
-    color: '$slate9',
+    color: '$textFieldPlaceholder',
   },
   '&:disabled': {
     pointerEvents: 'none',
-    backgroundColor: '$slate2',
-    color: '$slate8',
+    backgroundColor: 'textFieldDisabledBg',
+    boxShadow:
+      'inset 0px 0px 0px 1px $colors$textFieldDisabledBorder, 0px 0px 0px 1px $colors$textFieldDisabledBorder',
+    color: '$textFieldDisabledText',
     cursor: 'not-allowed',
     '&::placeholder': {
-      color: '$slate7',
+      color: '$textFieldDisabledText',
     },
   },
   '&:read-only': {
-    backgroundColor: '$slate2',
+    backgroundColor: '$textFieldReadOnlyBg',
     '&:focus': {
-      boxShadow: 'inset 0px 0px 0px 1px $colors$slate7',
+      boxShadow: 'inset 0px 0px 0px 2px $colors$textFieldBorder',
     },
   },
 
@@ -67,7 +81,7 @@ export const TextField = styled('input', {
         borderRadius: '$1',
         height: '$5',
         fontSize: '$1',
-        px: '$1',
+        px: '$2',
         lineHeight: '$sizes$5',
         '&:-webkit-autofill::first-line': {
           fontSize: '$1',
@@ -75,9 +89,9 @@ export const TextField = styled('input', {
       },
       medium: {
         borderRadius: '$2',
-        height: '$7',
+        height: '$6',
         fontSize: '$3',
-        px: '$2',
+        px: '$3',
         lineHeight: '$sizes$7',
         '&:-webkit-autofill::first-line': {
           fontSize: '$3',
@@ -85,9 +99,9 @@ export const TextField = styled('input', {
       },
       large: {
         borderRadius: '$2',
-        height: '$8',
+        height: '$7',
         fontSize: '$3',
-        px: '$2',
+        px: '$3',
         lineHeight: '$sizes$8',
         '&:-webkit-autofill::first-line': {
           fontSize: '$3',
@@ -117,13 +131,13 @@ export const TextField = styled('input', {
     },
     state: {
       invalid: {
-        boxShadow: 'inset 0 0 0 1px $colors$red7',
+        boxShadow: 'inset 0 0 0 2px $colors$red9',
         '&:focus': {
-          boxShadow: 'inset 0px 0px 0px 1px $colors$red8, 0px 0px 0px 1px $colors$red8',
+          boxShadow: 'inset 0px 0px 0px 1px $colors$red10, 0px 0px 0px 1px $colors$red10',
         },
       },
       valid: {
-        boxShadow: 'inset 0 0 0 1px $colors$green7',
+        boxShadow: 'inset 0 0 0 2px $colors$green7',
         '&:focus': {
           boxShadow: 'inset 0px 0px 0px 1px $colors$green8, 0px 0px 0px 1px $colors$green8',
         },
