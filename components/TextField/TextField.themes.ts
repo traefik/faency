@@ -7,7 +7,6 @@ export namespace Theme {
     textFieldHoverBg: string;
     textFieldText: string;
     textFieldPlaceholder: string;
-    textFieldDisabledBg: string;
     textFieldDisabledText: string;
     textFieldDisabledBorder: string;
     textFieldReadOnlyBg: string;
@@ -23,7 +22,6 @@ export namespace Theme {
     textFieldHoverBg: '$deepBlue2',
     textFieldText: '$deepBlue9',
     textFieldPlaceholder: '$deepBlue6',
-    textFieldDisabledBg: '$deepBlue1',
     textFieldDisabledText: '$deepBlue5',
     textFieldDisabledBorder: '$deepBlue5',
     textFieldReadOnlyBg: '$deepBlue3',
@@ -37,7 +35,6 @@ export namespace Theme {
     textFieldHoverBg: '$deepBlue1',
     textFieldText: '$deepBlue9',
     textFieldPlaceholder: '$deepBlue6',
-    textFieldDisabledBg: '$deepBlue2',
     textFieldDisabledText: '$deepBlue5',
     textFieldDisabledBorder: '$deepBlue4',
     textFieldReadOnlyBg: '$deepBlue2',

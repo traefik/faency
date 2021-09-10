@@ -47,17 +47,38 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, {
 
   borderRadius: '50%',
   color: '$hiContrast',
-  boxShadow: 'inset 0 0 0 1px $colors$slate7',
+  boxShadow: 'inset 0 0 0 1px $colors$radioBorder',
   overflow: 'hidden',
   '@hover': {
     '&:hover': {
-      boxShadow: 'inset 0 0 0 1px $colors$slate8',
+      boxShadow: 'inset 0 0 0 1px $colors$radioHoverBorder',
+      backgroundColor: '$radioHoverBg',
     },
   },
-  '&:focus': {
+  '&:focus-visible': {
     outline: 'none',
-    borderColor: '$red7',
-    boxShadow: 'inset 0 0 0 1px $colors$primary, 0 0 0 1px $colors$primary',
+    boxShadow: 'inset 0 0 0 1px $colors$radioFocusBorder, 0 0 0 1px $colors$radioFocusBorder',
+  },
+
+  '&:disabled': {
+    pointerEvents: 'none',
+    backgroundColor: '$radioDisabledBg',
+    '&::placeholder': {
+      color: '$radioDisabledText',
+    },
+
+    '@hover': {
+      '&:hover': {
+        boxShadow: 'inset 0 0 0 1px $colors$radioDisabledBorder',
+        backgroundColor: 'rgba(,,,0.1)',
+      },
+    },
+
+    [`& ${StyledIndicator}`]: {
+      '&::after': {
+        backgroundColor: '$radioIndicatorDisabledBg',
+      },
+    },
   },
 
   variants: {

@@ -6,18 +6,28 @@ import { RadioForStory, RadioGroupForStory } from './Radio';
 export default {
   title: 'Components/Radio',
   component: RadioForStory,
-  subcomponents: { RadioGroup: RadioGroupForStory },
 } as ComponentMeta<typeof RadioForStory>;
 
 const Template: ComponentStory<typeof RadioForStory> = ({ value, ...args }) => (
-  <RadioGroupForStory defaultValue="2">
-    <RadioForStory value="1" css={{ mr: '$5' }} />
-    <RadioForStory value="2" {...args} css={{ mr: '$5' }} />
+  <RadioGroupForStory defaultValue="1">
+    <RadioForStory value="1" css={{ mr: '$5' }} {...args} />
+    <RadioForStory value="2" css={{ mr: '$5' }} {...args} />
   </RadioGroupForStory>
 );
 
 export const Basic = Template.bind({});
 
-Basic.args = {
+Basic.args = {};
+
+export const Size = Template.bind({});
+
+Size.args = {
   size: '2',
+};
+
+export const Disabled = Template.bind({});
+
+Disabled.args = {
+  disabled: true,
+  size: 2,
 };

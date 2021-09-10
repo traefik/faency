@@ -59,11 +59,9 @@ export const TextField = styled('input', {
   },
   '&:disabled': {
     pointerEvents: 'none',
-    backgroundColor: 'textFieldDisabledBg',
     boxShadow:
       'inset 0px 0px 0px 1px $colors$textFieldDisabledBorder, 0px 0px 0px 1px $colors$textFieldDisabledBorder',
     color: '$textFieldDisabledText',
-    cursor: 'not-allowed',
     '&::placeholder': {
       color: '$textFieldDisabledText',
     },
