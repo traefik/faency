@@ -96,32 +96,32 @@ export const Badge = styled('span', {
   compoundVariants: [
     {
       interactive: true,
-      color: 'gray',
+      variant: 'gray',
       css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$badgeDefaultText' } },
     },
     {
       interactive: true,
-      color: 'red',
+      variant: 'red',
       css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$red10' } },
     },
     {
       interactive: true,
-      color: 'blue',
+      variant: 'blue',
       css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$blue9' } },
     },
     {
       interactive: true,
-      color: 'green',
+      variant: 'green',
       css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$grass10' } },
     },
     {
       interactive: true,
-      color: 'neon',
+      variant: 'neon',
       css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$badgeNeonText' } },
     },
     {
       interactive: true,
-      color: 'orange',
+      variant: 'orange',
       css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$amber10' } },
     },
   ],
