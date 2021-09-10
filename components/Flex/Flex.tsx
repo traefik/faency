@@ -1,4 +1,6 @@
-import { styled } from '../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { styled } from '../../stitches.config';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const Flex = styled('div', {
   boxSizing: 'border-box',
@@ -98,3 +100,11 @@ export const Flex = styled('div', {
     wrap: 'noWrap',
   },
 });
+
+type FlexVariants = VariantProps<typeof Flex>;
+export interface FlexProps extends FlexVariants {}
+const BaseFlex = (props: FlexProps): JSX.Element => <Flex {...props} />;
+export const FlexForStory = modifyVariantsForStory<
+  FlexVariants,
+  FlexProps & React.HTMLAttributes<any>
+>(BaseFlex);

@@ -1,4 +1,6 @@
-import { styled } from '../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { styled } from '../../stitches.config';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const Grid = styled('div', {
   boxSizing: 'border-box',
@@ -156,3 +158,11 @@ export const Grid = styled('div', {
     },
   },
 });
+
+type GridVariants = VariantProps<typeof Grid>;
+export interface GridProps extends GridVariants {}
+const BaseGrid = (props: GridProps): JSX.Element => <Grid {...props} />;
+export const GridForStory = modifyVariantsForStory<
+  GridVariants,
+  GridProps & React.HTMLAttributes<any>
+>(BaseGrid);
