@@ -1,6 +1,7 @@
 import React from 'react';
-import {styled, VariantProps} from '../../stitches.config';
-import {modifyVariantsForStory} from "../../utils/modifyVariantsForStory";
+import { styled, VariantProps } from '../../stitches.config';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Label } from '../Label';
 
 export const Caption = styled('caption', {
   textAlign: 'start',
@@ -19,16 +20,16 @@ export const Tr = styled('tr', {
       true: {
         '&:hover': {
           backgroundColor: '$tableHoverBackground',
-          cursor: 'pointer'
-        }
-      }
+          cursor: 'pointer',
+        },
+      },
     },
     active: {
       true: {
         backgroundColor: '$tableHoverBackground',
         color: '$tableActiveText',
-      }
-    }
+      },
+    },
   },
   compoundVariants: [
     {
@@ -36,17 +37,18 @@ export const Tr = styled('tr', {
       active: true,
       css: {
         '&:hover': {
-          color: '$tableActiveHoverText'
-        }
-      }
-    }
-  ]
+          color: '$tableActiveHoverText',
+        },
+      },
+    },
+  ],
 });
 
-export const Th = styled('th', {
-  fontWeight: 'unset',
+export const Th = styled('th', Label, {
+  // override Label
+  display: 'table-cell',
+
   textAlign: 'start',
-  fontSize: '$2',
   pt: '$2',
   pb: '$3',
   borderBottom: '1px solid $deepBlue3',
@@ -91,12 +93,6 @@ export const Td = styled('td', {
 });
 
 export const Thead = styled('thead', {
-  [`& ${Th}`]: {
-    fontSize: '$1',
-    color: '$deepBlue6',
-    textTransform: 'uppercase',
-    fontWeight: '300',
-  },
   [`& ${Td}`]: {
     fontSize: '$1',
     color: '$deepBlue6',
@@ -105,7 +101,7 @@ export const Thead = styled('thead', {
   },
 });
 
-export const Table = styled("table", {
+export const Table = styled('table', {
   width: '100%',
   tableLayout: 'fixed',
   borderSpacing: 0,
@@ -115,8 +111,7 @@ export const Table = styled("table", {
 
 type TableVariants = VariantProps<typeof Table>;
 
-export interface TableProps extends TableVariants {
-}
+export interface TableProps extends TableVariants {}
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 export const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
