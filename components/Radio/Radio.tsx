@@ -1,6 +1,7 @@
 import React from 'react';
-import { styled, CSS, VariantProps } from '../stitches.config';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import { styled, CSS, VariantProps } from '../../stitches.config';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const RadioGroup = styled(RadioGroupPrimitive.Root, {
   display: 'flex',
@@ -16,10 +17,10 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
   '&::after': {
     content: '""',
     display: 'block',
-    width: '7px',
-    height: '7px',
+    width: '8px',
+    height: '8px',
     borderRadius: '50%',
-    backgroundColor: '$blue9',
+    backgroundColor: '$primary',
   },
 });
 
@@ -56,7 +57,7 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, {
   '&:focus': {
     outline: 'none',
     borderColor: '$red7',
-    boxShadow: 'inset 0 0 0 1px $colors$blue9, 0 0 0 1px $colors$blue9',
+    boxShadow: 'inset 0 0 0 1px $colors$primary, 0 0 0 1px $colors$primary',
   },
 
   variants: {
@@ -97,3 +98,16 @@ export const Radio = React.forwardRef<React.ElementRef<typeof StyledRadio>, Radi
     </StyledRadio>
   )
 );
+
+type RadioGroupVariants = VariantProps<typeof RadioGroup>;
+export interface RadioGroupProps extends RadioGroupVariants {}
+const BaseRadioGroup = (props: RadioGroupProps): JSX.Element => <RadioGroup {...props} />;
+export const RadioGroupForStory = modifyVariantsForStory<
+  RadioGroupVariants,
+  RadioGroupProps & React.InputHTMLAttributes<any>
+>(BaseRadioGroup);
+
+// type RadioVariants = VariantProps<typeof Radio>;
+// export interface RadioProps extends RadioVariants {}
+const BaseRadio = (props: RadioProps): JSX.Element => <Radio {...props} />;
+export const RadioForStory = modifyVariantsForStory<RadioVariants, RadioProps>(BaseRadio);
