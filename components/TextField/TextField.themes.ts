@@ -30,7 +30,7 @@ export namespace Theme {
   });
 
   export const getDark: Factory = (primaryColor) => ({
-    textFieldBg: '$deepBlue2',
+    textFieldBg: '$deepBlue3',
     textFieldBorder: '$deepBlue6',
     textFieldFocusBg: '$deepBlue1',
     textFieldFocusBorder: '$deepBlue9',

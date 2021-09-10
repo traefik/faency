@@ -2,10 +2,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { TextForStory } from './Text';
-import { Flex } from '../Flex';
-import { Text } from '../Text';
-import { InfoCircledIcon } from '@radix-ui/react-icons';
-import { Tabs } from '@radix-ui/react-tabs';
 
 export default {
   title: 'Components/Text',

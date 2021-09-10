@@ -1,7 +1,7 @@
+import React from 'react';
 import { VariantProps } from '@stitches/react';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { styled } from '../../stitches.config';
-import React from 'react';
 
 export const Text = styled('span', {
   // Reset

@@ -23,7 +23,7 @@ export const TextField = styled('input', {
   // Custom
   position: 'relative',
   backgroundColor: '$textFieldBg',
-  boxShadow: 'inset 0 0 0 2px $colors$textFieldBorder',
+  boxShadow: 'inset 0 0 0 1px $colors$textFieldBorder',
   color: '$textFieldText',
   fontVariantNumeric: 'tabular-nums',
 
@@ -78,7 +78,7 @@ export const TextField = styled('input', {
   variants: {
     size: {
       small: {
-        borderRadius: '$1',
+        borderRadius: '$2',
         height: '$5',
         fontSize: '$1',
         px: '$2',
@@ -88,7 +88,7 @@ export const TextField = styled('input', {
         },
       },
       medium: {
-        borderRadius: '$2',
+        borderRadius: '$3',
         height: '$6',
         fontSize: '$3',
         px: '$3',
@@ -98,7 +98,7 @@ export const TextField = styled('input', {
         },
       },
       large: {
-        borderRadius: '$2',
+        borderRadius: '$3',
         height: '$7',
         fontSize: '$3',
         px: '$3',
@@ -133,13 +133,7 @@ export const TextField = styled('input', {
       invalid: {
         boxShadow: 'inset 0 0 0 2px $colors$red9',
         '&:focus': {
-          boxShadow: 'inset 0px 0px 0px 1px $colors$red10, 0px 0px 0px 1px $colors$red10',
-        },
-      },
-      valid: {
-        boxShadow: 'inset 0 0 0 2px $colors$green7',
-        '&:focus': {
-          boxShadow: 'inset 0px 0px 0px 1px $colors$green8, 0px 0px 0px 1px $colors$green8',
+          boxShadow: 'inset 0px 0px 0px 1px $colors$red9, 0px 0px 0px 1px $colors$red9',
         },
       },
     },
