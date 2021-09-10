@@ -66,7 +66,7 @@ export { Select } from './components/Select';
 export { Separator } from './components/Separator';
 export { Sheet, SheetClose, SheetContent, SheetTrigger } from './components/Sheet';
 export { SimpleToggle } from './components/SimpleToggle';
-export { Skeleton } from './components/Skeleton';
+export { Skeleton } from './components/Skeleton/Skeleton';
 export { Slider } from './components/Slider';
 export { Slot } from '@radix-ui/react-slot';
 export { Sup } from './components/Sup';

@@ -1,4 +1,6 @@
-import { styled, keyframes } from '../stitches.config';
+import { keyframes, styled } from '../../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const pulse = keyframes({
   '0%': { opacity: 0 },
@@ -6,9 +8,10 @@ const pulse = keyframes({
 });
 
 export const Skeleton = styled('div', {
-  backgroundColor: '$slate4',
+  backgroundColor: '$skeletonBackground',
   position: 'relative',
   overflow: 'hidden',
+  borderRadius: '3px',
 
   '&::after': {
     animationName: `${pulse}`,
@@ -16,7 +19,7 @@ export const Skeleton = styled('div', {
     animationDirection: 'alternate',
     animationIterationCount: 'infinite',
     animationTimingFunction: 'ease-in-out',
-    backgroundColor: '$slate6',
+    backgroundColor: '$skeletonAnimation',
     borderRadius: 'inherit',
     bottom: 0,
     content: '""',
@@ -69,8 +72,8 @@ export const Skeleton = styled('div', {
       },
       button: {
         borderRadius: '$1',
-        height: '$5',
-        width: '$8',
+        height: '32px',
+        width: '128px',
       },
     },
   },
@@ -78,3 +81,12 @@ export const Skeleton = styled('div', {
     variant: 'text',
   },
 });
+
+type SkeletonVariants = VariantProps<typeof Skeleton>;
+
+export interface SkeletonProps extends SkeletonVariants {}
+
+const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
+export const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(
+  BaseSkeleton
+);

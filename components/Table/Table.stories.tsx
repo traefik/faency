@@ -1,8 +1,8 @@
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import {Table, TableForStory, Tbody, Td, Th, Thead, Tr} from './Table';
-import {Badge} from "../Badge";
-import {Card} from "../Card";
+import { Table, TableForStory, Tbody, Td, Th, Thead, Tr } from './Table';
+import { Badge } from '../Badge';
+import { Card } from '../Card';
 
 export default {
   title: 'Components/Table',
@@ -22,25 +22,33 @@ export const Basic: ComponentStory<typeof TableForStory> = (args) => (
         <Tr>
           <Td>John</Td>
           <Td>Doe</Td>
-          <Td><Badge variant="green">Connected</Badge></Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
           <Td>Developer</Td>
         </Tr>
         <Tr>
           <Td>Johny</Td>
           <Td>Depp</Td>
-          <Td><Badge variant="orange">AFK</Badge></Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
           <Td>Actor</Td>
         </Tr>
         <Tr>
           <Td>Natalie</Td>
           <Td>Portman</Td>
-          <Td><Badge variant="green">Connected</Badge></Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
           <Td>Actor</Td>
         </Tr>
         <Tr>
           <Td>Luke</Td>
           <Td>Skywalker</Td>
-          <Td><Badge variant="red">Disconnected</Badge></Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
           <Td>Star wars</Td>
         </Tr>
       </Tbody>
@@ -61,25 +69,33 @@ export const Alignment: ComponentStory<any> = (args) => (
         <Tr>
           <Td {...args}>John</Td>
           <Td {...args}>Doe</Td>
-          <Td {...args}><Badge variant="green">Connected</Badge></Td>
+          <Td {...args}>
+            <Badge variant="green">Connected</Badge>
+          </Td>
           <Td {...args}>Developer</Td>
         </Tr>
         <Tr>
           <Td>Johny</Td>
           <Td>Depp</Td>
-          <Td><Badge variant="orange">AFK</Badge></Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
           <Td>Actor</Td>
         </Tr>
         <Tr>
           <Td>Natalie</Td>
           <Td>Portman</Td>
-          <Td><Badge variant="green">Connected</Badge></Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
           <Td>Actor</Td>
         </Tr>
         <Tr>
           <Td>Luke</Td>
           <Td>Skywalker</Td>
-          <Td><Badge variant="red">Disconnected</Badge></Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
           <Td>Star wars</Td>
         </Tr>
       </Tbody>
@@ -90,13 +106,13 @@ export const Alignment: ComponentStory<any> = (args) => (
 Alignment.argTypes = {
   align: {
     control: 'inline-radio',
-    options: ['start', 'center', 'end']
-  }
+    options: ['start', 'center', 'end'],
+  },
 };
 
 Alignment.args = {
-  align: 'start'
-}
+  align: 'start',
+};
 
 export const Interactive: ComponentStory<any> = (args) => (
   <Card>
@@ -111,25 +127,33 @@ export const Interactive: ComponentStory<any> = (args) => (
         <Tr {...args}>
           <Td>John</Td>
           <Td>Doe</Td>
-          <Td><Badge variant="green">Connected</Badge></Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
           <Td>Developer</Td>
         </Tr>
         <Tr {...args}>
           <Td>Johny</Td>
           <Td>Depp</Td>
-          <Td><Badge variant="orange">AFK</Badge></Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
           <Td>Actor</Td>
         </Tr>
         <Tr {...args} active>
           <Td>Natalie</Td>
           <Td>Portman</Td>
-          <Td><Badge variant="green">Connected</Badge></Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
           <Td>Actor</Td>
         </Tr>
         <Tr {...args}>
           <Td>Luke</Td>
           <Td>Skywalker</Td>
-          <Td><Badge variant="red">Disconnected</Badge></Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
           <Td>Star Wars</Td>
         </Tr>
       </Tbody>
@@ -138,5 +162,5 @@ export const Interactive: ComponentStory<any> = (args) => (
 );
 
 Interactive.args = {
-  interactive: true
-}
+  interactive: true,
+};

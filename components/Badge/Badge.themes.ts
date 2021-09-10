@@ -2,11 +2,11 @@ import tinycolor from 'tinycolor2';
 
 export namespace Theme {
   type Colors = {
-    badgeDefaultBackground: string
-    badgeDefaultText: string
-    badgeNeonBackground: string
-    badgeNeonText: string
-    badgeInteractiveBackground: string
+    badgeDefaultBackground: string;
+    badgeDefaultText: string;
+    badgeNeonBackground: string;
+    badgeNeonText: string;
+    badgeInteractiveBackground: string;
   };
 
   type Factory = (primaryColor: string) => Colors;
@@ -16,8 +16,8 @@ export namespace Theme {
     badgeDefaultText: '$slate10',
     badgeNeonBackground: '$neon7',
     badgeNeonText: '$neon9',
-    badgeInteractiveBackground: "rgba(0,0,0,.05)",
-  })
+    badgeInteractiveBackground: 'rgba(0,0,0,.05)',
+  });
 
   export const getDark: Factory = (primaryColor) => ({
     badgeDefaultBackground: '$slate5',
@@ -26,6 +26,6 @@ export namespace Theme {
     badgePrimaryText: '$primary',
     badgeNeonBackground: '$neon11',
     badgeNeonText: '$neon7',
-    badgeInteractiveBackground: "rgba(255,255,255,.1)",
-  })
+    badgeInteractiveBackground: 'rgba(255,255,255,.1)',
+  });
 }

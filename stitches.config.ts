@@ -38,6 +38,7 @@ import { Theme as RadioTheme } from './components/Radio/Radio.themes';
 import { Theme as TextTheme } from './components/Text/Text.themes';
 import { Theme as TextFieldTheme } from './components/TextField/TextField.themes';
 import { Theme as TableTheme } from './components/Table/Table.themes';
+import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 
 export type { VariantProps } from '@stitches/react';
 
@@ -206,6 +207,7 @@ const stitches = createStitches({
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
+      ...SkeletonTheme.getLight(primaryColor),
     },
     fonts: {
       rubik:
@@ -433,6 +435,7 @@ export const customColors = (primary: string) => {
       ...TextFieldTheme.getDark(primaryColor),
       ...TableTheme.getDark(primaryColor),
       ...TextTheme.getDark(primaryColor),
+      ...SkeletonTheme.getDark(primaryColor),
     },
   });
 
@@ -446,6 +449,7 @@ export const customColors = (primary: string) => {
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
+      ...SkeletonTheme.getLight(primaryColor),
     },
   });
 

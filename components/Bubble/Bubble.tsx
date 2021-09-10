@@ -1,6 +1,6 @@
-import {keyframes, styled} from "../../stitches.config";
-import {VariantProps} from "@stitches/react";
-import {modifyVariantsForStory} from "../../utils/modifyVariantsForStory";
+import { keyframes, styled } from '../../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const bip = keyframes({
   '0%': {
@@ -19,10 +19,10 @@ const bip = keyframes({
   },
 });
 
-export const Bubble = styled("div", {
+export const Bubble = styled('div', {
   display: 'inline-block',
-  size: "$4",
-  bc: "$red8",
+  size: '$4',
+  bc: '$red8',
   borderRadius: '50%',
   position: 'relative',
 
@@ -49,44 +49,43 @@ export const Bubble = styled("div", {
     right: 5,
     bottom: 5,
     left: 5,
-    bc: "rgba(255,255,255,.1)",
+    bc: 'rgba(255,255,255,.1)',
     borderRadius: '50%',
     pointerEvents: 'none',
   },
 
   variants: {
     variant: {
-      red: {bc: "$red8", "&::before": {bc: "$red8"}},
-      green: {bc: "$green8", "&::before": {bc: "$green8"}},
-      orange: {bc: "$orange8", "&::before": {bc: "$orange8"}},
-      blue: {bc: "$blue8", "&::before": {bc: "$blue8"}},
-      yellow: {bc: "$neon8", "&::before": {bc: "$neon8"}},
-      purple: {bc: "$purple8", "&::before": {bc: "$purple8"}},
-      gray: {bc: "$slate8", "&::before": {bc: "$slate8"}},
+      red: { bc: '$red8', '&::before': { bc: '$red8' } },
+      green: { bc: '$green8', '&::before': { bc: '$green8' } },
+      orange: { bc: '$orange8', '&::before': { bc: '$orange8' } },
+      blue: { bc: '$blue8', '&::before': { bc: '$blue8' } },
+      yellow: { bc: '$neon8', '&::before': { bc: '$neon8' } },
+      purple: { bc: '$purple8', '&::before': { bc: '$purple8' } },
+      gray: { bc: '$slate8', '&::before': { bc: '$slate8' } },
     },
     size: {
-      "x-small": {size: "$1"},
-      small: {size: "$2"},
-      medium: {size: "$3"},
-      large: {size: "$4"}
+      'x-small': { size: '$1' },
+      small: { size: '$2' },
+      medium: { size: '$3' },
+      large: { size: '$4' },
     },
     noAnimation: {
       true: {
-        '&::before': {content: "none"}
-      }
-    }
+        '&::before': { content: 'none' },
+      },
+    },
   },
 
   defaultVariants: {
-    size: "small",
+    size: 'small',
     noAnimation: false,
-  }
+  },
 });
 
 type BubbleVariants = VariantProps<typeof Bubble>;
 
-export interface BubbleProps extends BubbleVariants {
-}
+export interface BubbleProps extends BubbleVariants {}
 
 const BaseBubble = (props: BubbleProps): JSX.Element => <Bubble {...props} />;
 export const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseBubble);

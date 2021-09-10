@@ -1,6 +1,6 @@
-import {VariantProps} from '@stitches/react';
-import {modifyVariantsForStory} from '../../utils/modifyVariantsForStory';
-import {styled} from '../../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { styled } from '../../stitches.config';
 
 export const Card = styled('div', {
   appearance: 'none',
@@ -37,14 +37,14 @@ export const Card = styled('div', {
   variants: {
     variant: {
       inner: {
-        backgroundColor: 'rgba(255,255,255,.07)'
+        backgroundColor: 'rgba(255,255,255,.07)',
       },
       ghost: {
         backgroundColor: '$cardGhostBackground',
         '&::before': {
           boxShadow: 'none',
         },
-      }
+      },
     },
     interactive: {
       true: {
@@ -71,8 +71,7 @@ export const Card = styled('div', {
 
 type CardVariants = VariantProps<typeof Card>;
 
-export interface CardProps extends CardVariants {
-}
+export interface CardProps extends CardVariants {}
 
 const BaseCard = (props: CardProps): JSX.Element => <Card {...props} />;
 export const CardForStory = modifyVariantsForStory<CardVariants, CardProps>(BaseCard);
