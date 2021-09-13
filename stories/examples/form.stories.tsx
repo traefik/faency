@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from '../../components/Link';
 
-import { Box, Button, Card, Flex, Label, Heading, TextField } from '../../index';
+import { Box, Button, Card, Checkbox, Flex, Label, Heading, TextField } from '../../index';
 
 export const Form = () => (
   <Flex css={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -12,6 +13,7 @@ export const Form = () => (
         <>
           <Label htmlFor="email">Email</Label>
           <TextField
+            id="email"
             type="email"
             name="email"
             size="large"
@@ -24,23 +26,32 @@ export const Form = () => (
         <>
           <Label htmlFor="password">Password</Label>
           <TextField
+            id="password"
             type="password"
             name="password"
             size="large"
             placeholder="A secured password"
             autoComplete="new-password"
-            css={{ mb: '$3' }}
+            css={{ mb: '$4' }}
           />
         </>
 
-        <Flex css={{ ai: 'center', jc: 'space-between' }}>
-          <Button as="a" href="#" size="large" variant="secondary" ghost css={{ p: 0 }}>
-            Forgot password
-          </Button>
-          <Button type="submit" size="large" variant="primary">
-            Log in
-          </Button>
+        <Flex css={{ alignItems: 'center', mb: '$3' }}>
+          <Checkbox id="terms" name="terms" css={{ mr: '$2' }} />
+          <Label
+            htmlFor="terms"
+            css={{ fontSize: '$1', fontWeight: 'normal', textTransform: 'initial' }}
+          >
+            By signing up, you agree to the{' '}
+            <Link href="#terms" variant="subtle">
+              Terms of Service
+            </Link>
+          </Label>
         </Flex>
+
+        <Button type="submit" size="large" variant="primary" css={{ width: '100%' }}>
+          Sign Up
+        </Button>
       </form>
     </Card>
   </Flex>

@@ -35,6 +35,7 @@ import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
+import { Theme as LinkTheme } from './components/Link/Link.themes';
 import { Theme as RadioTheme } from './components/Radio/Radio.themes';
 import { Theme as TextTheme } from './components/Text/Text.themes';
 import { Theme as TextFieldTheme } from './components/TextField/TextField.themes';
@@ -205,6 +206,7 @@ const stitches = createStitches({
       ...CardTheme.getLight(primaryColor),
       ...CheckboxTheme.getLight(primaryColor),
       ...BadgeTheme.getLight(primaryColor),
+      ...LinkTheme.getLight(primaryColor),
       ...RadioTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
@@ -434,6 +436,7 @@ export const customColors = (primary: string) => {
       ...CardTheme.getDark(primaryColor),
       ...CheckboxTheme.getDark(primaryColor),
       ...BadgeTheme.getDark(primaryColor),
+      ...LinkTheme.getDark(primaryColor),
       ...RadioTheme.getDark(primaryColor),
       ...TextFieldTheme.getDark(primaryColor),
       ...TableTheme.getDark(primaryColor),
@@ -449,6 +452,7 @@ export const customColors = (primary: string) => {
       ...CardTheme.getLight(primaryColor),
       ...CheckboxTheme.getLight(primaryColor),
       ...BadgeTheme.getLight(primaryColor),
+      ...LinkTheme.getLight(primaryColor),
       ...RadioTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),

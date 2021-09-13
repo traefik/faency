@@ -13,7 +13,7 @@ export const Label = styled(LabelPrimitive.Root, Text, {
   lineHeight: 2.18,
   defaultVariants: {
     size: '0',
-    variant: 'loContrast',
+    variant: 'subtle',
   },
 });
 

@@ -57,8 +57,8 @@ export const Text = styled('span', {
       red: {
         color: '$red10',
       },
-      loContrast: {
-        color: '$textLoContrast',
+      subtle: {
+        color: '$textSubtle',
       },
       contrast: {
         color: '$textContrast',

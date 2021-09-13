@@ -121,7 +121,5 @@ export const RadioGroupForStory = modifyVariantsForStory<
   RadioGroupProps & React.InputHTMLAttributes<any>
 >(BaseRadioGroup);
 
-// type RadioVariants = VariantProps<typeof Radio>;
-// export interface RadioProps extends RadioVariants {}
 const BaseRadio = (props: RadioProps): JSX.Element => <Radio {...props} />;
 export const RadioForStory = modifyVariantsForStory<RadioVariants, RadioProps>(BaseRadio);
