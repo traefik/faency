@@ -5,7 +5,6 @@ import { ButtonForStory } from './Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
-import { Tabs } from '@radix-ui/react-tabs';
 
 export default {
   title: 'Components/Button',

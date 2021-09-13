@@ -1,7 +1,6 @@
-import { VariantProps, CSS } from '@stitches/react';
+import { VariantProps } from '@stitches/react';
 import React from 'react';
-import merge from 'lodash.merge';
-import { styled, keyframes } from '../../stitches.config';
+import { styled, keyframes, CSS } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const StyledButton = styled('button', {
@@ -234,7 +233,6 @@ export const StyledButton = styled('button', {
 });
 
 type ButtonVariants = VariantProps<typeof StyledButton>;
-export type ButtonProps = ButtonVariants;
 
 const Waiting = styled('div', {
   position: 'absolute',
@@ -279,19 +277,20 @@ const Waiting = styled('div', {
   },
 });
 
+type ButtonProps = React.ButtonHTMLAttributes<any> & ButtonVariants & { css?: CSS };
+
 export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
   ({ children, ...props }, forwardedRef) => {
     return (
-      <StyledButton ref={forwardedRef} {...props}>
-        {children}
-        {props.state === 'waiting' && <Waiting size={props.size} />}
+      <StyledButton {...props} ref={forwardedRef}>
+        <>
+          {children}
+          {props.state === 'waiting' && <Waiting size={props.size} />}
+        </>
       </StyledButton>
     );
   }
 );
 
 const BaseButton = (props: ButtonProps): JSX.Element => <Button {...props} />;
-export const ButtonForStory = modifyVariantsForStory<
-  ButtonVariants,
-  ButtonProps & React.ButtonHTMLAttributes<any>
->(BaseButton);
+export const ButtonForStory = modifyVariantsForStory<ButtonVariants, ButtonProps>(BaseButton);
