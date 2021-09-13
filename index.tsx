@@ -20,12 +20,7 @@ export { Code } from './components/Code';
 export { Container } from './components/Container';
 export { ControlGroup } from './components/ControlGroup';
 export { FaencyProvider } from './components/FaencyProvider';
-export {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTrigger,
-} from './components/Dialog/Dialog.themes';
+export { Dialog, DialogClose, DialogContent, DialogTrigger } from './components/Dialog';
 export {
   DropdownMenu,
   DropdownMenuTrigger,
