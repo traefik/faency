@@ -81,3 +81,9 @@ const TemplateWithActive: ComponentStory<typeof ButtonForStory> = ({ state, ...a
 export const Active = TemplateWithActive.bind({});
 
 Active.args = {};
+
+export const Waiting = Template.bind({});
+
+Waiting.args = {
+  state: 'waiting',
+};

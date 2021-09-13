@@ -1,8 +1,10 @@
-import { VariantProps } from '@stitches/react';
-import { styled } from '../../stitches.config';
+import { VariantProps, CSS } from '@stitches/react';
+import React from 'react';
+import merge from 'lodash.merge';
+import { styled, keyframes } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
-export const Button = styled('button', {
+export const StyledButton = styled('button', {
   // Reset
   all: 'unset',
   alignItems: 'center',
@@ -127,19 +129,11 @@ export const Button = styled('button', {
         },
       },
       waiting: {
-        backgroundColor: '$slate4',
-        boxShadow: 'inset 0 0 0 1px $colors$slate8',
+        backgroundColor: '$deepBlue3',
+        boxShadow: `inset 0 0 0 1px $deepBlue4`,
         color: 'transparent',
+        overflow: 'hidden',
         pointerEvents: 'none',
-        '@hover': {
-          '&:hover': {
-            backgroundColor: '$slate5',
-            boxShadow: 'inset 0 0 0 1px $colors$slate8',
-          },
-        },
-        '&:active': {
-          backgroundColor: '$slate5',
-        },
       },
     },
     ghost: {
@@ -191,6 +185,14 @@ export const Button = styled('button', {
     },
     {
       variant: 'secondary',
+      state: 'waiting',
+      css: {
+        backgroundColor: '$deepBlue3',
+        color: 'transparent',
+      },
+    },
+    {
+      variant: 'secondary',
       state: 'active',
       css: {
         backgroundColor: '$buttonPrimaryBg',
@@ -200,6 +202,14 @@ export const Button = styled('button', {
             backgroundColor: '$buttonPrimaryHoverBg',
           },
         },
+      },
+    },
+    {
+      variant: 'red',
+      state: 'waiting',
+      css: {
+        backgroundColor: '$deepBlue3',
+        color: 'transparent',
       },
     },
     {
@@ -223,8 +233,63 @@ export const Button = styled('button', {
   },
 });
 
-type ButtonVariants = VariantProps<typeof Button>;
-export interface ButtonProps extends ButtonVariants {}
+type ButtonVariants = VariantProps<typeof StyledButton>;
+export type ButtonProps = ButtonVariants;
+
+const Waiting = styled('div', {
+  position: 'absolute',
+  top: 0,
+  left: '-100%',
+  width: '200%',
+  height: '100%',
+  backgroundImage: `linear-gradient(
+                -45deg,
+                transparent 33%,
+                $colors$deepBlue4 33%,
+                $colors$deepBlue4 66%,
+                transparent 66%
+              )`,
+  variants: {
+    size: {
+      small: {
+        $$bgSize: '$sizes$8',
+        backgroundSize: '$$bgSize',
+        animation: `${keyframes({
+          '100%': { transform: 'translateX($sizes$8)' },
+        })} 500ms linear infinite`,
+      },
+      medium: {
+        $$bgSize: '$sizes$9',
+        backgroundSize: '$$bgSize',
+        animation: `${keyframes({
+          '100%': { transform: 'translateX($sizes$9)' },
+        })} 500ms linear infinite`,
+      },
+      large: {
+        $$bgSize: '$sizes$10',
+        backgroundSize: '$$bgSize',
+        animation: `${keyframes({
+          '100%': { transform: 'translateX($sizes$10)' },
+        })} 500ms linear infinite`,
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'medium',
+  },
+});
+
+export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
+  ({ children, ...props }, forwardedRef) => {
+    return (
+      <StyledButton ref={forwardedRef} {...props}>
+        {children}
+        {props.state === 'waiting' && <Waiting size={props.size} />}
+      </StyledButton>
+    );
+  }
+);
+
 const BaseButton = (props: ButtonProps): JSX.Element => <Button {...props} />;
 export const ButtonForStory = modifyVariantsForStory<
   ButtonVariants,
