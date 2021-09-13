@@ -20,7 +20,7 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
     width: '8px',
     height: '8px',
     borderRadius: '50%',
-    backgroundColor: '$primary',
+    backgroundColor: '$radioIndicator',
   },
 });
 
@@ -65,13 +65,6 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, {
     backgroundColor: '$radioDisabledBg',
     '&::placeholder': {
       color: '$radioDisabledText',
-    },
-
-    '@hover': {
-      '&:hover': {
-        boxShadow: 'inset 0 0 0 1px $colors$radioDisabledBorder',
-        backgroundColor: 'rgba(,,,0.1)',
-      },
     },
 
     [`& ${StyledIndicator}`]: {
