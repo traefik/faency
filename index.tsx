@@ -73,7 +73,6 @@ export { Sheet, SheetClose, SheetContent, SheetTrigger } from './components/Shee
 export { SimpleToggle } from './components/SimpleToggle';
 export { Skeleton } from './components/Skeleton/Skeleton';
 export { Slider } from './components/Slider';
-export { Slot } from '@radix-ui/react-slot';
 export { Sup } from './components/Sup';
 export { Sub } from './components/Sub';
 export { Switch } from './components/Switch';
