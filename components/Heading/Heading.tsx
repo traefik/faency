@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text } from './Text';
-import { styled, VariantProps, CSS } from '../stitches.config';
+import { Text } from '../Text';
+import { VariantProps, CSS } from '../../stitches.config';
 import merge from 'lodash.merge';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const DEFAULT_TAG = 'h1';
 
@@ -48,27 +49,6 @@ export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, He
   }
 );
 
-// export const Heading = styled(
-//   Text,
-//   {
-//     fontWeight: 500,
-//   },
-//   {
-//     variants: {
-//       // size: {
-//       //   1: {
-//       //     fontSize: '$10',
-//       //   },
-//       //   2: {
-//       //     fontSize: '$7',
-//       //   },
-//       // },
-//     },
-//   },
-//   {
-//     defaultVariants: {
-//       size: 1,
-//       as: 'h2',
-//     },
-//   }
-// );
+export interface BaseHeadingProps extends HeadingVariants {}
+const BaseHeading = (props: BaseHeadingProps): JSX.Element => <Heading {...props} />;
+export const HeadingForStory = modifyVariantsForStory<HeadingVariants, HeadingProps>(BaseHeading);
