@@ -64,7 +64,7 @@ const StyledCloseButton = styled(IconButton, {
   right: '$2',
 });
 
-type DialogContentPrimitiveProps = Omit<React.ComponentProps<typeof DialogPrimitive.Content>, 'as'>;
+type DialogContentPrimitiveProps = React.ComponentProps<typeof DialogPrimitive.Content>;
 type DialogContentProps = DialogContentPrimitiveProps & { css?: CSS };
 
 export const DialogContent = React.forwardRef<
