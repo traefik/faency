@@ -41,6 +41,7 @@ import { Theme as TextTheme } from './components/Text/Text.themes';
 import { Theme as TextFieldTheme } from './components/TextField/TextField.themes';
 import { Theme as TableTheme } from './components/Table/Table.themes';
 import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
+import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 
 export type { VariantProps } from '@stitches/react';
 
@@ -212,6 +213,7 @@ const stitches = createStitches({
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
       ...SkeletonTheme.getLight(primaryColor),
+      ...DialogTheme.getLight(primaryColor),
     },
     fonts: {
       rubik:
@@ -442,6 +444,7 @@ export const customColors = (primary: string) => {
       ...TableTheme.getDark(primaryColor),
       ...TextTheme.getDark(primaryColor),
       ...SkeletonTheme.getDark(primaryColor),
+      ...DialogTheme.getDark(primaryColor),
     },
   });
 
@@ -458,6 +461,7 @@ export const customColors = (primary: string) => {
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
       ...SkeletonTheme.getLight(primaryColor),
+      ...DialogTheme.getLight(primaryColor),
     },
   });
 
