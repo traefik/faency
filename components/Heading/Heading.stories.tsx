@@ -1,7 +1,12 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { HeadingForStory } from './Heading';
+import { Heading, HeadingProps, HeadingVariants } from './Heading';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+type BaseHeadingProps = HeadingVariants & {};
+const BaseHeading = (props: BaseHeadingProps): JSX.Element => <Heading {...props} />;
+export const HeadingForStory = modifyVariantsForStory<HeadingVariants, HeadingProps>(BaseHeading);
 
 export default {
   title: 'Components/Heading',

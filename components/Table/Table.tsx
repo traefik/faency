@@ -1,6 +1,4 @@
-import React from 'react';
 import { styled, VariantProps } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Label } from '../Label';
 
 export const Caption = styled('caption', {
@@ -109,9 +107,5 @@ export const Table = styled('table', {
   color: '$tableText',
 });
 
-type TableVariants = VariantProps<typeof Table>;
-
-export interface TableProps extends TableVariants {}
-
-const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
-export const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
+export type TableVariants = VariantProps<typeof Table>;
+export type TableProps = TableVariants & {};

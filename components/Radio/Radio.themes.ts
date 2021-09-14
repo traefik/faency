@@ -13,14 +13,14 @@ export namespace Theme {
   type Factory = (primaryColor: string) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
-    radioIndicator: tinycolor(primaryColor).darken(20),
+    radioIndicator: tinycolor(primaryColor).darken(20).toString(),
     radioBorder: '$deepBlue6',
     radioHoverBg: 'transparent',
-    radioHoverBorder: tinycolor(primaryColor).darken(20),
-    radioFocusBorder: tinycolor(primaryColor).darken(20),
+    radioHoverBorder: tinycolor(primaryColor).darken(20).toString(),
+    radioFocusBorder: tinycolor(primaryColor).darken(20).toString(),
     radioDisabledBg: '$deepBlue3',
     radioDisabledBorder: '$deepBlue5',
-    radioIndicatorDisabledBg: tinycolor(primaryColor).setAlpha(0.6),
+    radioIndicatorDisabledBg: tinycolor(primaryColor).setAlpha(0.6).toString(),
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -31,6 +31,6 @@ export namespace Theme {
     radioFocusBorder: '$primary',
     radioDisabledBg: '$deepBlue3',
     radioDisabledBorder: '$deepBlue4',
-    radioIndicatorDisabledBg: tinycolor(primaryColor).setAlpha(0.6),
+    radioIndicatorDisabledBg: tinycolor(primaryColor).setAlpha(0.6).toString(),
   });
 }

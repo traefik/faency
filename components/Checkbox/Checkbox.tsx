@@ -2,7 +2,6 @@ import React from 'react';
 import { styled, CSS, VariantProps } from '../../stitches.config';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
   alignItems: 'center',
@@ -100,8 +99,8 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
 });
 
 type CheckboxPrimitiveProps = Omit<React.ComponentProps<typeof CheckboxPrimitive.Root>, 'as'>;
-type CheckboxVariants = VariantProps<typeof StyledCheckbox>;
-type CheckboxProps = CheckboxPrimitiveProps & CheckboxVariants & { css?: CSS };
+export type CheckboxVariants = VariantProps<typeof StyledCheckbox>;
+export type CheckboxProps = CheckboxPrimitiveProps & CheckboxVariants & { css?: CSS };
 
 export const Checkbox = React.forwardRef<React.ElementRef<typeof StyledCheckbox>, CheckboxProps>(
   (props, forwardedRef) => {
@@ -114,9 +113,3 @@ export const Checkbox = React.forwardRef<React.ElementRef<typeof StyledCheckbox>
     );
   }
 );
-
-const BaseCheckbox = (props: CheckboxProps): JSX.Element => <Checkbox {...props} />;
-export const CheckboxForStory = modifyVariantsForStory<
-  CheckboxVariants,
-  CheckboxProps & React.InputHTMLAttributes<any>
->(BaseCheckbox);

@@ -1,7 +1,4 @@
-import { VariantProps } from '@stitches/react';
-import { LinkHTMLAttributes } from 'react';
 import { styled } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Text } from '../Text';
 
 export const Link = styled('a', {
@@ -83,13 +80,3 @@ export const Link = styled('a', {
     variant: 'contrast',
   },
 });
-
-type LinkVariants = VariantProps<typeof Link>;
-
-export interface LinkProps extends LinkVariants {}
-
-const BaseLink = (props: LinkProps): JSX.Element => <Link {...props} />;
-export const LinkForStory = modifyVariantsForStory<
-  LinkVariants,
-  LinkProps & LinkHTMLAttributes<any>
->(BaseLink);

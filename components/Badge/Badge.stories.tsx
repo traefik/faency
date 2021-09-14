@@ -1,7 +1,15 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Badge, BadgeForStory } from './Badge';
+import { VariantProps } from '@stitches/react';
+import { Badge } from './Badge';
 import { Flex } from '../Flex';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+type BadgeVariants = VariantProps<typeof Badge>;
+type BadgeProps = BadgeVariants & {};
+
+const BaseBadge = (props: BadgeProps): JSX.Element => <Badge {...props} />;
+export const BadgeForStory = modifyVariantsForStory<BadgeVariants, BadgeProps>(BaseBadge);
 
 export default {
   title: 'Components/Badge',

@@ -1,7 +1,7 @@
 {
   "name": "@traefiklabs/faency",
   "description": "Traefik Labs design system",
-  "version": "0.10.0",
+  "version": "1.0.0.alpha1",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "files": [
@@ -60,6 +60,7 @@
     "@types/lodash.merge": "^4.6.6",
     "@types/node": "^14.14.28",
     "@types/react": "^17.0.2",
+    "@types/tinycolor2": "^1.4.3",
     "babel-loader": "^8.2.2",
     "husky": ">=4",
     "lint-staged": ">=10",

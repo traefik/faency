@@ -1,7 +1,15 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Bubble, BubbleForStory } from './Bubble';
+import { VariantProps } from '@stitches/react';
+import { Bubble } from './Bubble';
 import { Flex } from '../Flex';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+type BubbleVariants = VariantProps<typeof Bubble>;
+type BubbleProps = BubbleVariants & {};
+
+const BaseBubble = (props: BubbleProps): JSX.Element => <Bubble {...props} />;
+export const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseBubble);
 
 export default {
   title: 'Components/Bubble',

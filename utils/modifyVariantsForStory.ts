@@ -15,12 +15,12 @@
  * const BaseButton = styled("button", {...});
  *
  * type ButtonVariants = StitchesVariants<typeof BaseButton>;
- * interface ButtonProps extends ButtonVariants {...};
+ * export interface ButtonProps extends ButtonVariants {...};
  *
  * export const Button = ({...}: ButtonProps): JSX.Element => {...};
  * export const ButtonForStory = modifyVariantsForStory<ButtonVariants, ButtonProps>(Button);
  */
-interface StitchesMedia {
+export interface StitchesMedia {
   [x: string]: any;
   initial?: any;
 }

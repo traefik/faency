@@ -1,7 +1,13 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { SelectForStory } from './Select';
+import { BaseSelect, SelectProps, SelectVariants } from './Select';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+const SelectForStory = modifyVariantsForStory<
+  SelectVariants,
+  SelectProps & React.InputHTMLAttributes<any>
+>(BaseSelect);
 
 export default {
   title: 'Components/Select',

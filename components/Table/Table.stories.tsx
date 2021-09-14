@@ -1,8 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Table, TableForStory, Tbody, Td, Th, Thead, Tr } from './Table';
+import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr } from './Table';
 import { Badge } from '../Badge';
 import { Card } from '../Card';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
+export const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
 
 export default {
   title: 'Components/Table',
@@ -11,7 +15,7 @@ export default {
 
 export const Basic: ComponentStory<typeof TableForStory> = (args) => (
   <Card>
-    <Table {...args}>
+    <TableForStory {...args}>
       <Thead>
         <Th>Firstname</Th>
         <Th>Lastname</Th>
@@ -52,13 +56,13 @@ export const Basic: ComponentStory<typeof TableForStory> = (args) => (
           <Td>Star wars</Td>
         </Tr>
       </Tbody>
-    </Table>
+    </TableForStory>
   </Card>
 );
 
 export const Alignment: ComponentStory<any> = (args) => (
   <Card>
-    <Table>
+    <TableForStory>
       <Thead>
         <Th {...args}>Firstname</Th>
         <Th {...args}>Lastname</Th>
@@ -99,7 +103,7 @@ export const Alignment: ComponentStory<any> = (args) => (
           <Td>Star wars</Td>
         </Tr>
       </Tbody>
-    </Table>
+    </TableForStory>
   </Card>
 );
 
@@ -116,7 +120,7 @@ Alignment.args = {
 
 export const Interactive: ComponentStory<any> = (args) => (
   <Card>
-    <Table>
+    <TableForStory>
       <Thead>
         <Th>Firstname</Th>
         <Th>Lastname</Th>
@@ -157,7 +161,7 @@ export const Interactive: ComponentStory<any> = (args) => (
           <Td>Star Wars</Td>
         </Tr>
       </Tbody>
-    </Table>
+    </TableForStory>
   </Card>
 );
 

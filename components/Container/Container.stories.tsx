@@ -1,8 +1,18 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { VariantProps } from '@stitches/react';
 
-import { ContainerForStory } from './Container';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Container } from './Container';
 import { Paragraph } from '../Paragraph';
+
+type ContainerVariants = VariantProps<typeof Container>;
+export interface ContainerProps extends ContainerVariants {}
+const BaseContainer = (props: ContainerProps): JSX.Element => <Container {...props} />;
+export const ContainerForStory = modifyVariantsForStory<
+  ContainerVariants,
+  ContainerProps & React.HTMLAttributes<any>
+>(BaseContainer);
 
 export default {
   title: 'Components/Container',

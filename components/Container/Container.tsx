@@ -1,6 +1,4 @@
-import { VariantProps } from '@stitches/react';
 import { styled } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const Container = styled('div', {
   // Reset
@@ -37,11 +35,3 @@ export const Container = styled('div', {
     size: '4',
   },
 });
-
-type ContainerVariants = VariantProps<typeof Container>;
-export interface ContainerProps extends ContainerVariants {}
-const BaseContainer = (props: ContainerProps): JSX.Element => <Container {...props} />;
-export const ContainerForStory = modifyVariantsForStory<
-  ContainerVariants,
-  ContainerProps & React.HTMLAttributes<any>
->(BaseContainer);

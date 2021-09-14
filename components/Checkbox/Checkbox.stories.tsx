@@ -1,7 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CheckboxForStory } from './Checkbox';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Checkbox, CheckboxProps, CheckboxVariants } from './Checkbox';
+
+const BaseCheckbox = (props: CheckboxProps): JSX.Element => <Checkbox {...props} />;
+export const CheckboxForStory = modifyVariantsForStory<
+  CheckboxVariants,
+  CheckboxProps & React.InputHTMLAttributes<any>
+>(BaseCheckbox);
 
 export default {
   title: 'Components/Checkbox',

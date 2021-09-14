@@ -27,9 +27,9 @@ export namespace Theme {
     cardBackground: '$deepBlue2',
     cardBorder: '$deepBlue3',
     cardHoverBackground: 'rgba(255,255,255,.12)',
-    cardHoverBorder: tinycolor(primaryColor).setAlpha(0.6),
+    cardHoverBorder: tinycolor(primaryColor).setAlpha(0.6).toString(),
     cardActiveBackground: 'rgba(255,255,255,.07)',
-    cardActiveBorder: tinycolor(primaryColor).setAlpha(0.4),
+    cardActiveBorder: tinycolor(primaryColor).setAlpha(0.4).toString(),
     cardGhostBackground: '$deepBlue1',
   });
 }

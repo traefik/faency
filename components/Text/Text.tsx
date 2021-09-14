@@ -1,6 +1,4 @@
-import React from 'react';
 import { VariantProps } from '@stitches/react';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { styled } from '../../stitches.config';
 
 export const Text = styled('span', {
@@ -77,10 +75,5 @@ export const Text = styled('span', {
   },
 });
 
-type TextVariants = VariantProps<typeof Text>;
-export interface TextProps extends TextVariants {}
-const BaseText = (props: TextProps): JSX.Element => <Text {...props} />;
-export const TextForStory = modifyVariantsForStory<
-  TextVariants,
-  TextProps & React.HTMLAttributes<any>
->(BaseText);
+export type TextVariants = VariantProps<typeof Text>;
+export type TextProps = TextVariants & {};

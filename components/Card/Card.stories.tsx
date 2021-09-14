@@ -1,10 +1,18 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Text } from '../Text';
+import { VariantProps } from '@stitches/react';
 
-import { Card, CardForStory } from './Card';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Text } from '../Text';
+import { Card } from './Card';
 import { Heading } from '../Heading';
 import { Flex } from '../Flex';
+
+type CardVariants = VariantProps<typeof Card>;
+type CardProps = CardVariants & {};
+
+const BaseCard = (props: CardProps): JSX.Element => <Card {...props} />;
+export const CardForStory = modifyVariantsForStory<CardVariants, CardProps>(BaseCard);
 
 export default {
   title: 'Components/Card',

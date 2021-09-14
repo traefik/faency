@@ -22,6 +22,6 @@ export namespace Theme {
     tableText: '$deepBlue9',
     tableHoverBackground: '$deepBlue1',
     tableActiveText: '$primary',
-    tableActiveHoverText: tinycolor(primaryColor).lighten(10),
+    tableActiveHoverText: tinycolor(primaryColor).lighten(10).toString(),
   });
 }

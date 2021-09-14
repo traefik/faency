@@ -35,6 +35,7 @@ import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
+
 import { Theme as LinkTheme } from './components/Link/Link.themes';
 import { Theme as RadioTheme } from './components/Radio/Radio.themes';
 import { Theme as TextTheme } from './components/Text/Text.themes';
@@ -166,9 +167,9 @@ export const deepBlueDark = {
   deepBlue1: 'hsl(208, 89%, 7%)',
 };
 
-const defaultPrimary = '$blue8';
+const defaultPrimary: string = '$blue8';
 
-const colors = {
+const colors: Record<string, string> = {
   ...gray,
   ...red,
   ...blue,
@@ -204,10 +205,10 @@ const stitches = createStitches({
   theme: {
     colors: {
       ...colors,
+      ...BadgeTheme.getLight(primaryColor),
       ...ButtonTheme.getLight(primaryColor),
       ...CardTheme.getLight(primaryColor),
       ...CheckboxTheme.getLight(primaryColor),
-      ...BadgeTheme.getLight(primaryColor),
       ...LinkTheme.getLight(primaryColor),
       ...RadioTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),
@@ -408,7 +409,7 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 export const utils = config.utils;
 
 export const customColors = (primary: string) => {
-  const primaryColor = getColorFromToken(config.theme.colors, primary);
+  const primaryColor = getColorFromToken(config.theme.colors as Record<string, string>, primary);
   const darkTheme = createTheme('dark', {
     colors: {
       ...grayDark,
@@ -436,10 +437,10 @@ export const customColors = (primary: string) => {
       hiContrast: 'white',
       loContrast: '$deepBlue2',
 
+      ...BadgeTheme.getDark(primaryColor),
       ...ButtonTheme.getDark(primaryColor),
       ...CardTheme.getDark(primaryColor),
       ...CheckboxTheme.getDark(primaryColor),
-      ...BadgeTheme.getDark(primaryColor),
       ...LinkTheme.getDark(primaryColor),
       ...RadioTheme.getDark(primaryColor),
       ...TextFieldTheme.getDark(primaryColor),
@@ -454,10 +455,10 @@ export const customColors = (primary: string) => {
   const lightTheme = createTheme('light', {
     colors: {
       primary,
+      ...BadgeTheme.getLight(primaryColor),
       ...ButtonTheme.getLight(primaryColor),
       ...CardTheme.getLight(primaryColor),
       ...CheckboxTheme.getLight(primaryColor),
-      ...BadgeTheme.getLight(primaryColor),
       ...LinkTheme.getLight(primaryColor),
       ...RadioTheme.getLight(primaryColor),
       ...TextFieldTheme.getLight(primaryColor),

@@ -1,6 +1,5 @@
 import { keyframes, styled } from '../../stitches.config';
 import { VariantProps } from '@stitches/react';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const pulse = keyframes({
   '0%': { opacity: 0 },
@@ -82,11 +81,5 @@ export const Skeleton = styled('div', {
   },
 });
 
-type SkeletonVariants = VariantProps<typeof Skeleton>;
-
-export interface SkeletonProps extends SkeletonVariants {}
-
-const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
-export const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(
-  BaseSkeleton
-);
+export type SkeletonVariants = VariantProps<typeof Skeleton>;
+export type SkeletonProps = SkeletonVariants & {};

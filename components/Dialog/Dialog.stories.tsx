@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Dialog, DialogContent } from './Dialog';
 import { Text } from '../Text';
 import { useState } from 'react';
-import { Button, ButtonForStory } from '../Button';
+import { Button } from '../Button';
 
 export default {
   title: 'Components/Dialog',

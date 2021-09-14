@@ -154,10 +154,5 @@ export const TextField = styled('input', {
   },
 });
 
-type TextFieldVariants = VariantProps<typeof TextField>;
-export interface TextFieldProps extends TextFieldVariants {}
-const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
-export const TextFieldForStory = modifyVariantsForStory<
-  TextFieldVariants,
-  TextFieldProps & React.InputHTMLAttributes<any>
->(BaseTextField);
+export type TextFieldVariants = VariantProps<typeof TextField>;
+export type TextFieldProps = TextFieldVariants & {};

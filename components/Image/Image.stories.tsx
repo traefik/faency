@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ImageForStory } from './Image';
+import { Image } from './Image';
 
 export default {
   title: 'Components/Image',
-  component: ImageForStory,
-} as ComponentMeta<typeof ImageForStory>;
+  component: Image,
+} as ComponentMeta<typeof Image>;
 
-const Template: ComponentStory<typeof ImageForStory> = (args) => <ImageForStory {...args} />;
+const Template: ComponentStory<typeof Image> = (args) => <Image {...args} />;
 
 export const Basic = Template.bind({});
 

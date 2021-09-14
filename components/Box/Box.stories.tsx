@@ -1,8 +1,19 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { VariantProps } from '@stitches/react';
 
-import { BoxForStory } from './Box';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Box } from './Box';
 import { Text } from '../Text';
+
+type BoxVariants = VariantProps<typeof Box>;
+type BoxProps = BoxVariants & {};
+
+const BaseBox = (props: BoxProps): JSX.Element => <Box {...props} />;
+export const BoxForStory = modifyVariantsForStory<
+  BoxVariants,
+  BoxProps & React.HTMLAttributes<any>
+>(BaseBox);
 
 export default {
   title: 'Components/Box',

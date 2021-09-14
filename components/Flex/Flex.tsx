@@ -100,11 +100,3 @@ export const Flex = styled('div', {
     wrap: 'noWrap',
   },
 });
-
-type FlexVariants = VariantProps<typeof Flex>;
-export interface FlexProps extends FlexVariants {}
-const BaseFlex = (props: FlexProps): JSX.Element => <Flex {...props} />;
-export const FlexForStory = modifyVariantsForStory<
-  FlexVariants,
-  FlexProps & React.HTMLAttributes<any>
->(BaseFlex);

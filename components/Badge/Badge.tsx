@@ -1,6 +1,4 @@
 import { styled } from '../../stitches.config';
-import { VariantProps } from '@stitches/react';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const Badge = styled('span', {
   // Reset
@@ -131,10 +129,3 @@ export const Badge = styled('span', {
     variant: 'gray',
   },
 });
-
-type BadgeVariants = VariantProps<typeof Badge>;
-
-export interface BadgeProps extends BadgeVariants {}
-
-const BaseBadge = (props: BadgeProps): JSX.Element => <Badge {...props} />;
-export const BadgeForStory = modifyVariantsForStory<BadgeVariants, BadgeProps>(BaseBadge);

@@ -1,7 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Skeleton, SkeletonForStory } from './Skeleton';
+
+import { Skeleton, SkeletonProps, SkeletonVariants } from './Skeleton';
 import { Flex } from '../Flex';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
+export const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(
+  BaseSkeleton
+);
 
 export default {
   title: 'Components/Skeleton',

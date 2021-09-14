@@ -1,5 +1,3 @@
-import { VariantProps } from '@stitches/react';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { styled } from '../../stitches.config';
 
 export const Card = styled('div', {
@@ -68,10 +66,3 @@ export const Card = styled('div', {
     },
   },
 });
-
-type CardVariants = VariantProps<typeof Card>;
-
-export interface CardProps extends CardVariants {}
-
-const BaseCard = (props: CardProps): JSX.Element => <Card {...props} />;
-export const CardForStory = modifyVariantsForStory<CardVariants, CardProps>(BaseCard);

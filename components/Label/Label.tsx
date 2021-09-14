@@ -1,8 +1,6 @@
-import { VariantProps } from '@stitches/react';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { styled } from '../../stitches.config';
 import { Text } from '../Text';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const Label = styled(LabelPrimitive.Root, Text, {
   display: 'inline-block',
@@ -16,11 +14,3 @@ export const Label = styled(LabelPrimitive.Root, Text, {
     variant: 'subtle',
   },
 });
-
-type LabelVariants = VariantProps<typeof Label>;
-export interface LabelProps extends LabelVariants {}
-const BaseLabel = (props: LabelProps): JSX.Element => <Label {...props} />;
-export const LabelForStory = modifyVariantsForStory<
-  LabelVariants,
-  LabelProps & React.LabelHTMLAttributes<any>
->(BaseLabel);

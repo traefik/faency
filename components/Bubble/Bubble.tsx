@@ -1,6 +1,4 @@
 import { keyframes, styled } from '../../stitches.config';
-import { VariantProps } from '@stitches/react';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const bip = keyframes({
   '0%': {
@@ -82,10 +80,3 @@ export const Bubble = styled('div', {
     noAnimation: false,
   },
 });
-
-type BubbleVariants = VariantProps<typeof Bubble>;
-
-export interface BubbleProps extends BubbleVariants {}
-
-const BaseBubble = (props: BubbleProps): JSX.Element => <Bubble {...props} />;
-export const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseBubble);

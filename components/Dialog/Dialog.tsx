@@ -58,7 +58,7 @@ const StyledContent = styled(DialogPrimitive.Content, Card, {
   },
 });
 
-const StyledCloseButton = styled(IconButton, {
+const StyledCloseButton = styled(DialogPrimitive.Close, {
   position: 'absolute',
   top: '$2',
   right: '$2',

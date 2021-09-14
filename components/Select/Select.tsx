@@ -2,7 +2,6 @@ import React from 'react';
 import { styled, CSS } from '../../stitches.config';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 import { VariantProps } from '@stitches/react';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const StyledSelect = styled('select', {
   appearance: 'none',
@@ -170,13 +169,11 @@ const StyledCaretSortIcon = styled(CaretSortIcon, {
   },
 });
 
-type SelectProps = React.ComponentProps<typeof StyledSelect> &
+export type SelectProps = React.ComponentProps<typeof StyledSelect> &
   React.ComponentProps<typeof SelectWrapper> & { css?: CSS };
+export type SelectVariants = VariantProps<typeof SelectWrapper>;
 
-export interface BaseSelectProps extends SelectVariants {
-  css?: CSS;
-}
-const BaseSelect = ({ css, size, state, variant, ...props }: SelectProps): JSX.Element => (
+export const BaseSelect = ({ css, size, state, variant, ...props }: SelectProps): JSX.Element => (
   <SelectWrapper
     css={css as any}
     size={size}
@@ -207,10 +204,3 @@ export const Select = React.forwardRef<React.ElementRef<typeof StyledSelect>, Se
 );
 
 Select.toString = () => `.${SelectWrapper.className}`;
-
-export type SelectVariants = VariantProps<typeof SelectWrapper>;
-
-export const SelectForStory = modifyVariantsForStory<
-  SelectVariants,
-  SelectProps & React.InputHTMLAttributes<any>
->(BaseSelect);

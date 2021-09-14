@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
 import { IdProvider } from '@radix-ui/react-id';
-import { customColors, globalCss } from '../index';
+import { customColors, globalCss } from '../stitches.config';
 
 import RubikWoff2 from '../assets/fonts/Rubik-Regular.woff2';
 import RubikSemiBoldWoff2 from '../assets/fonts/Rubik-SemiBold.woff2';

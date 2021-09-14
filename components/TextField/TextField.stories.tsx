@@ -1,7 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { TextFieldForStory } from './TextField';
+import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
+export const TextFieldForStory = modifyVariantsForStory<
+  TextFieldVariants,
+  TextFieldProps & React.InputHTMLAttributes<any>
+>(BaseTextField);
 
 export default {
   title: 'Components/TextField',

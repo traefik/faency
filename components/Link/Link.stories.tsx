@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { LinkHTMLAttributes } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { VariantProps } from '@stitches/react';
 
-import { LinkForStory } from './Link';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Link } from './Link';
+
+type LinkVariants = VariantProps<typeof Link>;
+
+export interface LinkProps extends LinkVariants {}
+
+const BaseLink = (props: LinkProps): JSX.Element => <Link {...props} />;
+export const LinkForStory = modifyVariantsForStory<
+  LinkVariants,
+  LinkProps & LinkHTMLAttributes<any>
+>(BaseLink);
 
 export default {
   title: 'Components/Link',

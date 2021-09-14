@@ -2,15 +2,17 @@ import React from 'react';
 import { Text } from '../Text';
 import { VariantProps, CSS } from '../../stitches.config';
 import merge from 'lodash.merge';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const DEFAULT_TAG = 'h1';
 
 type TextSizeVariants = Pick<VariantProps<typeof Text>, 'size'>;
 
 type HeadingSizeVariants = '1' | '2' | '3' | '4';
-type HeadingVariants = { size?: HeadingSizeVariants } & Omit<VariantProps<typeof Text>, 'size'>;
-type HeadingProps = React.ComponentProps<typeof DEFAULT_TAG> &
+export type HeadingVariants = { size?: HeadingSizeVariants } & Omit<
+  VariantProps<typeof Text>,
+  'size'
+>;
+export type HeadingProps = React.ComponentProps<typeof DEFAULT_TAG> &
   HeadingVariants & { css?: CSS; as?: any };
 
 export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, HeadingProps>(
@@ -42,13 +44,9 @@ export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, He
         size={textSize[size]}
         css={{
           fontVariantNumeric: 'proportional-nums',
-          ...merge(textCss[size], props.css),
+          ...(merge(textCss[size], props.css) as object),
         }}
       />
     );
   }
 );
-
-export interface BaseHeadingProps extends HeadingVariants {}
-const BaseHeading = (props: BaseHeadingProps): JSX.Element => <Heading {...props} />;
-export const HeadingForStory = modifyVariantsForStory<HeadingVariants, HeadingProps>(BaseHeading);

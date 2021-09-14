@@ -1,7 +1,20 @@
 import React from 'react';
+import { VariantProps } from '@stitches/react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { RadioForStory, RadioGroupForStory } from './Radio';
+import { Radio, RadioVariants, RadioProps, RadioGroup } from './Radio';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+const BaseRadio = (props: RadioProps): JSX.Element => <Radio {...props} />;
+const RadioForStory = modifyVariantsForStory<RadioVariants, RadioProps>(BaseRadio);
+
+export type RadioGroupVariants = VariantProps<typeof RadioGroup>;
+export interface RadioGroupProps extends RadioGroupVariants {}
+const BaseRadioGroup = (props: RadioGroupProps): JSX.Element => <RadioGroup {...props} />;
+export const RadioGroupForStory = modifyVariantsForStory<
+  RadioGroupVariants,
+  RadioGroupProps & React.InputHTMLAttributes<any>
+>(BaseRadioGroup);
 
 export default {
   title: 'Components/Radio',

@@ -1,9 +1,19 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { VariantProps } from '@stitches/react';
 
-import { LabelForStory } from './Label';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Label } from './Label';
 import { Box } from '../Box';
 import { TextField } from '../TextField';
+
+type LabelVariants = VariantProps<typeof Label>;
+export interface LabelProps extends LabelVariants {}
+const BaseLabel = (props: LabelProps): JSX.Element => <Label {...props} />;
+export const LabelForStory = modifyVariantsForStory<
+  LabelVariants,
+  LabelProps & React.LabelHTMLAttributes<any>
+>(BaseLabel);
 
 export default {
   title: 'Components/Label',
