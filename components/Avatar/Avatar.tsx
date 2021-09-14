@@ -1,7 +1,7 @@
 import React from 'react';
-import { styled, VariantProps, CSS } from '../stitches.config';
+import { styled, VariantProps, CSS } from '../../stitches.config';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { Box } from './Box';
+import { Box } from '../Box';
 
 const StyledAvatar = styled(AvatarPrimitive.Root, {
   alignItems: 'center',
@@ -61,72 +61,23 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
       },
     },
     variant: {
-      hiContrast: {
-        backgroundColor: '$hiContrast',
-        color: '$loContrast',
-      },
       gray: {
         backgroundColor: '$slate5',
-      },
-      tomato: {
-        backgroundColor: '$tomato5',
       },
       red: {
         backgroundColor: '$red5',
       },
-      crimson: {
-        backgroundColor: '$crimson5',
-      },
-      pink: {
-        backgroundColor: '$pink5',
-      },
-      plum: {
-        backgroundColor: '$plum5',
-      },
       purple: {
         backgroundColor: '$purple5',
       },
-      violet: {
-        backgroundColor: '$violet5',
-      },
-      indigo: {
-        backgroundColor: '$indigo5',
-      },
       blue: {
         backgroundColor: '$blue5',
-      },
-      cyan: {
-        backgroundColor: '$cyan5',
-      },
-      teal: {
-        backgroundColor: '$teal5',
       },
       green: {
         backgroundColor: '$green5',
       },
       grass: {
         backgroundColor: '$grass5',
-      },
-      brown: {
-        backgroundColor: '$brown5',
-      },
-      bronze: {
-        backgroundColor: '$bronze5',
-      },
-      gold: {
-        backgroundColor: '$gold5',
-      },
-      sky: {
-        backgroundColor: '$sky5',
-      },
-      mint: {
-        backgroundColor: '$mint5',
-      },
-      lime: {
-        backgroundColor: '$lime5',
-      },
-      yellow: {
-        backgroundColor: '$yellow5',
       },
       amber: {
         backgroundColor: '$amber5',
@@ -141,40 +92,6 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
       },
       circle: {
         borderRadius: '50%',
-      },
-    },
-    inactive: {
-      true: {
-        opacity: '.3',
-      },
-    },
-    interactive: {
-      true: {
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          top: '0',
-          right: '0',
-          bottom: '0',
-          left: '0',
-          backgroundColor: 'rgba(0,0,0,.08)',
-          opacity: '0',
-          pointerEvents: 'none',
-          transition: 'opacity 25ms linear',
-        },
-        '@hover': {
-          '&:hover': {
-            '&::after': {
-              opacity: '1',
-            },
-          },
-        },
-        '&[data-state="open"]': {
-          '&::after': {
-            backgroundColor: 'rgba(0,0,0,.12)',
-            opacity: '1',
-          },
-        },
       },
     },
   },
@@ -196,6 +113,8 @@ const StyledAvatarImage = styled(AvatarPrimitive.Image, {
 
 const StyledAvatarFallback = styled(AvatarPrimitive.Fallback, {
   textTransform: 'uppercase',
+  fontFamily: '$rubik',
+  color: '$deepBlue10',
 
   variants: {
     size: {
@@ -225,22 +144,6 @@ const StyledAvatarFallback = styled(AvatarPrimitive.Fallback, {
   },
 });
 
-export const AvatarNestedItem = styled('div', {
-  boxShadow: '0 0 0 2px $colors$loContrast',
-  borderRadius: '50%',
-});
-
-export const AvatarGroup = styled('div', {
-  display: 'flex',
-  flexDirection: 'row-reverse',
-  [`& ${AvatarNestedItem}:nth-child(n+2)`]: {
-    marginRight: '-$1',
-  },
-});
-
-// type StatusVariants = React.ComponentProps<typeof Status>;
-// type StatusColors = Pick<StatusVariants, 'variant'>;
-
 type AvatarVariants = VariantProps<typeof StyledAvatar>;
 type AvatarPrimitiveProps = Omit<React.ComponentProps<typeof AvatarPrimitive.Root>, 'as'>;
 type AvatarOwnProps = AvatarPrimitiveProps &
@@ -267,21 +170,6 @@ export const Avatar = React.forwardRef<React.ElementRef<typeof StyledAvatar>, Av
           <StyledAvatarImage alt={alt} src={src} />
           <StyledAvatarFallback size={size}>{fallback}</StyledAvatarFallback>
         </StyledAvatar>
-        {/* {status && (
-          <Box
-            css={{
-              position: 'absolute',
-              bottom: '0',
-              right: '0',
-              boxShadow: '0 0 0 3px $colors$loContrast',
-              borderRadius: '$round',
-              mr: '-3px',
-              mb: '-3px',
-            }}
-          >
-            <Status size={size && size > 2 ? '2' : '1'} variant={status} />
-          </Box>
-        )} */}
       </Box>
     );
   }
