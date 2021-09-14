@@ -40,6 +40,7 @@ import { Theme as RadioTheme } from './components/Radio/Radio.themes';
 import { Theme as TextTheme } from './components/Text/Text.themes';
 import { Theme as TextFieldTheme } from './components/TextField/TextField.themes';
 import { Theme as TableTheme } from './components/Table/Table.themes';
+import { Theme as SelectTheme } from './components/Select/Select.themes';
 import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 
@@ -212,6 +213,7 @@ const stitches = createStitches({
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
+      ...SelectTheme.getLight(primaryColor),
       ...SkeletonTheme.getLight(primaryColor),
       ...DialogTheme.getLight(primaryColor),
     },
@@ -443,6 +445,7 @@ export const customColors = (primary: string) => {
       ...TextFieldTheme.getDark(primaryColor),
       ...TableTheme.getDark(primaryColor),
       ...TextTheme.getDark(primaryColor),
+      ...SelectTheme.getDark(primaryColor),
       ...SkeletonTheme.getDark(primaryColor),
       ...DialogTheme.getDark(primaryColor),
     },
@@ -460,6 +463,7 @@ export const customColors = (primary: string) => {
       ...TextFieldTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
+      ...SelectTheme.getLight(primaryColor),
       ...SkeletonTheme.getLight(primaryColor),
       ...DialogTheme.getLight(primaryColor),
     },

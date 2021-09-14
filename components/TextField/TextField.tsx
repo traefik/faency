@@ -36,8 +36,10 @@ export const TextField = styled('input', {
     color: '$hiContrast',
   },
 
-  '&:hover': {
-    backgroundColor: '$textFieldHoverBg',
+  '@hover': {
+    '&:hover': {
+      backgroundColor: '$textFieldHoverBg',
+    },
   },
 
   '&:focus': {
@@ -90,7 +92,7 @@ export const TextField = styled('input', {
         height: '$6',
         fontSize: '$3',
         px: '$3',
-        lineHeight: '$sizes$7',
+        lineHeight: '$sizes$6',
         '&:-webkit-autofill::first-line': {
           fontSize: '$3',
         },
@@ -100,7 +102,7 @@ export const TextField = styled('input', {
         height: '$7',
         fontSize: '$3',
         px: '$3',
-        lineHeight: '$sizes$8',
+        lineHeight: '$sizes$7',
         '&:-webkit-autofill::first-line': {
           fontSize: '$3',
         },
