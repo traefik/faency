@@ -193,7 +193,7 @@ const colors: Record<string, string> = {
 
   // Semantic colors
   primary: defaultPrimary,
-  contentBg: '$deepBlue1', // to delete
+  contentBg: '$deepBlue1',
   hiContrast: '$deepBlue11',
   loContrast: 'white',
   focusOutline: 'hsl(216, 100%, 64%)',
@@ -433,7 +433,6 @@ export const customColors = (primary: string) => {
 
       // Semantic colors
       primary,
-      contentBg: '$deepBlue3', // to delete
       hiContrast: 'white',
       loContrast: '$deepBlue2',
 
