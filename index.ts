@@ -55,7 +55,7 @@ export { Link } from './components/Link';
 // export { Overlay } from './components/Overlay';
 // export { Paragraph } from './components/Paragraph';
 // export { Panel } from './components/Panel';
-// export { Popover, PopoverClose, PopoverContent, PopoverTrigger } from './components/Popover';
+export { Popover, PopoverClose, PopoverContent, PopoverTrigger } from './components/Popover';
 // TODO
 // export { Scrollbar } from './components/Scrollbar';
 export { Portal } from '@radix-ui/react-portal';
@@ -76,7 +76,7 @@ export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Ta
 // export { Tabs, TabsList, TabsPanel, TabsTab } from './components/Tabs';
 export { Text } from './components/Text';
 // export { TextArea } from './components/TextArea';
-// export { Tooltip } from './components/Tooltip';
+export { Tooltip } from './components/Tooltip';
 // export { TreeItem } from './components/TreeItem';
 
 // Stitches

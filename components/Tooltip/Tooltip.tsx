@@ -1,10 +1,12 @@
 import React from 'react';
-import { styled } from '../stitches.config';
+import { VariantProps } from '@stitches/react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import { Box } from './Box';
-import { Text } from './Text';
 
-type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
+import { styled } from '../../stitches.config';
+import { Box } from '../Box';
+import { Text } from '../Text';
+
+export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
   React.ComponentProps<typeof TooltipPrimitive.Content> & {
     children: React.ReactElement;
     content: React.ReactNode;
@@ -12,9 +14,9 @@ type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
   };
 
 const Content = styled(TooltipPrimitive.Content, {
-  backgroundColor: '$transparentPanel',
-  borderRadius: '$1',
-  padding: '$1 $2',
+  backgroundColor: '$deepBlue3',
+  borderRadius: '$3',
+  padding: '$2',
 
   variants: {
     multiline: {
@@ -44,13 +46,13 @@ export function Tooltip({
           size="1"
           as="p"
           css={{
-            color: '$loContrast',
+            color: '$hiContrast',
             lineHeight: multiline ? '20px' : (undefined as any),
           }}
         >
           {content}
         </Text>
-        <Box css={{ color: '$transparentExtreme' }}>
+        <Box css={{ color: '$deepBlue3' }}>
           <TooltipPrimitive.Arrow
             offset={5}
             width={11}
@@ -64,3 +66,5 @@ export function Tooltip({
     </TooltipPrimitive.Root>
   );
 }
+
+export type TooltipVariants = VariantProps<typeof Tooltip>;
