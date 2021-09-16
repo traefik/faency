@@ -12,7 +12,7 @@ type CardVariants = VariantProps<typeof Card>;
 type CardProps = CardVariants & {};
 
 const BaseCard = (props: CardProps): JSX.Element => <Card {...props} />;
-export const CardForStory = modifyVariantsForStory<CardVariants, CardProps>(BaseCard);
+const CardForStory = modifyVariantsForStory<CardVariants, CardProps>(BaseCard);
 
 export default {
   title: 'Components/Card',

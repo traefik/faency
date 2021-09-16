@@ -7,9 +7,10 @@ import { Container } from './Container';
 import { Paragraph } from '../Paragraph';
 
 type ContainerVariants = VariantProps<typeof Container>;
-export interface ContainerProps extends ContainerVariants {}
+type ContainerProps = ContainerVariants & {};
+
 const BaseContainer = (props: ContainerProps): JSX.Element => <Container {...props} />;
-export const ContainerForStory = modifyVariantsForStory<
+const ContainerForStory = modifyVariantsForStory<
   ContainerVariants,
   ContainerProps & React.HTMLAttributes<any>
 >(BaseContainer);

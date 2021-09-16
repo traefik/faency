@@ -5,7 +5,7 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Checkbox, CheckboxProps, CheckboxVariants } from './Checkbox';
 
 const BaseCheckbox = (props: CheckboxProps): JSX.Element => <Checkbox {...props} />;
-export const CheckboxForStory = modifyVariantsForStory<
+const CheckboxForStory = modifyVariantsForStory<
   CheckboxVariants,
   CheckboxProps & React.InputHTMLAttributes<any>
 >(BaseCheckbox);

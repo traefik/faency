@@ -8,7 +8,8 @@ import { Box } from '../Box';
 import { TextField } from '../TextField';
 
 type LabelVariants = VariantProps<typeof Label>;
-export interface LabelProps extends LabelVariants {}
+type LabelProps = LabelVariants & {};
+
 const BaseLabel = (props: LabelProps): JSX.Element => <Label {...props} />;
 export const LabelForStory = modifyVariantsForStory<
   LabelVariants,

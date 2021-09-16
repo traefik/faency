@@ -6,7 +6,7 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 type BaseHeadingProps = HeadingVariants & {};
 const BaseHeading = (props: BaseHeadingProps): JSX.Element => <Heading {...props} />;
-export const HeadingForStory = modifyVariantsForStory<HeadingVariants, HeadingProps>(BaseHeading);
+const HeadingForStory = modifyVariantsForStory<HeadingVariants, HeadingProps>(BaseHeading);
 
 export default {
   title: 'Components/Heading',

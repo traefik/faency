@@ -5,10 +5,9 @@ import { Text, TextProps, TextVariants } from './Text';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const BaseText = (props: TextProps): JSX.Element => <Text {...props} />;
-export const TextForStory = modifyVariantsForStory<
-  TextVariants,
-  TextProps & React.HTMLAttributes<any>
->(BaseText);
+const TextForStory = modifyVariantsForStory<TextVariants, TextProps & React.HTMLAttributes<any>>(
+  BaseText
+);
 
 export default {
   title: 'Components/Text',

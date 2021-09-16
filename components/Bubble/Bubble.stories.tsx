@@ -9,7 +9,7 @@ type BubbleVariants = VariantProps<typeof Bubble>;
 type BubbleProps = BubbleVariants & {};
 
 const BaseBubble = (props: BubbleProps): JSX.Element => <Bubble {...props} />;
-export const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseBubble);
+const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseBubble);
 
 export default {
   title: 'Components/Bubble',

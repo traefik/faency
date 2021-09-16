@@ -6,7 +6,7 @@ import { Card } from '../Card';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
-export const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
+const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
 
 export default {
   title: 'Components/Table',

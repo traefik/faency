@@ -6,9 +6,7 @@ import { Flex } from '../Flex';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
-export const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(
-  BaseSkeleton
-);
+const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(BaseSkeleton);
 
 export default {
   title: 'Components/Skeleton',

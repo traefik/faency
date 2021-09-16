@@ -4,14 +4,16 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Radio, RadioVariants, RadioProps, RadioGroup } from './Radio';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { type } from 'os';
 
 const BaseRadio = (props: RadioProps): JSX.Element => <Radio {...props} />;
 const RadioForStory = modifyVariantsForStory<RadioVariants, RadioProps>(BaseRadio);
 
-export type RadioGroupVariants = VariantProps<typeof RadioGroup>;
-export interface RadioGroupProps extends RadioGroupVariants {}
+type RadioGroupVariants = VariantProps<typeof RadioGroup>;
+type RadioGroupProps = RadioGroupVariants & {};
+
 const BaseRadioGroup = (props: RadioGroupProps): JSX.Element => <RadioGroup {...props} />;
-export const RadioGroupForStory = modifyVariantsForStory<
+const RadioGroupForStory = modifyVariantsForStory<
   RadioGroupVariants,
   RadioGroupProps & React.InputHTMLAttributes<any>
 >(BaseRadioGroup);

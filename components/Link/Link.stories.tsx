@@ -6,14 +6,12 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Link } from './Link';
 
 type LinkVariants = VariantProps<typeof Link>;
-
-export interface LinkProps extends LinkVariants {}
+type LinkProps = LinkVariants & {};
 
 const BaseLink = (props: LinkProps): JSX.Element => <Link {...props} />;
-export const LinkForStory = modifyVariantsForStory<
-  LinkVariants,
-  LinkProps & LinkHTMLAttributes<any>
->(BaseLink);
+const LinkForStory = modifyVariantsForStory<LinkVariants, LinkProps & LinkHTMLAttributes<any>>(
+  BaseLink
+);
 
 export default {
   title: 'Components/Link',

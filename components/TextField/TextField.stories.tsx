@@ -5,7 +5,7 @@ import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
-export const TextFieldForStory = modifyVariantsForStory<
+const TextFieldForStory = modifyVariantsForStory<
   TextFieldVariants,
   TextFieldProps & React.InputHTMLAttributes<any>
 >(BaseTextField);

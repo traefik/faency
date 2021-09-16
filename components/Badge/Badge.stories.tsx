@@ -9,7 +9,7 @@ type BadgeVariants = VariantProps<typeof Badge>;
 type BadgeProps = BadgeVariants & {};
 
 const BaseBadge = (props: BadgeProps): JSX.Element => <Badge {...props} />;
-export const BadgeForStory = modifyVariantsForStory<BadgeVariants, BadgeProps>(BaseBadge);
+const BadgeForStory = modifyVariantsForStory<BadgeVariants, BadgeProps>(BaseBadge);
 
 export default {
   title: 'Components/Badge',
