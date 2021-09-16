@@ -17,7 +17,8 @@
     "ds:build": "rollup -c",
     "ds:release": "npm run ds:build && np --any-branch",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "peerDependencies": {
     "react": ">= 17.0.1",
