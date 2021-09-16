@@ -2,17 +2,21 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Text } from '../Text';
 import { Heading } from '../Heading';
-import { Alert } from './Alert';
+import { Alert, AlertProps, AlertVariants } from './Alert';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
+const BaseAlert = (props: AlertProps): JSX.Element => <Alert {...props} />;
+const AlertForStory = modifyVariantsForStory<AlertVariants, AlertProps>(BaseAlert);
 
 export default {
   title: 'Components/Alert',
   component: Alert,
-} as ComponentMeta<typeof Alert>;
+} as ComponentMeta<typeof AlertForStory>;
 
-export const Variants: ComponentStory<typeof Alert> = (args) => (
-  <Alert {...args}>
+export const Variants: ComponentStory<typeof AlertForStory> = (args) => (
+  <AlertForStory {...args}>
     <Heading size="2" css={{ mb: '$3' }}>
-      Card
+      Alert
     </Heading>
     <Text css={{ mb: '$3' }}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -21,7 +25,7 @@ export const Variants: ComponentStory<typeof Alert> = (args) => (
       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
       non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </Text>
-  </Alert>
+  </AlertForStory>
 );
 
 Variants.args = {

@@ -1,4 +1,4 @@
-// export { Alert } from './components/Alert';
+export { Alert } from './components/Alert';
 // export {
 //   AlertDialog,
 //   AlertDialogAction,

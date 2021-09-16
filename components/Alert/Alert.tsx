@@ -1,4 +1,5 @@
-import { styled } from '../../stitches.config';
+import { VariantProps } from '@stitches/react';
+import { styled, CSS } from '../../stitches.config';
 import { Card } from '../Card';
 
 export const Alert = styled(Card, {
@@ -35,3 +36,6 @@ export const Alert = styled(Card, {
     variant: 'gray',
   },
 });
+
+export type AlertVariants = VariantProps<typeof Alert>;
+export type AlertProps = AlertVariants & {};
