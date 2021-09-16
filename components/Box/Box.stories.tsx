@@ -10,10 +10,9 @@ type BoxVariants = VariantProps<typeof Box>;
 type BoxProps = BoxVariants & {};
 
 const BaseBox = (props: BoxProps): JSX.Element => <Box {...props} />;
-export const BoxForStory = modifyVariantsForStory<
-  BoxVariants,
-  BoxProps & React.HTMLAttributes<any>
->(BaseBox);
+const BoxForStory = modifyVariantsForStory<BoxVariants, BoxProps & React.HTMLAttributes<any>>(
+  BaseBox
+);
 
 export default {
   title: 'Components/Box',
