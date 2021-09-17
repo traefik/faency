@@ -21,18 +21,18 @@ export { Container } from './components/Container';
 // export { ControlGroup } from './components/ControlGroup';
 export { FaencyProvider } from './components/FaencyProvider';
 export { Dialog, DialogClose, DialogContent, DialogTrigger } from './components/Dialog';
-// export {
-//   DropdownMenu,
-//   DropdownMenuTrigger,
-//   DropdownMenuContent,
-//   DropdownMenuCheckboxItem,
-//   DropdownMenuGroup,
-//   DropdownMenuItem,
-//   DropdownMenuLabel,
-//   DropdownMenuRadioGroup,
-//   DropdownMenuRadioItem,
-//   DropdownMenuSeparator,
-// } from './components/DropdownMenu';
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+} from './components/DropdownMenu';
 export { Flex } from './components/Flex';
 export { Grid } from './components/Grid';
 export { Heading } from './components/Heading';

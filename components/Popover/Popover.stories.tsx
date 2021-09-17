@@ -40,18 +40,6 @@ const Template: ComponentStory<typeof PopoverForStory> = (args) => (
 
 export const Basic = Template.bind({});
 
-// Basic.args = {
-//   content: 'This is some tooltip text',
-// };
-
-// export const MultiLine = Template.bind({});
-
-// MultiLine.args = {
-//   multiline: true,
-//   content:
-//     'This is some tooltip text. This box shows the max amount of text to display. If more room is needed, use a modal instead.',
-// };
-
 export const RichContent: ComponentStory<typeof PopoverForStory> = (args) => (
   <Container>
     <PopoverForStory {...args}>

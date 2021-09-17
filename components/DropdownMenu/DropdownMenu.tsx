@@ -1,11 +1,11 @@
-import React, { ReactText } from 'react';
+import React from 'react';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { styled, CSS } from '../stitches.config';
+import { styled, CSS } from '../../stitches.config';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { menuCss, separatorCss, itemCss, labelCss } from './Menu';
-import { Box } from './Box';
-import { Flex } from './Flex';
-import { panelStyles } from './Panel';
+import { menuCss, separatorCss, itemCss, labelCss } from '../Menu';
+import { Box } from '../Box';
+import { Flex } from '../Flex';
+import { panelStyles } from '../Panel';
 
 export const DropdownMenu = DropdownMenuPrimitive.Root;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;

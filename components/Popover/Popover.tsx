@@ -18,7 +18,7 @@ const StyledContent = styled(PopoverPrimitive.Content, panelStyles, {
   minWidth: 200,
   minHeight: '$6',
   maxWidth: 265,
-  backgroundColor: '$deepBlue3',
+  color: '$hiContrast',
   '&:focus': {
     outline: 'none',
   },
