@@ -5,8 +5,6 @@ import { Tooltip, TooltipProps, TooltipVariants } from './Tooltip';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Container } from '../Container';
 import { Text } from '../Text';
-import { Button } from '../Button';
-import { Flex } from '../Flex';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
 const TooltipForStory = modifyVariantsForStory<TooltipVariants, TooltipProps>(BaseTooltip);
