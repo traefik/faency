@@ -11,8 +11,8 @@
   "scripts": {
     "prettier": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "ds:build": "rollup -c",
-    "ds:release": "npm run ds:build && np --any-branch",
+    "build": "rollup -c",
+    "release": "npm run build && np",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages"
