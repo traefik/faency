@@ -1,11 +1,15 @@
 import type * as Stitches from '@stitches/react';
 import { createStitches, CSS as StitchesCSS } from '@stitches/react';
 import {
+  amber,
+  amberDark,
   blackA,
   blue,
   blueA,
   blueDark,
   blueDarkA,
+  grass,
+  grassDark,
   gray,
   grayA,
   grayDark,
@@ -16,6 +20,8 @@ import {
   greenDarkA,
   orangeA,
   orangeDarkA,
+  purple,
+  purpleDark,
   redA,
   redDarkA,
   slate,
@@ -23,19 +29,13 @@ import {
   slateDark,
   slateDarkA,
   whiteA,
-  amber,
-  amberDark,
-  grass,
-  grassDark,
-  purple,
-  purpleDark,
 } from '@radix-ui/colors';
 import { getColorFromToken } from './utils/getColorFromToken';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
+import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
-
 import { Theme as LinkTheme } from './components/Link/Link.themes';
 import { Theme as RadioTheme } from './components/Radio/Radio.themes';
 import { Theme as TextTheme } from './components/Text/Text.themes';
@@ -217,6 +217,7 @@ const stitches = createStitches({
       ...SelectTheme.getLight(primaryColor),
       ...SkeletonTheme.getLight(primaryColor),
       ...DialogTheme.getLight(primaryColor),
+      ...IconButtonTheme.getLight(primaryColor),
     },
     fonts: {
       rubik:
@@ -438,6 +439,7 @@ export const customColors = (primary: string) => {
 
       ...BadgeTheme.getDark(primaryColor),
       ...ButtonTheme.getDark(primaryColor),
+      ...IconButtonTheme.getDark(primaryColor),
       ...CardTheme.getDark(primaryColor),
       ...CheckboxTheme.getDark(primaryColor),
       ...LinkTheme.getDark(primaryColor),
@@ -456,6 +458,7 @@ export const customColors = (primary: string) => {
       primary,
       ...BadgeTheme.getLight(primaryColor),
       ...ButtonTheme.getLight(primaryColor),
+      ...IconButtonTheme.getLight(primaryColor),
       ...CardTheme.getLight(primaryColor),
       ...CheckboxTheme.getLight(primaryColor),
       ...LinkTheme.getLight(primaryColor),

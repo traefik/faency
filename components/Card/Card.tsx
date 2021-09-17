@@ -18,6 +18,7 @@ export const Card = styled('div', {
   color: 'inherit',
   borderRadius: '$3',
   position: 'relative',
+  boxShadow: '0 0 10px 0px $colors$cardShadow',
 
   '&::before': {
     boxSizing: 'border-box',
