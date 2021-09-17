@@ -1,64 +1,88 @@
 {
-  "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
+  "name": "@traefiklabs/faency",
+  "description": "Traefik Labs design system",
+  "version": "0.9.1",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
   "scripts": {
-    "init": "yarn faency:build",
-    "start": "npm-run-all --parallel faency faency:storybook website",
-    "website": "lerna exec --scope website -- yarn start",
-    "website:deploy": "lerna exec --scope website -- yarn deploy",
-    "website:build": "lerna exec --scope website -- yarn build",
-    "faency": "lerna exec --scope @traefiklabs/faency -- yarn run watch",
-    "faency:storybook": "lerna exec --scope @traefiklabs/faency -- yarn storybook",
-    "faency:build": "lerna exec --scope @traefiklabs/faency -- yarn build",
-    "faency:test": "lerna exec --scope @traefiklabs/faency -- yarn test",
-    "faency:test:watch": "lerna exec --scope @traefiklabs/faency -- yarn test:watch",
-    "build": "yarn faency:build && yarn website:build",
-    "test": "yarn faency:test",
-    "test:watch": "yarn faency:test:watch",
-    "prettier": "prettier './**/*.{js,jsx,ts,tsx,json,yml,yaml,css,md,mdx}' --write",
-    "lint": "eslint './packages/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix './packages/**/*.{js,jsx,ts,tsx}'",
-    "clean": "yarn clean-logs && yarn clean-modules",
-    "clean-logs": "rimraf ./packages/*/npm-debug* && rimraf ./*-debug*",
-    "clean-modules": "rimraf ./packages/*/node_modules/ && rimraf ./node_modules/",
-    "release": "lerna publish"
+    "prettier": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "ds:build": "rollup -c",
+    "ds:release": "npm run ds:build && np --any-branch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
+  },
+  "peerDependencies": {
+    "react": ">= 17.0.1",
+    "react-dom": ">= 17.0.1"
+  },
+  "dependencies": {
+    "@radix-ui/colors": "0.1.7",
+    "@radix-ui/react-alert-dialog": "0.1.0",
+    "@radix-ui/react-aspect-ratio": "^0.1.0",
+    "@radix-ui/react-avatar": "0.1.0",
+    "@radix-ui/react-checkbox": "0.1.0",
+    "@radix-ui/react-context-menu": "0.1.0",
+    "@radix-ui/react-dialog": "0.1.0",
+    "@radix-ui/react-dropdown-menu": "0.1.0",
+    "@radix-ui/react-icons": "1.0.3",
+    "@radix-ui/react-id": "^0.1.0",
+    "@radix-ui/react-label": "0.1.0",
+    "@radix-ui/react-menu": "0.1.0",
+    "@radix-ui/react-popover": "0.1.0",
+    "@radix-ui/react-portal": "0.1.0",
+    "@radix-ui/react-progress": "0.1.0",
+    "@radix-ui/react-radio-group": "0.1.0",
+    "@radix-ui/react-separator": "0.1.0",
+    "@radix-ui/react-slider": "0.1.0",
+    "@radix-ui/react-switch": "0.1.0",
+    "@radix-ui/react-tabs": "0.1.0",
+    "@radix-ui/react-toggle": "0.1.0",
+    "@radix-ui/react-tooltip": "0.1.0",
+    "@radix-ui/react-use-layout-effect": "^0.1.0",
+    "@stitches/react": "1.1.0",
+    "lodash.merge": "^4.6.2",
+    "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.19.2",
-    "@typescript-eslint/parser": "^2.11.0",
-    "babel-eslint": "10.0.3",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.18.3",
-    "husky": "^3.1.0",
-    "lerna": "^3.19.0",
-    "lint-staged": "^9.5.0",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^1.19.1",
-    "prettier-eslint": "^9.0.1",
-    "rimraf": "^3.0.0"
+    "@babel/core": "^7.15.4",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/react": "^6.3.7",
+    "@storybook/storybook-deployer": "^2.8.10",
+    "@types/lodash.merge": "^4.6.6",
+    "@types/node": "^14.14.28",
+    "@types/react": "^17.0.2",
+    "@types/tinycolor2": "^1.4.3",
+    "babel-loader": "^8.2.2",
+    "husky": ">=4",
+    "lint-staged": ">=10",
+    "np": "^7.3.0",
+    "prettier": "^2.1.2",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "rollup": "^2.33.1",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "rollup-plugin-url": "^3.0.1",
+    "storybook-dark-mode": "^1.0.8",
+    "typescript": "^4.3.5"
   },
-  "lint-staged": {
-    "**/*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{md,json}": [
-      "prettier --write",
-      "git add"
-    ]
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "lerna exec --scope @traefiklabs/faency -- npm run build && npm run test"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
