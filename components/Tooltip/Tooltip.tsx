@@ -35,6 +35,7 @@ export function Tooltip({
   defaultOpen,
   onOpenChange,
   multiline,
+  css,
   ...props
 }: TooltipProps) {
   return (
