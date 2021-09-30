@@ -90,3 +90,5 @@ export {
   config,
   customColors,
 } from './stitches.config';
+
+export type { CSS } from './stitches.config';

@@ -403,7 +403,7 @@ const stitches = createStitches({
   },
 });
 
-export type CSS = StitchesCSS<typeof stitches.config>;
+export type CSS<T = typeof stitches.config> = StitchesCSS<T>;
 
 export const { styled, css, createTheme, getCssText, globalCss, keyframes, config } = stitches;
 
