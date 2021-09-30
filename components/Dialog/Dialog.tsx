@@ -37,20 +37,14 @@ const StyledContent = styled(DialogPrimitive.Content, Card, {
   padding: '$4',
   marginTop: '-5vh',
   backgroundColor: '$dialogBackground',
+  boxShadow: 'inset 0 0 0 1px $colors$deepBlue4',
+  borderRadius: '$3',
   // animation: `${fadeIn} 125ms linear, ${moveDown} 125ms cubic-bezier(0.22, 1, 0.36, 1)`,
   willChange: 'transform',
+  overflow: 'auto',
 
   '&::before': {
-    boxSizing: 'border-box',
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    boxShadow: 'inset 0 0 0 1px $colors$deepBlue4',
-    borderRadius: '$3',
-    pointerEvents: 'none',
+    boxShadow: 'none',
   },
 
   '&:focus': {
