@@ -9,7 +9,7 @@ import { Heading } from '../Heading';
 import { Flex } from '../Flex';
 
 type CardVariants = VariantProps<typeof Card>;
-type CardProps = CardVariants & {};
+type CardProps = CardVariants & { elevation: 0 | 1 | 2 | 3 | 4 | 5 };
 
 const BaseCard = (props: CardProps): JSX.Element => <Card {...props} />;
 const CardForStory = modifyVariantsForStory<CardVariants, CardProps>(BaseCard);
@@ -37,6 +37,7 @@ export const Basic: ComponentStory<typeof CardForStory> = (args) => (
 Basic.args = {
   active: false,
   interactive: false,
+  elevation: 0
 };
 
 export const Ghost: ComponentStory<typeof CardForStory> = (args) => (

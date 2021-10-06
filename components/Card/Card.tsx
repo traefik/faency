@@ -1,6 +1,9 @@
-import { styled } from '../../stitches.config';
+import {CSS, styled} from '../../stitches.config';
+import {Elevation} from "../Elevation/Elevation";
+import React, {forwardRef} from "react";
+import {ComponentProps, ScaleValue, VariantProps} from "@stitches/react";
 
-export const Card = styled('div', {
+const StyledCard = styled('div', {
   appearance: 'none',
   border: 'none',
   boxSizing: 'border-box',
@@ -67,3 +70,13 @@ export const Card = styled('div', {
     },
   },
 });
+
+type CardVariantProps = VariantProps<typeof StyledCard>;
+type CardComponentProps = React.ComponentProps<typeof StyledCard>;
+type CardProps = CardVariantProps & CardComponentProps & { css?: CSS, elevation: 0 | 1 | 2 | 3 | 4 | 5 };
+
+export const Card2 = forwardRef<React.ElementRef<typeof StyledCard>, CardProps>(({elevation, ...props}, forwardedRed) => (
+  <Elevation height={elevation}>
+    <StyledCard ref={forwardedRed} {...props} />
+  </Elevation>
+))
