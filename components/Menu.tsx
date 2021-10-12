@@ -5,6 +5,7 @@ import { styled, css, CSS } from '../stitches.config';
 import { Box } from './Box';
 import { Flex } from './Flex';
 import { panelStyles } from './Panel';
+import { elevationVariant } from './Elevation/Elevation';
 
 export const baseItemCss = css({
   display: 'flex',
@@ -44,6 +45,12 @@ export const menuCss = css({
   boxSizing: 'border-box',
   minWidth: 120,
   py: '$1',
+  variants: {
+    elevation: elevationVariant,
+  },
+  defaultVariants: {
+    elevation: 2,
+  },
 });
 
 export const separatorCss = css({

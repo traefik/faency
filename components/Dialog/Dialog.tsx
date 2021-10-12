@@ -5,6 +5,7 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import { overlayStyles } from '../Overlay';
 import { IconButton } from '../IconButton';
 import { Card } from '../Card';
+import { elevationVariant } from '../Elevation/Elevation';
 
 type DialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, overlayStyles, {
   right: 0,
   bottom: 0,
   left: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
 });
 
 export function Dialog({ children, ...props }: DialogProps) {
@@ -50,6 +52,13 @@ const StyledContent = styled(DialogPrimitive.Content, Card, {
   '&:focus': {
     outline: 'none',
   },
+
+  variants: {
+    elevation: elevationVariant,
+  },
+  defaultVariants: {
+    elevation: 5,
+  },
 });
 
 const StyledCloseButton = styled(DialogPrimitive.Close, {
@@ -68,7 +77,7 @@ export const DialogContent = React.forwardRef<
   <StyledContent {...props} ref={forwardedRef}>
     {children}
     <StyledCloseButton asChild>
-      <IconButton ghost>
+      <IconButton ghost css={{ color: '$hiContrast' }}>
         <Cross1Icon />
       </IconButton>
     </StyledCloseButton>
