@@ -34,7 +34,7 @@ import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
 import { Theme as LinkTheme } from './components/Link/Link.themes';
 import { Theme as RadioTheme } from './components/Radio/Radio.themes';
 import { Theme as TextTheme } from './components/Text/Text.themes';
-import { Theme as TextFieldTheme } from './components/TextField/TextField.themes';
+import { Theme as InputTheme } from './components/Input/Input.themes';
 import { Theme as TableTheme } from './components/Table/Table.themes';
 import { Theme as SelectTheme } from './components/Select/Select.themes';
 import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
@@ -117,7 +117,7 @@ const stitches = createStitches({
       ...CheckboxTheme.getLight(primaryColor),
       ...LinkTheme.getLight(primaryColor),
       ...RadioTheme.getLight(primaryColor),
-      ...TextFieldTheme.getLight(primaryColor),
+      ...InputTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
       ...SelectTheme.getLight(primaryColor),
@@ -357,7 +357,7 @@ export const customColors = (primary: Property.Color) => {
       ...CheckboxTheme.getDark(primaryColor),
       ...LinkTheme.getDark(primaryColor),
       ...RadioTheme.getDark(primaryColor),
-      ...TextFieldTheme.getDark(primaryColor),
+      ...InputTheme.getDark(primaryColor),
       ...TableTheme.getDark(primaryColor),
       ...TextTheme.getDark(primaryColor),
       ...SelectTheme.getDark(primaryColor),
@@ -376,7 +376,7 @@ export const customColors = (primary: Property.Color) => {
       ...CheckboxTheme.getLight(primaryColor),
       ...LinkTheme.getLight(primaryColor),
       ...RadioTheme.getLight(primaryColor),
-      ...TextFieldTheme.getLight(primaryColor),
+      ...InputTheme.getLight(primaryColor),
       ...TableTheme.getLight(primaryColor),
       ...TextTheme.getLight(primaryColor),
       ...SelectTheme.getLight(primaryColor),
