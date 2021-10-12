@@ -1,9 +1,7 @@
-import {CSS, styled} from '../../stitches.config';
-import {Elevation} from "../Elevation/Elevation";
-import React, {forwardRef} from "react";
-import {ComponentProps, ScaleValue, VariantProps} from "@stitches/react";
+import { styled } from '../../stitches.config';
+import { elevationVariant } from '../Elevation/Elevation';
 
-const StyledCard = styled('div', {
+export const Card = styled('div', {
   appearance: 'none',
   border: 'none',
   boxSizing: 'border-box',
@@ -21,7 +19,6 @@ const StyledCard = styled('div', {
   color: 'inherit',
   borderRadius: '$3',
   position: 'relative',
-  boxShadow: '0 0 10px 0px $colors$cardShadow',
 
   '&::before': {
     boxSizing: 'border-box',
@@ -31,21 +28,19 @@ const StyledCard = styled('div', {
     right: 0,
     bottom: 0,
     left: 0,
-    boxShadow: 'inset 0 0 0 1px $colors$cardBorder',
     borderRadius: '$3',
     pointerEvents: 'none',
   },
 
   variants: {
+    elevation: elevationVariant,
     variant: {
       inner: {
         backgroundColor: 'rgba(255,255,255,.07)',
       },
       ghost: {
-        backgroundColor: '$cardGhostBackground',
-        '&::before': {
-          boxShadow: 'none',
-        },
+        backgroundColor: 'none',
+        boxShadow: 'none',
       },
     },
     interactive: {
@@ -69,14 +64,7 @@ const StyledCard = styled('div', {
       },
     },
   },
+  defaultVariants: {
+    elevation: 1,
+  },
 });
-
-type CardVariantProps = VariantProps<typeof StyledCard>;
-type CardComponentProps = React.ComponentProps<typeof StyledCard>;
-type CardProps = CardVariantProps & CardComponentProps & { css?: CSS, elevation: 0 | 1 | 2 | 3 | 4 | 5 };
-
-export const Card2 = forwardRef<React.ElementRef<typeof StyledCard>, CardProps>(({elevation, ...props}, forwardedRed) => (
-  <Elevation height={elevation}>
-    <StyledCard ref={forwardedRed} {...props} />
-  </Elevation>
-))

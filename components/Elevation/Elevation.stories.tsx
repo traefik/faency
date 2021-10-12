@@ -1,8 +1,8 @@
 import React from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {Elevation} from "./Elevation";
-import {Flex} from "../Flex";
-import {Text} from '../Text'
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Elevation } from './Elevation';
+import { Flex } from '../Flex';
+import { Text } from '../Text';
 
 export default {
   title: 'Components/Elevations',
@@ -11,46 +11,68 @@ export default {
 
 export const Basic: ComponentStory<typeof Elevation> = (args) => (
   <Flex gap={3}>
-    <Elevation height={0}>
-      <Flex justify="center" align="center" css={{width: '100px', height: '100px', bg: '$cardBackground'}}>
+    <Elevation variant={0}>
+      <Flex
+        justify="center"
+        align="center"
+        css={{ width: '100px', height: '100px', bg: '$cardBackground' }}
+      >
         <Text>Hello world</Text>
       </Flex>
     </Elevation>
-    <Elevation height={1}>
-      <Flex justify="center" align="center" css={{width: '100px', height: '100px', bg: '$cardBackground'}}>
+    <Elevation variant={1}>
+      <Flex
+        justify="center"
+        align="center"
+        css={{ width: '100px', height: '100px', bg: '$cardBackground' }}
+      >
         <Text>Hello world</Text>
       </Flex>
     </Elevation>
-    <Elevation height={2}>
-      <Flex justify="center" align="center" css={{width: '100px', height: '100px', bg: '$cardBackground'}}>
+    <Elevation variant={2}>
+      <Flex
+        justify="center"
+        align="center"
+        css={{ width: '100px', height: '100px', bg: '$cardBackground' }}
+      >
         <Text>Hello world</Text>
       </Flex>
     </Elevation>
-    <Elevation height={3}>
-      <Flex justify="center" align="center" css={{width: '100px', height: '100px', bg: '$cardBackground'}}>
+    <Elevation variant={3}>
+      <Flex
+        justify="center"
+        align="center"
+        css={{ width: '100px', height: '100px', bg: '$cardBackground' }}
+      >
         <Text>Hello world</Text>
       </Flex>
     </Elevation>
-    <Elevation height={4}>
-      <Flex justify="center" align="center" css={{width: '100px', height: '100px', bg: '$cardBackground'}}>
+    <Elevation variant={4}>
+      <Flex
+        justify="center"
+        align="center"
+        css={{ width: '100px', height: '100px', bg: '$cardBackground' }}
+      >
         <Text>Hello world</Text>
       </Flex>
     </Elevation>
-    <Elevation height={5}>
-      <Flex justify="center" align="center" css={{width: '100px', height: '100px', bg: '$cardBackground'}}>
+    <Elevation variant={5}>
+      <Flex
+        justify="center"
+        align="center"
+        css={{ width: '100px', height: '100px', bg: '$cardBackground' }}
+      >
         <Text>Hello world</Text>
       </Flex>
     </Elevation>
   </Flex>
 );
 
-Basic.args = {
-  height: 0
-};
+Basic.args = {};
 
 Basic.argTypes = {
-  height: {
+  variant: {
     control: 'inline-radio',
-    options: [0, 1, 2, 3, 4, 5]
-  }
-}
+    options: [0, 1, 2, 3, 4, 5],
+  },
+};
