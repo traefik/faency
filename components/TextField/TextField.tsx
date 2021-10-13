@@ -1,22 +1,78 @@
-import { VariantProps } from '@stitches/react';
-import { forwardRef } from 'markdown-to-jsx/node_modules/@types/react';
+import React from 'react';
 import { styled } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 import { Input, InputProps, InputVariants } from '../Input';
+import { IconButton } from '../IconButton';
+import { ExclamationTriangleIcon, CrossCircledIcon } from '@radix-ui/react-icons';
 
+// COMPONENTS
+const AdornmentGroup = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+});
 
-// handles error specific layout + search layout
+// TYPES
+export type TextFieldProps = InputProps & {
+  clearable?: boolean,
+}
+
+export type TextFieldVariants = InputVariants;
+
 export const TextField = React.forwardRef<
-  React.ElementRef<typeof Input>,
-  InputProps
->(({ }, ref) => {
-  error && ()
-    <>
-    // displays icons correctly
-    <InputField startIcon={ } endIcon={ } />
-  </>
-})
+  HTMLInputElement,
+  TextFieldProps
+>(({ state, clearable, ...props }, forwardedRef) => {
+  const inputRef = React.useRef<HTMLInputElement | null>(forwardedRef);
 
-export type TextFieldVariants = VariantProps<typeof TextField>;
-export type TextFieldProps = TextFieldVariants & {};
+  const invalid = React.useMemo(
+    () => state === 'invalid',
+    [state],
+  );
+
+  const handleClear = React.useCallback(
+    () => {
+      const { current } = inputRef;
+      if (current) {
+        current.value = '';
+      }
+    },
+    [inputRef],
+  );
+
+  const endAdornment = React.useMemo(
+    () => {
+      if (clearable && invalid) {
+        return (
+          <AdornmentGroup>
+            <ExclamationTriangleIcon />
+            <IconButton onClick={handleClear}>
+              <CrossCircledIcon />
+            </IconButton>
+          </AdornmentGroup>
+        )
+      }
+      if (clearable) {
+        return (
+          <IconButton onClick={handleClear}>
+            <CrossCircledIcon />
+          </IconButton>
+        )
+      }
+      if (invalid) {
+        return <ExclamationTriangleIcon />
+      }
+      return null;
+    },
+    [clearable, invalid, handleClear],
+  );
+
+  return (
+    <Input
+      ref={inputRef}
+      endAdornment={endAdornment}
+      state={state}
+      {...props}
+    />
+  );
+})
