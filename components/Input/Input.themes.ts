@@ -18,7 +18,7 @@ export namespace Theme {
     inputBg: '$deepBlue3',
     inputBorder: '$deepBlue6',
     inputFocusBg: '$deepBlue2',
-    inputFocusBorder: '$deepBlue10',
+    inputFocusBorder: 'hsl(68, 53.3%, 47.8%)', // @TODO: add color inside neon theme palette
     inputHoverBg: '$deepBlue2',
     inputText: '$deepBlue9',
     inputPlaceholder: '$deepBlue6',
@@ -31,7 +31,7 @@ export namespace Theme {
     inputBg: '$deepBlue3',
     inputBorder: '$deepBlue6',
     inputFocusBg: '$deepBlue1',
-    inputFocusBorder: '$deepBlue9',
+    inputFocusBorder: '$neon5',
     inputHoverBg: '$deepBlue1',
     inputText: '$deepBlue9',
     inputPlaceholder: '$deepBlue6',

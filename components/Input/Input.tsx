@@ -108,6 +108,12 @@ const StyledInput = styled('input', {
         },
       },
     },
+    startAdornment: {
+      true: {},
+    },
+    endAdornment: {
+      true: {}
+    },
     variant: {
       ghost: {
         boxShadow: 'none',
@@ -131,9 +137,9 @@ const StyledInput = styled('input', {
     },
     state: {
       invalid: {
-        boxShadow: 'inset 0 0 0 2px $colors$red9',
+        boxShadow: 'inset 0 0 0 1px $colors$red8',
         '&:focus': {
-          boxShadow: 'inset 0px 0px 0px 1px $colors$red9, 0px 0px 0px 1px $colors$red9',
+          boxShadow: 'inset 0px 0px 0px 1px $colors$red8, 0px 0px 0px 1px $colors$red8',
         },
       },
     },
@@ -152,28 +158,77 @@ const StyledInput = styled('input', {
   defaultVariants: {
     size: 'medium',
   },
+  compoundVariants: [
+    {
+      startAdornment: true,
+      size: 'small',
+      css: {
+        paddingInlineStart: 'calc($2 + 15px)',
+      }
+    },
+    {
+      startAdornment: true,
+      size: 'medium',
+      css: {
+        paddingInlineStart: 'calc($3 + 15px)',
+      }
+    },
+    {
+      startAdornment: true,
+      size: 'large',
+      css: {
+        paddingInlineStart: 'calc($3 + 15px)',
+      }
+    },
+    {
+      endAdornment: true,
+      size: 'small',
+      css: {
+        paddingInlineEnd: 'calc($2 + 15px)',
+      }
+    },
+    {
+      endAdornment: true,
+      size: 'medium',
+      css: {
+        paddingInlineEnd: 'calc($3 + 15px)',
+      }
+    },
+    {
+      endAdornment: true,
+      size: 'large',
+      css: {
+        paddingInlineEnd: 'calc($3 + 15px)',
+      }
+    },
+  ]
 });
 
 const InputWrapper = styled('div', {
-  backgroundColor: '$inputBg',
   position: 'relative',
-  variants: {
-    startAdornment: {
-      true: {
-        marginInlineStart: 16, // small icon
-      }
-    },
-    endAdornment: {
-      true: {
-        marginInlineEnd: 16, // small icon
-      }
-    }
-  },
 });
 
 const AdornmentWrapper = styled('div', {
   position: 'absolute',
+  top: 0,
+  zIndex: 1,
+  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   variants: {
+    // TODO: avoid variant duplication
+    size: {
+      small: {
+        mx: 'calc($2 / 2)',
+      },
+      medium: {
+        mx: 'calc($3 / 2)',
+      },
+      large: {
+        mx: 'calc($3 / 2)',
+      }
+    },
     variant: {
       start: {
         left: 0,
@@ -182,30 +237,58 @@ const AdornmentWrapper = styled('div', {
         right: 0,
       }
     }
-  }
+  },
+  // TODO: avoid defaultVariant duplication
+  defaultVariants: {
+    size: 'medium',
+  },
 });
 
 export type InputVariants = VariantProps<typeof StyledInput>;
 export type InputProps = InputVariants & {
-  startAdornment?: React.ReactNode,
-  endAdornment?: React.ReactNode,
+  startAdornment?: React.ReactNode | null,
+  endAdornment?: React.ReactNode | null,
 };
 
 export const Input = React.forwardRef<
   React.ElementRef<typeof StyledInput>,
   InputProps
->(({ startAdornment, endAdornment, ...props }, forwardedRef) => {
+>(({ startAdornment, endAdornment, size, ...props }, forwardedRef) => {
+  const hasStartAdornment = React.useMemo(
+    () => Boolean(startAdornment),
+    [startAdornment],
+  );
+
+  const hasEndAdornment = React.useMemo(
+    () => Boolean(endAdornment),
+    [endAdornment],
+  );
+
   return (
-    <InputWrapper startAdornment={Boolean(startAdornment)} endAdornment={Boolean(endAdornment)}>
-      {startAdornment && (
-        <AdornmentWrapper variant="start">
+    <InputWrapper>
+      {hasStartAdornment && (
+        <AdornmentWrapper
+          variant="start"
+          size={size}
+        >
           {startAdornment}
         </AdornmentWrapper>
       )}
-      <StyledInput ref={forwardedRef} {...props} />
-      <AdornmentWrapper variant="end">
-        {endAdornment}
-      </AdornmentWrapper>
+      <StyledInput
+        ref={forwardedRef}
+        startAdornment={hasStartAdornment}
+        endAdornment={hasEndAdornment}
+        size={size}
+        {...props}
+      />
+      {hasEndAdornment && (
+        <AdornmentWrapper
+          variant="end"
+          size={size}
+        >
+          {endAdornment}
+        </AdornmentWrapper>
+      )}
     </InputWrapper>
   );
 });
