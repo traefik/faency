@@ -92,6 +92,7 @@ export const IconButton = styled('button', {
     },
   },
   defaultVariants: {
+    variant: 'default',
     size: '2',
     ghost: true,
   },
