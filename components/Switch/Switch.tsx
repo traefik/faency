@@ -1,21 +1,28 @@
 import React from 'react';
-import { styled, VariantProps, CSS } from '../stitches.config';
+import { styled, VariantProps, CSS } from '../../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 
+// CONSTANTS
+const THUMB_DIAMETER = 14; // @FIXME: shouldn't this size be part of theme ?
+const THUMB_GAP = 2; // Gap between thumb and background
+const ROOT_WIDTH = 32;
+const ROOT_HEIGHT = 18;
+
+// COMPONENTS
 const StyledThumb = styled(SwitchPrimitive.Thumb, {
   position: 'absolute',
   left: 0,
-  width: 13,
-  height: 13,
+  width: THUMB_DIAMETER,
+  height: THUMB_DIAMETER,
   backgroundColor: 'white',
   borderRadius: '$round',
   boxShadow: 'rgba(0, 0, 0, 0.3) 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 1px 2px;',
   transition: 'transform 100ms cubic-bezier(0.22, 1, 0.36, 1)',
-  transform: 'translateX(1px)',
+  transform: `translateX(${THUMB_GAP}px)`,
   willChange: 'transform',
 
   '&[data-state="checked"]': {
-    transform: 'translateX(11px)',
+    transform: `translateX(${ROOT_WIDTH - THUMB_GAP - THUMB_DIAMETER}px)`,
   },
 });
 
@@ -56,8 +63,8 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   variants: {
     size: {
       '1': {
-        width: '$5',
-        height: '$3',
+        width: ROOT_WIDTH,
+        height: ROOT_HEIGHT,
       },
       '2': {
         width: '$7',
@@ -78,9 +85,9 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   },
 });
 
-type SwitchVariants = VariantProps<typeof StyledSwitch>;
+export type SwitchVariants = VariantProps<typeof StyledSwitch>;
 type SwitchPrimitiveProps = Omit<React.ComponentProps<typeof SwitchPrimitive.Root>, 'as'>;
-type SwitchProps = SwitchPrimitiveProps & SwitchVariants & { css?: CSS };
+export type SwitchProps = SwitchPrimitiveProps & SwitchVariants & { css?: CSS };
 
 export const Switch = React.forwardRef<React.ElementRef<typeof StyledSwitch>, SwitchProps>(
   (props, forwardedRef) => (
