@@ -206,6 +206,7 @@ const StyledInput = styled('input', {
 
 const InputWrapper = styled('div', {
   position: 'relative',
+  backgroundColor: '$wrapperBg',
 });
 
 const AdornmentWrapper = styled('div', {
@@ -217,7 +218,6 @@ const AdornmentWrapper = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   variants: {
-    // TODO: avoid variant duplication
     size: {
       small: {
         mx: 'calc($2 / 2)',
@@ -238,7 +238,63 @@ const AdornmentWrapper = styled('div', {
       }
     }
   },
-  // TODO: avoid defaultVariant duplication
+  compoundVariants: [
+    {
+      variant: 'start',
+      size: 'small',
+      css: {
+        [`& ${IconButton}:first-of-type`]: { // remove start margin for first IconButton
+          marginInlineStart: 'calc(-$2 / 2)'
+        }
+      }
+    },
+    {
+      variant: 'start',
+      size: 'medium',
+      css: {
+        [`& ${IconButton}:first-of-type`]: { // remove start margin for first IconButton
+          marginInlineStart: 'calc(-$3 / 2)'
+        }
+      }
+    },
+    {
+      variant: 'start',
+      size: 'large',
+      css: {
+        [`& ${IconButton}:first-of-type`]: { // remove start margin for first IconButton
+          marginInlineStart: 'calc(-$3 / 2)'
+        }
+      }
+    },
+    {
+      variant: 'end',
+      size: 'small',
+      css: {
+        [`& ${IconButton}:last-of-type`]: { // remove end margin for last IconButton
+          marginInlineEnd: 'calc(-$3 / 2)'
+        }
+      }
+    },
+    {
+      variant: 'end',
+      size: 'medium',
+      css: {
+        [`& ${IconButton}:last-of-type`]: { // remove end margin for last IconButton
+          marginInlineEnd: 'calc(-$3 / 2)'
+        }
+      }
+    },
+    {
+      variant: 'end',
+      size: 'large',
+      css: {
+        [`& ${IconButton}:last-of-type`]: { // remove end margin for last IconButton
+          marginInlineEnd: 'calc(-$3 / 2)'
+        }
+      }
+    },
+
+  ],
   defaultVariants: {
     size: 'medium',
   },
