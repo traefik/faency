@@ -1,9 +1,17 @@
 import React from 'react';
 import { styled } from '../../stitches.config';
 
-import { Input, InputProps, InputVariants } from '../Input';
+import { Input, InputHandle, InputProps, InputVariants } from '../Input';
 import { IconButton } from '../IconButton';
-import { ExclamationTriangleIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { ExclamationTriangleIcon, CrossCircledIcon, EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
+
+// TYPES
+export type TextFieldProps = InputProps & {
+  type?: string,
+  clearable?: boolean,
+}
+
+export type TextFieldVariants = InputVariants;
 
 // COMPONENTS
 const AdornmentGroup = styled('div', {
@@ -12,14 +20,6 @@ const AdornmentGroup = styled('div', {
   alignItems: 'center',
 });
 
-// TYPES
-export type TextFieldProps = InputProps & {
-  clearable?: boolean,
-}
-
-export type TextFieldVariants = InputVariants;
-
-// COMPONENTS
 const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
   color: '$slate10', // follow iconbutton default color
   '& + *': {
@@ -28,58 +28,82 @@ const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
 });
 
 export const TextField = React.forwardRef<
-  HTMLInputElement,
+  React.ElementRef<typeof Input>,
   TextFieldProps
->(({ state, clearable, ...props }, forwardedRef) => {
-  const inputRef = React.useRef<HTMLInputElement>(forwardedRef);
+>(({ state, clearable, type, ...props }, forwardedRef) => {
+  const inputRef = React.useRef<InputHandle | null>(null);
+  React.useImperativeHandle(forwardedRef, () => inputRef.current as InputHandle);
+
+  const [innerType, setInnerType] = React.useState(type);
+  const isPasswordVisible = React.useMemo(
+    () => innerType !== "password",
+    [innerType],
+  );
 
   const invalid = React.useMemo(
     () => state === 'invalid',
     [state],
   );
 
+  const isPasswordType = React.useMemo(
+    () => type === 'password',
+    [type],
+  );
+
+  const typeOrInnerType = React.useMemo(
+    () => isPasswordType ? innerType : type,
+    [isPasswordType, type, innerType],
+  );
+
+  const hasAdornmentGroup = React.useMemo(
+    () => (clearable && invalid)
+      || (clearable && isPasswordType)
+      || (invalid && isPasswordType),
+    [clearable, invalid, isPasswordType],
+  );
+
   const handleClear = React.useCallback(
     () => {
       const { current } = inputRef;
       if (current) {
-        current.value = '';
+        current.clear();
       }
     },
     [inputRef],
   );
 
-  const endAdornment = React.useMemo(
+  const togglePasswordVisibility = React.useCallback(
     () => {
-      if (clearable && invalid) {
-        return (
-          <AdornmentGroup>
-            <StyledExclamationTriangleIcon />
-            <IconButton onClick={handleClear}>
-              <CrossCircledIcon />
-            </IconButton>
-          </AdornmentGroup>
-        )
-      }
-      if (clearable) {
-        return (
-          <IconButton onClick={handleClear}>
-            <CrossCircledIcon />
-          </IconButton>
-        )
-      }
-      if (invalid) {
-        return <StyledExclamationTriangleIcon />
-      }
-      return null;
+      setInnerType(prevInnerType => prevInnerType === 'password' ? undefined : 'password');
     },
-    [clearable, invalid, handleClear],
+    [setInnerType],
+  );
+
+  const EndAdornmentWrapper = React.useMemo(
+    () => hasAdornmentGroup ? AdornmentGroup : React.Fragment,
+    [hasAdornmentGroup],
   );
 
   return (
     <Input
       ref={inputRef}
-      endAdornment={endAdornment}
+      endAdornment={(
+        <EndAdornmentWrapper>
+          {invalid && <StyledExclamationTriangleIcon />}
+          {isPasswordType && (
+            <IconButton onClick={togglePasswordVisibility}>
+              {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
+            </IconButton>
+          )}
+          {clearable && (
+            <IconButton onClick={handleClear}>
+              <CrossCircledIcon />
+            </IconButton>
+          )}
+        </EndAdornmentWrapper>
+      )}
       state={state}
+      type={typeOrInnerType}
       {...props}
     />
   );
