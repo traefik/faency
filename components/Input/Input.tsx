@@ -2,6 +2,8 @@ import React from 'react';
 import { VariantProps } from '@stitches/react';
 import { styled } from '../../stitches.config';
 
+import { IconButton } from '../IconButton';
+
 const StyledInput = styled('input', {
   // Reset
   appearance: 'none',
@@ -300,16 +302,39 @@ const AdornmentWrapper = styled('div', {
   },
 });
 
-export type InputVariants = VariantProps<typeof StyledInput>;
+type DefaultInputVariants = VariantProps<typeof StyledInput>;
+export type InputVariants = Omit<DefaultInputVariants, "startAdornment" | "endAdornment">
 export type InputProps = InputVariants & {
   startAdornment?: React.ReactNode | null,
   endAdornment?: React.ReactNode | null,
+  type?: string
 };
+export type InputHandle = {
+  clear: () => void
+  focus: () => void
+}
 
 export const Input = React.forwardRef<
-  React.ElementRef<typeof StyledInput>,
+  InputHandle,
   InputProps
 >(({ startAdornment, endAdornment, size, ...props }, forwardedRef) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  React.useImperativeHandle(forwardedRef, () => ({
+    clear: () => {
+      const { current } = inputRef;
+      if (current) {
+        current.value = '';
+      }
+    },
+    focus: () => {
+      const { current } = inputRef;
+      if (current) {
+        current.focus();
+      }
+    }
+  }), [inputRef]);
+
   const hasStartAdornment = React.useMemo(
     () => Boolean(startAdornment),
     [startAdornment],
@@ -331,7 +356,7 @@ export const Input = React.forwardRef<
         </AdornmentWrapper>
       )}
       <StyledInput
-        ref={forwardedRef}
+        ref={inputRef}
         startAdornment={hasStartAdornment}
         endAdornment={hasEndAdornment}
         size={size}
