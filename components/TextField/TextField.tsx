@@ -19,11 +19,19 @@ export type TextFieldProps = InputProps & {
 
 export type TextFieldVariants = InputVariants;
 
+// COMPONENTS
+const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
+  color: '$slate10', // follow iconbutton default color
+  '& + *': {
+    marginLeft: '$1'
+  }
+});
+
 export const TextField = React.forwardRef<
   HTMLInputElement,
   TextFieldProps
 >(({ state, clearable, ...props }, forwardedRef) => {
-  const inputRef = React.useRef<HTMLInputElement | null>(forwardedRef);
+  const inputRef = React.useRef<HTMLInputElement>(forwardedRef);
 
   const invalid = React.useMemo(
     () => state === 'invalid',
@@ -45,7 +53,7 @@ export const TextField = React.forwardRef<
       if (clearable && invalid) {
         return (
           <AdornmentGroup>
-            <ExclamationTriangleIcon />
+            <StyledExclamationTriangleIcon />
             <IconButton onClick={handleClear}>
               <CrossCircledIcon />
             </IconButton>
@@ -60,7 +68,7 @@ export const TextField = React.forwardRef<
         )
       }
       if (invalid) {
-        return <ExclamationTriangleIcon />
+        return <StyledExclamationTriangleIcon />
       }
       return null;
     },
