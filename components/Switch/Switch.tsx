@@ -14,7 +14,7 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
   left: 0,
   width: THUMB_DIAMETER,
   height: THUMB_DIAMETER,
-  backgroundColor: 'white',
+  backgroundColor: '$switchThumb',
   borderRadius: '$round',
   boxShadow: 'rgba(0, 0, 0, 0.3) 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 1px 2px;',
   transition: 'transform 100ms cubic-bezier(0.22, 1, 0.36, 1)',
@@ -46,17 +46,26 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   outline: 'none',
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
-  backgroundColor: '$slate5',
+  backgroundColor: '$switchBackground',
   borderRadius: '$pill',
   position: 'relative',
-  '&:focus': {
-    boxShadow: '0 0 0 2px $colors$slate8',
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer',
+      [`& ${StyledThumb}`]: {
+        boxShadow: '0 0 0 2px $colors$switchHoverThumb'
+      }
+    },
   },
 
   '&[data-state="checked"]': {
-    backgroundColor: '$blue9',
-    '&:focus': {
-      boxShadow: '0 0 0 2px $colors$blue8',
+    backgroundColor: '$switchActiveBackground',
+    '@hover': {
+      '&:hover': {
+        [`& ${StyledThumb}`]: {
+          boxShadow: '0 0 0 2px $colors$switchHoverActiveThumb'
+        }
+      },
     },
   },
 
@@ -65,6 +74,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
       '1': {
         width: ROOT_WIDTH,
         height: ROOT_HEIGHT,
+        m: '$2'
       },
       '2': {
         width: '$7',
