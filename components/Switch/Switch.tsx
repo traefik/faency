@@ -4,6 +4,7 @@ import * as SwitchPrimitive from '@radix-ui/react-switch';
 
 // CONSTANTS
 const THUMB_DIAMETER = 14; // @FIXME: shouldn't this size be part of theme ?
+const LARGE_RATIO = 1.5;
 const THUMB_GAP = 2; // Gap between thumb and background
 const ROOT_WIDTH = 32;
 const ROOT_HEIGHT = 18;
@@ -77,14 +78,31 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
         m: '$2'
       },
       '2': {
-        width: '$7',
-        height: '$5',
+        width: ROOT_WIDTH * LARGE_RATIO,
+        height: ROOT_HEIGHT * LARGE_RATIO,
+        '@hover': {
+          '&:hover': {
+            [`& ${StyledThumb}`]: {
+              boxShadow: '0 0 0 3px $colors$switchHoverThumb'
+            }
+          },
+        },
+        '&[data-state="checked"]': {
+          '@hover': {
+            '&:hover': {
+              [`& ${StyledThumb}`]: {
+                boxShadow: '0 0 0 3px $colors$switchHoverActiveThumb'
+              }
+            },
+          },
+        },
         [`& ${StyledThumb}`]: {
-          width: 21,
-          height: 21,
-          transform: 'translateX(2px)',
+          width: THUMB_DIAMETER * LARGE_RATIO,
+          height: THUMB_DIAMETER * LARGE_RATIO,
+          transform: `translateX(${LARGE_RATIO * THUMB_GAP})`,
+
           '&[data-state="checked"]': {
-            transform: 'translateX(22px)',
+            transform: `translateX(${LARGE_RATIO * (ROOT_WIDTH - THUMB_GAP - THUMB_DIAMETER)}px)`,
           },
         },
       },
