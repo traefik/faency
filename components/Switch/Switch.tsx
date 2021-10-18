@@ -107,6 +107,14 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
         },
       },
     },
+    disabled: {
+      true: {
+        pointerEvents: 'none',
+        [`& ${StyledThumb}`]: {
+          backgroundColor: '$switchDisabledThumb'
+        }
+      }
+    }
   },
   defaultVariants: {
     size: '1',

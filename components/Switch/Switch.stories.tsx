@@ -27,3 +27,7 @@ Basic.args = {};
 export const Large = Template.bind({});
 
 Large.args = { size: '2' };
+
+export const Disabled = Template.bind({});
+
+Disabled.args = { disabled: true };

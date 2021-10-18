@@ -5,6 +5,7 @@ export namespace Theme {
     switchThumb: string;
     switchHoverActiveThumb: string;
     switchActiveBackground: string;
+    switchDisabledThumb: string
   };
 
   type Factory = (primaryColor: string) => Colors;
@@ -15,6 +16,7 @@ export namespace Theme {
     switchThumb: 'hsla(0, 0%, 100%, 0.87)',
     switchHoverActiveThumb: 'hsla(0, 0%, 0%, 0.2)',
     switchActiveBackground: 'hsl(68, 53%, 36%)',
+    switchDisabledThumb: 'hsla(0, 0%, 100%, 0.26)'
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -23,5 +25,6 @@ export namespace Theme {
     switchThumb: 'hsla(0, 0%, 0%, 0.87)',
     switchHoverActiveThumb: 'hsla(0, 0%, 100%, 0.2)',
     switchActiveBackground: 'hsl(68, 79%, 60%)',
+    switchDisabledThumb: 'hsla(0, 0%, 100%, 0.26)'
   });
 }
