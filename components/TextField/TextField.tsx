@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from '../../stitches.config';
 
 import { Input, InputHandle, InputProps, InputVariants } from '../Input';
+import { Label } from '../Label';
 import { IconButton } from '../IconButton';
 import { ExclamationTriangleIcon, CrossCircledIcon, EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
 
@@ -9,6 +10,7 @@ import { ExclamationTriangleIcon, CrossCircledIcon, EyeOpenIcon, EyeClosedIcon }
 export type TextFieldProps = InputProps & {
   type?: string,
   clearable?: boolean,
+  label?: string,
 }
 
 export type TextFieldVariants = InputVariants;
@@ -30,10 +32,11 @@ const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
 export const TextField = React.forwardRef<
   React.ElementRef<typeof Input>,
   TextFieldProps
->(({ state, clearable, type, ...props }, forwardedRef) => {
+>(({ state, clearable, label, id, type, disabled, onBlur, onFocus, ...props }, forwardedRef) => {
   const inputRef = React.useRef<InputHandle | null>(null);
   React.useImperativeHandle(forwardedRef, () => inputRef.current as InputHandle);
 
+  const [inputHasFocus, setInputHasFocus] = React.useState(false);
   const [innerType, setInnerType] = React.useState(type);
   const isPasswordVisible = React.useMemo(
     () => innerType !== "password",
@@ -43,6 +46,22 @@ export const TextField = React.forwardRef<
   const invalid = React.useMemo(
     () => state === 'invalid',
     [state],
+  );
+
+  const labelVariant = React.useMemo(
+    () => {
+      if (invalid) {
+        return 'red';
+      }
+      if (disabled) {
+        return 'subtle';
+      }
+      if (inputHasFocus) {
+        return 'contrast';
+      }
+      return 'default';
+    },
+    [invalid, disabled, inputHasFocus],
   );
 
   const isPasswordType = React.useMemo(
@@ -72,6 +91,26 @@ export const TextField = React.forwardRef<
     [inputRef],
   );
 
+  const handleFocus = React.useCallback(
+    (e) => {
+      if (onFocus) {
+        onFocus(e);
+      }
+      setInputHasFocus(true);
+    },
+    [onFocus, setInputHasFocus],
+  );
+
+  const handleBlur = React.useCallback(
+    (e) => {
+      if (onBlur) {
+        onBlur(e);
+      }
+      setInputHasFocus(false);
+    },
+    [onBlur, setInputHasFocus],
+  );
+
   const togglePasswordVisibility = React.useCallback(
     () => {
       setInnerType(prevInnerType => prevInnerType === 'password' ? undefined : 'password');
@@ -85,26 +124,33 @@ export const TextField = React.forwardRef<
   );
 
   return (
-    <Input
-      ref={inputRef}
-      endAdornment={(
-        <EndAdornmentWrapper>
-          {invalid && <StyledExclamationTriangleIcon />}
-          {isPasswordType && (
-            <IconButton onClick={togglePasswordVisibility}>
-              {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
-            </IconButton>
-          )}
-          {clearable && (
-            <IconButton onClick={handleClear}>
-              <CrossCircledIcon />
-            </IconButton>
-          )}
-        </EndAdornmentWrapper>
-      )}
-      state={state}
-      type={typeOrInnerType}
-      {...props}
-    />
+    <>
+      {label && <Label variant={labelVariant} htmlFor={id}>{label}</Label>}
+      <Input
+        id={id}
+        ref={inputRef}
+        endAdornment={(
+          <EndAdornmentWrapper>
+            {invalid && <StyledExclamationTriangleIcon />}
+            {isPasswordType && (
+              <IconButton onClick={togglePasswordVisibility}>
+                {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
+              </IconButton>
+            )}
+            {clearable && (
+              <IconButton onClick={handleClear}>
+                <CrossCircledIcon />
+              </IconButton>
+            )}
+          </EndAdornmentWrapper>
+        )}
+        state={state}
+        type={typeOrInnerType}
+        disabled={disabled}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        {...props}
+      />
+    </>
   );
 })
