@@ -169,7 +169,7 @@ export const deepBlueDark = {
 
 const defaultPrimary: string = '$blue8';
 
-const colors: Record<string, string> = {
+export const colors: Record<string, string> = {
   ...gray,
   ...red,
   ...blue,
