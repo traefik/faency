@@ -18,6 +18,7 @@ export { Card } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 // export { Code } from './components/Code';
 export { Container } from './components/Container';
+export { Elevation } from './components/Elevation';
 // export { ControlGroup } from './components/ControlGroup';
 export { FaencyProvider } from './components/FaencyProvider';
 export { Dialog, DialogClose, DialogContent, DialogTrigger } from './components/Dialog';
@@ -52,7 +53,7 @@ export { Link } from './components/Link';
 //   MenuRadioItem,
 //   MenuSeparator,
 // } from './components/Menu';
-// export { Overlay } from './components/Overlay';
+export { Overlay } from './components/Overlay';
 // export { Paragraph } from './components/Paragraph';
 // export { Panel } from './components/Panel';
 export { Popover, PopoverClose, PopoverContent, PopoverTrigger } from './components/Popover';

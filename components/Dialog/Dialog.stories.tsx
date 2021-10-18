@@ -3,6 +3,7 @@ import { Dialog, DialogContent } from './Dialog';
 import { Text } from '../Text';
 import { useState } from 'react';
 import { Button } from '../Button';
+import { Box } from '../Box';
 
 export default {
   title: 'Components/Dialog',
@@ -34,20 +35,26 @@ const Content: React.FC = () => {
   );
 };
 
-export const Basic: ComponentStory<typeof Dialog> = (args) => (
-  <Dialog open={true}>
-    <DialogContent>
-      <Content />
-    </DialogContent>
-  </Dialog>
-);
-
-export const Actionable: ComponentStory<any> = (args) => {
+export const Basic: ComponentStory<any> = (args) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
+
+      <Box>
+        {[...Array(10)].map((_, i) => (
+          <Text key={i} css={{ my: '$1' }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+            mollit anim id est laborum.
+          </Text>
+        ))}
+      </Box>
+
       <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
         <DialogContent>
           <Content />

@@ -20,7 +20,7 @@ export namespace Theme {
     cardBorder: '$deepBlue3',
     cardShadow: 'rgba(0,0,0,.1)',
     cardHoverBackground: 'rgba(0,0,0,.05)',
-    cardHoverBorder: 'rgba(0,0,0,.15)',
+    cardHoverBorder: tinycolor(primaryColor).setAlpha(0.6).toString(),
     cardActiveBackground: 'rgba(0,0,0,.03)',
     cardActiveBorder: '$primary',
     cardGhostBackground: '$deepBlue2',
