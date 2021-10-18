@@ -1,6 +1,6 @@
 import React from 'react';
 import { VariantProps } from '@stitches/react';
-import { styled } from '../../stitches.config';
+import { styled, CSS } from '../../stitches.config';
 
 import { IconButton } from '../IconButton';
 
@@ -304,11 +304,14 @@ const AdornmentWrapper = styled('div', {
 
 type DefaultInputVariants = VariantProps<typeof StyledInput>;
 export type InputVariants = Omit<DefaultInputVariants, "startAdornment" | "endAdornment">
-export type InputProps = InputVariants & {
-  startAdornment?: React.ReactNode | null,
-  endAdornment?: React.ReactNode | null,
-  type?: string
+export interface HTMLInputProps extends React.InputHTMLAttributes<any> {
+  startAdornment?: React.ReactNode | null;
+  endAdornment?: React.ReactNode | null;
+  type?: string;
 };
+
+export type InputProps = Omit<HTMLInputProps, "size"> & InputVariants & { css?: CSS };
+
 export type InputHandle = {
   clear: () => void
   focus: () => void
@@ -317,7 +320,7 @@ export type InputHandle = {
 export const Input = React.forwardRef<
   InputHandle,
   InputProps
->(({ startAdornment, endAdornment, size, ...props }, forwardedRef) => {
+>(({ startAdornment, endAdornment, size, css, ...props }, forwardedRef) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   React.useImperativeHandle(forwardedRef, () => ({
@@ -346,7 +349,7 @@ export const Input = React.forwardRef<
   );
 
   return (
-    <InputWrapper>
+    <InputWrapper css={css}>
       {hasStartAdornment && (
         <AdornmentWrapper
           variant="start"
