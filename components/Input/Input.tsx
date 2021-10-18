@@ -28,6 +28,7 @@ const StyledInput = styled('input', {
   boxShadow: 'inset 0 0 0 1px $colors$inputBorder',
   color: '$inputText',
   fontVariantNumeric: 'tabular-nums',
+  transition: 'box-shadow .1s ease-in-out',
 
   '&:-webkit-autofill': {
     boxShadow: 'inset 0 0 0 2px $colors$inputBorder, inset 0 0 0 100px $colors$inputBg',
@@ -52,7 +53,6 @@ const StyledInput = styled('input', {
     backgroundColor: '$inputFocusBg',
     boxShadow:
       'inset 0px 0px 0px 1px $colors$inputFocusBorder, 0px 0px 0px 1px $colors$inputFocusBorder',
-    transition: 'box-shadow .1s ease-in-out',
     '&:-webkit-autofill': {
       boxShadow:
         'inset 0 0 0 2px $colors$inputFocusBorder, inset 0 0 0 100px $colors$inputBg',
@@ -61,22 +61,20 @@ const StyledInput = styled('input', {
   '&::placeholder': {
     color: '$inputPlaceholder',
   },
+  '&:read-only': {
+    boxShadow: 'inset 0px 0px 0px 1px $colors$inputReadOnlyBorder',
+    '&:focus-visible': {
+      boxShadow: 'inset 0px 0px 0px 1px $colors$inputBorder',
+    },
+  },
   '&:disabled': {
     pointerEvents: 'none',
-    boxShadow:
-      'inset 0px 0px 0px 1px $colors$inputDisabledBorder, 0px 0px 0px 1px $colors$inputDisabledBorder',
     color: '$inputDisabledText',
+    boxShadow: 'inset 0 0 0 1px $colors$inputDisabledBorder',
     '&::placeholder': {
       color: '$inputDisabledText',
     },
   },
-  '&:read-only': {
-    backgroundColor: '$inputReadOnlyBg',
-    '&:focus': {
-      boxShadow: 'inset 0px 0px 0px 2px $colors$inputBorder',
-    },
-  },
-
   variants: {
     size: {
       small: {
@@ -122,26 +120,22 @@ const StyledInput = styled('input', {
         backgroundColor: 'transparent',
         '@hover': {
           '&:hover': {
-            boxShadow: 'inset 0 0 0 1px $colors$slateA7',
+            boxShadow: 'inset 0 0 0 1px $colors$inputHoverBorderGhost',
           },
         },
         '&:focus': {
           backgroundColor: '$loContrast',
-          boxShadow: 'inset 0px 0px 0px 1px $colors$blue8, 0px 0px 0px 1px $colors$blue8',
         },
-        '&:disabled': {
-          backgroundColor: 'transparent',
-        },
-        '&:read-only': {
-          backgroundColor: 'transparent',
+        '&:focus-visible': {
+          boxShadow: 'inset 0px 0px 0px 1px $colors$inputFocusBorderGhost, 0px 0px 0px 1px $colors$inputFocusBorderGhost',
         },
       },
     },
     state: {
       invalid: {
-        boxShadow: 'inset 0 0 0 1px $colors$red8',
-        '&:focus': {
-          boxShadow: 'inset 0px 0px 0px 1px $colors$red8, 0px 0px 0px 1px $colors$red8',
+        boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder',
+        '&:focus-visible': {
+          boxShadow: 'inset 0px 0px 0px 1px $colors$inputInvalidBorder, 0px 0px 0px 1px $colors$inputInvalidBorder',
         },
       },
     },
@@ -159,6 +153,7 @@ const StyledInput = styled('input', {
   },
   defaultVariants: {
     size: 'medium',
+    cursor: 'default'
   },
   compoundVariants: [
     {

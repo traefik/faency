@@ -43,3 +43,7 @@ Disabled.args = { disabled: true, value: 'value' };
 export const ReadOnly = Template.bind({});
 
 ReadOnly.args = { readOnly: true, value: 'value' };
+
+export const Ghost = Template.bind({});
+
+Ghost.args = { variant: 'ghost' };
