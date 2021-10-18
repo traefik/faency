@@ -36,8 +36,7 @@ export const Colors = () => {
         const nb = token && token.match(nbPattern);
 
         if (!nb) {
-          acc.push({ name: token, colors: [{ token, value }] });
-          return acc;
+          return [...acc, { name: token, colors: [{ token, value }] }];
         }
 
         const colorGroupName = token.replace(`${nb}`, '');
@@ -48,11 +47,10 @@ export const Colors = () => {
             name: colorGroupName,
             colors: [...acc[colorGroupIdx].colors, { token, value }],
           };
-        } else {
-          acc.push({ name: colorGroupName, colors: [{ token, value }] });
+          return acc;
         }
 
-        return acc;
+        return [...acc, { name: colorGroupName, colors: [{ token, value }] }];
       }, []),
     [colors]
   );
@@ -68,50 +66,40 @@ export const Colors = () => {
           <Heading size="3" css={{ mb: '$2' }}>
             {colorGroup.name}
           </Heading>
-          <Card css={{ display: 'flex', bc: '$deepBlue1', overflow: 'auto', mb: '$3' }}>
-            {colorGroup.colors.map((color) => (
-              <Box css={{ textAlign: 'center', p: '$2' }}>
-                <Box
+          {['light', 'dark'].map((theme) => (
+            <Card
+              className={theme}
+              css={{ display: 'flex', bc: '$deepBlue1', overflow: 'auto', mb: '$3' }}
+            >
+              {colorGroup.colors.map((color) => (
+                <Flex
                   css={{
-                    mb: '$2',
-                    bc: color.value,
-                    size: 80,
-                    borderWidth: 1,
-                    borderStyle: 'solid',
-                    borderColor: '$colors$gray7',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    p: '$2',
                   }}
-                />
-                <Text variant="subtle" css={{ pb: '$1' }}>
-                  {color.token}
-                </Text>
-                <Text variant="subtle" size="0">
-                  {color.value}
-                </Text>
-              </Box>
-            ))}
-          </Card>
-          <Card className="dark" css={{ display: 'flex', bc: '$deepBlue1', overflow: 'auto' }}>
-            {colorGroup.colors.map((color) => (
-              <Box css={{ textAlign: 'center', p: '$2' }}>
-                <Box
-                  css={{
-                    mb: '$2',
-                    bc: `$${color.token}`,
-                    size: 80,
-                    borderWidth: 1,
-                    borderStyle: 'solid',
-                    borderColor: '$colors$gray8 ',
-                  }}
-                />
-                <Text variant="subtle" css={{ pb: '$1' }}>
-                  {color.token}
-                </Text>
-                <Text variant="subtle" size="0">
-                  {color.value}
-                </Text>
-              </Box>
-            ))}
-          </Card>
+                >
+                  <Box
+                    css={{
+                      mb: '$2',
+                      bc: color.value,
+                      size: 80,
+                      borderWidth: 1,
+                      borderStyle: 'solid',
+                      borderColor: '$colors$gray7',
+                    }}
+                  />
+                  <Text variant="subtle" css={{ pb: '$1', textAlign: 'center' }}>
+                    {color.token}
+                  </Text>
+                  <Text variant="subtle" size="0" css={{ textAlign: 'center' }}>
+                    {color.value}
+                  </Text>
+                </Flex>
+              ))}
+            </Card>
+          ))}
         </Card>
       ))}
     </Flex>
