@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Badge, Box, Button, Card, Flex, Heading, Text, TextField } from '../../index';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 export const Dashboard = () => (
   <Box css={{ p: '$6' }}>
@@ -13,8 +14,12 @@ export const Dashboard = () => (
           Items
         </Heading>
 
-        <Flex css={{ gap: '$3' }}>
-          <TextField placeholder="Search..." />
+        <Flex align="center" css={{ gap: '$3' }}>
+          <TextField
+            startAdornment={<MagnifyingGlassIcon />}
+            placeholder='Search...'
+            clearable
+          />
           <Button variant="secondary">Go</Button>
         </Flex>
       </Flex>

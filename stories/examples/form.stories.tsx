@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '../../components/Link';
 
-import { Box, Button, Card, Checkbox, Flex, Label, Heading, TextField } from '../../index';
+import { Button, Card, Checkbox, Flex, Label, Heading, TextField } from '../../index';
 
 export const Form = () => (
   <Flex css={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -10,31 +10,26 @@ export const Form = () => (
     </Heading>
     <Card css={{ p: '$6' }}>
       <form>
-        <>
-          <Label htmlFor="email">Email</Label>
-          <TextField
-            id="email"
-            type="email"
-            name="email"
-            size="large"
-            placeholder="Your e-mail address"
-            autoComplete="email"
-            css={{ mb: '$3' }}
-          />
-        </>
-
-        <>
-          <Label htmlFor="password">Password</Label>
-          <TextField
-            id="password"
-            type="password"
-            name="password"
-            size="large"
-            placeholder="A secured password"
-            autoComplete="new-password"
-            css={{ mb: '$4' }}
-          />
-        </>
+        <TextField
+          id="email"
+          type="email"
+          name="email"
+          label="Email"
+          size="large"
+          placeholder="Your e-mail address"
+          autoComplete="email"
+          css={{ mb: '$3' }}
+        />
+        <TextField
+          id="password"
+          type="password"
+          label="Password"
+          name="password"
+          size="large"
+          placeholder="A secured password"
+          autoComplete="new-password"
+          css={{ mb: '$4' }}
+        />
 
         <Flex css={{ alignItems: 'center', mb: '$3' }}>
           <Checkbox id="terms" name="terms" css={{ mr: '$2' }} />
