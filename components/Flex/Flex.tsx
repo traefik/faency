@@ -37,6 +37,15 @@ export const Flex = styled('div', {
       baseline: {
         alignItems: 'baseline',
       },
+      ['space-evenly']: {
+        alignItems: 'space-evenly',
+      },
+      ['space-between']: {
+        alignItems: 'space-between',
+      },
+      ['space-around']: {
+        alignItems: 'space-around',
+      },
     },
     justify: {
       start: {
@@ -50,6 +59,15 @@ export const Flex = styled('div', {
       },
       between: {
         justifyContent: 'space-between',
+      },
+      ['space-evenly']: {
+        justifyContent: 'space-evenly',
+      },
+      ['space-between']: {
+        justifyContent: 'space-between',
+      },
+      ['space-around']: {
+        justifyContent: 'space-around',
       },
     },
     wrap: {
