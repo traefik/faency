@@ -6,11 +6,11 @@ export const Label = styled(LabelPrimitive.Root, Text, {
   display: 'inline-block',
   verticalAlign: 'middle',
   cursor: 'default',
-  textTransform: 'uppercase',
   fontWeight: 500,
   lineHeight: 2.18,
   defaultVariants: {
     size: '0',
     variant: 'subtle',
+    transform: 'capitalize',
   },
 });
