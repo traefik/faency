@@ -58,6 +58,9 @@ export const Text = styled('span', {
       subtle: {
         color: '$textSubtle',
       },
+      default: {
+        color: '$textDefault',
+      },
       contrast: {
         color: '$textContrast',
       },
@@ -68,10 +71,25 @@ export const Text = styled('span', {
         WebkitTextFillColor: 'transparent',
       },
     },
+    transform: {
+      uppercase: {
+        textTransform: 'uppercase'
+      },
+      capitalize: {
+        textTransform: 'capitalize'
+      }
+    },
+    noWrap: {
+      true: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+      }
+    }
   },
   defaultVariants: {
     size: '3',
-    variant: 'contrast',
+    variant: 'default',
   },
 });
 

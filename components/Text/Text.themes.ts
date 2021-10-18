@@ -3,18 +3,21 @@ import { Property } from '@stitches/react/types/css';
 export namespace Theme {
   type Colors = {
     textSubtle: Property.Color;
+    textDefault: Property.Color;
     textContrast: Property.Color;
   };
 
   type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = () => ({
-    textSubtle: '$deepBlue7',
-    textContrast: '$hiContrast',
+  export const getLight: Factory = (primaryColor) => ({
+    textSubtle: 'hsla(0, 0%, 0%, 0.51)',
+    textDefault: 'hsla(0, 0%, 0%, 0.74)',
+    textContrast: 'hsl(0, 0%, 0%)',
   });
 
-  export const getDark: Factory = () => ({
-    textSubtle: '$deepBlue6',
-    textContrast: '$hiContrast',
+  export const getDark: Factory = (primaryColor) => ({
+    textSubtle: 'hsla(0, 0%, 100%, 0.51)',
+    textDefault: 'hsla(0, 0%, 100%, 0.74)',
+    textContrast: 'hsl(0, 0%, 100%)',
   });
 }

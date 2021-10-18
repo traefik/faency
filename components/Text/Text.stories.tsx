@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Text, TextProps, TextVariants } from './Text';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Flex } from '../Flex';
 
 const BaseText = (props: TextProps): JSX.Element => <Text {...props} />;
 const TextForStory = modifyVariantsForStory<TextVariants, TextProps & React.HTMLAttributes<any>>(
@@ -21,6 +22,23 @@ const Template: ComponentStory<typeof TextForStory> = (args) => (
 export const Basic = Template.bind({});
 
 Basic.args = {};
+
+export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args }) => (
+  <Flex gap={2}>
+    <TextForStory {...args} variant="default">
+      Default
+    </TextForStory>
+    <TextForStory {...args} variant="subtle">
+      Subtle
+    </TextForStory>
+    <TextForStory {...args} variant="contrast">
+      Contrast
+    </TextForStory>
+    <TextForStory {...args} variant="red">
+      Red
+    </TextForStory>
+  </Flex>
+)
 
 export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => (
   <>
