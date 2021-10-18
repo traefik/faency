@@ -53,7 +53,7 @@ export { Link } from './components/Link';
 //   MenuRadioItem,
 //   MenuSeparator,
 // } from './components/Menu';
-// export { Overlay } from './components/Overlay';
+export { Overlay } from './components/Overlay';
 // export { Paragraph } from './components/Paragraph';
 // export { Panel } from './components/Panel';
 export { Popover, PopoverClose, PopoverContent, PopoverTrigger } from './components/Popover';
