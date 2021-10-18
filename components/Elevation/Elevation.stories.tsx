@@ -5,7 +5,7 @@ import { Flex } from '../Flex';
 import { Text } from '../Text';
 
 export default {
-  title: 'Components/Elevations',
+  title: 'Components/Elevation',
   component: Elevation,
 } as ComponentMeta<typeof Elevation>;
 
