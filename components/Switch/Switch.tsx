@@ -58,7 +58,11 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
       }
     },
   },
-
+  '&:focus': {
+    [`& ${StyledThumb}`]: {
+      boxShadow: '0 0 0 2px $colors$switchFocusThumb'
+    }
+  },
   '&[data-state="checked"]': {
     backgroundColor: '$switchActiveBackground',
     '@hover': {
@@ -86,6 +90,11 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
               boxShadow: '0 0 0 3px $colors$switchHoverThumb'
             }
           },
+        },
+        '&:focus': {
+          [`& ${StyledThumb}`]: {
+            boxShadow: '0 0 0 3px $colors$switchFocusThumb'
+          }
         },
         '&[data-state="checked"]': {
           '@hover': {
