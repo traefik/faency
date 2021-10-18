@@ -142,7 +142,12 @@ const StyledInput = styled('input', {
     cursor: {
       default: {
         cursor: 'default',
-        '&:focus': {
+        '@hover': {
+          '&:hover:not(:read-only)': {
+            cursor: 'text',
+          },
+        },
+        '&:focus:not(:read-only)': {
           cursor: 'text',
         },
       },
