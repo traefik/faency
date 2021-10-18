@@ -1,6 +1,8 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
+import { MagnifyingGlassIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { IconButton } from '../IconButton';
 import { Input, InputProps, InputVariants } from './Input';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
@@ -47,3 +49,10 @@ ReadOnly.args = { readOnly: true, value: 'value' };
 export const Ghost = Template.bind({});
 
 Ghost.args = { variant: 'ghost' };
+
+export const Adornments = Template.bind({});
+
+Adornments.args = {
+  startAdornment: <MagnifyingGlassIcon />,
+  endAdornment: <IconButton><EyeOpenIcon /></IconButton>
+}
