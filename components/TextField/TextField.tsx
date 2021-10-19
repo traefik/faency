@@ -32,7 +32,7 @@ const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
 export const TextField = React.forwardRef<
   React.ElementRef<typeof Input>,
   TextFieldProps
->(({ state, clearable, label, id, type, disabled, onBlur, onFocus, ...props }, forwardedRef) => {
+>(({ state, clearable, label, id, type, disabled, readOnly, onBlur, onFocus, ...props }, forwardedRef) => {
   const inputRef = React.useRef<InputHandle | null>(null);
   React.useImperativeHandle(forwardedRef, () => inputRef.current as InputHandle);
 
@@ -74,11 +74,21 @@ export const TextField = React.forwardRef<
     [isPasswordType, type, innerType],
   );
 
+  const hasInnerAdornment = React.useMemo(
+    () => clearable || isPasswordType || invalid,
+    [clearable, isPasswordType, invalid],
+  );
+
   const hasAdornmentGroup = React.useMemo(
     () => (clearable && invalid)
       || (clearable && isPasswordType)
       || (invalid && isPasswordType),
     [clearable, invalid, isPasswordType],
+  );
+
+  const clearDisabled = React.useMemo(
+    () => readOnly || disabled,
+    [readOnly, disabled],
   );
 
   const handleClear = React.useCallback(
@@ -129,16 +139,16 @@ export const TextField = React.forwardRef<
       <Input
         id={id}
         ref={inputRef}
-        endAdornment={(
+        endAdornment={hasInnerAdornment && (
           <EndAdornmentWrapper>
             {invalid && <StyledExclamationTriangleIcon />}
             {isPasswordType && (
-              <IconButton onClick={togglePasswordVisibility}>
+              <IconButton type="button" onClick={togglePasswordVisibility}>
                 {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
               </IconButton>
             )}
             {clearable && (
-              <IconButton onClick={handleClear}>
+              <IconButton disabled={clearDisabled} type="button" onClick={handleClear}>
                 <CrossCircledIcon />
               </IconButton>
             )}
@@ -147,6 +157,7 @@ export const TextField = React.forwardRef<
         state={state}
         type={typeOrInnerType}
         disabled={disabled}
+        readOnly={readOnly}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
