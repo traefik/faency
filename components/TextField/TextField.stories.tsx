@@ -1,9 +1,11 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
+import { Flex } from '../Flex';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { styled } from '../../stitches.config';
 
 const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
 const TextFieldForStory = modifyVariantsForStory<
@@ -20,43 +22,78 @@ export default {
 const Template: ComponentStory<typeof TextFieldForStory> = (args) => (
   <TextFieldForStory {...args} />
 );
+const StyledMagnifyingGlassIcon = styled(MagnifyingGlassIcon, {
+  color: '$slate10', // follow iconbutton default color
+});
 
-export const Basic = Template.bind({});
+export const Basic: ComponentStory<typeof TextFieldForStory> = (args) => (
+  <Flex direction="column" gap={2}>
+    <TextFieldForStory
+      id='basic'
+      label="basic"
+      placeholder="placeholder"
+      {...args}
+    />
+    <TextFieldForStory
+      size="large"
+      id='large'
+      label="large"
+      placeholder="placeholder"
+      {...args}
+    />
+    <TextFieldForStory
+      state="invalid"
+      id='invalid'
+      label="invalid"
+      placeholder="placeholder"
+      {...args}
+    />
+    <TextFieldForStory
+      startAdornment={<StyledMagnifyingGlassIcon />}
+      id='search'
+      label="search"
+      placeholder="Search..."
+      {...args}
+    />
+  </Flex>
+);
 
-Basic.args = { placeholder: 'placeholder', id: 'basic', label: 'basic' };
-
-export const Large = Template.bind({});
-
-Large.args = { size: 'large', placeholder: 'placeholder', id: 'large', label: 'large' };
 
 export const PasswordType = Template.bind({});
 
-PasswordType.args = { type: 'password', value: 'value', id: 'password-type', label: 'password' };
+PasswordType.args = { type: 'password', id: 'password-type', label: 'password' };
 
-export const Invalid = Template.bind({});
+export const Clearable = Basic.bind({});
+Clearable.args = { clearable: true };
 
-Invalid.args = { state: 'invalid', id: 'invalid', label: 'invalid' };
+export const Disabled = Basic.bind({});
+Disabled.args = { disabled: true };
 
-export const Clearable = Template.bind({});
+export const ReadOnly = Basic.bind({});
+ReadOnly.args = { readOnly: true };
 
-Clearable.args = { clearable: true, id: 'clearable', label: 'clearable' };
+export const Display: ComponentStory<typeof TextFieldForStory> = (args) => (
+  <Flex direction="column" gap={2}>
+    <TextFieldForStory
+      id='disabled'
+      label="disabled"
+      placeholder="placeholder"
+      value="disabled"
+      disabled
+      {...args}
+    />
+    <TextFieldForStory
+      id='readOnly'
+      label="readOnly"
+      placeholder="placeholder"
+      value="readOnly"
+      readOnly
+      {...args}
+    />
+  </Flex>
+);
 
-export const ClearableInvalid = Template.bind({});
-
-ClearableInvalid.args = { clearable: true, state: 'invalid', id: 'clearable-invalid', label: 'clearableInvalid' };
-
-export const Search = Template.bind({});
-
-Search.args = { startAdornment: <MagnifyingGlassIcon />, placeholder: 'Search...', id: 'search', label: 'search' }
-
-export const SearchClearable = Template.bind({});
-
-SearchClearable.args = { startAdornment: <MagnifyingGlassIcon />, placeholder: 'Search...', clearable: true, id: 'search-clearable', label: 'searchClearable' };
-
-export const Disabled = Template.bind({});
-
-Disabled.args = { disabled: true, value: 'value', id: 'disabled', label: 'disabled' };
-
-export const ReadOnly = Template.bind({});
-
-ReadOnly.args = { readOnly: true, value: 'value', id: 'read-only', label: 'readOnly' };
+export const DisplayClearable = Display.bind({});
+DisplayClearable.args = {
+  clearable: true
+}
