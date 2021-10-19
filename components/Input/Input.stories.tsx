@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { IconButton } from '../IconButton';
 import { Input, InputProps, InputVariants } from './Input';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Flex } from '../Flex';
 
 const BaseInput = (props: InputProps): JSX.Element => <Input {...props} />;
 const InputForStory = modifyVariantsForStory<
@@ -30,9 +31,24 @@ export const Large = Template.bind({});
 
 Large.args = { size: 'large', placeholder: 'placeholder' };
 
-export const PasswordType = Template.bind({});
+const INPUT_TYPES = [
+  'button', 'checkbox', 'reset', 'submit',
+  'color', 'file', 'password', 'radio', 'range',
+  'date', "datetime-local", "month", 'time', 'week',
+  'email', 'number', 'search', 'tel', 'text', 'url'
+];
 
-PasswordType.args = { type: 'password', value: 'value' };
+export const Types: ComponentStory<typeof InputForStory> = ({ type, ...args }) => (
+  <Flex direction="column" gap={2}>
+    {INPUT_TYPES.map((type) => (
+      <label key={type}>{type}
+        <InputForStory {...args} type={type} />
+      </label>
+    ))}
+  </Flex>
+)
+
+Types.args = {};
 
 export const Invalid = Template.bind({});
 
