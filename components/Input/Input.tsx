@@ -29,7 +29,9 @@ const StyledInput = styled('input', {
   color: '$inputText',
   fontVariantNumeric: 'tabular-nums',
   transition: 'box-shadow .1s ease-in-out',
-
+  '&[type="number"]': {
+    pr: '0', // remove padding for number native controls
+  },
   '&:-webkit-autofill': {
     boxShadow: 'inset 0 0 0 2px $colors$inputBorder, inset 0 0 0 100px $colors$inputBg',
   },
