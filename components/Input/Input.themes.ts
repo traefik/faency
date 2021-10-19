@@ -9,7 +9,6 @@ export namespace Theme {
     inputText: string;
     inputPlaceholder: string;
     inputDisabledText: string;
-    inputReadOnlyBorder: string;
     inputInvalidBorder: string;
   };
 
@@ -30,7 +29,6 @@ export namespace Theme {
     inputPlaceholder: 'hsla(0, 0%, 0%, 0.5)',
     inputDisabledText: 'hsla(0, 0%, 0%, 0.35)',
     inputDisabledBorder: '$deepBlue3',
-    inputReadOnlyBorder: 'transparent',
     inputInvalidBorder: '$red8',
   });
 
@@ -48,7 +46,6 @@ export namespace Theme {
     inputPlaceholder: 'hsla(0, 0%, 100%, 0.51)',
     inputDisabledText: 'hsla(0, 0%, 100%, 0.35)',
     inputDisabledBorder: '$deepBlue5',
-    inputReadOnlyBorder: 'transparent',
     inputInvalidBorder: '$red8',
   });
 }

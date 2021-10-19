@@ -1,8 +1,10 @@
 import React from 'react';
 import { VariantProps } from '@stitches/react';
 import { styled, CSS } from '../../stitches.config';
-
+import { elevationVariant } from '../Elevation';
 import { IconButton } from '../IconButton';
+
+const FOCUS_SHADOW = elevationVariant[1].boxShadow; // apply elevation $1 when focus
 
 const StyledInput = styled('input', {
   // Reset
@@ -54,19 +56,25 @@ const StyledInput = styled('input', {
   '&:focus-visible': {
     backgroundColor: '$inputFocusBg',
     boxShadow:
-      'inset 0px 0px 0px 1px $colors$inputFocusBorder, 0px 0px 0px 1px $colors$inputFocusBorder',
+      `inset 0px 0px 0px 1px $colors$inputFocusBorder, 
+        0px 0px 0px 1px $colors$inputFocusBorder, 
+        ${FOCUS_SHADOW}
+  `,
     '&:-webkit-autofill': {
       boxShadow:
-        'inset 0 0 0 2px $colors$inputFocusBorder, inset 0 0 0 100px $colors$inputBg',
+        `inset 0 0 0 2px $colors$inputFocusBorder, inset 0 0 0 100px $colors$inputBg, ${FOCUS_SHADOW}`,
     },
   },
   '&::placeholder': {
     color: '$inputPlaceholder',
   },
   '&:read-only': {
-    boxShadow: 'inset 0px 0px 0px 1px $colors$inputReadOnlyBorder',
+    boxShadow: 'none',
     '&:focus-visible': {
-      boxShadow: 'inset 0px 0px 0px 1px $colors$inputBorder',
+      boxShadow:
+        `inset 0px 0px 0px 1px $colors$inputFocusBorder, 
+          0px 0px 0px 1px $colors$inputFocusBorder, 
+          ${FOCUS_SHADOW}`,
     },
   },
   '&:disabled': {
@@ -129,7 +137,8 @@ const StyledInput = styled('input', {
           backgroundColor: '$loContrast',
         },
         '&:focus-visible': {
-          boxShadow: 'inset 0px 0px 0px 1px $colors$inputFocusBorderGhost, 0px 0px 0px 1px $colors$inputFocusBorderGhost',
+          boxShadow: `inset 0px 0px 0px 1px $colors$inputFocusBorderGhost, 
+          0px 0px 0px 1px $colors$inputFocusBorderGhost, ${FOCUS_SHADOW}`,
         },
       },
     },
@@ -137,7 +146,8 @@ const StyledInput = styled('input', {
       invalid: {
         boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder',
         '&:focus-visible': {
-          boxShadow: 'inset 0px 0px 0px 1px $colors$inputInvalidBorder, 0px 0px 0px 1px $colors$inputInvalidBorder',
+          boxShadow: `inset 0px 0px 0px 1px $colors$inputInvalidBorder, 
+          0px 0px 0px 1px $colors$inputInvalidBorder, ${FOCUS_SHADOW}`,
         },
       },
     },
