@@ -25,21 +25,23 @@ const Template: ComponentStory<typeof InputForStory> = (args) => (
 
 export const Basic: ComponentStory<typeof InputForStory> = (args) => (
   <Flex direction="column" gap={2}>
-    <label>Default
-      <InputForStory {...args} />
-    </label>
-    <label>Large
-      <InputForStory size="large" {...args} />
-    </label>
-    <label>Ghost
-      <InputForStory variant="ghost" {...args} />
-    </label>
-    <label>Adornments
-      <InputForStory
-        startAdornment={<MagnifyingGlassIcon />}
-        endAdornment={<IconButton><EyeOpenIcon /></IconButton>}
-        {...args} />
-    </label>
+    <form>
+      <label>Default
+        <InputForStory {...args} />
+      </label>
+      <label>Large
+        <InputForStory size="large" {...args} />
+      </label>
+      <label>Ghost
+        <InputForStory variant="ghost" {...args} />
+      </label>
+      <label>Adornments
+        <InputForStory
+          startAdornment={<MagnifyingGlassIcon />}
+          endAdornment={<IconButton><EyeOpenIcon /></IconButton>}
+          {...args} />
+      </label>
+    </form>
   </Flex>
 );
 Basic.args = { placeholder: 'placeholder' };
@@ -74,9 +76,34 @@ export const ReadOnly = Basic.bind({});
 
 ReadOnly.args = { readOnly: true, value: 'value' };
 
-export const Ghost = Basic.bind({});
-
-Ghost.args = { variant: 'ghost' };
+export const Ghost: ComponentStory<typeof InputForStory> = (args) => (
+  <Flex direction="column" gap={2}>
+    <form>
+      <label>Default
+        <InputForStory {...args} />
+      </label>
+      <label>Large
+        <InputForStory size="large" {...args} />
+      </label>
+      <label>Invalid
+        <InputForStory state="invalid" {...args} />
+      </label>
+      <label>Disabled
+        <InputForStory disabled {...args} />
+      </label>
+      <label>ReadOnly
+        <InputForStory readOnly {...args} />
+      </label>
+      <label>Adornments
+        <InputForStory
+          startAdornment={<MagnifyingGlassIcon />}
+          endAdornment={<IconButton><EyeOpenIcon /></IconButton>}
+          {...args} />
+      </label>
+    </form>
+  </Flex>
+);
+Ghost.args = { value: 'value', variant: 'ghost' };
 
 export const Adornments = Basic.bind({});
 
@@ -84,3 +111,30 @@ Adornments.args = {
   startAdornment: <MagnifyingGlassIcon />,
   endAdornment: <IconButton><EyeOpenIcon /></IconButton>
 }
+
+export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
+  <Flex direction="column" gap={2}>
+    <form>
+      <label>Default
+        <InputForStory name="ship-organization" autoComplete="shipping organization" {...args} />
+      </label>
+      <label>Large
+        <InputForStory name="ship-address" autoComplete="shipping street-address" size="large" {...args} />
+      </label>
+      <label>Ghost
+        <InputForStory name="ship-city" autoComplete="shipping locality" variant="ghost" {...args} />
+      </label>
+      <label>Invalid
+        <InputForStory name="ship-zip" autoComplete="shipping postal-code" state="invalid" {...args} />
+      </label>
+      <label>Adornments
+        <InputForStory
+          name="ship-country"
+          autoComplete="shipping country"
+          startAdornment={<MagnifyingGlassIcon />}
+          endAdornment={<IconButton><EyeOpenIcon /></IconButton>}
+          {...args} />
+      </label>
+    </form>
+  </Flex>
+);
