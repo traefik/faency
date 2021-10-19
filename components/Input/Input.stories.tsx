@@ -23,13 +23,26 @@ const Template: ComponentStory<typeof InputForStory> = (args) => (
   <InputForStory {...args} />
 );
 
-export const Basic = Template.bind({});
-
+export const Basic: ComponentStory<typeof InputForStory> = (args) => (
+  <Flex direction="column" gap={2}>
+    <label>Default
+      <InputForStory {...args} />
+    </label>
+    <label>Large
+      <InputForStory size="large" {...args} />
+    </label>
+    <label>Ghost
+      <InputForStory variant="ghost" {...args} />
+    </label>
+    <label>Adornments
+      <InputForStory
+        startAdornment={<MagnifyingGlassIcon />}
+        endAdornment={<IconButton><EyeOpenIcon /></IconButton>}
+        {...args} />
+    </label>
+  </Flex>
+);
 Basic.args = { placeholder: 'placeholder' };
-
-export const Large = Template.bind({});
-
-Large.args = { size: 'large', placeholder: 'placeholder' };
 
 const INPUT_TYPES = [
   'button', 'checkbox', 'reset', 'submit',
@@ -50,23 +63,22 @@ export const Types: ComponentStory<typeof InputForStory> = ({ type, ...args }) =
 
 Types.args = {};
 
-export const Invalid = Template.bind({});
-
+export const Invalid = Basic.bind({});
 Invalid.args = { state: 'invalid' };
 
-export const Disabled = Template.bind({});
+export const Disabled = Basic.bind({});
 
 Disabled.args = { disabled: true, value: 'value' };
 
-export const ReadOnly = Template.bind({});
+export const ReadOnly = Basic.bind({});
 
 ReadOnly.args = { readOnly: true, value: 'value' };
 
-export const Ghost = Template.bind({});
+export const Ghost = Basic.bind({});
 
 Ghost.args = { variant: 'ghost' };
 
-export const Adornments = Template.bind({});
+export const Adornments = Basic.bind({});
 
 Adornments.args = {
   startAdornment: <MagnifyingGlassIcon />,
