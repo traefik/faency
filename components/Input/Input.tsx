@@ -34,11 +34,11 @@ const StyledInput = styled('input', {
   '&[type="number"]': {
     pr: '0', // remove padding for number native controls
   },
-  '&:-webkit-autofill': {
-    boxShadow: 'inset 0 0 0 2px $colors$inputBorder, inset 0 0 0 100px $colors$inputBg',
+  '&:-webkit-autofill,&:autofill': {
+    boxShadow: 'inset 0 0 0 1px $colors$inputBorder, inset 0 0 0 100px $colors$inputBg',
   },
 
-  '&:-webkit-autofill::first-line': {
+  '&:-webkit-autofill::first-line,&:autofill::first-line': {
     fontFamily: '$rubik',
     color: '$hiContrast',
   },
@@ -60,10 +60,6 @@ const StyledInput = styled('input', {
         0px 0px 0px 1px $colors$inputFocusBorder, 
         ${FOCUS_SHADOW}
   `,
-    '&:-webkit-autofill': {
-      boxShadow:
-        `inset 0 0 0 2px $colors$inputFocusBorder, inset 0 0 0 100px $colors$inputBg, ${FOCUS_SHADOW}`,
-    },
   },
   '&::placeholder': {
     color: '$inputPlaceholder',
@@ -93,7 +89,7 @@ const StyledInput = styled('input', {
         fontSize: '$1',
         px: '$2',
         lineHeight: '$sizes$5',
-        '&:-webkit-autofill::first-line': {
+        '&:-webkit-autofill::first-line,&:autofill::first-line': {
           fontSize: '$1',
         },
       },
@@ -103,7 +99,7 @@ const StyledInput = styled('input', {
         fontSize: '$3',
         px: '$3',
         lineHeight: '$sizes$6',
-        '&:-webkit-autofill::first-line': {
+        '&:-webkit-autofill::first-line,&:autofill::first-line': {
           fontSize: '$3',
         },
       },
@@ -113,7 +109,7 @@ const StyledInput = styled('input', {
         fontSize: '$3',
         px: '$3',
         lineHeight: '$sizes$7',
-        '&:-webkit-autofill::first-line': {
+        '&:-webkit-autofill::first-line,&:autofill::first-line': {
           fontSize: '$3',
         },
       },
@@ -127,10 +123,16 @@ const StyledInput = styled('input', {
     variant: {
       ghost: {
         boxShadow: 'none',
+        '&:disabled,&:-webkit-autofill,&:autofill': {
+          boxShadow: 'none',
+        },
         backgroundColor: 'transparent',
         '@hover': {
           '&:hover': {
             boxShadow: 'inset 0 0 0 1px $colors$inputHoverBorderGhost',
+            '&:disabled': {
+              boxShadow: 'inset 0 0 0 1px $colors$inputDisabledBorder'
+            }
           },
         },
         '&:focus': {
@@ -145,6 +147,9 @@ const StyledInput = styled('input', {
     state: {
       invalid: {
         boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder',
+        '&:-webkit-autofill,&:autofill': {
+          boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder, inset 0 0 0 100px $colors$inputBg',
+        },
         '&:focus-visible': {
           boxShadow: `inset 0px 0px 0px 1px $colors$inputInvalidBorder, 
           0px 0px 0px 1px $colors$inputInvalidBorder, ${FOCUS_SHADOW}`,
