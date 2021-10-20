@@ -39,6 +39,7 @@ import { Theme as TableTheme } from './components/Table/Table.themes';
 import { Theme as SelectTheme } from './components/Select/Select.themes';
 import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
+import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
 
 import {
   elevation,
@@ -363,6 +364,7 @@ export const customColors = (primary: Property.Color) => {
       ...SelectTheme.getDark(primaryColor),
       ...SkeletonTheme.getDark(primaryColor),
       ...DialogTheme.getDark(primaryColor),
+      ...NavigationTheme.getDark(primaryColor),
     },
   });
 
@@ -382,6 +384,7 @@ export const customColors = (primary: Property.Color) => {
       ...SelectTheme.getLight(primaryColor),
       ...SkeletonTheme.getLight(primaryColor),
       ...DialogTheme.getLight(primaryColor),
+      ...NavigationTheme.getLight(primaryColor),
     },
   });
 
