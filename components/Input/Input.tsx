@@ -4,7 +4,12 @@ import { styled, CSS } from '../../stitches.config';
 import { elevationVariant } from '../Elevation';
 import { IconButton } from '../IconButton';
 
+// CONSTANTS
 const FOCUS_SHADOW = elevationVariant[1].boxShadow; // apply elevation $1 when focus
+
+const SMALL_HEIGHT = '$5';
+const MEDIUM_HEIGHT = '$6';
+const LARGE_HEIGHT = '$7';
 
 const StyledInput = styled('input', {
   // Reset
@@ -27,6 +32,7 @@ const StyledInput = styled('input', {
   // Custom
   position: 'relative',
   backgroundColor: '$inputBg',
+  borderRadius: 'inherit', // inherit border radius from InputWrapper
   boxShadow: 'inset 0 0 0 1px $colors$inputBorder',
   color: '$inputText',
   fontVariantNumeric: 'tabular-nums',
@@ -84,8 +90,7 @@ const StyledInput = styled('input', {
   variants: {
     size: {
       small: {
-        borderRadius: '$2',
-        height: '$5',
+        height: SMALL_HEIGHT,
         fontSize: '$1',
         px: '$2',
         lineHeight: '$sizes$5',
@@ -94,8 +99,7 @@ const StyledInput = styled('input', {
         },
       },
       medium: {
-        borderRadius: '$3',
-        height: '$6',
+        height: MEDIUM_HEIGHT,
         fontSize: '$3',
         px: '$3',
         lineHeight: '$sizes$6',
@@ -104,8 +108,7 @@ const StyledInput = styled('input', {
         },
       },
       large: {
-        borderRadius: '$3',
-        height: '$7',
+        height: LARGE_HEIGHT,
         fontSize: '$3',
         px: '$3',
         lineHeight: '$sizes$7',
@@ -226,6 +229,22 @@ const StyledInput = styled('input', {
 const InputWrapper = styled('div', {
   position: 'relative',
   backgroundColor: '$wrapperBg',
+  variants: {
+    size: {
+      small: {
+        borderRadius: '$2',
+      },
+      medium: {
+        borderRadius: '$3',
+      },
+      large: {
+        borderRadius: '$3',
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'medium',
+  },
 });
 
 const AdornmentWrapper = styled('div', {
@@ -240,12 +259,21 @@ const AdornmentWrapper = styled('div', {
     size: {
       small: {
         mx: 'calc($2 / 2)',
+        [`& ${IconButton}`]: {
+          size: SMALL_HEIGHT,
+        }
       },
       medium: {
         mx: 'calc($3 / 2)',
+        [`& ${IconButton}`]: {
+          size: MEDIUM_HEIGHT,
+        }
       },
       large: {
         mx: 'calc($3 / 2)',
+        [`& ${IconButton}`]: {
+          size: LARGE_HEIGHT,
+        }
       }
     },
     variant: {
@@ -257,63 +285,58 @@ const AdornmentWrapper = styled('div', {
       }
     }
   },
-  compoundVariants: [
-    {
-      variant: 'start',
-      size: 'small',
-      css: {
+  defaultVariants: {
+    size: 'medium',
+  },
+});
+
+const AdornmentWrapperStart = styled(AdornmentWrapper, {
+  left: 0,
+  variants: {
+    size: {
+      small: {
         [`& ${IconButton}:first-of-type`]: { // remove start margin for first IconButton
           marginInlineStart: 'calc(-$2 / 2)'
         }
-      }
-    },
-    {
-      variant: 'start',
-      size: 'medium',
-      css: {
+      },
+      medium: {
+        [`& ${IconButton}:first-of-type`]: { // remove start margin for first IconButton
+          marginInlineStart: 'calc(-$3 / 2)'
+        }
+      },
+      large: {
         [`& ${IconButton}:first-of-type`]: { // remove start margin for first IconButton
           marginInlineStart: 'calc(-$3 / 2)'
         }
       }
-    },
-    {
-      variant: 'start',
-      size: 'large',
-      css: {
-        [`& ${IconButton}:first-of-type`]: { // remove start margin for first IconButton
-          marginInlineStart: 'calc(-$3 / 2)'
-        }
-      }
-    },
-    {
-      variant: 'end',
-      size: 'small',
-      css: {
-        [`& ${IconButton}:last-of-type`]: { // remove end margin for last IconButton
-          marginInlineEnd: 'calc(-$3 / 2)'
-        }
-      }
-    },
-    {
-      variant: 'end',
-      size: 'medium',
-      css: {
-        [`& ${IconButton}:last-of-type`]: { // remove end margin for last IconButton
-          marginInlineEnd: 'calc(-$3 / 2)'
-        }
-      }
-    },
-    {
-      variant: 'end',
-      size: 'large',
-      css: {
-        [`& ${IconButton}:last-of-type`]: { // remove end margin for last IconButton
-          marginInlineEnd: 'calc(-$3 / 2)'
-        }
-      }
-    },
+    }
+  },
+  defaultVariants: {
+    size: 'medium',
+  },
+});
 
-  ],
+const AdornmentWrapperEnd = styled(AdornmentWrapper, {
+  right: 0,
+  variants: {
+    size: {
+      small: {
+        [`& ${IconButton}:last-of-type`]: { // remove start margin for last IconButton
+          marginInlineEnd: 'calc(-$2 / 2)'
+        }
+      },
+      medium: {
+        [`& ${IconButton}:last-of-type`]: { // remove start margin for last IconButton
+          marginInlineEnd: 'calc(-$3 / 2)'
+        }
+      },
+      large: {
+        [`& ${IconButton}:last-of-type`]: { // remove start margin for last IconButton
+          marginInlineEnd: 'calc(-$3 / 2)'
+        }
+      }
+    }
+  },
   defaultVariants: {
     size: 'medium',
   },
@@ -368,12 +391,11 @@ export const Input = React.forwardRef<
   return (
     <InputWrapper css={css}>
       {hasStartAdornment && (
-        <AdornmentWrapper
-          variant="start"
+        <AdornmentWrapperStart
           size={size}
         >
           {startAdornment}
-        </AdornmentWrapper>
+        </AdornmentWrapperStart>
       )}
       <StyledInput
         ref={inputRef}
@@ -383,12 +405,11 @@ export const Input = React.forwardRef<
         {...props}
       />
       {hasEndAdornment && (
-        <AdornmentWrapper
-          variant="end"
+        <AdornmentWrapperEnd
           size={size}
         >
           {endAdornment}
-        </AdornmentWrapper>
+        </AdornmentWrapperEnd>
       )}
     </InputWrapper>
   );
