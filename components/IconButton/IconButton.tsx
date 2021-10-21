@@ -1,3 +1,4 @@
+import { VariantProps } from '@stitches/react';
 import { styled } from '../../stitches.config';
 
 export const IconButton = styled('button', {
@@ -97,3 +98,5 @@ export const IconButton = styled('button', {
     ghost: true,
   },
 });
+
+export type IconButtonVariants = VariantProps<typeof IconButton>;
