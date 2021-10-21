@@ -29,6 +29,13 @@ const StyledMagnifyingGlassIcon = styled(MagnifyingGlassIcon, {
 export const Basic: ComponentStory<typeof TextFieldForStory> = (args) => (
   <Flex direction="column" gap={2}>
     <TextFieldForStory
+      size="small"
+      id='small'
+      label="small"
+      placeholder="placeholder"
+      {...args}
+    />
+    <TextFieldForStory
       id='basic'
       label="basic"
       placeholder="placeholder"
