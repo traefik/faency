@@ -143,12 +143,21 @@ export const TextField = React.forwardRef<
           <EndAdornmentWrapper>
             {invalid && <StyledExclamationTriangleIcon />}
             {isPasswordType && (
-              <IconButton type="button" onClick={togglePasswordVisibility}>
+              <IconButton
+                type="button"
+                onClick={togglePasswordVisibility}
+                size="1"
+              >
                 {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
               </IconButton>
             )}
             {clearable && (
-              <IconButton disabled={clearDisabled} type="button" onClick={handleClear}>
+              <IconButton
+                disabled={clearDisabled}
+                type="button"
+                onClick={handleClear}
+                size="1"
+              >
                 <CrossCircledIcon />
               </IconButton>
             )}
