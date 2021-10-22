@@ -1,12 +1,14 @@
+import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
+import { getColorFromToken } from '../../utils/getColorFromToken';
 
 export namespace Theme {
   type Colors = {
-    badgeDefaultBackground: string;
-    badgeDefaultText: string;
-    badgeNeonBackground: string;
-    badgeNeonText: string;
-    badgeInteractiveBackground: string;
+    badgeDefaultBackground: Property.Color;
+    badgeDefaultText: Property.Color;
+    badgeNeonBackground: Property.Color;
+    badgeNeonText: Property.Color;
+    badgeInteractiveBackground: Property.Color;
   };
 
   type Factory = (primaryColor: string) => Colors;
@@ -14,7 +16,7 @@ export namespace Theme {
   export const getLight: Factory = (primaryColor) => ({
     badgeDefaultBackground: '$slate7',
     badgeDefaultText: '$slate10',
-    badgeNeonBackground: '$neon7',
+    badgeNeonBackground: tinycolor(getColorFromToken('$neon9')).setAlpha(0.2).toHslString(),
     badgeNeonText: '$neon9',
     badgeInteractiveBackground: 'rgba(0,0,0,.05)',
   });

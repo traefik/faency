@@ -1,7 +1,9 @@
+import { Property } from '@stitches/react/types/css';
+
 export namespace Theme {
   type Colors = {
-    textSubtle: string;
-    textContrast: string;
+    textSubtle: Property.Color;
+    textContrast: Property.Color;
   };
 
   type Factory = (primaryColor: string) => Colors;

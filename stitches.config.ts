@@ -45,12 +45,18 @@ import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 
 import {
   deepBlue,
+  deepBlueA,
+  grayBlue,
+  grayBlueA,
   neon,
   neonA,
   orange,
   red,
   redA,
   deepBlueDark,
+  deepBlueDarkA,
+  grayBlueDark,
+  grayBlueDarkA,
   neonDark,
   neonDarkA,
   orangeDark,
@@ -58,30 +64,54 @@ import {
   redDarkA,
 } from './colors';
 import { Property } from '@stitches/react/types/css';
+import tinycolor from 'tinycolor2';
 export type { VariantProps } from '@stitches/react';
 
 const defaultPrimary: Property.Color = '$blue8';
 
+const darkElevation = {
+  '00dp': 'hsl(210, 68%, 9%)',
+  '01dp': 'hsl(208, 37%, 15%)',
+  '02dp': 'hsl(207, 32%, 17%)',
+  '03dp': 'hsl(209, 28%, 19%)',
+  '04dp': 'hsl(209, 23%, 21%)',
+  '05dp': 'hsl(209, 21%, 23%)',
+};
+
+const elevation = {
+  '00dp': 'hsl(240, 4%, 95%)',
+  '01dp': 'hsl(0, 0%, 99%)',
+  '02dp': 'hsl(0, 0%, 99%)',
+  '03dp': 'hsl(0, 0%, 99%)',
+  '04dp': 'hsl(0, 0%, 99%)',
+  '05dp': 'hsl(0, 0%, 99%)',
+};
+
 export const colors: Record<string, Property.Color> = {
-  ...gray,
+  ...elevation,
+  ...neon,
+  ...neonA,
+  ...deepBlue,
+  ...deepBlueA,
+  ...grayBlue,
+  ...grayBlueA,
   ...red,
+  ...redA,
+  ...orange,
+
+  ...gray,
   ...blue,
   ...green,
-  ...orange,
   ...slate,
-  ...neon,
-  ...deepBlue,
   ...amber,
   ...grass,
   ...purple,
 
   ...grayA,
-  ...redA,
   ...blueA,
   ...greenA,
   ...orangeA,
   ...slateA,
-  ...neonA,
   ...whiteA,
   ...blackA,
 
@@ -243,8 +273,12 @@ const stitches = createStitches({
     fs: (value: Stitches.PropertyValue<'flexShrink'>) => ({ flexShrink: value }),
     fb: (value: Stitches.PropertyValue<'flexBasis'>) => ({ flexBasis: value }),
 
-    bc: (value: Stitches.PropertyValue<'backgroundColor'>) => ({
-      backgroundColor: value,
+    bc: (value: string) => ({
+      backgroundColor: value.includes('@')
+        ? tinycolor(getColorFromToken(value.split('@')[0]))
+            .setAlpha(+value.split('@')[1])
+            .toHslString()
+        : value,
     }),
 
     br: (value: Stitches.PropertyValue<'borderRadius'>) => ({
@@ -264,6 +298,14 @@ const stitches = createStitches({
     }),
 
     bs: (value: Stitches.PropertyValue<'boxShadow'>) => ({ boxShadow: value }),
+
+    c: (value: string) => ({
+      color: value.includes('@')
+        ? tinycolor(getColorFromToken(value.split('@')[0]))
+            .setAlpha(+value.split('@')[1])
+            .toHslString()
+        : value,
+    }),
 
     lh: (value: Stitches.PropertyValue<'lineHeight'>) => ({ lineHeight: value }),
 
@@ -303,29 +345,35 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 
 export const utils = config.utils;
 
-export const customColors = (primary: string) => {
+export const customColors = (primary: Property.Color) => {
   const primaryColor = getColorFromToken(config.theme.colors as Record<string, string>, primary);
+
   const darkTheme = createTheme('dark', {
     colors: {
-      ...grayDark,
+      ...darkElevation,
+      ...neonDark,
+      ...neonDarkA,
+      ...deepBlueDark,
+      ...deepBlueDarkA,
+      ...grayBlueDark,
+      ...grayBlueDarkA,
       ...redDark,
+      ...redDarkA,
+      ...orangeDark,
+
+      ...grayDark,
       ...blueDark,
       ...greenDark,
-      ...orangeDark,
       ...slateDark,
-      ...neonDark,
-      ...deepBlueDark,
       ...amberDark,
       ...grassDark,
       ...purpleDark,
 
       ...grayDarkA,
-      ...redDarkA,
       ...blueDarkA,
       ...greenDarkA,
       ...orangeDarkA,
       ...slateDarkA,
-      ...neonDarkA,
 
       // Semantic colors
       primary,

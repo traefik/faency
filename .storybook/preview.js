@@ -22,5 +22,5 @@ export const parameters = {
 };
 
 export const decorators = [
-  (renderStory) => <FaencyProvider primaryColor="$neon8">{renderStory()}</FaencyProvider>,
+  (renderStory) => <FaencyProvider primaryColor="$neon9">{renderStory()}</FaencyProvider>,
 ];

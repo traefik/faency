@@ -1,56 +1,66 @@
+import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
 
 export namespace Theme {
   type Colors = {
-    buttonPrimaryBg: string;
-    buttonPrimaryHoverBg: string;
-    buttonPrimaryText: string;
-    buttonPrimaryGhostHoverText: string;
-    buttonSecondaryBg: string;
-    buttonSecondaryHoverBg: string;
-    buttonSecondaryText: string;
-    buttonSecondaryGhostHoverText: string;
-    buttonSecondaryGhostText: string;
-    buttonRedBg: string;
-    buttonRedHoverBg: string;
-    buttonRedText: string;
+    buttonPrimaryBg: Property.Color;
+    buttonPrimaryText: Property.Color;
+    buttonPrimaryFocusBorder: Property.Color;
+    buttonPrimaryGhostHoverText: Property.Color;
+    buttonPrimaryGhostText: Property.Color;
+
+    buttonSecondaryBg: Property.Color;
+    buttonSecondaryText: Property.Color;
+    buttonSecondaryBorder: Property.Color;
+    buttonSecondaryFocusBorder: Property.Color;
+    buttonSecondaryGhostHoverText: Property.Color;
+    buttonSecondaryGhostText: Property.Color;
+
+    buttonRedBg: Property.Color;
+    buttonRedText: Property.Color;
+    buttonRedHoverBg: Property.Color;
+    buttonRedFocusBg: Property.Color;
   };
 
   type Factory = (primaryColor: string) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
-    buttonPrimaryBg: '$deepBlue11',
-    buttonPrimaryHoverBg: '$deepBlue9',
-    buttonPrimaryText: '$primary',
-    buttonPrimaryGhostHoverText: tinycolor(primaryColor).darken(16).toString(),
-    buttonPrimaryGhostText: tinycolor(primaryColor).darken(26).toString(),
+    buttonPrimaryBg: '$primary',
+    buttonPrimaryText: 'white',
+    buttonPrimaryFocusBorder: '$neonA6',
+    buttonPrimaryGhostHoverText: '$deepBlue9',
+    buttonPrimaryGhostText: '$primary',
 
-    buttonSecondaryBg: '$deepBlue3',
-    buttonSecondaryHoverBg: '$deepBlue4',
-    buttonSecondaryText: '$hiContrast',
+    buttonSecondaryBg: 'transparent',
+    buttonSecondaryText: 'hsla(0, 0%, 0%, 0.54)',
+    buttonSecondaryBorder: '$grayBlue9',
+    buttonSecondaryFocusBorder: tinycolor(primaryColor).setAlpha(0.19).toHslString(),
     buttonSecondaryGhostHoverText: '$deepBlue7',
     buttonSecondaryGhostText: '$deepBlue6',
 
     buttonRedBg: '$red9',
-    buttonRedHoverBg: '$red10',
     buttonRedText: '$loContrast',
+    buttonRedHoverBg: '$red10',
+    buttonRedFocusBg: `$colors$redA8`,
   });
 
   export const getDark: Factory = (primaryColor) => ({
     buttonPrimaryBg: '$primary',
-    buttonPrimaryHoverBg: tinycolor(primaryColor).lighten(10).toString(),
     buttonPrimaryText: '$deepBlue2',
-    buttonPrimaryGhostHoverText: '$primary',
-    buttonPrimaryGhostText: tinycolor(primaryColor).lighten(10).toString(),
+    buttonPrimaryFocusBorder: '$neonA12',
+    buttonPrimaryGhostHoverText: tinycolor(primaryColor).lighten(10).toString(),
+    buttonPrimaryGhostText: '$primary',
 
-    buttonSecondaryBg: '$deepBlue4',
-    buttonSecondaryHoverBg: '$deepBlue5',
-    buttonSecondaryText: '$hiContrast',
+    buttonSecondaryBg: 'transparent',
+    buttonSecondaryText: 'hsla(0, 0%, 100%, 0.74)',
+    buttonSecondaryBorder: '$grayBlue9',
+    buttonSecondaryFocusBorder: '$primary',
     buttonSecondaryGhostHoverText: '$deepBlue6',
     buttonSecondaryGhostText: '$deepBlue7',
 
     buttonRedBg: '$red10',
-    buttonRedHoverBg: '$red11',
     buttonRedText: '$hiContrast',
+    buttonRedHoverBg: '$red11',
+    buttonRedFocusBg: `$colors$redA11`,
   });
 }

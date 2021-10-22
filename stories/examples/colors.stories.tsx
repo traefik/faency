@@ -2,29 +2,20 @@ import React from 'react';
 import { Property } from '@stitches/react/types/css';
 import { Box, Card, Flex, Heading, Text, config } from '../../index';
 import { colors } from '../../stitches.config';
+import { getColorFromToken } from '../../utils/getColorFromToken';
 
 type Color = { token: string; value: Property.Color };
 type ColorGroup = { name: string; colors: Color[]; alphaColors: Color[] };
 
-const getColorFromConst = (colorName) => {
-  if (colorName.startsWith('$')) {
-    return getColorFromConst(colorName.replace('$', ''));
-  }
-
-  const color = config.theme.colors[colorName];
-
-  if (color && color.startsWith('$')) {
-    return getColorFromConst(color);
-  }
-
-  return color;
+const aliases = {
+  dp: 'Elevations',
 };
 
 const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
   (acc: ColorGroup[], token: Property.Color) => {
     const nbPattern = /\d+/g;
 
-    const value = getColorFromConst(token);
+    const value = getColorFromToken(config.theme.colors, token);
 
     const nb = token && token.match(nbPattern);
 
@@ -79,32 +70,32 @@ export const Colors = () => {
 
       {colorGroups.map((colorGroup) => (
         <Card key={colorGroup.name} css={{ mb: '$3' }}>
-          <Heading size="3" css={{ mb: '$2' }}>
-            {colorGroup.name}
+          <Heading size="3" css={{ mb: '$2', '&:first-letter': { textTransform: 'uppercase' } }}>
+            {aliases[colorGroup.name] || colorGroup.name}
           </Heading>
           {['colors', 'alphaColors'].map((type) => (
             <>
               {!!colorGroup?.[type]?.length && (
-                <Card css={{ display: 'flex', bc: '$deepBlue1', overflow: 'auto', mb: '$3' }}>
+                <Card
+                  css={{ display: 'flex', bc: '$deepBlue1', overflow: 'auto', mb: '$3', gap: '$3' }}
+                >
                   {colorGroup[type].map((color) => (
                     <Flex
+                      key={color.token}
                       css={{
                         flexDirection: 'column',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        p: '$2',
+                        maxWidth: 80,
                       }}
                     >
-                      <Box
-                        css={{
-                          mb: '$2',
-                          bc: `$${color.token}`,
-                          size: 80,
-                          borderWidth: 1,
-                          borderStyle: 'solid',
-                          borderColor: '$colors$gray7',
-                        }}
-                      />
+                      <Box css={{ bc: `$${colorGroup.name}1`, mb: '$2' }}>
+                        <Box
+                          css={{
+                            size: 80,
+                            bc: `$${color.token}`,
+                          }}
+                        />
+                      </Box>
                       <Text variant="subtle" css={{ pb: '$1', textAlign: 'center' }}>
                         {color.token}
                       </Text>

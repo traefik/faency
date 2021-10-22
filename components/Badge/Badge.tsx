@@ -9,6 +9,7 @@ export const Badge = styled('span', {
   display: 'inline-flex',
   flexShrink: 0,
   fontFamily: '$rubik',
+  fontWeight: 500,
   justifyContent: 'center',
   lineHeight: '1',
   verticalAlign: 'middle',
@@ -17,7 +18,7 @@ export const Badge = styled('span', {
   textDecoration: 'none',
   userSelect: 'none',
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
-  borderRadius: '5px',
+  borderRadius: '$pill',
   whiteSpace: 'nowrap',
   fontVariantNumeric: 'tabular-nums',
   position: 'relative',
@@ -55,39 +56,37 @@ export const Badge = styled('span', {
         height: '$4',
         px: '$2',
         fontSize: '$2',
-        fontWeight: '300',
       },
       large: {
         height: '$5',
         px: '$3',
         fontSize: '$3',
-        fontWeight: '300',
       },
     },
     variant: {
       gray: {
-        backgroundColor: '$badgeDefaultBackground',
-        color: '$badgeDefaultText',
+        bc: '$gray9@0.2',
+        color: '$gray9',
       },
       red: {
-        backgroundColor: '$red6',
-        color: '$red10',
+        bc: '$red9@0.2',
+        color: '$red9',
       },
       blue: {
-        backgroundColor: '$blue5',
+        bc: '$blue9@0.2',
         color: '$blue9',
       },
       green: {
-        backgroundColor: '$grass6',
-        color: '$grass10',
+        bc: '$green9@0.2',
+        color: '$green9',
       },
       neon: {
-        backgroundColor: '$badgeNeonBackground',
-        color: '$badgeNeonText',
+        bc: '$neon9@0.2',
+        color: '$neon9',
       },
       orange: {
-        backgroundColor: '$amber6',
-        color: '$amber10',
+        bc: '$orange9@0.2',
+        color: '$orange9',
       },
     },
   },
@@ -95,12 +94,12 @@ export const Badge = styled('span', {
     {
       interactive: true,
       variant: 'gray',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$badgeDefaultText' } },
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$gray9' } },
     },
     {
       interactive: true,
       variant: 'red',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$red10' } },
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$red9' } },
     },
     {
       interactive: true,
@@ -110,17 +109,17 @@ export const Badge = styled('span', {
     {
       interactive: true,
       variant: 'green',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$grass10' } },
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$green9' } },
     },
     {
       interactive: true,
       variant: 'neon',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$badgeNeonText' } },
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$neon9' } },
     },
     {
       interactive: true,
       variant: 'orange',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$amber10' } },
+      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$orange9' } },
     },
   ],
   defaultVariants: {
