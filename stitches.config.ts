@@ -22,8 +22,6 @@ import {
   orangeDarkA,
   purple,
   purpleDark,
-  redA,
-  redDarkA,
   slate,
   slateA,
   slateDark,
@@ -45,131 +43,26 @@ import { Theme as SelectTheme } from './components/Select/Select.themes';
 import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 
+import {
+  deepBlue,
+  neon,
+  neonA,
+  orange,
+  red,
+  redA,
+  deepBlueDark,
+  neonDark,
+  neonDarkA,
+  orangeDark,
+  redDark,
+  redDarkA,
+} from './colors';
+import { Property } from '@stitches/react/types/css';
 export type { VariantProps } from '@stitches/react';
 
-const red = {
-  red1: 'hsl(359 100% 99.0%)',
-  red2: 'hsl(359 100% 98.0%)',
-  red3: 'hsl(360 100% 95.4%)',
-  red4: 'hsl(359 100% 92.2%)',
-  red5: 'hsl(358 100% 88.1%)',
-  red6: 'hsl(357 100% 82.4%)',
-  red7: 'hsl(354 100% 73.8%)',
-  red8: 'hsl(347 100% 60.0%)',
-  red9: 'hsl(351, 100%, 42.0%)',
-  red10: 'hsl(351, 100%, 40.0%)',
-  red11: 'hsl(351, 100%, 36.0%)',
-  red12: 'hsl(354 50.0% 16.0%)',
-};
+const defaultPrimary: Property.Color = '$blue8';
 
-const redDark = {
-  red1: 'hsl(347 23.0% 9.8%)',
-  red2: 'hsl(357 34.4% 12.0%)',
-  red3: 'hsl(356 43.4% 16.4%)',
-  red4: 'hsl(356 47.6% 19.2%)',
-  red5: 'hsl(356 51.1% 21.9%)',
-  red6: 'hsl(356 55.2% 25.9%)',
-  red7: 'hsl(357 60.2% 31.8%)',
-  red8: 'hsl(358 65.0% 40.4%)',
-  red9: 'hsl(358 75.0% 59.0%)',
-  red10: 'hsl(347, 100%, 60.0%)',
-  red11: 'hsl(347 100% 72.0%)',
-  red12: 'hsl(351 89.0% 96.0%)',
-};
-
-const orange = {
-  orange1: 'hsl(31 70.0% 99.0%)',
-  orange2: 'hsl(30 100% 96.1%)',
-  orange3: 'hsl(32 100% 93.6%)',
-  orange4: 'hsl(33 100% 90.6%)',
-  orange5: 'hsl(33 100% 86.6%)',
-  orange6: 'hsl(34 100% 81.2%)',
-  orange7: 'hsl(34 100% 73.4%)',
-  orange8: 'hsl(35 100% 62.0%)',
-  orange9: 'hsl(31 100% 41.0%)',
-  orange10: 'hsl(31, 85.0%, 39.0%)',
-  orange11: 'hsl(31, 70.0%, 30.0%)',
-  orange12: 'hsl(15 60.0% 17.0%)',
-};
-
-const orangeDark = {
-  orange1: 'hsl(35 100% 7.2%)',
-  orange2: 'hsl(35 100% 8.0%)',
-  orange3: 'hsl(34 87.5% 11.4%)',
-  orange4: 'hsl(33 84.1% 14.0%)',
-  orange5: 'hsl(33 83.6% 16.6%)',
-  orange6: 'hsl(33 85.7% 19.8%)',
-  orange7: 'hsl(34 91.5% 23.9%)',
-  orange8: 'hsl(35 100% 29.0%)',
-  orange9: 'hsl(24 94.0% 50.0%)',
-  orange10: 'hsl(35, 100%, 50.0%)',
-  orange11: 'hsl(35 100% 62.2%)',
-  orange12: 'hsl(24 97.0% 93.2%)',
-};
-
-const neon = {
-  neon1: 'hsl(67, 76.0%, 99.0%)',
-  neon2: 'hsl(68 75.6% 92.0%)',
-  neon3: 'hsl(68 76.7% 89.9%)',
-  neon4: 'hsl(68 77.4% 87.2%)',
-  neon5: 'hsl(68 78.0% 83.7%)',
-  neon6: 'hsl(68 78.4% 78.8%)',
-  neon7: 'hsl(68 78.7% 71.4%)',
-  neon8: 'hsl(68, 79.0%, 60.0%)',
-  neon9: 'hsl(68, 79.0%, 34.5%)',
-  neon10: 'hsl(68 70.8% 31.6%)',
-  neon11: 'hsl(67, 54.0%, 24.0%)',
-  neon12: 'hsl(68, 53.0%, 12.0%)',
-};
-
-const neonDark = {
-  neon1: 'hsl(67, 76%, 99%)',
-  neon2: 'hsl(68 75.6% 92%)',
-  neon3: 'hsl(68 76.7% 89.9%)',
-  neon4: 'hsl(68 77.4% 87.2%)',
-  neon5: 'hsl(68 78% 83.7%)',
-  neon6: 'hsl(68 78.4% 78.8%)',
-  neon7: 'hsl(68 78.7% 71.4%)',
-  neon8: 'hsl(68, 79%, 60%)',
-  neon9: 'hsl(68, 79%, 34.5%)',
-  neon10: 'hsl(68 70.8% 31.6%)',
-  neon11: 'hsl(67, 54%, 24%)',
-  neon12: 'hsl(68, 53%, 12%)',
-};
-
-export const deepBlue = {
-  deepBlue1: 'hsl(180, 9%, 98%)',
-  deepBlue2: 'hsl(210, 10%, 96%)',
-  deepBlue3: 'hsl(204, 11%, 91%)',
-  deepBlue4: 'hsl(207, 10%, 82%)',
-  deepBlue5: 'hsl(208, 9%, 73%)',
-  deepBlue6: 'hsl(208, 9%, 64%)',
-  deepBlue7: 'hsl(208, 11%, 45%)',
-  deepBlue8: 'hsl(208, 16%, 36%)',
-  deepBlue9: 'hsl(208, 24%, 27%)',
-  deepBlue10: 'hsl(208, 40%, 18%)',
-  deepBlue11: 'hsl(209, 88%, 9%)',
-  deepBlue12: 'hsl(208, 89%, 7%)',
-};
-
-export const deepBlueDark = {
-  deepBlue12: 'hsl(180, 9%, 98%)',
-  deepBlue11: 'hsl(210, 10%, 96%)',
-  deepBlue10: 'hsl(204, 11%, 91%)',
-  deepBlue9: 'hsl(207, 10%, 82%)',
-  deepBlue8: 'hsl(208, 9%, 73%)',
-  deepBlue7: 'hsl(208, 9%, 64%)',
-  deepBlue6: 'hsl(208, 11%, 45%)',
-  deepBlue5: 'hsl(208, 16%, 36%)',
-  deepBlue4: 'hsl(208, 24%, 27%)',
-  deepBlue3: 'hsl(208, 40%, 18%)',
-  deepBlue2: 'hsl(209, 88%, 9%)',
-  deepBlue1: 'hsl(208, 89%, 7%)',
-};
-
-const defaultPrimary: string = '$blue8';
-
-export const colors: Record<string, string> = {
+export const colors: Record<string, Property.Color> = {
   ...gray,
   ...red,
   ...blue,
@@ -188,6 +81,7 @@ export const colors: Record<string, string> = {
   ...greenA,
   ...orangeA,
   ...slateA,
+  ...neonA,
   ...whiteA,
   ...blackA,
 
@@ -431,6 +325,7 @@ export const customColors = (primary: string) => {
       ...greenDarkA,
       ...orangeDarkA,
       ...slateDarkA,
+      ...neonDarkA,
 
       // Semantic colors
       primary,

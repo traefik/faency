@@ -1,7 +1,7 @@
 import { FaencyProvider } from '../components/FaencyProvider';
 import { DocsContainer } from './components/DocContainer';
 import { themes } from '@storybook/theming';
-import { deepBlue, deepBlueDark } from '../stitches.config';
+import { deepBlue, deepBlueDark } from '../colors';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
