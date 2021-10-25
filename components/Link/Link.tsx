@@ -30,50 +30,50 @@ export const Link = styled('a', {
   },
   variants: {
     variant: {
-      // blue: {
-      //   color: '$linkBlue',
-      //   textDecoration: 'none',
-      //   textDecorationColor: '$linkBlueTextDecoration',
-      //   '&:focus': {
-      //     outlineColor: '$linkBlueFocusOutline',
-      //   },
-      // },
-      primary: {
-        // color: '$linkPrimary',
-        // textDecorationColor: '$linkPrimaryTextDecoration',
-        // '@hover': {
-        //   '&:hover': {
-        //     textDecorationColor: '$linkPrimaryHoverTextDecoration',
-        //   },
-        // },
-        // '&:focus': {
-        //   outlineColor: '$linkPrimaryFocusOutline',
-        // },
+      blue: {
+        color: '$linkBlue',
+        textDecoration: 'none',
+        textDecorationColor: '$linkBlueTextDecoration',
+        '&:focus': {
+          outlineColor: '$linkBlueFocusOutline',
+        },
       },
-      // subtle: {
-      //   color: '$linkSubtle',
-      //   textDecorationColor: '$linkSubtleTextDecoration',
-      //   '@hover': {
-      //     '&:hover': {
-      //       textDecorationColor: '$linkSubtleHoverTextDecoration',
-      //     },
-      //   },
-      //   '&:focus': {
-      //     outlineColor: '$linkSubtleFocusOutline',
-      //   },
-      // },
-      // contrast: {
-      //   color: '$linkContrast',
-      //   textDecorationColor: '$linkContrastTextDecoration',
-      //   '@hover': {
-      //     '&:hover': {
-      //       textDecorationColor: '$linkContrastHoverTextDecoration',
-      //     },
-      //   },
-      //   '&:focus': {
-      //     outlineColor: '$linkContrastFocusOutline',
-      //   },
-      // },
+      primary: {
+        color: '$linkPrimary',
+        textDecorationColor: '$linkPrimaryTextDecoration',
+        '@hover': {
+          '&:hover': {
+            textDecorationColor: '$linkPrimaryHoverTextDecoration',
+          },
+        },
+        '&:focus': {
+          outlineColor: '$linkPrimaryFocusOutline',
+        },
+      },
+      subtle: {
+        color: '$linkSubtle',
+        textDecorationColor: '$linkSubtleTextDecoration',
+        '@hover': {
+          '&:hover': {
+            textDecorationColor: '$linkSubtleHoverTextDecoration',
+          },
+        },
+        '&:focus': {
+          outlineColor: '$linkSubtleFocusOutline',
+        },
+      },
+      contrast: {
+        color: '$linkContrast',
+        textDecorationColor: '$linkContrastTextDecoration',
+        '@hover': {
+          '&:hover': {
+            textDecorationColor: '$linkContrastHoverTextDecoration',
+          },
+        },
+        '&:focus': {
+          outlineColor: '$linkContrastFocusOutline',
+        },
+      },
     },
   },
   defaultVariants: {

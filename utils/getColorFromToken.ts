@@ -1,9 +1,8 @@
 import { config } from '..';
 
 type ColorsConfig = { [color: string]: string };
-type GetColorFromTokenOneParam = (token: string) => string;
-type GetColorFromTokenTwoParam = (colorsConfig: ColorsConfig, token: string) => string;
-type GetColorFromToken = GetColorFromTokenTwoParam & GetColorFromTokenOneParam;
+type GetColorFromTokenArgs = [token: string] | [colorsConfig: ColorsConfig, token: string];
+type GetColorFromToken = (...args: GetColorFromTokenArgs) => string;
 
 export const getColorFromToken: GetColorFromToken = (...args) => {
   const colorsConfig = args.length === 2 ? args[0] : config.theme.colors;
