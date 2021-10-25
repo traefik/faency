@@ -1,10 +1,25 @@
+import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
 export namespace Theme {
   type Colors = {
-    linkSubtle: string;
+    linkSubtle: Property.Color;
+    linkBlueTextDecoration: Property.Color;
+    linkBlueHoverTextDecoration: Property.Color;
+    linkBlueFocusOutline: Property.Color;
+    linkContrast: Property.Color;
+    linkContrastTextDecoration: Property.Color;
+    linkContrastHoverTextDecoration: Property.Color;
+    linkContrastFocusOutline: Property.Color;
+    linkSubtleTextDecoration: Property.Color;
+    linkSubtleHoverTextDecoration: Property.Color;
+    linkSubtleFocusOutline: Property.Color;
+    linkPrimary: Property.Color;
+    linkPrimaryTextDecoration: Property.Color;
+    linkPrimaryHoverTextDecoration: Property.Color;
+    linkPrimaryFocusOutline: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor: Property.Color) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
     linkBlue: '$blue11',

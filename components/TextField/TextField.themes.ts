@@ -1,20 +1,22 @@
+import { Property } from '@stitches/react/types/css';
+
 export namespace Theme {
   type Colors = {
-    textFieldBg: string;
-    textFieldBorder: string;
-    textFieldFocusBg: string;
-    textFieldFocusBorder: string;
-    textFieldHoverBg: string;
-    textFieldText: string;
-    textFieldPlaceholder: string;
-    textFieldDisabledText: string;
-    textFieldDisabledBorder: string;
-    textFieldReadOnlyBg: string;
+    textFieldBg: Property.Color;
+    textFieldBorder: Property.Color;
+    textFieldFocusBg: Property.Color;
+    textFieldFocusBorder: Property.Color;
+    textFieldHoverBg: Property.Color;
+    textFieldText: Property.Color;
+    textFieldPlaceholder: Property.Color;
+    textFieldDisabledText: Property.Color;
+    textFieldDisabledBorder: Property.Color;
+    textFieldReadOnlyBg: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     textFieldBg: '$deepBlue3',
     textFieldBorder: '$deepBlue6',
     textFieldFocusBg: '$deepBlue2',
@@ -27,7 +29,7 @@ export namespace Theme {
     textFieldReadOnlyBg: '$deepBlue3',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     textFieldBg: '$deepBlue3',
     textFieldBorder: '$deepBlue6',
     textFieldFocusBg: '$deepBlue1',

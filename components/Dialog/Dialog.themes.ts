@@ -1,17 +1,17 @@
-import tinycolor from 'tinycolor2';
+import { Property } from '@stitches/react/types/css';
 
 export namespace Theme {
   type Colors = {
-    dialogBackground: string;
+    dialogBackground: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     dialogBackground: '$deepBlue2',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     dialogBackground: '$deepBlue3',
   });
 }

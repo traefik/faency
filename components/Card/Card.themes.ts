@@ -13,7 +13,7 @@ export namespace Theme {
     cardGhostBackground: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor: Property.Color) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
     cardBackground: 'white',

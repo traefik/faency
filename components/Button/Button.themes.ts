@@ -22,9 +22,9 @@ export namespace Theme {
     buttonRedFocusBg: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = (primaryColor: Property.Color) => ({
     buttonPrimaryBg: '$primary',
     buttonPrimaryText: 'white',
     buttonPrimaryFocusBorder: '$neonA6',

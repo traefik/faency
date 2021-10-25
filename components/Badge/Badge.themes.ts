@@ -11,12 +11,12 @@ export namespace Theme {
     badgeInteractiveBackground: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = (primaryColor: Property.Color) => ({
     badgeDefaultBackground: '$slate7',
     badgeDefaultText: '$slate10',
-    badgeNeonBackground: tinycolor(getColorFromToken('$neon9')).setAlpha(0.2).toHslString(),
+    badgeNeonBackground: tinycolor(getColorFromToken(primaryColor)).setAlpha(0.2).toHslString(),
     badgeNeonText: '$neon9',
     badgeInteractiveBackground: 'rgba(0,0,0,.05)',
   });
