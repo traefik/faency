@@ -1,7 +1,7 @@
 import { FaencyProvider } from '../components/FaencyProvider';
 import { DocsContainer } from './components/DocContainer';
 import { themes } from '@storybook/theming';
-import { deepBlue, deepBlueDark } from '../colors';
+import { elevation, elevationDark } from '../colors';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -13,8 +13,8 @@ export const parameters = {
   },
   darkMode: {
     stylePreview: true,
-    dark: { ...themes.dark, appContentBg: deepBlueDark.deepBlue1 },
-    light: { ...themes.light, appContentBg: deepBlue.deepBlue1 },
+    dark: { ...themes.dark, appContentBg: elevationDark['00dp'] },
+    light: { ...themes.light, appContentBg: elevation['00dp'] },
   },
   docs: {
     container: DocsContainer,

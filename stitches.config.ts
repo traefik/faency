@@ -44,6 +44,7 @@ import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 
 import {
+  elevation,
   deepBlue,
   deepBlueA,
   grayBlue,
@@ -53,6 +54,7 @@ import {
   orange,
   red,
   redA,
+  elevationDark,
   deepBlueDark,
   deepBlueDarkA,
   grayBlueDark,
@@ -68,24 +70,6 @@ import tinycolor from 'tinycolor2';
 export type { VariantProps } from '@stitches/react';
 
 const defaultPrimary: Property.Color = '$blue8';
-
-const darkElevation = {
-  '00dp': 'hsl(210, 68%, 9%)',
-  '01dp': 'hsl(208, 37%, 15%)',
-  '02dp': 'hsl(207, 32%, 17%)',
-  '03dp': 'hsl(209, 28%, 19%)',
-  '04dp': 'hsl(209, 23%, 21%)',
-  '05dp': 'hsl(209, 21%, 23%)',
-};
-
-const elevation = {
-  '00dp': 'hsl(240, 4%, 95%)',
-  '01dp': 'hsl(0, 0%, 99%)',
-  '02dp': 'hsl(0, 0%, 99%)',
-  '03dp': 'hsl(0, 0%, 99%)',
-  '04dp': 'hsl(0, 0%, 99%)',
-  '05dp': 'hsl(0, 0%, 99%)',
-};
 
 export const colors: Record<string, Property.Color> = {
   ...elevation,
@@ -117,7 +101,7 @@ export const colors: Record<string, Property.Color> = {
 
   // Semantic colors
   primary: defaultPrimary,
-  contentBg: '$deepBlue1',
+  contentBg: '$00dp',
   hiContrast: '$deepBlue11',
   loContrast: 'white',
   focusOutline: 'hsl(216, 100%, 64%)',
@@ -350,7 +334,7 @@ export const customColors = (primary: Property.Color) => {
 
   const darkTheme = createTheme('dark', {
     colors: {
-      ...darkElevation,
+      ...elevationDark,
       ...neonDark,
       ...neonDarkA,
       ...deepBlueDark,
@@ -377,6 +361,7 @@ export const customColors = (primary: Property.Color) => {
 
       // Semantic colors
       primary,
+      contentBg: '$00dp',
       hiContrast: 'white',
       loContrast: '$deepBlue2',
 
