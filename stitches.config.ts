@@ -251,13 +251,7 @@ const stitches = createStitches({
     fs: (value: Stitches.PropertyValue<'flexShrink'>) => ({ flexShrink: value }),
     fb: (value: Stitches.PropertyValue<'flexBasis'>) => ({ flexBasis: value }),
 
-    bc: (value: string) => ({
-      backgroundColor: value.includes('@')
-        ? tinycolor(getColorFromToken(value.split('@')[0]))
-            .setAlpha(+value.split('@')[1])
-            .toHslString()
-        : value,
-    }),
+    bc: (value: Stitches.PropertyValue<'backgroundColor'>) => ({ backgroundColor: value }),
 
     br: (value: Stitches.PropertyValue<'borderRadius'>) => ({
       borderRadius: value,
@@ -277,13 +271,7 @@ const stitches = createStitches({
 
     bs: (value: Stitches.PropertyValue<'boxShadow'>) => ({ boxShadow: value }),
 
-    c: (value: string) => ({
-      color: value.includes('@')
-        ? tinycolor(getColorFromToken(value.split('@')[0]))
-            .setAlpha(+value.split('@')[1])
-            .toHslString()
-        : value,
-    }),
+    c: (value: Stitches.PropertyValue<'color'>) => ({ color: value }),
 
     lh: (value: Stitches.PropertyValue<'lineHeight'>) => ({ lineHeight: value }),
 
