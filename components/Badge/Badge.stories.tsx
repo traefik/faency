@@ -47,6 +47,12 @@ Colors.args = {
   variant: 'gray',
 };
 
+export const AlphaBackground = Colors.bind({});
+
+AlphaBackground.args = {
+  alphaBg: true,
+};
+
 export const Small: ComponentStory<typeof BadgeForStory> = (args) => (
   <Badge {...args}>Small badge</Badge>
 );

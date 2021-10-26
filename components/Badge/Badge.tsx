@@ -65,29 +65,32 @@ export const Badge = styled('span', {
     },
     variant: {
       gray: {
-        bc: '$gray9@0.2',
-        color: '$gray9',
+        bc: '$gray6',
+        color: '$gray10',
       },
       red: {
-        bc: '$red9@0.2',
-        color: '$red9',
+        bc: '$red6',
+        color: '$red10',
       },
       blue: {
-        bc: '$blue9@0.2',
-        color: '$blue9',
+        bc: '$blue6',
+        color: '$blue10',
       },
       green: {
-        bc: '$green9@0.2',
-        color: '$green9',
+        bc: '$green6',
+        color: '$green10',
       },
       neon: {
-        bc: '$neon9@0.2',
-        color: '$neon9',
+        bc: '$neon6',
+        color: '$neon10',
       },
       orange: {
-        bc: '$orange9@0.2',
-        color: '$orange9',
+        bc: '$orange6',
+        color: '$orange10',
       },
+    },
+    alphaBg: {
+      true: {},
     },
   },
   compoundVariants: [
@@ -120,6 +123,36 @@ export const Badge = styled('span', {
       interactive: true,
       variant: 'orange',
       css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$orange9' } },
+    },
+    {
+      alphaBg: true,
+      variant: 'gray',
+      css: { bc: '$grayA6' },
+    },
+    {
+      alphaBg: true,
+      variant: 'red',
+      css: { bc: '$redA6' },
+    },
+    {
+      alphaBg: true,
+      variant: 'blue',
+      css: { bc: '$blueA6' },
+    },
+    {
+      alphaBg: true,
+      variant: 'green',
+      css: { bc: '$greenA6' },
+    },
+    {
+      alphaBg: true,
+      variant: 'neon',
+      css: { bc: '$neonA6' },
+    },
+    {
+      alphaBg: true,
+      variant: 'orange',
+      css: { bc: '$orangeA6' },
     },
   ],
   defaultVariants: {
