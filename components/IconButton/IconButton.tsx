@@ -84,10 +84,10 @@ export const IconButton = styled('button', {
         color: '$red9',
       },
       green: {
-        color: '$grass9',
+        color: '$orange9',
       },
       orange: {
-        color: '$amber9',
+        color: '$orange9',
       },
     },
   },

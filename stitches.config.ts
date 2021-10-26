@@ -1,15 +1,11 @@
 import type * as Stitches from '@stitches/react';
 import { createStitches, CSS as StitchesCSS } from '@stitches/react';
 import {
-  amber,
-  amberDark,
   blackA,
   blue,
   blueA,
   blueDark,
   blueDarkA,
-  grass,
-  grassDark,
   gray,
   grayA,
   grayDark,
@@ -87,8 +83,6 @@ export const colors: Record<string, Property.Color> = {
   ...blue,
   ...green,
   ...slate,
-  ...amber,
-  ...grass,
   ...purple,
 
   ...grayA,
@@ -349,8 +343,6 @@ export const customColors = (primary: Property.Color) => {
       ...blueDark,
       ...greenDark,
       ...slateDark,
-      ...amberDark,
-      ...grassDark,
       ...purpleDark,
 
       ...grayDarkA,
