@@ -69,16 +69,14 @@ export const Colors = () => {
       </Heading>
 
       {colorGroups.map((colorGroup) => (
-        <Card key={colorGroup.name} css={{ mb: '$3' }}>
+        <Box key={colorGroup.name} css={{ mb: '$3' }}>
           <Heading size="3" css={{ mb: '$2', '&:first-letter': { textTransform: 'uppercase' } }}>
             {aliases[colorGroup.name] || colorGroup.name}
           </Heading>
           {['colors', 'alphaColors'].map((type) => (
             <>
               {!!colorGroup?.[type]?.length && (
-                <Card
-                  css={{ display: 'flex', bc: '$deepBlue1', overflow: 'auto', mb: '$3', gap: '$3' }}
-                >
+                <Flex css={{ bc: '$contentBg', overflow: 'auto', mb: '$3', gap: '$3' }}>
                   {colorGroup[type].map((color) => (
                     <Flex
                       key={color.token}
@@ -104,11 +102,11 @@ export const Colors = () => {
                       </Text>
                     </Flex>
                   ))}
-                </Card>
+                </Flex>
               )}
             </>
           ))}
-        </Card>
+        </Box>
       ))}
     </Flex>
   );
