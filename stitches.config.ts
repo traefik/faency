@@ -107,7 +107,7 @@ export const colors: Record<string, Property.Color> = {
   focusOutline: 'hsl(216, 100%, 64%)',
 };
 
-const primaryColor = getColorFromToken(colors, defaultPrimary);
+const primaryColor = getColorFromToken(defaultPrimary, colors);
 
 const stitches = createStitches({
   theme: {
@@ -330,7 +330,7 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 export const utils = config.utils;
 
 export const customColors = (primary: Property.Color) => {
-  const primaryColor = getColorFromToken(config.theme.colors as Record<string, string>, primary);
+  const primaryColor = getColorFromToken(primary);
 
   const darkTheme = createTheme('dark', {
     colors: {

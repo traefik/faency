@@ -15,7 +15,7 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
   (acc: ColorGroup[], token: Property.Color) => {
     const nbPattern = /\d+/g;
 
-    const value = getColorFromToken(config.theme.colors, token);
+    const value = getColorFromToken(token);
 
     const nb = token && token.match(nbPattern);
 
