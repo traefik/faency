@@ -18,7 +18,7 @@ export namespace Theme {
 
     buttonRedBg: Property.Color;
     buttonRedText: Property.Color;
-    buttonRedHoverBg: Property.Color;
+    buttonRedHoverText: Property.Color;
     buttonRedFocusBg: Property.Color;
   };
 
@@ -40,8 +40,8 @@ export namespace Theme {
 
     buttonRedBg: '$red9',
     buttonRedText: '$loContrast',
-    buttonRedHoverBg: '$red10',
-    buttonRedFocusBg: `$colors$redA8`,
+    buttonRedHoverText: '$red10',
+    buttonRedFocusBg: '$redA8',
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -60,7 +60,7 @@ export namespace Theme {
 
     buttonRedBg: '$red10',
     buttonRedText: '$hiContrast',
-    buttonRedHoverBg: '$red11',
-    buttonRedFocusBg: `$colors$redA11`,
+    buttonRedHoverText: '$red10',
+    buttonRedFocusBg: '$redA11',
   });
 }
