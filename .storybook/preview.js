@@ -1,7 +1,6 @@
 import { FaencyProvider } from '../components/FaencyProvider';
 import { DocsContainer } from './components/DocContainer';
-import { themes } from '@storybook/theming';
-import { elevation, elevationDark } from '../colors';
+import { globalCss } from '../';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -13,14 +12,23 @@ export const parameters = {
   },
   darkMode: {
     stylePreview: true,
-    dark: { ...themes.dark, appContentBg: elevationDark['00dp'] },
-    light: { ...themes.light, appContentBg: elevation['00dp'] },
   },
   docs: {
     container: DocsContainer,
   },
 };
 
+const globalStyle = globalCss({
+  body: {
+    bc: '$contentBg',
+  },
+});
+
 export const decorators = [
-  (renderStory) => <FaencyProvider primaryColor="$neon9">{renderStory()}</FaencyProvider>,
+  (renderStory) => (
+    <FaencyProvider primaryColor="$neon9">
+      {globalStyle()}
+      {renderStory()}
+    </FaencyProvider>
+  ),
 ];
