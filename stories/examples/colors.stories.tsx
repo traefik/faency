@@ -54,7 +54,7 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
 );
 
 export const Colors = () => {
-  useDarkMode();
+  useDarkMode(); // force re-render on theme change
 
   return (
     <Flex css={{ flexDirection: 'column' }}>
