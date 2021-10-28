@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Property } from '@stitches/react/types/css';
+import { useDarkMode } from 'storybook-dark-mode';
 import { Box, Flex, Heading, Text, config } from '../../index';
 import { colors } from '../../stitches.config';
-import { getColorFromToken } from '../../utils/getColorFromToken';
 
-type Color = { token: string; value: Property.Color };
+type Color = { token: string };
 type ColorGroup = { name: string; colors: Color[]; alphaColors: Color[] };
 
 const aliases = {
@@ -15,12 +15,10 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
   (acc: ColorGroup[], token: Property.Color) => {
     const nbPattern = /\d+/g;
 
-    const value = getColorFromToken(token, config.theme.colors);
-
     const nb = token && token.match(nbPattern);
 
     if (!nb) {
-      return [...acc, { name: token, colors: [{ token, value }] }] as ColorGroup[];
+      return [...acc, { name: token, colors: [{ token }] }] as ColorGroup[];
     }
 
     const colorName = token.replace(`${nb}`, '');
@@ -33,13 +31,13 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
         acc[colorGroupIdx] = {
           ...acc[colorGroupIdx],
           name: colorGroupName,
-          alphaColors: [...acc[colorGroupIdx].alphaColors, { token, value }],
+          alphaColors: [...acc[colorGroupIdx].alphaColors, { token }],
         };
       } else {
         acc[colorGroupIdx] = {
           ...acc[colorGroupIdx],
           name: colorGroupName,
-          colors: [...acc[colorGroupIdx].colors, { token, value }],
+          colors: [...acc[colorGroupIdx].colors, { token }],
         };
       }
 
@@ -47,21 +45,17 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
     }
 
     if (isAlpha) {
-      return [
-        ...acc,
-        { name: colorGroupName, colors: [], alphaColors: [{ token, value }] } as ColorGroup,
-      ];
+      return [...acc, { name: colorGroupName, colors: [], alphaColors: [{ token }] } as ColorGroup];
     }
 
-    return [
-      ...acc,
-      { name: colorGroupName, colors: [{ token, value }], alphaColors: [] } as ColorGroup,
-    ];
+    return [...acc, { name: colorGroupName, colors: [{ token }], alphaColors: [] } as ColorGroup];
   },
   []
 );
 
 export const Colors = () => {
+  useDarkMode();
+
   return (
     <Flex css={{ flexDirection: 'column' }}>
       <Heading size="4" css={{ mb: '$6' }}>
@@ -98,7 +92,9 @@ export const Colors = () => {
                         {color.token}
                       </Text>
                       <Text variant="subtle" size="0" css={{ textAlign: 'center' }}>
-                        {color.value}
+                        {window
+                          .getComputedStyle(document.body)
+                          .getPropertyValue(`--colors-${color.token}`)}
                       </Text>
                     </Flex>
                   ))}
