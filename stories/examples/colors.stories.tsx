@@ -76,7 +76,7 @@ export const Colors = () => {
           {['colors', 'alphaColors'].map((type) => (
             <>
               {!!colorGroup?.[type]?.length && (
-                <Flex key={type} css={{ bc: '$contentBg', overflow: 'auto', mb: '$3', gap: '$3' }}>
+                <Flex key={type} css={{ bc: '$contentBg', mb: '$3', gap: '$3' }}>
                   {colorGroup[type].map((color) => (
                     <Flex
                       key={color.token}
