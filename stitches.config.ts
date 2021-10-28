@@ -14,16 +14,17 @@ import {
   greenA,
   greenDark,
   greenDarkA,
-  orangeA,
-  orangeDarkA,
   purple,
+  purpleA,
   purpleDark,
+  purpleDarkA,
   slate,
   slateA,
   slateDark,
   slateDarkA,
   whiteA,
 } from '@radix-ui/colors';
+import { Property } from '@stitches/react/types/css';
 import { tokenToPropertyName } from './utils/tokenToPropertyName';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
@@ -48,6 +49,7 @@ import {
   neon,
   neonA,
   orange,
+  orangeA,
   red,
   redA,
   elevationDark,
@@ -58,11 +60,11 @@ import {
   neonDark,
   neonDarkA,
   orangeDark,
+  orangeDarkA,
   redDark,
   redDarkA,
 } from './colors';
-import { Property } from '@stitches/react/types/css';
-import tinycolor from 'tinycolor2';
+
 export type { VariantProps } from '@stitches/react';
 
 const defaultPrimary: Property.Color = '$blue8';
@@ -78,18 +80,20 @@ export const colors: Record<string, Property.Color> = {
   ...red,
   ...redA,
   ...orange,
-
-  ...gray,
-  ...blue,
-  ...green,
-  ...slate,
-  ...purple,
-
-  ...grayA,
-  ...blueA,
-  ...greenA,
   ...orangeA,
+
+  // radix colors
+  ...gray,
+  ...grayA,
+  ...blue,
+  ...blueA,
+  ...green,
+  ...greenA,
+  ...slate,
   ...slateA,
+  ...purple,
+  ...purpleA,
+
   ...whiteA,
   ...blackA,
 
@@ -326,18 +330,19 @@ export const customColors = (primary: Property.Color) => {
       ...redDark,
       ...redDarkA,
       ...orangeDark,
-
-      ...grayDark,
-      ...blueDark,
-      ...greenDark,
-      ...slateDark,
-      ...purpleDark,
-
-      ...grayDarkA,
-      ...blueDarkA,
-      ...greenDarkA,
       ...orangeDarkA,
+
+      // radix colors
+      ...grayDark,
+      ...grayDarkA,
+      ...blueDark,
+      ...blueDarkA,
+      ...greenDark,
+      ...greenDarkA,
+      ...slateDark,
       ...slateDarkA,
+      ...purpleDark,
+      ...purpleDarkA,
 
       // Semantic colors
       primary,

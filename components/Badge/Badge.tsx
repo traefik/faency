@@ -88,6 +88,10 @@ export const Badge = styled('span', {
         bc: '$orange6',
         color: '$orange10',
       },
+      purple: {
+        bc: '$purple6',
+        color: '$purple10',
+      },
     },
     alphaBg: {
       true: {},
@@ -153,6 +157,11 @@ export const Badge = styled('span', {
       alphaBg: true,
       variant: 'orange',
       css: { bc: '$orangeA6' },
+    },
+    {
+      alphaBg: true,
+      variant: 'purple',
+      css: { bc: '$purpleA6' },
     },
   ],
   defaultVariants: {

@@ -15,13 +15,13 @@ export const grayBlue = {
 
 export const grayBlueA = {
   grayBlueA1: 'hsl(240 89.3% 18.3% / 0.012)',
-  grayBlueA2: 'hsl(210 82.0% 10.9% / 0.044)',
+  grayBlueA2: 'hsl(182 89% 7.1% / 0.032)',
   grayBlueA3: 'hsl(210 80.6% 10.1% / 0.048)',
   grayBlueA4: 'hsl(210 97.6% 7.3% / 0.055)',
   grayBlueA5: 'hsl(220 92.3% 8.5% / 0.075)',
   grayBlueA6: 'hsl(204 97.3% 8.8% / 0.114)',
   grayBlueA7: 'hsl(210 95.8% 8.9% / 0.185)',
-  grayBlueA8: 'hsl(209 98.1% 8.5% / 0.491)',
+  grayBlueA8: 'hsl(207 96.4% 8.9% / 0.211)',
   grayBlueA9: 'hsl(205 96.4% 8.3% / 0.295)',
   grayBlueA10: 'hsl(207 99.4% 8.4% / 0.514)',
   grayBlueA11: 'hsl(208 96.8% 4.3% / 0.699)',

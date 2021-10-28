@@ -21,7 +21,7 @@ export const deepBlueA = {
   deepBlueA5: 'hsl(209, 99.5%, 25.7%, 0.161)',
   deepBlueA6: 'hsl(209, 98.5%, 19.4%, 0.236)',
   deepBlueA7: 'hsl(209, 99.1%, 15.2%, 0.377)',
-  deepBlueA8: 'hsl(208, 99.7%, 11.9%, 0.612)',
+  deepBlueA8: 'hsl(207 99.7% 8.3% / 0.682)',
   deepBlueA9: 'hsl(207, 98.6%, 8.2%, 0.797)',
   deepBlueA10: 'hsl(208, 98.9%, 8.0%, 0.891)',
   deepBlueA11: 'hsl(210, 100%, 7.6%, 0.980)',
@@ -45,8 +45,8 @@ export const deepBlueDark = {
 
 export const deepBlueDarkA = {
   deepBlueA1: 'hsl(0, 0%, 0%, 0)',
-  deepBlueA2: 'hsl(210, 97.9%, 64.8%, 0.097)',
-  deepBlueA3: 'hsl(211, 99.3%, 67.7%, 0.151)',
+  deepBlueA2: 'hsl(216 100% 49.6% / 0.076)',
+  deepBlueA3: 'hsl(210 100% 50% / 0.113)',
   deepBlueA4: 'hsl(210, 99.9%, 69.5%, 0.180)',
   deepBlueA5: 'hsl(209, 98.5%, 69.8%, 0.206)',
   deepBlueA6: 'hsl(209, 99.1%, 70.0%, 0.235)',
