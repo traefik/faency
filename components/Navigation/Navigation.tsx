@@ -32,7 +32,7 @@ const baseNavItemCss = css({
     backgroundColor: '$navButtonFocusBg',
     color: '$navButtonFocusText',
     padding: 'calc($2 - 2px)',
-    border: '2px solid $navButtonActiveText',
+    border: '2px solid $navButtonFocusBorder',
   },
 
   variants: {

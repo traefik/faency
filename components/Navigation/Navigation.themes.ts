@@ -7,6 +7,7 @@ export namespace Theme {
     navButtonHoverBg: Property.Color;
     navButtonActiveBg: Property.Color;
     navButtonFocusBg: Property.Color;
+    navButtonFocusBorder: Property.Color;
     navButtonText: Property.Color;
     navButtonHoverText: Property.Color;
     navButtonActiveText: Property.Color;
@@ -18,12 +19,13 @@ export namespace Theme {
   export const getLight: Factory = (primaryColor) => ({
     navBg: 'white',
     navButtonBg: 'transparent',
-    navButtonHoverBg: 'rgba(0, 0, 0, 0.04)',
-    navButtonActiveBg: 'rgba(0, 0, 0, 0.04)',
+    navButtonHoverBg: 'hsla(0, 0%, 0%, 0.04)',
+    navButtonActiveBg: 'hsla(0, 0%, 0%, 0.04)',
     navButtonFocusBg: tinycolor(primaryColor).setAlpha(0.05).toString(),
-    navButtonText: 'rgba(0, 0, 0, 0.54)',
-    navButtonHoverText: 'rgba(0, 0, 0)',
-    navButtonFocusText: 'rgba(0, 0, 0)',
+    navButtonFocusBorder: 'hsl(68, 53%, 48%)',
+    navButtonText: 'hsla(0, 0%, 0%, 0.54)',
+    navButtonHoverText: 'black',
+    navButtonFocusText: 'black',
     navButtonActiveText: tinycolor(primaryColor).darken(20).toString(),
   });
 
@@ -33,6 +35,7 @@ export namespace Theme {
     navButtonHoverBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
     navButtonActiveBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
     navButtonFocusBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
+    navButtonFocusBorder: '$neon5',
     navButtonText: 'white',
     navButtonHoverText: 'white',
     navButtonFocusText: 'white',
