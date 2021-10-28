@@ -1,6 +1,6 @@
 import React from 'react';
 import { Property } from '@stitches/react/types/css';
-import { Box, Card, Flex, Heading, Text, config } from '../../index';
+import { Box, Flex, Heading, Text, config } from '../../index';
 import { colors } from '../../stitches.config';
 import { getColorFromToken } from '../../utils/getColorFromToken';
 
@@ -15,7 +15,7 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
   (acc: ColorGroup[], token: Property.Color) => {
     const nbPattern = /\d+/g;
 
-    const value = getColorFromToken(token);
+    const value = getColorFromToken(token, config.theme.colors);
 
     const nb = token && token.match(nbPattern);
 

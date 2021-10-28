@@ -24,7 +24,7 @@ import {
   slateDarkA,
   whiteA,
 } from '@radix-ui/colors';
-import { getColorFromToken } from './utils/getColorFromToken';
+import { tokenToPropertyName } from './utils/tokenToPropertyName';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
@@ -101,7 +101,7 @@ export const colors: Record<string, Property.Color> = {
   focusOutline: 'hsl(216, 100%, 64%)',
 };
 
-const primaryColor = getColorFromToken(defaultPrimary, colors);
+const primaryColor = colors[tokenToPropertyName(defaultPrimary)];
 
 const stitches = createStitches({
   theme: {
@@ -312,7 +312,7 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 export const utils = config.utils;
 
 export const customColors = (primary: Property.Color) => {
-  const primaryColor = getColorFromToken(primary);
+  const primaryColor = colors[tokenToPropertyName(primary)];
 
   const darkTheme = createTheme('dark', {
     colors: {
