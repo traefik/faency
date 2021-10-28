@@ -9,9 +9,9 @@ export namespace Theme {
     tableActiveHoverText: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     tableText: '$deepBlue9',
     tableHoverBackground: '$deepBlue1',
     tableActiveText: '$deepBlue9',

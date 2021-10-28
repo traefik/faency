@@ -1,20 +1,22 @@
+import { Property } from '@stitches/react/types/css';
+
 export namespace Theme {
   type Colors = {
-    selectBg: string;
-    selectBorder: string;
-    selectFocusBg: string;
-    selectFocusBorder: string;
-    selectHoverBg: string;
-    selectText: string;
-    selectPlaceholder: string;
-    selectDisabledText: string;
-    selectDisabledBorder: string;
-    selectReadOnlyBg: string;
+    selectBg: Property.Color;
+    selectBorder: Property.Color;
+    selectFocusBg: Property.Color;
+    selectFocusBorder: Property.Color;
+    selectHoverBg: Property.Color;
+    selectText: Property.Color;
+    selectPlaceholder: Property.Color;
+    selectDisabledText: Property.Color;
+    selectDisabledBorder: Property.Color;
+    selectReadOnlyBg: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     selectBg: '$deepBlue3',
     selectBorder: '$deepBlue6',
     selectFocusBg: '$deepBlue2',
@@ -27,7 +29,7 @@ export namespace Theme {
     selectReadOnlyBg: '$deepBlue3',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     selectBg: '$deepBlue3',
     selectBorder: '$deepBlue6',
     selectFocusBg: '$deepBlue1',

@@ -8,16 +8,16 @@ export namespace Theme {
     iconButtonFocusBorder: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     iconButtonBackground: 'white',
     iconButtonHoverBorder: '$slate9',
     iconButtonHoverBackground: '$slateA3',
     iconButtonFocusBorder: '$slate10',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     iconButtonBackground: '$deepBlue2',
     iconButtonHoverBorder: '$deepBlue6',
     iconButtonHoverBackground: '$slateA4',

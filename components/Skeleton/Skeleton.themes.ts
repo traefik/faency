@@ -6,14 +6,14 @@ export namespace Theme {
     skeletonAnimation: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     skeletonBackground: '$slate4',
     skeletonAnimation: '$slate6',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     skeletonBackground: '$deepBlue3',
     skeletonAnimation: '$deepBlue4',
   });

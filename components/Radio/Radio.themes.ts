@@ -1,16 +1,17 @@
+import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
 export namespace Theme {
   type Colors = {
-    radioBorder: string;
-    radioHoverBg: string;
-    radioHoverBorder: string;
-    radioFocusBorder: string;
-    radioDisabledBg: string;
-    radioDisabledBorder: string;
-    radioIndicatorDisabledBg: string;
+    radioBorder: Property.Color;
+    radioHoverBg: Property.Color;
+    radioHoverBorder: Property.Color;
+    radioFocusBorder: Property.Color;
+    radioDisabledBg: Property.Color;
+    radioDisabledBorder: Property.Color;
+    radioIndicatorDisabledBg: Property.Color;
   };
 
-  type Factory = (primaryColor: string) => Colors;
+  type Factory = (primaryColor: Property.Color) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
     radioIndicator: tinycolor(primaryColor).darken(20).toString(),

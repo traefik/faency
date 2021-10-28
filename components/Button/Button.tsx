@@ -9,11 +9,25 @@ export const StyledButton = styled('button', {
   alignItems: 'center',
   boxSizing: 'border-box',
   userSelect: 'none',
+  overflow: 'hidden',
+
   '&::before': {
     boxSizing: 'border-box',
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
   '&::after': {
     boxSizing: 'border-box',
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
 
   // Custom reset?
@@ -32,33 +46,37 @@ export const StyledButton = styled('button', {
   fontWeight: 500,
   fontVariantNumeric: 'tabular-nums',
 
+  '&:focus-visible': {
+    boxShadow: `inset 0 0 0 2px $colors$focusOutline`,
+    '&::before': {
+      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    },
+    '&::after': {
+      opacity: 0.15,
+    },
+  },
+
   '@hover': {
     '&:hover': {
       cursor: 'pointer',
+      '&::before': {
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+      },
+      '&::after': {
+        opacity: 0.05,
+      },
+    },
+  },
+
+  '&:active': {
+    '&::before': {
+      backgroundColor: 'rgba(0, 0, 0, 0.15)',
     },
   },
 
   '&:disabled': {
     pointerEvents: 'none',
     opacity: 0.5,
-  },
-
-  '&:focus-visible': {
-    '&::after': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      zIndex: 1,
-      top: '-2px',
-      right: '-2px',
-      bottom: '-2px',
-      left: '-2px',
-      display: 'block',
-      pointerEvents: 'none',
-      boxShadow: '0 0 0 2px $colors$focusOutline',
-      transition: 'box-shadow .1s ease-in-out',
-      borderRadius: '$3',
-    },
   },
 
   variants: {
@@ -87,62 +105,67 @@ export const StyledButton = styled('button', {
     },
     variant: {
       primary: {
-        backgroundColor: '$buttonPrimaryBg',
-        color: '$buttonPrimaryText',
+        bc: '$primary',
+        c: '$buttonPrimaryText',
+        '&:focus-visible': {
+          boxShadow: 'inset 0 0 0 2px $colors$buttonPrimaryFocusBorder',
+        },
         '@hover': {
           '&:hover': {
-            backgroundColor: '$buttonPrimaryHoverBg',
+            '&::after': {
+              backgroundColor: '$primary',
+            },
           },
         },
       },
       secondary: {
-        backgroundColor: '$buttonSecondaryBg',
-        color: '$buttonSecondaryText',
+        bc: '$buttonSecondaryBg',
+        c: '$buttonSecondaryText',
+        boxShadow: 'inset 0 0 0 2px $colors$buttonSecondaryBorder',
+        '&:active': {
+          boxShadow: 'inset 0 0 0 1px $colors$buttonSecondaryBorder',
+        },
+        '&:focus-visible': {
+          boxShadow: 'inset 0 0 0 2px $colors$buttonSecondaryFocusBorder',
+        },
         '@hover': {
           '&:hover': {
-            backgroundColor: '$buttonSecondaryHoverBg',
+            '&::after': {
+              backgroundColor: '$primary',
+            },
           },
         },
       },
       red: {
         backgroundColor: '$buttonRedBg',
         color: '$buttonRedText',
-        '@hover': {
-          '&:hover': {
-            backgroundColor: '$buttonRedHoverBg',
-          },
+        '&:focus-visible': {
+          boxShadow: 'inset 0 0 0 2px $colors$buttonRedFocusBg',
         },
       },
     },
     state: {
       active: {
-        backgroundColor: '$deepBlue5',
-        color: '$deepBlue11',
-        '@hover': {
-          '&:hover': {
-            backgroundColor: '$deepBlue5',
-          },
-        },
+        bc: '$deepBlue5',
+        c: '$deepBlue11',
         '&:active': {
           backgroundColor: '$deepBlue5',
         },
       },
       waiting: {
-        backgroundColor: '$deepBlue3',
+        bc: '$deepBlue3',
         boxShadow: `inset 0 0 0 1px $deepBlue4`,
-        color: 'transparent',
+        c: 'transparent',
         overflow: 'hidden',
         pointerEvents: 'none',
       },
     },
     ghost: {
       true: {
-        backgroundColor: 'transparent',
         boxShadow: 'none',
         '@hover': {
           '&:hover': {
             boxShadow: 'none',
-            backgroundColor: 'transparent',
           },
         },
       },
@@ -158,25 +181,11 @@ export const StyledButton = styled('button', {
       variant: 'primary',
       ghost: 'true',
       css: {
-        color: '$buttonPrimaryGhostText',
+        color: '$primary',
         backgroundColor: 'transparent',
         '@hover': {
           '&:hover': {
             color: '$buttonPrimaryGhostHoverText',
-            backgroundColor: 'transparent',
-          },
-        },
-      },
-    },
-    {
-      variant: 'secondary',
-      ghost: 'true',
-      css: {
-        color: '$buttonSecondaryGhostText',
-        backgroundColor: 'transparent',
-        '@hover': {
-          '&:hover': {
-            color: '$buttonSecondaryGhostHoverText',
             backgroundColor: 'transparent',
           },
         },
@@ -196,11 +205,6 @@ export const StyledButton = styled('button', {
       css: {
         backgroundColor: '$buttonPrimaryBg',
         color: '$buttonPrimaryText',
-        '@hover': {
-          '&:hover': {
-            backgroundColor: '$buttonPrimaryHoverBg',
-          },
-        },
       },
     },
     {
@@ -219,7 +223,7 @@ export const StyledButton = styled('button', {
         backgroundColor: 'transparent',
         '@hover': {
           '&:hover': {
-            color: '$buttonRedHoverBg',
+            color: '$buttonRedHoverText',
             backgroundColor: 'transparent',
           },
         },

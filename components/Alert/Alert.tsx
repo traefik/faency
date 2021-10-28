@@ -1,5 +1,5 @@
 import { VariantProps } from '@stitches/react';
-import { styled, CSS } from '../../stitches.config';
+import { styled } from '../../stitches.config';
 import { Card } from '../Card';
 
 export const Alert = styled(Card, {
@@ -22,7 +22,7 @@ export const Alert = styled(Card, {
       },
       warning: {
         '&::before': {
-          boxShadow: 'inset 0 0 0 1px $colors$amber9',
+          boxShadow: 'inset 0 0 0 1px $colors$orange9',
         },
       },
       error: {
