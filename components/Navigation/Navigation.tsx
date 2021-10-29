@@ -74,7 +74,7 @@ export const NavigationDrawer = styled('nav', {
     elevation: elevationVariant,
   },
   defaultVariants: {
-    elevation: 5,
+    elevation: 1,
   },
 });
 
@@ -123,3 +123,5 @@ export const NavigationItem = ({
     </NavigationItemWrapper>
   );
 };
+
+export type NavigationItemVariants = VariantProps<typeof NavigationItem>;
