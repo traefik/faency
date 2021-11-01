@@ -10,8 +10,6 @@ import {
 import {
   NavigationDrawer,
   NavigationContainer,
-  NavigationLink,
-  NavigationButton,
   NavigationDrawerProps,
   NavigationDrawerVariants,
   NavigationItem,
@@ -39,8 +37,8 @@ const NavigationDrawerForStory = modifyVariantsForStory<
   NavigationDrawerProps
 >(BaseNavigationDrawer);
 
-const useNavigationSample = () => {
-  const [currentRoute, setCurrentRoute] = useState('/');
+const useNavigationSample = (initialRoute = '/') => {
+  const [currentRoute, setCurrentRoute] = useState(initialRoute);
   const navigateTo = useDebouncedCallback((route: string) => setCurrentRoute(route), 300);
   const navigationHandlerProps = (route: string) => ({
     active: route === currentRoute,
@@ -55,10 +53,10 @@ const Template: ComponentStory<typeof NavigationDrawerForStory> = (args) => {
 
   return (
     <NavigationDrawerForStory {...args}>
-      <NavigationButton {...navigationHandlerProps('/')}>Dashboard</NavigationButton>
-      <NavigationButton {...navigationHandlerProps('/profile')}>Profile</NavigationButton>
-      <NavigationButton {...navigationHandlerProps('/settings')}>Settings</NavigationButton>
-      <NavigationButton {...navigationHandlerProps('/help')}>Help</NavigationButton>
+      <NavigationItem {...navigationHandlerProps('/')}>Dashboard</NavigationItem>
+      <NavigationItem {...navigationHandlerProps('/profile')}>Profile</NavigationItem>
+      <NavigationItem {...navigationHandlerProps('/settings')}>Settings</NavigationItem>
+      <NavigationItem {...navigationHandlerProps('/help')}>Help</NavigationItem>
     </NavigationDrawerForStory>
   );
 };

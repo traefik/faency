@@ -81,17 +81,15 @@ export const NavigationDrawer = styled('nav', {
 export type NavigationDrawerVariants = VariantProps<typeof NavigationDrawer>;
 export type NavigationDrawerProps = NavigationDrawerVariants & {};
 
-export const NavigationLink = styled('a', baseNavItemCss, {
+const StyledLink = styled('a', baseNavItemCss, {
   textDecoration: 'none',
 });
 
-export type NavigationLinkVariants = VariantProps<typeof NavigationLink>;
-export type NavigationLinkProps = NavigationLinkVariants & {};
+type StyledLinkVariants = VariantProps<typeof StyledLink>;
 
-export const NavigationButton = styled('button', baseNavItemCss);
+const StyledButton = styled('button', baseNavItemCss);
 
-export type NavigationButtonVariants = VariantProps<typeof NavigationButton>;
-export type NavigationButtonProps = NavigationButtonVariants & {};
+type StyledButtonVariants = VariantProps<typeof StyledButton>;
 
 export type NavigationItemProps = {
   as?: 'button' | 'a';
@@ -99,11 +97,11 @@ export type NavigationItemProps = {
   endAdornment?: React.ReactNode;
   children: React.ReactNode;
   href?: string;
-} & NavigationButtonProps &
-  NavigationLinkProps;
+} & StyledLinkVariants &
+  StyledButtonVariants;
 
 const NavigationItemWrapper = (props: NavigationItemProps): JSX.Element =>
-  props.as === 'a' ? <NavigationLink {...props} /> : <NavigationButton type="button" {...props} />;
+  props.as === 'a' ? <StyledLink {...props} /> : <StyledButton type="button" {...props} />;
 
 export const NavigationItem = ({
   as,
@@ -125,3 +123,11 @@ export const NavigationItem = ({
 };
 
 export type NavigationItemVariants = VariantProps<typeof NavigationItem>;
+
+export const NavigationLink = (props: Omit<NavigationItemProps, 'as'>) => (
+  <NavigationItem as="a" {...props} />
+);
+
+export type NavigationLinkVariants = VariantProps<typeof NavigationLink>;
+
+export type NavigationLinkProps = NavigationLinkVariants & {};
