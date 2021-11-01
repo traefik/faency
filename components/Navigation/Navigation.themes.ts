@@ -21,12 +21,12 @@ export namespace Theme {
     navButtonBg: 'transparent',
     navButtonHoverBg: 'hsla(0, 0%, 0%, 0.04)',
     navButtonActiveBg: 'hsla(0, 0%, 0%, 0.04)',
-    navButtonFocusBg: tinycolor(primaryColor).setAlpha(0.05).toString(),
-    navButtonFocusBorder: 'hsl(68, 53%, 48%)',
+    navButtonFocusBg: tinycolor(primaryColor).saturate(27).lighten(58).setAlpha(0.33).toString(),
+    navButtonFocusBorder: tinycolor(primaryColor).lighten(12).toString(),
     navButtonText: 'hsla(0, 0%, 0%, 0.54)',
     navButtonHoverText: 'black',
     navButtonFocusText: 'black',
-    navButtonActiveText: tinycolor(primaryColor).darken(20).toString(),
+    navButtonActiveText: tinycolor(primaryColor).toString(),
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -34,11 +34,11 @@ export namespace Theme {
     navButtonBg: 'transparent',
     navButtonHoverBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
     navButtonActiveBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
-    navButtonFocusBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
-    navButtonFocusBorder: '$neon5',
+    navButtonFocusBg: tinycolor(primaryColor).saturate(29).lighten(55).setAlpha(0.19).toString(),
+    navButtonFocusBorder: tinycolor(primaryColor).saturate(25).lighten(48).toString(),
     navButtonText: 'white',
     navButtonHoverText: 'white',
     navButtonFocusText: 'white',
-    navButtonActiveText: primaryColor,
+    navButtonActiveText: '$primary',
   });
 }
