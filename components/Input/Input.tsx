@@ -186,7 +186,7 @@ const InputWrapper = styled('div', {
 
   position: 'relative',
   backgroundColor: '$inputBg',
-  // cursor: 'auto',
+  color: '$inputPlaceholder',
 
   '&::before': {
     boxSizing: 'border-box',
@@ -233,6 +233,7 @@ const InputWrapper = styled('div', {
     disabled: {
       true: {
         opacity: 0.7,
+        color: '$inputDisabledText',
 
         '&:hover': {
           '&::before': {
@@ -242,6 +243,11 @@ const InputWrapper = styled('div', {
             backgroundColor: 'inherit',
           },
         },
+      },
+    },
+    state: {
+      invalid: {
+        color: '$inputInvalidBorder',
       },
     },
     size: {
@@ -415,7 +421,7 @@ export const Input = React.forwardRef<InputHandle, InputProps>(
     const hasEndAdornment = React.useMemo(() => Boolean(endAdornment), [endAdornment]);
 
     return (
-      <InputWrapper css={css} disabled={props.disabled}>
+      <InputWrapper css={css} disabled={props.disabled} state={props.state}>
         {hasStartAdornment && (
           <AdornmentWrapperStart size={size}>{startAdornment}</AdornmentWrapperStart>
         )}

@@ -29,7 +29,6 @@ const AdornmentGroup = styled('div', {
 });
 
 const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
-  color: '$slate10', // follow iconbutton default color
   '& + *': {
     marginLeft: '$1',
   },

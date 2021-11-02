@@ -15,11 +15,7 @@ export const Dashboard = () => (
         </Heading>
 
         <Flex align="center" css={{ gap: '$3' }}>
-          <TextField
-            startAdornment={<MagnifyingGlassIcon />}
-            placeholder='Search...'
-            clearable
-          />
+          <TextField startAdornment={<MagnifyingGlassIcon />} placeholder="Search..." clearable />
           <Button variant="secondary">Go</Button>
         </Flex>
       </Flex>

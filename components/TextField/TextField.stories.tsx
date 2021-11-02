@@ -5,7 +5,6 @@ import { Flex } from '../Flex';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { styled } from '../../stitches.config';
 
 const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
 const TextFieldForStory = modifyVariantsForStory<
@@ -22,49 +21,28 @@ export default {
 const Template: ComponentStory<typeof TextFieldForStory> = (args) => (
   <TextFieldForStory {...args} />
 );
-const StyledMagnifyingGlassIcon = styled(MagnifyingGlassIcon, {
-  color: '$slate10', // follow iconbutton default color
-});
 
 export const Basic: ComponentStory<typeof TextFieldForStory> = (args) => (
   <Flex direction="column" gap={2}>
-    <TextFieldForStory
-      size="small"
-      id='small'
-      label="small"
-      placeholder="placeholder"
-      {...args}
-    />
-    <TextFieldForStory
-      id='basic'
-      label="basic"
-      placeholder="placeholder"
-      {...args}
-    />
-    <TextFieldForStory
-      size="large"
-      id='large'
-      label="large"
-      placeholder="placeholder"
-      {...args}
-    />
+    <TextFieldForStory size="small" id="small" label="small" placeholder="placeholder" {...args} />
+    <TextFieldForStory id="basic" label="basic" placeholder="placeholder" {...args} />
+    <TextFieldForStory size="large" id="large" label="large" placeholder="placeholder" {...args} />
     <TextFieldForStory
       state="invalid"
-      id='invalid'
+      id="invalid"
       label="invalid"
       placeholder="placeholder"
       {...args}
     />
     <TextFieldForStory
-      startAdornment={<StyledMagnifyingGlassIcon />}
-      id='search'
+      startAdornment={<MagnifyingGlassIcon />}
+      id="search"
       label="search"
       placeholder="Search..."
       {...args}
     />
   </Flex>
 );
-
 
 export const PasswordType = Template.bind({});
 
@@ -82,7 +60,7 @@ ReadOnly.args = { readOnly: true };
 export const Display: ComponentStory<typeof TextFieldForStory> = (args) => (
   <Flex direction="column" gap={2}>
     <TextFieldForStory
-      id='disabled'
+      id="disabled"
       label="disabled"
       placeholder="placeholder"
       value="disabled"
@@ -90,7 +68,7 @@ export const Display: ComponentStory<typeof TextFieldForStory> = (args) => (
       {...args}
     />
     <TextFieldForStory
-      id='readOnly'
+      id="readOnly"
       label="readOnly"
       placeholder="placeholder"
       value="readOnly"
@@ -102,5 +80,5 @@ export const Display: ComponentStory<typeof TextFieldForStory> = (args) => (
 
 export const DisplayClearable = Display.bind({});
 DisplayClearable.args = {
-  clearable: true
-}
+  clearable: true,
+};
