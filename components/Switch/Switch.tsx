@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled, VariantProps, CSS } from '../../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
+import { elevationVariant } from '../Elevation';
 
 // CONSTANTS
 const THUMB_DIAMETER = 14; // @FIXME: shouldn't this size be part of theme ?
@@ -54,24 +55,17 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     '&:hover': {
       cursor: 'pointer',
       [`& ${StyledThumb}`]: {
-        boxShadow: '0 0 0 2px $colors$switchHoverThumb'
+        ...elevationVariant[1],
       }
     },
   },
   '&:focus': {
     [`& ${StyledThumb}`]: {
-      boxShadow: '0 0 0 2px $colors$switchFocusThumb'
+      ...elevationVariant[2],
     }
   },
   '&[data-state="checked"]': {
     backgroundColor: '$switchActiveBackground',
-    '@hover': {
-      '&:hover': {
-        [`& ${StyledThumb}`]: {
-          boxShadow: '0 0 0 2px $colors$switchHoverActiveThumb'
-        }
-      },
-    },
   },
 
   variants: {
@@ -84,27 +78,6 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
       '2': {
         width: ROOT_WIDTH * LARGE_RATIO,
         height: ROOT_HEIGHT * LARGE_RATIO,
-        '@hover': {
-          '&:hover': {
-            [`& ${StyledThumb}`]: {
-              boxShadow: '0 0 0 3px $colors$switchHoverThumb'
-            }
-          },
-        },
-        '&:focus': {
-          [`& ${StyledThumb}`]: {
-            boxShadow: '0 0 0 3px $colors$switchFocusThumb'
-          }
-        },
-        '&[data-state="checked"]': {
-          '@hover': {
-            '&:hover': {
-              [`& ${StyledThumb}`]: {
-                boxShadow: '0 0 0 3px $colors$switchHoverActiveThumb'
-              }
-            },
-          },
-        },
         [`& ${StyledThumb}`]: {
           width: THUMB_DIAMETER * LARGE_RATIO,
           height: THUMB_DIAMETER * LARGE_RATIO,
@@ -119,9 +92,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     disabled: {
       true: {
         pointerEvents: 'none',
-        [`& ${StyledThumb}`]: {
-          backgroundColor: '$switchDisabledThumb'
-        }
+        opacity: 0.38,
       }
     }
   },
