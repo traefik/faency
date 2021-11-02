@@ -5,6 +5,7 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 import { IconButton } from '../IconButton';
 import { Input, InputProps, InputVariants } from './Input';
+import { Box } from '../Box';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
 
@@ -30,50 +31,79 @@ export default {
   argTypes: { onClick: { action: 'clicked' } },
 } as ComponentMeta<typeof InputForStory>;
 
-const Template: ComponentStory<typeof InputForStory> = (args) => (
-  <InputForStory {...args} />
-);
+const Template: ComponentStory<typeof InputForStory> = (args) => <InputForStory {...args} />;
 
 export const Basic: ComponentStory<typeof InputForStory> = (args) => (
   <Flex direction="column" gap={2}>
-    <Label>Small
+    <Box>
+      <Label>Small</Label>
       <InputForStory size="small" {...args} />
-    </Label>
-    <Label>Default
+    </Box>
+
+    <Box>
+      <Label>Default</Label>
       <InputForStory {...args} />
-    </Label>
-    <Label>Large
+    </Box>
+
+    <Box>
+      <Label>Large</Label>
       <InputForStory size="large" {...args} />
-    </Label>
-    <Label>Ghost
+    </Box>
+
+    <Box>
+      <Label>Ghost</Label>
       <InputForStory variant="ghost" {...args} />
-    </Label>
-    <Label>Adornments
+    </Box>
+
+    <Box>
+      <Label>Adornments</Label>
       <InputForStory
         startAdornment={<StyledMagnifyingGlassIcon />}
-        endAdornment={<IconButton><StyledEyeOpenIcon /></IconButton>}
-        {...args} />
-    </Label>
+        endAdornment={
+          <IconButton>
+            <StyledEyeOpenIcon />
+          </IconButton>
+        }
+        {...args}
+      />
+    </Box>
   </Flex>
 );
 Basic.args = { placeholder: 'placeholder' };
 
 const INPUT_TYPES = [
-  'button', 'checkbox', 'reset', 'submit',
-  'color', 'file', 'password', 'radio', 'range',
-  'date', "datetime-local", "month", 'time', 'week',
-  'email', 'number', 'search', 'tel', 'text', 'url'
+  'button',
+  'checkbox',
+  'reset',
+  'submit',
+  'color',
+  'file',
+  'password',
+  'radio',
+  'range',
+  'date',
+  'datetime-local',
+  'month',
+  'time',
+  'week',
+  'email',
+  'number',
+  'search',
+  'tel',
+  'text',
+  'url',
 ];
 
 export const Types: ComponentStory<typeof InputForStory> = ({ type, ...args }) => (
   <Flex direction="column" gap={2}>
     {INPUT_TYPES.map((type) => (
-      <Label key={type}>{type}
+      <>
+        <Label key={type}>{type}</Label>
         <InputForStory {...args} type={type} />
-      </Label>
+      </>
     ))}
   </Flex>
-)
+);
 
 Types.args = {};
 
@@ -82,90 +112,140 @@ Invalid.args = { state: 'invalid' };
 
 export const Disabled = Basic.bind({});
 
-Disabled.args = { disabled: true, value: 'value' };
+Disabled.args = { disabled: true, defaultValue: 'value' };
 
 export const ReadOnly = Basic.bind({});
 
-ReadOnly.args = { readOnly: true, value: 'value' };
+ReadOnly.args = { readOnly: true, defaultValue: 'value' };
 
 export const Ghost: ComponentStory<typeof InputForStory> = (args) => (
   <Flex direction="column" gap={2}>
-    <Label>Small
+    <Label>
+      Small
       <InputForStory size="small" {...args} />
     </Label>
-    <Label>Default
+    <Label>
+      Default
       <InputForStory {...args} />
     </Label>
-    <Label>Large
+    <Label>
+      Large
       <InputForStory size="large" {...args} />
     </Label>
-    <Label>Invalid
+    <Label>
+      Invalid
       <InputForStory state="invalid" {...args} />
     </Label>
-    <Label>Disabled
+    <Label>
+      Disabled
       <InputForStory disabled {...args} />
     </Label>
-    <Label>ReadOnly
+    <Label>
+      ReadOnly
       <InputForStory readOnly {...args} />
     </Label>
-    <Label>Adornments
+    <Label>
+      Adornments
       <InputForStory
         startAdornment={<StyledMagnifyingGlassIcon />}
-        endAdornment={<IconButton><StyledEyeOpenIcon /></IconButton>}
-        {...args} />
+        endAdornment={
+          <IconButton>
+            <StyledEyeOpenIcon />
+          </IconButton>
+        }
+        {...args}
+      />
     </Label>
   </Flex>
 );
-Ghost.args = { value: 'value', variant: 'ghost' };
+Ghost.args = { defaultValue: 'value', variant: 'ghost' };
 
 export const Adornments = Basic.bind({});
 
 Adornments.args = {
   startAdornment: <StyledMagnifyingGlassIcon />,
-  endAdornment: <IconButton><StyledEyeOpenIcon /></IconButton>
-}
+  endAdornment: (
+    <IconButton>
+      <StyledEyeOpenIcon />
+    </IconButton>
+  ),
+};
 Adornments.argTypes = {
   startAdornment: {
     options: ['search', 'iconbutton'],
     mapping: {
       search: <StyledMagnifyingGlassIcon />,
-      iconbutton: <IconButton><StyledEyeOpenIcon /></IconButton>
-    }
+      iconbutton: (
+        <IconButton>
+          <StyledEyeOpenIcon />
+        </IconButton>
+      ),
+    },
   },
   endAdornment: {
     options: ['search', 'iconbutton'],
     mapping: {
       search: <StyledMagnifyingGlassIcon />,
-      iconbutton: <IconButton><StyledEyeOpenIcon /></IconButton>
-    }
-  }
-}
+      iconbutton: (
+        <IconButton>
+          <StyledEyeOpenIcon />
+        </IconButton>
+      ),
+    },
+  },
+};
 
 export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
   <form>
     <Flex direction="column" gap={2}>
-      <Label>Small
+      <Label>
+        Small
         <InputForStory name="ship-city" autoComplete="shipping locality" size="small" {...args} />
       </Label>
-      <Label>Default
+      <Label>
+        Default
         <InputForStory name="ship-organization" autoComplete="shipping organization" {...args} />
       </Label>
-      <Label>Large
-        <InputForStory name="ship-address" autoComplete="shipping street-address" size="large" {...args} />
+      <Label>
+        Large
+        <InputForStory
+          name="ship-address"
+          autoComplete="shipping street-address"
+          size="large"
+          {...args}
+        />
       </Label>
-      <Label>Ghost
-        <InputForStory name="ship-city" autoComplete="shipping locality" variant="ghost" {...args} />
+      <Label>
+        Ghost
+        <InputForStory
+          name="ship-city"
+          autoComplete="shipping locality"
+          variant="ghost"
+          {...args}
+        />
       </Label>
-      <Label>Invalid
-        <InputForStory name="ship-zip" autoComplete="shipping postal-code" state="invalid" {...args} />
+      <Label>
+        Invalid
+        <InputForStory
+          name="ship-zip"
+          autoComplete="shipping postal-code"
+          state="invalid"
+          {...args}
+        />
       </Label>
-      <Label>Adornments
+      <Label>
+        Adornments
         <InputForStory
           name="ship-country"
           autoComplete="shipping country"
           startAdornment={<StyledMagnifyingGlassIcon />}
-          endAdornment={<IconButton><StyledEyeOpenIcon /></IconButton>}
-          {...args} />
+          endAdornment={
+            <IconButton>
+              <StyledEyeOpenIcon />
+            </IconButton>
+          }
+          {...args}
+        />
       </Label>
     </Flex>
   </form>

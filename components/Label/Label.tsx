@@ -8,6 +8,7 @@ export const Label = styled(LabelPrimitive.Root, Text, {
   cursor: 'default',
   fontWeight: 500,
   lineHeight: 2.18,
+
   defaultVariants: {
     size: '0',
     variant: 'subtle',

@@ -73,19 +73,29 @@ export const Text = styled('span', {
     },
     transform: {
       uppercase: {
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
       },
       capitalize: {
-        textTransform: 'capitalize'
-      }
+        textTransform: 'capitalize',
+      },
     },
     noWrap: {
       true: {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
-      }
-    }
+      },
+    },
+    invalid: {
+      true: {
+        color: '$inputInvalidBorder',
+      },
+    },
+    disabled: {
+      true: {
+        color: '$inputDisabledText',
+      },
+    },
   },
   defaultVariants: {
     size: '3',
