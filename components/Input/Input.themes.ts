@@ -17,7 +17,7 @@ export namespace Theme {
   type Factory = (primaryColor?: Property.Color) => Colors;
 
   export const getLight: Factory = () => ({
-    inputBg: 'hsl(240, 14%, 99%)',
+    inputBg: '$deepBlue1',
     inputBorder: '$grayBlue9',
     inputFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
     inputFocusBorder: '$neon8',
@@ -29,7 +29,7 @@ export namespace Theme {
   });
 
   export const getDark: Factory = () => ({
-    inputBg: '#131f2a',
+    inputBg: '$grayBlue7',
     inputBorder: '$grayBlue9',
     inputFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
     inputFocusBorder: '$neon11',
