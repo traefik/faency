@@ -1,5 +1,5 @@
 export const deepBlue = {
-  deepBlue1: 'hsl(208, 60.0%, 99.0%)',
+  deepBlue1: 'hsl(240, 14.0%, 99.0%)',
   deepBlue2: 'hsl(210, 90.0%, 96.1%)',
   deepBlue3: 'hsl(210, 67.8%, 94.6%)',
   deepBlue4: 'hsl(210, 49.1%, 92.2%)',

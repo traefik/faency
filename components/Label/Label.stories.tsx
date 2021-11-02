@@ -5,13 +5,12 @@ import { VariantProps } from '@stitches/react';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Label } from './Label';
 import { Box } from '../Box';
-import { TextField } from '../TextField';
 
 type LabelVariants = VariantProps<typeof Label>;
 type LabelProps = LabelVariants & {};
 
 const BaseLabel = (props: LabelProps): JSX.Element => <Label {...props} />;
-export const LabelForStory = modifyVariantsForStory<
+const LabelForStory = modifyVariantsForStory<
   LabelVariants,
   LabelProps & React.LabelHTMLAttributes<any>
 >(BaseLabel);
@@ -21,13 +20,38 @@ export default {
   component: LabelForStory,
 } as ComponentMeta<typeof LabelForStory>;
 
-export const Basic: ComponentStory<typeof LabelForStory> = (args) => (
+const Template: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
   <Box>
-    <LabelForStory htmlFor="email" {...args}>
+    <LabelForStory htmlFor={id} css={{ mr: '$2' }} {...args}>
       Email
     </LabelForStory>
-    <TextField id="email" name="email" type="email" />
+    <input id={id} name="email" type="email" />
   </Box>
 );
 
-Basic.args = {};
+export const Basic = Template.bind({});
+
+Basic.args = {
+  id: 'basic'
+};
+
+export const Capitalized = Template.bind({});
+
+Capitalized.args = {
+  id: 'capitalized',
+}
+
+export const Uppercased = Template.bind({});
+
+Uppercased.args = {
+  id: 'uppercased',
+  transform: 'uppercase',
+};
+
+export const Error = Template.bind({});
+
+Error.args = {
+  id: 'error',
+  variant: 'red',
+};
+

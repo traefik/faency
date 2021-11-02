@@ -1,7 +1,9 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
+import { Flex } from '../Flex';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
@@ -20,26 +22,63 @@ const Template: ComponentStory<typeof TextFieldForStory> = (args) => (
   <TextFieldForStory {...args} />
 );
 
-export const Basic = Template.bind({});
-
-Basic.args = { placeholder: 'placeholder' };
-
-export const Large = Template.bind({});
-
-Large.args = { size: 'large', placeholder: 'placeholder' };
+export const Basic: ComponentStory<typeof TextFieldForStory> = (args) => (
+  <Flex direction="column" gap={2}>
+    <TextFieldForStory size="small" id="small" label="small" placeholder="placeholder" {...args} />
+    <TextFieldForStory id="basic" label="basic" placeholder="placeholder" {...args} />
+    <TextFieldForStory size="large" id="large" label="large" placeholder="placeholder" {...args} />
+    <TextFieldForStory
+      state="invalid"
+      id="invalid"
+      label="invalid"
+      placeholder="placeholder"
+      {...args}
+    />
+    <TextFieldForStory
+      startAdornment={<MagnifyingGlassIcon />}
+      id="search"
+      label="search"
+      placeholder="Search..."
+      {...args}
+    />
+  </Flex>
+);
 
 export const PasswordType = Template.bind({});
 
-PasswordType.args = { type: 'password', value: 'value' };
+PasswordType.args = { type: 'password', id: 'password-type', label: 'password' };
 
-export const Invalid = Template.bind({});
+export const Clearable = Basic.bind({});
+Clearable.args = { clearable: true };
 
-Invalid.args = { state: 'invalid' };
+export const Disabled = Basic.bind({});
+Disabled.args = { disabled: true };
 
-export const Disabled = Template.bind({});
+export const ReadOnly = Basic.bind({});
+ReadOnly.args = { readOnly: true };
 
-Disabled.args = { disabled: true, value: 'value' };
+export const Display: ComponentStory<typeof TextFieldForStory> = (args) => (
+  <Flex direction="column" gap={2}>
+    <TextFieldForStory
+      id="disabled"
+      label="disabled"
+      placeholder="placeholder"
+      value="disabled"
+      disabled
+      {...args}
+    />
+    <TextFieldForStory
+      id="readOnly"
+      label="readOnly"
+      placeholder="placeholder"
+      value="readOnly"
+      readOnly
+      {...args}
+    />
+  </Flex>
+);
 
-export const ReadOnly = Template.bind({});
-
-ReadOnly.args = { readOnly: true, value: 'value' };
+export const DisplayClearable = Display.bind({});
+DisplayClearable.args = {
+  clearable: true,
+};
