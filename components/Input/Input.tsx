@@ -195,7 +195,7 @@ const StyledInput = styled('input', {
       size: 'small',
       state: 'invalid',
       css: {
-        paddingInlineEnd: 'calc($4 + 30px)',
+        paddingInlineEnd: 'calc($4 + 30px)', // size padding + adornment margins + icon size + icon size
       },
     },
     {
@@ -203,7 +203,7 @@ const StyledInput = styled('input', {
       size: 'medium',
       state: 'invalid',
       css: {
-        paddingInlineEnd: 'calc($6 + 30px)',
+        paddingInlineEnd: 'calc($6 + 30px)', // size padding + adornment margins + icon size + icon size
       },
     },
     {
@@ -211,7 +211,7 @@ const StyledInput = styled('input', {
       size: 'large',
       state: 'invalid',
       css: {
-        paddingInlineEnd: 'calc($6 + 30px)',
+        paddingInlineEnd: 'calc($6 + 30px)', // size padding + adornment margins + icon size + icon size
       },
     },
   ],
