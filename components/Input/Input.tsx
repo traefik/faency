@@ -1,7 +1,6 @@
 import React from 'react';
 import { VariantProps } from '@stitches/react';
 import { styled, CSS } from '../../stitches.config';
-import { elevationVariant } from '../Elevation';
 import { IconButton } from '../IconButton';
 
 const SMALL_HEIGHT = '$5';
@@ -21,6 +20,7 @@ const StyledInput = styled('input', {
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
   // Custom
+  zIndex: 1,
   position: 'relative',
   backgroundColor: 'transparent',
   borderRadius: 'inherit', // inherit border radius from InputWrapper
@@ -138,6 +138,13 @@ const StyledInput = styled('input', {
   },
   compoundVariants: [
     {
+      variant: 'ghost',
+      state: 'invalid',
+      css: {
+        boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder',
+      },
+    },
+    {
       startAdornment: true,
       size: 'small',
       css: {
@@ -177,6 +184,30 @@ const StyledInput = styled('input', {
       size: 'large',
       css: {
         paddingInlineEnd: 'calc($3 + 15px)',
+      },
+    },
+    {
+      endAdornment: true,
+      size: 'small',
+      state: 'invalid',
+      css: {
+        paddingInlineEnd: 'calc($4 + 30px)',
+      },
+    },
+    {
+      endAdornment: true,
+      size: 'medium',
+      state: 'invalid',
+      css: {
+        paddingInlineEnd: 'calc($6 + 30px)',
+      },
+    },
+    {
+      endAdornment: true,
+      size: 'large',
+      state: 'invalid',
+      css: {
+        paddingInlineEnd: 'calc($6 + 30px)',
       },
     },
   ],
@@ -237,20 +268,27 @@ const InputWrapper = styled('div', {
       true: {
         opacity: 0.7,
         color: '$inputDisabledText',
-
-        '&:hover': {
-          '&::before': {
-            backgroundColor: 'inherit',
-          },
-          '&::after': {
-            backgroundColor: 'inherit',
+        '@hover': {
+          '&:hover': {
+            '&::before': {
+              backgroundColor: 'inherit',
+            },
+            '&::after': {
+              backgroundColor: 'inherit',
+            },
           },
         },
       },
     },
     state: {
       invalid: {
-        color: '$inputInvalidBorder',
+        '@hover': {
+          '&:hover': {
+            '&::after': {
+              backgroundColor: '$inputInvalidBorder',
+            },
+          },
+        },
       },
     },
     size: {
@@ -288,6 +326,9 @@ const AdornmentWrapper = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  [`& ${IconButton}:focus-visible`]: {
+    color: '$inputFocusBorder',
+  },
   variants: {
     size: {
       small: {
@@ -428,7 +469,7 @@ export const Input = React.forwardRef<InputHandle, InputProps>(
         {hasStartAdornment && (
           <AdornmentWrapperStart size={size}>{startAdornment}</AdornmentWrapperStart>
         )}
-        {hasEndAdornment && <AdornmentWrapperEnd size={size}>{endAdornment}</AdornmentWrapperEnd>}
+
         <StyledInput
           ref={inputRef}
           startAdornment={hasStartAdornment}
@@ -436,6 +477,7 @@ export const Input = React.forwardRef<InputHandle, InputProps>(
           size={size}
           {...props}
         />
+        {hasEndAdornment && <AdornmentWrapperEnd size={size}>{endAdornment}</AdornmentWrapperEnd>}
       </InputWrapper>
     );
   }
