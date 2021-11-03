@@ -5,8 +5,9 @@ export namespace Theme {
     navBg: Property.Color;
     navButtonBg: Property.Color;
     navButtonHoverBg: Property.Color;
-    navButtonActiveBg: Property.Color;
+    navButtonHoverBg2: Property.Color;
     navButtonFocusBg: Property.Color;
+    navButtonFocusBg2: Property.Color;
     navButtonFocusBorder: Property.Color;
     navButtonText: Property.Color;
     navButtonHoverText: Property.Color;
@@ -14,28 +15,30 @@ export namespace Theme {
     navButtonFocusText: Property.Color;
   };
 
-  type Factory = (primaryColor: Property.Color) => Colors;
+  type Factory = (primaryColor?: Property.Color) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     navBg: 'white',
     navButtonBg: 'transparent',
-    navButtonHoverBg: 'hsla(0, 0%, 0%, 0.04)',
-    navButtonActiveBg: 'hsla(0, 0%, 0%, 0.04)',
-    navButtonFocusBg: tinycolor(primaryColor).saturate(27).lighten(58).setAlpha(0.33).toString(),
-    navButtonFocusBorder: tinycolor(primaryColor).lighten(12).toString(),
-    navButtonText: 'hsla(0, 0%, 0%, 0.54)',
+    navButtonHoverBg: tinycolor('black').setAlpha(0.04).toHslString(),
+    navButtonHoverBg2: 'transparent',
+    navButtonFocusBg: tinycolor('white').setAlpha(0.15).toHslString(),
+    navButtonFocusBg2: '$primary',
+    navButtonFocusBorder: '$neon8',
+    navButtonText: tinycolor('black').setAlpha(0.54).toHslString(),
     navButtonHoverText: 'black',
     navButtonFocusText: 'black',
-    navButtonActiveText: tinycolor(primaryColor).toString(),
+    navButtonActiveText: '$primary',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     navBg: '$deepBlue2',
     navButtonBg: 'transparent',
-    navButtonHoverBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
-    navButtonActiveBg: tinycolor(primaryColor).setAlpha(0.1).toString(),
-    navButtonFocusBg: tinycolor(primaryColor).saturate(29).lighten(55).setAlpha(0.19).toString(),
-    navButtonFocusBorder: tinycolor(primaryColor).saturate(25).lighten(48).toString(),
+    navButtonHoverBg: tinycolor('white').setAlpha(0.05).toString(),
+    navButtonHoverBg2: '$primary',
+    navButtonFocusBg: tinycolor('white').setAlpha(0.15).toHslString(),
+    navButtonFocusBg2: '$primary',
+    navButtonFocusBorder: '$neon11',
     navButtonText: 'white',
     navButtonHoverText: 'white',
     navButtonFocusText: 'white',
