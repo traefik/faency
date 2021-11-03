@@ -1,7 +1,11 @@
 import React from 'react';
 import { VariantProps } from '@stitches/react';
 import { styled, CSS } from '../../stitches.config';
+import { elevationVariant } from '../Elevation';
 import { IconButton } from '../IconButton';
+
+// CONSTANTS
+const FOCUS_SHADOW = elevationVariant[1].boxShadow; // apply elevation $1 when focus
 
 const SMALL_HEIGHT = '$5';
 const MEDIUM_HEIGHT = '$6';
@@ -43,7 +47,7 @@ const StyledInput = styled('input', {
   },
 
   '&:focus-visible': {
-    boxShadow: `inset 0 0 0 2px $colors$inputFocusBorder`,
+    boxShadow: `inset 0 0 0 2px $colors$inputFocusBorder, ${FOCUS_SHADOW}`,
   },
 
   '&::placeholder': {
@@ -111,7 +115,7 @@ const StyledInput = styled('input', {
       invalid: {
         boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder',
         '&:focus-visible': {
-          boxShadow: 'inset 0 0 0 2px $colors$inputInvalidBorder',
+          boxShadow: `inset 0 0 0 2px $colors$inputInvalidBorder, ${FOCUS_SHADOW}`,
         },
       },
     },
