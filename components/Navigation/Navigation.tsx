@@ -63,7 +63,8 @@ const baseNavItemCss = css({
         backgroundColor: '$navButtonHoverBg',
       },
       '&::after': {
-        backgroundColor: 'navButtonHoverBg2',
+        backgroundColor: '$navButtonHoverBg2',
+        opacity: 0.05,
       },
     },
   },
@@ -76,6 +77,14 @@ const baseNavItemCss = css({
     active: {
       true: {
         color: '$navButtonActiveText',
+
+        '&::before': {
+          backgroundColor: '$navButtonActiveBg',
+        },
+        '&::after': {
+          backgroundColor: '$navButtonActiveBg2',
+          opacity: 0.05,
+        },
 
         '@hover': {
           '&:hover': {
