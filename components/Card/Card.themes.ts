@@ -1,5 +1,6 @@
 import tinycolor from 'tinycolor2';
 import { Property } from '@stitches/react/types/css';
+import { ColorInfo } from '../../stitches.config';
 
 export namespace Theme {
   type Colors = {
@@ -13,14 +14,14 @@ export namespace Theme {
     cardGhostBackground: Property.Color;
   };
 
-  type Factory = (primaryColor: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
     cardBackground: 'white',
     cardBorder: '$deepBlue3',
     cardShadow: 'rgba(0,0,0,.1)',
     cardHoverBackground: 'rgba(0,0,0,.05)',
-    cardHoverBorder: tinycolor(primaryColor).setAlpha(0.6).toString(),
+    cardHoverBorder: tinycolor(primaryColor.value).setAlpha(0.6).toString(),
     cardActiveBackground: 'rgba(0,0,0,.03)',
     cardActiveBorder: '$primary',
     cardGhostBackground: '$deepBlue2',
@@ -31,9 +32,9 @@ export namespace Theme {
     cardBorder: '$deepBlue3',
     cardShadow: 'transparent',
     cardHoverBackground: 'rgba(255,255,255,.12)',
-    cardHoverBorder: tinycolor(primaryColor).setAlpha(0.6).toString(),
+    cardHoverBorder: tinycolor(primaryColor.value).setAlpha(0.6).toString(),
     cardActiveBackground: 'rgba(255,255,255,.07)',
-    cardActiveBorder: tinycolor(primaryColor).setAlpha(0.4).toString(),
+    cardActiveBorder: tinycolor(primaryColor.value).setAlpha(0.4).toString(),
     cardGhostBackground: '$deepBlue1',
   });
 }

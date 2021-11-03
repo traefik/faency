@@ -1,4 +1,5 @@
 import { Property } from '@stitches/react/types/css';
+import { ColorInfo } from '../../stitches.config';
 
 export namespace Theme {
   type Colors = {
@@ -7,7 +8,7 @@ export namespace Theme {
     textContrast: Property.Color;
   };
 
-  type Factory = (primaryColor?: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
     textSubtle: 'hsla(0, 0%, 0%, 0.51)',

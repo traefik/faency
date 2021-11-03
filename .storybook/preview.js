@@ -26,7 +26,7 @@ const globalStyle = globalCss({
 
 export const decorators = [
   (renderStory) => (
-    <FaencyProvider primaryColor="$neon9">
+    <FaencyProvider primaryColor="neon">
       {globalStyle()}
       {renderStory()}
     </FaencyProvider>

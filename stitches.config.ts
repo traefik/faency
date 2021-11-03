@@ -1,31 +1,7 @@
 import type * as Stitches from '@stitches/react';
 import { createStitches, CSS as StitchesCSS } from '@stitches/react';
-import {
-  blackA,
-  blue,
-  blueA,
-  blueDark,
-  blueDarkA,
-  gray,
-  grayA,
-  grayDark,
-  grayDarkA,
-  green,
-  greenA,
-  greenDark,
-  greenDarkA,
-  purple,
-  purpleA,
-  purpleDark,
-  purpleDarkA,
-  slate,
-  slateA,
-  slateDark,
-  slateDarkA,
-  whiteA,
-} from '@radix-ui/colors';
+
 import { Property } from '@stitches/react/types/css';
-import { tokenToPropertyName } from './utils/tokenToPropertyName';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
@@ -41,90 +17,49 @@ import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
 
-import {
-  elevation,
-  deepBlue,
-  deepBlueA,
-  grayBlue,
-  grayBlueA,
-  neon,
-  neonA,
-  orange,
-  orangeA,
-  red,
-  redA,
-  elevationDark,
-  deepBlueDark,
-  deepBlueDarkA,
-  grayBlueDark,
-  grayBlueDarkA,
-  neonDark,
-  neonDarkA,
-  orangeDark,
-  orangeDarkA,
-  redDark,
-  redDarkA,
-} from './colors';
+import { lightColors, darkColors } from './colors';
 
 export type { VariantProps } from '@stitches/react';
 
-const defaultPrimary: Property.Color = '$blue8';
-
-export const colors: Record<string, Property.Color> = {
-  ...elevation,
-  ...neon,
-  ...neonA,
-  ...deepBlue,
-  ...deepBlueA,
-  ...grayBlue,
-  ...grayBlueA,
-  ...red,
-  ...redA,
-  ...orange,
-  ...orangeA,
-
-  // radix colors
-  ...gray,
-  ...grayA,
-  ...blue,
-  ...blueA,
-  ...green,
-  ...greenA,
-  ...slate,
-  ...slateA,
-  ...purple,
-  ...purpleA,
-
-  ...whiteA,
-  ...blackA,
-
-  // Semantic colors
-  primary: defaultPrimary,
-  contentBg: '$00dp',
-  hiContrast: '$deepBlue11',
-  loContrast: 'white',
-  focusOutline: 'hsl(216, 100%, 64%)',
+// Only colors having color variations and corresponding alpha
+export type PrimaryColor = 'neon' | 'blue' | 'orange' | 'red' | 'green' | 'deepBlue' | 'grayBlue';
+export type ColorInfo = {
+  name: PrimaryColor;
+  token: Property.Color;
+  value: string;
 };
 
-const primaryColor = colors[tokenToPropertyName(defaultPrimary)];
+const defaultPrimary: PrimaryColor = 'blue';
+
+const defaultPrimaryColor: ColorInfo = {
+  name: defaultPrimary,
+  value: lightColors[`${defaultPrimary}9`],
+  token: `$${defaultPrimary}9`,
+};
 
 const stitches = createStitches({
   theme: {
     colors: {
-      ...colors,
-      ...BadgeTheme.getLight(primaryColor),
-      ...ButtonTheme.getLight(primaryColor),
-      ...CardTheme.getLight(primaryColor),
-      ...CheckboxTheme.getLight(primaryColor),
-      ...LinkTheme.getLight(primaryColor),
-      ...RadioTheme.getLight(primaryColor),
-      ...InputTheme.getLight(primaryColor),
-      ...TableTheme.getLight(primaryColor),
-      ...TextTheme.getLight(primaryColor),
-      ...SelectTheme.getLight(primaryColor),
-      ...SkeletonTheme.getLight(primaryColor),
-      ...DialogTheme.getLight(primaryColor),
-      ...IconButtonTheme.getLight(primaryColor),
+      // Semantic colors
+      primary: defaultPrimaryColor.token,
+      contentBg: '$00dp',
+      hiContrast: '$deepBlue11',
+      loContrast: 'white',
+      focusOutline: 'hsl(216, 100%, 64%)',
+      ...lightColors,
+      ...BadgeTheme.getLight(defaultPrimaryColor),
+      ...ButtonTheme.getLight(defaultPrimaryColor),
+      ...CardTheme.getLight(defaultPrimaryColor),
+      ...CheckboxTheme.getLight(defaultPrimaryColor),
+      ...LinkTheme.getLight(defaultPrimaryColor),
+      ...RadioTheme.getLight(defaultPrimaryColor),
+      ...InputTheme.getLight(defaultPrimaryColor),
+      ...TableTheme.getLight(defaultPrimaryColor),
+      ...TextTheme.getLight(defaultPrimaryColor),
+      ...SelectTheme.getLight(defaultPrimaryColor),
+      ...SkeletonTheme.getLight(defaultPrimaryColor),
+      ...DialogTheme.getLight(defaultPrimaryColor),
+      ...IconButtonTheme.getLight(defaultPrimaryColor),
     },
     fonts: {
       rubik:
@@ -316,37 +251,19 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 
 export const utils = config.utils;
 
-export const customColors = (primary: Property.Color) => {
-  const primaryColor = colors[tokenToPropertyName(primary)];
+export const customColors = (primary: PrimaryColor) => {
+  const primaryColor: ColorInfo = {
+    name: primary,
+    value: darkColors[`${primary}9`],
+    token: `$${primary}9`,
+  };
 
   const darkTheme = createTheme('dark', {
     colors: {
-      ...elevationDark,
-      ...neonDark,
-      ...neonDarkA,
-      ...deepBlueDark,
-      ...deepBlueDarkA,
-      ...grayBlueDark,
-      ...grayBlueDarkA,
-      ...redDark,
-      ...redDarkA,
-      ...orangeDark,
-      ...orangeDarkA,
-
-      // radix colors
-      ...grayDark,
-      ...grayDarkA,
-      ...blueDark,
-      ...blueDarkA,
-      ...greenDark,
-      ...greenDarkA,
-      ...slateDark,
-      ...slateDarkA,
-      ...purpleDark,
-      ...purpleDarkA,
+      ...darkColors,
 
       // Semantic colors
-      primary,
+      primary: primaryColor.token,
       contentBg: '$00dp',
       hiContrast: 'white',
       loContrast: '$deepBlue2',
@@ -370,7 +287,7 @@ export const customColors = (primary: Property.Color) => {
 
   const lightTheme = createTheme('light', {
     colors: {
-      primary,
+      primary: primaryColor.token,
       ...BadgeTheme.getLight(primaryColor),
       ...ButtonTheme.getLight(primaryColor),
       ...IconButtonTheme.getLight(primaryColor),

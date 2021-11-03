@@ -1,5 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
+import { ColorInfo } from '../../stitches.config';
 
 export namespace Theme {
   type Colors = {
@@ -14,13 +15,13 @@ export namespace Theme {
     inputInvalidBorder: Property.Color;
   };
 
-  type Factory = (primaryColor?: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
-  export const getLight: Factory = () => ({
+  export const getLight: Factory = (primaryColor) => ({
     inputBg: '$deepBlue1',
     inputBorder: '$grayBlue9',
     inputFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
-    inputFocusBorder: '$neon8',
+    inputFocusBorder: `$${primaryColor.name}8`,
     inputHoverBg: '$whiteA9',
     inputText: tinycolor('black').setAlpha(0.74).toHslString(),
     inputPlaceholder: '$blackA10',
@@ -28,11 +29,11 @@ export namespace Theme {
     inputInvalidBorder: '$red9',
   });
 
-  export const getDark: Factory = () => ({
+  export const getDark: Factory = (primaryColor) => ({
     inputBg: '$grayBlue7',
     inputBorder: '$grayBlue9',
     inputFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
-    inputFocusBorder: '$neon11',
+    inputFocusBorder: `$${primaryColor.name}11`,
     inputHoverBg: '$whiteA4',
     inputText: tinycolor('white').setAlpha(0.8).toHslString(),
     inputPlaceholder: '$whiteA10',

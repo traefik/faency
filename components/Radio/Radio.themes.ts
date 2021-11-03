@@ -1,5 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
+import { ColorInfo } from '../../stitches.config';
 export namespace Theme {
   type Colors = {
     radioBorder: Property.Color;
@@ -11,17 +12,17 @@ export namespace Theme {
     radioIndicatorDisabledBg: Property.Color;
   };
 
-  type Factory = (primaryColor: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
-    radioIndicator: tinycolor(primaryColor).darken(20).toString(),
+    radioIndicator: tinycolor(primaryColor.value).darken(20).toString(),
     radioBorder: '$deepBlue6',
     radioHoverBg: 'transparent',
-    radioHoverBorder: tinycolor(primaryColor).darken(20).toString(),
-    radioFocusBorder: tinycolor(primaryColor).darken(20).toString(),
+    radioHoverBorder: tinycolor(primaryColor.value).darken(20).toString(),
+    radioFocusBorder: tinycolor(primaryColor.value).darken(20).toString(),
     radioDisabledBg: '$deepBlue3',
     radioDisabledBorder: '$deepBlue5',
-    radioIndicatorDisabledBg: tinycolor(primaryColor).setAlpha(0.6).toString(),
+    radioIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toString(),
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -32,6 +33,6 @@ export namespace Theme {
     radioFocusBorder: '$primary',
     radioDisabledBg: '$deepBlue3',
     radioDisabledBorder: '$deepBlue4',
-    radioIndicatorDisabledBg: tinycolor(primaryColor).setAlpha(0.6).toString(),
+    radioIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toString(),
   });
 }

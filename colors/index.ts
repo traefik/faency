@@ -1,6 +1,104 @@
-export * from './elevation';
-export * from './deepBlue';
-export * from './grayBlue';
-export * from './neon';
-export * from './orange';
-export * from './red';
+import * as elevation from './elevation';
+import * as deepBlue from './deepBlue';
+import * as grayBlue from './grayBlue';
+import * as neon from './neon';
+import * as orange from './orange';
+import * as red from './red';
+
+import {
+  blackA,
+  blue,
+  blueA,
+  blueDark,
+  blueDarkA,
+  gray,
+  grayA,
+  grayDark,
+  grayDarkA,
+  green,
+  greenA,
+  greenDark,
+  greenDarkA,
+  purple,
+  purpleA,
+  purpleDark,
+  purpleDarkA,
+  slate,
+  slateA,
+  slateDark,
+  slateDarkA,
+  whiteA,
+} from '@radix-ui/colors';
+
+const allColors = {
+  ...elevation,
+  ...deepBlue,
+  ...grayBlue,
+  ...neon,
+  ...orange,
+  ...red,
+};
+
+type LightColors = {
+  [key: string]: string;
+};
+
+export const lightColors: LightColors = Object.entries(allColors)
+  .filter(([colorName]) => !colorName.includes('Dark'))
+  .reduce(
+    (acc, [_, colors]) => ({
+      ...acc,
+      ...colors,
+    }),
+    {
+      // radix colors
+      ...gray,
+      ...grayA,
+      ...blue,
+      ...blueA,
+      ...green,
+      ...greenA,
+      ...slate,
+      ...slateA,
+      ...purple,
+      ...purpleA,
+      ...whiteA,
+      ...blackA,
+    }
+  );
+
+type DarkColors = {
+  [key: string]: string;
+};
+
+export const darkColors: DarkColors = Object.entries(allColors)
+  .filter(([colorName]) => colorName.includes('Dark'))
+  .reduce(
+    (acc, [_, colors]) => ({
+      ...acc,
+      ...colors,
+    }),
+    {
+      // radix colors
+      ...grayDark,
+      ...grayDarkA,
+      ...blueDark,
+      ...blueDarkA,
+      ...greenDark,
+      ...greenDarkA,
+      ...slateDark,
+      ...slateDarkA,
+      ...purpleDark,
+      ...purpleDarkA,
+      ...whiteA,
+      ...blackA,
+    }
+  );
+
+export * as elevation from './elevation';
+export * as deepBlue from './deepBlue';
+export * as grayBlue from './grayBlue';
+export * as neon from './neon';
+export * as orange from './orange';
+export * as red from './red';
+export default allColors;

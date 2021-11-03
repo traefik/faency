@@ -1,4 +1,5 @@
 import { Property } from '@stitches/react/types/css';
+import { ColorInfo } from '../../stitches.config';
 
 export namespace Theme {
   type Colors = {
@@ -6,7 +7,7 @@ export namespace Theme {
     skeletonAnimation: Property.Color;
   };
 
-  type Factory = (primaryColor?: Property.Color) => Colors;
+  type Factory = (primaryColor?: ColorInfo) => Colors;
 
   export const getLight: Factory = () => ({
     skeletonBackground: '$slate4',

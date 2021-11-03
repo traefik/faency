@@ -1,5 +1,7 @@
 import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
+import colors from '../../colors';
+import { ColorInfo } from '../../stitches.config';
 
 export namespace Theme {
   type Colors = {
@@ -10,23 +12,22 @@ export namespace Theme {
     badgeInteractiveBackground: Property.Color;
   };
 
-  type Factory = (primaryColor: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
-  export const getLight: Factory = (primaryColor: Property.Color) => ({
+  export const getLight: Factory = () => ({
     badgeDefaultBackground: '$slate7',
     badgeDefaultText: '$slate10',
-    badgeNeonBackground: tinycolor(primaryColor).setAlpha(0.2).toHslString(),
+    badgeNeonBackground: tinycolor(colors.neon.neon9).setAlpha(0.2).toHslString(),
     badgeNeonText: '$neon9',
     badgeInteractiveBackground: 'rgba(0,0,0,.05)',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     badgeDefaultBackground: '$slate5',
     badgeDefaultText: '$slate10',
-    badgePrimaryBackground: tinycolor(primaryColor).lighten(20),
     badgePrimaryText: '$primary',
     badgeNeonBackground: '$neon11',
     badgeNeonText: '$neon7',
-    badgeInteractiveBackground: 'rgba(255,255,255,.1)',
+    badgeInteractiveBackground: tinycolor('black').setAlpha(0.1).toHslString(),
   });
 }
