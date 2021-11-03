@@ -110,6 +110,9 @@ const StyledInput = styled('input', {
     state: {
       invalid: {
         boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder',
+        '&:focus-visible': {
+          boxShadow: 'inset 0 0 0 2px $colors$inputInvalidBorder',
+        },
       },
     },
     cursor: {
