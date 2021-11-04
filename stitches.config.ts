@@ -252,7 +252,7 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 export const utils = config.utils;
 
 export const customColors = (primary: PrimaryColor) => {
-  const primaryColor: ColorInfo = {
+  const darkPrimaryColor: ColorInfo = {
     name: primary,
     value: darkColors[`${primary}9`],
     token: `$${primary}9`,
@@ -263,45 +263,51 @@ export const customColors = (primary: PrimaryColor) => {
       ...darkColors,
 
       // Semantic colors
-      primary: primaryColor.token,
+      primary: darkPrimaryColor.token,
       contentBg: '$00dp',
       hiContrast: 'white',
       loContrast: '$deepBlue2',
 
-      ...BadgeTheme.getDark(primaryColor),
-      ...ButtonTheme.getDark(primaryColor),
-      ...IconButtonTheme.getDark(primaryColor),
-      ...CardTheme.getDark(primaryColor),
-      ...CheckboxTheme.getDark(primaryColor),
-      ...LinkTheme.getDark(primaryColor),
-      ...RadioTheme.getDark(primaryColor),
-      ...InputTheme.getDark(primaryColor),
-      ...TableTheme.getDark(primaryColor),
-      ...TextTheme.getDark(primaryColor),
-      ...SelectTheme.getDark(primaryColor),
-      ...SkeletonTheme.getDark(primaryColor),
-      ...DialogTheme.getDark(primaryColor),
-      ...NavigationTheme.getDark(primaryColor),
+      ...BadgeTheme.getDark(darkPrimaryColor),
+      ...ButtonTheme.getDark(darkPrimaryColor),
+      ...IconButtonTheme.getDark(darkPrimaryColor),
+      ...CardTheme.getDark(darkPrimaryColor),
+      ...CheckboxTheme.getDark(darkPrimaryColor),
+      ...LinkTheme.getDark(darkPrimaryColor),
+      ...RadioTheme.getDark(darkPrimaryColor),
+      ...InputTheme.getDark(darkPrimaryColor),
+      ...TableTheme.getDark(darkPrimaryColor),
+      ...TextTheme.getDark(darkPrimaryColor),
+      ...SelectTheme.getDark(darkPrimaryColor),
+      ...SkeletonTheme.getDark(darkPrimaryColor),
+      ...DialogTheme.getDark(darkPrimaryColor),
+      ...NavigationTheme.getDark(darkPrimaryColor),
     },
   });
 
+  const lightPrimaryColor: ColorInfo = {
+    name: primary,
+    value: lightColors[`${primary}9`],
+    token: `$${primary}9`,
+  };
+
   const lightTheme = createTheme('light', {
     colors: {
-      primary: primaryColor.token,
-      ...BadgeTheme.getLight(primaryColor),
-      ...ButtonTheme.getLight(primaryColor),
-      ...IconButtonTheme.getLight(primaryColor),
-      ...CardTheme.getLight(primaryColor),
-      ...CheckboxTheme.getLight(primaryColor),
-      ...LinkTheme.getLight(primaryColor),
-      ...RadioTheme.getLight(primaryColor),
-      ...InputTheme.getLight(primaryColor),
-      ...TableTheme.getLight(primaryColor),
-      ...TextTheme.getLight(primaryColor),
-      ...SelectTheme.getLight(primaryColor),
-      ...SkeletonTheme.getLight(primaryColor),
-      ...DialogTheme.getLight(primaryColor),
-      ...NavigationTheme.getLight(primaryColor),
+      primary: lightPrimaryColor.token,
+      ...BadgeTheme.getLight(lightPrimaryColor),
+      ...ButtonTheme.getLight(lightPrimaryColor),
+      ...IconButtonTheme.getLight(lightPrimaryColor),
+      ...CardTheme.getLight(lightPrimaryColor),
+      ...CheckboxTheme.getLight(lightPrimaryColor),
+      ...LinkTheme.getLight(lightPrimaryColor),
+      ...RadioTheme.getLight(lightPrimaryColor),
+      ...InputTheme.getLight(lightPrimaryColor),
+      ...TableTheme.getLight(lightPrimaryColor),
+      ...TextTheme.getLight(lightPrimaryColor),
+      ...SelectTheme.getLight(lightPrimaryColor),
+      ...SkeletonTheme.getLight(lightPrimaryColor),
+      ...DialogTheme.getLight(lightPrimaryColor),
+      ...NavigationTheme.getLight(lightPrimaryColor),
     },
   });
 
