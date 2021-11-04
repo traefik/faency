@@ -1,7 +1,6 @@
 import type * as Stitches from '@stitches/react';
 import { createStitches, CSS as StitchesCSS } from '@stitches/react';
 
-import { Property } from '@stitches/react/types/css';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
@@ -18,24 +17,16 @@ import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
 
 import { lightColors, darkColors } from './colors';
+import getPrimaryColorInfo from './utils/getPrimaryColorInfo';
 
 export type { VariantProps } from '@stitches/react';
 
 // Only colors having color variations and corresponding alpha
 export type PrimaryColor = 'neon' | 'blue' | 'orange' | 'red' | 'green' | 'deepBlue' | 'grayBlue';
-export type ColorInfo = {
-  name: PrimaryColor;
-  token: Property.Color;
-  value: string;
-};
 
 const defaultPrimary: PrimaryColor = 'blue';
 
-const defaultPrimaryColor: ColorInfo = {
-  name: defaultPrimary,
-  value: lightColors[`${defaultPrimary}9`],
-  token: `$${defaultPrimary}9`,
-};
+const defaultPrimaryColor = getPrimaryColorInfo(defaultPrimary, lightColors);
 
 const stitches = createStitches({
   theme: {
@@ -252,11 +243,7 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 export const utils = config.utils;
 
 export const customColors = (primary: PrimaryColor) => {
-  const darkPrimaryColor: ColorInfo = {
-    name: primary,
-    value: darkColors[`${primary}9`],
-    token: `$${primary}9`,
-  };
+  const darkPrimaryColor = getPrimaryColorInfo(primary, darkColors);
 
   const darkTheme = createTheme('dark', {
     colors: {
@@ -285,11 +272,7 @@ export const customColors = (primary: PrimaryColor) => {
     },
   });
 
-  const lightPrimaryColor: ColorInfo = {
-    name: primary,
-    value: lightColors[`${primary}9`],
-    token: `$${primary}9`,
-  };
+  const lightPrimaryColor = getPrimaryColorInfo(primary, lightColors);
 
   const lightTheme = createTheme('light', {
     colors: {

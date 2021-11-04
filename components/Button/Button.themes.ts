@@ -1,6 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
-import { ColorInfo } from '../../stitches.config';
+import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
@@ -28,7 +28,7 @@ export namespace Theme {
   export const getLight: Factory = (primaryColor) => ({
     buttonPrimaryBg: '$primary',
     buttonPrimaryText: 'white',
-    buttonPrimaryFocusBorder: `$${primaryColor.name}A6`,
+    buttonPrimaryFocusBorder: primaryColor.helpers.pickScale(6, { alpha: true }),
     buttonPrimaryGhostHoverText: '$deepBlue9',
     buttonPrimaryGhostText: '$primary',
 
@@ -48,7 +48,7 @@ export namespace Theme {
   export const getDark: Factory = (primaryColor) => ({
     buttonPrimaryBg: '$primary',
     buttonPrimaryText: '$deepBlue2',
-    buttonPrimaryFocusBorder: `$${primaryColor.name}A12`,
+    buttonPrimaryFocusBorder: primaryColor.helpers.pickScale(12, { alpha: true }),
     buttonPrimaryGhostHoverText: tinycolor(primaryColor.value).lighten(10).toHslString(),
     buttonPrimaryGhostText: '$primary',
 

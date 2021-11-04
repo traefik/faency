@@ -39,7 +39,7 @@ const customColors = {
   ...red,
 };
 
-type ColorMap = {
+export type ColorMap = {
   [key: string]: string;
 };
 
