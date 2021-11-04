@@ -4,7 +4,6 @@ import { styled } from '../../stitches.config';
 import { Box } from '../Box';
 import { Input, InputHandle, InputProps, InputVariants } from '../Input';
 import { Label } from '../Label';
-import { IconButton } from '../IconButton';
 import {
   ExclamationTriangleIcon,
   CrossCircledIcon,
@@ -32,6 +31,30 @@ const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
   '& + *': {
     marginLeft: '$1',
   },
+});
+
+const StyledEyeOpenIcon = styled(EyeOpenIcon, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer',
+    }
+  }
+});
+
+const StyledEyeClosedIcon = styled(EyeClosedIcon, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
+});
+
+const StyledCrossCircledIcon = styled(CrossCircledIcon, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
 });
 
 export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFieldProps>(
@@ -118,6 +141,11 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
       [hasAdornmentGroup]
     );
 
+    const PasswordVisibilityToggleIcon = React.useMemo(
+      () => isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon,
+      [isPasswordVisible],
+    );
+
     return (
       <Box css={css}>
         {label && (
@@ -133,14 +161,10 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
               <EndAdornmentWrapper>
                 {invalid && <StyledExclamationTriangleIcon />}
                 {isPasswordType && (
-                  <IconButton type="button" onClick={togglePasswordVisibility} size="1">
-                    {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
-                  </IconButton>
+                  <PasswordVisibilityToggleIcon onClick={togglePasswordVisibility} />
                 )}
-                {clearable && (
-                  <IconButton disabled={clearDisabled} type="button" onClick={handleClear} size="1">
-                    <CrossCircledIcon />
-                  </IconButton>
+                {clearable && !clearDisabled && (
+                  <StyledCrossCircledIcon onClick={handleClear} />
                 )}
               </EndAdornmentWrapper>
             )
