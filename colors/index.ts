@@ -39,11 +39,11 @@ const customColors = {
   ...red,
 };
 
-type LightColors = {
+type ColorMap = {
   [key: string]: string;
 };
 
-export const lightColors: LightColors = Object.entries(customColors)
+export const lightColors: ColorMap = Object.entries(customColors)
   .filter(([colorName]) => !colorName.includes('Dark'))
   .reduce(
     (acc, [_, colors]) => ({
@@ -67,11 +67,7 @@ export const lightColors: LightColors = Object.entries(customColors)
     }
   );
 
-type DarkColors = {
-  [key: string]: string;
-};
-
-export const darkColors: DarkColors = Object.entries(customColors)
+export const darkColors: ColorMap = Object.entries(customColors)
   .filter(([colorName]) => colorName.includes('Dark'))
   .reduce(
     (acc, [_, colors]) => ({
