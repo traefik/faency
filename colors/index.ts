@@ -30,7 +30,7 @@ import {
   whiteA,
 } from '@radix-ui/colors';
 
-const allColors = {
+const customColors = {
   ...elevation,
   ...deepBlue,
   ...grayBlue,
@@ -43,7 +43,7 @@ type LightColors = {
   [key: string]: string;
 };
 
-export const lightColors: LightColors = Object.entries(allColors)
+export const lightColors: LightColors = Object.entries(customColors)
   .filter(([colorName]) => !colorName.includes('Dark'))
   .reduce(
     (acc, [_, colors]) => ({
@@ -71,7 +71,7 @@ type DarkColors = {
   [key: string]: string;
 };
 
-export const darkColors: DarkColors = Object.entries(allColors)
+export const darkColors: DarkColors = Object.entries(customColors)
   .filter(([colorName]) => colorName.includes('Dark'))
   .reduce(
     (acc, [_, colors]) => ({
@@ -101,4 +101,5 @@ export * as grayBlue from './grayBlue';
 export * as neon from './neon';
 export * as orange from './orange';
 export * as red from './red';
-export default allColors;
+
+export default customColors;
