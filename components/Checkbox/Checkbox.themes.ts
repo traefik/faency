@@ -26,13 +26,13 @@ export namespace Theme {
     checkboxBorder: '$slate8',
     checkboxCheckedBg: '$primary',
     checkboxCheckedIcon: 'white',
-    checkboxCheckedHoverBg: tinycolor(primaryColor.value).darken().toString(),
+    checkboxCheckedHoverBg: tinycolor(primaryColor.value).darken().toHslString(),
     checkboxHoverBg: 'transparent',
     checkboxHoverBorder: '$primary',
     checkboxFocusBorder: '$primary',
     checkboxDisabledBg: '$deepBlue3',
     checkboxDisabledBorder: '$deepBlue5',
-    checkboxIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toString(),
+    checkboxIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -41,11 +41,11 @@ export namespace Theme {
     checkboxCheckedBg: '$primary',
     checkboxBorder: '$slate9',
     checkboxCheckedIcon: '$deepBlue1',
-    checkboxCheckedHoverBg: tinycolor(primaryColor.value).lighten(10).toString(),
+    checkboxCheckedHoverBg: tinycolor(primaryColor.value).lighten(10).toHslString(),
     checkboxHoverBg: '$deepBlue3',
     checkboxHoverBorder: '$primary',
     checkboxFocusBorder: '$primary',
-    checkboxDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toString(),
+    checkboxDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
     checkboxDisabledBorder: 'transparent',
     checkboxIndicatorDisabledBg: '$deepBlue1',
   });

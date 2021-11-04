@@ -35,10 +35,10 @@ export namespace Theme {
     linkSubtleTextDecoration: '$deepBlue5',
     linkSubtleHoverTextDecoration: '$deepBlue7',
     linkSubtleFocusOutline: '$deepBlue4',
-    linkPrimary: tinycolor(primaryColor.value).darken(26).toString(),
-    linkPrimaryTextDecoration: tinycolor(primaryColor.value).darken(16).toString(),
-    linkPrimaryHoverTextDecoration: tinycolor(primaryColor.value).darken(26).toString(),
-    linkPrimaryFocusOutline: tinycolor(primaryColor.value).darken(16).toString(),
+    linkPrimary: tinycolor(primaryColor.value).darken(26).toHslString(),
+    linkPrimaryTextDecoration: tinycolor(primaryColor.value).darken(16).toHslString(),
+    linkPrimaryHoverTextDecoration: tinycolor(primaryColor.value).darken(26).toHslString(),
+    linkPrimaryFocusOutline: tinycolor(primaryColor.value).darken(16).toHslString(),
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -55,8 +55,8 @@ export namespace Theme {
     linkSubtleHoverTextDecoration: '$deepBlue5',
     linkSubtleFocusOutline: '$deepBlue3',
     linkPrimary: '$primary',
-    linkPrimaryTextDecoration: tinycolor(primaryColor.value).lighten(16).toString(),
-    linkPrimaryHoverTextDecoration: tinycolor(primaryColor.value).darken(20).toString(),
-    linkPrimaryFocusOutline: tinycolor(primaryColor.value).lighten(16).toString(),
+    linkPrimaryTextDecoration: tinycolor(primaryColor.value).lighten(16).toHslString(),
+    linkPrimaryHoverTextDecoration: tinycolor(primaryColor.value).darken(20).toHslString(),
+    linkPrimaryFocusOutline: tinycolor(primaryColor.value).lighten(16).toHslString(),
   });
 }

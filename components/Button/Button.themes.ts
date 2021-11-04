@@ -49,7 +49,7 @@ export namespace Theme {
     buttonPrimaryBg: '$primary',
     buttonPrimaryText: '$deepBlue2',
     buttonPrimaryFocusBorder: `$${primaryColor.name}A12`,
-    buttonPrimaryGhostHoverText: tinycolor(primaryColor.value).lighten(10).toString(),
+    buttonPrimaryGhostHoverText: tinycolor(primaryColor.value).lighten(10).toHslString(),
     buttonPrimaryGhostText: '$primary',
 
     buttonSecondaryBg: 'transparent',
