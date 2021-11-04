@@ -47,6 +47,7 @@ export const Card = styled('div', {
       true: {
         '@hover': {
           '&:hover': {
+            cursor: 'pointer',
             '&::before': {
               boxShadow: 'inset 0 0 0 1px $colors$cardHoverBorder',
               backgroundColor: '$cardHoverBackground',
