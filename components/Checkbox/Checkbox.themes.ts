@@ -1,5 +1,6 @@
 import tinycolor from 'tinycolor2';
 import { Property } from '@stitches/react/types/css';
+import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
@@ -17,7 +18,7 @@ export namespace Theme {
     checkboxIndicatorDisabledBg: Property.Color;
   };
 
-  type Factory = (primaryColor: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
     checkboxIcon: '$deepBlue11',
@@ -25,13 +26,13 @@ export namespace Theme {
     checkboxBorder: '$slate8',
     checkboxCheckedBg: '$primary',
     checkboxCheckedIcon: 'white',
-    checkboxCheckedHoverBg: tinycolor(primaryColor).darken().toString(),
+    checkboxCheckedHoverBg: tinycolor(primaryColor.value).darken().toHslString(),
     checkboxHoverBg: 'transparent',
     checkboxHoverBorder: '$primary',
     checkboxFocusBorder: '$primary',
     checkboxDisabledBg: '$deepBlue3',
     checkboxDisabledBorder: '$deepBlue5',
-    checkboxIndicatorDisabledBg: tinycolor(primaryColor).setAlpha(0.6).toString(),
+    checkboxIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -40,11 +41,11 @@ export namespace Theme {
     checkboxCheckedBg: '$primary',
     checkboxBorder: '$slate9',
     checkboxCheckedIcon: '$deepBlue1',
-    checkboxCheckedHoverBg: tinycolor(primaryColor).lighten(10).toString(),
+    checkboxCheckedHoverBg: tinycolor(primaryColor.value).lighten(10).toHslString(),
     checkboxHoverBg: '$deepBlue3',
     checkboxHoverBorder: '$primary',
     checkboxFocusBorder: '$primary',
-    checkboxDisabledBg: tinycolor(primaryColor).setAlpha(0.6).toString(),
+    checkboxDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
     checkboxDisabledBorder: 'transparent',
     checkboxIndicatorDisabledBg: '$deepBlue1',
   });

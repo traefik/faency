@@ -1,4 +1,5 @@
 import { Property } from '@stitches/react/types/css';
+import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
@@ -8,7 +9,7 @@ export namespace Theme {
     iconButtonFocusBorder: Property.Color;
   };
 
-  type Factory = (primaryColor?: Property.Color) => Colors;
+  type Factory = (primaryColor?: ColorInfo) => Colors;
 
   export const getLight: Factory = () => ({
     iconButtonBackground: 'white',

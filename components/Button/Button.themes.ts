@@ -1,5 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
+import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
@@ -22,19 +23,19 @@ export namespace Theme {
     buttonRedFocusBg: Property.Color;
   };
 
-  type Factory = (primaryColor: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
-  export const getLight: Factory = (primaryColor: Property.Color) => ({
+  export const getLight: Factory = (primaryColor) => ({
     buttonPrimaryBg: '$primary',
     buttonPrimaryText: 'white',
-    buttonPrimaryFocusBorder: '$neonA6',
+    buttonPrimaryFocusBorder: primaryColor.helpers.pickScale(6, { alpha: true }),
     buttonPrimaryGhostHoverText: '$deepBlue9',
     buttonPrimaryGhostText: '$primary',
 
     buttonSecondaryBg: 'transparent',
     buttonSecondaryText: 'hsla(0, 0%, 0%, 0.54)',
     buttonSecondaryBorder: '$grayBlue9',
-    buttonSecondaryFocusBorder: tinycolor(primaryColor).setAlpha(0.19).toHslString(),
+    buttonSecondaryFocusBorder: tinycolor(primaryColor.value).setAlpha(0.19).toHslString(),
     buttonSecondaryGhostHoverText: '$deepBlue7',
     buttonSecondaryGhostText: '$deepBlue6',
 
@@ -47,12 +48,12 @@ export namespace Theme {
   export const getDark: Factory = (primaryColor) => ({
     buttonPrimaryBg: '$primary',
     buttonPrimaryText: '$deepBlue2',
-    buttonPrimaryFocusBorder: '$neonA12',
-    buttonPrimaryGhostHoverText: tinycolor(primaryColor).lighten(10).toString(),
+    buttonPrimaryFocusBorder: primaryColor.helpers.pickScale(12, { alpha: true }),
+    buttonPrimaryGhostHoverText: tinycolor(primaryColor.value).lighten(10).toHslString(),
     buttonPrimaryGhostText: '$primary',
 
     buttonSecondaryBg: 'transparent',
-    buttonSecondaryText: 'hsla(0, 0%, 100%, 0.74)',
+    buttonSecondaryText: tinycolor('white').setAlpha(0.74).toHslString(),
     buttonSecondaryBorder: '$grayBlue9',
     buttonSecondaryFocusBorder: '$primary',
     buttonSecondaryGhostHoverText: '$deepBlue6',

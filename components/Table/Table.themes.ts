@@ -1,5 +1,6 @@
 import tinycolor from 'tinycolor2';
 import { Property } from '@stitches/react/types/css';
+import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
@@ -9,9 +10,9 @@ export namespace Theme {
     tableActiveHoverText: Property.Color;
   };
 
-  type Factory = (primaryColor?: Property.Color) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
-  export const getLight: Factory = () => ({
+  export const getLight: Factory = (primaryColor) => ({
     tableText: '$deepBlue9',
     tableHoverBackground: '$deepBlue1',
     tableActiveText: '$deepBlue9',
@@ -22,6 +23,6 @@ export namespace Theme {
     tableText: '$deepBlue9',
     tableHoverBackground: '$deepBlue1',
     tableActiveText: '$primary',
-    tableActiveHoverText: tinycolor(primaryColor).lighten(10).toString(),
+    tableActiveHoverText: tinycolor(primaryColor.value).lighten(10).toHslString(),
   });
 }

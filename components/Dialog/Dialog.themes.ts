@@ -1,11 +1,12 @@
 import { Property } from '@stitches/react/types/css';
+import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
     dialogBackground: Property.Color;
   };
 
-  type Factory = (primaryColor?: Property.Color) => Colors;
+  type Factory = (primaryColor?: ColorInfo) => Colors;
 
   export const getLight: Factory = () => ({
     dialogBackground: '$deepBlue2',

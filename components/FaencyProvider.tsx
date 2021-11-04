@@ -1,6 +1,6 @@
 import React from 'react';
 import { IdProvider } from '@radix-ui/react-id';
-import { customColors, globalCss } from '../stitches.config';
+import { customColors, globalCss, PrimaryColor } from '../stitches.config';
 
 import RubikWoff2 from '../assets/fonts/Rubik-Regular.woff2';
 import RubikSemiBoldWoff2 from '../assets/fonts/Rubik-SemiBold.woff2';
@@ -30,7 +30,10 @@ const globalStyles = globalCss({
   ],
 });
 
-export const FaencyProvider: React.FC<{ primaryColor: string }> = ({ children, primaryColor }) => {
+export const FaencyProvider: React.FC<{ primaryColor: PrimaryColor }> = ({
+  children,
+  primaryColor,
+}) => {
   React.useEffect(() => {
     const { dark, light } = customColors(primaryColor);
     dark.toString();
