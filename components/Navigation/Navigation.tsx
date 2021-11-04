@@ -12,7 +12,8 @@ const baseNavItemCss = css({
   color: '$navButtonText',
   border: 'none',
   minHeight: '$7',
-  padding: '$2',
+  px: '$3',
+  py: '$2',
   borderRadius: '$3',
   cursor: 'pointer',
   fontFamily: '$rubik',
@@ -165,9 +166,9 @@ export const NavigationItem = ({
 
   return (
     <NavigationItemWrapper as={as} {...restProps}>
-      {hasStartAdornment && <Flex css={{ pr: '$2' }}>{startAdornment}</Flex>}
+      {hasStartAdornment && <Flex css={{ pr: '$2', ml: '-$1' }}>{startAdornment}</Flex>}
       <Flex css={{ flexGrow: 1 }}>{children}</Flex>
-      {hasEndAdornment && <Flex css={{ pl: '$2' }}>{endAdornment}</Flex>}
+      {hasEndAdornment && <Flex css={{ pl: '$2', mr: '-$1' }}>{endAdornment}</Flex>}
     </NavigationItemWrapper>
   );
 };
