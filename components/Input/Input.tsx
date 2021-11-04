@@ -324,9 +324,6 @@ const AdornmentWrapper = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  [`& ${IconButton}:focus-visible`]: {
-    color: '$inputFocusBorder',
-  },
   variants: {
     size: {
       small: {
