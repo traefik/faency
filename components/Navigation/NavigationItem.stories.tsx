@@ -67,7 +67,7 @@ const Template: ComponentStory<typeof NavigationItemForStory> = (args) => (
               color: '$hiContrast',
             }}
           >
-            <Text>{args.endAdornment}</Text>
+            {args.endAdornment}
           </Badge>
         )
       }
