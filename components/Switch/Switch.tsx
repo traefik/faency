@@ -64,6 +64,10 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
       ...elevationVariant[2],
     }
   },
+  '&:disabled': {
+    pointerEvents: 'none',
+    opacity: 0.38,
+  },
   '&[data-state="checked"]': {
     backgroundColor: '$switchActiveBackground',
   },
@@ -89,12 +93,6 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
         },
       },
     },
-    disabled: {
-      true: {
-        pointerEvents: 'none',
-        opacity: 0.38,
-      }
-    }
   },
   defaultVariants: {
     size: '1',
