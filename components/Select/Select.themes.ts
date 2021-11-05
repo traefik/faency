@@ -1,5 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import { ColorInfo } from '../../utils/getPrimaryColorInfo';
+import tinycolor from 'tinycolor2';
 
 export namespace Theme {
   type Colors = {
@@ -11,35 +12,32 @@ export namespace Theme {
     selectText: Property.Color;
     selectPlaceholder: Property.Color;
     selectDisabledText: Property.Color;
-    selectDisabledBorder: Property.Color;
-    selectReadOnlyBg: Property.Color;
+    selectInvalidBorder: Property.Color;
   };
 
-  type Factory = (primaryColor?: ColorInfo) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
 
-  export const getLight: Factory = () => ({
-    selectBg: '$deepBlue3',
-    selectBorder: '$deepBlue6',
-    selectFocusBg: '$deepBlue2',
-    selectFocusBorder: '$deepBlue10',
-    selectHoverBg: '$deepBlue2',
-    selectText: '$deepBlue9',
-    selectPlaceholder: '$deepBlue6',
-    selectDisabledText: '$deepBlue5',
-    selectDisabledBorder: '$deepBlue5',
-    selectReadOnlyBg: '$deepBlue3',
+  export const getLight: Factory = (primaryColor) => ({
+    selectBg: '$deepBlue1',
+    selectBorder: '$grayBlue9',
+    selectFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
+    selectFocusBorder: primaryColor.helpers.pickScale(8),
+    selectHoverBg: '$whiteA9',
+    selectText: tinycolor('black').setAlpha(0.74).toHslString(),
+    selectPlaceholder: '$blackA10',
+    selectDisabledText: tinycolor('black').setAlpha(0.35).toHslString(),
+    selectInvalidBorder: '$red9',
   });
 
-  export const getDark: Factory = () => ({
-    selectBg: '$deepBlue3',
-    selectBorder: '$deepBlue6',
-    selectFocusBg: '$deepBlue1',
-    selectFocusBorder: '$deepBlue9',
-    selectHoverBg: '$deepBlue1',
-    selectText: '$deepBlue9',
-    selectPlaceholder: '$deepBlue6',
-    selectDisabledText: '$deepBlue5',
-    selectDisabledBorder: '$deepBlue4',
-    selectReadOnlyBg: '$deepBlue2',
+  export const getDark: Factory = (primaryColor) => ({
+    selectBg: '$grayBlue7',
+    selectBorder: '$grayBlue9',
+    selectFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
+    selectFocusBorder: primaryColor.helpers.pickScale(11),
+    selectHoverBg: '$whiteA4',
+    selectText: tinycolor('white').setAlpha(0.8).toHslString(),
+    selectPlaceholder: '$whiteA10',
+    selectDisabledText: tinycolor('white').setAlpha(0.35).toHslString(),
+    selectInvalidBorder: '$red9',
   });
 }
