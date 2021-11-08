@@ -1,6 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import { ColorInfo } from '../../utils/getPrimaryColorInfo';
-import tinycolor from 'tinycolor2';
+import { Theme as InputTheme } from '../Input/Input.themes';
 
 export namespace Theme {
   type Colors = {
@@ -17,27 +17,23 @@ export namespace Theme {
 
   type Factory = (primaryColor: ColorInfo) => Colors;
 
+  const remapInputTheme = (inputLightOrDark) => ({
+    selectBg: inputLightOrDark.inputBg,
+    selectBorder: inputLightOrDark.inputBorder,
+    selectFocusBg: inputLightOrDark.inputFocusBg,
+    selectFocusBorder: inputLightOrDark.inputFocusBorder,
+    selectHoverBg: inputLightOrDark.inputHoverBg,
+    selectText: inputLightOrDark.inputText,
+    selectPlaceholder: inputLightOrDark.inputPlaceholder,
+    selectDisabledText: inputLightOrDark.inputDisabledText,
+    selectInvalidBorder: inputLightOrDark.inputInvalidBorder,
+  });
+
   export const getLight: Factory = (primaryColor) => ({
-    selectBg: '$deepBlue1',
-    selectBorder: '$grayBlue9',
-    selectFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
-    selectFocusBorder: primaryColor.helpers.pickScale(8),
-    selectHoverBg: '$whiteA9',
-    selectText: tinycolor('black').setAlpha(0.74).toHslString(),
-    selectPlaceholder: '$blackA10',
-    selectDisabledText: tinycolor('black').setAlpha(0.35).toHslString(),
-    selectInvalidBorder: '$red9',
+    ...remapInputTheme(InputTheme.getLight(primaryColor)),
   });
 
   export const getDark: Factory = (primaryColor) => ({
-    selectBg: '$grayBlue7',
-    selectBorder: '$grayBlue9',
-    selectFocusBg: tinycolor('black').setAlpha(0.15).toHslString(),
-    selectFocusBorder: primaryColor.helpers.pickScale(11),
-    selectHoverBg: '$whiteA4',
-    selectText: tinycolor('white').setAlpha(0.8).toHslString(),
-    selectPlaceholder: '$whiteA10',
-    selectDisabledText: tinycolor('white').setAlpha(0.35).toHslString(),
-    selectInvalidBorder: '$red9',
+    ...remapInputTheme(InputTheme.getDark(primaryColor)),
   });
 }

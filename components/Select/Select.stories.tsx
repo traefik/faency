@@ -29,17 +29,17 @@ export const Basic = Template.bind({});
 
 Basic.args = {};
 
-export const Large = Template.bind({});
+export const Size = Template.bind({});
 
-Large.args = { size: 'large', placeholder: 'placeholder' };
+Size.args = { size: 'large', placeholder: 'placeholder' };
 
-export const Ghost = Template.bind({});
+export const Variant = Template.bind({});
 
-Ghost.args = { variant: 'ghost', value: 'value' };
+Variant.args = { variant: 'ghost', value: 'value' };
 
-export const Invalid = Template.bind({});
+export const State = Template.bind({});
 
-Invalid.args = { state: 'invalid' };
+State.args = { state: 'invalid' };
 
 export const Disabled = Template.bind({});
 
