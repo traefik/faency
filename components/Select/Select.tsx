@@ -60,6 +60,10 @@ const StyledSelect = styled('select', {
   pr: '$3',
   lineHeight: '25px',
 
+  '& option': {
+    color: '$loContrast',
+  },
+
   '&:focus-visible': {
     boxShadow: `inset 0 0 0 2px $colors$selectFocusBorder, ${FOCUS_SHADOW}`,
   },
