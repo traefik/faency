@@ -1,6 +1,8 @@
-import { styled } from '../../stitches.config';
+import { styled, CSS } from '../../stitches.config';
 
-export const elevationVariant = {
+type ElevationVariant = Record<number, CSS>;
+
+export const elevationVariant: ElevationVariant = {
   0: {
     boxShadow: 'none',
   },

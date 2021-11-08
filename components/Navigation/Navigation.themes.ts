@@ -3,7 +3,6 @@ import { Property } from '@stitches/react/types/css';
 import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 export namespace Theme {
   type Colors = {
-    navBg: Property.Color;
     navButtonBg: Property.Color;
     navButtonHoverBg: Property.Color;
     navButtonHoverBg2: Property.Color;
@@ -19,7 +18,6 @@ export namespace Theme {
   type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
-    navBg: 'white',
     navButtonBg: 'transparent',
     navButtonHoverBg: tinycolor('black').setAlpha(0.04).toHslString(),
     navButtonHoverBg2: 'transparent',
@@ -35,7 +33,6 @@ export namespace Theme {
   });
 
   export const getDark: Factory = (primaryColor) => ({
-    navBg: '$deepBlue2',
     navButtonBg: 'transparent',
     navButtonHoverBg: tinycolor('white').setAlpha(0.05).toHslString(),
     navButtonHoverBg2: '$primary',

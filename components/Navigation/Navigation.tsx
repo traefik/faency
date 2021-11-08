@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo, ReactNode } from 'react';
 import { styled, css, VariantProps } from '../../stitches.config';
 import { elevationVariant } from '../Elevation';
 import { Flex } from '../Flex';
@@ -110,19 +110,19 @@ export const NavigationContainer = styled('div', {
 export type NavigationContainerVariants = VariantProps<typeof NavigationContainer>;
 export type NavigationContainerProps = NavigationContainerVariants & {};
 
+const elevation = Object.keys(elevationVariant).map((elevationKey) => ({
+  ...elevationVariant[Number(elevationKey)],
+  bc: `$${Number(elevationKey) < 10 ? '0' : ''}${elevationKey}dp`,
+})) as any;
+
 export const NavigationDrawer = styled('nav', {
   display: 'flex',
   boxSizing: 'border-box',
   padding: '$3',
-  backgroundColor: '$navBg',
   maxWidth: '240px',
   flexDirection: 'column',
-
   variants: {
-    elevation: Object.keys(elevationVariant).map((_, index) => ({
-      ...elevationVariant[index],
-      bc: `$${index < 10 ? '0' : ''}${index}dp`,
-    })) as any,
+    elevation,
   },
   defaultVariants: {
     elevation: 1,
@@ -144,9 +144,9 @@ type StyledButtonVariants = VariantProps<typeof StyledButton>;
 
 export type NavigationItemProps = {
   as?: 'button' | 'a';
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
-  children: React.ReactNode;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
+  children: ReactNode;
   href?: string;
 } & StyledLinkVariants &
   StyledButtonVariants;
