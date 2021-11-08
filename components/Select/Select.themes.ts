@@ -16,8 +16,9 @@ export namespace Theme {
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;
+  type FactoryMapper = (colors: InputTheme.Colors) => Colors;
 
-  const remapInputTheme = (inputLightOrDark) => ({
+  const remapInputTheme: FactoryMapper = (inputLightOrDark) => ({
     selectBg: inputLightOrDark.inputBg,
     selectBorder: inputLightOrDark.inputBorder,
     selectFocusBg: inputLightOrDark.inputFocusBg,

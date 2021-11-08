@@ -3,7 +3,7 @@ import tinycolor from 'tinycolor2';
 import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
-  type Colors = {
+  export type Colors = {
     inputBg: Property.Color;
     inputBorder: Property.Color;
     inputFocusBg: Property.Color;
