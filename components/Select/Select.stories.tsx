@@ -17,11 +17,11 @@ export default {
 
 const Template: ComponentStory<typeof SelectForStory> = (args) => (
   <SelectForStory {...args}>
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
-    <option>Option 4</option>
-    <option>Option 5</option>
+    <option value="option1">Option 1</option>
+    <option value="option2">Option 2</option>
+    <option value="option3">Option 3</option>
+    <option value="option4">Option 4</option>
+    <option value="option5">Option 5</option>
   </SelectForStory>
 );
 
@@ -35,7 +35,7 @@ Size.args = { size: 'large', placeholder: 'placeholder' };
 
 export const Variant = Template.bind({});
 
-Variant.args = { variant: 'ghost', value: 'value' };
+Variant.args = { variant: 'ghost', defaultValue: 'option3' };
 
 export const State = Template.bind({});
 
@@ -43,8 +43,8 @@ State.args = { state: 'invalid' };
 
 export const Disabled = Template.bind({});
 
-Disabled.args = { disabled: true, value: 'value' };
+Disabled.args = { disabled: true, defaultValue: 'option3' };
 
 export const ReadOnly = Template.bind({});
 
-ReadOnly.args = { readOnly: true, value: 'value' };
+ReadOnly.args = { readOnly: true, defaultValue: 'option3' };
