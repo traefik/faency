@@ -73,7 +73,7 @@ const StyledSelect = styled('select', {
     color: '$selectDisabledText',
   },
 
-  '&[readonly]': {
+  '&:read-only': {
     pointerEvents: 'none',
   },
 });
