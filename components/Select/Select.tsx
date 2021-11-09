@@ -72,10 +72,6 @@ const StyledSelect = styled('select', {
     pointerEvents: 'none',
     color: '$selectDisabledText',
   },
-
-  '&:read-only': {
-    pointerEvents: 'none',
-  },
 });
 
 const SelectWrapper = styled('div', {

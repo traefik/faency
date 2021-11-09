@@ -44,7 +44,3 @@ State.args = { state: 'invalid' };
 export const Disabled = Template.bind({});
 
 Disabled.args = { disabled: true, defaultValue: 'option3' };
-
-export const ReadOnly = Template.bind({});
-
-ReadOnly.args = { readOnly: true, defaultValue: 'option3' };
