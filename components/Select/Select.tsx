@@ -61,7 +61,8 @@ const StyledSelect = styled('select', {
   lineHeight: '25px',
 
   '& option': {
-    color: '$loContrast',
+    color: 'black',
+    bc: 'white',
   },
 
   '&:focus-visible': {
