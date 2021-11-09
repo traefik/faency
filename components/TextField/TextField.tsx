@@ -4,6 +4,7 @@ import { styled } from '../../stitches.config';
 import { Box } from '../Box';
 import { Input, InputHandle, InputProps, InputVariants } from '../Input';
 import { Label } from '../Label';
+import { Tooltip } from '../Tooltip';
 import {
   ExclamationTriangleIcon,
   CrossCircledIcon,
@@ -142,7 +143,12 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     );
 
     const PasswordVisibilityToggleIcon = React.useMemo(
-      () => isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon,
+      () => isPasswordVisible ? StyledEyeOpenIcon : StyledEyeClosedIcon,
+      [isPasswordVisible],
+    );
+
+    const passwordTooltipContent = React.useMemo(
+      () => isPasswordVisible ? "Hide password" : "Show password",
       [isPasswordVisible],
     );
 
@@ -161,10 +167,14 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
               <EndAdornmentWrapper>
                 {invalid && <StyledExclamationTriangleIcon />}
                 {isPasswordType && (
-                  <PasswordVisibilityToggleIcon onClick={togglePasswordVisibility} />
+                  <Tooltip content={passwordTooltipContent}>
+                    <PasswordVisibilityToggleIcon onClick={togglePasswordVisibility} />
+                  </Tooltip>
                 )}
                 {clearable && !clearDisabled && (
-                  <StyledCrossCircledIcon onClick={handleClear} />
+                  <Tooltip content="Clear">
+                    <StyledCrossCircledIcon onClick={handleClear} />
+                  </Tooltip>
                 )}
               </EndAdornmentWrapper>
             )
