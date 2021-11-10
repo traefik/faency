@@ -2,7 +2,6 @@ import React from 'react';
 import { VariantProps } from '@stitches/react';
 import { styled, CSS } from '../../stitches.config';
 import { elevationVariant } from '../Elevation';
-import { IconButton } from '../IconButton';
 
 // CONSTANTS
 const FOCUS_SHADOW = elevationVariant[1].boxShadow; // apply elevation $1 when focus
@@ -328,21 +327,12 @@ const AdornmentWrapper = styled('div', {
     size: {
       small: {
         mx: 'calc($2 / 2)',
-        [`& ${IconButton}`]: {
-          size: SMALL_HEIGHT,
-        },
       },
       medium: {
         mx: 'calc($3 / 2)',
-        [`& ${IconButton}`]: {
-          size: MEDIUM_HEIGHT,
-        },
       },
       large: {
         mx: 'calc($3 / 2)',
-        [`& ${IconButton}`]: {
-          size: LARGE_HEIGHT,
-        },
       },
     },
     variant: {
@@ -361,60 +351,10 @@ const AdornmentWrapper = styled('div', {
 
 const AdornmentWrapperStart = styled(AdornmentWrapper, {
   left: 0,
-  variants: {
-    size: {
-      small: {
-        [`& ${IconButton}:first-of-type`]: {
-          // remove start margin for first IconButton
-          marginInlineStart: 'calc(-$2 / 2)',
-        },
-      },
-      medium: {
-        [`& ${IconButton}:first-of-type`]: {
-          // remove start margin for first IconButton
-          marginInlineStart: 'calc(-$3 / 2)',
-        },
-      },
-      large: {
-        [`& ${IconButton}:first-of-type`]: {
-          // remove start margin for first IconButton
-          marginInlineStart: 'calc(-$3 / 2)',
-        },
-      },
-    },
-  },
-  defaultVariants: {
-    size: 'medium',
-  },
 });
 
 const AdornmentWrapperEnd = styled(AdornmentWrapper, {
   right: 0,
-  variants: {
-    size: {
-      small: {
-        [`& ${IconButton}:last-of-type`]: {
-          // remove start margin for last IconButton
-          marginInlineEnd: 'calc(-$2 / 2)',
-        },
-      },
-      medium: {
-        [`& ${IconButton}:last-of-type`]: {
-          // remove start margin for last IconButton
-          marginInlineEnd: 'calc(-$3 / 2)',
-        },
-      },
-      large: {
-        [`& ${IconButton}:last-of-type`]: {
-          // remove start margin for last IconButton
-          marginInlineEnd: 'calc(-$3 / 2)',
-        },
-      },
-    },
-  },
-  defaultVariants: {
-    size: 'medium',
-  },
 });
 
 type DefaultInputVariants = VariantProps<typeof StyledInput>;
