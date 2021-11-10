@@ -143,7 +143,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     );
 
     const PasswordVisibilityToggleIcon = React.useMemo(
-      () => isPasswordVisible ? StyledEyeOpenIcon : StyledEyeClosedIcon,
+      () => isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon,
       [isPasswordVisible],
     );
 
