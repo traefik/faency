@@ -3,6 +3,18 @@ import { styled, css, VariantProps } from '../../stitches.config';
 import { elevationVariant } from '../Elevation';
 import { Flex } from '../Flex';
 
+const FlexWithOpacity = styled(Flex, {
+  opacity: 0.74,
+
+  variants: {
+    active: {
+      true: {
+        opacity: 1,
+      },
+    },
+  },
+});
+
 const baseNavItemCss = css({
   position: 'relative',
   display: 'flex',
@@ -41,6 +53,10 @@ const baseNavItemCss = css({
     bottom: 0,
     left: 0,
     borderRadius: '$3',
+  },
+
+  [`&:focus > ${FlexWithOpacity}, &:hover > ${FlexWithOpacity}`]: {
+    opacity: 1,
   },
 
   '&:focus': {
@@ -166,8 +182,14 @@ export const NavigationItem = ({
 
   return (
     <NavigationItemWrapper as={as} {...restProps}>
-      {hasStartAdornment && <Flex css={{ pr: '$2', ml: '-$1' }}>{startAdornment}</Flex>}
-      <Flex css={{ flexGrow: 1 }}>{children}</Flex>
+      {hasStartAdornment && (
+        <FlexWithOpacity css={{ pr: '$2', ml: '-$1' }} active={restProps.active}>
+          {startAdornment}
+        </FlexWithOpacity>
+      )}
+      <FlexWithOpacity css={{ flexGrow: 1 }} active={restProps.active}>
+        {children}
+      </FlexWithOpacity>
       {hasEndAdornment && <Flex css={{ pl: '$2', mr: '-$1' }}>{endAdornment}</Flex>}
     </NavigationItemWrapper>
   );
