@@ -4,7 +4,7 @@ import { styled } from '../../stitches.config';
 import { Box } from '../Box';
 import { Input, InputHandle, InputProps, InputVariants } from '../Input';
 import { Label } from '../Label';
-import { IconButton } from '../IconButton';
+import { Tooltip } from '../Tooltip';
 import {
   ExclamationTriangleIcon,
   CrossCircledIcon,
@@ -32,6 +32,30 @@ const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon, {
   '& + *': {
     marginLeft: '$1',
   },
+});
+
+const StyledEyeOpenIcon = styled(EyeOpenIcon, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer',
+    }
+  }
+});
+
+const StyledEyeClosedIcon = styled(EyeClosedIcon, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
+});
+
+const StyledCrossCircledIcon = styled(CrossCircledIcon, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
 });
 
 export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFieldProps>(
@@ -118,6 +142,16 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
       [hasAdornmentGroup]
     );
 
+    const PasswordVisibilityToggleIcon = React.useMemo(
+      () => isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon,
+      [isPasswordVisible],
+    );
+
+    const passwordAction = React.useMemo(
+      () => isPasswordVisible ? "Hide password" : "Show password",
+      [isPasswordVisible],
+    );
+
     return (
       <Box css={css}>
         {label && (
@@ -131,16 +165,16 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
           endAdornment={
             hasInnerAdornment && (
               <EndAdornmentWrapper>
-                {invalid && <StyledExclamationTriangleIcon />}
+                {invalid && <StyledExclamationTriangleIcon role="alert" aria-label="Invalid" />}
                 {isPasswordType && (
-                  <IconButton type="button" onClick={togglePasswordVisibility} size="1">
-                    {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
-                  </IconButton>
+                  <Tooltip content={passwordAction}>
+                    <PasswordVisibilityToggleIcon aria-label={passwordAction} onClick={togglePasswordVisibility} />
+                  </Tooltip>
                 )}
-                {clearable && (
-                  <IconButton disabled={clearDisabled} type="button" onClick={handleClear} size="1">
-                    <CrossCircledIcon />
-                  </IconButton>
+                {clearable && !clearDisabled && (
+                  <Tooltip content="Clear">
+                    <StyledCrossCircledIcon aria-label="Clear" onClick={handleClear} />
+                  </Tooltip>
                 )}
               </EndAdornmentWrapper>
             )

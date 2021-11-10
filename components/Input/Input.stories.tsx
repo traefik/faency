@@ -3,7 +3,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { styled } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
-import { IconButton } from '../IconButton';
 import { Input, InputProps, InputVariants } from './Input';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
@@ -11,12 +10,12 @@ import { Label } from '../Label';
 
 import { MagnifyingGlassIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 
-const StyledMagnifyingGlassIcon = styled(MagnifyingGlassIcon, {
-  color: '$slate10', // follow iconbutton default color
-});
-
 const StyledEyeOpenIcon = styled(EyeOpenIcon, {
-  color: '$slate10', // follow iconbutton default color
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer',
+    }
+  }
 });
 
 const BaseInput = (props: InputProps): JSX.Element => <Input {...props} />;
@@ -58,11 +57,9 @@ export const Basic: ComponentStory<typeof InputForStory> = (args) => (
     <Box>
       <Label>Adornments</Label>
       <InputForStory
-        startAdornment={<StyledMagnifyingGlassIcon />}
+        startAdornment={<MagnifyingGlassIcon />}
         endAdornment={
-          <IconButton>
-            <StyledEyeOpenIcon />
-          </IconButton>
+          <StyledEyeOpenIcon />
         }
         {...args}
       />
@@ -147,11 +144,9 @@ export const Ghost: ComponentStory<typeof InputForStory> = (args) => (
     <Label>
       Adornments
       <InputForStory
-        startAdornment={<StyledMagnifyingGlassIcon />}
+        startAdornment={<MagnifyingGlassIcon />}
         endAdornment={
-          <IconButton>
-            <StyledEyeOpenIcon />
-          </IconButton>
+          <StyledEyeOpenIcon />
         }
         {...args}
       />
@@ -163,33 +158,27 @@ Ghost.args = { defaultValue: 'value', variant: 'ghost' };
 export const Adornments = Basic.bind({});
 
 Adornments.args = {
-  startAdornment: <StyledMagnifyingGlassIcon />,
+  startAdornment: <MagnifyingGlassIcon />,
   endAdornment: (
-    <IconButton>
-      <StyledEyeOpenIcon />
-    </IconButton>
+    <StyledEyeOpenIcon />
   ),
 };
 Adornments.argTypes = {
   startAdornment: {
-    options: ['search', 'iconbutton'],
+    options: ['search', 'eye'],
     mapping: {
-      search: <StyledMagnifyingGlassIcon />,
-      iconbutton: (
-        <IconButton>
-          <StyledEyeOpenIcon />
-        </IconButton>
+      search: <MagnifyingGlassIcon />,
+      eye: (
+        <StyledEyeOpenIcon />
       ),
     },
   },
   endAdornment: {
-    options: ['search', 'iconbutton'],
+    options: ['search', 'eye'],
     mapping: {
-      search: <StyledMagnifyingGlassIcon />,
-      iconbutton: (
-        <IconButton>
-          <StyledEyeOpenIcon />
-        </IconButton>
+      search: <MagnifyingGlassIcon />,
+      eye: (
+        <StyledEyeOpenIcon />
       ),
     },
   },
@@ -238,11 +227,9 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
         <InputForStory
           name="ship-country"
           autoComplete="shipping country"
-          startAdornment={<StyledMagnifyingGlassIcon />}
+          startAdornment={<MagnifyingGlassIcon />}
           endAdornment={
-            <IconButton>
-              <StyledEyeOpenIcon />
-            </IconButton>
+            <StyledEyeOpenIcon />
           }
           {...args}
         />
