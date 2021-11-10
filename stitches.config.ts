@@ -4,6 +4,7 @@ import { createStitches, CSS as StitchesCSS } from '@stitches/react';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
+import { Theme as SwitchTheme } from './components/Switch/Switch.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
 import { Theme as LinkTheme } from './components/Link/Link.themes';
@@ -40,6 +41,7 @@ const stitches = createStitches({
       ...lightColors,
       ...BadgeTheme.getLight(defaultPrimaryColor),
       ...ButtonTheme.getLight(defaultPrimaryColor),
+      ...SwitchTheme.getLight(defaultPrimaryColor),
       ...CardTheme.getLight(defaultPrimaryColor),
       ...CheckboxTheme.getLight(defaultPrimaryColor),
       ...LinkTheme.getLight(defaultPrimaryColor),
@@ -258,6 +260,7 @@ export const customColors = (primary: PrimaryColor) => {
       ...BadgeTheme.getDark(darkPrimaryColor),
       ...ButtonTheme.getDark(darkPrimaryColor),
       ...IconButtonTheme.getDark(darkPrimaryColor),
+      ...SwitchTheme.getDark(darkPrimaryColor),
       ...CardTheme.getDark(darkPrimaryColor),
       ...CheckboxTheme.getDark(darkPrimaryColor),
       ...LinkTheme.getDark(darkPrimaryColor),
@@ -280,6 +283,7 @@ export const customColors = (primary: PrimaryColor) => {
       ...BadgeTheme.getLight(lightPrimaryColor),
       ...ButtonTheme.getLight(lightPrimaryColor),
       ...IconButtonTheme.getLight(lightPrimaryColor),
+      ...SwitchTheme.getLight(lightPrimaryColor),
       ...CardTheme.getLight(lightPrimaryColor),
       ...CheckboxTheme.getLight(lightPrimaryColor),
       ...LinkTheme.getLight(lightPrimaryColor),
