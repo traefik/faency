@@ -1,5 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import { ColorInfo } from '../../utils/getPrimaryColorInfo';
+import { Theme as InputTheme } from '../Input/Input.themes';
 
 export namespace Theme {
   type Colors = {
@@ -11,35 +12,29 @@ export namespace Theme {
     selectText: Property.Color;
     selectPlaceholder: Property.Color;
     selectDisabledText: Property.Color;
-    selectDisabledBorder: Property.Color;
-    selectReadOnlyBg: Property.Color;
+    selectInvalidBorder: Property.Color;
   };
 
-  type Factory = (primaryColor?: ColorInfo) => Colors;
+  type Factory = (primaryColor: ColorInfo) => Colors;
+  type FactoryMapper = (colors: InputTheme.Colors) => Colors;
 
-  export const getLight: Factory = () => ({
-    selectBg: '$deepBlue3',
-    selectBorder: '$deepBlue6',
-    selectFocusBg: '$deepBlue2',
-    selectFocusBorder: '$deepBlue10',
-    selectHoverBg: '$deepBlue2',
-    selectText: '$deepBlue9',
-    selectPlaceholder: '$deepBlue6',
-    selectDisabledText: '$deepBlue5',
-    selectDisabledBorder: '$deepBlue5',
-    selectReadOnlyBg: '$deepBlue3',
+  const remapInputTheme: FactoryMapper = (inputLightOrDark) => ({
+    selectBg: inputLightOrDark.inputBg,
+    selectBorder: inputLightOrDark.inputBorder,
+    selectFocusBg: inputLightOrDark.inputFocusBg,
+    selectFocusBorder: inputLightOrDark.inputFocusBorder,
+    selectHoverBg: inputLightOrDark.inputHoverBg,
+    selectText: inputLightOrDark.inputText,
+    selectPlaceholder: inputLightOrDark.inputPlaceholder,
+    selectDisabledText: inputLightOrDark.inputDisabledText,
+    selectInvalidBorder: inputLightOrDark.inputInvalidBorder,
   });
 
-  export const getDark: Factory = () => ({
-    selectBg: '$deepBlue3',
-    selectBorder: '$deepBlue6',
-    selectFocusBg: '$deepBlue1',
-    selectFocusBorder: '$deepBlue9',
-    selectHoverBg: '$deepBlue1',
-    selectText: '$deepBlue9',
-    selectPlaceholder: '$deepBlue6',
-    selectDisabledText: '$deepBlue5',
-    selectDisabledBorder: '$deepBlue4',
-    selectReadOnlyBg: '$deepBlue2',
+  export const getLight: Factory = (primaryColor) => ({
+    ...remapInputTheme(InputTheme.getLight(primaryColor)),
+  });
+
+  export const getDark: Factory = (primaryColor) => ({
+    ...remapInputTheme(InputTheme.getDark(primaryColor)),
   });
 }
