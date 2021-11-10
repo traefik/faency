@@ -147,7 +147,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
       [isPasswordVisible],
     );
 
-    const passwordTooltipContent = React.useMemo(
+    const passwordAction = React.useMemo(
       () => isPasswordVisible ? "Hide password" : "Show password",
       [isPasswordVisible],
     );
@@ -165,15 +165,15 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
           endAdornment={
             hasInnerAdornment && (
               <EndAdornmentWrapper>
-                {invalid && <StyledExclamationTriangleIcon />}
+                {invalid && <StyledExclamationTriangleIcon role="alert" aria-label="Invalid" />}
                 {isPasswordType && (
-                  <Tooltip content={passwordTooltipContent}>
-                    <PasswordVisibilityToggleIcon onClick={togglePasswordVisibility} />
+                  <Tooltip content={passwordAction}>
+                    <PasswordVisibilityToggleIcon aria-label={passwordAction} onClick={togglePasswordVisibility} />
                   </Tooltip>
                 )}
                 {clearable && !clearDisabled && (
                   <Tooltip content="Clear">
-                    <StyledCrossCircledIcon onClick={handleClear} />
+                    <StyledCrossCircledIcon aria-label="Clear" onClick={handleClear} />
                   </Tooltip>
                 )}
               </EndAdornmentWrapper>
