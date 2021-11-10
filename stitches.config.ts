@@ -19,6 +19,7 @@ import { Theme as NavigationTheme } from './components/Navigation/Navigation.the
 
 import { lightColors, darkColors } from './colors';
 import getPrimaryColorInfo from './utils/getPrimaryColorInfo';
+import { Property } from '@stitches/react/types/css';
 
 export type { VariantProps } from '@stitches/react';
 
@@ -29,16 +30,21 @@ const defaultPrimary: PrimaryColor = 'blue';
 
 const defaultPrimaryColor = getPrimaryColorInfo(defaultPrimary, lightColors);
 
+export const colors: Record<string, Property.Color> = {
+  ...lightColors,
+
+  // Semantic colors
+  primary: defaultPrimary,
+  contentBg: '$00dp',
+  hiContrast: '$deepBlue11',
+  loContrast: 'white',
+  focusOutline: 'hsl(216, 100%, 64%)',
+};
+
 const stitches = createStitches({
   theme: {
     colors: {
-      // Semantic colors
-      primary: defaultPrimaryColor.token,
-      contentBg: '$00dp',
-      hiContrast: '$deepBlue11',
-      loContrast: 'white',
-      focusOutline: 'hsl(216, 100%, 64%)',
-      ...lightColors,
+      ...colors,
       ...BadgeTheme.getLight(defaultPrimaryColor),
       ...ButtonTheme.getLight(defaultPrimaryColor),
       ...SwitchTheme.getLight(defaultPrimaryColor),
