@@ -77,7 +77,7 @@ export { Skeleton } from './components/Skeleton';
 // export { Slider } from './components/Slider';
 // export { Sup } from './components/Sup';
 // export { Sub } from './components/Sub';
-// export { Switch } from './components/Switch';
+export { Switch } from './components/Switch';
 export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Table';
 // export { TabLink } from './components/TabLink';
 // export { Tabs, TabsList, TabsPanel, TabsTab } from './components/Tabs';
