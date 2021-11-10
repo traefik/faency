@@ -126,11 +126,6 @@ export const NavigationContainer = styled('div', {
 export type NavigationContainerVariants = VariantProps<typeof NavigationContainer>;
 export type NavigationContainerProps = NavigationContainerVariants & {};
 
-const elevation = Object.keys(elevationVariant).map((elevationKey) => ({
-  ...elevationVariant[Number(elevationKey)],
-  bc: `$${Number(elevationKey) < 10 ? '0' : ''}${elevationKey}dp`,
-})) as any;
-
 export const NavigationDrawer = styled('nav', {
   display: 'flex',
   boxSizing: 'border-box',
@@ -138,7 +133,7 @@ export const NavigationDrawer = styled('nav', {
   maxWidth: '240px',
   flexDirection: 'column',
   variants: {
-    elevation,
+    elevation: elevationVariant,
   },
   defaultVariants: {
     elevation: 1,
