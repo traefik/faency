@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Property } from '@stitches/react/types/css';
 import { useDarkMode } from 'storybook-dark-mode';
-import { Box, Flex, Heading, Text, config } from '../../index';
-import { colors } from '../../stitches.config';
+import { Box, Flex, Heading, Text } from '../index';
+import { colors } from '../stitches.config';
 
 type Color = { token: string };
 type ColorGroup = { name: string; colors: Color[]; alphaColors: Color[] };
