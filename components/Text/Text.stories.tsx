@@ -4,6 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Text, TextProps, TextVariants } from './Text';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Flex } from '../Flex';
+import { Box } from '../Box';
 
 const BaseText = (props: TextProps): JSX.Element => <Text {...props} />;
 const TextForStory = modifyVariantsForStory<TextVariants, TextProps & React.HTMLAttributes<any>>(
@@ -23,8 +24,12 @@ export const Basic = Template.bind({});
 
 Basic.args = {};
 
+const VARIANT_PARENTS = ['$primary', '$purple10'];
+
 export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args }) => (
-  <Flex gap={2} direction="column">
+  <Flex align="center" justify="center" css={{
+    height: 100,
+  }} gap={2}>
     <TextForStory {...args} variant="default">
       Default
     </TextForStory>
@@ -57,11 +62,29 @@ export const Transform: ComponentStory<typeof TextForStory> = ({ transform, ...a
     <TextForStory {...args} transform='capitalizeWords'>
       capitalize each word
     </TextForStory>
+    {VARIANT_PARENTS.map((color) => (
+      <Flex direction="column" align="center" justify="center" css={{
+        color,
+        border: '1px dashed currentColor',
+        height: 100,
+        width: 100,
+        position: 'relative'
+      }}>
+        <TextForStory {...args} variant="inherit">
+          Inherit
+        </TextForStory>
+        <Box css={{ position: 'absolute', bottom: 0, fontSize: '$1' }}>
+          Parent color
+        </Box>
+      </Flex>
+    ))}
   </Flex>
 );
 
+const SIZE_PARENTS = ['$4', '$12']
+
 export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => (
-  <>
+  <Flex gap={2} direction="column">
     <TextForStory {...args} size="0">
       Makes Networking Boring
     </TextForStory>
@@ -101,7 +124,21 @@ export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => 
     <TextForStory {...args} size="12">
       Makes Networking Boring
     </TextForStory>
-  </>
+    {SIZE_PARENTS.map((fontSize) => (
+      <Flex css={{
+        fontSize,
+        border: '1px dashed $hiContrast',
+        justifyContent: 'space-between'
+      }}>
+        <TextForStory {...args} size="inherit">
+          Inherit
+        </TextForStory>
+        <Box css={{ color: '$hiContrast' }}>
+          Parent fontSize
+        </Box>
+      </Flex>
+    ))}
+  </Flex>
 );
 
 const Customize: ComponentStory<typeof TextForStory> = (args) => (
