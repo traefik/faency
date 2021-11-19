@@ -1,5 +1,5 @@
 import React from 'react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps, CSS } from '@stitches/react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 import { styled } from '../../stitches.config';
@@ -11,6 +11,7 @@ export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
     children: React.ReactElement;
     content: React.ReactNode;
     multiline?: boolean;
+    css?: CSS
   };
 
 const Content = styled(TooltipPrimitive.Content, {
@@ -51,7 +52,7 @@ export function Tooltip({
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 
-      <Content side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
+      <Content css={css as any} side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
         {isContentString ? (<Text
           size="1"
           as="p"
