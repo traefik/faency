@@ -7,6 +7,7 @@ import { Container } from '../Container';
 import { Text } from '../Text';
 import { Flex } from '../Flex';
 import {
+  CrossCircledIcon,
   ExclamationTriangleIcon,
 } from '@radix-ui/react-icons';
 
@@ -42,6 +43,19 @@ MultiLine.args = {
 
 export const NodeContent = Template.bind({});
 
+const WarningOption = <Flex align="center" gap={1}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
+
 NodeContent.args = {
-  content: <Flex align="center" gap={1}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
+  content: WarningOption
+};
+
+NodeContent.argTypes = {
+  content: {
+    options: ['Warning', 'Disabled', 'Heading'],
+    mapping: {
+      Warning: WarningOption,
+      Disabled: <Flex align="center" gap={1}><CrossCircledIcon /><Text css={{ color: 'currentColor' }}>Disabled message</Text></Flex>,
+      Heading: <Flex align="center" gap={1}><Text css={{ fontWeight: 700, color: 'CurrentColor' }} >Heading</Text><Text css={{ color: 'currentColor' }}>Content</Text></Flex>,
+    },
+  }
 }
