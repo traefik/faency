@@ -9,6 +9,8 @@ import { Flex } from '../Flex';
 import {
   ExclamationTriangleIcon,
 } from '@radix-ui/react-icons';
+import { Button } from '../Button';
+import { TextField } from '../TextField';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
 const TooltipForStory = modifyVariantsForStory<TooltipVariants, TooltipProps>(BaseTooltip);
@@ -44,4 +46,32 @@ export const NodeContent = Template.bind({});
 
 NodeContent.args = {
   content: <Flex align="center" gap={1}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
+}
+
+export const DisabledChildren: ComponentStory<typeof TooltipForStory> = (args) => (
+  <Container>
+    <TooltipForStory {...args} />
+  </Container>
+);
+
+const ButtonDisabled = <Button disabled>Tooltip button</Button>;
+const TextFieldDisabled = <TextField id="disabled" label="disabled" value="value" disabled />;
+
+DisabledChildren.args = {
+  trigger: 'disabled',
+  content: 'This is some tooltip text',
+  children: ButtonDisabled
+}
+
+DisabledChildren.argTypes = {
+  trigger: {
+    control: false,
+  },
+  children: {
+    options: ['Button', 'TextField'],
+    mapping: {
+      Button: ButtonDisabled,
+      TextField: TextFieldDisabled
+    }
+  }
 }

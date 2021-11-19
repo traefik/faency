@@ -11,6 +11,7 @@ export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
     children: React.ReactElement;
     content: React.ReactNode;
     multiline?: boolean;
+    trigger?: 'disabled';
   };
 
 const Content = styled(TooltipPrimitive.Content, {
@@ -40,6 +41,7 @@ export function Tooltip({
   defaultOpen,
   onOpenChange,
   multiline,
+  trigger,
   css,
   ...props
 }: TooltipProps) {
@@ -49,7 +51,9 @@ export function Tooltip({
   );
   return (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
-      <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
+      <TooltipPrimitive.Trigger asChild>
+        {trigger === 'disabled' ? (<span>{children}</span>) : children}
+      </TooltipPrimitive.Trigger>
 
       <Content side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
         {isContentString ? (<Text
