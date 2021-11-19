@@ -16,6 +16,7 @@ import { Theme as SelectTheme } from './components/Select/Select.themes';
 import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
+import { Theme as TooltipTheme } from './components/Tooltip/Tooltip.themes';
 
 import { lightColors, darkColors } from './colors';
 import getPrimaryColorInfo from './utils/getPrimaryColorInfo';
@@ -59,6 +60,7 @@ const stitches = createStitches({
       ...SkeletonTheme.getLight(defaultPrimaryColor),
       ...DialogTheme.getLight(defaultPrimaryColor),
       ...IconButtonTheme.getLight(defaultPrimaryColor),
+      ...TooltipTheme.getLight(defaultPrimaryColor),
     },
     fonts: {
       rubik:
@@ -285,6 +287,7 @@ export const customColors = (primary: PrimaryColor) => {
       ...SkeletonTheme.getDark(darkPrimaryColor),
       ...DialogTheme.getDark(darkPrimaryColor),
       ...NavigationTheme.getDark(darkPrimaryColor),
+      ...TooltipTheme.getDark(darkPrimaryColor),
     },
   });
 
@@ -308,6 +311,7 @@ export const customColors = (primary: PrimaryColor) => {
       ...SkeletonTheme.getLight(lightPrimaryColor),
       ...DialogTheme.getLight(lightPrimaryColor),
       ...NavigationTheme.getLight(lightPrimaryColor),
+      ...TooltipTheme.getLight(lightPrimaryColor),
     },
   });
 
