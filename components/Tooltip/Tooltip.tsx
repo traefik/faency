@@ -3,8 +3,8 @@ import { VariantProps } from '@stitches/react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 import { styled } from '../../stitches.config';
-import { Box } from '../Box';
 import { Text } from '../Text';
+import { Box } from '../Box';
 
 export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
   React.ComponentProps<typeof TooltipPrimitive.Content> & {
@@ -14,7 +14,8 @@ export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
   };
 
 const Content = styled(TooltipPrimitive.Content, {
-  backgroundColor: '$deepBlue3',
+  color: '$tooltipText',
+  backgroundColor: '$tooltipContentBg',
   borderRadius: '$3',
   padding: '$2',
 
@@ -28,6 +29,10 @@ const Content = styled(TooltipPrimitive.Content, {
   },
 });
 
+const ArrowBox = styled(Box, {
+  color: '$tooltipContentBg'
+})
+
 export function Tooltip({
   children,
   content,
@@ -38,22 +43,27 @@ export function Tooltip({
   css,
   ...props
 }: TooltipProps) {
+  const isContentString = React.useMemo(
+    () => typeof content === 'string',
+    [content],
+  );
   return (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 
       <Content side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
-        <Text
+        {isContentString ? (<Text
           size="1"
           as="p"
           css={{
-            color: '$hiContrast',
+            color: 'currentColor',
             lineHeight: multiline ? '20px' : (undefined as any),
           }}
         >
           {content}
-        </Text>
-        <Box css={{ color: '$deepBlue3' }}>
+        </Text>) : content
+        }
+        <ArrowBox>
           <TooltipPrimitive.Arrow
             offset={5}
             width={11}
@@ -62,7 +72,7 @@ export function Tooltip({
               fill: 'currentColor',
             }}
           />
-        </Box>
+        </ArrowBox>
       </Content>
     </TooltipPrimitive.Root>
   );

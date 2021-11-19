@@ -5,6 +5,10 @@ import { Tooltip, TooltipProps, TooltipVariants } from './Tooltip';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Container } from '../Container';
 import { Text } from '../Text';
+import { Flex } from '../Flex';
+import {
+  ExclamationTriangleIcon,
+} from '@radix-ui/react-icons';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
 const TooltipForStory = modifyVariantsForStory<TooltipVariants, TooltipProps>(BaseTooltip);
@@ -35,3 +39,9 @@ MultiLine.args = {
   content:
     'This is some tooltip text. This box shows the max amount of text to display. If more room is needed, use a modal instead.',
 };
+
+export const NodeContent = Template.bind({});
+
+NodeContent.args = {
+  content: <Flex align="center" gap={1}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
+}
