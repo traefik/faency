@@ -367,31 +367,25 @@ export interface HTMLInputProps extends React.InputHTMLAttributes<any> {
 
 export type InputProps = Omit<HTMLInputProps, 'size'> & InputVariants & { css?: CSS };
 
-export type InputHandle = {
+export interface InputHandle extends HTMLInputElement {
   clear: () => void;
-  focus: () => void;
-};
+}
 
 export const Input = React.forwardRef<InputHandle, InputProps>(
   ({ size, startAdornment, endAdornment, css, ...props }, forwardedRef) => {
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const inputRef = React.useRef<InputHandle>(null);
 
     React.useImperativeHandle(
       forwardedRef,
-      () => ({
-        clear: () => {
-          const { current } = inputRef;
-          if (current) {
-            current.value = '';
-          }
-        },
-        focus: () => {
-          const { current } = inputRef;
-          if (current) {
-            current.focus();
-          }
-        },
-      }),
+      () => {
+        const { current } = inputRef;
+        if (current) {
+          current.clear = () => {
+            current.value = ''
+          };
+        }
+        return current as InputHandle;
+      },
       [inputRef]
     );
 
