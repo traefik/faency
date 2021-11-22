@@ -3,17 +3,25 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Tooltip, TooltipProps, TooltipVariants } from './Tooltip';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Container } from '../Container';
 import { Text } from '../Text';
+import { Container } from '../Container';
 import { Flex } from '../Flex';
+import { Button } from '../Button';
+import { Box } from '../Box';
+import { Bubble } from '../Bubble';
+import { TextField } from '../TextField';
 import {
   ExclamationTriangleIcon,
 } from '@radix-ui/react-icons';
-import { Button } from '../Button';
-import { TextField } from '../TextField';
+import { styled } from '../../stitches.config';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
 const TooltipForStory = modifyVariantsForStory<TooltipVariants, TooltipProps>(BaseTooltip);
+
+const SpacedBox = styled(Box, {
+  my: '$8',
+  border: '1px dashed $primary',
+});
 
 export default {
   title: 'Components/Tooltip',
@@ -50,28 +58,55 @@ NodeContent.args = {
 
 export const DisabledChildren: ComponentStory<typeof TooltipForStory> = (args) => (
   <Container>
-    <TooltipForStory {...args} />
+    <SpacedBox>
+      <TooltipForStory {...args}>
+        <Button disabled>Disabled</Button>
+      </TooltipForStory>
+    </SpacedBox>
+    <SpacedBox>
+      <TooltipForStory {...args}>
+        <TextField type="text" id="disabled" label="disabled" defaultValue="value" disabled />
+      </TooltipForStory>
+    </SpacedBox>
+    <SpacedBox css={{
+      display: 'flex', flexDirection: 'column'
+    }}>
+      <TooltipForStory {...args}>
+        <Button disabled>Disabled Flex</Button>
+      </TooltipForStory>
+    </SpacedBox>
+    <SpacedBox css={{
+      display: 'flex', flexDirection: 'column'
+    }}>
+      <TooltipForStory {...args}>
+        <TextField type="text" id="disabledflex" label="disabled flex" defaultValue="value" disabled />
+      </TooltipForStory>
+    </SpacedBox>
+    <SpacedBox css={{
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+    }}>
+      <TooltipForStory {...args}>
+        <Button disabled>Disabled Flex Center</Button>
+      </TooltipForStory>
+    </SpacedBox>
+    <SpacedBox css={{
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+    }}>
+      <TooltipForStory {...args}>
+        <TextField type="text" id="disabledflexcenter" label="disabled flex center" defaultValue="value" disabled />
+      </TooltipForStory>
+    </SpacedBox>
   </Container>
 );
-
-const ButtonDisabled = <Button disabled>Tooltip button</Button>;
-const TextFieldDisabled = <TextField id="disabled" label="disabled" value="value" disabled />;
 
 DisabledChildren.args = {
   trigger: 'disabled',
   content: 'This is some tooltip text',
-  children: ButtonDisabled
 }
 
 DisabledChildren.argTypes = {
   trigger: {
-    control: false,
+    options: ['disabled', undefined],
+    control: 'inline-radio'
   },
-  children: {
-    options: ['Button', 'TextField'],
-    mapping: {
-      Button: ButtonDisabled,
-      TextField: TextFieldDisabled
-    }
-  }
 }

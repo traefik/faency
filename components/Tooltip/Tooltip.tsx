@@ -34,6 +34,12 @@ const ArrowBox = styled(Box, {
   color: '$tooltipContentBg'
 })
 
+const TriggerDisabledBox = styled(Box, {
+  display: 'inherit',
+  flexDirection: 'inherit',
+  flex: 'inherit'
+});
+
 export function Tooltip({
   children,
   content,
@@ -53,7 +59,7 @@ export function Tooltip({
   return (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>
-        {trigger === 'disabled' ? (<Box css={triggerCss as any}>{children}</Box>) : children}
+        {trigger === 'disabled' ? (<TriggerDisabledBox css={triggerCss as any}>{children}</TriggerDisabledBox>) : children}
       </TooltipPrimitive.Trigger>
 
       <Content side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
