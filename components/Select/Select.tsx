@@ -84,7 +84,7 @@ const SelectWrapper = styled('div', {
   fontFamily: '$rubik',
   fontSize: '$1',
   fontVariantNumeric: 'tabular-nums',
-  fontWeight: 400,
+  fontWeight: '$regular',
   height: '$5',
   flexShrink: 0,
 

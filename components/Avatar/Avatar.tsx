@@ -19,7 +19,7 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
   margin: '0',
   outline: 'none',
   padding: '0',
-  fontWeight: '500' as any,
+  fontWeight: '$medium',
   color: '$hiContrast',
 
   '&::before': {

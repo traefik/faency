@@ -43,7 +43,7 @@ export const StyledButton = styled('button', {
   px: '$2',
   fontFamily: '$rubik',
   fontSize: '$3',
-  fontWeight: 500,
+  fontWeight: '$medium',
   fontVariantNumeric: 'tabular-nums',
 
   '&:focus-visible': {

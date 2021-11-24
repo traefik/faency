@@ -35,7 +35,7 @@ export const Form = () => (
           <Checkbox id="terms" name="terms" css={{ mr: '$2' }} />
           <Label
             htmlFor="terms"
-            css={{ fontSize: '$1', fontWeight: 'normal', textTransform: 'initial' }}
+            css={{ fontSize: '$1', fontWeight: '$regular', textTransform: 'initial' }}
           >
             By signing up, you agree to the{' '}
             <Link href="#terms" variant="subtle">

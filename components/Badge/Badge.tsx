@@ -9,7 +9,7 @@ export const Badge = styled('span', {
   display: 'inline-flex',
   flexShrink: 0,
   fontFamily: '$rubik',
-  fontWeight: 500,
+  fontWeight: '$medium',
   justifyContent: 'center',
   lineHeight: '1',
   verticalAlign: 'middle',

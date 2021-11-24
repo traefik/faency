@@ -6,7 +6,7 @@ export const Label = styled(LabelPrimitive.Root, Text, {
   display: 'inline-block',
   verticalAlign: 'middle',
   cursor: 'default',
-  fontWeight: 500,
+  fontWeight: '$medium',
   lineHeight: 2.18,
 
   defaultVariants: {

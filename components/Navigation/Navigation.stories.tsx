@@ -87,7 +87,6 @@ const AdornmentsTemplate: ComponentStory<typeof NavigationDrawerForStory> = (arg
               height: '$3',
               borderRadius: '$pill',
               fontSize: '$0',
-              fontWeight: 500,
               color: '$hiContrast',
             }}
           >

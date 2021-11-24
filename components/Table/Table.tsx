@@ -95,7 +95,7 @@ export const Thead = styled('thead', {
     fontSize: '$1',
     color: '$deepBlue6',
     textTransform: 'uppercase',
-    fontWeight: '300',
+    fontWeight: '$light',
   },
 });
 

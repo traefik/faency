@@ -30,10 +30,10 @@ export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, He
 
     // This is the mapping of Heading Variants to Text css
     const textCss: Record<HeadingSizeVariants, CSS> = {
-      1: { fontWeight: 500, lineHeight: '20px' },
-      2: { fontWeight: 500, lineHeight: '25px' },
-      3: { fontWeight: 500, lineHeight: '33px' },
-      4: { fontWeight: 500, lineHeight: '35px' },
+      1: { fontWeight: '$medium', lineHeight: '20px' },
+      2: { fontWeight: '$medium', lineHeight: '25px' },
+      3: { fontWeight: '$medium', lineHeight: '33px' },
+      4: { fontWeight: '$medium', lineHeight: '35px' },
     };
 
     return (
