@@ -102,6 +102,13 @@ const stitches = createStitches({
       11: '32px',
       12: '38px',
     },
+    fontWeights: {
+      light: 300,
+      regular: 400,
+      medium: 500,
+      semiBold: 600,
+      bold: 700,
+    },
     radii: {
       1: '4px',
       2: '6px',
