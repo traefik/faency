@@ -1,10 +1,10 @@
 import React from 'react';
 import { VariantProps } from '@stitches/react';
 import { styled, CSS } from '../../stitches.config';
-import { elevationVariant } from '../Elevation';
+import { elevationVariants } from '../Elevation';
 
 // CONSTANTS
-const FOCUS_SHADOW = elevationVariant[1].boxShadow; // apply elevation $1 when focus
+const FOCUS_SHADOW = elevationVariants[1].boxShadow; // apply elevation $1 when focus
 
 const SMALL_HEIGHT = '$5';
 const MEDIUM_HEIGHT = '$6';

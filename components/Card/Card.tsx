@@ -1,5 +1,5 @@
 import { styled } from '../../stitches.config';
-import { elevationVariant } from '../Elevation/Elevation';
+import { elevationVariants } from '../Elevation/Elevation';
 
 export const Card = styled('div', {
   appearance: 'none',
@@ -33,7 +33,7 @@ export const Card = styled('div', {
   },
 
   variants: {
-    elevation: elevationVariant,
+    elevation: elevationVariants,
     variant: {
       inner: {
         backgroundColor: 'rgba(255,255,255,.07)',

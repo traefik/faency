@@ -5,7 +5,7 @@ import { styled, css, CSS } from '../stitches.config';
 import { Box } from './Box';
 import { Flex } from './Flex';
 import { panelStyles } from './Panel';
-import { elevationVariant } from './Elevation/Elevation';
+import { elevationVariants } from './Elevation/Elevation';
 
 export const baseItemCss = css({
   display: 'flex',
@@ -46,7 +46,7 @@ export const menuCss = css({
   minWidth: 120,
   py: '$1',
   variants: {
-    elevation: elevationVariant,
+    elevation: elevationVariants,
   },
   defaultVariants: {
     elevation: 2,

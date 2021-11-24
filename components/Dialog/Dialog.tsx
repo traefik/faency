@@ -5,7 +5,7 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import { overlayStyles } from '../Overlay';
 import { IconButton } from '../IconButton';
 import { Card } from '../Card';
-import { elevationVariant } from '../Elevation/Elevation';
+import { elevationVariants } from '../Elevation/Elevation';
 
 type DialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
   children: React.ReactNode;
@@ -53,7 +53,7 @@ const StyledContent = styled(DialogPrimitive.Content, Card, {
   },
 
   variants: {
-    elevation: elevationVariant,
+    elevation: elevationVariants,
   },
   defaultVariants: {
     elevation: 5,
