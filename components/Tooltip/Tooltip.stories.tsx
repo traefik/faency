@@ -3,16 +3,26 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Tooltip, TooltipProps, TooltipVariants } from './Tooltip';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Container } from '../Container';
 import { Text } from '../Text';
+import { Container } from '../Container';
 import { Flex } from '../Flex';
+import { Button } from '../Button';
+import { Box } from '../Box';
+import { Bubble } from '../Bubble';
+import { TextField } from '../TextField';
 import {
   CrossCircledIcon,
   ExclamationTriangleIcon,
 } from '@radix-ui/react-icons';
+import { styled } from '../../stitches.config';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
 const TooltipForStory = modifyVariantsForStory<TooltipVariants, TooltipProps>(BaseTooltip);
+
+const SpacedBox = styled(Box, {
+  my: '$8',
+  border: '1px dashed $primary',
+});
 
 export default {
   title: 'Components/Tooltip',
@@ -43,7 +53,9 @@ MultiLine.args = {
 
 export const NodeContent = Template.bind({});
 
-const WarningOption = <Flex align="center" gap={1}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
+const WarningOption = <Flex align="center" gap={2}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
+const DisabledOption = <Flex align="center" gap={2}><CrossCircledIcon /><Text css={{ color: 'currentColor' }}>Disabled message</Text></Flex>
+const HeadingOption = <Flex align="center" gap={2}><Text css={{ fontWeight: 700, color: 'CurrentColor' }} >Heading</Text><Text css={{ color: 'currentColor' }}>Content</Text></Flex>
 
 NodeContent.args = {
   content: WarningOption
@@ -54,8 +66,8 @@ NodeContent.argTypes = {
     options: ['Warning', 'Disabled', 'Heading'],
     mapping: {
       Warning: WarningOption,
-      Disabled: <Flex align="center" gap={1}><CrossCircledIcon /><Text css={{ color: 'currentColor' }}>Disabled message</Text></Flex>,
-      Heading: <Flex align="center" gap={1}><Text css={{ fontWeight: 700, color: 'CurrentColor' }} >Heading</Text><Text css={{ color: 'currentColor' }}>Content</Text></Flex>,
+      Disabled: DisabledOption,
+      Heading: HeadingOption,
     },
   }
 }
