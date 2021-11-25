@@ -99,7 +99,7 @@ export const FaencyProvider: React.FC<{ primaryColor: PrimaryColor }> = ({
   return (
     <IdProvider>
       <>
-        {globalStyles}
+        {globalStyles()}
         {children}
       </>
     </IdProvider>
