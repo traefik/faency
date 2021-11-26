@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, VariantProps, CSS } from '../../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import { elevationVariant } from '../Elevation';
+import { elevationVariants } from '../Elevation';
 
 // CONSTANTS
 const THUMB_DIAMETER = 14; // @FIXME: shouldn't this size be part of theme ?
@@ -55,13 +55,13 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     '&:hover': {
       cursor: 'pointer',
       [`& ${StyledThumb}`]: {
-        ...elevationVariant[1],
+        ...elevationVariants[1],
       }
     },
   },
   '&:focus': {
     [`& ${StyledThumb}`]: {
-      ...elevationVariant[2],
+      ...elevationVariants[2],
     }
   },
   '&:disabled': {

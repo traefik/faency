@@ -2,7 +2,7 @@ import { styled, CSS } from '../../stitches.config';
 
 type ElevationVariant = Record<number, CSS>;
 
-export const elevationVariant: ElevationVariant = {
+export const elevationVariants: ElevationVariant = {
   0: {
     boxShadow: 'none',
   },
@@ -37,7 +37,7 @@ export const Elevation = styled('div', {
   display: 'inline-block',
 
   variants: {
-    variant: elevationVariant,
+    variant: elevationVariants,
   },
   defaultVariants: {
     variant: 1,

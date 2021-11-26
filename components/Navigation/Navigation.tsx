@@ -1,6 +1,6 @@
 import React, { useMemo, ReactNode } from 'react';
 import { styled, css, VariantProps } from '../../stitches.config';
-import { elevationVariant } from '../Elevation';
+import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
 
 const FlexWithOpacity = styled(Flex, {
@@ -133,7 +133,7 @@ export const NavigationDrawer = styled('nav', {
   maxWidth: '240px',
   flexDirection: 'column',
   variants: {
-    elevation: elevationVariant,
+    elevation: elevationVariants,
   },
   defaultVariants: {
     elevation: 1,

@@ -4,7 +4,7 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { Box } from '../Box';
 import { panelStyles } from '../Panel';
 import { VariantProps } from '@stitches/react';
-import { elevationVariant } from '../Elevation';
+import { elevationVariants } from '../Elevation';
 
 export type PopoverProps = React.ComponentProps<typeof PopoverPrimitive.Root> & {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ const StyledContent = styled(PopoverPrimitive.Content, panelStyles, {
     outline: 'none',
   },
   variants: {
-    elevation: elevationVariant,
+    elevation: elevationVariants,
   },
   defaultVariants: {
     elevation: 2,

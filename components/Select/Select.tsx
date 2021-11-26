@@ -2,10 +2,10 @@ import React from 'react';
 import { styled, CSS } from '../../stitches.config';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 import { VariantProps } from '@stitches/react';
-import { elevationVariant } from '../Elevation';
+import { elevationVariants } from '../Elevation';
 
 // CONSTANTS
-const FOCUS_SHADOW = elevationVariant[1].boxShadow; // apply elevation $1 when focus
+const FOCUS_SHADOW = elevationVariants[1].boxShadow; // apply elevation $1 when focus
 
 const StyledCaretSortIcon = styled(CaretSortIcon, {
   position: 'absolute',
