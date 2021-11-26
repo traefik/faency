@@ -63,7 +63,7 @@ const Template: ComponentStory<typeof NavigationItemForStory> = (args) => (
               height: '$3',
               borderRadius: '$pill',
               fontSize: '$0',
-              fontWeight: 500,
+              fontWeight: '$medium',
               color: '$hiContrast',
             }}
           >

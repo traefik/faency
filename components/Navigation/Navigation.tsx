@@ -29,7 +29,7 @@ const baseNavItemCss = css({
   borderRadius: '$3',
   cursor: 'pointer',
   fontFamily: '$rubik',
-  fontWeight: 500,
+  fontWeight: '$medium',
   outline: 'none',
   fontSize: '$3',
   mt: '$2',

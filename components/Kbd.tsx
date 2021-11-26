@@ -19,7 +19,7 @@ export const Kbd = styled('kbd', {
     0 1px $colors$slate8`,
   textShadow: '0 0 1px rgba(255, 255, 255, 0.5)',
   fontFamily: 'inherit',
-  fontWeight: 400,
+  fontWeight: '$regular',
   lineHeight: '1.5',
   mx: '2px',
 
