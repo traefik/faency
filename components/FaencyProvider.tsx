@@ -90,18 +90,18 @@ export const FaencyProvider: React.FC<{ primaryColor: PrimaryColor }> = ({
   children,
   primaryColor,
 }) => {
+
   React.useEffect(() => {
     const { dark, light } = customColors(primaryColor);
     dark.toString();
     light.toString();
   }, [primaryColor]);
 
+  globalStyles()
+
   return (
     <IdProvider>
-      <>
-        {globalStyles}
-        {children}
-      </>
+      {children}
     </IdProvider>
   );
 };
