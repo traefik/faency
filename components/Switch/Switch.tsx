@@ -56,13 +56,13 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
       cursor: 'pointer',
       [`& ${StyledThumb}`]: {
         ...elevationVariants[1],
-      }
+      },
     },
   },
   '&:focus': {
     [`& ${StyledThumb}`]: {
       ...elevationVariants[2],
-    }
+    },
   },
   '&:disabled': {
     pointerEvents: 'none',
@@ -77,7 +77,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
       '1': {
         width: ROOT_WIDTH,
         height: ROOT_HEIGHT,
-        m: '$2'
+        m: '$2',
       },
       '2': {
         width: ROOT_WIDTH * LARGE_RATIO,

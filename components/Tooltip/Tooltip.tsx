@@ -11,7 +11,7 @@ export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
     children: React.ReactElement;
     content: React.ReactNode;
     multiline?: boolean;
-    css?: CSS
+    css?: CSS;
   };
 
 const Content = styled(TooltipPrimitive.Content, {
@@ -31,8 +31,8 @@ const Content = styled(TooltipPrimitive.Content, {
 });
 
 const ArrowBox = styled(Box, {
-  color: '$tooltipContentBg'
-})
+  color: '$tooltipContentBg',
+});
 
 export function Tooltip({
   children,
@@ -44,26 +44,33 @@ export function Tooltip({
   css,
   ...props
 }: TooltipProps) {
-  const isContentString = React.useMemo(
-    () => typeof content === 'string',
-    [content],
-  );
+  const isContentString = React.useMemo(() => typeof content === 'string', [content]);
   return (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 
-      <Content css={css as any} side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
-        {isContentString ? (<Text
-          size="1"
-          as="p"
-          css={{
-            color: 'currentColor',
-            lineHeight: multiline ? '20px' : (undefined as any),
-          }}
-        >
-          {content}
-        </Text>) : content
-        }
+      <Content
+        css={css as any}
+        side="top"
+        align="center"
+        sideOffset={5}
+        {...props}
+        multiline={multiline}
+      >
+        {isContentString ? (
+          <Text
+            size="1"
+            as="p"
+            css={{
+              color: 'currentColor',
+              lineHeight: multiline ? '20px' : (undefined as any),
+            }}
+          >
+            {content}
+          </Text>
+        ) : (
+          content
+        )}
         <ArrowBox>
           <TooltipPrimitive.Arrow
             offset={5}

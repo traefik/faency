@@ -38,7 +38,7 @@ export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args 
       Red
     </TextForStory>
   </Flex>
-)
+);
 
 export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => (
   <>

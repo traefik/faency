@@ -10,10 +10,7 @@ import { Button } from '../Button';
 import { Box } from '../Box';
 import { Bubble } from '../Bubble';
 import { TextField } from '../TextField';
-import {
-  CrossCircledIcon,
-  ExclamationTriangleIcon,
-} from '@radix-ui/react-icons';
+import { CrossCircledIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { styled } from '../../stitches.config';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
@@ -53,12 +50,27 @@ MultiLine.args = {
 
 export const NodeContent = Template.bind({});
 
-const WarningOption = <Flex align="center" gap={2}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
-const DisabledOption = <Flex align="center" gap={2}><CrossCircledIcon /><Text css={{ color: 'currentColor' }}>Disabled message</Text></Flex>
-const HeadingOption = <Flex align="center" gap={2}><Text css={{ fontWeight: 700, color: 'CurrentColor' }} >Heading</Text><Text css={{ color: 'currentColor' }}>Content</Text></Flex>
+const WarningOption = (
+  <Flex align="center" gap={2}>
+    <ExclamationTriangleIcon />
+    <Text css={{ color: 'currentColor' }}>Warning message</Text>
+  </Flex>
+);
+const DisabledOption = (
+  <Flex align="center" gap={2}>
+    <CrossCircledIcon />
+    <Text css={{ color: 'currentColor' }}>Disabled message</Text>
+  </Flex>
+);
+const HeadingOption = (
+  <Flex align="center" gap={2}>
+    <Text css={{ fontWeight: 700, color: 'CurrentColor' }}>Heading</Text>
+    <Text css={{ color: 'currentColor' }}>Content</Text>
+  </Flex>
+);
 
 NodeContent.args = {
-  content: WarningOption
+  content: WarningOption,
 };
 
 NodeContent.argTypes = {
@@ -69,5 +81,5 @@ NodeContent.argTypes = {
       Disabled: DisabledOption,
       Heading: HeadingOption,
     },
-  }
-}
+  },
+};
