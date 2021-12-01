@@ -102,7 +102,7 @@ const SelectWrapper = styled('div', {
     position: 'absolute',
     inset: 0,
     pointerEvents: 'none',
-    borderRadius: 'inherit'
+    borderRadius: 'inherit',
   },
 
   '&:focus-visible': {

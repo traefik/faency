@@ -33,7 +33,7 @@ const globalStyles = globalCss({
       fontFamily: 'Rubik',
       fontWeight: 500,
       fontDisplay: 'swap',
-      src: `local('Rubik-Medium'), url(${RubikMediumWoff2}) format('woff2')`
+      src: `local('Rubik-Medium'), url(${RubikMediumWoff2}) format('woff2')`,
     },
     {
       fontFamily: 'Rubik',
@@ -67,7 +67,7 @@ const globalStyles = globalCss({
       fontStyle: 'italic',
       fontWeight: 500,
       fontDisplay: 'swap',
-      src: `local('Rubik-Medium'), url(${RubikMediumItalicWoff2}) format('woff2')`
+      src: `local('Rubik-Medium'), url(${RubikMediumItalicWoff2}) format('woff2')`,
     },
     {
       fontFamily: 'Rubik',

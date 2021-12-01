@@ -10,9 +10,7 @@ import { Button } from '../Button';
 import { Box } from '../Box';
 import { Bubble } from '../Bubble';
 import { TextField } from '../TextField';
-import {
-  ExclamationTriangleIcon,
-} from '@radix-ui/react-icons';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { styled } from '../../stitches.config';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
@@ -53,8 +51,13 @@ MultiLine.args = {
 export const NodeContent = Template.bind({});
 
 NodeContent.args = {
-  content: <Flex align="center" gap={1}><ExclamationTriangleIcon /><Text css={{ color: 'currentColor' }}>Warning message</Text></Flex>
-}
+  content: (
+    <Flex align="center" gap={1}>
+      <ExclamationTriangleIcon />
+      <Text css={{ color: 'currentColor' }}>Warning message</Text>
+    </Flex>
+  ),
+};
 
 export const DisabledChildren: ComponentStory<typeof TooltipForStory> = (args) => (
   <Container>
@@ -68,32 +71,60 @@ export const DisabledChildren: ComponentStory<typeof TooltipForStory> = (args) =
         <TextField type="text" id="disabled" label="disabled" defaultValue="value" disabled />
       </TooltipForStory>
     </SpacedBox>
-    <SpacedBox css={{
-      display: 'flex', flexDirection: 'column'
-    }}>
+    <SpacedBox
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <TooltipForStory {...args}>
         <Button disabled>Disabled Flex</Button>
       </TooltipForStory>
     </SpacedBox>
-    <SpacedBox css={{
-      display: 'flex', flexDirection: 'column'
-    }}>
+    <SpacedBox
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <TooltipForStory {...args}>
-        <TextField type="text" id="disabledflex" label="disabled flex" defaultValue="value" disabled />
+        <TextField
+          type="text"
+          id="disabledflex"
+          label="disabled flex"
+          defaultValue="value"
+          disabled
+        />
       </TooltipForStory>
     </SpacedBox>
-    <SpacedBox css={{
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
-    }}>
+    <SpacedBox
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <TooltipForStory {...args}>
         <Button disabled>Disabled Flex Center</Button>
       </TooltipForStory>
     </SpacedBox>
-    <SpacedBox css={{
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
-    }}>
+    <SpacedBox
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <TooltipForStory {...args}>
-        <TextField type="text" id="disabledflexcenter" label="disabled flex center" defaultValue="value" disabled />
+        <TextField
+          type="text"
+          id="disabledflexcenter"
+          label="disabled flex center"
+          defaultValue="value"
+          disabled
+        />
       </TooltipForStory>
     </SpacedBox>
   </Container>
@@ -102,11 +133,11 @@ export const DisabledChildren: ComponentStory<typeof TooltipForStory> = (args) =
 DisabledChildren.args = {
   trigger: 'disabled',
   content: 'This is some tooltip text',
-}
+};
 
 DisabledChildren.argTypes = {
   trigger: {
     options: ['disabled', undefined],
-    control: 'inline-radio'
+    control: 'inline-radio',
   },
-}
+};

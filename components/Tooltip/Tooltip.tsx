@@ -31,13 +31,13 @@ const Content = styled(TooltipPrimitive.Content, {
 });
 
 const ArrowBox = styled(Box, {
-  color: '$tooltipContentBg'
-})
+  color: '$tooltipContentBg',
+});
 
 const TriggerDisabledBox = styled(Box, {
   display: 'inherit',
   flexDirection: 'inherit',
-  flex: 'inherit'
+  flex: 'inherit',
 });
 
 export function Tooltip({
@@ -52,28 +52,32 @@ export function Tooltip({
   css,
   ...props
 }: TooltipProps) {
-  const isContentString = React.useMemo(
-    () => typeof content === 'string',
-    [content],
-  );
+  const isContentString = React.useMemo(() => typeof content === 'string', [content]);
   return (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>
-        {trigger === 'disabled' ? (<TriggerDisabledBox css={triggerCss as any}>{children}</TriggerDisabledBox>) : children}
+        {trigger === 'disabled' ? (
+          <TriggerDisabledBox css={triggerCss as any}>{children}</TriggerDisabledBox>
+        ) : (
+          children
+        )}
       </TooltipPrimitive.Trigger>
 
       <Content side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
-        {isContentString ? (<Text
-          size="1"
-          as="p"
-          css={{
-            color: 'currentColor',
-            lineHeight: multiline ? '20px' : (undefined as any),
-          }}
-        >
-          {content}
-        </Text>) : content
-        }
+        {isContentString ? (
+          <Text
+            size="1"
+            as="p"
+            css={{
+              color: 'currentColor',
+              lineHeight: multiline ? '20px' : (undefined as any),
+            }}
+          >
+            {content}
+          </Text>
+        ) : (
+          content
+        )}
         <ArrowBox>
           <TooltipPrimitive.Arrow
             offset={5}
