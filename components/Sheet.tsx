@@ -123,8 +123,10 @@ export const SheetContent = React.forwardRef<
 >(({ children, ...props }, forwardedRef) => (
   <StyledContent {...props} ref={forwardedRef}>
     {children}
-    <DialogPrimitive.Close as={StyledCloseButton} variant="ghost">
-      <Cross1Icon />
+    <DialogPrimitive.Close asChild>
+      <StyledCloseButton ghost>
+        <Cross1Icon />
+      </StyledCloseButton>
     </DialogPrimitive.Close>
   </StyledContent>
 ));
