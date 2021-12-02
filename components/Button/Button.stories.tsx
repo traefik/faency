@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ButtonForStory } from './Button';
+import { ButtonForStory, LinkButton } from './Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
@@ -85,4 +85,10 @@ export const Waiting = Template.bind({});
 
 Waiting.args = {
   state: 'waiting',
+};
+
+const LinkTemplate: ComponentStory<typeof LinkButton> = (args) => (<LinkButton {...args}>Link</LinkButton>)
+export const Link = LinkTemplate.bind({});
+Link.args = {
+  href: `https://traefik.io`,
 };
