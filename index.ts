@@ -13,7 +13,7 @@ export { AspectRatio } from '@radix-ui/react-aspect-ratio';
 export { Badge } from './components/Badge';
 export { Box } from './components/Box';
 export { Bubble } from './components/Bubble';
-export { Button } from './components/Button';
+export { Button, LinkButton } from './components/Button';
 export { Card } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 // export { Code } from './components/Code';
