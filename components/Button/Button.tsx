@@ -3,7 +3,7 @@ import React from 'react';
 import { styled, keyframes, CSS } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
-export const StyledButton = styled('button', {
+const buttonStyles = {
   // Reset
   all: 'unset',
   alignItems: 'center',
@@ -234,8 +234,12 @@ export const StyledButton = styled('button', {
     size: 'medium',
     variant: 'primary',
   },
-});
+}
 
+export const StyledLinkButton = styled('a', buttonStyles);
+export const StyledButton = styled('button', buttonStyles);
+
+type LinkButtonVariants = VariantProps<typeof StyledLinkButton>;
 type ButtonVariants = VariantProps<typeof StyledButton>;
 
 const Waiting = styled('div', {
@@ -281,7 +285,19 @@ const Waiting = styled('div', {
   },
 });
 
+type LinkButtonProps = React.AnchorHTMLAttributes<any> & LinkButtonVariants & { css?: CSS };
 type ButtonProps = React.ButtonHTMLAttributes<any> & ButtonVariants & { css?: CSS };
+
+export const LinkButton = React.forwardRef<React.ElementRef<typeof StyledLinkButton>, LinkButtonProps>(
+  ({ children, ...props }, forwardedRef) => (
+    <StyledLinkButton {...props} ref={forwardedRef}>
+      <>
+        {children}
+        {props.state === 'waiting' && <Waiting size={props.size} />}
+      </>
+    </StyledLinkButton>
+  )
+)
 
 export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
   ({ children, ...props }, forwardedRef) => {
