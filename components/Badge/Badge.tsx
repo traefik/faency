@@ -1,5 +1,29 @@
 import { styled } from '../../stitches.config';
 
+export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
+type COLOR_VALUES = typeof COLORS[number];
+
+type ColorVariants = Record<COLOR_VALUES, { bc: string, color: string }>
+const colorVariants: ColorVariants = COLORS.reduce((variants, color) => ({
+  ...variants,
+  [color]: {
+    bc: `$${color}6`,
+    color: `$${color}10`,
+  }
+}), {} as ColorVariants);
+
+const alphaColorCompoundVariants = COLORS.map((color) => ({
+  alphaBg: true,
+  variant: color,
+  css: { bc: `$${color}A6` }
+}));
+
+const interactiveColorCompoundVariants = COLORS.map((color) => ({
+  interactive: true,
+  variant: color,
+  css: { '&:focus-visible': { boxShadow: `0 0 0 1px $colors$${color}9` } }
+}))
+
 export const Badge = styled('span', {
   // Reset
   alignItems: 'center',
@@ -63,106 +87,14 @@ export const Badge = styled('span', {
         fontSize: '$3',
       },
     },
-    variant: {
-      gray: {
-        bc: '$gray6',
-        color: '$gray10',
-      },
-      red: {
-        bc: '$red6',
-        color: '$red10',
-      },
-      blue: {
-        bc: '$blue6',
-        color: '$blue10',
-      },
-      green: {
-        bc: '$green6',
-        color: '$green10',
-      },
-      neon: {
-        bc: '$neon6',
-        color: '$neon10',
-      },
-      orange: {
-        bc: '$orange6',
-        color: '$orange10',
-      },
-      purple: {
-        bc: '$purple6',
-        color: '$purple10',
-      },
-    },
+    variant: colorVariants,
     alphaBg: {
       true: {},
     },
   },
   compoundVariants: [
-    {
-      interactive: true,
-      variant: 'gray',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$gray9' } },
-    },
-    {
-      interactive: true,
-      variant: 'red',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$red9' } },
-    },
-    {
-      interactive: true,
-      variant: 'blue',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$blue9' } },
-    },
-    {
-      interactive: true,
-      variant: 'green',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$green9' } },
-    },
-    {
-      interactive: true,
-      variant: 'neon',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$neon9' } },
-    },
-    {
-      interactive: true,
-      variant: 'orange',
-      css: { '&:focus-visible': { boxShadow: '0 0 0 1px $colors$orange9' } },
-    },
-    {
-      alphaBg: true,
-      variant: 'gray',
-      css: { bc: '$grayA6' },
-    },
-    {
-      alphaBg: true,
-      variant: 'red',
-      css: { bc: '$redA6' },
-    },
-    {
-      alphaBg: true,
-      variant: 'blue',
-      css: { bc: '$blueA6' },
-    },
-    {
-      alphaBg: true,
-      variant: 'green',
-      css: { bc: '$greenA6' },
-    },
-    {
-      alphaBg: true,
-      variant: 'neon',
-      css: { bc: '$neonA6' },
-    },
-    {
-      alphaBg: true,
-      variant: 'orange',
-      css: { bc: '$orangeA6' },
-    },
-    {
-      alphaBg: true,
-      variant: 'purple',
-      css: { bc: '$purpleA6' },
-    },
+    ...interactiveColorCompoundVariants,
+    ...alphaColorCompoundVariants,
   ],
   defaultVariants: {
     size: 'small',
