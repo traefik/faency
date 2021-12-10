@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { VariantProps } from '@stitches/react';
-import { Badge } from './Badge';
+import { Badge, COLORS } from './Badge';
 import { Flex } from '../Flex';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
@@ -23,21 +23,9 @@ export default {
 export const Colors: ComponentStory<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Badge {...args}>Default</Badge>
-    <Badge {...args} variant="red">
-      Red
-    </Badge>
-    <Badge {...args} variant="green">
-      Green
-    </Badge>
-    <Badge {...args} variant="blue">
-      Blue
-    </Badge>
-    <Badge {...args} variant="neon">
-      Neon
-    </Badge>
-    <Badge {...args} variant="orange">
-      Orange
-    </Badge>
+    {COLORS.map(color => (
+      <Badge key={color} {...args} variant={color}>{color}</Badge>
+    ))}
   </Flex>
 );
 
@@ -78,21 +66,9 @@ export const Interactive: ComponentStory<typeof BadgeForStory> = (args) => (
     <Badge as="button" {...args}>
       Default
     </Badge>
-    <Badge as="button" {...args} variant="red">
-      Red
-    </Badge>
-    <Badge as="button" {...args} variant="green">
-      Green
-    </Badge>
-    <Badge as="button" {...args} variant="blue">
-      Blue
-    </Badge>
-    <Badge as="button" {...args} variant="neon">
-      Neon
-    </Badge>
-    <Badge as="button" {...args} variant="orange">
-      Orange
-    </Badge>
+    {COLORS.map(color => (
+      <Badge as="button" {...args} variant={color}>{color}</Badge>
+    ))}
   </Flex>
 );
 
