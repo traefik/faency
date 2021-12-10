@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Dialog, DialogContent } from './Dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogClose } from './Dialog';
 import { Text } from '../Text';
 import { useState } from 'react';
 import { Button } from '../Button';
@@ -39,8 +39,10 @@ export const Basic: ComponentStory<any> = (args) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <Button onClick={() => setOpen(true)}>Open dialog</Button>
+    <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
+      <DialogTrigger asChild>
+        <Button onClick={() => setOpen(true)}>Open dialog</Button>
+      </DialogTrigger>
 
       <Box>
         {[...Array(10)].map((_, i) => (
@@ -55,11 +57,9 @@ export const Basic: ComponentStory<any> = (args) => {
         ))}
       </Box>
 
-      <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
-        <DialogContent>
-          <Content />
-        </DialogContent>
-      </Dialog>
-    </>
+      <DialogContent>
+        <Content />
+      </DialogContent>
+    </Dialog>
   );
 };
