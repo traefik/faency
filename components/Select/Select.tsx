@@ -222,12 +222,12 @@ const SelectWrapper = styled('div', {
   },
 });
 
-export type SelectProps = React.ComponentProps<typeof StyledSelect> &
-  React.ComponentProps<typeof SelectWrapper> & { css?: CSS };
-export type SelectVariants = VariantProps<typeof SelectWrapper>;
+export type SelectVariants = VariantProps<typeof StyledSelect> & VariantProps<typeof SelectWrapper> & VariantProps<typeof StyledCaretSortIcon>;
+
+export type SelectProps = Omit<React.ComponentProps<typeof StyledSelect>, 'size'> & SelectVariants & { css?: CSS };
 
 export const Select = React.forwardRef<React.ElementRef<typeof StyledSelect>, SelectProps>(
-  ({ css, size, state, variant, ...props }, forwardedRef) => {
+  ({ css, size, state, variant, cursor, ...props }, forwardedRef) => {
     return (
       <SelectWrapper
         css={css as any}
@@ -237,7 +237,7 @@ export const Select = React.forwardRef<React.ElementRef<typeof StyledSelect>, Se
         disabled={props.disabled}
       >
         <StyledSelect ref={forwardedRef} {...props} />
-        <StyledCaretSortIcon size={size} />
+        <StyledCaretSortIcon size={size} cursor={cursor} />
       </SelectWrapper>
     );
   }
