@@ -14,8 +14,8 @@ const StyledEyeOpenIcon = styled(EyeOpenIcon, {
   '@hover': {
     '&:hover': {
       cursor: 'pointer',
-    }
-  }
+    },
+  },
 });
 
 const BaseInput = (props: InputProps): JSX.Element => <Input {...props} />;
@@ -58,9 +58,7 @@ export const Basic: ComponentStory<typeof InputForStory> = (args) => (
       <Label>Adornments</Label>
       <InputForStory
         startAdornment={<MagnifyingGlassIcon />}
-        endAdornment={
-          <StyledEyeOpenIcon />
-        }
+        endAdornment={<StyledEyeOpenIcon />}
         {...args}
       />
     </Box>
@@ -145,9 +143,7 @@ export const Ghost: ComponentStory<typeof InputForStory> = (args) => (
       Adornments
       <InputForStory
         startAdornment={<MagnifyingGlassIcon />}
-        endAdornment={
-          <StyledEyeOpenIcon />
-        }
+        endAdornment={<StyledEyeOpenIcon />}
         {...args}
       />
     </Label>
@@ -159,27 +155,21 @@ export const Adornments = Basic.bind({});
 
 Adornments.args = {
   startAdornment: <MagnifyingGlassIcon />,
-  endAdornment: (
-    <StyledEyeOpenIcon />
-  ),
+  endAdornment: <StyledEyeOpenIcon />,
 };
 Adornments.argTypes = {
   startAdornment: {
     options: ['search', 'eye'],
     mapping: {
       search: <MagnifyingGlassIcon />,
-      eye: (
-        <StyledEyeOpenIcon />
-      ),
+      eye: <StyledEyeOpenIcon />,
     },
   },
   endAdornment: {
     options: ['search', 'eye'],
     mapping: {
       search: <MagnifyingGlassIcon />,
-      eye: (
-        <StyledEyeOpenIcon />
-      ),
+      eye: <StyledEyeOpenIcon />,
     },
   },
 };
@@ -228,9 +218,7 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
           name="ship-country"
           autoComplete="shipping country"
           startAdornment={<MagnifyingGlassIcon />}
-          endAdornment={
-            <StyledEyeOpenIcon />
-          }
+          endAdornment={<StyledEyeOpenIcon />}
           {...args}
         />
       </Label>

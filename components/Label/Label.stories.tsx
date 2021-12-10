@@ -32,14 +32,14 @@ const Template: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
 export const Basic = Template.bind({});
 
 Basic.args = {
-  id: 'basic'
+  id: 'basic',
 };
 
 export const Capitalized = Template.bind({});
 
 Capitalized.args = {
   id: 'capitalized',
-}
+};
 
 export const Uppercased = Template.bind({});
 
@@ -54,4 +54,3 @@ Error.args = {
   id: 'error',
   variant: 'red',
 };
-

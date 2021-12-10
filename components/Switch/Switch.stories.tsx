@@ -16,9 +16,7 @@ export default {
   argTypes: { onClick: { action: 'clicked' } },
 } as ComponentMeta<typeof SwitchForStory>;
 
-const Template: ComponentStory<typeof SwitchForStory> = (args) => (
-  <SwitchForStory {...args} />
-);
+const Template: ComponentStory<typeof SwitchForStory> = (args) => <SwitchForStory {...args} />;
 
 export const Basic = Template.bind({});
 

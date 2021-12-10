@@ -38,24 +38,24 @@ const StyledEyeOpenIcon = styled(EyeOpenIcon, {
   '@hover': {
     '&:hover': {
       cursor: 'pointer',
-    }
-  }
+    },
+  },
 });
 
 const StyledEyeClosedIcon = styled(EyeClosedIcon, {
   '@hover': {
     '&:hover': {
-      cursor: 'pointer'
-    }
-  }
+      cursor: 'pointer',
+    },
+  },
 });
 
 const StyledCrossCircledIcon = styled(CrossCircledIcon, {
   '@hover': {
     '&:hover': {
-      cursor: 'pointer'
-    }
-  }
+      cursor: 'pointer',
+    },
+  },
 });
 
 export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFieldProps>(
@@ -143,13 +143,13 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     );
 
     const PasswordVisibilityToggleIcon = React.useMemo(
-      () => isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon,
-      [isPasswordVisible],
+      () => (isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon),
+      [isPasswordVisible]
     );
 
     const passwordAction = React.useMemo(
-      () => isPasswordVisible ? "Hide password" : "Show password",
-      [isPasswordVisible],
+      () => (isPasswordVisible ? 'Hide password' : 'Show password'),
+      [isPasswordVisible]
     );
 
     return (
@@ -168,7 +168,10 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
                 {invalid && <StyledExclamationTriangleIcon role="alert" aria-label="Invalid" />}
                 {isPasswordType && (
                   <Tooltip content={passwordAction}>
-                    <PasswordVisibilityToggleIcon aria-label={passwordAction} onClick={togglePasswordVisibility} />
+                    <PasswordVisibilityToggleIcon
+                      aria-label={passwordAction}
+                      onClick={togglePasswordVisibility}
+                    />
                   </Tooltip>
                 )}
                 {clearable && !clearDisabled && (
