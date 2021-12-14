@@ -69,6 +69,10 @@ export const Skeleton = styled('div', {
       heading: {
         height: '$3',
       },
+      badge: {
+        borderRadius: '$pill',
+        height: '$4',
+      },
       button: {
         borderRadius: '$1',
         height: '32px',

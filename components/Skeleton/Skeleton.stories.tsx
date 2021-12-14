@@ -34,6 +34,8 @@ export const Typographies: ComponentStory<typeof SkeletonForStory> = () => (
 
 export const Button: ComponentStory<typeof SkeletonForStory> = () => <Skeleton variant="button" />;
 
+export const Badge: ComponentStory<typeof SkeletonForStory> = () => <Skeleton variant="badge" />
+
 export const Customs: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex direction="column" gap={3}>
     <Skeleton variant="title" css={{ width: '30%' }} />
