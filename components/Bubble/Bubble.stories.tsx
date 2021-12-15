@@ -36,7 +36,7 @@ Colors.args = {
 Colors.argTypes = {
   size: {
     control: 'inline-radio',
-    options: ['x-small', 'small', 'medium', 'large'],
+    options: ['x-small', 'small', 'medium', 'large', 'x-large'],
   },
   variant: {
     control: true,
@@ -45,9 +45,11 @@ Colors.argTypes = {
 
 export const Sizes: ComponentStory<typeof BubbleForStory> = (args) => (
   <Flex css={{ gap: '$3', alignItems: 'center' }}>
+    <Bubble {...args} size="x-small" />
     <Bubble {...args} size="small" />
     <Bubble {...args} size="medium" />
     <Bubble {...args} size="large" />
+    <Bubble {...args} size="x-large" />
   </Flex>
 );
 
