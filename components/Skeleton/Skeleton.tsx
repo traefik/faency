@@ -10,6 +10,14 @@ export const Skeleton = styled('div', {
   position: 'relative',
   overflow: 'hidden',
   borderRadius: '3px',
+  height: 'auto',
+  width: 'auto',
+  '&:not(:empty)': {
+    '& > *': {
+      visibility: 'hidden',
+    },
+    maxWidth: 'fit-content',
+  },
 
   '&::after': {
     animationName: `${pulse}`,
@@ -70,12 +78,14 @@ export const Skeleton = styled('div', {
       },
       badge: {
         borderRadius: '$pill',
-        height: '$4',
       },
       button: {
-        borderRadius: '$1',
-        height: '32px',
-        width: '128px',
+        borderRadius: '$3',
+      },
+      text: {
+        '&:empty:before': {
+          content: '"\\00a0"', // adds a space character before element
+        }
       },
     },
   },
