@@ -1,4 +1,4 @@
-import { keyframes, styled } from '../../stitches.config';
+import { keyframes, styled, config } from '../../stitches.config';
 
 const bip = keyframes({
   '0%': {
@@ -67,6 +67,7 @@ export const Bubble = styled('div', {
       small: { size: '$2' },
       medium: { size: '$3' },
       large: { size: '$4' },
+      'x-large': { size: '$5' },
     },
     noAnimation: {
       true: {
