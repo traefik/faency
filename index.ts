@@ -49,6 +49,7 @@ export { Caption as AriaCaption, Tbody as AriaTbody, Tfoot as AriaTfoot, Tr as A
 export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Table';
 export { Text } from './components/Text';
 export { Tooltip } from './components/Tooltip';
+export { VisuallyHidden } from './components/VisuallyHidden';
 
 // Stitches
 export {
