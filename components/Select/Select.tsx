@@ -6,6 +6,7 @@ import { elevationVariants } from '../Elevation';
 
 // CONSTANTS
 const FOCUS_SHADOW = elevationVariants[1].boxShadow; // apply elevation $1 when focus
+const CARET_WIDTH = '15px';
 
 const StyledCaretSortIcon = styled(CaretSortIcon, {
   position: 'absolute',
@@ -59,6 +60,9 @@ const StyledSelect = styled('select', {
   pl: '$1',
   pr: '$3',
   lineHeight: '25px',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
 
   '& option': {
     color: 'black',
@@ -154,10 +158,11 @@ const SelectWrapper = styled('div', {
           fontSize: '$1',
         },
         [`& ${StyledSelect}`]: {
-          px: '$2',
+          pl: '$2',
+          pr: `calc($2 + ${CARET_WIDTH})`
         },
         [`& ${StyledCaretSortIcon}`]: {
-          right: '$2',
+          right: 'calc($2 / 2)',
         },
       },
       medium: {
@@ -169,10 +174,11 @@ const SelectWrapper = styled('div', {
           fontSize: '$3',
         },
         [`& ${StyledSelect}`]: {
-          px: '$3',
+          pl: '$3',
+          pr: `calc($3 + ${CARET_WIDTH})`,
         },
         [`& ${StyledCaretSortIcon}`]: {
-          right: '$3',
+          right: 'calc($3 / 2)',
         },
       },
       large: {
@@ -184,10 +190,11 @@ const SelectWrapper = styled('div', {
           fontSize: '$3',
         },
         [`& ${StyledSelect}`]: {
-          px: '$3',
+          pl: '$3',
+          pr: `calc($3 + ${CARET_WIDTH})`,
         },
         [`& ${StyledCaretSortIcon}`]: {
-          right: '$3',
+          right: 'calc($3 / 2)',
         },
       },
     },
