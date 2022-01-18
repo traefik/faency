@@ -5,6 +5,7 @@ import { VariantProps } from '@stitches/react';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Label } from './Label';
 import { Box } from '../Box';
+import ignoreArgType from '../../utils/ignoreArgType';
 
 type LabelVariants = VariantProps<typeof Label>;
 type LabelProps = LabelVariants & {};
@@ -34,23 +35,25 @@ export const Basic = Template.bind({});
 Basic.args = {
   id: 'basic',
 };
+ignoreArgType('id', Basic);
 
 export const Capitalized = Template.bind({});
 
 Capitalized.args = {
-  id: 'capitalized',
+  id: 'capitalize',
 };
+ignoreArgType('id', Capitalized);
 
 export const Uppercased = Template.bind({});
-
 Uppercased.args = {
-  id: 'uppercased',
+  id: 'uppercase',
   transform: 'uppercase',
 };
+ignoreArgType('id', Uppercased);
 
 export const Error = Template.bind({});
-
 Error.args = {
-  id: 'error',
+  id: 'err',
   variant: 'red',
 };
+ignoreArgType('id', Error);

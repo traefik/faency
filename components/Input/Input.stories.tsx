@@ -9,6 +9,7 @@ import { Flex } from '../Flex';
 import { Label } from '../Label';
 
 import { MagnifyingGlassIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import ignoreArgType from '../../utils/ignoreArgType';
 
 const StyledEyeOpenIcon = styled(EyeOpenIcon, {
   '@hover': {
@@ -30,33 +31,32 @@ export default {
   argTypes: { onClick: { action: 'clicked' } },
 } as ComponentMeta<typeof InputForStory>;
 
-const Template: ComponentStory<typeof InputForStory> = (args) => <InputForStory {...args} />;
-
-export const Basic: ComponentStory<typeof InputForStory> = (args) => (
+export const Basic: ComponentStory<typeof InputForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>
     <Box>
-      <Label>Small</Label>
-      <InputForStory size="small" {...args} />
+      <Label htmlFor={`${id}-small`}>Small</Label>
+      <InputForStory id={`${id}-small`} size="small" {...args} />
     </Box>
 
     <Box>
-      <Label>Default</Label>
-      <InputForStory {...args} />
+      <Label htmlFor={`${id}-default`}>Default</Label>
+      <InputForStory id={`${id}-default`} {...args} />
     </Box>
 
     <Box>
-      <Label>Large</Label>
-      <InputForStory size="large" {...args} />
+      <Label htmlFor={`${id}-large`}>Large</Label>
+      <InputForStory id={`${id}-large`} size="large" {...args} />
     </Box>
 
     <Box>
-      <Label>Ghost</Label>
-      <InputForStory variant="ghost" {...args} />
+      <Label htmlFor={`${id}-ghost`}>Ghost</Label>
+      <InputForStory id={`${id}-ghost`} variant="ghost" {...args} />
     </Box>
 
     <Box>
-      <Label>Adornments</Label>
+      <Label htmlFor={`${id}-adornments`}>Adornments</Label>
       <InputForStory
+        id={`${id}-adornments`}
         startAdornment={<MagnifyingGlassIcon />}
         endAdornment={<StyledEyeOpenIcon />}
         {...args}
@@ -65,6 +65,7 @@ export const Basic: ComponentStory<typeof InputForStory> = (args) => (
   </Flex>
 );
 Basic.args = { placeholder: 'placeholder' };
+ignoreArgType('id', Basic);
 
 const INPUT_TYPES = [
   'button',
@@ -93,8 +94,8 @@ export const Types: ComponentStory<typeof InputForStory> = ({ type, ...args }) =
   <Flex direction="column" gap={2}>
     {INPUT_TYPES.map((type) => (
       <>
-        <Label key={type}>{type}</Label>
-        <InputForStory {...args} type={type} />
+        <Label htmlFor={`types-${type}`} key={type}>{type}</Label>
+        <InputForStory id={`types-${type}`} {...args} type={type} />
       </>
     ))}
   </Flex>
@@ -103,57 +104,74 @@ export const Types: ComponentStory<typeof InputForStory> = ({ type, ...args }) =
 Types.args = {};
 
 export const Invalid = Basic.bind({});
-Invalid.args = { state: 'invalid' };
+Invalid.args = { id: 'invalid', state: 'invalid' };
+ignoreArgType('id', Invalid);
 
 export const Disabled = Basic.bind({});
 
-Disabled.args = { disabled: true, defaultValue: 'value' };
+Disabled.args = { id: 'disabled', disabled: true, defaultValue: 'value' };
+ignoreArgType('id', Disabled);
 
 export const ReadOnly = Basic.bind({});
-
-ReadOnly.args = { readOnly: true, defaultValue: 'value' };
+ReadOnly.args = { id: 'readonly', readOnly: true, defaultValue: 'value' };
+ignoreArgType('id', ReadOnly);
 
 export const Ghost: ComponentStory<typeof InputForStory> = (args) => (
   <Flex direction="column" gap={2}>
-    <Label>
-      Small
-      <InputForStory size="small" {...args} />
-    </Label>
-    <Label>
-      Default
-      <InputForStory {...args} />
-    </Label>
-    <Label>
-      Large
-      <InputForStory size="large" {...args} />
-    </Label>
-    <Label>
-      Invalid
-      <InputForStory state="invalid" {...args} />
-    </Label>
-    <Label>
-      Disabled
-      <InputForStory disabled {...args} />
-    </Label>
-    <Label>
-      ReadOnly
-      <InputForStory readOnly {...args} />
-    </Label>
-    <Label>
-      Adornments
+    <Box>
+      <Label htmlFor="ghost-small">
+        Small
+      </Label>
+      <InputForStory id="ghost-small" size="small" {...args} />
+    </Box>
+    <Box>
+      <Label htmlFor="ghost-default">
+        Default
+      </Label>
+      <InputForStory id="ghost-default" {...args} />
+    </Box>
+    <Box>
+      <Label htmlFor="ghost-large">
+        Large
+      </Label>
+      <InputForStory id="ghost-large" size="large" {...args} />
+    </Box>
+    <Box>
+      <Label htmlFor="ghost-invalid">
+        Invalid
+      </Label>
+      <InputForStory id="ghost-invalid" state="invalid" {...args} />
+    </Box>
+    <Box>
+      <Label htmlFor="ghost-disabled">
+        Disabled
+      </Label>
+      <InputForStory id="ghost-disabled" disabled {...args} />
+    </Box>
+    <Box>
+      <Label htmlFor="ghost-readonly">
+        ReadOnly
+      </Label>
+      <InputForStory id="ghost-readonly" readOnly {...args} />
+    </Box>
+    <Box>
+      <Label htmlFor="ghost-adornments">
+        Adornments
+      </Label>
       <InputForStory
+        id="ghost-adornments"
         startAdornment={<MagnifyingGlassIcon />}
         endAdornment={<StyledEyeOpenIcon />}
         {...args}
       />
-    </Label>
+    </Box>
   </Flex>
 );
 Ghost.args = { defaultValue: 'value', variant: 'ghost' };
 
 export const Adornments = Basic.bind({});
-
 Adornments.args = {
+  id: 'adornments',
   startAdornment: <MagnifyingGlassIcon />,
   endAdornment: <StyledEyeOpenIcon />,
 };
@@ -173,55 +191,72 @@ Adornments.argTypes = {
     },
   },
 };
+ignoreArgType('id', Adornments);
 
 export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
   <form>
     <Flex direction="column" gap={2}>
-      <Label>
-        Small
-        <InputForStory name="ship-city" autoComplete="shipping locality" size="small" {...args} />
-      </Label>
-      <Label>
-        Default
-        <InputForStory name="ship-organization" autoComplete="shipping organization" {...args} />
-      </Label>
-      <Label>
-        Large
+      <Box>
+        <Label htmlFor="autofill-small">
+          Small
+        </Label>
+        <InputForStory id="autofill-small" name="ship-city" autoComplete="shipping locality" size="small" {...args} />
+      </Box>
+      <Box>
+        <Label htmlFor="autofill-default">
+          Default
+        </Label>
+        <InputForStory id="autofill-default" name="ship-organization" autoComplete="shipping organization" {...args} />
+      </Box>
+      <Box>
+        <Label htmlFor="autofill-large">
+          Large
+        </Label>
         <InputForStory
+          id="autofill-large"
           name="ship-address"
           autoComplete="shipping street-address"
           size="large"
           {...args}
         />
-      </Label>
-      <Label>
-        Ghost
+      </Box>
+      <Box>
+        <Label htmlFor="autofill-ghost">
+          Ghost
+        </Label>
         <InputForStory
+          id="autofill-ghost"
           name="ship-city"
           autoComplete="shipping locality"
           variant="ghost"
           {...args}
         />
-      </Label>
-      <Label>
-        Invalid
+      </Box>
+      <Box>
+        <Label htmlFor="autofill-invalid">
+          Invalid
+        </Label>
         <InputForStory
+          id="autofill-invalid"
           name="ship-zip"
           autoComplete="shipping postal-code"
           state="invalid"
           {...args}
         />
-      </Label>
-      <Label>
-        Adornments
+      </Box>
+      <Box>
+        <Label htmlFor="autofill-adornments">
+          Adornments
+        </Label>
         <InputForStory
+          id="autofill-adornments"
           name="ship-country"
           autoComplete="shipping country"
           startAdornment={<MagnifyingGlassIcon />}
           endAdornment={<StyledEyeOpenIcon />}
           {...args}
         />
-      </Label>
+      </Box>
     </Flex>
   </form>
 );
