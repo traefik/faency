@@ -24,7 +24,7 @@ export default {
 const Template: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
   <Box>
     <LabelForStory htmlFor={id} css={{ mr: '$2' }} {...args}>
-      Email
+      Email field
     </LabelForStory>
     <input id={id} name="email" type="email" />
   </Box>
@@ -43,6 +43,16 @@ Capitalized.args = {
   id: 'capitalize',
 };
 ignoreArgType('id', Capitalized);
+
+export const CapitalizedWords = Template.bind({});
+
+CapitalizedWords.args = {
+  id: 'capitalize-words',
+  transform: 'capitalizeWords'
+};
+ignoreArgType('id', CapitalizedWords);
+
+
 
 export const Uppercased = Template.bind({});
 Uppercased.args = {
