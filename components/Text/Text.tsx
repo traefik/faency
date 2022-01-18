@@ -76,8 +76,14 @@ export const Text = styled('span', {
         textTransform: 'uppercase',
       },
       capitalize: {
-        textTransform: 'capitalize',
+        // WARNING: this will only work with block elements (display block/inline-block)
+        '&::first-letter': {
+          textTransform: 'uppercase',
+        }
       },
+      capitalizeWords: {
+        textTransform: 'capitalize',
+      }
     },
     noWrap: {
       true: {
