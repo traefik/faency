@@ -1,6 +1,7 @@
 import type * as Stitches from '@stitches/react';
 import { createStitches, CSS as StitchesCSS } from '@stitches/react';
 
+import { Theme as AccordionTheme } from './components/Accordion/Accordion.themes';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
@@ -46,6 +47,7 @@ const stitches = createStitches({
   theme: {
     colors: {
       ...colors,
+      ...AccordionTheme.getLight(defaultPrimaryColor),
       ...BadgeTheme.getLight(defaultPrimaryColor),
       ...ButtonTheme.getLight(defaultPrimaryColor),
       ...SwitchTheme.getLight(defaultPrimaryColor),
@@ -271,7 +273,7 @@ export const customColors = (primary: PrimaryColor) => {
       contentBg: '$00dp',
       hiContrast: 'white',
       loContrast: '$deepBlue2',
-
+      ...AccordionTheme.getDark(darkPrimaryColor),
       ...BadgeTheme.getDark(darkPrimaryColor),
       ...ButtonTheme.getDark(darkPrimaryColor),
       ...IconButtonTheme.getDark(darkPrimaryColor),
@@ -296,6 +298,7 @@ export const customColors = (primary: PrimaryColor) => {
   const lightTheme = createTheme('light', {
     colors: {
       primary: lightPrimaryColor.token,
+      ...AccordionTheme.getLight(lightPrimaryColor),
       ...BadgeTheme.getLight(lightPrimaryColor),
       ...ButtonTheme.getLight(lightPrimaryColor),
       ...IconButtonTheme.getLight(lightPrimaryColor),
