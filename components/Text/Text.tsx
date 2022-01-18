@@ -77,6 +77,7 @@ export const Text = styled('span', {
       },
       capitalize: {
         // WARNING: this will only work with block elements (display block/inline-block)
+        // @see https://developer.mozilla.org/en-US/docs/Web/CSS/::first-letter
         '&::first-letter': {
           textTransform: 'uppercase',
         }
