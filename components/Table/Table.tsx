@@ -64,7 +64,7 @@ export const Th = styled('th', Label, {
     },
     transform: {
       capitalize: {
-        display: 'table-cell',
+        display: 'table-cell', // revert Label enforced value
       }
     }
   },
