@@ -7,7 +7,7 @@ export const Text = styled('span', {
   margin: '0',
   fontFamily: '$rubik',
   fontVariantNumeric: 'tabular-nums',
-  display: 'block',
+  display: 'inline-block',
 
   variants: {
     size: {
@@ -76,8 +76,16 @@ export const Text = styled('span', {
         textTransform: 'uppercase',
       },
       capitalize: {
-        textTransform: 'capitalize',
+        // WARNING: this will only work with block elements (display block/inline-block)
+        // @see https://developer.mozilla.org/en-US/docs/Web/CSS/::first-letter
+        display: 'inline-block',
+        '&::first-letter': {
+          textTransform: 'uppercase',
+        }
       },
+      capitalizeWords: {
+        textTransform: 'capitalize',
+      }
     },
     noWrap: {
       true: {

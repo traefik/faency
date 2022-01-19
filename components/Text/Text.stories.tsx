@@ -40,6 +40,23 @@ export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args 
   </Flex>
 );
 
+export const Transform: ComponentStory<typeof TextForStory> = ({ transform, ...args }) => (
+  <Flex gap={2}>
+    <TextForStory {...args} >
+      default text
+    </TextForStory>
+    <TextForStory {...args} transform='uppercase'>
+      uppercase text
+    </TextForStory>
+    <TextForStory {...args} transform='capitalize'>
+      capitalize text
+    </TextForStory>
+    <TextForStory {...args} transform='capitalizeWords'>
+      capitalize each word
+    </TextForStory>
+  </Flex>
+);
+
 export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => (
   <>
     <TextForStory {...args} size="0">
