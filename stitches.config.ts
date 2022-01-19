@@ -41,6 +41,7 @@ export const colors: Record<string, Property.Color> = {
   hiContrast: '$deepBlue11',
   loContrast: 'white',
   focusOutline: 'hsl(216, 100%, 64%)',
+  divider: 'hsl(207, 10%, 82%)'
 };
 
 const stitches = createStitches({
@@ -273,6 +274,7 @@ export const customColors = (primary: PrimaryColor) => {
       contentBg: '$00dp',
       hiContrast: 'white',
       loContrast: '$deepBlue2',
+      divider: 'hsl(209, 29%, 19%)',
       ...AccordionTheme.getDark(darkPrimaryColor),
       ...BadgeTheme.getDark(darkPrimaryColor),
       ...ButtonTheme.getDark(darkPrimaryColor),

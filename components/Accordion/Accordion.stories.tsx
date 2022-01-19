@@ -6,7 +6,7 @@ import { VariantProps } from '../../stitches.config';
 
 import { Badge } from '../Badge';
 import { Text } from '../Text';
-import { Card } from '../Card';
+import { Box } from '../Box';
 import { Flex } from '../Flex';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
 
@@ -20,30 +20,52 @@ export default {
   component: AccordionForStory,
 } as ComponentMeta<typeof AccordionForStory>;
 
-const Template: ComponentStory<typeof AccordionForStory> = (args) => (
-  <Card css={{ width: 300 }}>
+const Template: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) => (
+  <Box css={{ width: 300 }}>
     <AccordionForStory {...args}>
       <AccordionItem value="item-1">
-        <AccordionTrigger>Item1 Trigger</AccordionTrigger>
-        <AccordionContent>Item1 Content</AccordionContent>
+        <AccordionTrigger size={size}>Item1 Trigger</AccordionTrigger>
+        <AccordionContent size={size}>Item1 Content</AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>Item2 Trigger</AccordionTrigger>
-        <AccordionContent>Item2 Content</AccordionContent>
+        <AccordionTrigger size={size}>Item2 Trigger</AccordionTrigger>
+        <AccordionContent size={size}>Item2 Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger size={size}>Item3 Trigger</AccordionTrigger>
+        <AccordionContent size={size}>Item3 Content</AccordionContent>
       </AccordionItem>
     </AccordionForStory>
-  </Card>
+  </Box>
 )
 
 export const Single = Template.bind({});
 Single.args = {
   type: 'single',
+  size: 'small',
 };
+Single.argTypes = {
+  size: {
+    control: 'inline-radio',
+    options: ['small', 'medium', 'large'],
+  }
+}
+
+export const Large = Template.bind({});
+Large.args = {
+  size: 'large',
+}
 
 export const Collapsible = Template.bind({});
 Collapsible.args = {
   type: 'single',
   collapsible: true,
+}
+Collapsible.argTypes = {
+  size: {
+    control: 'inline-radio',
+    options: ['small', 'medium', 'large'],
+  }
 }
 
 export const MultipleCollapsible = Template.bind({});
@@ -51,11 +73,16 @@ MultipleCollapsible.args = {
   type: 'multiple',
   collapsible: true,
 };
-
+MultipleCollapsible.argTypes = {
+  size: {
+    control: 'inline-radio',
+    options: ['small', 'medium', 'large'],
+  }
+}
 
 export const Complex
   : ComponentStory<typeof AccordionForStory> = (args) => (
-    <Card css={{ width: 300 }}>
+    <Box css={{ width: 300 }}>
       <AccordionForStory {...args}>
         <AccordionItem value="item-1">
           <AccordionTrigger>
@@ -82,10 +109,16 @@ export const Complex
           <AccordionContent>Item2 Content</AccordionContent>
         </AccordionItem>
       </AccordionForStory>
-    </Card>
+    </Box>
   )
 
 Complex.args = {
   type: 'multiple',
   collapsible: true,
 };
+Complex.argTypes = {
+  size: {
+    control: 'inline-radio',
+    options: ['small', 'medium', 'large'],
+  }
+}
