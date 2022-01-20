@@ -66,7 +66,13 @@ Basic.args = {
 Basic.argTypes = {
   transform: {
     control: 'inline-radio',
-    options: ['capitalize', 'capitalizeWords', 'uppercase', '']
+    options: ['capitalize', 'capitalizeWords', 'uppercase', 'none'],
+    mapping: {
+      capitalize: 'capitalize',
+      capitalizeWords: 'capitalizeWords',
+      uppercase: 'uppercase',
+      none: '',
+    }
   },
 };
 
