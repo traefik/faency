@@ -62,6 +62,11 @@ export const Th = styled('th', Label, {
         textAlign: 'end',
       },
     },
+    transform: {
+      capitalize: {
+        display: 'table-cell', // revert Label enforced value
+      }
+    }
   },
   defaultVariants: {
     align: 'start',

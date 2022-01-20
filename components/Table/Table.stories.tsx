@@ -13,14 +13,14 @@ export default {
   component: TableForStory,
 } as ComponentMeta<typeof TableForStory>;
 
-export const Basic: ComponentStory<typeof TableForStory> = (args) => (
+export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
   <Card>
     <TableForStory {...args}>
       <Thead>
-        <Th>Firstname</Th>
-        <Th>Lastname</Th>
-        <Th>Status</Th>
-        <Th>Role</Th>
+        <Th transform={transform}>first name</Th>
+        <Th transform={transform}>last name</Th>
+        <Th transform={transform}>Status</Th>
+        <Th transform={transform}>Role</Th>
       </Thead>
       <Tbody>
         <Tr>
@@ -59,6 +59,22 @@ export const Basic: ComponentStory<typeof TableForStory> = (args) => (
     </TableForStory>
   </Card>
 );
+
+Basic.args = {
+  transform: 'capitalize',
+};
+Basic.argTypes = {
+  transform: {
+    control: 'inline-radio',
+    options: ['capitalize', 'capitalizeWords', 'uppercase', 'none'],
+    mapping: {
+      capitalize: 'capitalize',
+      capitalizeWords: 'capitalizeWords',
+      uppercase: 'uppercase',
+      none: '',
+    }
+  },
+};
 
 export const Alignment: ComponentStory<any> = (args) => (
   <Card>
