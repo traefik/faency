@@ -5,7 +5,7 @@ import { INDICATOR_BASE_STYLES, RADIO_BASE_STYLES } from "../Radio";
 
 type RadioAccordionRootProps = Omit<VariantProps<typeof AccordionRoot>, 'type'>
 export const RadioAccordionRoot: (props: RadioAccordionRootProps) => JSX.Element = (props) => (
-  <AccordionRoot {...props} type='single' />
+  <AccordionRoot {...props} type='single' collapsible={false} />
 )
 export const RadioAccordionItem = React.forwardRef<React.ElementRef<typeof AccordionItem>, ComponentProps<typeof AccordionItem>>(({ value, children, ...props }, forwardedRef) => {
 
