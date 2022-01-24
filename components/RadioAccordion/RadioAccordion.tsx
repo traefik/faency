@@ -33,17 +33,28 @@ const StyledIndicator = styled('div', INDICATOR_BASE_STYLES, {
   },
 });
 
+const StyledRadioAccordionTrigger = styled(StyledAccordionTrigger, {
+  '@hover': {
+    '&:hover': {
+      [`& ${StyledRadio}`]: {
+        boxShadow: 'inset 0 0 0 1px $colors$radioHoverBorder',
+        backgroundColor: '$radioHoverBg',
+      }
+    }
+  }
+})
+
 export const RadioAccordionTrigger = React.forwardRef<
-  React.ElementRef<typeof StyledAccordionTrigger>, AccordionTriggerProps>(({ children, ...props }, ref) => {
+  React.ElementRef<typeof StyledRadioAccordionTrigger>, AccordionTriggerProps>(({ children, ...props }, ref) => {
 
     return (
       <StyledAccordionHeader>
-        <StyledAccordionTrigger ref={ref} {...props}>
+        <StyledRadioAccordionTrigger ref={ref} {...props}>
           <StyledRadio >
             <StyledIndicator />
           </StyledRadio>
           {children}
-        </StyledAccordionTrigger>
+        </StyledRadioAccordionTrigger>
       </StyledAccordionHeader>
     )
   })
