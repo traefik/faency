@@ -1,9 +1,8 @@
 import React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { keyframes, styled } from '../../stitches.config';
+import { keyframes, styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { VariantProps } from '@stitches/react';
 
 const open = keyframes({
   from: { height: 0 },
@@ -35,13 +34,13 @@ const StyledAccordionItem = styled(AccordionPrimitive.Item, {
   boxShadow: '0 1px 0 0 $colors$divider',
 })
 
-const StyledAccordionHeader = styled(AccordionPrimitive.Header, {
+export const StyledAccordionHeader = styled(AccordionPrimitive.Header, {
   all: 'unset',
   display: 'flex',
   borderRadius: 'inherit',
 });
 
-const StyledAccordionTrigger = styled(AccordionPrimitive.Trigger, {
+export const StyledAccordionTrigger = styled(AccordionPrimitive.Trigger, {
   all: 'unset',
   borderRadius: 'inherit',
   fontFamily: 'inherit',

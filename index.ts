@@ -1,4 +1,5 @@
 export { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from './components/Accordion';
+export { RadioAccordionRoot, RadioAccordionItem, RadioAccordionTrigger, RadioAccordionContent } from './components/RadioAccordion';
 export { Alert } from './components/Alert';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
 export { Badge } from './components/Badge';
