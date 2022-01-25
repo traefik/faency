@@ -60,4 +60,4 @@ export {
   customColors,
 } from './stitches.config';
 
-export type { CSS } from './stitches.config';
+export type { CSS, VariantProps } from './stitches.config';
