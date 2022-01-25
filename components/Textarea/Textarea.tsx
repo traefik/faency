@@ -11,7 +11,7 @@ const FOCUS_SHADOW = elevationVariants[1].boxShadow; // apply elevation $1 when 
 const StyledTextarea = styled('textarea', {
   // Reset
   appearance: 'none',
-  overflow: 'auto',
+  overflow: 'auto', // force overflow auto behaviour cross-browser
   borderWidth: '0',
   boxSizing: 'border-box',
   fontFamily: '$rubik',
@@ -21,12 +21,12 @@ const StyledTextarea = styled('textarea', {
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
   // Custom
-  zIndex: 1,
+  zIndex: 1, // layer on top of before/after pseudo
   p: '$3',
   position: 'relative',
-  flexGrow: 1,
+  flexGrow: 1, // make sure to grow fully inside TextareaWrapper
   backgroundColor: 'transparent',
-  borderRadius: 'inherit', // inherit border radius from InputWrapper
+  borderRadius: 'inherit', // inherit border radius from TextareaWrapper
   boxShadow: 'inset 0 0 0 1px $colors$textareaBorder',
   color: '$textareaText',
   fontVariantNumeric: 'tabular-nums',
