@@ -6,10 +6,7 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Text } from '../Text';
 import { Container } from '../Container';
 import { Flex } from '../Flex';
-import { Button } from '../Button';
 import { Box } from '../Box';
-import { Bubble } from '../Bubble';
-import { TextField } from '../TextField';
 import { CrossCircledIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { styled } from '../../stitches.config';
 
