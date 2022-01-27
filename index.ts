@@ -29,6 +29,7 @@ export { Grid } from './components/Grid';
 export { Heading } from './components/Heading';
 export { Image } from './components/Image';
 export { TextField } from './components/TextField';
+export { Textarea } from './components/Textarea';
 export { Label } from './components/Label';
 export { Link } from './components/Link';
 export {
