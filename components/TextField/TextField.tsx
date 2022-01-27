@@ -13,10 +13,16 @@ import {
 } from '@radix-ui/react-icons';
 
 // TYPES
+export interface TextFieldLabelProps {
+  variant: 'red' | 'subtle' | 'contrast' | 'default'
+  disabled?: boolean
+  invalid?: boolean
+  htmlFor?: string
+}
 export type TextFieldProps = InputProps & {
   type?: string;
   clearable?: boolean;
-  label?: string;
+  label?: string | ((TextFieldLabelProps) => JSX.Element);
 };
 
 export type TextFieldVariants = InputVariants;
@@ -60,7 +66,7 @@ const StyledCrossCircledIcon = styled(CrossCircledIcon, {
 
 export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFieldProps>(
   (
-    { state, clearable, label, id, type, disabled, readOnly, onBlur, onFocus, css, ...props },
+    { state, clearable, label: LabelOrComponent, id, type, disabled, readOnly, onBlur, onFocus, css, ...props },
     forwardedRef
   ) => {
     const inputRef = React.useRef<InputHandle | null>(null);
@@ -84,6 +90,25 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
       }
       return 'default';
     }, [invalid, disabled, inputHasFocus]);
+
+    const LabelNode = React.useMemo(
+      () => {
+        if (LabelOrComponent === undefined || LabelOrComponent === null) {
+          return null;
+        }
+        if (typeof LabelOrComponent === 'string') {
+          return (
+            <Label variant={labelVariant} disabled={disabled} invalid={invalid} htmlFor={id}>
+              {LabelOrComponent}
+            </Label>
+          );
+        }
+        return (
+          <LabelOrComponent variant={labelVariant} disabled={disabled} invalid={invalid} htmlFor={id} />
+        );
+      },
+      [LabelOrComponent, labelVariant, disabled, invalid, id],
+    );
 
     const isPasswordType = React.useMemo(() => type === 'password', [type]);
 
@@ -154,11 +179,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
 
     return (
       <Box css={css}>
-        {label && (
-          <Label variant={labelVariant} disabled={disabled} invalid={invalid} htmlFor={id}>
-            {label}
-          </Label>
-        )}
+        {LabelNode}
         <Input
           id={id}
           ref={inputRef}
