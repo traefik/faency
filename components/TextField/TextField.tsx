@@ -22,7 +22,7 @@ export interface TextFieldLabelProps {
 export type TextFieldProps = InputProps & {
   type?: string;
   clearable?: boolean;
-  label?: string | ((TextFieldLabelProps) => JSX.Element);
+  label?: string | ((props: TextFieldLabelProps) => JSX.Element);
 };
 
 export type TextFieldVariants = InputVariants;
