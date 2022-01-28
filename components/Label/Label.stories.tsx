@@ -52,8 +52,6 @@ CapitalizedWords.args = {
 };
 ignoreArgType('id', CapitalizedWords);
 
-
-
 export const Uppercased = Template.bind({});
 Uppercased.args = {
   id: 'uppercase',
@@ -61,9 +59,47 @@ Uppercased.args = {
 };
 ignoreArgType('id', Uppercased);
 
-export const Error = Template.bind({});
-Error.args = {
-  id: 'err',
-  variant: 'red',
+export const Invalid = Template.bind({});
+Invalid.args = {
+  id: 'invalidvariant',
+  variant: 'invalid',
 };
-ignoreArgType('id', Error);
+ignoreArgType('id', Invalid);
+
+export const Disabled: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
+  <Box>
+    <LabelForStory htmlFor={id} css={{ mr: '$2' }} variant="subtle" {...args}>
+      Email field
+    </LabelForStory>
+    <input id={id} name="email" type="email" disabled />
+  </Box>
+);
+Disabled.args = {
+  id: 'subtledisabled'
+}
+ignoreArgType('id', Disabled);
+
+export const FocusContrast: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => {
+  const [hasFocus, setHasFocus] = React.useState(false);
+
+  const onFocus = React.useCallback(() => {
+    setHasFocus(true);
+  }, [setHasFocus])
+
+  const onBlur = React.useCallback(() => {
+    setHasFocus(false);
+  }, [setHasFocus])
+
+  return (
+    <Box>
+      <LabelForStory variant={hasFocus ? 'contrast' : 'default'} htmlFor={id} css={{ mr: '$2' }} {...args}>
+        Email field
+      </LabelForStory>
+      <input id={id} name="email" type="email" onFocus={onFocus} onBlur={onBlur} />
+    </Box>
+  );
+}
+FocusContrast.args = {
+  id: 'focuscontrastvariants'
+}
+ignoreArgType('id', FocusContrast)
