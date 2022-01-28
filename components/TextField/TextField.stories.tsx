@@ -2,8 +2,12 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Flex } from '../Flex';
+import { Label } from '../Label';
+import { Text } from '../Text';
+import { Popover, PopoverTrigger, PopoverContent } from '../Popover';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { MagnifyingGlassIcon, InfoCircledIcon } from '@radix-ui/react-icons';
+import { styled } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import ignoreArgType from '../../utils/ignoreArgType';
 
@@ -98,3 +102,57 @@ DisplayClearable.args = {
   clearable: true,
 };
 ignoreArgType('id', DisplayClearable);
+
+export const LabelComponent: ComponentStory<typeof TextFieldForStory> = ({ id, ...args }) => (
+  <Flex direction="column" gap={2}>
+    <TextFieldForStory
+      id={`${id}-basic`}
+      {...args}
+    />
+    <TextFieldForStory
+      id={`${id}-invalid`}
+      state="invalid"
+      {...args}
+    />
+    <TextFieldForStory
+      id={`${id}-disabled`}
+      value="disabled"
+      disabled
+      {...args}
+    />
+
+  </Flex>
+)
+
+const StyledInfoCircledIcon = styled(InfoCircledIcon, {
+  ml: '$2',
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
+});
+
+const label = (props) => (
+  <Label {...props}>
+    <Flex align="center">
+      Field Label
+      <Popover>
+        <PopoverTrigger asChild>
+          <StyledInfoCircledIcon />
+        </PopoverTrigger>
+        <PopoverContent css={{ p: '$3' }}>
+          <Text as="p" css={{ color: 'currentColor' }}>
+            More information
+          </Text>
+        </PopoverContent>
+      </Popover>
+    </Flex>
+  </Label >
+)
+
+LabelComponent.args = {
+  id: 'labelcomponent',
+  label: label,
+}
+ignoreArgType('id', LabelComponent);
