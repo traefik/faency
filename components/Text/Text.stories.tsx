@@ -24,7 +24,7 @@ export const Basic = Template.bind({});
 Basic.args = {};
 
 export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args }) => (
-  <Flex gap={2}>
+  <Flex gap={2} direction="column">
     <TextForStory {...args} variant="default">
       Default
     </TextForStory>
@@ -35,7 +35,10 @@ export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args 
       Contrast
     </TextForStory>
     <TextForStory {...args} variant="red">
-      Red
+      Red (error text)
+    </TextForStory>
+    <TextForStory {...args} variant="invalid">
+      Invalid (invalid field)
     </TextForStory>
   </Flex>
 );

@@ -14,9 +14,7 @@ import {
 
 // TYPES
 export interface TextFieldLabelProps {
-  variant: 'red' | 'subtle' | 'contrast' | 'default'
-  disabled?: boolean
-  invalid?: boolean
+  variant: 'invalid' | 'subtle' | 'contrast' | 'default'
   htmlFor?: string
 }
 export type TextFieldProps = InputProps & {
@@ -79,11 +77,11 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     const invalid = React.useMemo(() => state === 'invalid', [state]);
 
     const labelVariant = React.useMemo(() => {
-      if (invalid) {
-        return 'red';
-      }
       if (disabled) {
         return 'subtle';
+      }
+      if (invalid) {
+        return 'invalid'
       }
       if (inputHasFocus) {
         return 'contrast';
@@ -98,16 +96,16 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
         }
         if (typeof LabelOrComponent === 'string') {
           return (
-            <Label variant={labelVariant} disabled={disabled} invalid={invalid} htmlFor={id}>
+            <Label variant={labelVariant} htmlFor={id}>
               {LabelOrComponent}
             </Label>
           );
         }
         return (
-          <LabelOrComponent variant={labelVariant} disabled={disabled} invalid={invalid} htmlFor={id} />
+          <LabelOrComponent variant={labelVariant} htmlFor={id} />
         );
       },
-      [LabelOrComponent, labelVariant, disabled, invalid, id],
+      [LabelOrComponent, labelVariant, id],
     );
 
     const isPasswordType = React.useMemo(() => type === 'password', [type]);
