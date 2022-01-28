@@ -3,7 +3,7 @@ import { styled, VariantProps } from "../../stitches.config";
 import { StyledAccordionTrigger, StyledAccordionHeader, AccordionRoot, AccordionContent, AccordionItem, AccordionTriggerProps } from "../Accordion";
 import { INDICATOR_BASE_STYLES, RADIO_BASE_STYLES } from "../Radio";
 
-type RadioAccordionRootProps = Omit<VariantProps<typeof AccordionRoot>, 'type'>
+type RadioAccordionRootProps = Omit<VariantProps<typeof AccordionRoot>, 'type' | 'collapsible'>
 export const RadioAccordionRoot: (props: RadioAccordionRootProps) => JSX.Element = (props) => (
   <AccordionRoot {...props} type='single' collapsible={false} />
 )
