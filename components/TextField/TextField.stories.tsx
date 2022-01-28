@@ -135,17 +135,19 @@ const StyledInfoCircledIcon = styled(InfoCircledIcon, {
 
 const label = (props) => (
   <Label {...props}>
-    Field Label
-    <Popover>
-      <PopoverTrigger asChild>
-        <StyledInfoCircledIcon />
-      </PopoverTrigger>
-      <PopoverContent css={{ p: '$3' }}>
-        <Text as="p" css={{ color: 'currentColor' }}>
-          More information
-        </Text>
-      </PopoverContent>
-    </Popover>
+    <Flex align="center">
+      Field Label
+      <Popover>
+        <PopoverTrigger asChild>
+          <StyledInfoCircledIcon />
+        </PopoverTrigger>
+        <PopoverContent css={{ p: '$3' }}>
+          <Text as="p" css={{ color: 'currentColor' }}>
+            More information
+          </Text>
+        </PopoverContent>
+      </Popover>
+    </Flex>
   </Label >
 )
 
