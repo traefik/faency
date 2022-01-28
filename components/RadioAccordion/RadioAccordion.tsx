@@ -2,10 +2,12 @@ import React, { ComponentProps } from "react";
 import { styled, VariantProps } from "../../stitches.config";
 import { StyledAccordionTrigger, StyledAccordionHeader, AccordionRoot, AccordionContent, AccordionItem, AccordionTriggerProps } from "../Accordion";
 import { INDICATOR_BASE_STYLES, RADIO_BASE_STYLES } from "../Radio";
+import type { AccordionSingleProps } from '@radix-ui/react-accordion'
 
-type RadioAccordionRootProps = Omit<VariantProps<typeof AccordionRoot>, 'type' | 'collapsible'>
+export interface RadioAccordionRootProps extends Omit<AccordionSingleProps, 'type' | 'collapsible' | 'css'>, Omit<VariantProps<typeof AccordionRoot>, 'type' | 'collapsible'> { }
+
 export const RadioAccordionRoot: (props: RadioAccordionRootProps) => JSX.Element = (props) => (
-  <AccordionRoot {...props} type='single' collapsible={false} />
+  <AccordionRoot {...props} type="single" collapsible={false} />
 )
 export const RadioAccordionItem = React.forwardRef<React.ElementRef<typeof AccordionItem>, ComponentProps<typeof AccordionItem>>(({ value, children, ...props }, forwardedRef) => {
 
