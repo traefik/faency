@@ -53,7 +53,7 @@ export const Text = styled('span', {
     },
     variant: {
       red: {
-        color: '$red10',
+        color: '$textRed',
       },
       subtle: {
         color: '$textSubtle',
@@ -64,6 +64,9 @@ export const Text = styled('span', {
       contrast: {
         color: '$textContrast',
       },
+      invalid: {
+        color: '$textInvalid'
+      }
     },
     gradient: {
       true: {
@@ -92,16 +95,6 @@ export const Text = styled('span', {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
-      },
-    },
-    invalid: {
-      true: {
-        color: '$inputInvalidBorder',
-      },
-    },
-    disabled: {
-      true: {
-        color: '$inputDisabledText',
       },
     },
   },
