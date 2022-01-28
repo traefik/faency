@@ -34,12 +34,10 @@ export const Disabled = Template.bind({});
 Disabled.args = { disabled: true };
 
 export const Labelled: ComponentStory<typeof SwitchForStory> = ({ id, ...args }) => (
-  <>
-    <Flex align="center">
-      <Label variant="contrast" htmlFor={id}>label</Label>
-      <SwitchForStory id={id} {...args} />
-    </Flex>
-  </>
+  <Flex align="center">
+    <Label variant="contrast" htmlFor={id}>label</Label>
+    <SwitchForStory id={id} {...args} />
+  </Flex>
 );
 Labelled.args = {
   id: 'labelled',
