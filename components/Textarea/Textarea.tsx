@@ -230,11 +230,11 @@ export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>
     const invalid = React.useMemo(() => state === 'invalid', [state]);
 
     const labelVariant = React.useMemo(() => {
-      if (invalid) {
-        return 'red';
-      }
       if (disabled) {
         return 'subtle';
+      }
+      if (invalid) {
+        return 'invalid';
       }
       if (hasFocus) {
         return 'contrast';
@@ -265,7 +265,7 @@ export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>
     return (
       <Box css={rootCss as any}>
         {label && (
-          <Label variant={labelVariant} disabled={disabled} invalid={invalid} htmlFor={id} css={{ display: 'block' }}>
+          <Label variant={labelVariant} htmlFor={id} css={{ display: 'block' }}>
             {label}
           </Label>
         )}
