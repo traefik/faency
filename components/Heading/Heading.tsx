@@ -13,7 +13,7 @@ export type HeadingVariants = { size?: HeadingSizeVariants } & Omit<
   'size'
 >;
 export type HeadingProps = React.ComponentProps<typeof DEFAULT_TAG> &
-  HeadingVariants & { css?: CSS; as?: any };
+  HeadingVariants & { as?: any };
 
 export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, HeadingProps>(
   // '2' here is the default heading size variant
