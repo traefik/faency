@@ -44,6 +44,7 @@ export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, He
         size={textSize[size]}
         css={{
           fontVariantNumeric: 'proportional-nums',
+          display: 'block',
           ...(merge(textCss[size], props.css) as object),
         }}
       />
