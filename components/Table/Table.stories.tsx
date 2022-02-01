@@ -17,10 +17,12 @@ export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
   <Card>
     <TableForStory {...args}>
       <Thead>
-        <Th transform={transform}>first name</Th>
-        <Th transform={transform}>last name</Th>
-        <Th transform={transform}>Status</Th>
-        <Th transform={transform}>Role</Th>
+        <Tr>
+          <Th transform={transform}>first name</Th>
+          <Th transform={transform}>last name</Th>
+          <Th transform={transform}>Status</Th>
+          <Th transform={transform}>Role</Th>
+        </Tr>
       </Thead>
       <Tbody>
         <Tr>
@@ -80,10 +82,12 @@ export const Alignment: ComponentStory<any> = (args) => (
   <Card>
     <TableForStory>
       <Thead>
-        <Th {...args}>Firstname</Th>
-        <Th {...args}>Lastname</Th>
-        <Th {...args}>Status</Th>
-        <Th {...args}>Role</Th>
+        <Tr>
+          <Th {...args}>Firstname</Th>
+          <Th {...args}>Lastname</Th>
+          <Th {...args}>Status</Th>
+          <Th {...args}>Role</Th>
+        </Tr>
       </Thead>
       <Tbody>
         <Tr>
@@ -138,10 +142,12 @@ export const Interactive: ComponentStory<any> = (args) => (
   <Card>
     <TableForStory>
       <Thead>
-        <Th>Firstname</Th>
-        <Th>Lastname</Th>
-        <Th>Status</Th>
-        <Th>Role</Th>
+        <Tr>
+          <Th>Firstname</Th>
+          <Th>Lastname</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
       </Thead>
       <Tbody>
         <Tr {...args}>
