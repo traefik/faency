@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot';
 import { ComponentProps, ElementRef, forwardRef } from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { Caption as TableCaption, Tbody as TableTbody, Tfoot as TableTfoot, Tr as TableTr, Th as TableTh, Td as TableTd, Thead as TableThead, Table as TableTable } from '../Table';
@@ -23,9 +24,17 @@ export const Tfoot = forwardRef<ElementRef<typeof StyledTfoot>, Omit<ComponentPr
 const StyledTr = styled('div', TableTr, {
   display: 'table-row',
 });
-export const Tr = forwardRef<ElementRef<typeof StyledTr>, Omit<ComponentProps<typeof StyledTr>, 'css'> & VariantProps<typeof StyledTr>>((props, ref) => (
-  <StyledTr ref={ref} role="row" {...props} />
-))
+const StyledTrSlot = styled(Slot, StyledTr);
+export interface TrProps extends Omit<ComponentProps<typeof StyledTr>, 'css'>, VariantProps<typeof StyledTr> {
+  asChild?: boolean
+}
+export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(({ asChild, ...props }, ref) => {
+  const Component = asChild ? StyledTrSlot : StyledTr;
+
+  return (
+    <Component ref={ref} role="row" {...props} />
+  )
+})
 
 const StyledTh = styled('span', TableTh, {
   display: 'table-cell'
@@ -45,7 +54,7 @@ export const Td = forwardRef<ElementRef<typeof StyledTd>, Omit<ComponentProps<ty
   <StyledTd ref={ref} role="cell" {...props} />
 ))
 
-const StyledThead = styled('div', {
+const StyledThead = styled('div', TableThead, {
   display: 'table-header-group',
 });
 export const Thead = forwardRef<ElementRef<typeof StyledThead>, Omit<ComponentProps<typeof StyledThead>, 'css'> & VariantProps<typeof StyledThead>>((props, ref) => (

@@ -3,8 +3,7 @@ import React from 'react';
 import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr, Caption } from './AriaTable';
 import { Badge } from '../Badge';
 import { Card } from '../Card';
-import { Flex } from '../Flex';
-import { Text } from '../Text';
+import { UnstyledLink } from '../Link';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
@@ -193,3 +192,31 @@ export const Interactive: ComponentStory<any> = (args) => (
 Interactive.args = {
   interactive: true,
 };
+
+export const Links: ComponentStory<any> = (args) => (
+  <Card>
+    <TableForStory aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
+      <Caption id="empty-table-caption">Table with empty data</Caption>
+      <Thead>
+        <Tr>
+          <Th>first name</Th>
+          <Th>last name</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr interactive asChild>
+          <UnstyledLink href="https://traefik.io">
+            <Td>John</Td>
+            <Td>Doe</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td>Developer</Td>
+          </UnstyledLink>
+        </Tr>
+      </Tbody>
+    </TableForStory>
+  </Card>
+)
