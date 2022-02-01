@@ -1,6 +1,12 @@
 import { styled } from '../../stitches.config';
 import { Text } from '../Text';
 
+export const UnstyledLink = styled('a', {
+  color: 'inherit',
+  textDecoration: 'inherit',
+  fontWeight: 'inherit',
+});
+
 export const Link = styled('a', {
   alignItems: 'center',
   gap: '$1',
