@@ -54,6 +54,7 @@ export const RADIO_BASE_STYLES = {
 const StyledRadio = styled(RadioGroupPrimitive.Item, RADIO_BASE_STYLES, {
   '@hover': {
     '&:hover': {
+      cursor: 'pointer',
       boxShadow: 'inset 0 0 0 1px $colors$radioHoverBorder',
       backgroundColor: '$radioHoverBg',
     },
