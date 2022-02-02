@@ -1,5 +1,5 @@
+import React, { ComponentProps, ElementRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { ComponentProps, ElementRef, forwardRef } from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { Caption as TableCaption, Tbody as TableTbody, Tfoot as TableTfoot, Tr as TableTr, Th as TableTh, Td as TableTd, Thead as TableThead, Table as TableTable } from '../Table';
 
