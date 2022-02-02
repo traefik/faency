@@ -1,4 +1,5 @@
 import { styled, VariantProps } from '../../stitches.config';
+import { elevationVariants } from '../Elevation';
 import { Label } from '../Label';
 
 export const Caption = styled('caption', {
@@ -10,9 +11,75 @@ export const Tbody = styled('tbody', {
   width: '100%',
 });
 
-export const Tfoot = styled('tfoot', {});
+export const Th = styled('th', Label, {
+  // override Label
+  display: 'table-cell',
+
+  textAlign: 'start',
+  p: '$2 $3',
+  borderBottom: '1px solid $tableRowBorder',
+
+  variants: {
+    align: {
+      start: {
+        textAlign: 'start',
+      },
+      center: {
+        textAlign: 'center',
+      },
+      end: {
+        textAlign: 'end',
+      },
+    },
+    transform: {
+      capitalize: {
+        display: 'table-cell', // revert Label enforced value
+      },
+    },
+  },
+  defaultVariants: {
+    align: 'start',
+  },
+});
+
+export const Td = styled('td', {
+  p: '$5 $3',
+  borderBottom: '1px solid $tableRowBorder',
+  fontSize: '$3',
+  lineHeight: '16px',
+  variants: {
+    subtle: {
+      true: {
+        fontWeight: '$regular',
+        color: '$tableSubtleText',
+      },
+    },
+    align: {
+      start: {
+        textAlign: 'start',
+      },
+      center: {
+        textAlign: 'center',
+      },
+      end: {
+        textAlign: 'end',
+      },
+    },
+  },
+  defaultVariants: {
+    align: 'start',
+  },
+});
 
 export const Tr = styled('tr', {
+  '&:hover': {
+    color: '$tableHoverText',
+  },
+
+  [`&:last-child ${Td}`]: {
+    borderBottom: 'none',
+  },
+
   variants: {
     interactive: {
       true: {
@@ -26,6 +93,7 @@ export const Tr = styled('tr', {
       true: {
         backgroundColor: '$tableHoverBackground',
         color: '$tableActiveText',
+        fontWeight: '$semiBold',
       },
     },
   },
@@ -42,64 +110,40 @@ export const Tr = styled('tr', {
   ],
 });
 
-export const Th = styled('th', Label, {
-  // override Label
-  display: 'table-cell',
+export const Tfoot = styled('tfoot', {
+  position: 'relative',
 
-  textAlign: 'start',
-  pt: '$2',
-  pb: '$3',
-  borderBottom: '1px solid $deepBlue3',
-  variants: {
-    align: {
-      start: {
-        textAlign: 'start',
-      },
-      center: {
-        textAlign: 'center',
-      },
-      end: {
-        textAlign: 'end',
-      },
-    },
-    transform: {
-      capitalize: {
-        display: 'table-cell', // revert Label enforced value
-      }
-    }
+  '&::after': {
+    pointerEvents: 'none',
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: '$tableFooterLayerBackground',
   },
-  defaultVariants: {
-    align: 'start',
-  },
-});
 
-export const Td = styled('td', {
-  py: '$2',
-  borderBottom: '1px solid $deepBlue3',
-  fontSize: '$2',
-  variants: {
-    align: {
-      start: {
-        textAlign: 'start',
-      },
-      center: {
-        textAlign: 'center',
-      },
-      end: {
-        textAlign: 'end',
-      },
-    },
-  },
-  defaultVariants: {
-    align: 'start',
+  [`& ${Td}`]: {
+    fontSize: '$1',
+    color: '$tableHeaderText',
+    fontWeight: '$light',
+    borderTop: '1px solid $tableRowBorder',
+    p: '$2 $3',
   },
 });
 
 export const Thead = styled('thead', {
-  [`& ${Td}`]: {
+  position: 'relative',
+
+  '&::after': {
+    pointerEvents: 'none',
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: '$tableHeaderLayerBackground',
+  },
+
+  [`& ${Th}`]: {
     fontSize: '$1',
-    color: '$deepBlue6',
-    textTransform: 'uppercase',
+    color: '$tableHeaderText',
     fontWeight: '$light',
   },
 });
@@ -110,6 +154,14 @@ export const Table = styled('table', {
   borderSpacing: 0,
   fontFamily: '$rubik',
   color: '$tableText',
+  borderRadius: '$3',
+
+  variants: {
+    elevation: elevationVariants,
+  },
+  defaultVariants: {
+    elevation: 1,
+  },
 });
 
 export type TableVariants = VariantProps<typeof Table>;
