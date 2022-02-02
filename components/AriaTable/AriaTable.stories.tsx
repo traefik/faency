@@ -106,7 +106,7 @@ export const Alignment: ComponentStory<any> = (args) => (
           <Td {...args}>
             <Badge variant="orange">AFK</Badge>
           </Td>
-          <Td>Actor</Td>
+          <Td {...args}>Actor</Td>
         </Tr>
         <Tr>
           <Td {...args}>Natalie</Td>
