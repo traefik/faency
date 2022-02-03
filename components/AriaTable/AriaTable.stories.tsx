@@ -1,21 +1,23 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr } from './Table';
+import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr, Caption } from './AriaTable';
 import { Badge } from '../Badge';
 import { Card } from '../Card';
+import { UnstyledLink } from '../Link';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
 
 export default {
-  title: 'Components/Table',
+  title: 'Components/AriaTable',
   component: TableForStory,
 } as ComponentMeta<typeof TableForStory>;
 
 export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
   <Card>
-    <TableForStory {...args}>
+    <TableForStory aria-label="People" aria-describedby="basic-table-caption" {...args}>
+      <Caption id="basic-table-caption">People with some information</Caption>
       <Thead>
         <Tr>
           <Th transform={transform}>first name</Th>
@@ -99,28 +101,28 @@ export const Alignment: ComponentStory<any> = (args) => (
           <Td {...args}>Developer</Td>
         </Tr>
         <Tr>
-          <Td>Johny</Td>
-          <Td>Depp</Td>
-          <Td>
+          <Td {...args}>Johny</Td>
+          <Td {...args}>Depp</Td>
+          <Td {...args}>
             <Badge variant="orange">AFK</Badge>
           </Td>
-          <Td>Actor</Td>
+          <Td {...args}>Actor</Td>
         </Tr>
         <Tr>
-          <Td>Natalie</Td>
-          <Td>Portman</Td>
-          <Td>
+          <Td {...args}>Natalie</Td>
+          <Td {...args}>Portman</Td>
+          <Td {...args}>
             <Badge variant="green">Connected</Badge>
           </Td>
-          <Td>Actor</Td>
+          <Td {...args}>Actor</Td>
         </Tr>
         <Tr>
-          <Td>Luke</Td>
-          <Td>Skywalker</Td>
-          <Td>
+          <Td {...args}>Luke</Td>
+          <Td {...args}>Skywalker</Td>
+          <Td {...args}>
             <Badge variant="red">Disconnected</Badge>
           </Td>
-          <Td>Star wars</Td>
+          <Td {...args}>Star wars</Td>
         </Tr>
       </Tbody>
     </TableForStory>
@@ -190,3 +192,31 @@ export const Interactive: ComponentStory<any> = (args) => (
 Interactive.args = {
   interactive: true,
 };
+
+export const Links: ComponentStory<any> = (args) => (
+  <Card>
+    <TableForStory aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
+      <Caption id="empty-table-caption">Table with empty data</Caption>
+      <Thead>
+        <Tr>
+          <Th>first name</Th>
+          <Th>last name</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr interactive asChild>
+          <UnstyledLink href="https://traefik.io">
+            <Td>John</Td>
+            <Td>Doe</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td>Developer</Td>
+          </UnstyledLink>
+        </Tr>
+      </Tbody>
+    </TableForStory>
+  </Card>
+)
