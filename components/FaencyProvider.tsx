@@ -1,6 +1,6 @@
 import React from 'react';
 import { IdProvider } from '@radix-ui/react-id';
-import { customColors, globalCss, PrimaryColor } from '../stitches.config';
+import { globalCss } from '../stitches.config';
 
 import RubikLightWoff2 from '../assets/fonts/rubik/Rubik-Light.woff2';
 import RubikWoff2 from '../assets/fonts/rubik/Rubik-Regular.woff2';
@@ -33,7 +33,7 @@ const globalStyles = globalCss({
       fontFamily: 'Rubik',
       fontWeight: 500,
       fontDisplay: 'swap',
-      src: `local('Rubik-Medium'), url(${RubikMediumWoff2}) format('woff2')`
+      src: `local('Rubik-Medium'), url(${RubikMediumWoff2}) format('woff2')`,
     },
     {
       fontFamily: 'Rubik',
@@ -67,7 +67,7 @@ const globalStyles = globalCss({
       fontStyle: 'italic',
       fontWeight: 500,
       fontDisplay: 'swap',
-      src: `local('Rubik-Medium'), url(${RubikMediumItalicWoff2}) format('woff2')`
+      src: `local('Rubik-Medium'), url(${RubikMediumItalicWoff2}) format('woff2')`,
     },
     {
       fontFamily: 'Rubik',
@@ -86,22 +86,8 @@ const globalStyles = globalCss({
   ],
 });
 
-export const FaencyProvider: React.FC<{ primaryColor: PrimaryColor }> = ({
-  children,
-  primaryColor,
-}) => {
+export const FaencyProvider: React.FC = ({ children }) => {
+  globalStyles();
 
-  React.useEffect(() => {
-    const { dark, light } = customColors(primaryColor);
-    dark.toString();
-    light.toString();
-  }, [primaryColor]);
-
-  globalStyles()
-
-  return (
-    <IdProvider>
-      {children}
-    </IdProvider>
-  );
+  return <IdProvider>{children}</IdProvider>;
 };

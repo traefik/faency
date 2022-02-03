@@ -1,5 +1,15 @@
-export { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from './components/Accordion';
-export { RadioAccordionRoot, RadioAccordionItem, RadioAccordionTrigger, RadioAccordionContent } from './components/RadioAccordion';
+export {
+  AccordionRoot,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from './components/Accordion';
+export {
+  RadioAccordionRoot,
+  RadioAccordionItem,
+  RadioAccordionTrigger,
+  RadioAccordionContent,
+} from './components/RadioAccordion';
 export { Alert } from './components/Alert';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
 export { Badge } from './components/Badge';
@@ -60,7 +70,8 @@ export {
   globalCss,
   keyframes,
   config,
-  customColors,
+  lightTheme,
+  darkTheme,
 } from './stitches.config';
 
 export type { CSS, VariantProps } from './stitches.config';
