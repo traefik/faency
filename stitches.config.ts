@@ -18,7 +18,7 @@ import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
 import { Theme as TooltipTheme } from './components/Tooltip/Tooltip.themes';
-import { Theme as TextareaTheme } from './components/Textarea/Textarea.themes'
+import { Theme as TextareaTheme } from './components/Textarea/Textarea.themes';
 
 import { lightColors, darkColors } from './colors';
 import getPrimaryColorInfo from './utils/getPrimaryColorInfo';
@@ -42,7 +42,7 @@ export const colors: Record<string, Property.Color> = {
   hiContrast: '$deepBlue11',
   loContrast: 'white',
   focusOutline: 'hsl(216, 100%, 64%)',
-  divider: 'hsl(207, 10%, 82%)'
+  divider: 'hsl(207, 10%, 82%)',
 };
 
 const stitches = createStitches({
@@ -264,10 +264,10 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 
 export const utils = config.utils;
 
-export const customColors = (primary: PrimaryColor) => {
+export const darkTheme = (primary: PrimaryColor) => {
   const darkPrimaryColor = getPrimaryColorInfo(primary, darkColors);
 
-  const darkTheme = createTheme('dark', {
+  return createTheme('dark', {
     colors: {
       ...darkColors,
 
@@ -297,10 +297,12 @@ export const customColors = (primary: PrimaryColor) => {
       ...TextareaTheme.getDark(darkPrimaryColor),
     },
   });
+};
 
+export const lightTheme = (primary: PrimaryColor) => {
   const lightPrimaryColor = getPrimaryColorInfo(primary, lightColors);
 
-  const lightTheme = createTheme('light', {
+  return createTheme('light', {
     colors: {
       primary: lightPrimaryColor.token,
       ...AccordionTheme.getLight(lightPrimaryColor),
@@ -323,9 +325,4 @@ export const customColors = (primary: PrimaryColor) => {
       ...TextareaTheme.getLight(lightPrimaryColor),
     },
   });
-
-  return {
-    dark: darkTheme,
-    light: lightTheme,
-  };
 };
