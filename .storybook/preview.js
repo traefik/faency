@@ -1,6 +1,8 @@
 import { FaencyProvider } from '../components/FaencyProvider';
 import { DocsContainer } from './components/DocContainer';
 import { globalCss } from '../';
+import { darkTheme, lightTheme } from '../stitches.config';
+import { useEffect } from 'react';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -25,10 +27,17 @@ const globalStyle = globalCss({
 });
 
 export const decorators = [
-  (renderStory) => (
-    <FaencyProvider primaryColor="neon">
-      {globalStyle()}
-      {renderStory()}
-    </FaencyProvider>
-  ),
+  (renderStory) => {
+    useEffect(() => {
+      darkTheme('neon').toString();
+      lightTheme('neon').toString();
+    }, []);
+
+    return (
+      <FaencyProvider>
+        {globalStyle()}
+        {renderStory()}
+      </FaencyProvider>
+    );
+  },
 ];
