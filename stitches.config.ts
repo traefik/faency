@@ -1,6 +1,6 @@
 import { ComponentProps, JSXElementConstructor } from 'react';
 import type * as Stitches from '@stitches/react';
-import { createStitches, CSS as StitchesCSS } from '@stitches/react';
+import { createStitches, CSS as StitchesCSS, VariantProps } from '@stitches/react';
 
 import { Theme as AccordionTheme } from './components/Accordion/Accordion.themes';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
@@ -263,8 +263,8 @@ export type CSS<T = typeof stitches.config> = StitchesCSS<T>;
 
 export const { styled, css, createTheme, getCssText, globalCss, keyframes, config } = stitches;
 
-export type FaencyComponentProps<C = any> = Omit<ComponentProps<C>, 'css'>
-export type FaencyComponentPropsAndVariants<C = any, SC = any> = FaencyComponentProps<C> & VariantProps<SC>
+export type FaencyComponentProps<C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> = Omit<ComponentProps<C>, 'css'>
+export type FaencyComponentPropsAndVariants<C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>, SC = any> = FaencyComponentProps<C> & VariantProps<SC>
 
 
 export const utils = config.utils;

@@ -19,8 +19,8 @@ export interface HeadingVariants extends Omit<
   VariantProps<typeof Text>,
   'size'
 > { size?: HeadingSizeVariants }
-export interface HeadingProps extends FaencyComponentProps<typeof StyledHeading>,
-  HeadingVariants { as?: any, children?: React.ReactNode };
+export type HeadingProps = FaencyComponentProps<typeof StyledHeading> &
+  HeadingVariants & { as?: any, children?: React.ReactNode };
 
 
 export const Heading = React.forwardRef<React.ElementRef<typeof StyledHeading>, HeadingProps>(
