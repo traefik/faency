@@ -278,7 +278,7 @@ export const WithCaption: ComponentStory<any> = (args) => {
     <>
       <Flex direction="column" gap="4">
         <TableForStory {...args}>
-          <Caption>Caption child of table</Caption>
+          <Caption size="10">Caption child of table</Caption>
           <Thead>
             <Th>Firstname</Th>
             <Th>Lastname</Th>

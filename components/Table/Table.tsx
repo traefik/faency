@@ -1,10 +1,15 @@
 import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { Label } from '../Label';
+import { Text } from '../Text';
 
-export const Caption = styled('caption', {
+export const Caption = styled('caption', Text, {
+  display: 'table-caption',
   textAlign: 'start',
   marginBottom: '$5',
+  fontVariantNumeric: 'proportional-nums',
+  fontWeight: '$medium',
+  lineHeight: '1.25',
 });
 
 export const Tbody = styled('tbody', {
