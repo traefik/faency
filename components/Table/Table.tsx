@@ -20,6 +20,9 @@ export const Th = styled('th', Label, {
   // override Label
   display: 'table-cell',
 
+  borderTopLeftRadius: 'inherit',
+  borderTopRightRadius: 'inherit',
+
   textAlign: 'start',
   p: '$2 $3',
   borderBottom: '1px solid $tableRowBorder',
@@ -50,6 +53,7 @@ export const Th = styled('th', Label, {
 export const Td = styled('td', {
   p: '$5 $3',
   borderBottom: '1px solid $tableRowBorder',
+  borderRadius: 'inherit',
   fontSize: '$3',
   lineHeight: '16px',
   variants: {
@@ -77,6 +81,9 @@ export const Td = styled('td', {
 });
 
 export const Tr = styled('tr', {
+  borderBottomLeftRadius: 'inherit',
+  borderBottomRightRadius: 'inherit',
+
   '&:hover': {
     color: '$tableHoverText',
   },
@@ -117,6 +124,8 @@ export const Tr = styled('tr', {
 
 export const Tfoot = styled('tfoot', {
   position: 'relative',
+  borderBottomLeftRadius: 'inherit',
+  borderBottomRightRadius: 'inherit',
 
   '&::after': {
     pointerEvents: 'none',
@@ -124,6 +133,7 @@ export const Tfoot = styled('tfoot', {
     position: 'absolute',
     inset: 0,
     backgroundColor: '$tableFooterLayerBackground',
+    borderRadius: 'inherit',
   },
 
   [`& ${Td}`]: {
@@ -137,6 +147,8 @@ export const Tfoot = styled('tfoot', {
 
 export const Thead = styled('thead', {
   position: 'relative',
+  borderTopLeftRadius: 'inherit',
+  borderTopRightRadius: 'inherit',
 
   '&::after': {
     pointerEvents: 'none',
@@ -144,6 +156,8 @@ export const Thead = styled('thead', {
     position: 'absolute',
     inset: 0,
     backgroundColor: '$tableHeaderLayerBackground',
+    borderTopLeftRadius: 'inherit',
+    borderTopRightRadius: 'inherit',
   },
 
   [`& ${Th}`]: {

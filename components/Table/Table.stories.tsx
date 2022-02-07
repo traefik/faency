@@ -1,6 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
-import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr, Tfoot, Caption } from './Table';
+import {
+  Table,
+  TableProps,
+  TableVariants,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Tfoot,
+  Caption,
+} from './Table';
 import { Badge } from '../Badge';
 import { Flex } from '../Flex';
 import { Heading } from '../Heading';
@@ -217,15 +228,17 @@ Interactive.argTypes = {
   elevation: {
     control: 'inline-radio',
     options: ['1', '2', '3', '4', '5'],
-  }
-}
+  },
+};
 export const WithFooter: ComponentStory<any> = (args) => (
   <TableForStory {...args}>
     <Thead>
-      <Th>Firstname</Th>
-      <Th>Lastname</Th>
-      <Th>Status</Th>
-      <Th>Role</Th>
+      <Tr>
+        <Th>Firstname</Th>
+        <Th>Lastname</Th>
+        <Th>Status</Th>
+        <Th>Role</Th>
+      </Tr>
     </Thead>
     <Tbody>
       <Tr>
@@ -263,27 +276,27 @@ export const WithFooter: ComponentStory<any> = (args) => (
     </Tbody>
     <Tfoot>
       <Tr>
-        <Td colSpan={4}>
-          Footer information
-        </Td>
+        <Td colSpan={4}>Footer information</Td>
       </Tr>
     </Tfoot>
   </TableForStory>
-)
+);
 
 export const WithCaption: ComponentStory<any> = (args) => {
-  const id = "described-heading"
-  const title = 'Title not child of table'
+  const id = 'described-heading';
+  const title = 'Title not child of table';
   return (
     <>
       <Flex direction="column" gap="4">
         <TableForStory {...args}>
           <Caption size="10">Caption child of table</Caption>
           <Thead>
-            <Th>Firstname</Th>
-            <Th>Lastname</Th>
-            <Th>Status</Th>
-            <Th>Role</Th>
+            <Tr>
+              <Th>Firstname</Th>
+              <Th>Lastname</Th>
+              <Th>Status</Th>
+              <Th>Role</Th>
+            </Tr>
           </Thead>
           <Tbody>
             <Tr>
@@ -329,10 +342,12 @@ export const WithCaption: ComponentStory<any> = (args) => {
               <Caption>{title}</Caption>
             </VisuallyHidden>
             <Thead>
-              <Th>Firstname</Th>
-              <Th>Lastname</Th>
-              <Th>Status</Th>
-              <Th>Role</Th>
+              <Tr>
+                <Th>Firstname</Th>
+                <Th>Lastname</Th>
+                <Th>Status</Th>
+                <Th>Role</Th>
+              </Tr>
             </Thead>
             <Tbody>
               <Tr>
@@ -376,10 +391,12 @@ export const WithCaption: ComponentStory<any> = (args) => {
           </Heading>
           <TableForStory aria-describedby={id} {...args}>
             <Thead>
-              <Th>Firstname</Th>
-              <Th>Lastname</Th>
-              <Th>Status</Th>
-              <Th>Role</Th>
+              <Tr>
+                <Th>Firstname</Th>
+                <Th>Lastname</Th>
+                <Th>Status</Th>
+                <Th>Role</Th>
+              </Tr>
             </Thead>
             <Tbody>
               <Tr>
@@ -419,5 +436,5 @@ export const WithCaption: ComponentStory<any> = (args) => {
         </div>
       </Flex>
     </>
-  )
-}
+  );
+};
