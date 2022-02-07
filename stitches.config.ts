@@ -133,9 +133,9 @@ const stitches = createStitches({
     },
   },
   media: {
-    bp1: '(min-width: 520px)',
-    bp2: '(min-width: 900px)',
-    bp3: '(min-width: 1200px)',
+    bp1: '(min-width: 520px) and (max-width: 899px)',
+    bp2: '(min-width: 900px) and (max-width: 1199px)',
+    bp3: '(min-width: 1200px) and (max-width: 1799px)',
     bp4: '(min-width: 1800px)',
     motion: '(prefers-reduced-motion)',
     hover: '(any-hover: hover)',
