@@ -6,7 +6,7 @@ import { Label } from '../Label';
 import { Text } from '../Text';
 import { Popover, PopoverTrigger, PopoverContent } from '../Popover';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
-import { MagnifyingGlassIcon, InfoCircledIcon, CopyIcon } from '@radix-ui/react-icons';
+import { MagnifyingGlassIcon, InfoCircledIcon, CopyIcon, CheckCircledIcon } from '@radix-ui/react-icons';
 import { styled } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import ignoreArgType from '../../utils/ignoreArgType';
@@ -80,12 +80,17 @@ const StyledCopyIcon = styled(CopyIcon, {
 
 export const ReadOnlyCopy: ComponentStory<typeof TextFieldForStory> = (args) => {
   const toCopy = 'Text to copy';
+  const [copied, setCopied] = useState(false);
 
   const onCopy = useCallback(
     async () => {
       await navigator.clipboard.writeText(toCopy)
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
     },
-    [toCopy],
+    [toCopy, setCopied],
   );
 
   return (
@@ -95,8 +100,10 @@ export const ReadOnlyCopy: ComponentStory<typeof TextFieldForStory> = (args) => 
         label="readOnly Copy"
         value={toCopy}
         readOnly
-        endAdornment={(
-          <StyledCopyIcon onClick={onCopy} />
+        endAdornment={copied ? (
+          <CheckCircledIcon aria-label='Copied' />
+        ) : (
+          <StyledCopyIcon aria-label='Copy' onClick={onCopy} />
         )}
         {...args}
       />
