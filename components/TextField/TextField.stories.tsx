@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Flex } from '../Flex';
@@ -6,7 +6,7 @@ import { Label } from '../Label';
 import { Text } from '../Text';
 import { Popover, PopoverTrigger, PopoverContent } from '../Popover';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
-import { MagnifyingGlassIcon, InfoCircledIcon } from '@radix-ui/react-icons';
+import { MagnifyingGlassIcon, InfoCircledIcon, CopyIcon } from '@radix-ui/react-icons';
 import { styled } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import ignoreArgType from '../../utils/ignoreArgType';
@@ -69,6 +69,40 @@ ignoreArgType('id', Disabled);
 export const ReadOnly = Basic.bind({});
 ReadOnly.args = { id: 'readonly', readOnly: true };
 ignoreArgType('id', ReadOnly);
+
+const StyledCopyIcon = styled(CopyIcon, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
+});
+
+export const ReadOnlyCopy: ComponentStory<typeof TextFieldForStory> = (args) => {
+  const toCopy = 'Text to copy';
+
+  const onCopy = useCallback(
+    async () => {
+      await navigator.clipboard.writeText(toCopy)
+    },
+    [toCopy],
+  );
+
+  return (
+    <Flex direction="column" gap={2}>
+      <TextFieldForStory
+        id={`readOnly-copy`}
+        label="readOnly Copy"
+        value={toCopy}
+        readOnly
+        endAdornment={(
+          <StyledCopyIcon onClick={onCopy} />
+        )}
+        {...args}
+      />
+    </Flex>
+  );
+}
 
 export const Display: ComponentStory<typeof TextFieldForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>
