@@ -18,6 +18,7 @@ import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
 import { Theme as TooltipTheme } from './components/Tooltip/Tooltip.themes';
+import { Theme as ToolbarTheme } from './components/Toolbar/Toolbar.themes';
 import { Theme as TextareaTheme } from './components/Textarea/Textarea.themes';
 
 import { lightColors, darkColors } from './colors';
@@ -65,6 +66,7 @@ const stitches = createStitches({
       ...DialogTheme.getLight(defaultPrimaryColor),
       ...IconButtonTheme.getLight(defaultPrimaryColor),
       ...TooltipTheme.getLight(defaultPrimaryColor),
+      ...ToolbarTheme.getLight(defaultPrimaryColor),
       ...TextareaTheme.getLight(defaultPrimaryColor),
     },
     fonts: {
@@ -294,6 +296,7 @@ export const darkTheme = (primary: PrimaryColor) => {
       ...DialogTheme.getDark(darkPrimaryColor),
       ...NavigationTheme.getDark(darkPrimaryColor),
       ...TooltipTheme.getDark(darkPrimaryColor),
+      ...ToolbarTheme.getDark(darkPrimaryColor),
       ...TextareaTheme.getDark(darkPrimaryColor),
     },
   });
@@ -322,6 +325,7 @@ export const lightTheme = (primary: PrimaryColor) => {
       ...DialogTheme.getLight(lightPrimaryColor),
       ...NavigationTheme.getLight(lightPrimaryColor),
       ...TooltipTheme.getLight(lightPrimaryColor),
+      ...ToolbarTheme.getLight(lightPrimaryColor),
       ...TextareaTheme.getLight(lightPrimaryColor),
     },
   });

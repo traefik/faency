@@ -58,6 +58,7 @@ export { Switch } from './components/Switch';
 export { Caption as AriaCaption, Tbody as AriaTbody, Tfoot as AriaTfoot, Tr as AriaTr, Th as AriaTh, Td as AriaTd, Thead as AriaThead, Table as AriaTable } from './components/AriaTable'
 export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Table';
 export { Text } from './components/Text';
+export { Toolbar, ToolbarButton, ToolbarLink, ToolbarSeparator } from './components/Toolbar';
 export { Tooltip } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
 
