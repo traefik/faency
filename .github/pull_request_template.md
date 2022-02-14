@@ -36,6 +36,7 @@ For added dependencies, it's nice to have a description of why it was needed.
 
 <!--
 Please mention any breaking changes. It's important to have a complete description of the change for reviewers to validate.
+Once your PR is merged, an automatic release will be issued. Please add this section to its content.
 -->
 
 ## How to test?
