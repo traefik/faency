@@ -111,5 +111,8 @@
       "@semantic-release/npm",
       "@semantic-release/github"
     ]
+  },
+  "engines": {
+    "node": ">=14.17.0"
   }
 }
