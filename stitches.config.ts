@@ -9,6 +9,7 @@ import { Theme as SwitchTheme } from './components/Switch/Switch.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
 import { Theme as LinkTheme } from './components/Link/Link.themes';
+import { Theme as ListTheme } from './components/List/List.themes';
 import { Theme as RadioTheme } from './components/Radio/Radio.themes';
 import { Theme as TextTheme } from './components/Text/Text.themes';
 import { Theme as InputTheme } from './components/Input/Input.themes';
@@ -56,6 +57,7 @@ const stitches = createStitches({
       ...CardTheme.getLight(defaultPrimaryColor),
       ...CheckboxTheme.getLight(defaultPrimaryColor),
       ...LinkTheme.getLight(defaultPrimaryColor),
+      ...ListTheme.getLight(defaultPrimaryColor),
       ...RadioTheme.getLight(defaultPrimaryColor),
       ...InputTheme.getLight(defaultPrimaryColor),
       ...TableTheme.getLight(defaultPrimaryColor),
@@ -285,6 +287,7 @@ export const darkTheme = (primary: PrimaryColor) => {
       ...CardTheme.getDark(darkPrimaryColor),
       ...CheckboxTheme.getDark(darkPrimaryColor),
       ...LinkTheme.getDark(darkPrimaryColor),
+      ...ListTheme.getDark(darkPrimaryColor),
       ...RadioTheme.getDark(darkPrimaryColor),
       ...InputTheme.getDark(darkPrimaryColor),
       ...TableTheme.getDark(darkPrimaryColor),
@@ -313,6 +316,7 @@ export const lightTheme = (primary: PrimaryColor) => {
       ...CardTheme.getLight(lightPrimaryColor),
       ...CheckboxTheme.getLight(lightPrimaryColor),
       ...LinkTheme.getLight(lightPrimaryColor),
+      ...ListTheme.getLight(lightPrimaryColor),
       ...RadioTheme.getLight(lightPrimaryColor),
       ...InputTheme.getLight(lightPrimaryColor),
       ...TableTheme.getLight(lightPrimaryColor),
