@@ -24,10 +24,10 @@
     "isolatedModules": true,
     "paths": {
       "@emotion/core": [
-        "./types.d.ts"
+        "./types/index.d.ts"
       ],
       "@storybook/theming": [
-        "./types.d.ts"
+        "./types/index.d.ts"
       ]
     }
   },
