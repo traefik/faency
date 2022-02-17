@@ -236,7 +236,7 @@ export const Select = React.forwardRef<React.ElementRef<typeof StyledSelect>, Se
   ({ css, size, state, variant, cursor, ...props }, forwardedRef) => {
     return (
       <SelectWrapper
-        css={css as any}
+        css={css}
         size={size}
         state={state}
         variant={variant}

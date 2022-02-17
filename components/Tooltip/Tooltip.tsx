@@ -49,7 +49,7 @@ export function Tooltip({
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 
       <Content
-        css={css as any}
+        css={css}
         side="top"
         align="center"
         sideOffset={5}
@@ -62,7 +62,7 @@ export function Tooltip({
             as="p"
             css={{
               color: 'currentColor',
-              lineHeight: multiline ? '20px' : (undefined as any),
+              lineHeight: multiline ? '20px' : undefined,
             }}
           >
             {content}

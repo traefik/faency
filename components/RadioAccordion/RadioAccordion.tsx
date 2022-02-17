@@ -12,7 +12,7 @@ export const RadioAccordionRoot: (props: RadioAccordionRootProps) => JSX.Element
 export const RadioAccordionItem = React.forwardRef<React.ElementRef<typeof AccordionItem>, ComponentProps<typeof AccordionItem>>(({ value, children, ...props }, forwardedRef) => {
 
   return (
-    <AccordionItem value={value} ref={forwardedRef} css={{ display: 'inherit', flexDirection: 'column' } as any} {...props}>
+    <AccordionItem value={value} ref={forwardedRef} css={{ display: 'inherit', flexDirection: 'column' }} {...props}>
       {children}
     </AccordionItem>
   );

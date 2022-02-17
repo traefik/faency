@@ -263,14 +263,14 @@ export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>
     );
 
     return (
-      <Box css={rootCss as any}>
+      <Box css={rootCss}>
         {label && (
           <Label variant={labelVariant} htmlFor={id} css={{ display: 'block' }}>
             {label}
           </Label>
         )}
         <TextareaWrapper state={state} disabled={disabled}>
-          <StyledTextarea id={id} ref={forwardedRef} css={css as any}
+          <StyledTextarea id={id} ref={forwardedRef} css={css}
             disabled={disabled}
             state={state}
             onFocus={handleFocus} onBlur={handleBlur}
