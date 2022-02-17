@@ -15,7 +15,6 @@ import {
 } from './Navigation';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Badge } from '../Badge';
-import { Text } from '../Text';
 
 export default {
   title: 'Components/NavigationItem',
@@ -52,7 +51,7 @@ const NavigationItemForStory = modifyVariantsForStory<NavigationItemVariants, Na
   BaseNavigationItem
 );
 
-const Template: ComponentStory<typeof NavigationItemForStory> = (args) => (
+const Template: ComponentStory<typeof NavigationItem> = (args) => (
   <NavigationDrawer css={{ height: '200px' }}>
     <NavigationItem
       {...args}
@@ -80,9 +79,39 @@ const Template: ComponentStory<typeof NavigationItemForStory> = (args) => (
 export const Basic = Template.bind({});
 
 Basic.args = {
-  as: 'button',
+  as: 'a',
   href: '#',
   startAdornment: 'Gear',
   endAdornment: 1,
   active: false,
 };
+
+export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => (
+  <NavigationDrawer css={{ height: '200px' }}>
+    <NavigationItem
+      {...args}
+      onClick={console.log}
+      onMouseEnter={console.log}
+      onMouseLeave={console.log}
+    >
+      Navigation Item
+    </NavigationItem>
+  </NavigationDrawer>
+);
+ButtonProps.args = {
+  as: 'button'
+}
+
+export const LinkProps: ComponentStory<typeof NavigationItem> = (args) => (
+  <NavigationDrawer css={{ height: '200px' }}>
+    <NavigationItem
+      as="a"
+      href="https://traefik.io"
+    >
+      Navigation Item
+    </NavigationItem>
+  </NavigationDrawer>
+);
+LinkProps.args = {
+  as: 'a'
+}
