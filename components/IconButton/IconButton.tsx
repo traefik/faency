@@ -1,5 +1,4 @@
-import { VariantProps } from '@stitches/react';
-import { styled } from '../../stitches.config';
+import { styled, VariantProps } from '../../stitches.config';
 
 export const IconButton = styled('button', {
   // Reset

@@ -1,6 +1,5 @@
-import { VariantProps } from '@stitches/react';
 import React from 'react';
-import { styled, keyframes, CSS } from '../../stitches.config';
+import { styled, keyframes, CSS, VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const StyledButton = styled('button', {

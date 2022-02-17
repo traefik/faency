@@ -1,8 +1,7 @@
 import React from 'react';
-import { VariantProps, CSS } from '@stitches/react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
-import { styled } from '../../stitches.config';
+import { styled, CSS, VariantProps } from '../../stitches.config';
 import { Text } from '../Text';
 import { Box } from '../Box';
 

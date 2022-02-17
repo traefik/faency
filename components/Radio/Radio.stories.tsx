@@ -1,10 +1,9 @@
 import React from 'react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps } from '../../stitches.config';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Radio, RadioVariants, RadioProps, RadioGroup } from './Radio';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { type } from 'os';
 
 const BaseRadio = (props: RadioProps): JSX.Element => <Radio {...props} />;
 const RadioForStory = modifyVariantsForStory<RadioVariants, RadioProps>(BaseRadio);

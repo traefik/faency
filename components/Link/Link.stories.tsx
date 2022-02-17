@@ -1,6 +1,6 @@
 import React, { LinkHTMLAttributes } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Link } from './Link';

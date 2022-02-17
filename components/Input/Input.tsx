@@ -1,6 +1,5 @@
 import React from 'react';
-import { VariantProps } from '@stitches/react';
-import { styled, CSS } from '../../stitches.config';
+import { styled, CSS, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 
 // CONSTANTS
