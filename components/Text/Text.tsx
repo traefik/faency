@@ -1,5 +1,4 @@
-import { VariantProps } from '@stitches/react';
-import { styled } from '../../stitches.config';
+import { styled, CSS, VariantProps } from '../../stitches.config';
 
 export const Text = styled('span', {
   // Reset
@@ -105,4 +104,4 @@ export const Text = styled('span', {
 });
 
 export type TextVariants = VariantProps<typeof Text>;
-export type TextProps = TextVariants & {};
+export type TextProps = TextVariants & { css?: CSS };

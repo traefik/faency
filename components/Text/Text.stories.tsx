@@ -103,3 +103,7 @@ export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => 
     </TextForStory>
   </>
 );
+
+export const Customize: ComponentStory<typeof TextForStory> = (args) => (
+  <TextForStory css={{ fontWeight: '$semiBold' }} {...args}>SemiBold</TextForStory>
+);

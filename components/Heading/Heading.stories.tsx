@@ -14,7 +14,7 @@ export default {
 } as ComponentMeta<typeof HeadingForStory>;
 
 const Template: ComponentStory<typeof HeadingForStory> = (args) => (
-  <HeadingForStory {...args}>Title {args?.size}</HeadingForStory>
+  <HeadingForStory  {...args}>Title {args?.size}</HeadingForStory>
 );
 
 export const Basic = Template.bind({});
@@ -28,4 +28,8 @@ export const Size: ComponentStory<typeof HeadingForStory> = ({ size, ...args }) 
     <Template {...args} size="3" />
     <Template {...args} size="4" />
   </>
+);
+
+export const Customize: ComponentStory<typeof HeadingForStory> = (args) => (
+  <HeadingForStory css={{ fontWeight: '$semiBold' }} {...args}>SemiBold</HeadingForStory>
 );
