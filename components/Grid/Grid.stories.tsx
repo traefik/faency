@@ -40,3 +40,7 @@ Basic.args = {
   columns: '3',
   gap: '6',
 };
+
+const Customize: ComponentStory<typeof Grid> = (args) => (
+  <Grid {...args} css={{ c: '$hiContrast' }} />
+)

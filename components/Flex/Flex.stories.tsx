@@ -22,3 +22,7 @@ Basic.args = {
   align: 'center',
   gap: '6',
 };
+
+const Customize: ComponentStory<typeof Flex> = (args) => (
+  <Flex {...args} css={{ c: '$hiContrast' }} />
+)

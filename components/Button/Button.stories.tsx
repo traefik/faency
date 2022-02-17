@@ -86,3 +86,7 @@ export const Waiting = Template.bind({});
 Waiting.args = {
   state: 'waiting',
 };
+
+const Customize: ComponentStory<typeof ButtonForStory> = (args) => (
+  <ButtonForStory css={{ c: '$hiContrast' }} {...args}>Button</ButtonForStory>
+);

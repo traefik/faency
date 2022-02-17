@@ -197,3 +197,8 @@ LabelComponent.args = {
   label: label,
 }
 ignoreArgType('id', LabelComponent);
+
+
+const Customize: ComponentStory<typeof TextFieldForStory> = (args) => (
+  <TextFieldForStory css={{ c: '$hiContrast' }} {...args} />
+);

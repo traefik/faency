@@ -45,3 +45,10 @@ Disabled.args = {
   disabled: true,
   size: 2,
 };
+
+const Customize: ComponentStory<typeof RadioForStory> = ({ value, ...args }) => (
+  <RadioGroup css={{ c: '$hiContrast' }} defaultValue="1">
+    <RadioForStory value="1" css={{ mr: '$5' }} {...args} />
+    <RadioForStory value="2" css={{ mr: '$5' }} {...args} />
+  </RadioGroup>
+);

@@ -66,3 +66,7 @@ Sizes.argTypes = {
     control: 'select',
   },
 };
+
+const Customize: ComponentStory<typeof BubbleForStory> = (args) => (
+  <Bubble {...args} css={{ c: '$hiContrast' }} />
+);

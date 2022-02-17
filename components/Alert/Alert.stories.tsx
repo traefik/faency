@@ -14,7 +14,7 @@ export default {
 } as ComponentMeta<typeof AlertForStory>;
 
 export const Variants: ComponentStory<typeof AlertForStory> = (args) => (
-  <AlertForStory {...args}>
+  <Alert {...args}>
     <Heading size="2" css={{ mb: '$3' }}>
       Alert
     </Heading>
@@ -25,7 +25,7 @@ export const Variants: ComponentStory<typeof AlertForStory> = (args) => (
       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
       non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </Text>
-  </AlertForStory>
+  </Alert>
 );
 
 Variants.args = {
@@ -38,3 +38,19 @@ Variants.argTypes = {
     options: ['gray', 'info', 'success', 'warning', 'error'],
   },
 };
+
+
+const Customize: ComponentStory<typeof AlertForStory> = (args) => (
+  <Alert {...args} css={{ mt: '$1' }}>
+    <Heading size="2" css={{ mb: '$3' }}>
+      Alert
+    </Heading>
+    <Text css={{ mb: '$3' }}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+      non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </Text>
+  </Alert>
+);

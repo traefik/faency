@@ -1,6 +1,6 @@
 import React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { keyframes, styled, VariantProps } from '../../stitches.config';
+import { keyframes, styled, VariantProps, CSS } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 
@@ -134,7 +134,7 @@ const StyledAccordionContentWrapper = styled('div', {
 // EXPORTS
 export const AccordionRoot = StyledAccordionRoot;
 export const AccordionItem = StyledAccordionItem;
-export type AccordionTriggerProps = VariantProps<typeof StyledAccordionTrigger> & {
+export type AccordionTriggerProps = React.ComponentProps<typeof StyledAccordionTrigger> & VariantProps<typeof StyledAccordionTrigger> & {
   children: React.ReactNode
 }
 export const AccordionTrigger = React.forwardRef<
@@ -147,8 +147,9 @@ export const AccordionTrigger = React.forwardRef<
     </StyledAccordionHeader>
   ));
 
-export type AccordionContentProps = VariantProps<typeof StyledAccordionContent> & VariantProps<typeof StyledAccordionContentWrapper> & {
+export type AccordionContentProps = VariantProps<typeof StyledAccordionContent> & Pick<VariantProps<typeof StyledAccordionContentWrapper>, 'size'> & {
   children: React.ReactNode
+  css?: CSS
 }
 export const AccordionContent = React.forwardRef<React.ElementRef<typeof StyledAccordionContent>, AccordionContentProps>(({ children, size, ...props }, forwardedRef) => (
   <StyledAccordionContent {...props} ref={forwardedRef}>

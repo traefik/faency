@@ -260,3 +260,7 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
     </Flex>
   </form>
 );
+
+const Customize: ComponentStory<typeof InputForStory> = ({ id, ...args }) => (
+  <InputForStory css={{ c: '$hiContrast' }} {...args} />
+)

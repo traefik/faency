@@ -76,3 +76,7 @@ Basic.argTypes = {
     options: [0, 1, 2, 3, 4, 5],
   },
 };
+
+const Customize: ComponentStory<typeof Elevation> = () => (
+  <Elevation css={{ c: '$hiContrast' }} variant={0} />
+)

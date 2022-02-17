@@ -77,3 +77,7 @@ Interactive.args = {
   size: 'small',
   variant: 'gray',
 };
+
+const Customize: ComponentStory<typeof BadgeForStory> = (args) => (
+  <Badge css={{ c: '$hiContrast' }} {...args}>Customize</Badge>
+);

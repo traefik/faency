@@ -90,3 +90,8 @@ export const Ghost: ComponentStory<typeof TextareaForStory> = (args) => (
   </Flex>
 );
 Ghost.args = { defaultValue: 'default value', variant: 'ghost', rows: 2 };
+
+
+const Customize: ComponentStory<typeof TextareaForStory> = (args) => (
+  <Textarea {...args} css={{ c: '$hiContrast' }} />
+);

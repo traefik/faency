@@ -74,3 +74,7 @@ Variants.argTypes = {
     control: 'boolean',
   },
 };
+
+const Customize: ComponentStory<any> = (args) => (
+  <IconButton css={{ c: '$hiContrast' }} {...args} size="1"></IconButton>
+)

@@ -112,3 +112,5 @@ LabelAndTitle.args = {
   disabled: false,
 }
 ignoreArgType('id', LabelAndTitle);
+
+const Customize: ComponentStory<typeof SwitchForStory> = (args) => <SwitchForStory css={{ c: '$hiContrast' }} {...args} />;
