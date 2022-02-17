@@ -14,7 +14,7 @@ export default {
 } as ComponentMeta<typeof HeadingForStory>;
 
 const Template: ComponentStory<typeof HeadingForStory> = (args) => (
-  <HeadingForStory  {...args}>Title {args?.size}</HeadingForStory>
+  <HeadingForStory {...args}>Title {args?.size}</HeadingForStory>
 );
 
 export const Basic = Template.bind({});
