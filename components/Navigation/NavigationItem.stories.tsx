@@ -86,13 +86,15 @@ Basic.args = {
   active: false,
 };
 
-export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => (
+export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => {
+  const noop = () => undefined;
+  return (
   <NavigationDrawer css={{ height: '200px' }}>
     <NavigationItem
       {...args}
-      onClick={console.log}
-      onMouseEnter={console.log}
-      onMouseLeave={console.log}
+      onClick={noop}
+      onMouseEnter={noop}
+      onMouseLeave={noop}
     >
       Navigation Item
     </NavigationItem>
@@ -100,7 +102,7 @@ export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => (
 );
 ButtonProps.args = {
   as: 'button'
-}
+}}
 
 export const LinkProps: ComponentStory<typeof NavigationItem> = (args) => (
   <NavigationDrawer css={{ height: '200px' }}>
