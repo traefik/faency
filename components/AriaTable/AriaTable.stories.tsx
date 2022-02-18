@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr, Caption } from './AriaTable';
+import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr, Caption, Tfoot } from './AriaTable';
 import { Badge } from '../Badge';
+import { Button } from '../Button';
 import { Card } from '../Card';
 import { UnstyledLink } from '../Link';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -60,6 +61,19 @@ export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
           <Td>Star wars</Td>
         </Tr>
       </Tbody>
+      <Tfoot>
+        <Tr>
+          <Td css={{ textAlign: 'center', columnSpan: 'all' }}>
+            <Button
+              ghost
+              variant="secondary"
+              css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
+            >
+              Load more...
+            </Button>
+          </Td>
+        </Tr>
+      </Tfoot>
     </TableForStory>
   </Card>
 );
@@ -217,6 +231,69 @@ export const Links: ComponentStory<any> = (args) => (
           </UnstyledLink>
         </Tr>
       </Tbody>
+    </TableForStory>
+  </Card>
+)
+
+const Customize: ComponentStory<any> = (args) => (
+  <Card>
+    <TableForStory css={{ c: '$hiContrast' }} aria-label="People" aria-describedby="basic-table-caption" {...args}>
+      <Caption css={{ c: '$hiContrast' }} id="basic-table-caption">People with some information</Caption>
+      <Thead css={{ c: '$hiContrast' }}>
+        <Tr css={{ c: '$hiContrast' }}>
+          <Th css={{ c: '$hiContrast' }}>first name</Th>
+          <Th >last name</Th>
+          <Th >Status</Th>
+          <Th >Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody css={{ c: '$hiContrast' }}>
+        <Tr>
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr>
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Luke</Td>
+          <Td>Skywalker</Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
+          <Td>Star wars</Td>
+        </Tr>
+      </Tbody>
+      <Tfoot css={{ c: '$hiContrast' }}>
+        <Tr>
+          <Td css={{ textAlign: 'center', columnSpan: 'all' }}>
+            <Button
+              ghost
+              variant="secondary"
+              css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
+            >
+              Load more...
+            </Button>
+          </Td>
+        </Tr>
+      </Tfoot>
     </TableForStory>
   </Card>
 )

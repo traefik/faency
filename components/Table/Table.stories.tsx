@@ -438,3 +438,56 @@ export const WithCaption: ComponentStory<any> = (args) => {
     </>
   );
 };
+
+
+const Customize: ComponentStory<any> = (args) => (
+  <TableForStory css={{ c: '$hiContrast' }} {...args}>
+    <Thead css={{ c: '$hiContrast' }}>
+      <Tr css={{ c: '$hiContrast' }}>
+        <Th css={{ c: '$hiContrast' }}>Firstname</Th>
+        <Th>Lastname</Th>
+        <Th>Status</Th>
+        <Th>Role</Th>
+      </Tr>
+    </Thead>
+    <Tbody css={{ c: '$hiContrast' }}>
+      <Tr css={{ c: '$hiContrast' }}>
+        <Td css={{ c: '$hiContrast' }}>John</Td>
+        <Td>Doe</Td>
+        <Td>
+          <Badge variant="green">Connected</Badge>
+        </Td>
+        <Td>Developer</Td>
+      </Tr>
+      <Tr>
+        <Td>Johny</Td>
+        <Td>Depp</Td>
+        <Td>
+          <Badge variant="orange">AFK</Badge>
+        </Td>
+        <Td>Actor</Td>
+      </Tr>
+      <Tr>
+        <Td>Natalie</Td>
+        <Td>Portman</Td>
+        <Td>
+          <Badge variant="green">Connected</Badge>
+        </Td>
+        <Td>Actor</Td>
+      </Tr>
+      <Tr>
+        <Td>Luke</Td>
+        <Td>Skywalker</Td>
+        <Td>
+          <Badge variant="red">Disconnected</Badge>
+        </Td>
+        <Td>Star wars</Td>
+      </Tr>
+    </Tbody>
+    <Tfoot css={{ c: '$hiContrast' }}>
+      <Tr>
+        <Td colSpan={4}>Footer information</Td>
+      </Tr>
+    </Tfoot>
+  </TableForStory>
+);

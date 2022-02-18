@@ -89,3 +89,4 @@ Variants.argTypes = {
     options: ['gray', 'red', 'purple', 'blue', 'green', 'orange'],
   },
 };
+const Customize: ComponentStory<typeof Avatar> = (args) => <Avatar css={{ c: '$hiContrast' }} {...args} />;

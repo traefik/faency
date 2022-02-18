@@ -29,3 +29,7 @@ export const Size: ComponentStory<typeof HeadingForStory> = ({ size, ...args }) 
     <Template {...args} size="4" />
   </>
 );
+
+const Customize: ComponentStory<typeof HeadingForStory> = (args) => (
+  <HeadingForStory css={{ fontWeight: '$semiBold' }} {...args}>SemiBold</HeadingForStory>
+);

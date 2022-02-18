@@ -15,10 +15,29 @@
     "strict": true,
     "target": "es5",
     "noImplicitAny": false,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "@emotion/core": [
+        "./types/index.d.ts"
+      ],
+      "@storybook/theming": [
+        "./types/index.d.ts"
+      ]
+    }
   },
-  "exclude": ["node_modules", "pages"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": [
+    "node_modules",
+    "pages"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Label } from './Label';
@@ -23,9 +23,9 @@ export default {
 
 const Template: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
   <Box>
-    <LabelForStory htmlFor={id} css={{ mr: '$2' }} {...args}>
+    <Label htmlFor={id} css={{ mr: '$2' }} {...args}>
       Email field
-    </LabelForStory>
+    </Label>
     <input id={id} name="email" type="email" />
   </Box>
 );
@@ -68,9 +68,9 @@ ignoreArgType('id', Invalid);
 
 export const Disabled: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
   <Box>
-    <LabelForStory htmlFor={id} css={{ mr: '$2' }} variant="subtle" {...args}>
+    <Label htmlFor={id} css={{ mr: '$2' }} variant="subtle" {...args}>
       Email field
-    </LabelForStory>
+    </Label>
     <input id={id} name="email" type="email" disabled />
   </Box>
 );
@@ -92,9 +92,9 @@ export const FocusContrast: ComponentStory<typeof LabelForStory> = ({ id, ...arg
 
   return (
     <Box>
-      <LabelForStory variant={hasFocus ? 'contrast' : 'default'} htmlFor={id} css={{ mr: '$2' }} {...args}>
+      <Label variant={hasFocus ? 'contrast' : 'default'} htmlFor={id} css={{ mr: '$2' }} {...args}>
         Email field
-      </LabelForStory>
+      </Label>
       <input id={id} name="email" type="email" onFocus={onFocus} onBlur={onBlur} />
     </Box>
   );

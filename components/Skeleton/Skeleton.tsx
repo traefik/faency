@@ -1,5 +1,4 @@
-import { keyframes, styled } from '../../stitches.config';
-import { VariantProps } from '@stitches/react';
+import { keyframes, styled, VariantProps } from '../../stitches.config';
 
 const pulse = keyframes({
   '0%': { opacity: 0 },

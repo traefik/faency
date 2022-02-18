@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps } from '../../stitches.config';
 import { Badge, COLORS } from './Badge';
 import { Flex } from '../Flex';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -77,3 +77,7 @@ Interactive.args = {
   size: 'small',
   variant: 'gray',
 };
+
+const Customize: ComponentStory<typeof BadgeForStory> = (args) => (
+  <Badge css={{ c: '$hiContrast' }} {...args}>Customize</Badge>
+);

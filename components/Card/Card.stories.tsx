@@ -138,3 +138,7 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
 );
 
 Elevation.args = {};
+
+const Customize: ComponentStory<any> = (args) => (
+  <Card css={{ c: '$hiContrast' }} {...args}></Card>
+)

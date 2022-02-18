@@ -122,3 +122,22 @@ Complex.argTypes = {
     options: ['small', 'medium', 'large'],
   }
 }
+
+const Customize: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) => (
+  <Box css={{ width: 300 }}>
+    <AccordionForStory css={{ maxWidth: 250 }} {...args}>
+      <AccordionItem css={{ bc: '$hiContrast' }} value="item-1">
+        <AccordionTrigger css={{ c: '$hiContrast' }} size={size}>Item1 Trigger</AccordionTrigger>
+        <AccordionContent css={{ c: '$hiContrast' }} size={size}>Item1 Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger size={size}>Item2 Trigger</AccordionTrigger>
+        <AccordionContent size={size}>Item2 Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger size={size}>Item3 Trigger</AccordionTrigger>
+        <AccordionContent size={size}>Item3 Content</AccordionContent>
+      </AccordionItem>
+    </AccordionForStory>
+  </Box>
+)

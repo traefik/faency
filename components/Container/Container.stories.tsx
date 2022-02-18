@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Container } from './Container';
@@ -21,7 +21,7 @@ export default {
 } as ComponentMeta<typeof ContainerForStory>;
 
 const Template: ComponentStory<typeof ContainerForStory> = (args) => (
-  <ContainerForStory {...args} css={{ bc: '$deepBlue3' }}>
+  <Container {...args} css={{ bc: '$deepBlue3' }}>
     <Paragraph>
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, iste. Perferendis saepe aperiam
       repudiandae, a ea labore error iure! Doloribus sunt earum, aperiam facilis ex corporis veniam
@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof ContainerForStory> = (args) => (
       minus error dolorem? Explicabo iure quidem, maxime fugit quos obcaecati, molestiae nemo nobis
       aliquid saepe, impedit at.
     </Paragraph>
-  </ContainerForStory>
+  </Container>
 );
 
 export const Basic = Template.bind({});

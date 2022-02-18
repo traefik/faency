@@ -1,8 +1,7 @@
 import React from 'react';
-import { VariantProps, CSS } from '@stitches/react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
-import { styled } from '../../stitches.config';
+import { styled, CSS, VariantProps } from '../../stitches.config';
 import { Text } from '../Text';
 import { Box } from '../Box';
 
@@ -50,7 +49,7 @@ export function Tooltip({
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 
       <Content
-        css={css as any}
+        css={css}
         side="top"
         align="center"
         sideOffset={5}
@@ -63,7 +62,7 @@ export function Tooltip({
             as="p"
             css={{
               color: 'currentColor',
-              lineHeight: multiline ? '20px' : (undefined as any),
+              lineHeight: multiline ? '20px' : undefined,
             }}
           >
             {content}

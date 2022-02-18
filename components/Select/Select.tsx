@@ -1,7 +1,6 @@
 import React from 'react';
-import { styled, CSS } from '../../stitches.config';
+import { styled, CSS, VariantProps } from '../../stitches.config';
 import { CaretSortIcon } from '@radix-ui/react-icons';
-import { VariantProps } from '@stitches/react';
 import { elevationVariants } from '../Elevation';
 
 // CONSTANTS
@@ -237,7 +236,7 @@ export const Select = React.forwardRef<React.ElementRef<typeof StyledSelect>, Se
   ({ css, size, state, variant, cursor, ...props }, forwardedRef) => {
     return (
       <SelectWrapper
-        css={css as any}
+        css={css}
         size={size}
         state={state}
         variant={variant}

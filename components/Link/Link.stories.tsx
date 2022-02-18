@@ -1,6 +1,6 @@
 import React, { LinkHTMLAttributes } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Link } from './Link';
@@ -33,3 +33,9 @@ export const Variant = Template.bind({});
 Variant.args = {
   variant: 'primary',
 };
+
+const Customize: ComponentStory<typeof LinkForStory> = (args) => (
+  <Link css={{ c: '$hiContraqt' }} href="https://traefik.io" {...args}>
+    https://traefik.io
+  </Link>
+);

@@ -1,5 +1,5 @@
 import React, { useMemo, ReactNode } from 'react';
-import { styled, css, VariantProps } from '../../stitches.config';
+import { styled, css, CSS, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
 
@@ -159,6 +159,7 @@ export type NavigationItemProps = {
   endAdornment?: ReactNode;
   children: ReactNode;
   href?: string;
+  css?: CSS
 } & StyledLinkVariants &
   StyledButtonVariants;
 

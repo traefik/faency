@@ -80,3 +80,12 @@ NodeContent.argTypes = {
     },
   },
 };
+
+
+const Customize: ComponentStory<typeof TooltipForStory> = (args) => (
+  <Container>
+    <TooltipForStory css={{ c: '$hiContrast' }} {...args}>
+      <Text css={{ display: 'inline-block' }}>Tooltip label</Text>
+    </TooltipForStory>
+  </Container>
+);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { VariantProps } from '@stitches/react';
+import { VariantProps } from '../../stitches.config';
 import { Bubble } from './Bubble';
 import { Flex } from '../Flex';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -66,3 +66,7 @@ Sizes.argTypes = {
     control: 'select',
   },
 };
+
+const Customize: ComponentStory<typeof BubbleForStory> = (args) => (
+  <Bubble {...args} css={{ c: '$hiContrast' }} />
+);
