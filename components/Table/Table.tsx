@@ -6,7 +6,6 @@ import { Text } from '../Text';
 export const Caption = styled('caption', Text, {
   display: 'table-caption',
   textAlign: 'start',
-  marginBottom: '$5',
   fontVariantNumeric: 'proportional-nums',
   fontWeight: '$medium',
   lineHeight: '1.25',
