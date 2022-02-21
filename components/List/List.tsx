@@ -1,5 +1,5 @@
 import React, { ComponentProps, createContext, ReactNode, useContext, useMemo } from 'react';
-import { styled, VariantProps } from '../../stitches.config';
+import { styled, VariantProps, CSS } from '../../stitches.config';
 import { BUTTON_BASE_STYLES } from '../Button';
 import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
@@ -99,9 +99,10 @@ const ListContext = createContext({
 });
 
 
-export interface ListProps extends Omit<ComponentProps<typeof StyledUl>, 'css'>, VariantProps<typeof StyledUl> { interactive?: boolean }
+export interface ListProps extends Omit<ComponentProps<typeof StyledUl>, 'css'>, VariantProps<typeof StyledUl> { interactive?: boolean, css?: CSS }
 export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>(({ interactive, ...props }, forwardedRef) => {
   const contextValue = useMemo(() => ({ interactive: !!interactive }), [interactive]);
+  
   return (
     <ListContext.Provider value={contextValue}>
       <StyledUl role="list" ref={forwardedRef} {...props} />
@@ -121,7 +122,10 @@ const ControlsWrapper = styled('div', {
   overflow: 'visible',
 });
 
-export interface ListItemProps extends Omit<ComponentProps<typeof StyledLi>, 'css'>, VariantProps<typeof StyledLi>, VariantProps<typeof Flex> { controls?: ReactNode }
+export interface ListItemProps extends Omit<ComponentProps<typeof StyledLi>, 'css'>, VariantProps<typeof StyledLi>, VariantProps<typeof Flex> { 
+  controls?: ReactNode
+  css?: CSS
+ }
 export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemProps>(({
   children, controls,
   align, justify, direction, gap, wrap,

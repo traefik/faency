@@ -25,6 +25,15 @@ const Template: ComponentStory<typeof Ul> = (args) => (
   </Ul>
 );
 
+const Customize:ComponentStory<typeof Ul> = (args) => (
+  <Ul css={{mt: '$1'}} {...args}>
+    <Li css={{color: '$hiContrast'}}>Dashboard</Li>
+    <Li>Profile</Li>
+    <Li>Settings</Li>
+    <Li>Help</Li>
+  </Ul>
+); 
+
 export const Basic = Template.bind({});
 
 export const Interactive = Template.bind({});
