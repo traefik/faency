@@ -17,7 +17,6 @@ const StyledTextarea = styled('textarea', {
   fontFamily: '$rubik',
   margin: '0',
   outline: 'none',
-  padding: '0',
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
   // Custom
@@ -115,6 +114,12 @@ const StyledTextarea = styled('textarea', {
       },
       horizontal: {
         resize: 'horizontal'
+      }
+    },
+    endAdornment: {
+      true: {
+        paddingBottom: '$5',
+        paddingRight: '$5',
       }
     }
   },
@@ -215,19 +220,34 @@ const TextareaWrapper = styled('div', {
   },
 });
 
-export interface TextareaVariants extends VariantProps<typeof StyledTextarea> { }
+const AdornmentWrapperEnd = styled('div', {
+  position: 'absolute',
+  bottom: '$2',
+  right: '$3',
+  minWidth: '$5',
+  minHeight: '$5',
+  zIndex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
 
-export interface TextareaProps extends TextareaVariants, Omit<React.ComponentProps<typeof StyledTextarea>, 'css'> {
+export interface TextareaVariants extends Omit<VariantProps<typeof StyledTextarea>, 'endAdornment'> { }
+
+export interface TextareaProps extends TextareaVariants, Omit<React.ComponentProps<typeof StyledTextarea>, 'css' | 'endAdornment'> {
   label?: string
-  rootCss?: CSS,
+  endAdornment?: React.ReactNode
+  rootCss?: CSS
   css?: CSS
 }
 
 export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>, TextareaProps>(
-  ({ state, disabled, onFocus, onBlur, label, id, rootCss, css, ...props }, forwardedRef) => {
+  ({ state, disabled, onFocus, onBlur, label, id, rootCss, css, endAdornment, ...props }, forwardedRef) => {
     const [hasFocus, setHasFocus] = React.useState(false);
 
     const invalid = React.useMemo(() => state === 'invalid', [state]);
+
+    const hasEndAdornment = React.useMemo(() => Boolean(endAdornment), [endAdornment]);
 
     const labelVariant = React.useMemo(() => {
       if (disabled) {
@@ -274,8 +294,10 @@ export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>
             disabled={disabled}
             state={state}
             onFocus={handleFocus} onBlur={handleBlur}
+            endAdornment={hasEndAdornment}
             {...props}
           />
+          {hasEndAdornment && (<AdornmentWrapperEnd>{endAdornment}</AdornmentWrapperEnd>)}
         </TextareaWrapper>
       </Box>
     )
