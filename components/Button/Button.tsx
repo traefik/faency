@@ -2,12 +2,23 @@ import React from 'react';
 import { styled, keyframes, CSS, VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
+export const BUTTON_BASE_STYLES = {
+  appearance: 'none',
+  userSelect: 'none',
+  boxSizing: 'border-box',
+  border: 'none',
+  WebkitTapHighlightColor: 'rgba(0,0,0,0)',
+  '&:disabled': {
+    pointerEvents: 'none',
+    opacity: 0.5,
+  },
+}
+
 export const StyledButton = styled('button', {
+  ...BUTTON_BASE_STYLES,
   // Reset
   all: 'unset',
   alignItems: 'center',
-  boxSizing: 'border-box',
-  userSelect: 'none',
   overflow: 'hidden',
 
   '&::before': {
@@ -34,7 +45,6 @@ export const StyledButton = styled('button', {
   flexShrink: 0,
   justifyContent: 'center',
   lineHeight: '1',
-  WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
   // Custom
   position: 'relative',
@@ -71,11 +81,6 @@ export const StyledButton = styled('button', {
     '&::before': {
       backgroundColor: 'rgba(0, 0, 0, 0.15)',
     },
-  },
-
-  '&:disabled': {
-    pointerEvents: 'none',
-    opacity: 0.5,
   },
 
   variants: {
