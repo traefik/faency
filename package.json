@@ -81,9 +81,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
