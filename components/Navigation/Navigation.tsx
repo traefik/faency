@@ -147,27 +147,30 @@ const StyledLink = styled('a', baseNavItemCss, {
   textDecoration: 'none',
 });
 
-type StyledLinkVariants = VariantProps<typeof StyledLink>;
+type StyledLinkProps = VariantProps<typeof StyledLink> & Omit<React.ComponentProps<typeof StyledLink>, 'css'>;
 
 const StyledButton = styled('button', baseNavItemCss);
 
-type StyledButtonVariants = VariantProps<typeof StyledButton>;
-
-export type NavigationItemProps = {
-  as?: 'button' | 'a';
+type StyledButtonProps = VariantProps<typeof StyledButton> & Omit<React.ComponentProps<typeof StyledButton>, 'css'>;
+interface NavigationItemBaseProps {
+  css?: CSS
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
-  children: ReactNode;
-  href?: string;
-  css?: CSS
-} & StyledLinkVariants &
-  StyledButtonVariants;
+};
+
+interface NavigationItemButtonProps extends NavigationItemBaseProps, StyledButtonProps {
+  as?: 'button',
+}
+interface NavigationItemLinkProps extends NavigationItemBaseProps, StyledLinkProps {
+  as: 'a',
+}
+
+export type NavigationItemProps = NavigationItemButtonProps | NavigationItemLinkProps
 
 const NavigationItemWrapper = (props: NavigationItemProps): JSX.Element =>
   props.as === 'a' ? <StyledLink {...props} /> : <StyledButton type="button" {...props} />;
 
 export const NavigationItem = ({
-  as,
   startAdornment,
   endAdornment,
   children,
@@ -177,7 +180,7 @@ export const NavigationItem = ({
   const hasEndAdornment = useMemo(() => Boolean(endAdornment), [endAdornment]);
 
   return (
-    <NavigationItemWrapper as={as} {...restProps}>
+    <NavigationItemWrapper {...restProps}>
       {hasStartAdornment && (
         <FlexWithOpacity css={{ pr: '$2', ml: '-$1' }} active={restProps.active}>
           {startAdornment}
@@ -193,7 +196,7 @@ export const NavigationItem = ({
 
 export type NavigationItemVariants = VariantProps<typeof NavigationItem>;
 
-export const NavigationLink = (props: Omit<NavigationItemProps, 'as'>) => (
+export const NavigationLink = (props: Omit<NavigationItemLinkProps, 'as'>) => (
   <NavigationItem as="a" {...props} />
 );
 
