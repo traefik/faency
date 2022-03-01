@@ -51,7 +51,7 @@ If you consider the change needs specific instructions on how to test, use this 
 
 - [ ] Change has been tested
 - [ ] Added/Updated tests
-- [ ] Added/Updated documentation
+- [ ] Added/Updated stories
 - [ ] PR title follows [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 - [ ] Labels are set
 - [ ] Project is linked
