@@ -75,8 +75,4 @@ A good PR is small, focuses on a single feature or improvement, and clearly comm
 
 Try not to include more than one issue in a single PR. It's much easier for us to review multiple small pull requests than one that is large and unwieldy.
 
-As a model for a PR structure we recommend following this order:
-
-1. Use the prefix `fix` or `feat` (for features/enhancements) on the PR title
-2. Description of the problem that is being solved, or link to the [issue](https://github.com/traefik/faency/issues) (e.g. "Closes #{issue-number}").
-3. [Optional] Image or video with a demo of the result. (If it's a fix, both demos from `before` and `after` will be very appreciated).
+Please follow the provided [PR template](/.github/pull_request_template.md)
