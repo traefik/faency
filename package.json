@@ -1,7 +1,7 @@
 {
   "name": "@traefiklabs/faency",
   "description": "Traefik Labs design system",
-  "version": "1.0.0-12",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "files": [
