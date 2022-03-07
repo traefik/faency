@@ -75,12 +75,54 @@ A good PR is small, focuses on a single feature or improvement, and clearly comm
 
 Try not to include more than one issue in a single PR. It's much easier for us to review multiple small pull requests than one that is large and unwieldy.
 
-Please follow the provided [PR template](/.github/pull_request_template.md)
+Note we follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
-### Releasing
+Please follow the provided [PR template](/.github/pull_request_template.md).
 
-We use [semantic-release](https://semantic-release.gitbook.io/semantic-release) to have automatic releases every time a PR is merged.
+### Release process
 
-We follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+We use [semantic-release/semantic-release](https://github.com/semantic-release/semantic-release) to automagically release any commit on the `master` branch.
 
-Breaking changes must be added manually to releases' description. Please make sure to validate their content during review.
+Recommended conventional commit types:
+
+```
+[
+  'build',
+  'chore',
+  'ci',
+  'docs',
+  'feat',
+  'fix',
+  'revert',
+  'test'
+]
+```
+
+- `build`/`chore`: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- `ci`: Changes to CI configuration files and scripts (examples: CircleCi, SauceLabs)
+- `docs`: Documentation (comments) only changes
+- `feat`: A new feature
+- `fix`: A bug fix
+- `revert`: Reverts a previous commit
+- `test`: Adding missing tests or correcting existing tests
+
+Breaking change syntax:
+
+```
+<type>!: <description>
+```
+
+Matching between commit type and release
+
+```
+[
+  {breaking: true, release: 'major'},
+  // types impacting release version
+  {revert: true, release: 'patch'},
+  {type: 'feat', release: 'minor'},
+  {type: 'fix', release: 'patch'},
+  {type: 'perf', release: 'patch'},
+]
+```
+
+See [semantic-release/commit-analyzer](https://github.com/semantic-release/commit-analyzer#readme) for more information.
