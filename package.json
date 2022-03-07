@@ -97,7 +97,7 @@
   },
   "release": {
     "branches": [
-      "main",
+      "master",
       "next"
     ],
     "plugins": [
