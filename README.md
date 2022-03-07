@@ -76,3 +76,11 @@ A good PR is small, focuses on a single feature or improvement, and clearly comm
 Try not to include more than one issue in a single PR. It's much easier for us to review multiple small pull requests than one that is large and unwieldy.
 
 Please follow the provided [PR template](/.github/pull_request_template.md)
+
+### Releasing
+
+We use [semantic-release](https://semantic-release.gitbook.io/semantic-release) to have automatic releases every time a PR is merged.
+
+We follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+
+Breaking changes must be added manually to releases' description. Please make sure to validate their content during review.
