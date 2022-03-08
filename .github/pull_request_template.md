@@ -53,7 +53,7 @@ If you consider the change needs specific instructions on how to test, use this 
 - [ ] Change has been tested
 - [ ] Added/Updated tests
 - [ ] Added/Updated stories
-- [ ] PR title follows [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [ ] PR follows [conventions](https://github.com/traefik/faency#how-to-contribute)
 - [ ] Labels are set
 - [ ] Project is linked
 
@@ -69,7 +69,7 @@ If you consider the change needs specific instructions on how to test, use this 
 - [ ] I've read the code and understood it
 - [ ] I don't have any more questions
 - [ ] I've described any optional improvements
-- [ ] I checked PR title follows [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [ ] I checked PR follows [conventions](https://github.com/traefik/faency#how-to-contribute)
 ```
 
 </details>
