@@ -37,16 +37,17 @@ type PopoverContentPrimitiveProps = Omit<
 export type PopoverContentProps = PopoverContentPrimitiveProps & {
   css?: CSS;
   hideArrow?: boolean;
+  arrowCss?: CSS;
 };
 
 export const PopoverContent = React.forwardRef<
   React.ElementRef<typeof StyledContent>,
   PopoverContentProps
->(({ children, hideArrow, ...props }, fowardedRef) => (
+>(({ children, hideArrow, arrowCss, ...props }, fowardedRef) => (
   <StyledContent sideOffset={0} {...props} ref={fowardedRef}>
     {children}
     {!hideArrow && (
-      <Box css={{ color: '$deepBlue3' }}>
+      <Box css={arrowCss}>
         <PopoverPrimitive.Arrow width={11} height={5} offset={5} style={{ fill: 'currentColor' }} />
       </Box>
     )}

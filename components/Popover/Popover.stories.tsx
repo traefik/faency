@@ -14,6 +14,7 @@ import { Container } from '../Container';
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { Flex } from '../Flex';
+import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 
 const BasePopover = (props: PopoverProps): JSX.Element => <Popover {...props} />;
 const PopoverForStory = modifyVariantsForStory<PopoverVariants, PopoverProps>(BasePopover);
@@ -58,6 +59,21 @@ export const RichContent: ComponentStory<typeof PopoverForStory> = (args) => (
             <Button variant="primary">Close</Button>
           </PopoverClose>
         </Flex>
+      </PopoverContent>
+    </PopoverForStory>
+  </Container>
+);
+
+export const IconTrigger: ComponentStory<typeof PopoverForStory> = (args) => (
+  <Container>
+    <PopoverForStory {...args}>
+      <PopoverTrigger asChild>
+        <Button size="small">
+          <HamburgerMenuIcon />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent arrowCss={{ color: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
+        <Text css={{ c: 'white' }}>Content</Text>
       </PopoverContent>
     </PopoverForStory>
   </Container>
