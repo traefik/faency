@@ -276,7 +276,8 @@ export const WithFooter: ComponentStory<any> = (args) => (
     </Tbody>
     <Tfoot>
       <Tr>
-        <Td colSpan={4}>Footer information</Td>
+        <Td colSpan={2}>Footer information</Td>
+        <Td colSpan={2}>Footer information</Td>
       </Tr>
     </Tfoot>
   </TableForStory>
@@ -286,10 +287,60 @@ export const WithCaption: ComponentStory<any> = (args) => {
   const id = 'described-heading';
   const title = 'Title not child of table';
   return (
-    <>
-      <Flex direction="column" gap="4">
+    <Flex direction="column" gap="4">
+      <TableForStory {...args}>
+        <Caption size="10">Caption child of table</Caption>
+        <Thead>
+          <Tr>
+            <Th>Firstname</Th>
+            <Th>Lastname</Th>
+            <Th>Status</Th>
+            <Th>Role</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr>
+            <Td>John</Td>
+            <Td>Doe</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td>Developer</Td>
+          </Tr>
+          <Tr>
+            <Td>Johny</Td>
+            <Td>Depp</Td>
+            <Td>
+              <Badge variant="orange">AFK</Badge>
+            </Td>
+            <Td>Actor</Td>
+          </Tr>
+          <Tr>
+            <Td>Natalie</Td>
+            <Td>Portman</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td>Actor</Td>
+          </Tr>
+          <Tr>
+            <Td>Luke</Td>
+            <Td>Skywalker</Td>
+            <Td>
+              <Badge variant="red">Disconnected</Badge>
+            </Td>
+            <Td>Star wars</Td>
+          </Tr>
+        </Tbody>
+      </TableForStory>
+      <div>
+        <Heading size="4" as="h1">
+          {title}
+        </Heading>
         <TableForStory {...args}>
-          <Caption size="10">Caption child of table</Caption>
+          <VisuallyHidden asChild>
+            <Caption>{title}</Caption>
+          </VisuallyHidden>
           <Thead>
             <Tr>
               <Th>Firstname</Th>
@@ -333,112 +384,210 @@ export const WithCaption: ComponentStory<any> = (args) => {
             </Tr>
           </Tbody>
         </TableForStory>
-        <div>
-          <Heading size="4" as="h1">
-            {title}
-          </Heading>
-          <TableForStory {...args}>
-            <VisuallyHidden asChild>
-              <Caption>{title}</Caption>
-            </VisuallyHidden>
-            <Thead>
-              <Tr>
-                <Th>Firstname</Th>
-                <Th>Lastname</Th>
-                <Th>Status</Th>
-                <Th>Role</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td>John</Td>
-                <Td>Doe</Td>
-                <Td>
-                  <Badge variant="green">Connected</Badge>
-                </Td>
-                <Td>Developer</Td>
-              </Tr>
-              <Tr>
-                <Td>Johny</Td>
-                <Td>Depp</Td>
-                <Td>
-                  <Badge variant="orange">AFK</Badge>
-                </Td>
-                <Td>Actor</Td>
-              </Tr>
-              <Tr>
-                <Td>Natalie</Td>
-                <Td>Portman</Td>
-                <Td>
-                  <Badge variant="green">Connected</Badge>
-                </Td>
-                <Td>Actor</Td>
-              </Tr>
-              <Tr>
-                <Td>Luke</Td>
-                <Td>Skywalker</Td>
-                <Td>
-                  <Badge variant="red">Disconnected</Badge>
-                </Td>
-                <Td>Star wars</Td>
-              </Tr>
-            </Tbody>
-          </TableForStory>
-        </div>
-        <div>
-          <Heading id={id} size="4" as="h1">
-            {title}
-          </Heading>
-          <TableForStory aria-describedby={id} {...args}>
-            <Thead>
-              <Tr>
-                <Th>Firstname</Th>
-                <Th>Lastname</Th>
-                <Th>Status</Th>
-                <Th>Role</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td>John</Td>
-                <Td>Doe</Td>
-                <Td>
-                  <Badge variant="green">Connected</Badge>
-                </Td>
-                <Td>Developer</Td>
-              </Tr>
-              <Tr>
-                <Td>Johny</Td>
-                <Td>Depp</Td>
-                <Td>
-                  <Badge variant="orange">AFK</Badge>
-                </Td>
-                <Td>Actor</Td>
-              </Tr>
-              <Tr>
-                <Td>Natalie</Td>
-                <Td>Portman</Td>
-                <Td>
-                  <Badge variant="green">Connected</Badge>
-                </Td>
-                <Td>Actor</Td>
-              </Tr>
-              <Tr>
-                <Td>Luke</Td>
-                <Td>Skywalker</Td>
-                <Td>
-                  <Badge variant="red">Disconnected</Badge>
-                </Td>
-                <Td>Star wars</Td>
-              </Tr>
-            </Tbody>
-          </TableForStory>
-        </div>
-      </Flex>
-    </>
+      </div>
+      <div>
+        <Heading id={id} size="4" as="h1">
+          {title}
+        </Heading>
+        <TableForStory aria-describedby={id} {...args}>
+          <Thead>
+            <Tr>
+              <Th>Firstname</Th>
+              <Th>Lastname</Th>
+              <Th>Status</Th>
+              <Th>Role</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>John</Td>
+              <Td>Doe</Td>
+              <Td>
+                <Badge variant="green">Connected</Badge>
+              </Td>
+              <Td>Developer</Td>
+            </Tr>
+            <Tr>
+              <Td>Johny</Td>
+              <Td>Depp</Td>
+              <Td>
+                <Badge variant="orange">AFK</Badge>
+              </Td>
+              <Td>Actor</Td>
+            </Tr>
+            <Tr>
+              <Td>Natalie</Td>
+              <Td>Portman</Td>
+              <Td>
+                <Badge variant="green">Connected</Badge>
+              </Td>
+              <Td>Actor</Td>
+            </Tr>
+            <Tr>
+              <Td>Luke</Td>
+              <Td>Skywalker</Td>
+              <Td>
+                <Badge variant="red">Disconnected</Badge>
+              </Td>
+              <Td>Star wars</Td>
+            </Tr>
+          </Tbody>
+        </TableForStory>
+      </div>
+    </Flex>
   );
 };
 
+export const Empty: ComponentStory<any> = (args) => (
+  <Flex direction="column" gap="4">
+    <TableForStory {...args}>
+      <Thead />
+      <Tbody />
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>Empty head and body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory {...args}>
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>No head, no body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory {...args}>
+      <Tbody />
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>No head and empty body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory {...args}>
+      <Thead />
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>Empty head and no body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory {...args}>
+      <Tbody>
+        <Tr>
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr>
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Luke</Td>
+          <Td>Skywalker</Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
+          <Td>Star wars</Td>
+        </Tr>
+      </Tbody>
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>No head and filled body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory {...args}>
+      <Thead />
+      <Tbody>
+        <Tr>
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr>
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Luke</Td>
+          <Td>Skywalker</Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
+          <Td>Star wars</Td>
+        </Tr>
+      </Tbody>
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>Empty head and filled body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory {...args}>
+      <Thead>
+        <Tr>
+          <Th>Firstname</Th>
+          <Th>Lastname</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>Filled head and no body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory {...args}>
+      <Thead>
+        <Tr>
+          <Th>Firstname</Th>
+          <Th>Lastname</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody />
+      <Tfoot>
+        <Tr>
+          <Td colSpan={4}>Filled head and empty body</Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+  </Flex>
+);
 
 const Customize: ComponentStory<any> = (args) => (
   <TableForStory css={{ c: '$hiContrast' }} {...args}>
