@@ -123,8 +123,7 @@ export const Tr = styled('tr', {
 
 export const Tfoot = styled('tfoot', {
   position: 'relative',
-  borderBottomLeftRadius: 'inherit',
-  borderBottomRightRadius: 'inherit',
+  borderRadius: 'inherit',
 
   '&::after': {
     pointerEvents: 'none',
@@ -139,7 +138,6 @@ export const Tfoot = styled('tfoot', {
     fontSize: '$1',
     color: '$tableHeaderText',
     fontWeight: '$light',
-    borderTop: '1px solid $tableRowBorder',
     p: '$2 $3',
   },
 });
@@ -173,6 +171,18 @@ export const Table = styled('table', {
   fontFamily: '$rubik',
   color: '$tableText',
   borderRadius: '$3',
+
+  [`& ${Tbody}:not(:empty) ~ ${Tfoot}`]: {
+    borderTopLeftRadius: '0',
+    borderTopRightRadius: '0',
+    [`& ${Td}`]: {
+      borderTop: '1px solid $tableRowBorder',
+    },
+  },
+  [`& ${Thead}:not(:empty) ~ ${Tfoot}`]: {
+    borderTopLeftRadius: '0',
+    borderTopRightRadius: '0',
+  },
 
   variants: {
     elevation: elevationVariants,
