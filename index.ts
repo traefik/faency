@@ -50,7 +50,7 @@ export {
   NavigationLink,
 } from './components/Navigation';
 export { Overlay } from './components/Overlay';
-export { Popover, PopoverClose, PopoverContent, PopoverTrigger } from './components/Popover';
+export { Popover, PopoverClose, PopoverContent, PopoverTrigger, PopoverAnchor } from './components/Popover';
 export { Portal } from '@radix-ui/react-portal';
 export { Radio, RadioGroup } from './components/Radio';
 export { Select } from './components/Select';
