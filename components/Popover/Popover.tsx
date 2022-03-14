@@ -1,7 +1,6 @@
 import React from 'react';
 import { styled, CSS, VariantProps } from '../../stitches.config';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { Box } from '../Box';
 import { panelStyles } from '../Panel';
 import { elevationVariants } from '../Elevation';
 
@@ -30,27 +29,57 @@ const StyledContent = styled(PopoverPrimitive.Content, panelStyles, {
   },
 });
 
+const fillColorVariants: Record<number, CSS> = {
+  0: {
+    fill: '$00dp',
+  },
+  1: {
+    fill: '$01dp',
+  },
+  2: {
+    fill: '$02dp',
+  },
+  3: {
+    fill: '$03dp',
+  },
+  4: {
+    fill: '$04dp',
+  },
+  5: {
+    fill: '$05dp',
+  },
+};
+
 const StyledArrow = styled(PopoverPrimitive.Arrow, {
   fill: 'currentColor',
+  variants: {
+    elevation: fillColorVariants,
+  },
+  defaultVariants: {
+    elevation: 2,
+  },
 });
 
 type PopoverContentPrimitiveProps = Omit<
   React.ComponentProps<typeof PopoverPrimitive.Content>,
   'as'
 >;
-export type PopoverContentProps = PopoverContentPrimitiveProps & {
-  css?: CSS;
-  hideArrow?: boolean;
-  arrowCss?: CSS;
-};
+export type PopoverContentProps = PopoverContentPrimitiveProps &
+  VariantProps<typeof StyledContent> & {
+    css?: CSS;
+    hideArrow?: boolean;
+    arrowCss?: CSS;
+  };
 
 export const PopoverContent = React.forwardRef<
   React.ElementRef<typeof StyledContent>,
   PopoverContentProps
->(({ children, hideArrow, arrowCss, ...props }, fowardedRef) => (
-  <StyledContent sideOffset={0} {...props} ref={fowardedRef}>
+>(({ children, hideArrow, arrowCss, elevation, ...props }, fowardedRef) => (
+  <StyledContent sideOffset={0} elevation={elevation} {...props} ref={fowardedRef}>
     {children}
-    {!hideArrow && <StyledArrow width={11} height={5} offset={5} css={arrowCss} />}
+    {!hideArrow && (
+      <StyledArrow elevation={elevation} width={11} height={5} offset={5} css={arrowCss} />
+    )}
   </StyledContent>
 ));
 

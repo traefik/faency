@@ -74,8 +74,8 @@ export const IconTrigger: ComponentStory<typeof PopoverForStory> = (args) => (
           <HamburgerMenuIcon />
         </Button>
       </PopoverTrigger>
-      <PopoverContent arrowCss={{ color: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
-        <Text css={{ c: 'white' }}>Content</Text>
+      <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
+        <Text css={{ c: '$loContrast' }}>Content</Text>
       </PopoverContent>
     </PopoverForStory>
   </Container>
@@ -95,8 +95,8 @@ export const RowAnchor: ComponentStory<typeof PopoverForStory> = (args) => (
           to open the anchor
         </Box>
       </PopoverAnchor>
-      <PopoverContent arrowCss={{ color: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
-        <Text css={{ c: 'white' }}>Content</Text>
+      <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
+        <Text css={{ c: '$loContrast' }}>Content</Text>
       </PopoverContent>
     </PopoverForStory>
   </Container>
