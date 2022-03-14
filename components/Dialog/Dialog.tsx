@@ -28,7 +28,7 @@ export function Dialog({ children, ...props }: DialogProps) {
   );
 }
 
-const StyledContent = styled(DialogPrimitive.Content, Card, {
+export const StyledContent = styled(DialogPrimitive.Content, Card, {
   position: 'fixed',
   top: '50%',
   left: '50%',
@@ -84,4 +84,4 @@ export const DialogContent = React.forwardRef<
 ));
 
 export const DialogTrigger = DialogPrimitive.Trigger;
-export const DialogClose = DialogPrimitive.Close;
+export const DialogClose = StyledCloseButton;
