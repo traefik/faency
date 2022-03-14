@@ -159,63 +159,109 @@ export const Interactive: ComponentStory<any> = ({ interactive, ...args }) => {
   );
 
   return (
-    <TableForStory {...args}>
-      <Thead>
-        <Tr>
-          <Th>First name</Th>
-          <Th>Last name</Th>
-          <Th>Status</Th>
-          <Th>Role</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        <Tr interactive={interactive} {...makeSelectableRowProps(1)}>
-          <Td>John</Td>
-          <Td>Doe</Td>
-          <Td>
-            <Badge variant="green">Connected</Badge>
-          </Td>
-          <Td subtle>Developer</Td>
-        </Tr>
-        <Tr interactive={interactive} {...makeSelectableRowProps(2)}>
-          <Td>Johnny</Td>
-          <Td>Depp</Td>
-          <Td subtle>
-            <Badge variant="orange">AFK</Badge>
-          </Td>
-          <Td subtle>Actor</Td>
-        </Tr>
-        <Tr interactive={interactive} {...makeSelectableRowProps(3)}>
-          <Td>Natalie</Td>
-          <Td>Portman</Td>
-          <Td>
-            <Badge variant="green">Connected</Badge>
-          </Td>
-          <Td subtle>Actor</Td>
-        </Tr>
-        <Tr interactive={interactive} {...makeSelectableRowProps(4)}>
-          <Td>Luke</Td>
-          <Td>Skywalker</Td>
-          <Td>
-            <Badge variant="red">Disconnected</Badge>
-          </Td>
-          <Td subtle>Star Wars</Td>
-        </Tr>
-      </Tbody>
-      <Tfoot>
-        <Tr>
-          <Td colSpan={4} css={{ textAlign: 'center' }}>
-            <Button
-              ghost
-              variant="secondary"
-              css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
-            >
-              Load more...
-            </Button>
-          </Td>
-        </Tr>
-      </Tfoot>
-    </TableForStory>
+    <Flex direction="column" gap="4">
+      <TableForStory {...args}>
+        <Thead>
+          <Tr>
+            <Th>First name</Th>
+            <Th>Last name</Th>
+            <Th>Status</Th>
+            <Th>Role</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr interactive={interactive} {...makeSelectableRowProps(1)}>
+            <Td>John</Td>
+            <Td>Doe</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td subtle>Developer</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(2)}>
+            <Td>Johnny</Td>
+            <Td>Depp</Td>
+            <Td subtle>
+              <Badge variant="orange">AFK</Badge>
+            </Td>
+            <Td subtle>Actor</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(3)}>
+            <Td>Natalie</Td>
+            <Td>Portman</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td subtle>Actor</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(4)}>
+            <Td>Luke</Td>
+            <Td>Skywalker</Td>
+            <Td>
+              <Badge variant="red">Disconnected</Badge>
+            </Td>
+            <Td subtle>Star Wars</Td>
+          </Tr>
+        </Tbody>
+        <Tfoot>
+          <Tr>
+            <Td colSpan={4} css={{ textAlign: 'center' }}>
+              <Button
+                ghost
+                variant="secondary"
+                css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
+              >
+                Load more...
+              </Button>
+            </Td>
+          </Tr>
+        </Tfoot>
+      </TableForStory>
+      <TableForStory {...args}>
+        <Thead>
+          <Tr>
+            <Th>First name</Th>
+            <Th>Last name</Th>
+            <Th>Status</Th>
+            <Th>Role</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr interactive={interactive} {...makeSelectableRowProps(1)}>
+            <Td>John</Td>
+            <Td>Doe</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td subtle>Developer</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(2)}>
+            <Td>Johnny</Td>
+            <Td>Depp</Td>
+            <Td subtle>
+              <Badge variant="orange">AFK</Badge>
+            </Td>
+            <Td subtle>Actor</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(3)}>
+            <Td>Natalie</Td>
+            <Td>Portman</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td subtle>Actor</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(4)}>
+            <Td>Luke</Td>
+            <Td>Skywalker</Td>
+            <Td>
+              <Badge variant="red">Disconnected</Badge>
+            </Td>
+            <Td subtle>Star Wars</Td>
+          </Tr>
+        </Tbody>
+      </TableForStory>
+    </Flex>
   );
 };
 

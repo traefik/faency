@@ -52,7 +52,6 @@ export const Th = styled('th', Label, {
 export const Td = styled('td', {
   p: '$5 $3',
   borderBottom: '1px solid $tableRowBorder',
-  borderRadius: 'inherit',
   fontSize: '$3',
   lineHeight: '16px',
   variants: {
@@ -80,13 +79,9 @@ export const Td = styled('td', {
 });
 
 export const Tr = styled('tr', {
-  borderBottomLeftRadius: 'inherit',
-  borderBottomRightRadius: 'inherit',
-
   '&:hover': {
     color: '$tableHoverText',
   },
-
   [`&:last-child ${Td}`]: {
     borderBottom: 'none',
   },
@@ -171,7 +166,7 @@ export const Table = styled('table', {
   fontFamily: '$rubik',
   color: '$tableText',
   borderRadius: '$3',
-
+  overflow: 'hidden',
   [`& ${Tbody}:not(:empty) ~ ${Tfoot}`]: {
     borderTopLeftRadius: '0',
     borderTopRightRadius: '0',
