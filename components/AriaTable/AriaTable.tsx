@@ -1,4 +1,4 @@
-import React, { ComponentProps, ElementRef, forwardRef } from 'react';
+import React, { ComponentProps, ElementRef, forwardRef, useMemo } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { styled, VariantProps, CSS } from '../../stitches.config';
 import {
@@ -11,6 +11,7 @@ import {
   Thead as TableThead,
   Table as TableTable,
 } from '../Table';
+import merge from 'lodash.merge';
 
 export const Caption = styled('div', TableCaption, {
   display: 'table-caption',
@@ -67,8 +68,20 @@ export const Td = forwardRef<
   ElementRef<typeof StyledTd>,
   Omit<ComponentProps<typeof StyledTd>, 'css'> &
     VariantProps<typeof StyledTd> &
-    VariantProps<typeof TableTd> & { css?: CSS }
->((props, ref) => <StyledTd ref={ref} role="cell" {...props} />);
+    VariantProps<typeof TableTd> & { css?: CSS; colSpan?: number }
+>(({ colSpan, css, ...props }, ref) => {
+  const colSpanCss = useMemo(
+    () =>
+      colSpan
+        ? {
+            width: `${Math.max(colSpan || 0, 0) * 100}%`,
+            float: 'left',
+          }
+        : {},
+    [colSpan]
+  );
+  return <StyledTd ref={ref} role="cell" css={merge(colSpanCss, css)} {...props} />;
+});
 
 const StyledThead = styled('div', TableThead, {
   display: 'table-header-group',

@@ -1,6 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Table, TableProps, TableVariants, Tbody, Td, Th, Thead, Tr, Caption, Tfoot } from './AriaTable';
+import {
+  Table,
+  TableProps,
+  TableVariants,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Caption,
+  Tfoot,
+} from './AriaTable';
 import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Card } from '../Card';
@@ -63,7 +74,7 @@ export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
       </Tbody>
       <Tfoot>
         <Tr>
-          <Td css={{ textAlign: 'center', columnSpan: 'all' }}>
+          <Td colSpan={4} css={{ textAlign: 'center' }}>
             <Button
               ghost
               variant="secondary"
@@ -90,7 +101,7 @@ Basic.argTypes = {
       capitalizeWords: 'capitalizeWords',
       uppercase: 'uppercase',
       none: '',
-    }
+    },
   },
 };
 
@@ -233,18 +244,25 @@ export const Links: ComponentStory<any> = (args) => (
       </Tbody>
     </TableForStory>
   </Card>
-)
+);
 
 const Customize: ComponentStory<any> = (args) => (
   <Card>
-    <TableForStory css={{ c: '$hiContrast' }} aria-label="People" aria-describedby="basic-table-caption" {...args}>
-      <Caption css={{ c: '$hiContrast' }} id="basic-table-caption">People with some information</Caption>
+    <TableForStory
+      css={{ c: '$hiContrast' }}
+      aria-label="People"
+      aria-describedby="basic-table-caption"
+      {...args}
+    >
+      <Caption css={{ c: '$hiContrast' }} id="basic-table-caption">
+        People with some information
+      </Caption>
       <Thead css={{ c: '$hiContrast' }}>
         <Tr css={{ c: '$hiContrast' }}>
           <Th css={{ c: '$hiContrast' }}>first name</Th>
-          <Th >last name</Th>
-          <Th >Status</Th>
-          <Th >Role</Th>
+          <Th>last name</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
         </Tr>
       </Thead>
       <Tbody css={{ c: '$hiContrast' }}>
@@ -283,7 +301,7 @@ const Customize: ComponentStory<any> = (args) => (
       </Tbody>
       <Tfoot css={{ c: '$hiContrast' }}>
         <Tr>
-          <Td css={{ textAlign: 'center', columnSpan: 'all' }}>
+          <Td css={{ textAlign: 'center' }}>
             <Button
               ghost
               variant="secondary"
@@ -296,4 +314,65 @@ const Customize: ComponentStory<any> = (args) => (
       </Tfoot>
     </TableForStory>
   </Card>
-)
+);
+
+export const Columns: ComponentStory<any> = ({ transform, ...args }) => (
+  <TableForStory aria-label="People" aria-describedby="basic-table-caption" {...args}>
+    <Caption id="basic-table-caption">People with some information</Caption>
+    <Thead>
+      <Tr>
+        <Th transform={transform}>first name</Th>
+        <Th transform={transform}>last name</Th>
+        <Th transform={transform}>Status</Th>
+        <Th transform={transform}>Role</Th>
+      </Tr>
+    </Thead>
+    <Tbody>
+      <Tr>
+        <Td>John</Td>
+        <Td>Doe</Td>
+        <Td>
+          <Badge variant="green">Connected</Badge>
+        </Td>
+        <Td>Developer</Td>
+      </Tr>
+      <Tr>
+        <Td>Johny</Td>
+        <Td>Depp</Td>
+        <Td>
+          <Badge variant="orange">AFK</Badge>
+        </Td>
+        <Td>Actor</Td>
+      </Tr>
+      <Tr>
+        <Td>Natalie</Td>
+        <Td>Portman</Td>
+        <Td>
+          <Badge variant="green">Connected</Badge>
+        </Td>
+        <Td>Actor</Td>
+      </Tr>
+      <Tr>
+        <Td>Luke</Td>
+        <Td>Skywalker</Td>
+        <Td>
+          <Badge variant="red">Disconnected</Badge>
+        </Td>
+        <Td>Star wars</Td>
+      </Tr>
+    </Tbody>
+    <Tfoot>
+      <Tr>
+        <Td colSpan={4} css={{ textAlign: 'center' }}>
+          <Button
+            ghost
+            variant="secondary"
+            css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
+          >
+            Load more...
+          </Button>
+        </Td>
+      </Tr>
+    </Tfoot>
+  </TableForStory>
+);
