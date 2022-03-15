@@ -80,7 +80,15 @@ export const Td = forwardRef<
         : {},
     [colSpan]
   );
-  return <StyledTd ref={ref} role="cell" css={merge(colSpanCss, css)} {...props} />;
+  return (
+    <StyledTd
+      ref={ref}
+      aria-colspan={colSpan}
+      role="cell"
+      css={merge(colSpanCss, css)}
+      {...props}
+    />
+  );
 });
 
 const StyledThead = styled('div', TableThead, {
