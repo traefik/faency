@@ -13,6 +13,7 @@ export const Caption = styled('caption', Text, {
 
 export const Tbody = styled('tbody', {
   width: '100%',
+  verticalAlign: 'middle',
 });
 
 export const Th = styled('th', Label, {
@@ -52,7 +53,6 @@ export const Th = styled('th', Label, {
 export const Td = styled('td', {
   p: '$5 $3',
   borderBottom: '1px solid $tableRowBorder',
-  borderRadius: 'inherit',
   fontSize: '$3',
   lineHeight: '16px',
   variants: {
@@ -80,13 +80,9 @@ export const Td = styled('td', {
 });
 
 export const Tr = styled('tr', {
-  borderBottomLeftRadius: 'inherit',
-  borderBottomRightRadius: 'inherit',
-
   '&:hover': {
     color: '$tableHoverText',
   },
-
   [`&:last-child ${Td}`]: {
     borderBottom: 'none',
   },
@@ -122,9 +118,9 @@ export const Tr = styled('tr', {
 });
 
 export const Tfoot = styled('tfoot', {
+  verticalAlign: 'middle',
   position: 'relative',
-  borderBottomLeftRadius: 'inherit',
-  borderBottomRightRadius: 'inherit',
+  borderRadius: 'inherit',
 
   '&::after': {
     pointerEvents: 'none',
@@ -139,7 +135,6 @@ export const Tfoot = styled('tfoot', {
     fontSize: '$1',
     color: '$tableHeaderText',
     fontWeight: '$light',
-    borderTop: '1px solid $tableRowBorder',
     p: '$2 $3',
   },
 });
@@ -148,6 +143,7 @@ export const Thead = styled('thead', {
   position: 'relative',
   borderTopLeftRadius: 'inherit',
   borderTopRightRadius: 'inherit',
+  verticalAlign: 'middle',
 
   '&::after': {
     pointerEvents: 'none',
@@ -169,10 +165,24 @@ export const Thead = styled('thead', {
 export const Table = styled('table', {
   width: '100%',
   tableLayout: 'fixed',
+  boxSizing: 'border-box',
+  borderCollapse: 'separate',
   borderSpacing: 0,
   fontFamily: '$rubik',
   color: '$tableText',
   borderRadius: '$3',
+  overflow: 'hidden',
+  [`& ${Tbody}:not(:empty) ~ ${Tfoot}`]: {
+    borderTopLeftRadius: '0',
+    borderTopRightRadius: '0',
+    [`& ${Td}`]: {
+      borderTop: '1px solid $tableRowBorder',
+    },
+  },
+  [`& ${Thead}:not(:empty) ~ ${Tfoot}`]: {
+    borderTopLeftRadius: '0',
+    borderTopRightRadius: '0',
+  },
 
   variants: {
     elevation: elevationVariants,
