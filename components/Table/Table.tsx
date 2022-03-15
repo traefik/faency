@@ -13,6 +13,7 @@ export const Caption = styled('caption', Text, {
 
 export const Tbody = styled('tbody', {
   width: '100%',
+  verticalAlign: 'middle',
 });
 
 export const Th = styled('th', Label, {
@@ -117,6 +118,7 @@ export const Tr = styled('tr', {
 });
 
 export const Tfoot = styled('tfoot', {
+  verticalAlign: 'middle',
   position: 'relative',
   borderRadius: 'inherit',
 
@@ -141,6 +143,7 @@ export const Thead = styled('thead', {
   position: 'relative',
   borderTopLeftRadius: 'inherit',
   borderTopRightRadius: 'inherit',
+  verticalAlign: 'middle',
 
   '&::after': {
     pointerEvents: 'none',
@@ -162,6 +165,8 @@ export const Thead = styled('thead', {
 export const Table = styled('table', {
   width: '100%',
   tableLayout: 'fixed',
+  boxSizing: 'border-box',
+  borderCollapse: 'separate',
   borderSpacing: 0,
   fontFamily: '$rubik',
   color: '$tableText',
