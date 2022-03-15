@@ -85,7 +85,7 @@ export const RowAnchor: ComponentStory<typeof PopoverForStory> = (args) => (
   <Container>
     <PopoverForStory {...args}>
       <PopoverAnchor asChild>
-        <Box css={{ bc: '$orange4', p: '$2', display: 'inline-block' }}>
+        <Box css={{ bc: '$01dp', p: '$2', display: 'inline-block', c: '$hiContrast' }}>
           Click on
           <PopoverTrigger asChild>
             <Button size="small" css={{ mx: '$2' }}>
