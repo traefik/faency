@@ -14,6 +14,9 @@ import { Container } from '../Container';
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { Flex } from '../Flex';
+import { HamburgerMenuIcon } from '@radix-ui/react-icons';
+import { PopoverAnchor } from '@radix-ui/react-popover';
+import { Box } from '../Box';
 
 const BasePopover = (props: PopoverProps): JSX.Element => <Popover {...props} />;
 const PopoverForStory = modifyVariantsForStory<PopoverVariants, PopoverProps>(BasePopover);
@@ -58,6 +61,42 @@ export const RichContent: ComponentStory<typeof PopoverForStory> = (args) => (
             <Button variant="primary">Close</Button>
           </PopoverClose>
         </Flex>
+      </PopoverContent>
+    </PopoverForStory>
+  </Container>
+);
+
+export const IconTrigger: ComponentStory<typeof PopoverForStory> = (args) => (
+  <Container>
+    <PopoverForStory {...args}>
+      <PopoverTrigger asChild>
+        <Button size="small">
+          <HamburgerMenuIcon />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
+        <Text css={{ c: '$loContrast' }}>Content</Text>
+      </PopoverContent>
+    </PopoverForStory>
+  </Container>
+);
+
+export const RowAnchor: ComponentStory<typeof PopoverForStory> = (args) => (
+  <Container>
+    <PopoverForStory {...args}>
+      <PopoverAnchor asChild>
+        <Box css={{ bc: '$01dp', p: '$2', display: 'inline-block', c: '$hiContrast' }}>
+          Click on
+          <PopoverTrigger asChild>
+            <Button size="small" css={{ mx: '$2' }}>
+              <HamburgerMenuIcon />
+            </Button>
+          </PopoverTrigger>
+          to open the anchor
+        </Box>
+      </PopoverAnchor>
+      <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
+        <Text css={{ c: '$loContrast' }}>Content</Text>
       </PopoverContent>
     </PopoverForStory>
   </Container>
