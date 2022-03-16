@@ -1,4 +1,11 @@
-import React, { ComponentProps, ElementRef, forwardRef, useMemo } from 'react';
+import React, {
+  ComponentProps,
+  ElementRef,
+  forwardRef,
+  useMemo,
+  Children,
+  isValidElement,
+} from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { styled, VariantProps, CSS } from '../../stitches.config';
 import {
@@ -43,11 +50,31 @@ export interface TrProps
   asChild?: boolean;
   css?: CSS;
 }
-export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(({ asChild, ...props }, ref) => {
-  const Component = asChild ? StyledTrSlot : StyledTr;
+export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
+  ({ asChild, children, ...props }, ref) => {
+    const Component = asChild ? StyledTrSlot : StyledTr;
 
-  return <Component ref={ref} role="row" {...props} />;
-});
+    if (!asChild) {
+      const arrayChildren = Children.toArray(children);
+      const hasColSpanChildren = arrayChildren.some((child) => {
+        if (!isValidElement(child)) {
+          return false;
+        }
+        const { colSpan } = child.props as TdProps;
+        return !!colSpan;
+      });
+      if (hasColSpanChildren && arrayChildren.length > 1) {
+        throw new Error('Using colSpan is allowed only for a single full width Td.');
+      }
+    }
+
+    return (
+      <Component ref={ref} role="row" {...props}>
+        {children}
+      </Component>
+    );
+  }
+);
 
 const StyledTh = styled('span', TableTh, {
   display: 'table-cell',
@@ -64,32 +91,36 @@ export const Th = forwardRef<ElementRef<typeof StyledTh>, ThProps>((props, ref) 
 const StyledTd = styled('span', TableTd, {
   display: 'table-cell',
 });
-export const Td = forwardRef<
-  ElementRef<typeof StyledTd>,
-  Omit<ComponentProps<typeof StyledTd>, 'css'> &
-    VariantProps<typeof StyledTd> &
-    VariantProps<typeof TableTd> & { css?: CSS; colSpan?: number }
->(({ colSpan, css, ...props }, ref) => {
-  const colSpanCss = useMemo(
-    () =>
-      colSpan
-        ? {
-            width: `${Math.max(colSpan || 0, 0) * 100}%`,
-            float: 'left',
-          }
-        : {},
-    [colSpan]
-  );
-  return (
-    <StyledTd
-      ref={ref}
-      aria-colspan={colSpan}
-      role="cell"
-      css={merge(colSpanCss, css)}
-      {...props}
-    />
-  );
-});
+export interface TdProps
+  extends Omit<ComponentProps<typeof StyledTd>, 'css'>,
+    VariantProps<typeof StyledTd>,
+    VariantProps<typeof TableTd> {
+  css?: CSS;
+  colSpan?: number;
+}
+export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
+  ({ colSpan, css, ...props }, ref) => {
+    const colSpanCss = useMemo(
+      () =>
+        colSpan
+          ? {
+              width: `${Math.max(colSpan || 0, 0) * 100}%`,
+              float: 'left',
+            }
+          : {},
+      [colSpan]
+    );
+    return (
+      <StyledTd
+        ref={ref}
+        aria-colspan={colSpan}
+        role="cell"
+        css={merge(colSpanCss, css)}
+        {...props}
+      />
+    );
+  }
+);
 
 const StyledThead = styled('div', TableThead, {
   display: 'table-header-group',
