@@ -8,6 +8,11 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
+  "homepage": "https://traefik.github.io/faency/",
+  "repository": "https://github.com/traefik/faency",
+  "bugs": {
+    "url": "https://github.com/traefik/faency/issues"
+  },
   "scripts": {
     "prettier": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 0",
