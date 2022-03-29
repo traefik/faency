@@ -75,7 +75,7 @@ export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
     </Tbody>
     <Tfoot>
       <Tr>
-        <Td fullColSpan css={{ textAlign: 'center' }}>
+        <Td fullColSpan aria-colspan={4} css={{ textAlign: 'center' }}>
           <Button
             ghost
             variant="secondary"
@@ -358,7 +358,7 @@ export const Columns: ComponentStory<any> = ({ transform, ...args }) => (
       </Tbody>
       <Tfoot>
         <Tr>
-          <Td fullColSpan css={{ textAlign: 'center' }}>
+          <Td fullColSpan aria-colspan={4} css={{ textAlign: 'center' }}>
             <Button
               ghost
               variant="secondary"
@@ -510,7 +510,7 @@ export const Columns: ComponentStory<any> = ({ transform, ...args }) => (
       </Tbody>
       <Tfoot>
         <Tr>
-          <Td fullColSpan css={{ textAlign: 'center' }}>
+          <Td fullColSpan aria-colspan={4} css={{ textAlign: 'center' }}>
             <Button
               ghost
               variant="secondary"
