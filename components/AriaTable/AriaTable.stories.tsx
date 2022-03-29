@@ -75,7 +75,7 @@ export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
     </Tbody>
     <Tfoot>
       <Tr>
-        <Td colSpan={4} css={{ textAlign: 'center' }}>
+        <Td fullColSpan css={{ textAlign: 'center' }}>
           <Button
             ghost
             variant="secondary"
@@ -358,7 +358,7 @@ export const Columns: ComponentStory<any> = ({ transform, ...args }) => (
       </Tbody>
       <Tfoot>
         <Tr>
-          <Td colSpan={4} css={{ textAlign: 'center' }}>
+          <Td fullColSpan css={{ textAlign: 'center' }}>
             <Button
               ghost
               variant="secondary"
@@ -452,6 +452,71 @@ export const Columns: ComponentStory<any> = ({ transform, ...args }) => (
               css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
             >
               Four
+            </Button>
+          </Td>
+        </Tr>
+      </Tfoot>
+    </TableForStory>
+    <TableForStory
+      css={{ tableLayout: 'auto' }}
+      aria-label="People"
+      aria-describedby="basic-table-caption"
+      {...args}
+    >
+      <Caption size="10" id="basic-table-caption">
+        People with some information
+      </Caption>
+      <Thead>
+        <Tr>
+          <Th transform={transform}>first name</Th>
+          <Th transform={transform}>last name</Th>
+          <Th transform={transform}>Status</Th>
+          <Th transform={transform}>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr>
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr>
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr>
+          <Td>Luke</Td>
+          <Td>Skywalker</Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
+          <Td>Star wars</Td>
+        </Tr>
+      </Tbody>
+      <Tfoot>
+        <Tr>
+          <Td fullColSpan css={{ textAlign: 'center' }}>
+            <Button
+              ghost
+              variant="secondary"
+              css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
+            >
+              Load more...
             </Button>
           </Td>
         </Tr>

@@ -60,11 +60,11 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
         if (!isValidElement(child)) {
           return false;
         }
-        const { colSpan } = child.props as TdProps;
-        return !!colSpan;
+        const { fullColSpan } = child.props as TdProps;
+        return !!fullColSpan;
       });
       if (hasColSpanChildren && arrayChildren.length > 1) {
-        throw new Error('Using colSpan is allowed only for a single full width Td.');
+        throw new Error('Using fullColSpan is allowed only for a single full width Td.');
       }
     }
 
@@ -91,34 +91,40 @@ export const Th = forwardRef<ElementRef<typeof StyledTh>, ThProps>((props, ref) 
 const StyledTd = styled('span', TableTd, {
   display: 'table-cell',
 });
+
+const FillerTd = styled(StyledTd, {
+  visibility: 'hidden',
+});
 export interface TdProps
   extends Omit<ComponentProps<typeof StyledTd>, 'css'>,
     VariantProps<typeof StyledTd>,
     VariantProps<typeof TableTd> {
   css?: CSS;
-  colSpan?: number;
+  fullColSpan?: boolean;
 }
 export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
-  ({ colSpan, css, ...props }, ref) => {
-    const colSpanCss = useMemo(
+  ({ fullColSpan, css, ...props }, ref) => {
+    const fullColSpanCss = useMemo(
       () =>
-        colSpan
+        fullColSpan
           ? {
-              width: `${Math.max(colSpan || 0, 0) * 100}%`,
-              float: 'left',
+              position: 'absolute',
+              left: 0,
+              width: '100%',
+              height: '100%',
             }
           : {},
-      [colSpan]
+      [fullColSpan]
     );
-    return (
-      <StyledTd
-        ref={ref}
-        aria-colspan={colSpan}
-        role="cell"
-        css={merge(colSpanCss, css)}
-        {...props}
-      />
-    );
+    if (fullColSpan) {
+      return (
+        <>
+          <FillerTd css={css} {...props} />
+          <StyledTd ref={ref} role="cell" css={merge(fullColSpanCss, css)} {...props} />
+        </>
+      );
+    }
+    return <StyledTd ref={ref} role="cell" css={css} {...props} />;
   }
 );
 
