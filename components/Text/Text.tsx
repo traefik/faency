@@ -67,11 +67,11 @@ export const Text = styled('span', {
         color: '$textContrast',
       },
       inherit: {
-        color: 'inherit'
+        color: 'inherit',
       },
       invalid: {
-        color: '$textInvalid'
-      }
+        color: '$textInvalid',
+      },
     },
     gradient: {
       true: {
@@ -89,11 +89,11 @@ export const Text = styled('span', {
         display: 'inline-block',
         '&::first-letter': {
           textTransform: 'uppercase',
-        }
+        },
       },
       capitalizeWords: {
         textTransform: 'capitalize',
-      }
+      },
     },
     noWrap: {
       true: {

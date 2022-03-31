@@ -27,9 +27,14 @@ Basic.args = {};
 const VARIANT_PARENTS = ['$primary', '$purple10'];
 
 export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args }) => (
-  <Flex align="center" justify="center" css={{
-    height: 100,
-  }} gap={2}>
+  <Flex
+    align="center"
+    justify="center"
+    css={{
+      height: 100,
+    }}
+    gap={2}
+  >
     <TextForStory {...args} variant="default">
       Default
     </TextForStory>
@@ -50,38 +55,39 @@ export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args 
 
 export const Transform: ComponentStory<typeof TextForStory> = ({ transform, ...args }) => (
   <Flex gap={2}>
-    <TextForStory {...args} >
-      default text
-    </TextForStory>
-    <TextForStory {...args} transform='uppercase'>
+    <TextForStory {...args}>default text</TextForStory>
+    <TextForStory {...args} transform="uppercase">
       uppercase text
     </TextForStory>
-    <TextForStory {...args} transform='capitalize'>
+    <TextForStory {...args} transform="capitalize">
       capitalize text
     </TextForStory>
-    <TextForStory {...args} transform='capitalizeWords'>
+    <TextForStory {...args} transform="capitalizeWords">
       capitalize each word
     </TextForStory>
     {VARIANT_PARENTS.map((color) => (
-      <Flex direction="column" align="center" justify="center" css={{
-        color,
-        border: '1px dashed currentColor',
-        height: 100,
-        width: 100,
-        position: 'relative'
-      }}>
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        css={{
+          color,
+          border: '1px dashed currentColor',
+          height: 100,
+          width: 100,
+          position: 'relative',
+        }}
+      >
         <TextForStory {...args} variant="inherit">
           Inherit
         </TextForStory>
-        <Box css={{ position: 'absolute', bottom: 0, fontSize: '$1' }}>
-          Parent color
-        </Box>
+        <Box css={{ position: 'absolute', bottom: 0, fontSize: '$1' }}>Parent color</Box>
       </Flex>
     ))}
   </Flex>
 );
 
-const SIZE_PARENTS = ['$4', '$12']
+const SIZE_PARENTS = ['$4', '$12'];
 
 export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => (
   <Flex gap={2} direction="column">
@@ -125,22 +131,24 @@ export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => 
       Makes Networking Boring
     </TextForStory>
     {SIZE_PARENTS.map((fontSize) => (
-      <Flex css={{
-        fontSize,
-        border: '1px dashed $hiContrast',
-        justifyContent: 'space-between'
-      }}>
+      <Flex
+        css={{
+          fontSize,
+          border: '1px dashed $hiContrast',
+          justifyContent: 'space-between',
+        }}
+      >
         <TextForStory {...args} size="inherit">
           Inherit
         </TextForStory>
-        <Box css={{ color: '$hiContrast' }}>
-          Parent fontSize
-        </Box>
+        <Box css={{ color: '$hiContrast' }}>Parent fontSize</Box>
       </Flex>
     ))}
   </Flex>
 );
 
 const Customize: ComponentStory<typeof TextForStory> = (args) => (
-  <TextForStory css={{ fontWeight: '$semiBold' }} {...args}>SemiBold</TextForStory>
+  <TextForStory css={{ fontWeight: '$semiBold' }} {...args}>
+    SemiBold
+  </TextForStory>
 );
