@@ -1,4 +1,11 @@
-import React, { ComponentProps, ElementRef, forwardRef } from 'react';
+import React, {
+  ComponentProps,
+  ElementRef,
+  forwardRef,
+  useMemo,
+  Children,
+  isValidElement,
+} from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { styled, VariantProps, CSS } from '../../stitches.config';
 import {
@@ -11,6 +18,7 @@ import {
   Thead as TableThead,
   Table as TableTable,
 } from '../Table';
+import merge from 'lodash.merge';
 
 export const Caption = styled('div', TableCaption, {
   display: 'table-caption',
@@ -42,11 +50,31 @@ export interface TrProps
   asChild?: boolean;
   css?: CSS;
 }
-export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(({ asChild, ...props }, ref) => {
-  const Component = asChild ? StyledTrSlot : StyledTr;
+export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
+  ({ asChild, children, ...props }, ref) => {
+    const Component = asChild ? StyledTrSlot : StyledTr;
 
-  return <Component ref={ref} role="row" {...props} />;
-});
+    if (!asChild) {
+      const arrayChildren = Children.toArray(children);
+      const hasColSpanChildren = arrayChildren.some((child) => {
+        if (!isValidElement(child)) {
+          return false;
+        }
+        const { fullColSpan } = child.props as TdProps;
+        return !!fullColSpan;
+      });
+      if (hasColSpanChildren && arrayChildren.length > 1) {
+        throw new Error('Using fullColSpan is allowed only for a single full width Td.');
+      }
+    }
+
+    return (
+      <Component ref={ref} role="row" {...props}>
+        {children}
+      </Component>
+    );
+  }
+);
 
 const StyledTh = styled('span', TableTh, {
   display: 'table-cell',
@@ -63,12 +91,42 @@ export const Th = forwardRef<ElementRef<typeof StyledTh>, ThProps>((props, ref) 
 const StyledTd = styled('span', TableTd, {
   display: 'table-cell',
 });
-export const Td = forwardRef<
-  ElementRef<typeof StyledTd>,
-  Omit<ComponentProps<typeof StyledTd>, 'css'> &
-    VariantProps<typeof StyledTd> &
-    VariantProps<typeof TableTd> & { css?: CSS }
->((props, ref) => <StyledTd ref={ref} role="cell" {...props} />);
+
+const FillerTd = styled(StyledTd, {
+  visibility: 'hidden',
+});
+export interface TdProps
+  extends Omit<ComponentProps<typeof StyledTd>, 'css'>,
+    VariantProps<typeof StyledTd>,
+    VariantProps<typeof TableTd> {
+  css?: CSS;
+  fullColSpan?: boolean;
+}
+export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
+  ({ fullColSpan, css, ...props }, ref) => {
+    const fullColSpanCss = useMemo(
+      () =>
+        fullColSpan
+          ? {
+              position: 'absolute',
+              left: 0,
+              width: '100%',
+              height: '100%',
+            }
+          : {},
+      [fullColSpan]
+    );
+    if (fullColSpan) {
+      return (
+        <>
+          <FillerTd css={css} {...props} />
+          <StyledTd ref={ref} role="cell" css={merge(fullColSpanCss, css)} {...props} />
+        </>
+      );
+    }
+    return <StyledTd ref={ref} role="cell" css={css} {...props} />;
+  }
+);
 
 const StyledThead = styled('div', TableThead, {
   display: 'table-header-group',

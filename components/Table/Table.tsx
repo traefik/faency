@@ -51,6 +51,7 @@ export const Th = styled('th', Label, {
 });
 
 export const Td = styled('td', {
+  boxSizing: 'border-box',
   p: '$5 $3',
   borderBottom: '1px solid $tableRowBorder',
   fontSize: '$3',
