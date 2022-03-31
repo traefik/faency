@@ -49,6 +49,9 @@ export const Text = styled('span', {
       '12': {
         fontSize: '$12',
       },
+      inherit: {
+        fontSize: 'inherit',
+      },
     },
     variant: {
       red: {
@@ -63,9 +66,12 @@ export const Text = styled('span', {
       contrast: {
         color: '$textContrast',
       },
+      inherit: {
+        color: 'inherit',
+      },
       invalid: {
-        color: '$textInvalid'
-      }
+        color: '$textInvalid',
+      },
     },
     gradient: {
       true: {
@@ -83,11 +89,11 @@ export const Text = styled('span', {
         display: 'inline-block',
         '&::first-letter': {
           textTransform: 'uppercase',
-        }
+        },
       },
       capitalizeWords: {
         textTransform: 'capitalize',
-      }
+      },
     },
     noWrap: {
       true: {
