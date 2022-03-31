@@ -15,12 +15,13 @@
   },
   "scripts": {
     "prettier": "prettier --write .",
-    "test": "echo \"Error: no test specified\" && exit 0",
     "build": "rollup -c",
     "release": "npm run build && np",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages",
+    "test": "jest --watch",
+    "test:ci": "jest --ci --silent"
   },
   "peerDependencies": {
     "react": ">= 17.0.1",
