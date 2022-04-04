@@ -61,6 +61,7 @@ export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Ta
 export { Text } from './components/Text';
 export { Tooltip } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
+export {Avatar} from './components/Avatar';
 
 // Stitches
 export {
