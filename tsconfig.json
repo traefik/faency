@@ -15,6 +15,7 @@
     "strict": true,
     "target": "es5",
     "noImplicitAny": false,
+    "incremental": true,
     "lib": [
       "dom",
       "dom.iterable",
@@ -33,7 +34,8 @@
   },
   "exclude": [
     "node_modules",
-    "pages"
+    "pages",
+    "*.test.ts"
   ],
   "include": [
     "next-env.d.ts",
