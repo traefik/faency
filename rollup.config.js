@@ -1,5 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
-import url from 'rollup-plugin-url';
+import url from '@rollup/plugin-url';
 import pkg from './package.json';
 
 export default {
@@ -19,7 +19,6 @@ export default {
     url({
       include: ['**/*.woff', '**/*.woff2'],
       destDir: 'dist/fonts',
-      limit: Infinity,
     }),
     typescript({
       clean: true,
