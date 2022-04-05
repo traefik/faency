@@ -86,7 +86,7 @@ const Customize: ComponentStory<any> = (args) => {
         ))}
       </Box>
 
-      <DialogContent css={{ c: '$hiContrast' }}>
+      <DialogContent css={{ c: '$hiContrast' }} elevation={2}>
         <Content />
       </DialogContent>
     </Dialog>
