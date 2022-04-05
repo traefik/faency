@@ -19,6 +19,7 @@ export const Tbody = styled('tbody', {
 export const Th = styled('th', Label, {
   // override Label
   display: 'table-cell',
+  verticalAlign: 'inherit',
 
   borderTopLeftRadius: 'inherit',
   borderTopRightRadius: 'inherit',
@@ -56,6 +57,7 @@ export const Td = styled('td', {
   borderBottom: '1px solid $tableRowBorder',
   fontSize: '$3',
   lineHeight: '16px',
+  verticalAlign: 'inherit',
   variants: {
     subtle: {
       true: {
@@ -81,6 +83,7 @@ export const Td = styled('td', {
 });
 
 export const Tr = styled('tr', {
+  verticalAlign: 'inherit',
   '&:hover': {
     color: '$tableHoverText',
   },
