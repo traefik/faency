@@ -85,17 +85,8 @@ We use [semantic-release/semantic-release](https://github.com/semantic-release/s
 
 Recommended conventional commit types:
 
-```
-[
-  'build',
-  'chore',
-  'ci',
-  'docs',
-  'feat',
-  'fix',
-  'revert',
-  'test'
-]
+```json
+["build", "chore", "ci", "docs", "feat", "fix", "revert", "test"]
 ```
 
 - `build`/`chore`: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
@@ -108,21 +99,21 @@ Recommended conventional commit types:
 
 Breaking change syntax:
 
-```
+```text
 <type>!: <description>
 ```
 
 Matching between commit type and release
 
-```
+```js
 [
-  {breaking: true, release: 'major'},
+  { breaking: true, release: 'major' },
   // types impacting release version
-  {revert: true, release: 'patch'},
-  {type: 'feat', release: 'minor'},
-  {type: 'fix', release: 'patch'},
-  {type: 'perf', release: 'patch'},
-]
+  { revert: true, release: 'patch' },
+  { type: 'feat', release: 'minor' },
+  { type: 'fix', release: 'patch' },
+  { type: 'perf', release: 'patch' },
+];
 ```
 
 See [semantic-release/commit-analyzer](https://github.com/semantic-release/commit-analyzer#readme) for more information.
