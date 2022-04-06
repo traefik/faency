@@ -45,6 +45,7 @@ export const Skeleton = styled('div', {
       },
       badge: {
         borderRadius: '$pill',
+        display: 'inline-flex',
       },
       button: {
         borderRadius: '$3',
