@@ -41,18 +41,19 @@ export const Skeleton = styled('div', {
         borderRadius: '$2',
       },
       circle: {
-        borderRadius: '$round'
+        borderRadius: '$round',
       },
       badge: {
         borderRadius: '$pill',
       },
       button: {
         borderRadius: '$3',
+        display: 'inline-flex',
       },
       text: {
         '&:empty:before': {
           content: '"\\00a0"', // adds a space character before element
-        }
+        },
       },
     },
   },

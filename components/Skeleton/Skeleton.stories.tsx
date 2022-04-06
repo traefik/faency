@@ -24,8 +24,7 @@ export const Square: ComponentStory<typeof SkeletonForStory> = () => (
     <Skeleton variant="square" css={{ size: '$6' }} />
     <Skeleton variant="square" css={{ size: '$9' }} />
   </Flex>
-)
-
+);
 
 export const Circle: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
@@ -33,7 +32,7 @@ export const Circle: ComponentStory<typeof SkeletonForStory> = () => (
     <Skeleton variant="circle" css={{ size: '$6' }} />
     <Skeleton variant="circle" css={{ size: '$9' }} />
   </Flex>
-)
+);
 
 export const Badge: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
@@ -41,7 +40,7 @@ export const Badge: ComponentStory<typeof SkeletonForStory> = () => (
     <Skeleton variant="badge" css={{ height: '$5', width: '$8' }} />
     <Skeleton variant="badge" css={{ height: '$5', width: '$10' }} />
   </Flex>
-)
+);
 
 export const Button: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
@@ -49,7 +48,7 @@ export const Button: ComponentStory<typeof SkeletonForStory> = () => (
     <Skeleton variant="button" css={{ height: '$5', width: '$8' }} />
     <Skeleton variant="button" css={{ height: '$5', width: '$10' }} />
   </Flex>
-)
+);
 
 export const Text: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
@@ -77,7 +76,7 @@ export const Typographies: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-const AVATAR_SIZES = ['1', '2', '3', '4', '5', '6'] as const
+const AVATAR_SIZES = ['1', '2', '3', '4', '5', '6'] as const;
 
 export const Avatars: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex gap="3" align="center">
@@ -106,7 +105,7 @@ export const ButtonInferred: ComponentStory<typeof SkeletonForStory> = () => (
       <FaencyButton css={{ width: 120 }} size="large" />
     </Skeleton>
   </Flex>
-)
+);
 
 export const BadgeInferred: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex gap="3" direction="column">
@@ -117,7 +116,7 @@ export const BadgeInferred: ComponentStory<typeof SkeletonForStory> = () => (
       <FaencyBadge css={{ width: 140 }} size="large" />
     </Skeleton>
   </Flex>
-)
+);
 
 export const Customs: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex direction="column" gap={3}>

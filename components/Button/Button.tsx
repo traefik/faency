@@ -12,10 +12,9 @@ export const BUTTON_BASE_STYLES = {
     pointerEvents: 'none',
     opacity: 0.5,
   },
-}
+};
 
-export const StyledButton = styled('button', {
-  ...BUTTON_BASE_STYLES,
+export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
   // Reset
   all: 'unset',
   alignItems: 'center',
