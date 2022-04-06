@@ -3,9 +3,23 @@
   "description": "Traefik Labs design system",
   "version": "1.0.0-semantic-release",
   "license": "Apache-2.0",
+  "keywords": [
+    "traefiklabs",
+    "ui",
+    "design system",
+    "react",
+    "radix-ui",
+    "a11y"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "modulesDir": "dist",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
