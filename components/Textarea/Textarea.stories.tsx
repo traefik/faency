@@ -11,17 +11,12 @@ import { styled } from '../../stitches.config';
 
 const BaseTextarea = (props: TextareaProps): JSX.Element => <Textarea {...props} />;
 
-const TextareaForStory = modifyVariantsForStory<
-  TextareaVariants,
-  TextareaProps
->(BaseTextarea);
+const TextareaForStory = modifyVariantsForStory<TextareaVariants, TextareaProps>(BaseTextarea);
 
 export default {
   title: 'Components/Textarea',
   component: TextareaForStory,
 } as ComponentMeta<typeof TextareaForStory>;
-
-
 
 const Template: ComponentStory<typeof TextareaForStory> = (args) => (
   <Box>
@@ -42,7 +37,7 @@ RowsCols.args = {
   label: 'RowCols',
   cols: 64,
   rows: 16,
-}
+};
 ignoreArgType('id', RowsCols);
 
 export const Resize = Template.bind({});
@@ -55,15 +50,15 @@ ignoreArgType('id', Resize);
 Resize.argTypes = {
   resize: {
     control: 'inline-radio',
-    options: ['both', 'vertical', 'horizontal', 'none']
-  }
-}
+    options: ['both', 'vertical', 'horizontal', 'none'],
+  },
+};
 
 export const Labelled = Template.bind({});
 Labelled.args = {
   id: 'labelled-textarea',
   label: 'Labelled',
-}
+};
 ignoreArgType('id', Labelled);
 
 export const Invalid = Template.bind({});
@@ -71,12 +66,16 @@ Invalid.args = {
   id: 'invalid-textarea',
   label: 'Invalid',
   state: 'invalid',
-}
+};
 ignoreArgType('id', Invalid);
 
-
 export const Disabled = Template.bind({});
-Disabled.args = { id: 'disabled-textarea', label: 'disabled', disabled: true, defaultValue: 'default value' };
+Disabled.args = {
+  id: 'disabled-textarea',
+  label: 'disabled',
+  disabled: true,
+  defaultValue: 'default value',
+};
 ignoreArgType('id', Disabled);
 
 export const ReadOnly = Template.bind({});
@@ -85,10 +84,25 @@ ignoreArgType('id', ReadOnly);
 
 export const Ghost: ComponentStory<typeof TextareaForStory> = (args) => (
   <Flex direction="column" gap={2}>
-    <TextareaForStory id="ghost-textarea" label='Ghost textarea' {...args} />
-    <TextareaForStory id="ghost-invalid-textarea" label="Ghost invalid textarea" state="invalid" {...args} />
-    <TextareaForStory id="ghost-disabled-textarea" label="Ghost disabled textarea" disabled {...args} />
-    <TextareaForStory id="ghost-readonly-textarea" label="Ghost readonly textarea" readOnly {...args} />
+    <TextareaForStory id="ghost-textarea" label="Ghost textarea" {...args} />
+    <TextareaForStory
+      id="ghost-invalid-textarea"
+      label="Ghost invalid textarea"
+      state="invalid"
+      {...args}
+    />
+    <TextareaForStory
+      id="ghost-disabled-textarea"
+      label="Ghost disabled textarea"
+      disabled
+      {...args}
+    />
+    <TextareaForStory
+      id="ghost-readonly-textarea"
+      label="Ghost readonly textarea"
+      readOnly
+      {...args}
+    />
   </Flex>
 );
 Ghost.args = { defaultValue: 'default value', variant: 'ghost', rows: 2 };
@@ -96,15 +110,15 @@ Ghost.args = { defaultValue: 'default value', variant: 'ghost', rows: 2 };
 const StyledCopyIcon = styled(CopyIcon, {
   '@hover': {
     '&:hover': {
-      cursor: 'pointer'
-    }
-  }
+      cursor: 'pointer',
+    },
+  },
 });
 
 export const EndAdornment = Template.bind({});
 EndAdornment.args = {
-  endAdornment: <InfoCircledIcon />
-}
+  endAdornment: <InfoCircledIcon />,
+};
 
 export const ReadOnlyCopy: ComponentStory<typeof TextareaForStory> = (args) => {
   const toCopy = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -114,16 +128,13 @@ export const ReadOnlyCopy: ComponentStory<typeof TextareaForStory> = (args) => {
   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
   const [copied, setCopied] = useState(false);
 
-  const onCopy = useCallback(
-    async () => {
-      await navigator.clipboard.writeText(toCopy)
-      setCopied(true);
-      setTimeout(() => {
-        setCopied(false);
-      }, 2000);
-    },
-    [toCopy, setCopied],
-  );
+  const onCopy = useCallback(async () => {
+    await navigator.clipboard.writeText(toCopy);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  }, [toCopy, setCopied]);
 
   return (
     <Flex direction="column" gap={2}>
@@ -134,17 +145,26 @@ export const ReadOnlyCopy: ComponentStory<typeof TextareaForStory> = (args) => {
         cols={40}
         value={toCopy}
         readOnly
-        endAdornment={copied ? (
-          <CheckCircledIcon aria-label='Copied' />
-        ) : (
-          <StyledCopyIcon aria-label='Copy' onClick={onCopy} />
-        )}
+        endAdornment={
+          copied ? (
+            <CheckCircledIcon aria-label="Copied" />
+          ) : (
+            <StyledCopyIcon aria-label="Copy" onClick={onCopy} />
+          )
+        }
         {...args}
       />
     </Flex>
   );
-}
+};
 
 const Customize: ComponentStory<typeof TextareaForStory> = (args) => (
   <Textarea {...args} css={{ c: '$hiContrast' }} />
 );
+
+export const EndAdornmentPositionning = ReadOnlyCopy.bind({});
+EndAdornmentPositionning.args = {
+  css: {
+    whiteSpace: 'pre',
+  },
+};
