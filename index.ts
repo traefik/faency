@@ -21,7 +21,7 @@ export { Checkbox } from './components/Checkbox';
 export { Container } from './components/Container';
 export { Elevation, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
-export { Dialog, DialogClose, DialogContent, StyledContent, DialogTrigger } from './components/Dialog';
+export { Dialog, DialogClose, DialogContent, StyledContent, DialogCloseIconButton, DialogTrigger } from './components/Dialog';
 export {
   DropdownMenu,
   DropdownMenuTrigger,

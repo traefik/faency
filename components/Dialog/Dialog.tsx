@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
@@ -67,6 +67,20 @@ const StyledCloseButton = styled(DialogPrimitive.Close, {
   cursor: 'pointer',
 });
 
+interface DialogCloseButtonProps
+  extends VariantProps<typeof IconButton>,
+    ComponentProps<typeof IconButton> {}
+export const DialogCloseIconButton = React.forwardRef<
+  React.ElementRef<typeof IconButton>,
+  DialogCloseButtonProps
+>((props, forwardedRef) => (
+  <StyledCloseButton asChild>
+    <IconButton ref={forwardedRef} css={{ color: '$hiContrast' }} {...props}>
+      <Cross1Icon />
+    </IconButton>
+  </StyledCloseButton>
+));
+
 type DialogContentPrimitiveProps = React.ComponentProps<typeof DialogPrimitive.Content>;
 type DialogContentProps = DialogContentPrimitiveProps &
   VariantProps<typeof StyledContent> & { css?: CSS };
@@ -77,11 +91,7 @@ export const DialogContent = React.forwardRef<
 >(({ children, ...props }, forwardedRef) => (
   <StyledContent {...props} ref={forwardedRef}>
     {children}
-    <StyledCloseButton asChild>
-      <IconButton css={{ color: '$hiContrast' }}>
-        <Cross1Icon />
-      </IconButton>
-    </StyledCloseButton>
+    <DialogCloseIconButton />
   </StyledContent>
 ));
 
