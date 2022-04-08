@@ -86,4 +86,4 @@ export const DialogContent = React.forwardRef<
 ));
 
 export const DialogTrigger = DialogPrimitive.Trigger;
-export const DialogClose = StyledCloseButton;
+export const DialogClose = DialogPrimitive.Close;
