@@ -44,7 +44,6 @@ export namespace Theme {
     buttonPrimaryText: '$deepBlue2',
     buttonPrimaryFocusBorder: primaryColor.helpers.pickScale(12, { alpha: true }),
     buttonPrimaryGhostHoverText: tinycolor(primaryColor.value).lighten(10).toHslString(),
-    buttonPrimaryGhostText: '$primary',
 
     buttonSecondaryBg: 'transparent',
     buttonSecondaryText: tinycolor('white').setAlpha(0.74).toHslString(),

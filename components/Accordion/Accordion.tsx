@@ -32,7 +32,7 @@ const StyledAccordionItem = styled(AccordionPrimitive.Item, {
     mt: 0,
   },
   boxShadow: '0 1px 0 0 $colors$divider',
-})
+});
 
 export const StyledAccordionHeader = styled(AccordionPrimitive.Header, {
   all: 'unset',
@@ -69,7 +69,7 @@ export const StyledAccordionTrigger = styled(AccordionPrimitive.Trigger, {
       cursor: 'pointer',
       '&::before': {
         backgroundColor: '$accordionHoverShadow',
-      }
+      },
     },
   },
   transition: 'opacity 200ms ease-out',
@@ -79,16 +79,16 @@ export const StyledAccordionTrigger = styled(AccordionPrimitive.Trigger, {
         py: '$2',
       },
       medium: {
-        py: '$3'
+        py: '$3',
       },
       large: {
         py: '$5',
-      }
-    }
+      },
+    },
   },
   defaultVariants: {
     size: 'small',
-  }
+  },
 });
 
 const StyledAccordionChevron = styled(ChevronRightIcon, {
@@ -108,7 +108,7 @@ const StyledAccordionContent = styled(AccordionPrimitive.Content, {
     animation: `${open} 200ms ease-out`,
   },
   '&[data-state="closed"]': {
-    animation: `${close} 200ms ease-out`
+    animation: `${close} 200ms ease-out`,
   },
 });
 
@@ -119,41 +119,47 @@ const StyledAccordionContentWrapper = styled('div', {
         py: '$2',
       },
       medium: {
-        py: '$3'
+        py: '$3',
       },
       large: {
         py: '$5',
-      }
-    }
+      },
+    },
   },
   defaultVariants: {
     size: 'small',
-  }
+  },
 });
 
 // EXPORTS
 export const AccordionRoot = StyledAccordionRoot;
 export const AccordionItem = StyledAccordionItem;
-export type AccordionTriggerProps = React.ComponentProps<typeof StyledAccordionTrigger> & VariantProps<typeof StyledAccordionTrigger> & {
-  children: React.ReactNode
-}
+export type AccordionTriggerProps = React.ComponentProps<typeof StyledAccordionTrigger> &
+  VariantProps<typeof StyledAccordionTrigger> & {
+    children: React.ReactNode;
+  };
 export const AccordionTrigger = React.forwardRef<
-  React.ElementRef<typeof StyledAccordionTrigger>, AccordionTriggerProps>(({ children, ...props }, forwardedRef) => (
-    <StyledAccordionHeader>
-      <StyledAccordionTrigger ref={forwardedRef} {...props}>
-        <StyledAccordionChevron aria-hidden />
-        {children}
-      </StyledAccordionTrigger>
-    </StyledAccordionHeader>
-  ));
+  React.ElementRef<typeof StyledAccordionTrigger>,
+  AccordionTriggerProps
+>(({ children, ...props }, forwardedRef) => (
+  <StyledAccordionHeader>
+    <StyledAccordionTrigger ref={forwardedRef} {...props}>
+      <StyledAccordionChevron aria-hidden />
+      {children}
+    </StyledAccordionTrigger>
+  </StyledAccordionHeader>
+));
 
-export type AccordionContentProps = VariantProps<typeof StyledAccordionContent> & Pick<VariantProps<typeof StyledAccordionContentWrapper>, 'size'> & {
-  children: React.ReactNode
-  css?: CSS
-}
-export const AccordionContent = React.forwardRef<React.ElementRef<typeof StyledAccordionContent>, AccordionContentProps>(({ children, size, ...props }, forwardedRef) => (
+export type AccordionContentProps = VariantProps<typeof StyledAccordionContent> &
+  Pick<VariantProps<typeof StyledAccordionContentWrapper>, 'size'> & {
+    children: React.ReactNode;
+    css?: CSS;
+  };
+export const AccordionContent = React.forwardRef<
+  React.ElementRef<typeof StyledAccordionContent>,
+  AccordionContentProps
+>(({ children, size, ...props }, forwardedRef) => (
   <StyledAccordionContent {...props} ref={forwardedRef}>
     <StyledAccordionContentWrapper size={size}>{children}</StyledAccordionContentWrapper>
   </StyledAccordionContent>
-));;
-
+));

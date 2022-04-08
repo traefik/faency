@@ -42,7 +42,7 @@ export const Skeleton = styled('div', {
         borderRadius: '$2',
       },
       circle: {
-        borderRadius: '$round',
+        borderRadius: '$round'
       },
       badge: {
         borderRadius: '$pill',
@@ -53,7 +53,7 @@ export const Skeleton = styled('div', {
       text: {
         '&:empty:before': {
           content: '"\\00a0"', // adds a space character before element
-        },
+        }
       },
     },
   },

@@ -15,11 +15,8 @@ import {
 import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
-import { Box } from '../Box';
 import { UnstyledLink } from '../Link';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Image } from '../Image';
-import { Text } from '../Text';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
@@ -526,33 +523,4 @@ export const Columns: ComponentStory<any> = ({ transform, ...args }) => (
       </Tfoot>
     </TableForStory>
   </Flex>
-);
-
-const FlexIssue = () => (
-  <Flex align="center" justify="center">
-    <Image src="https://picsum.photos/38/38" />
-  </Flex>
-);
-
-export const VerticalAlignment: ComponentStory<any> = (args) => (
-  <TableForStory>
-    <Thead>
-      <Tr>
-        <Th>Flex issue column</Th>
-        <Th>Column</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr>
-        <Td>
-          <FlexIssue />
-        </Td>
-        <Td>
-          <Flex align="center" justify="center">
-            <Text>Cell</Text>
-          </Flex>
-        </Td>
-      </Tr>
-    </Tbody>
-  </TableForStory>
 );

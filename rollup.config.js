@@ -1,5 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
-import url from '@rollup/plugin-url';
+import babel from '@rollup/plugin-babel';
+
 import pkg from './package.json';
 
 export default {
@@ -10,20 +11,21 @@ export default {
       format: 'cjs',
     },
     {
-      file: pkg.module,
+      preserveModules: true,
+      dir: pkg.modulesDir,
       format: 'es',
     },
   ],
   external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
   plugins: [
-    url({
-      include: ['**/*.woff', '**/*.woff2'],
-      destDir: 'dist/fonts',
-    }),
     typescript({
       clean: true,
       tsconfig: 'tsconfig-rollup.json',
       typescript: require('typescript'),
+    }),
+    babel({
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      babelHelpers: 'bundled',
     }),
   ],
 };
