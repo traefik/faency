@@ -85,12 +85,9 @@ const BADGE_BASE_STYLES = {
   },
 };
 
-export const StyledSpanBadge = styled('span', {
-  ...BADGE_BASE_STYLES,
-});
+export const StyledSpanBadge = styled('span', BADGE_BASE_STYLES);
 
-const StyledButtonBadge = styled('button', {
-  ...BADGE_BASE_STYLES,
+const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
   '&:focus-visible': {
     boxShadow: '0 0 0 1px $colors$focusOutline',
   },
