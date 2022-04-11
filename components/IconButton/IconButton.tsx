@@ -77,6 +77,9 @@ export const IconButton = styled('button', {
       default: {
         color: '$slate10',
       },
+      contrast: {
+        color: '$hiContrast',
+      },
       primary: {
         color: '$primary',
       },

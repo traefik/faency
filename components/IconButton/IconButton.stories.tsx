@@ -45,6 +45,9 @@ export const Variants: ComponentStory<any> = (args) => (
     <IconButton {...args} variant="default">
       <Icons.BellIcon />
     </IconButton>
+    <IconButton {...args} variant="contrast">
+      <Icons.Cross1Icon />
+    </IconButton>
     <IconButton {...args} variant="primary">
       <Icons.AvatarIcon />
     </IconButton>
@@ -77,4 +80,4 @@ Variants.argTypes = {
 
 const Customize: ComponentStory<any> = (args) => (
   <IconButton css={{ c: '$hiContrast' }} {...args} size="1"></IconButton>
-)
+);
