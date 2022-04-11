@@ -113,14 +113,10 @@ interface BadgeProps
 
 export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>, BadgeProps>(
   ({ interactive, ...props }, forwardedRef) => {
-    return (
-      <>
-        {interactive ? (
-          <StyledButtonBadge {...props} ref={forwardedRef} />
-        ) : (
-          <StyledSpanBadge {...props} ref={forwardedRef} />
-        )}
-      </>
+    return interactive ? (
+      <StyledButtonBadge {...props} ref={forwardedRef} />
+    ) : (
+      <StyledSpanBadge {...props} ref={forwardedRef} />
     );
   }
 );
