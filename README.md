@@ -23,8 +23,10 @@ Then you need to wire up the FaencyProvider which will hold the context with the
 ```jsx
 import { FaencyProvider } from '@traefiklabs/faency';
 
-const App = () => <FaencyProvider primaryColor="$blue8">{/* your app */}</FaencyProvider>;
+const App = () => <FaencyProvider primaryColor="blue">{/* your app */}</FaencyProvider>;
 ```
+
+> Available primary colors are: blue, deepBlue, gray, grayBlue, green, neon, orange, purple, red, slate
 
 Then you are ready to import components and use them on your project:
 
