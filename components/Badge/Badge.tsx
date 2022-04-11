@@ -102,7 +102,7 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
       right: 0,
       bottom: 0,
       left: 0,
-      borderRadius: '5px',
+      borderRadius: '$pill',
     },
   },
 });
