@@ -1,30 +1,34 @@
-import { styled } from '../../stitches.config';
+import React, { ComponentProps, createContext } from 'react';
+import { styled, VariantProps, CSS } from '../../stitches.config';
 
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 type COLOR_VALUES = typeof COLORS[number];
 
-type ColorVariants = Record<COLOR_VALUES, { bc: string, color: string }>
-const colorVariants: ColorVariants = COLORS.reduce((variants, color) => ({
-  ...variants,
-  [color]: {
-    bc: `$${color}6`,
-    color: `$${color}10`,
-  }
-}), {} as ColorVariants);
+type ColorVariants = Record<COLOR_VALUES, { bc: string; color: string }>;
+const colorVariants: ColorVariants = COLORS.reduce(
+  (variants, color) => ({
+    ...variants,
+    [color]: {
+      bc: `$${color}6`,
+      color: `$${color}10`,
+    },
+  }),
+  {} as ColorVariants
+);
 
 const alphaColorCompoundVariants = COLORS.map((color) => ({
   alphaBg: true,
   variant: color,
-  css: { bc: `$${color}A6` }
+  css: { bc: `$${color}A6` },
 }));
 
 const interactiveColorCompoundVariants = COLORS.map((color) => ({
   interactive: true,
   variant: color,
-  css: { '&:focus-visible': { boxShadow: `0 0 0 1px $colors$${color}9` } }
-}))
+  css: { '&:focus-visible': { boxShadow: `0 0 0 1px $colors$${color}9` } },
+}));
 
-export const Badge = styled('span', {
+const BADGE_BASE_STYLES = {
   // Reset
   alignItems: 'center',
   appearance: 'none',
@@ -52,28 +56,9 @@ export const Badge = styled('span', {
     pointerEvents: 'none',
     color: '$slate8',
   },
-
   variants: {
     interactive: {
-      true: {
-        '&:focus-visible': {
-          boxShadow: '0 0 0 1px $colors$focusOutline',
-        },
-        '&:hover': {
-          cursor: 'pointer',
-          '&::before': {
-            backgroundColor: '$badgeInteractiveBackground',
-            boxSizing: 'border-box',
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            borderRadius: '5px',
-          },
-        },
-      },
+      true: {},
     },
     size: {
       small: {
@@ -92,13 +77,46 @@ export const Badge = styled('span', {
       true: {},
     },
   },
-  compoundVariants: [
-    ...interactiveColorCompoundVariants,
-    ...alphaColorCompoundVariants,
-  ],
+  compoundVariants: [...interactiveColorCompoundVariants, ...alphaColorCompoundVariants],
   defaultVariants: {
     size: 'small',
     interactive: false,
     variant: 'gray',
   },
+};
+
+export const StyledSpanBadge = styled('span', BADGE_BASE_STYLES);
+
+const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
+  '&:focus-visible': {
+    boxShadow: '0 0 0 1px $colors$focusOutline',
+  },
+  '&:hover': {
+    cursor: 'pointer',
+    '&::before': {
+      backgroundColor: '$badgeInteractiveBackground',
+      boxSizing: 'border-box',
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      borderRadius: '5px',
+    },
+  },
 });
+
+interface BadgeProps
+  extends ComponentProps<typeof StyledButtonBadge>,
+    VariantProps<typeof StyledButtonBadge> {}
+
+export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>, BadgeProps>(
+  ({ interactive, ...props }, forwardedRef) => {
+    return interactive ? (
+      <StyledButtonBadge {...props} ref={forwardedRef} />
+    ) : (
+      <StyledSpanBadge {...props} ref={forwardedRef} />
+    );
+  }
+);

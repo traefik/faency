@@ -23,8 +23,10 @@ export default {
 export const Colors: ComponentStory<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Badge {...args}>Default</Badge>
-    {COLORS.map(color => (
-      <Badge key={color} {...args} variant={color}>{color}</Badge>
+    {COLORS.map((color) => (
+      <Badge key={color} {...args} variant={color}>
+        {color}
+      </Badge>
     ))}
   </Flex>
 );
@@ -63,11 +65,11 @@ Large.args = {
 
 export const Interactive: ComponentStory<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
-    <Badge as="button" {...args}>
-      Default
-    </Badge>
-    {COLORS.map(color => (
-      <Badge as="button" {...args} variant={color}>{color}</Badge>
+    <Badge {...args}>Default</Badge>
+    {COLORS.map((color) => (
+      <Badge {...args} variant={color}>
+        {color}
+      </Badge>
     ))}
   </Flex>
 );
@@ -79,5 +81,7 @@ Interactive.args = {
 };
 
 const Customize: ComponentStory<typeof BadgeForStory> = (args) => (
-  <Badge css={{ c: '$hiContrast' }} {...args}>Customize</Badge>
+  <Badge css={{ c: '$hiContrast' }} {...args}>
+    Customize
+  </Badge>
 );
