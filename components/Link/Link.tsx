@@ -46,7 +46,7 @@ export const Link = styled('a', {
       },
       primary: {
         color: '$linkPrimary',
-        textDecorationColor: '$linkPrimaryTextDecoration',
+        textDecoration: 'none',
         '@hover': {
           '&:hover': {
             textDecorationColor: '$linkPrimaryHoverTextDecoration',

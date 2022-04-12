@@ -35,9 +35,9 @@ export namespace Theme {
     linkSubtleTextDecoration: '$deepBlue5',
     linkSubtleHoverTextDecoration: '$deepBlue7',
     linkSubtleFocusOutline: '$deepBlue4',
-    linkPrimary: tinycolor(primaryColor.value).darken(26).toHslString(),
+    linkPrimary: '$primary',
     linkPrimaryTextDecoration: tinycolor(primaryColor.value).darken(16).toHslString(),
-    linkPrimaryHoverTextDecoration: tinycolor(primaryColor.value).darken(26).toHslString(),
+    linkPrimaryHoverTextDecoration: '$primary',
     linkPrimaryFocusOutline: tinycolor(primaryColor.value).darken(16).toHslString(),
   });
 
