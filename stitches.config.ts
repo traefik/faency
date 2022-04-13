@@ -20,6 +20,7 @@ import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
 import { Theme as TooltipTheme } from './components/Tooltip/Tooltip.themes';
 import { Theme as TextareaTheme } from './components/Textarea/Textarea.themes';
+import {Theme as HeadingTheme} from './components/Heading/Heading.themes';
 
 import { lightColors, darkColors } from './colors';
 import getPrimaryColorInfo from './utils/getPrimaryColorInfo';
@@ -68,6 +69,7 @@ const stitches = createStitches({
       ...IconButtonTheme.getLight(defaultPrimaryColor),
       ...TooltipTheme.getLight(defaultPrimaryColor),
       ...TextareaTheme.getLight(defaultPrimaryColor),
+      ...HeadingTheme.getLight(defaultPrimaryColor),
     },
     fonts: {
       rubik:
@@ -298,6 +300,7 @@ export const darkTheme = (primary: PrimaryColor) => {
       ...NavigationTheme.getDark(darkPrimaryColor),
       ...TooltipTheme.getDark(darkPrimaryColor),
       ...TextareaTheme.getDark(darkPrimaryColor),
+      ...HeadingTheme.getDark(darkPrimaryColor),
     },
   });
 };
@@ -327,6 +330,7 @@ export const lightTheme = (primary: PrimaryColor) => {
       ...NavigationTheme.getLight(lightPrimaryColor),
       ...TooltipTheme.getLight(lightPrimaryColor),
       ...TextareaTheme.getLight(lightPrimaryColor),
+      ...HeadingTheme.getLight(lightPrimaryColor),
     },
   });
 };

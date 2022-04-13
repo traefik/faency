@@ -14,7 +14,7 @@ import {
 } from './Table';
 import { Badge } from '../Badge';
 import { Flex } from '../Flex';
-import { Heading } from '../Heading';
+import { H1 } from '../Heading';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { Button } from '../Button';
@@ -380,9 +380,7 @@ export const WithCaption: ComponentStory<any> = (args) => {
         </Tbody>
       </TableForStory>
       <div>
-        <Heading size="4" as="h1">
-          {title}
-        </Heading>
+        <H1>{title}</H1>
         <TableForStory {...args}>
           <VisuallyHidden asChild>
             <Caption>{title}</Caption>
@@ -432,9 +430,7 @@ export const WithCaption: ComponentStory<any> = (args) => {
         </TableForStory>
       </div>
       <div>
-        <Heading id={id} size="4" as="h1">
-          {title}
-        </Heading>
+        <H1 id={id}>{title}</H1>
         <TableForStory aria-describedby={id} {...args}>
           <Thead>
             <Tr>

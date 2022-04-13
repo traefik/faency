@@ -1,35 +1,31 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Heading, HeadingProps, HeadingVariants } from './Heading';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-
-type BaseHeadingProps = HeadingVariants & {};
-const BaseHeading = (props: BaseHeadingProps): JSX.Element => <Heading {...props} />;
-const HeadingForStory = modifyVariantsForStory<HeadingVariants, HeadingProps>(BaseHeading);
+import { Flex } from '../Flex';
+import { H1, H2, H3, H4, H5, H6 } from './Heading';
 
 export default {
   title: 'Components/Heading',
-  component: HeadingForStory,
-} as ComponentMeta<typeof HeadingForStory>;
+  component: H1,
+} as ComponentMeta<typeof H1>;
 
-const Template: ComponentStory<typeof HeadingForStory> = (args) => (
-  <HeadingForStory {...args}>Title {args?.size}</HeadingForStory>
+const Template: ComponentStory<typeof H1> = (args) => (
+  <Flex direction="column">
+    <H1>Heading level 1</H1>
+    <H2>Heading level 2</H2>
+    <H3>Heading level 3</H3>
+    <H4>Heading level 4</H4>
+    <H5>Heading level 5</H5>
+    <H6>Heading level 6</H6>
+  </Flex>
 );
 
 export const Basic = Template.bind({});
 
 Basic.args = {};
 
-export const Size: ComponentStory<typeof HeadingForStory> = ({ size, ...args }) => (
-  <>
-    <Template {...args} size="1" />
-    <Template {...args} size="2" />
-    <Template {...args} size="3" />
-    <Template {...args} size="4" />
-  </>
-);
-
-const Customize: ComponentStory<typeof HeadingForStory> = (args) => (
-  <HeadingForStory css={{ fontWeight: '$semiBold' }} {...args}>SemiBold</HeadingForStory>
+const Customize: ComponentStory<typeof H1> = (args) => (
+  <H1 css={{ fontWeight: '$semiBold' }} {...args}>
+    Heading level 1 SemiBold
+  </H1>
 );

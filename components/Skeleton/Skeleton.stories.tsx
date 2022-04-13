@@ -4,7 +4,7 @@ import React from 'react';
 import { Skeleton, SkeletonProps, SkeletonVariants } from './Skeleton';
 import { Flex } from '../Flex';
 import { Box } from '../Box';
-import { Heading } from '../Heading';
+import { H1, H2, H3, H4, H5, H6 } from '../Heading';
 import { Text as FaencyText } from '../Text';
 import { Avatar } from '../Avatar';
 import { Badge as FaencyBadge } from '../Badge';
@@ -62,16 +62,29 @@ export const Text: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-const HEADING_SIZES = ['1', '2', '3', '4'] as const;
 const TEXT_SIZES = ['3', '6', '9', '12'] as const;
 
 export const Typographies: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex gap="3" direction="column">
-    {HEADING_SIZES.map((size) => (
-      <Heading size={size}>
-        <Skeleton variant="text" />
-      </Heading>
-    ))}
+    <H1>
+      <Skeleton variant="text" />
+    </H1>
+    <H2>
+      <Skeleton variant="text" />
+    </H2>
+    <H3>
+      <Skeleton variant="text" />
+    </H3>
+    <H4>
+      <Skeleton variant="text" />
+    </H4>
+    <H5>
+      <Skeleton variant="text" />
+    </H5>
+    <H6>
+      <Skeleton variant="text" />
+    </H6>
+
     {TEXT_SIZES.map((size) => (
       <FaencyText size={size}>
         <Skeleton variant="text" />
