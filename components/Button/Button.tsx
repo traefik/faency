@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { styled, keyframes, CSS, VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Slot } from '@radix-ui/react-slot';
 
 export const BUTTON_BASE_STYLES = {
   appearance: 'none',
@@ -238,10 +239,9 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
     variant: 'primary',
   },
 });
+const StyledButtonSlot = styled(Slot, StyledButton);
 
-type ButtonVariants = VariantProps<typeof StyledButton>;
-
-const Waiting = styled('div', {
+export const Waiting = styled('div', {
   position: 'absolute',
   top: 0,
   left: '-100%',
@@ -284,10 +284,21 @@ const Waiting = styled('div', {
   },
 });
 
-type ButtonProps = React.ButtonHTMLAttributes<any> & ButtonVariants & { css?: CSS };
+export interface ButtonVariants extends VariantProps<typeof StyledButton> {}
+export interface ButtonProps extends ComponentProps<typeof StyledButton>, ButtonVariants {
+  css?: CSS;
+  asChild?: boolean;
+}
 
 export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
-  ({ children, ...props }, forwardedRef) => {
+  ({ children, asChild, ...props }, forwardedRef) => {
+    if (asChild) {
+      return (
+        <StyledButtonSlot ref={forwardedRef} {...props}>
+          {children}
+        </StyledButtonSlot>
+      );
+    }
     return (
       <StyledButton {...props} ref={forwardedRef}>
         <>
