@@ -1,5 +1,6 @@
-import React, { ComponentProps, createContext } from 'react';
-import { styled, VariantProps, CSS } from '../../stitches.config';
+import React, { ComponentProps, useMemo } from 'react';
+import { styled, VariantProps } from '../../stitches.config';
+import { Slot } from '@radix-ui/react-slot';
 
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 type COLOR_VALUES = typeof COLORS[number];
@@ -85,7 +86,8 @@ const BADGE_BASE_STYLES = {
   },
 };
 
-export const StyledSpanBadge = styled('span', BADGE_BASE_STYLES);
+const StyledSpanBadge = styled('span', BADGE_BASE_STYLES);
+const StyledSpanBadgeSlot = styled(Slot, StyledSpanBadge);
 
 const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
   '&:focus-visible': {
@@ -106,17 +108,23 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
     },
   },
 });
+const StyledButtonBadgeSlot = styled(Slot, StyledButtonBadge);
 
 interface BadgeProps
   extends ComponentProps<typeof StyledButtonBadge>,
-    VariantProps<typeof StyledButtonBadge> {}
+    VariantProps<typeof StyledButtonBadge> {
+  asChild?: boolean;
+}
 
 export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>, BadgeProps>(
-  ({ interactive, ...props }, forwardedRef) => {
-    return interactive ? (
-      <StyledButtonBadge {...props} ref={forwardedRef} />
-    ) : (
-      <StyledSpanBadge {...props} ref={forwardedRef} />
-    );
+  ({ interactive, asChild, ...props }, forwardedRef) => {
+    const Component = useMemo(() => {
+      if (interactive) {
+        return asChild ? StyledButtonBadgeSlot : StyledButtonBadge;
+      }
+      return asChild ? StyledSpanBadgeSlot : StyledSpanBadge;
+    }, [asChild]);
+
+    return <Component {...props} ref={forwardedRef} />;
   }
 );
