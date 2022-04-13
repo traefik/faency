@@ -21,7 +21,7 @@ const BG_SIZES = {
   large: '$sizes$10',
 };
 
-const backgroundSizeAnimation = (size) => ({
+const backgroundSizeAnimation = (size: keyof typeof BG_SIZES) => ({
   $$bgSize: BG_SIZES[size],
   backgroundSize: '$$bgSize',
   backgroundImage: `linear-gradient(
