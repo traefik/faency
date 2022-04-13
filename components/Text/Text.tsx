@@ -53,6 +53,23 @@ export const Text = styled('span', {
         fontSize: 'inherit',
       },
     },
+    weight: {
+      light: {
+        fontWeight: '$light',
+      },
+      regular: {
+        fontWeight: '$regular',
+      },
+      medium: {
+        fontWeight: '$medium',
+      },
+      semiBold: {
+        fontWeight: '$semiBold',
+      },
+      bold: {
+        fontWeight: '$bold',
+      },
+    },
     variant: {
       red: {
         color: '$textRed',
