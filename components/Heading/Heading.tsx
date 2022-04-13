@@ -7,6 +7,24 @@ const HEADING_BASE_STYLES = {
   lineHeight: '1.25',
   fontWeight: '$medium',
   color: '$headingDefault',
+  variants: {
+    transform: {
+      uppercase: {
+        textTransform: 'uppercase',
+      },
+      capitalize: {
+        // WARNING: this will only work with block elements (display block/inline-block)
+        // @see https://developer.mozilla.org/en-US/docs/Web/CSS/::first-letter
+        display: 'block',
+        '&::first-letter': {
+          textTransform: 'uppercase',
+        },
+      },
+      capitalizeWords: {
+        textTransform: 'capitalize',
+      },
+    },
+  },
 };
 
 export const H1 = styled('h1', {
