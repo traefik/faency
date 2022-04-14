@@ -147,6 +147,27 @@ export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => 
   </Flex>
 );
 
+export const Weight: ComponentStory<typeof TextForStory> = (args) => (
+  <Flex gap={2} direction="column">
+    <TextForStory {...args}>Default</TextForStory>
+    <TextForStory {...args} weight="light">
+      Light
+    </TextForStory>
+    <TextForStory {...args} weight="regular">
+      Regular
+    </TextForStory>
+    <TextForStory {...args} weight="medium">
+      Medium
+    </TextForStory>
+    <TextForStory {...args} weight="semiBold">
+      SemiBold
+    </TextForStory>
+    <TextForStory {...args} weight="bold">
+      Bold
+    </TextForStory>
+  </Flex>
+);
+
 const Customize: ComponentStory<typeof TextForStory> = (args) => (
   <TextForStory css={{ fontWeight: '$semiBold' }} {...args}>
     SemiBold
