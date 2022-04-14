@@ -3,12 +3,15 @@ import React from 'react';
 
 import { Skeleton, SkeletonProps, SkeletonVariants } from './Skeleton';
 import { Flex } from '../Flex';
+import { Box } from '../Box';
 import { Heading } from '../Heading';
 import { Text as FaencyText } from '../Text';
 import { Avatar } from '../Avatar';
 import { Badge as FaencyBadge } from '../Badge';
+import { Bubble } from '../Bubble';
 import { Button as FaencyButton } from '../Button';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Cross1Icon } from '@radix-ui/react-icons';
 
 const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
 const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(BaseSkeleton);
@@ -117,6 +120,46 @@ export const BadgeInferred: ComponentStory<typeof SkeletonForStory> = () => (
     </Skeleton>
   </Flex>
 );
+
+export const BubbleInferred: ComponentStory<typeof SkeletonForStory> = () => (
+  <Flex gap="3" direction="column">
+    <Skeleton variant="circle">
+      <Bubble noAnimation size="x-small" />
+    </Skeleton>
+    <Skeleton variant="circle">
+      <Bubble noAnimation size="small" />
+    </Skeleton>
+    <Skeleton variant="circle">
+      <Bubble noAnimation size="medium" />
+    </Skeleton>
+    <Skeleton variant="circle">
+      <Bubble noAnimation size="large" />
+    </Skeleton>
+    <Skeleton variant="circle">
+      <Bubble noAnimation size="x-large" />
+    </Skeleton>
+  </Flex>
+);
+
+export const CustomInferred: ComponentStory<typeof SkeletonForStory> = (args) => (
+  <Flex gap="3" direction="column">
+    <Skeleton {...args}>
+      <Box css={{ width: 35, height: 20 }} />
+    </Skeleton>
+    <Skeleton {...args}>
+      <Cross1Icon />
+    </Skeleton>
+  </Flex>
+);
+CustomInferred.args = {
+  variant: 'square',
+};
+CustomInferred.argTypes = {
+  variant: {
+    options: ['square', 'circle', 'badge', 'button', 'text'],
+    control: 'inline-radio',
+  },
+};
 
 export const Customs: ComponentStory<typeof SkeletonForStory> = () => (
   <Flex direction="column" gap={3}>
