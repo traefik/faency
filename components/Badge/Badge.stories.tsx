@@ -4,6 +4,7 @@ import { VariantProps } from '../../stitches.config';
 import { Badge, COLORS } from './Badge';
 import { Flex } from '../Flex';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { UnstyledLink } from '../Link';
 
 type BadgeVariants = VariantProps<typeof Badge>;
 type BadgeProps = BadgeVariants & {};
@@ -83,5 +84,11 @@ Interactive.args = {
 const Customize: ComponentStory<typeof BadgeForStory> = (args) => (
   <Badge css={{ c: '$hiContrast' }} {...args}>
     Customize
+  </Badge>
+);
+
+export const BadgeLink: ComponentStory<typeof BadgeForStory> = (args) => (
+  <Badge asChild interactive {...args}>
+    <UnstyledLink href="https://traefik.io">Link</UnstyledLink>
   </Badge>
 );
