@@ -5,6 +5,7 @@ import { ButtonForStory } from './Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { UnstyledLink } from '../Link';
 
 export default {
   title: 'Components/Button',
@@ -88,5 +89,19 @@ Waiting.args = {
 };
 
 const Customize: ComponentStory<typeof ButtonForStory> = (args) => (
-  <ButtonForStory css={{ c: '$hiContrast' }} {...args}>Button</ButtonForStory>
+  <ButtonForStory css={{ c: '$hiContrast' }} {...args}>
+    Button
+  </ButtonForStory>
 );
+
+export const ButtonLink: ComponentStory<typeof ButtonForStory> = (args) => (
+  <ButtonForStory asChild {...args}>
+    <UnstyledLink href="https://traefik.io">Button</UnstyledLink>
+  </ButtonForStory>
+);
+ButtonLink.argTypes = {
+  state: {
+    options: ['waiting', undefined],
+    control: 'inline-radio',
+  },
+};

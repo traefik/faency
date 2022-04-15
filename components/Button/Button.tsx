@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { ComponentProps, useMemo } from 'react';
 import { styled, keyframes, CSS, VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Slot } from '@radix-ui/react-slot';
 
 export const BUTTON_BASE_STYLES = {
   appearance: 'none',
@@ -14,6 +15,27 @@ export const BUTTON_BASE_STYLES = {
   },
 };
 
+const BG_SIZES = {
+  small: '$sizes$8',
+  medium: '$sizes$9',
+  large: '$sizes$10',
+};
+
+const backgroundSizeAnimation = (size: keyof typeof BG_SIZES) => ({
+  $$bgSize: BG_SIZES[size],
+  backgroundSize: '$$bgSize',
+  backgroundImage: `linear-gradient(
+            -45deg,
+            transparent 33%,
+            $colors$deepBlue4 33%,
+            $colors$deepBlue4 66%,
+            transparent 66%
+          )`,
+  animation: `${keyframes({
+    '100%': { transform: 'translateX($$bgSize)' },
+  })} 500ms linear infinite`,
+});
+
 export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
   // Reset
   all: 'unset',
@@ -24,19 +46,13 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
     boxSizing: 'border-box',
     content: '""',
     position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    inset: 0,
   },
   '&::after': {
     boxSizing: 'border-box',
     content: '""',
     position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    inset: 0,
   },
 
   // Custom reset?
@@ -161,6 +177,11 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
         c: 'transparent',
         overflow: 'hidden',
         pointerEvents: 'none',
+        '&::after': {
+          left: '-100%',
+          width: '200%',
+          ...backgroundSizeAnimation('medium'),
+        },
       },
     },
     ghost: {
@@ -232,69 +253,41 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
         },
       },
     },
+    {
+      size: 'small',
+      state: 'waiting',
+      css: {
+        '&::after': backgroundSizeAnimation('small'),
+      },
+    },
+    {
+      size: 'large',
+      state: 'waiting',
+      css: {
+        '&::after': backgroundSizeAnimation('large'),
+      },
+    },
   ],
   defaultVariants: {
     size: 'medium',
     variant: 'primary',
   },
 });
+const StyledButtonSlot = styled(Slot, StyledButton);
 
-type ButtonVariants = VariantProps<typeof StyledButton>;
-
-const Waiting = styled('div', {
-  position: 'absolute',
-  top: 0,
-  left: '-100%',
-  width: '200%',
-  height: '100%',
-  backgroundImage: `linear-gradient(
-                -45deg,
-                transparent 33%,
-                $colors$deepBlue4 33%,
-                $colors$deepBlue4 66%,
-                transparent 66%
-              )`,
-  variants: {
-    size: {
-      small: {
-        $$bgSize: '$sizes$8',
-        backgroundSize: '$$bgSize',
-        animation: `${keyframes({
-          '100%': { transform: 'translateX($sizes$8)' },
-        })} 500ms linear infinite`,
-      },
-      medium: {
-        $$bgSize: '$sizes$9',
-        backgroundSize: '$$bgSize',
-        animation: `${keyframes({
-          '100%': { transform: 'translateX($sizes$9)' },
-        })} 500ms linear infinite`,
-      },
-      large: {
-        $$bgSize: '$sizes$10',
-        backgroundSize: '$$bgSize',
-        animation: `${keyframes({
-          '100%': { transform: 'translateX($sizes$10)' },
-        })} 500ms linear infinite`,
-      },
-    },
-  },
-  defaultVariants: {
-    size: 'medium',
-  },
-});
-
-type ButtonProps = React.ButtonHTMLAttributes<any> & ButtonVariants & { css?: CSS };
+export interface ButtonVariants extends VariantProps<typeof StyledButton> {}
+export interface ButtonProps extends ComponentProps<typeof StyledButton>, ButtonVariants {
+  css?: CSS;
+  asChild?: boolean;
+}
 
 export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
-  ({ children, ...props }, forwardedRef) => {
+  ({ children, asChild, ...props }, forwardedRef) => {
+    const Component = useMemo(() => (asChild ? StyledButtonSlot : StyledButton), [asChild]);
     return (
-      <StyledButton {...props} ref={forwardedRef}>
-        <>
-          {children}
-          {props.state === 'waiting' && <Waiting size={props.size} />}
-        </>
-      </StyledButton>
+      <Component ref={forwardedRef} {...props}>
+        {children}
+      </Component>
     );
   }
 );
