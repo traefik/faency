@@ -1,7 +1,8 @@
-import { styled } from '../../stitches.config';
+import React, { forwardRef, ComponentProps, ElementRef } from 'react';
+import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation/Elevation';
 
-export const Card = styled('div', {
+const StyledCard = styled('div', {
   appearance: 'none',
   border: 'none',
   boxSizing: 'border-box',
@@ -39,33 +40,54 @@ export const Card = styled('div', {
         backgroundColor: 'rgba(255,255,255,.07)',
       },
       ghost: {
-        backgroundColor: 'none',
+        backgroundColor: 'transparent',
         boxShadow: 'none',
-      },
-    },
-    interactive: {
-      true: {
-        '@hover': {
-          '&:hover': {
-            cursor: 'pointer',
-            '&::before': {
-              boxShadow: 'inset 0 0 0 1px $colors$cardHoverBorder',
-              backgroundColor: '$cardHoverBackground',
-            },
-          },
-        },
-      },
-    },
-    active: {
-      true: {
-        '&::before': {
-          boxShadow: 'inset 0 0 0 1px $colors$cardActiveBorder',
-          backgroundColor: '$cardActiveBackground',
-        },
       },
     },
   },
   defaultVariants: {
     elevation: 1,
   },
+});
+
+const StyledInteractiveCard = styled('button', StyledCard, {
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer',
+      '&::before': {
+        outline: '1px solid $colors$cardHoverBorder',
+        backgroundColor: '$cardHoverBackground',
+      },
+    },
+  },
+  '&:focus': {
+    outline: '1px solid $primary',
+  },
+  '&:active': {
+    '&  ::before': {
+      outline: '1px solid $colors$cardActiveBorder',
+      backgroundColor: '$cardActiveBackground',
+    },
+  },
+});
+
+interface CardVariantProps
+  extends ComponentProps<typeof StyledCard>,
+    VariantProps<typeof StyledCard> {
+  interactive?: false;
+}
+interface InteractiveCardProps
+  extends VariantProps<typeof StyledInteractiveCard>,
+    ComponentProps<typeof StyledInteractiveCard> {
+  interactive: true;
+}
+export type CardProps = CardVariantProps | InteractiveCardProps;
+
+export const Card = forwardRef<any, CardProps>(({ interactive, ...props }, forwardedRef) => {
+  if (interactive) {
+    return (
+      <StyledInteractiveCard tabIndex={0} ref={forwardedRef} {...(props as InteractiveCardProps)} />
+    );
+  }
+  return <StyledCard ref={forwardedRef} {...(props as CardVariantProps)} />;
 });
