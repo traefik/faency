@@ -5,13 +5,26 @@ import { Slot } from '@radix-ui/react-slot';
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 type COLOR_VALUES = typeof COLORS[number];
 
+const getColorBadgeStyles = (color) => ({
+  bc: `$${color}6`,
+  color: `$${color}10`,
+});
+
 type ColorVariants = Record<COLOR_VALUES, { bc: string; color: string }>;
 const colorVariants: ColorVariants = COLORS.reduce(
   (variants, color) => ({
     ...variants,
+    [color]: getColorBadgeStyles(color),
+  }),
+  {} as ColorVariants
+);
+
+const interactiveColorVariants: ColorVariants = COLORS.reduce(
+  (variants, color) => ({
+    ...variants,
     [color]: {
-      bc: `$${color}6`,
-      color: `$${color}10`,
+      ...getColorBadgeStyles(color),
+      '&:focus-visible': { outline: `2px solid $${color}9` },
     },
   }),
   {} as ColorVariants
@@ -23,17 +36,11 @@ const alphaColorCompoundVariants = COLORS.map((color) => ({
   css: { bc: `$${color}A6` },
 }));
 
-const interactiveColorCompoundVariants = COLORS.map((color) => ({
-  interactive: true,
-  variant: color,
-  css: { '&:focus-visible': { boxShadow: `0 0 0 1px $colors$${color}9` } },
-}));
-
 const BADGE_BASE_STYLES = {
   // Reset
   alignItems: 'center',
   appearance: 'none',
-  borderWidth: '0',
+  border: 'none',
   boxSizing: 'border-box',
   display: 'inline-flex',
   flexShrink: 0,
@@ -58,9 +65,6 @@ const BADGE_BASE_STYLES = {
     color: '$slate8',
   },
   variants: {
-    interactive: {
-      true: {},
-    },
     size: {
       small: {
         height: '$4',
@@ -78,10 +82,9 @@ const BADGE_BASE_STYLES = {
       true: {},
     },
   },
-  compoundVariants: [...interactiveColorCompoundVariants, ...alphaColorCompoundVariants],
+  compoundVariants: alphaColorCompoundVariants,
   defaultVariants: {
     size: 'small',
-    interactive: false,
     variant: 'gray',
   },
 };
@@ -91,7 +94,7 @@ const StyledSpanBadgeSlot = styled(Slot, StyledSpanBadge);
 
 const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
   '&:focus-visible': {
-    boxShadow: '0 0 0 1px $colors$focusOutline',
+    outline: '2px solid $gray9',
   },
   '&:hover': {
     cursor: 'pointer',
@@ -107,6 +110,9 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
       borderRadius: 'inherit',
     },
   },
+  variants: {
+    variant: interactiveColorVariants,
+  },
 });
 const StyledButtonBadgeSlot = styled(Slot, StyledButtonBadge);
 
@@ -114,6 +120,7 @@ interface BadgeProps
   extends ComponentProps<typeof StyledButtonBadge>,
     VariantProps<typeof StyledButtonBadge> {
   asChild?: boolean;
+  interactive?: boolean;
 }
 
 export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>, BadgeProps>(
