@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Text } from '../Text';
-import { Heading } from '../Heading';
+import { H2 } from '../Heading';
 import { Alert, AlertProps, AlertVariants } from './Alert';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
@@ -15,9 +15,7 @@ export default {
 
 export const Variants: ComponentStory<typeof AlertForStory> = (args) => (
   <Alert {...args}>
-    <Heading size="2" css={{ mb: '$3' }}>
-      Alert
-    </Heading>
+    <H2 css={{ mb: '$3' }}>Alert</H2>
     <Text css={{ mb: '$3' }}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -39,12 +37,9 @@ Variants.argTypes = {
   },
 };
 
-
 const Customize: ComponentStory<typeof AlertForStory> = (args) => (
   <Alert {...args} css={{ mt: '$1' }}>
-    <Heading size="2" css={{ mb: '$3' }}>
-      Alert
-    </Heading>
+    <H2 css={{ mb: '$3' }}>Alert</H2>
     <Text css={{ mb: '$3' }}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco

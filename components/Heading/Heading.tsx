@@ -1,53 +1,58 @@
-import React from 'react';
-import { Text } from '../Text';
-import { VariantProps, CSS } from '../../stitches.config';
-import merge from 'lodash.merge';
+import { styled } from '../../stitches.config';
 
-const DEFAULT_TAG = 'h1';
+const HEADING_BASE_STYLES = {
+  fontFamily: '$rubik',
+  fontVariantNumeric: 'proportional-nums',
+  display: 'block',
+  lineHeight: '1.25',
+  fontWeight: '$medium',
+  color: '$headingDefault',
+  variants: {
+    transform: {
+      uppercase: {
+        textTransform: 'uppercase',
+      },
+      capitalize: {
+        // WARNING: this will only work with block elements (display block/inline-block)
+        // @see https://developer.mozilla.org/en-US/docs/Web/CSS/::first-letter
+        display: 'block',
+        '&::first-letter': {
+          textTransform: 'uppercase',
+        },
+      },
+      capitalizeWords: {
+        textTransform: 'capitalize',
+      },
+    },
+  },
+};
 
-type TextSizeVariants = Pick<VariantProps<typeof Text>, 'size'>;
+export const H1 = styled('h1', {
+  ...HEADING_BASE_STYLES,
+  fontSize: '$12',
+});
 
-type HeadingSizeVariants = '1' | '2' | '3' | '4';
-export type HeadingVariants = { size?: HeadingSizeVariants } & Omit<
-  VariantProps<typeof Text>,
-  'size'
->;
-export type HeadingProps = React.ComponentProps<typeof DEFAULT_TAG> &
-  HeadingVariants & { as?: any, css?: CSS };
+export const H2 = styled('h2', {
+  ...HEADING_BASE_STYLES,
+  fontSize: '$10',
+});
 
-export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, HeadingProps>(
-  // '2' here is the default heading size variant
-  (props, forwardedRef) => {
-    // '2' here is the default heading size variant
-    const { size = '1', ...textProps } = props;
-    // This is the mapping of Heading Variants to Text variants
-    const textSize: Record<HeadingSizeVariants, TextSizeVariants['size']> = {
-      1: { '@initial': '4' },
-      2: { '@initial': '6' },
-      3: { '@initial': '7' },
-      4: { '@initial': '10' },
-    };
+export const H3 = styled('h3', {
+  ...HEADING_BASE_STYLES,
+  fontSize: '$8',
+});
 
-    // This is the mapping of Heading Variants to Text css
-    const textCss: Record<HeadingSizeVariants, CSS> = {
-      1: { fontWeight: '$medium', lineHeight: '20px' },
-      2: { fontWeight: '$medium', lineHeight: '25px' },
-      3: { fontWeight: '$medium', lineHeight: '33px' },
-      4: { fontWeight: '$medium', lineHeight: '35px' },
-    };
+export const H4 = styled('h4', {
+  ...HEADING_BASE_STYLES,
+  fontSize: '$7',
+});
 
-    return (
-      <Text
-        as={DEFAULT_TAG}
-        {...textProps}
-        ref={forwardedRef}
-        size={textSize[size]}
-        css={{
-          fontVariantNumeric: 'proportional-nums',
-          display: 'block',
-          ...(merge(textCss[size], props.css) as object),
-        }}
-      />
-    );
-  }
-);
+export const H5 = styled('h5', {
+  ...HEADING_BASE_STYLES,
+  fontSize: '$6',
+});
+
+export const H6 = styled('h6', {
+  ...HEADING_BASE_STYLES,
+  fontSize: '$4',
+});

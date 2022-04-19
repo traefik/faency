@@ -36,7 +36,7 @@ export {
 } from './components/DropdownMenu';
 export { Flex } from './components/Flex';
 export { Grid } from './components/Grid';
-export { Heading } from './components/Heading';
+export { H1, H2, H3, H4, H5, H6 } from './components/Heading';
 export { Image } from './components/Image';
 export { TextField } from './components/TextField';
 export { Textarea } from './components/Textarea';

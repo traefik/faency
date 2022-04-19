@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Text } from '../Text';
 import { Card } from './Card';
-import { Heading } from '../Heading';
+import { H2 } from '../Heading';
 import { Flex } from '../Flex';
 
 export default {
@@ -12,9 +12,7 @@ export default {
 
 const Template: ComponentStory<any> = (args) => (
   <Card {...args}>
-    <Heading size="2" css={{ mb: '$3' }}>
-      Card
-    </Heading>
+    <H2 css={{ mb: '$3' }}>Card</H2>
     <Text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -49,9 +47,7 @@ Interactive.args = {
 
 export const Inner: ComponentStory<typeof Card> = (args) => (
   <Card>
-    <Heading size="2" css={{ mb: '$3' }}>
-      Wrapping Card
-    </Heading>
+    <H2 css={{ mb: '$3' }}>Wrapping Card</H2>
     <Template {...args} />
   </Card>
 );
@@ -63,9 +59,7 @@ Inner.args = {
 export const Elevation: ComponentStory<typeof Card> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Card elevation={0}>
-      <Heading size="2" css={{ mb: '$3' }}>
-        No Elevation
-      </Heading>
+      <H2 css={{ mb: '$3' }}>No Elevation</H2>
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -75,9 +69,7 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
       </Text>
     </Card>
     <Card>
-      <Heading size="2" css={{ mb: '$3' }}>
-        Default Elevation
-      </Heading>
+      <H2 css={{ mb: '$3' }}>Default Elevation</H2>
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -87,9 +79,7 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
       </Text>
     </Card>
     <Card elevation={2}>
-      <Heading size="2" css={{ mb: '$3' }}>
-        Elevation 2
-      </Heading>
+      <H2 css={{ mb: '$3' }}>Elevation 2</H2>
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -99,9 +89,7 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
       </Text>
     </Card>
     <Card elevation={3}>
-      <Heading size="2" css={{ mb: '$3' }}>
-        Elevation 3
-      </Heading>
+      <H2 css={{ mb: '$3' }}>Elevation 3</H2>
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -111,9 +99,7 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
       </Text>
     </Card>
     <Card elevation={4}>
-      <Heading size="2" css={{ mb: '$3' }}>
-        Elevation 4
-      </Heading>
+      <H2 css={{ mb: '$3' }}>Elevation 4</H2>
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -123,9 +109,7 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
       </Text>
     </Card>
     <Card elevation={5}>
-      <Heading size="2" css={{ mb: '$3' }}>
-        Elevation 5
-      </Heading>
+      <H2 css={{ mb: '$3' }}>Elevation 5</H2>
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -139,6 +123,4 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
 
 Elevation.args = {};
 
-const Customize: ComponentStory<any> = (args) => (
-  <Card css={{ c: '$hiContrast' }} {...args}></Card>
-)
+const Customize: ComponentStory<any> = (args) => <Card css={{ c: '$hiContrast' }} {...args}></Card>;
