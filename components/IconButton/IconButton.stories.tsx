@@ -26,14 +26,10 @@ export const Sizes: ComponentStory<any> = (args) => (
 );
 
 Sizes.args = {
-  ghost: true,
   variant: 'default',
 };
 
 Sizes.argTypes = {
-  ghost: {
-    control: 'boolean',
-  },
   variant: {
     control: 'inline-radio',
     options: ['default', 'primary', 'red', 'green', 'orange'],
@@ -64,7 +60,6 @@ export const Variants: ComponentStory<any> = (args) => (
 );
 
 Variants.args = {
-  ghost: true,
   size: '3',
 };
 
@@ -72,9 +67,6 @@ Variants.argTypes = {
   size: {
     control: 'inline-radio',
     options: ['1', '2', '3', '4'],
-  },
-  ghost: {
-    control: 'boolean',
   },
 };
 
