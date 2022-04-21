@@ -92,21 +92,25 @@ const StyledSpanBadge = styled('span', BADGE_BASE_STYLES);
 const StyledSpanBadgeSlot = styled(Slot, StyledSpanBadge);
 
 const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
+  '&::before': {
+    boxSizing: 'border-box',
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    borderRadius: 'inherit',
+  },
   '&:focus-visible': {
     outline: '2px solid $primary',
   },
   '&:hover': {
     cursor: 'pointer',
     '&::before': {
-      backgroundColor: '$badgeInteractiveBackground',
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-      borderRadius: 'inherit',
+      backgroundColor: '$badgeInteractiveBackgroundHover',
+    },
+  },
+  '&:active': {
+    '&::before': {
+      backgroundColor: '$badgeInteractiveBackgroundActive',
     },
   },
 

@@ -4,16 +4,19 @@ import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
-    badgeInteractiveBackground: Property.Color;
+    badgeInteractiveBackgroundActive: Property.Color
+    badgeInteractiveBackgroundHover: Property.Color;
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = () => ({
-    badgeInteractiveBackground: tinycolor('black').setAlpha(0.05).toHslString(),
+    badgeInteractiveBackgroundActive: tinycolor('black').setAlpha(0.1).toHslString(),
+    badgeInteractiveBackgroundHover: tinycolor('black').setAlpha(0.05).toHslString(),
   });
 
   export const getDark: Factory = () => ({
-    badgeInteractiveBackground: tinycolor('black').setAlpha(0.1).toHslString(),
+    badgeInteractiveBackgroundActive: tinycolor('black').setAlpha(0.2).toHslString(),
+    badgeInteractiveBackgroundHover: tinycolor('black').setAlpha(0.1).toHslString(),
   });
 }
