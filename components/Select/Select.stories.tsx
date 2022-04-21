@@ -36,6 +36,12 @@ Size.args = { size: 'large', placeholder: 'placeholder' };
 export const Variant = Template.bind({});
 
 Variant.args = { variant: 'ghost', defaultValue: 'option3' };
+Variant.argTypes = {
+  variant: {
+    control: 'inline-radio',
+    options: [undefined, 'ghost'],
+  },
+};
 
 export const State = Template.bind({});
 
@@ -60,12 +66,12 @@ Overflow.args = { width: 100, defaultValue: 'option1', size: 'medium' };
 Overflow.argTypes = {
   size: {
     control: 'inline-radio',
-    options: ['small', 'medium', 'large']
+    options: ['small', 'medium', 'large'],
   },
   width: {
-    control: 'number'
-  }
-}
+    control: 'number',
+  },
+};
 
 const Customize: ComponentStory<typeof SelectForStory> = (args) => (
   <Select css={{ c: '$hiContrast' }} {...args}>
