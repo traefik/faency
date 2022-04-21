@@ -5,7 +5,7 @@ import { Slot } from '@radix-ui/react-slot';
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 type COLOR_VALUES = typeof COLORS[number];
 
-const getColorBadgeStyles = (color) => ({
+const getColorBadgeStyles = (color: COLOR_VALUES) => ({
   bc: `$${color}6`,
   color: `$${color}10`,
 });
