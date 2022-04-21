@@ -83,7 +83,6 @@ const StyledTextarea = styled('textarea', {
             },
           },
         },
-
       },
     },
     cursor: {
@@ -110,18 +109,18 @@ const StyledTextarea = styled('textarea', {
         resize: 'both',
       },
       vertical: {
-        resize: 'vertical'
+        resize: 'vertical',
       },
       horizontal: {
-        resize: 'horizontal'
-      }
+        resize: 'horizontal',
+      },
     },
     endAdornment: {
       true: {
         paddingBottom: '$5',
         paddingRight: '$5',
-      }
-    }
+      },
+    },
   },
   defaultVariants: {
     cursor: 'default',
@@ -232,17 +231,23 @@ const AdornmentWrapperEnd = styled('div', {
   justifyContent: 'center',
 });
 
-export interface TextareaVariants extends Omit<VariantProps<typeof StyledTextarea>, 'endAdornment'> { }
+export interface TextareaVariants
+  extends Omit<VariantProps<typeof StyledTextarea>, 'endAdornment'> {}
 
-export interface TextareaProps extends TextareaVariants, Omit<React.ComponentProps<typeof StyledTextarea>, 'css' | 'endAdornment'> {
-  label?: string
-  endAdornment?: React.ReactNode
-  rootCss?: CSS
-  css?: CSS
+export interface TextareaProps
+  extends TextareaVariants,
+    Omit<React.ComponentProps<typeof StyledTextarea>, 'css' | 'endAdornment'> {
+  label?: string;
+  endAdornment?: React.ReactNode;
+  rootCss?: CSS;
+  css?: CSS;
 }
 
 export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>, TextareaProps>(
-  ({ state, disabled, onFocus, onBlur, label, id, rootCss, css, endAdornment, ...props }, forwardedRef) => {
+  (
+    { state, disabled, onFocus, onBlur, label, id, rootCss, css, endAdornment, ...props },
+    forwardedRef
+  ) => {
     const [hasFocus, setHasFocus] = React.useState(false);
 
     const invalid = React.useMemo(() => state === 'invalid', [state]);
@@ -290,16 +295,20 @@ export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>
           </Label>
         )}
         <TextareaWrapper state={state} disabled={disabled}>
-          <StyledTextarea id={id} ref={forwardedRef} css={css}
+          <StyledTextarea
+            id={id}
+            ref={forwardedRef}
+            css={css}
             disabled={disabled}
             state={state}
-            onFocus={handleFocus} onBlur={handleBlur}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             endAdornment={hasEndAdornment}
             {...props}
           />
-          {hasEndAdornment && (<AdornmentWrapperEnd>{endAdornment}</AdornmentWrapperEnd>)}
+          {hasEndAdornment && <AdornmentWrapperEnd>{endAdornment}</AdornmentWrapperEnd>}
         </TextareaWrapper>
       </Box>
-    )
+    );
   }
 );
