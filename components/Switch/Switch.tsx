@@ -60,6 +60,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     },
   },
   '&:focus': {
+    outline: '2px solid $switchFocusBorder',
     [`& ${StyledThumb}`]: {
       ...elevationVariants[2],
     },
