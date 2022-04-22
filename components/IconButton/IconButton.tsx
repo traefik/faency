@@ -1,44 +1,62 @@
 import { styled, VariantProps } from '../../stitches.config';
+import { BUTTON_BASE_STYLES } from '../Button';
 
 export const IconButton = styled('button', {
+  ...BUTTON_BASE_STYLES,
   // Reset
   alignItems: 'center',
-  appearance: 'none',
-  borderWidth: '0',
-  boxSizing: 'border-box',
   display: 'inline-flex',
   flexShrink: 0,
   fontFamily: 'inherit',
   fontSize: '14px',
   justifyContent: 'center',
   lineHeight: '1',
-  outline: 'none',
+  // Custom
+  position: 'relative',
   padding: '0',
   textDecoration: 'none',
-  userSelect: 'none',
-  WebkitTapHighlightColor: 'transparent',
-  backgroundColor: '$iconButtonBackground',
+  backgroundColor: 'transparent',
 
   '&::before': {
     boxSizing: 'border-box',
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    borderRadius: 'inherit',
   },
-
   '&::after': {
     boxSizing: 'border-box',
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    borderRadius: 'inherit',
+  },
+  '@hover': {
+    '&:hover': {
+      cursor: 'pointer',
+      '&::before': {
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+      },
+      '&::after': {
+        opacity: 0.05,
+      },
+    },
   },
 
-  '&:hover': {
-    boxShadow: '0 0 1px 0 $colors$iconButtonHoverBorder',
+  '&:focus-visible': {
+    outline: '2px solid currentColor',
+    '&::before': {
+      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    },
+    '&::after': {
+      opacity: 0.15,
+    },
   },
 
-  '&:focus': {
-    boxShadow: '0 0 1px 0 $colors$iconButtonFocusBorder',
-  },
-
-  '&:disabled': {
-    pointerEvents: 'none',
-    backgroundColor: 'transparent',
-    color: '$slate6',
+  '&:active': {
+    '&::before': {
+      backgroundColor: 'rgba(0, 0, 0, 0.15)',
+    },
   },
 
   variants: {
@@ -64,15 +82,6 @@ export const IconButton = styled('button', {
         width: '$8',
       },
     },
-    ghost: {
-      true: {
-        backgroundColor: 'transparent',
-        '&:hover': {
-          boxShadow: 'none',
-          backgroundColor: '$iconButtonHoverBackground',
-        },
-      },
-    },
     variant: {
       default: {
         color: '$slate10',
@@ -87,7 +96,7 @@ export const IconButton = styled('button', {
         color: '$red9',
       },
       green: {
-        color: '$orange9',
+        color: '$green9',
       },
       orange: {
         color: '$orange9',
@@ -97,7 +106,6 @@ export const IconButton = styled('button', {
   defaultVariants: {
     variant: 'default',
     size: '2',
-    ghost: true,
   },
 });
 
