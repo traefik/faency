@@ -6,6 +6,7 @@ const HEADING_BASE_STYLES = {
   display: 'block',
   lineHeight: '1.25',
   fontWeight: '$medium',
+  margin: 0,
   color: '$headingDefault',
   variants: {
     transform: {
