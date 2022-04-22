@@ -24,7 +24,6 @@ const interactiveColorVariants: ColorVariants = COLORS.reduce(
     ...variants,
     [color]: {
       ...getColorBadgeStyles(color),
-      '&:focus-visible': { outline: `2px solid $${color}9` },
     },
   }),
   {} as ColorVariants
@@ -94,7 +93,7 @@ const StyledSpanBadgeSlot = styled(Slot, StyledSpanBadge);
 
 const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
   '&:focus-visible': {
-    outline: '2px solid $gray9',
+    outline: '2px solid $primary',
   },
   '&:hover': {
     cursor: 'pointer',
@@ -110,6 +109,7 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
       borderRadius: 'inherit',
     },
   },
+
   variants: {
     variant: interactiveColorVariants,
   },
