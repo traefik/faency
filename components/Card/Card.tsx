@@ -61,7 +61,7 @@ const StyledInteractiveCard = styled('button', StyledCard, {
     },
   },
   '&:focus': {
-    outline: '1px solid $primary',
+    outline: '2px solid $primary',
   },
   '&:active': {
     '&  ::before': {
