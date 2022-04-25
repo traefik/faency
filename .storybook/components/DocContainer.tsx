@@ -19,9 +19,7 @@ export const DocsContainer = ({ children, context }) => {
         },
       }}
     >
-      <FaencyProvider primaryColor="neon">
-        {children}
-      </FaencyProvider>
+      <FaencyProvider>{children}</FaencyProvider>
     </BaseContainer>
   );
 };

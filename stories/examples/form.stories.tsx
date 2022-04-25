@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from '../../components/Link';
 
-import { Button, Card, Checkbox, Flex, Label, Heading, TextField } from '../../index';
+import { Button, Card, Checkbox, Flex, Label, H1, TextField } from '../../index';
 
 export const Form = () => (
   <Flex css={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-    <Heading size="4" css={{ mb: '$6' }}>
-      Form Example
-    </Heading>
+    <H1 css={{ mb: '$6' }}>Form Example</H1>
     <Card css={{ p: '$6' }}>
       <form>
         <TextField

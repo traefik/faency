@@ -1,7 +1,7 @@
 import React from 'react';
 import { Property } from '@stitches/react/types/css';
 import { useDarkMode } from 'storybook-dark-mode';
-import { Box, Flex, Heading, Text } from '../index';
+import { Box, Flex, H1, H2, Text } from '../index';
 import { colors } from '../stitches.config';
 
 type Color = { token: string };
@@ -58,15 +58,13 @@ export const Colors = () => {
 
   return (
     <Flex css={{ flexDirection: 'column' }}>
-      <Heading size="4" css={{ mb: '$6' }}>
-        Colors
-      </Heading>
+      <H1 css={{ mb: '$6' }}>Colors</H1>
 
       {colorGroups.map((colorGroup) => (
         <Box key={colorGroup.name} css={{ mb: '$3' }}>
-          <Heading size="3" css={{ mb: '$2', '&:first-letter': { textTransform: 'uppercase' } }}>
+          <H2 css={{ mb: '$2', '&:first-letter': { textTransform: 'uppercase' } }}>
             {aliases[colorGroup.name] || colorGroup.name}
-          </Heading>
+          </H2>
           {['colors', 'alphaColors'].map((type) => (
             <>
               {!!colorGroup?.[type]?.length && (
