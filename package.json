@@ -12,7 +12,6 @@
     "a11y"
   ],
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
   "modulesDir": "dist",
   "exports": {
     ".": {
@@ -41,8 +40,8 @@
     "test:ci": "jest --ci --silent"
   },
   "peerDependencies": {
-    "react": ">= 17.0.1",
-    "react-dom": ">= 17.0.1"
+    "react": ">= 17.0.2",
+    "react-dom": ">= 17.0.2"
   },
   "dependencies": {
     "@radix-ui/colors": "0.1.7",
@@ -109,8 +108,8 @@
     "lint-staged": ">=10",
     "np": "^7.3.0",
     "prettier": "^2.1.2",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "rollup": "^2.70.1",
     "rollup-plugin-typescript2": "^0.31.2",
     "semantic-release": "^19.0.2",
