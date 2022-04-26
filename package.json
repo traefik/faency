@@ -16,7 +16,7 @@
   "modulesDir": "dist",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
   },
