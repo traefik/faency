@@ -126,3 +126,9 @@ Matching between commit type and release
 ```
 
 See [semantic-release/commit-analyzer](https://github.com/semantic-release/commit-analyzer#readme) for more information.
+
+## License
+
+Licensed under the Apache License 2.0.
+
+See [LICENSE](./LICENSE) for more information.
