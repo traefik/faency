@@ -13,6 +13,7 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
 
 const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   all: 'unset',
+  border: 'none',
   boxSizing: 'border-box',
   userSelect: 'none',
   '&::before': {
@@ -60,7 +61,6 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
 
   '&:focus': {
     outline: 'none',
-    borderColor: '$red7',
     boxShadow: 'inset 0 0 0 1px $colors$checkboxFocusBorder',
   },
 

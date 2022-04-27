@@ -33,6 +33,12 @@ export const Variant = Template.bind({});
 Variant.args = {
   variant: 'primary',
 };
+Variant.argTypes = {
+  variant: {
+    options: ['blue', 'primary', 'subtle', 'contrast'],
+    control: 'inline-radio',
+  },
+};
 
 const Customize: ComponentStory<typeof LinkForStory> = (args) => (
   <Link css={{ c: '$hiContraqt' }} href="https://traefik.io" {...args}>
