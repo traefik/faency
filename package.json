@@ -3,9 +3,23 @@
   "description": "Traefik Labs design system",
   "version": "1.0.0-semantic-release",
   "license": "Apache-2.0",
+  "keywords": [
+    "traefiklabs",
+    "ui",
+    "design system",
+    "react",
+    "radix-ui",
+    "a11y"
+  ],
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "type": "module",
   "modulesDir": "dist",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -27,8 +41,8 @@
     "test:ci": "jest --ci --silent"
   },
   "peerDependencies": {
-    "react": ">= 17.0.1",
-    "react-dom": ">= 17.0.1"
+    "react": ">= 17.0.2",
+    "react-dom": ">= 17.0.2"
   },
   "dependencies": {
     "@radix-ui/colors": "0.1.7",
@@ -73,11 +87,11 @@
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^9.0.0",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "@storybook/addon-actions": "^6.3.7",
-    "@storybook/addon-essentials": "^6.3.7",
-    "@storybook/addon-links": "^6.3.7",
-    "@storybook/react": "^6.3.7",
-    "@storybook/storybook-deployer": "^2.8.10",
+    "@storybook/addon-actions": "^6.4.22",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-links": "^6.4.22",
+    "@storybook/react": "^6.4.22",
+    "@storybook/storybook-deployer": "^2.8.11",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.*",
     "@types/jest": "^27.4.1",
@@ -95,12 +109,12 @@
     "lint-staged": ">=10",
     "np": "^7.3.0",
     "prettier": "^2.1.2",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "rollup": "^2.70.1",
     "rollup-plugin-typescript2": "^0.31.2",
     "semantic-release": "^19.0.2",
-    "storybook-dark-mode": "^1.0.8",
+    "storybook-dark-mode": "^1.0.9",
     "typescript": "^4.4.3"
   },
   "publishConfig": {
