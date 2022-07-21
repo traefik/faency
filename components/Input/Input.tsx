@@ -317,7 +317,7 @@ const InputWrapper = styled('div', {
 const AdornmentWrapper = styled('div', {
   position: 'absolute',
   top: 0,
-  zIndex: 1,
+  zIndex: 2,
   height: '100%',
   display: 'flex',
   alignItems: 'center',
@@ -380,7 +380,7 @@ export const Input = React.forwardRef<InputHandle, InputProps>(
         const { current } = inputRef;
         if (current) {
           current.clear = () => {
-            current.value = ''
+            current.value = '';
           };
         }
         return current as InputHandle;
