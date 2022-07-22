@@ -34,6 +34,16 @@ export const ButtonSwitchItem = styled(ToggleGroupPrimitive.Item, {
     borderRadius: '$3',
   },
 
+  '&:focus-visible': {
+    borderRadius: '$3',
+    '&::before': {
+      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    },
+    '&::after': {
+      opacity: 0.15,
+    },
+  },
+
   '@hover': {
     '&:hover': {
       cursor: 'pointer',
@@ -68,5 +78,6 @@ export const ButtonSwitchItem = styled(ToggleGroupPrimitive.Item, {
     bc: '$buttonSwitchActiveBg',
     c: '$buttonSwitchActiveColor',
     borderRadius: '$3',
+    zIndex: 1,
   },
 });
