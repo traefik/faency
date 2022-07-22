@@ -62,6 +62,7 @@ export { Text } from './components/Text';
 export { Tooltip } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
 export {Avatar} from './components/Avatar';
+export {ButtonSwitchContainer, ButtonSwitchItem} from './components/ButtonSwitch';
 
 // Stitches
 export {
