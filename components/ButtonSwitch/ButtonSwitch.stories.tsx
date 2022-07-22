@@ -19,6 +19,7 @@ export const Basic: ComponentStory<any> = (args) => {
       }}
     >
       <ButtonSwitchItem value="left">Left</ButtonSwitchItem>
+      <ButtonSwitchItem value="center">Center</ButtonSwitchItem>
       <ButtonSwitchItem value="right">Right</ButtonSwitchItem>
     </ButtonSwitchContainer>
   );
