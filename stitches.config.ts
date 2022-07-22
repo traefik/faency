@@ -4,6 +4,7 @@ import { createStitches, CSS as StitchesCSS } from '@stitches/react';
 import { Theme as AccordionTheme } from './components/Accordion/Accordion.themes';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
+import { Theme as ButtonSwitchTheme } from './components/ButtonSwitch/ButtonSwitch.themes';
 import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
 import { Theme as SwitchTheme } from './components/Switch/Switch.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
@@ -54,6 +55,7 @@ const stitches = createStitches({
       ...AccordionTheme.getLight(defaultPrimaryColor),
       ...BadgeTheme.getLight(defaultPrimaryColor),
       ...ButtonTheme.getLight(defaultPrimaryColor),
+      ...ButtonSwitchTheme.getLight(defaultPrimaryColor),
       ...SwitchTheme.getLight(defaultPrimaryColor),
       ...CardTheme.getLight(defaultPrimaryColor),
       ...CheckboxTheme.getLight(defaultPrimaryColor),
@@ -284,6 +286,7 @@ export const darkTheme = (primary: PrimaryColor) => {
       ...AccordionTheme.getDark(darkPrimaryColor),
       ...BadgeTheme.getDark(darkPrimaryColor),
       ...ButtonTheme.getDark(darkPrimaryColor),
+      ...ButtonSwitchTheme.getDark(darkPrimaryColor),
       ...IconButtonTheme.getDark(darkPrimaryColor),
       ...SwitchTheme.getDark(darkPrimaryColor),
       ...CardTheme.getDark(darkPrimaryColor),
@@ -314,6 +317,7 @@ export const lightTheme = (primary: PrimaryColor) => {
       ...AccordionTheme.getLight(lightPrimaryColor),
       ...BadgeTheme.getLight(lightPrimaryColor),
       ...ButtonTheme.getLight(lightPrimaryColor),
+      ...ButtonSwitchTheme.getLight(lightPrimaryColor),
       ...IconButtonTheme.getLight(lightPrimaryColor),
       ...SwitchTheme.getLight(lightPrimaryColor),
       ...CardTheme.getLight(lightPrimaryColor),
