@@ -13,9 +13,9 @@ export namespace Theme {
   type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = () => ({
-    buttonSwitchContainerBg: '$deepBlue1',
+    buttonSwitchContainerBg: '$02dp',
     buttonSwitchActiveBg: '$primary',
-    buttonSwitchOffBg: '$primary',
+    buttonSwitchOffBg: 'transparent',
     buttonSwitchOffColor: '$hiContrast',
     buttonSwitchActiveColor: 'white',
   });

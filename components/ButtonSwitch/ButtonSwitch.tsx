@@ -5,6 +5,7 @@ export const ButtonSwitchContainer = styled(ToggleGroupPrimitive.Root, {
   display: 'inline-flex',
   bc: '$buttonSwitchContainerBg',
   borderRadius: '$3',
+  p: '3px',
 });
 
 export const ButtonSwitchItem = styled(ToggleGroupPrimitive.Item, {
