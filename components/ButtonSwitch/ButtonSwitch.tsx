@@ -47,11 +47,21 @@ export const ButtonSwitchItem = styled(ToggleGroupPrimitive.Item, {
   },
 
   '&:first-of-type': {
-    mr: '-8px',
+    '&[data-state=off]': {
+      pl: '8px',
+      '&::before': {
+        mr: '-8px',
+      },
+    },
   },
 
   '&:last-of-type': {
-    ml: '-8px',
+    '&[data-state=off]': {
+      pr: '8px',
+      '&::before': {
+        ml: '-8px',
+      },
+    },
   },
 
   '&[data-state=on]': {
