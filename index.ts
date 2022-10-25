@@ -21,7 +21,14 @@ export { Checkbox } from './components/Checkbox';
 export { Container } from './components/Container';
 export { Elevation, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
-export { Dialog, DialogClosePrimitive, DialogContent, StyledContent, DialogCloseIconButton, DialogTrigger } from './components/Dialog';
+export {
+  Dialog,
+  DialogClosePrimitive,
+  DialogContent,
+  StyledContent,
+  DialogCloseIconButton,
+  DialogTrigger,
+} from './components/Dialog';
 export {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -50,19 +57,35 @@ export {
   NavigationLink,
 } from './components/Navigation';
 export { Overlay } from './components/Overlay';
-export { Popover, PopoverClose, PopoverContent, PopoverTrigger, PopoverAnchor } from './components/Popover';
+export {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverAnchor,
+} from './components/Popover';
 export { Portal } from '@radix-ui/react-portal';
 export { Radio, RadioGroup } from './components/Radio';
 export { Select } from './components/Select';
 export { Skeleton } from './components/Skeleton';
 export { Switch } from './components/Switch';
-export { Caption as AriaCaption, Tbody as AriaTbody, Tfoot as AriaTfoot, Tr as AriaTr, Th as AriaTh, Td as AriaTd, Thead as AriaThead, Table as AriaTable } from './components/AriaTable'
+export {
+  Caption as AriaCaption,
+  Tbody as AriaTbody,
+  Tfoot as AriaTfoot,
+  Tr as AriaTr,
+  Th as AriaTh,
+  Td as AriaTd,
+  Thead as AriaThead,
+  Table as AriaTable,
+} from './components/AriaTable';
 export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Table';
 export { Text } from './components/Text';
 export { Tooltip } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
-export {Avatar} from './components/Avatar';
-export {ButtonSwitchContainer, ButtonSwitchItem} from './components/ButtonSwitch';
+export { Avatar } from './components/Avatar';
+export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
+export { TabsContainer, TabsList, TabsTrigger, TabsContent } from './components/Tabs';
 
 // Stitches
 export {
