@@ -1,4 +1,6 @@
 import React from 'react';
-import { IdProvider } from '@radix-ui/react-id';
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 
-export const FaencyProvider: React.FC = ({ children }) => <IdProvider>{children}</IdProvider>;
+export const FaencyProvider: React.FC = ({ children }) => (
+  <TooltipProvider>{children}</TooltipProvider>
+);
