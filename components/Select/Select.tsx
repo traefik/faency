@@ -105,7 +105,7 @@ const SelectWrapper = styled('div', {
     position: 'absolute',
     inset: 0,
     pointerEvents: 'none',
-    borderRadius: 'inherit'
+    borderRadius: 'inherit',
   },
 
   '&:focus-visible': {
@@ -158,7 +158,7 @@ const SelectWrapper = styled('div', {
         },
         [`& ${StyledSelect}`]: {
           pl: '$2',
-          pr: `calc($2 + ${CARET_WIDTH})`
+          pr: `calc($2 + ${CARET_WIDTH})`,
         },
         [`& ${StyledCaretSortIcon}`]: {
           right: 'calc($2 / 2)',
@@ -228,9 +228,12 @@ const SelectWrapper = styled('div', {
   },
 });
 
-export type SelectVariants = VariantProps<typeof StyledSelect> & VariantProps<typeof SelectWrapper> & VariantProps<typeof StyledCaretSortIcon>;
+export type SelectVariants = VariantProps<typeof StyledSelect> &
+  VariantProps<typeof SelectWrapper> &
+  VariantProps<typeof StyledCaretSortIcon>;
 
-export type SelectProps = Omit<React.ComponentProps<typeof StyledSelect>, 'size'> & SelectVariants & { css?: CSS };
+export type SelectProps = Omit<React.ComponentProps<typeof StyledSelect>, 'size'> &
+  SelectVariants & { css?: CSS };
 
 export const Select = React.forwardRef<React.ElementRef<typeof StyledSelect>, SelectProps>(
   ({ css, size, state, variant, cursor, ...props }, forwardedRef) => {

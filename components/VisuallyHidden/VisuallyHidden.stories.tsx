@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { VisuallyHidden } from './VisuallyHidden';
-import { Table, Caption } from '../Table'
+import { Table, Caption } from '../Table';
 import { Card } from '../Card';
 import { GearIcon } from '@radix-ui/react-icons';
 import { styled } from '../../stitches.config';
@@ -12,7 +12,7 @@ const FlexButton = styled('button', {
   color: '$hiContrast',
   border: '1px dashed $hiContrast',
   display: 'flex',
-  background: 'none'
+  background: 'none',
 });
 
 const ContrastDiv = styled('div', {
@@ -35,7 +35,7 @@ export const HiddenButtonText: ComponentStory<typeof VisuallyHidden> = (args) =>
     <GearIcon />
     <VisuallyHidden {...args}>Settings</VisuallyHidden>
   </FlexButton>
-)
+);
 
 export const AsChild: ComponentStory<typeof VisuallyHidden> = (args) => (
   <ContrastDiv>
@@ -52,8 +52,8 @@ export const AsChild: ComponentStory<typeof VisuallyHidden> = (args) => (
       </Table>
     </Card>
   </ContrastDiv>
-)
+);
 
 AsChild.args = {
   asChild: true,
-}
+};

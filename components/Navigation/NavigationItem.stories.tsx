@@ -89,31 +89,24 @@ Basic.args = {
 export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => {
   const noop = () => undefined;
   return (
-  <NavigationDrawer css={{ height: '200px' }}>
-    <NavigationItem
-      {...args}
-      onClick={noop}
-      onMouseEnter={noop}
-      onMouseLeave={noop}
-    >
-      Navigation Item
-    </NavigationItem>
-  </NavigationDrawer>
-);
-ButtonProps.args = {
-  as: 'button'
-}}
+    <NavigationDrawer css={{ height: '200px' }}>
+      <NavigationItem {...args} onClick={noop} onMouseEnter={noop} onMouseLeave={noop}>
+        Navigation Item
+      </NavigationItem>
+    </NavigationDrawer>
+  );
+  ButtonProps.args = {
+    as: 'button',
+  };
+};
 
 export const LinkProps: ComponentStory<typeof NavigationItem> = (args) => (
   <NavigationDrawer css={{ height: '200px' }}>
-    <NavigationItem
-      as="a"
-      href="https://traefik.io"
-    >
+    <NavigationItem as="a" href="https://traefik.io">
       Navigation Item
     </NavigationItem>
   </NavigationDrawer>
 );
 LinkProps.args = {
-  as: 'a'
-}
+  as: 'a',
+};

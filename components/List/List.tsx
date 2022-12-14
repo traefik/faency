@@ -11,14 +11,14 @@ const LIST_ITEM_CONTENT_STYLES = {
   fontFamily: '$rubik',
   fontSize: '$3',
   fontVariantNumeric: 'tabular-nums',
-}
+};
 
 const StyledSpan = styled('span', Flex, {
   // APPLY BUTTON STYLES
   ...LIST_ITEM_CONTENT_STYLES,
   // CUSTOM
   p: '$2',
-})
+});
 
 const StyledListItemButton = styled('button', Flex, {
   ...BUTTON_BASE_STYLES,
@@ -56,7 +56,7 @@ const StyledListItemButton = styled('button', Flex, {
         backgroundColor: '$primary',
         opacity: 0.05,
       },
-    }
+    },
   },
   '&:active': {
     '&::before': {
@@ -66,9 +66,8 @@ const StyledListItemButton = styled('button', Flex, {
       backgroundColor: '$primary',
       opacity: 0.05,
     },
-  }
+  },
 });
-
 
 const StyledLi = styled('li', {
   borderRadius: '$1',
@@ -84,7 +83,7 @@ const StyledLi = styled('li', {
   },
   defaultVariants: {
     elevation: '1',
-  }
+  },
 });
 
 const StyledUl = styled('ul', {
@@ -98,17 +97,23 @@ const ListContext = createContext({
   interactive: false,
 });
 
+export interface ListProps
+  extends Omit<ComponentProps<typeof StyledUl>, 'css'>,
+    VariantProps<typeof StyledUl> {
+  interactive?: boolean;
+  css?: CSS;
+}
+export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>(
+  ({ interactive, ...props }, forwardedRef) => {
+    const contextValue = useMemo(() => ({ interactive: !!interactive }), [interactive]);
 
-export interface ListProps extends Omit<ComponentProps<typeof StyledUl>, 'css'>, VariantProps<typeof StyledUl> { interactive?: boolean, css?: CSS }
-export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>(({ interactive, ...props }, forwardedRef) => {
-  const contextValue = useMemo(() => ({ interactive: !!interactive }), [interactive]);
-  
-  return (
-    <ListContext.Provider value={contextValue}>
-      <StyledUl role="list" ref={forwardedRef} {...props} />
-    </ListContext.Provider>
-  )
-})
+    return (
+      <ListContext.Provider value={contextValue}>
+        <StyledUl role="list" ref={forwardedRef} {...props} />
+      </ListContext.Provider>
+    );
+  }
+);
 
 const ControlsWrapper = styled('div', {
   position: 'absolute',
@@ -122,25 +127,42 @@ const ControlsWrapper = styled('div', {
   overflow: 'visible',
 });
 
-export interface ListItemProps extends Omit<ComponentProps<typeof StyledLi>, 'css'>, VariantProps<typeof StyledLi>, VariantProps<typeof Flex> { 
-  controls?: ReactNode
-  css?: CSS
- }
-export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemProps>(({
-  children, controls,
-  align, justify, direction, gap, wrap,
-  ...props }, forwardedRef) => {
-  const { interactive } = useContext(ListContext);
-  return (
-    <StyledLi {...props} ref={forwardedRef}>
-      {interactive ? (
-        <StyledListItemButton align={align} justify={justify} direction={direction} gap={gap} wrap={wrap}>{children}</StyledListItemButton>
-      ) : (
-        <StyledSpan align={align} justify={justify} direction={direction} gap={gap} wrap={wrap} css={{ flexGrow: 1 }}>{children}</StyledSpan>
-      )}
-      {!!controls && (
-        <ControlsWrapper>{controls}</ControlsWrapper>
-      )}
-    </StyledLi>
-  )
-})
+export interface ListItemProps
+  extends Omit<ComponentProps<typeof StyledLi>, 'css'>,
+    VariantProps<typeof StyledLi>,
+    VariantProps<typeof Flex> {
+  controls?: ReactNode;
+  css?: CSS;
+}
+export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemProps>(
+  ({ children, controls, align, justify, direction, gap, wrap, ...props }, forwardedRef) => {
+    const { interactive } = useContext(ListContext);
+    return (
+      <StyledLi {...props} ref={forwardedRef}>
+        {interactive ? (
+          <StyledListItemButton
+            align={align}
+            justify={justify}
+            direction={direction}
+            gap={gap}
+            wrap={wrap}
+          >
+            {children}
+          </StyledListItemButton>
+        ) : (
+          <StyledSpan
+            align={align}
+            justify={justify}
+            direction={direction}
+            gap={gap}
+            wrap={wrap}
+            css={{ flexGrow: 1 }}
+          >
+            {children}
+          </StyledSpan>
+        )}
+        {!!controls && <ControlsWrapper>{controls}</ControlsWrapper>}
+      </StyledLi>
+    );
+  }
+);

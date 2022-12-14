@@ -36,4 +36,6 @@ Disabled.args = {
   size: 'large',
 };
 
-const Customize: ComponentStory<typeof CheckboxForStory> = (args) => <CheckboxForStory css={{ c: '$hiContrast' }} {...args} />;
+const Customize: ComponentStory<typeof CheckboxForStory> = (args) => (
+  <CheckboxForStory css={{ c: '$hiContrast' }} {...args} />
+);

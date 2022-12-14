@@ -48,14 +48,7 @@ export function Tooltip({
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 
-      <Content
-        css={css}
-        side="top"
-        align="center"
-        sideOffset={5}
-        {...props}
-        multiline={multiline}
-      >
+      <Content css={css} side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
         {isContentString ? (
           <Text
             size="1"

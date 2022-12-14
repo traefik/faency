@@ -50,7 +50,7 @@ export const RADIO_BASE_STYLES = {
   color: '$hiContrast',
   boxShadow: 'inset 0 0 0 1px $colors$radioBorder',
   overflow: 'hidden',
-}
+};
 const StyledRadio = styled(RadioGroupPrimitive.Item, RADIO_BASE_STYLES, {
   '@hover': {
     '&:hover': {

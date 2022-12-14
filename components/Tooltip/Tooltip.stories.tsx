@@ -81,7 +81,6 @@ NodeContent.argTypes = {
   },
 };
 
-
 const Customize: ComponentStory<typeof TooltipForStory> = (args) => (
   <Container>
     <TooltipForStory css={{ c: '$hiContrast' }} {...args}>
