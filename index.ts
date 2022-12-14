@@ -11,7 +11,7 @@ export {
   RadioAccordionContent,
 } from './components/RadioAccordion';
 export { Alert } from './components/Alert';
-export { AspectRatio } from '@radix-ui/react-aspect-ratio';
+export * as AspectRatio from '@radix-ui/react-aspect-ratio';
 export { Badge } from './components/Badge';
 export { Box } from './components/Box';
 export { Bubble } from './components/Bubble';
@@ -64,7 +64,7 @@ export {
   PopoverTrigger,
   PopoverAnchor,
 } from './components/Popover';
-export { Portal } from '@radix-ui/react-portal';
+export * as Portal from '@radix-ui/react-portal';
 export { Radio, RadioGroup } from './components/Radio';
 export { Select } from './components/Select';
 export { Skeleton } from './components/Skeleton';

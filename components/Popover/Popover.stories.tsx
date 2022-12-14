@@ -7,6 +7,7 @@ import {
   PopoverVariants,
   PopoverTrigger,
   PopoverContent,
+  PopoverAnchor,
   PopoverClose,
 } from './Popover';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -15,7 +16,6 @@ import { Button } from '../Button';
 import { Text } from '../Text';
 import { Flex } from '../Flex';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { PopoverAnchor } from '@radix-ui/react-popover';
 import { Box } from '../Box';
 
 const BasePopover = (props: PopoverProps): JSX.Element => <Popover {...props} />;

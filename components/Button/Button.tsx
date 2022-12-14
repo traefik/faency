@@ -1,7 +1,7 @@
 import React, { ComponentProps, useMemo } from 'react';
 import { styled, keyframes, CSS, VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Slot } from '@radix-ui/react-slot';
+import * as Slot from '@radix-ui/react-slot';
 
 export const BUTTON_BASE_STYLES = {
   appearance: 'none',
@@ -273,7 +273,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
     variant: 'primary',
   },
 });
-const StyledButtonSlot = styled(Slot, StyledButton);
+const StyledButtonSlot = styled(Slot.Root, StyledButton);
 
 export interface ButtonVariants extends VariantProps<typeof StyledButton> {}
 export interface ButtonProps extends ComponentProps<typeof StyledButton>, ButtonVariants {
