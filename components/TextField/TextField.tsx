@@ -144,7 +144,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     }, [inputRef]);
 
     const handleFocus = React.useCallback(
-      (e) => {
+      (e: React.FocusEvent<HTMLInputElement>) => {
         if (onFocus) {
           onFocus(e);
         }
@@ -154,7 +154,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     );
 
     const handleBlur = React.useCallback(
-      (e) => {
+      (e: React.FocusEvent<HTMLInputElement>) => {
         if (onBlur) {
           onBlur(e);
         }

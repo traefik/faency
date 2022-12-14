@@ -83,11 +83,9 @@ interface InteractiveCardProps
 }
 export type CardProps = CardVariantProps | InteractiveCardProps;
 
-export const Card = forwardRef<any, CardProps>(({ interactive, ...props }, forwardedRef) => {
+export const Card = ({ interactive, ...props }: CardProps) => {
   if (interactive) {
-    return (
-      <StyledInteractiveCard tabIndex={0} ref={forwardedRef} {...(props as InteractiveCardProps)} />
-    );
+    return <StyledInteractiveCard tabIndex={0} {...(props as InteractiveCardProps)} />;
   }
-  return <StyledCard ref={forwardedRef} {...(props as CardVariantProps)} />;
-});
+  return <StyledCard {...(props as CardVariantProps)} />;
+};

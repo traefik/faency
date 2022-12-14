@@ -268,7 +268,7 @@ export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>
     }, [invalid, disabled, hasFocus]);
 
     const handleFocus = React.useCallback(
-      (e) => {
+      (e: React.FocusEvent<HTMLTextAreaElement>) => {
         if (onFocus) {
           onFocus(e);
         }
@@ -278,7 +278,7 @@ export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>
     );
 
     const handleBlur = React.useCallback(
-      (e) => {
+      (e: React.FocusEvent<HTMLTextAreaElement>) => {
         if (onBlur) {
           onBlur(e);
         }

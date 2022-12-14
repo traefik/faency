@@ -84,7 +84,7 @@ export const LabelAndTitle: ComponentStory<(props: ExtendedSwitchProps) => JSX.E
   }, [invalid, disabled]);
 
   const handleFocus = React.useCallback(
-    (e) => {
+    (e: React.FocusEvent<HTMLButtonElement>) => {
       if (onFocus) {
         onFocus(e);
       }
@@ -94,7 +94,7 @@ export const LabelAndTitle: ComponentStory<(props: ExtendedSwitchProps) => JSX.E
   );
 
   const handleBlur = React.useCallback(
-    (e) => {
+    (e: React.FocusEvent<HTMLButtonElement>) => {
       if (onBlur) {
         onBlur(e);
       }
