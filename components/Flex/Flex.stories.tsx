@@ -25,4 +25,4 @@ Basic.args = {
 
 const Customize: ComponentStory<typeof Flex> = (args) => (
   <Flex {...args} css={{ c: '$hiContrast' }} />
-)
+);

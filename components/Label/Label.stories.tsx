@@ -48,7 +48,7 @@ export const CapitalizedWords = Template.bind({});
 
 CapitalizedWords.args = {
   id: 'capitalize-words',
-  transform: 'capitalizeWords'
+  transform: 'capitalizeWords',
 };
 ignoreArgType('id', CapitalizedWords);
 
@@ -75,8 +75,8 @@ export const Disabled: ComponentStory<typeof LabelForStory> = ({ id, ...args }) 
   </Box>
 );
 Disabled.args = {
-  id: 'subtledisabled'
-}
+  id: 'subtledisabled',
+};
 ignoreArgType('id', Disabled);
 
 export const FocusContrast: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => {
@@ -84,11 +84,11 @@ export const FocusContrast: ComponentStory<typeof LabelForStory> = ({ id, ...arg
 
   const onFocus = React.useCallback(() => {
     setHasFocus(true);
-  }, [setHasFocus])
+  }, [setHasFocus]);
 
   const onBlur = React.useCallback(() => {
     setHasFocus(false);
-  }, [setHasFocus])
+  }, [setHasFocus]);
 
   return (
     <Box>
@@ -98,8 +98,8 @@ export const FocusContrast: ComponentStory<typeof LabelForStory> = ({ id, ...arg
       <input id={id} name="email" type="email" onFocus={onFocus} onBlur={onBlur} />
     </Box>
   );
-}
+};
 FocusContrast.args = {
-  id: 'focuscontrastvariants'
-}
-ignoreArgType('id', FocusContrast)
+  id: 'focuscontrastvariants',
+};
+ignoreArgType('id', FocusContrast);

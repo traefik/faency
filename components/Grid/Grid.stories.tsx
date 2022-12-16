@@ -43,4 +43,4 @@ Basic.args = {
 
 const Customize: ComponentStory<typeof Grid> = (args) => (
   <Grid {...args} css={{ c: '$hiContrast' }} />
-)
+);

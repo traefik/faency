@@ -3,11 +3,11 @@ const ignoreArgType = (key, Story) => {
     ...(Story?.argTypes || {}),
     [key]: {
       table: {
-        disable: true
-      }
-    }
+        disable: true,
+      },
+    },
   };
   return Story;
 };
 
-export default ignoreArgType
+export default ignoreArgType;

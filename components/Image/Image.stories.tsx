@@ -22,4 +22,6 @@ Large.args = {
   src: 'https://picsum.photos/2000/3000',
 };
 
-const Customize: ComponentStory<typeof Image> = (args) => <Image css={{ c: '$hiContrast' }} {...args} />;
+const Customize: ComponentStory<typeof Image> = (args) => (
+  <Image css={{ c: '$hiContrast' }} {...args} />
+);

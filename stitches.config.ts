@@ -21,7 +21,7 @@ import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
 import { Theme as TooltipTheme } from './components/Tooltip/Tooltip.themes';
 import { Theme as TextareaTheme } from './components/Textarea/Textarea.themes';
-import {Theme as HeadingTheme} from './components/Heading/Heading.themes';
+import { Theme as HeadingTheme } from './components/Heading/Heading.themes';
 
 import { lightColors, darkColors } from './colors';
 import getPrimaryColorInfo from './utils/getPrimaryColorInfo';

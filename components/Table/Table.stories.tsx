@@ -227,7 +227,7 @@ export const Interactive: ComponentStory<any> = ({ interactive, ...args }) => {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr interactive={interactive} {...makeSelectableRowProps(1)}>
+          <Tr interactive={interactive} {...makeSelectableRowProps(5)}>
             <Td>John</Td>
             <Td>Doe</Td>
             <Td>
@@ -235,7 +235,7 @@ export const Interactive: ComponentStory<any> = ({ interactive, ...args }) => {
             </Td>
             <Td subtle>Developer</Td>
           </Tr>
-          <Tr interactive={interactive} {...makeSelectableRowProps(2)}>
+          <Tr interactive={interactive} {...makeSelectableRowProps(6)}>
             <Td>Johnny</Td>
             <Td>Depp</Td>
             <Td subtle>
@@ -243,7 +243,7 @@ export const Interactive: ComponentStory<any> = ({ interactive, ...args }) => {
             </Td>
             <Td subtle>Actor</Td>
           </Tr>
-          <Tr interactive={interactive} {...makeSelectableRowProps(3)}>
+          <Tr interactive={interactive} {...makeSelectableRowProps(7)}>
             <Td>Natalie</Td>
             <Td>Portman</Td>
             <Td>
@@ -251,7 +251,7 @@ export const Interactive: ComponentStory<any> = ({ interactive, ...args }) => {
             </Td>
             <Td subtle>Actor</Td>
           </Tr>
-          <Tr interactive={interactive} {...makeSelectableRowProps(4)}>
+          <Tr interactive={interactive} {...makeSelectableRowProps(8)}>
             <Td>Luke</Td>
             <Td>Skywalker</Td>
             <Td>

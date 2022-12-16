@@ -14,8 +14,8 @@ import {
 
 // TYPES
 export interface TextFieldLabelProps {
-  variant: 'invalid' | 'subtle' | 'contrast' | 'default'
-  htmlFor?: string
+  variant: 'invalid' | 'subtle' | 'contrast' | 'default';
+  htmlFor?: string;
 }
 export type TextFieldProps = InputProps & {
   type?: string;
@@ -64,7 +64,19 @@ const StyledCrossCircledIcon = styled(CrossCircledIcon, {
 
 export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFieldProps>(
   (
-    { state, clearable, label: LabelOrComponent, id, type, disabled, readOnly, onBlur, onFocus, css, ...props },
+    {
+      state,
+      clearable,
+      label: LabelOrComponent,
+      id,
+      type,
+      disabled,
+      readOnly,
+      onBlur,
+      onFocus,
+      css,
+      ...props
+    },
     forwardedRef
   ) => {
     const inputRef = React.useRef<InputHandle | null>(null);
@@ -81,7 +93,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
         return 'subtle';
       }
       if (invalid) {
-        return 'invalid'
+        return 'invalid';
       }
       if (inputHasFocus) {
         return 'contrast';
@@ -89,24 +101,19 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
       return 'default';
     }, [invalid, disabled, inputHasFocus]);
 
-    const LabelNode = React.useMemo(
-      () => {
-        if (LabelOrComponent === undefined || LabelOrComponent === null) {
-          return null;
-        }
-        if (typeof LabelOrComponent === 'string') {
-          return (
-            <Label variant={labelVariant} htmlFor={id}>
-              {LabelOrComponent}
-            </Label>
-          );
-        }
+    const LabelNode = React.useMemo(() => {
+      if (LabelOrComponent === undefined || LabelOrComponent === null) {
+        return null;
+      }
+      if (typeof LabelOrComponent === 'string') {
         return (
-          <LabelOrComponent variant={labelVariant} htmlFor={id} />
+          <Label variant={labelVariant} htmlFor={id}>
+            {LabelOrComponent}
+          </Label>
         );
-      },
-      [LabelOrComponent, labelVariant, id],
-    );
+      }
+      return <LabelOrComponent variant={labelVariant} htmlFor={id} />;
+    }, [LabelOrComponent, labelVariant, id]);
 
     const isPasswordType = React.useMemo(() => type === 'password', [type]);
 
@@ -137,7 +144,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     }, [inputRef]);
 
     const handleFocus = React.useCallback(
-      (e) => {
+      (e: React.FocusEvent<HTMLInputElement>) => {
         if (onFocus) {
           onFocus(e);
         }
@@ -147,7 +154,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
     );
 
     const handleBlur = React.useCallback(
-      (e) => {
+      (e: React.FocusEvent<HTMLInputElement>) => {
         if (onBlur) {
           onBlur(e);
         }

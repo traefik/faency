@@ -4,7 +4,7 @@ import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {
-    badgeInteractiveBackgroundActive: Property.Color
+    badgeInteractiveBackgroundActive: Property.Color;
     badgeInteractiveBackgroundHover: Property.Color;
   };
 

@@ -8,9 +8,9 @@ import { Badge } from '../Badge';
 import { Text } from '../Text';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
-type AccordionVariants = VariantProps<typeof AccordionRoot>
+type AccordionVariants = VariantProps<typeof AccordionRoot>;
 
 const BaseAccordion = (props: any): JSX.Element => <AccordionRoot {...props} />;
 const AccordionForStory = modifyVariantsForStory<AccordionVariants, any>(BaseAccordion);
@@ -37,7 +37,7 @@ const Template: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) =
       </AccordionItem>
     </AccordionForStory>
   </Box>
-)
+);
 
 export const Single = Template.bind({});
 Single.args = {
@@ -48,25 +48,25 @@ Single.argTypes = {
   size: {
     control: 'inline-radio',
     options: ['small', 'medium', 'large'],
-  }
-}
+  },
+};
 
 export const Large = Template.bind({});
 Large.args = {
   size: 'large',
-}
+};
 
 export const Collapsible = Template.bind({});
 Collapsible.args = {
   type: 'single',
   collapsible: true,
-}
+};
 Collapsible.argTypes = {
   size: {
     control: 'inline-radio',
     options: ['small', 'medium', 'large'],
-  }
-}
+  },
+};
 
 export const MultipleCollapsible = Template.bind({});
 MultipleCollapsible.args = {
@@ -77,40 +77,35 @@ MultipleCollapsible.argTypes = {
   size: {
     control: 'inline-radio',
     options: ['small', 'medium', 'large'],
-  }
-}
+  },
+};
 
-export const Complex
-  : ComponentStory<typeof AccordionForStory> = (args) => (
-    <Box css={{ width: 300 }}>
-      <AccordionForStory {...args}>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <Flex
-              css={{ flexGrow: 1 }}
-              align="center"
-              justify="space-between"
-            >
-              <Text>Title</Text>
-              <Badge>Status</Badge>
-              <Text>Metadata</Text>
-            </Flex>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Flex gap="2">
-              <MagnifyingGlassIcon />
-              <Text>More information</Text>
-              <Text>Version</Text>
-            </Flex>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-2">
-          <AccordionTrigger>Item2 Trigger</AccordionTrigger>
-          <AccordionContent>Item2 Content</AccordionContent>
-        </AccordionItem>
-      </AccordionForStory>
-    </Box>
-  )
+export const Complex: ComponentStory<typeof AccordionForStory> = (args) => (
+  <Box css={{ width: 300 }}>
+    <AccordionForStory {...args}>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>
+          <Flex css={{ flexGrow: 1 }} align="center" justify="space-between">
+            <Text>Title</Text>
+            <Badge>Status</Badge>
+            <Text>Metadata</Text>
+          </Flex>
+        </AccordionTrigger>
+        <AccordionContent>
+          <Flex gap="2">
+            <MagnifyingGlassIcon />
+            <Text>More information</Text>
+            <Text>Version</Text>
+          </Flex>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Item2 Trigger</AccordionTrigger>
+        <AccordionContent>Item2 Content</AccordionContent>
+      </AccordionItem>
+    </AccordionForStory>
+  </Box>
+);
 
 Complex.args = {
   type: 'multiple',
@@ -120,15 +115,19 @@ Complex.argTypes = {
   size: {
     control: 'inline-radio',
     options: ['small', 'medium', 'large'],
-  }
-}
+  },
+};
 
 const Customize: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) => (
   <Box css={{ width: 300 }}>
     <AccordionForStory css={{ maxWidth: 250 }} {...args}>
       <AccordionItem css={{ bc: '$hiContrast' }} value="item-1">
-        <AccordionTrigger css={{ c: '$hiContrast' }} size={size}>Item1 Trigger</AccordionTrigger>
-        <AccordionContent css={{ c: '$hiContrast' }} size={size}>Item1 Content</AccordionContent>
+        <AccordionTrigger css={{ c: '$hiContrast' }} size={size}>
+          Item1 Trigger
+        </AccordionTrigger>
+        <AccordionContent css={{ c: '$hiContrast' }} size={size}>
+          Item1 Content
+        </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger size={size}>Item2 Trigger</AccordionTrigger>
@@ -140,4 +139,4 @@ const Customize: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) 
       </AccordionItem>
     </AccordionForStory>
   </Box>
-)
+);

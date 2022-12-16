@@ -35,7 +35,9 @@ Disabled.args = { disabled: true };
 
 export const Labelled: ComponentStory<typeof SwitchForStory> = ({ id, ...args }) => (
   <Flex align="center">
-    <Label variant="contrast" htmlFor={id}>label</Label>
+    <Label variant="contrast" htmlFor={id}>
+      label
+    </Label>
     <SwitchForStory id={id} {...args} />
   </Flex>
 );
@@ -45,72 +47,89 @@ Labelled.args = {
 ignoreArgType('id', Labelled);
 
 interface ExtendedSwitchProps extends React.ComponentProps<typeof SwitchForStory> {
-  invalid?: boolean
+  invalid?: boolean;
 }
 
-export const LabelAndTitle: ComponentStory<(props: ExtendedSwitchProps) => JSX.Element> = ({ id, onFocus, onBlur, invalid, disabled, ...args }) => {
+export const LabelAndTitle: ComponentStory<(props: ExtendedSwitchProps) => JSX.Element> = ({
+  id,
+  onFocus,
+  onBlur,
+  invalid,
+  disabled,
+  ...args
+}) => {
   const [hasFocus, setHasFocus] = React.useState(false);
 
   const titleVariant = React.useMemo(() => {
     if (disabled) {
-      return 'subtle'
+      return 'subtle';
     }
     if (invalid) {
-      return 'invalid'
+      return 'invalid';
     }
     if (hasFocus) {
-      return 'contrast'
+      return 'contrast';
     }
-    return 'default'
-  }, [invalid, disabled, hasFocus])
+    return 'default';
+  }, [invalid, disabled, hasFocus]);
 
   const labelVariant = React.useMemo(() => {
     if (invalid) {
-      return 'invalid'
+      return 'invalid';
     }
     if (disabled) {
-      return 'subtle'
+      return 'subtle';
     }
-    return 'contrast'
-  }, [invalid, disabled]
-  );
-
+    return 'contrast';
+  }, [invalid, disabled]);
 
   const handleFocus = React.useCallback(
-    (e) => {
+    (e: React.FocusEvent<HTMLButtonElement>) => {
       if (onFocus) {
-        onFocus(e)
+        onFocus(e);
       }
-      setHasFocus(true)
+      setHasFocus(true);
     },
-    [onFocus, setHasFocus],
-  )
+    [onFocus, setHasFocus]
+  );
 
   const handleBlur = React.useCallback(
-    (e) => {
+    (e: React.FocusEvent<HTMLButtonElement>) => {
       if (onBlur) {
-        onBlur(e)
+        onBlur(e);
       }
-      setHasFocus(false)
+      setHasFocus(false);
     },
-    [onBlur, setHasFocus],
-  )
+    [onBlur, setHasFocus]
+  );
 
   return (
     <>
-      <Label htmlFor={id} variant={titleVariant}>title</Label>
+      <Label htmlFor={id} variant={titleVariant}>
+        title
+      </Label>
       <Flex align="center">
-        <Label variant={labelVariant} htmlFor={id}>label</Label>
-        <SwitchForStory id={id} disabled={disabled} onBlur={handleBlur} onFocus={handleFocus} {...args} />
+        <Label variant={labelVariant} htmlFor={id}>
+          label
+        </Label>
+        <SwitchForStory
+          id={id}
+          disabled={disabled}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          {...args}
+        />
       </Flex>
     </>
   );
-}
+};
 LabelAndTitle.args = {
   id: 'label-title',
   invalid: false,
   disabled: false,
-}
+};
 ignoreArgType('id', LabelAndTitle);
 
-const Customize: ComponentStory<typeof SwitchForStory> = (args) => <SwitchForStory css={{ c: '$hiContrast' }} {...args} />;
+const Customize: ComponentStory<typeof SwitchForStory> = (args) => (
+  <SwitchForStory css={{ c: '$hiContrast' }} {...args} />
+);

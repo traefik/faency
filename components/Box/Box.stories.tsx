@@ -26,5 +26,5 @@ export const Basic: ComponentStory<typeof BoxForStory> = (args) => (
       It helps developers and operations teams of all sizes build, deploy and run modern
       microservices applications quickly and easily.
     </Text>
-  </Box >
+  </Box>
 );

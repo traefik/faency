@@ -94,7 +94,9 @@ export const Types: ComponentStory<typeof InputForStory> = ({ type, ...args }) =
   <Flex direction="column" gap={2}>
     {INPUT_TYPES.map((type) => (
       <>
-        <Label htmlFor={`types-${type}`} key={type}>{type}</Label>
+        <Label htmlFor={`types-${type}`} key={type}>
+          {type}
+        </Label>
         <InputForStory id={`types-${type}`} {...args} type={type} />
       </>
     ))}
@@ -119,45 +121,31 @@ ignoreArgType('id', ReadOnly);
 export const Ghost: ComponentStory<typeof InputForStory> = (args) => (
   <Flex direction="column" gap={2}>
     <Box>
-      <Label htmlFor="ghost-small">
-        Small
-      </Label>
+      <Label htmlFor="ghost-small">Small</Label>
       <InputForStory id="ghost-small" size="small" {...args} />
     </Box>
     <Box>
-      <Label htmlFor="ghost-default">
-        Default
-      </Label>
+      <Label htmlFor="ghost-default">Default</Label>
       <InputForStory id="ghost-default" {...args} />
     </Box>
     <Box>
-      <Label htmlFor="ghost-large">
-        Large
-      </Label>
+      <Label htmlFor="ghost-large">Large</Label>
       <InputForStory id="ghost-large" size="large" {...args} />
     </Box>
     <Box>
-      <Label htmlFor="ghost-invalid">
-        Invalid
-      </Label>
+      <Label htmlFor="ghost-invalid">Invalid</Label>
       <InputForStory id="ghost-invalid" state="invalid" {...args} />
     </Box>
     <Box>
-      <Label htmlFor="ghost-disabled">
-        Disabled
-      </Label>
+      <Label htmlFor="ghost-disabled">Disabled</Label>
       <InputForStory id="ghost-disabled" disabled {...args} />
     </Box>
     <Box>
-      <Label htmlFor="ghost-readonly">
-        ReadOnly
-      </Label>
+      <Label htmlFor="ghost-readonly">ReadOnly</Label>
       <InputForStory id="ghost-readonly" readOnly {...args} />
     </Box>
     <Box>
-      <Label htmlFor="ghost-adornments">
-        Adornments
-      </Label>
+      <Label htmlFor="ghost-adornments">Adornments</Label>
       <InputForStory
         id="ghost-adornments"
         startAdornment={<MagnifyingGlassIcon />}
@@ -197,21 +185,26 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
   <form>
     <Flex direction="column" gap={2}>
       <Box>
-        <Label htmlFor="autofill-small">
-          Small
-        </Label>
-        <InputForStory id="autofill-small" name="ship-city" autoComplete="shipping locality" size="small" {...args} />
+        <Label htmlFor="autofill-small">Small</Label>
+        <InputForStory
+          id="autofill-small"
+          name="ship-city"
+          autoComplete="shipping locality"
+          size="small"
+          {...args}
+        />
       </Box>
       <Box>
-        <Label htmlFor="autofill-default">
-          Default
-        </Label>
-        <InputForStory id="autofill-default" name="ship-organization" autoComplete="shipping organization" {...args} />
+        <Label htmlFor="autofill-default">Default</Label>
+        <InputForStory
+          id="autofill-default"
+          name="ship-organization"
+          autoComplete="shipping organization"
+          {...args}
+        />
       </Box>
       <Box>
-        <Label htmlFor="autofill-large">
-          Large
-        </Label>
+        <Label htmlFor="autofill-large">Large</Label>
         <InputForStory
           id="autofill-large"
           name="ship-address"
@@ -221,9 +214,7 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
         />
       </Box>
       <Box>
-        <Label htmlFor="autofill-ghost">
-          Ghost
-        </Label>
+        <Label htmlFor="autofill-ghost">Ghost</Label>
         <InputForStory
           id="autofill-ghost"
           name="ship-city"
@@ -233,9 +224,7 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
         />
       </Box>
       <Box>
-        <Label htmlFor="autofill-invalid">
-          Invalid
-        </Label>
+        <Label htmlFor="autofill-invalid">Invalid</Label>
         <InputForStory
           id="autofill-invalid"
           name="ship-zip"
@@ -245,9 +234,7 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
         />
       </Box>
       <Box>
-        <Label htmlFor="autofill-adornments">
-          Adornments
-        </Label>
+        <Label htmlFor="autofill-adornments">Adornments</Label>
         <InputForStory
           id="autofill-adornments"
           name="ship-country"
@@ -263,4 +250,4 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
 
 const Customize: ComponentStory<typeof InputForStory> = ({ id, ...args }) => (
   <InputForStory css={{ c: '$hiContrast' }} {...args} />
-)
+);

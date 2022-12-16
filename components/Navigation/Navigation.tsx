@@ -147,25 +147,27 @@ const StyledLink = styled('a', baseNavItemCss, {
   textDecoration: 'none',
 });
 
-type StyledLinkProps = VariantProps<typeof StyledLink> & Omit<React.ComponentProps<typeof StyledLink>, 'css'>;
+type StyledLinkProps = VariantProps<typeof StyledLink> &
+  Omit<React.ComponentProps<typeof StyledLink>, 'css'>;
 
 const StyledButton = styled('button', baseNavItemCss);
 
-type StyledButtonProps = VariantProps<typeof StyledButton> & Omit<React.ComponentProps<typeof StyledButton>, 'css'>;
+type StyledButtonProps = VariantProps<typeof StyledButton> &
+  Omit<React.ComponentProps<typeof StyledButton>, 'css'>;
 interface NavigationItemBaseProps {
-  css?: CSS
+  css?: CSS;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
-};
+}
 
 interface NavigationItemButtonProps extends NavigationItemBaseProps, StyledButtonProps {
-  as?: 'button',
+  as?: 'button';
 }
 interface NavigationItemLinkProps extends NavigationItemBaseProps, StyledLinkProps {
-  as: 'a',
+  as: 'a';
 }
 
-export type NavigationItemProps = NavigationItemButtonProps | NavigationItemLinkProps
+export type NavigationItemProps = NavigationItemButtonProps | NavigationItemLinkProps;
 
 const NavigationItemWrapper = (props: NavigationItemProps): JSX.Element =>
   props.as === 'a' ? <StyledLink {...props} /> : <StyledButton type="button" {...props} />;

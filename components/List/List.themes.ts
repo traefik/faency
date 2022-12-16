@@ -5,7 +5,7 @@ export namespace Theme {
   export type Colors = {
     listItemHoverBg: Property.Color;
     listItemActiveBg: Property.Color;
-    listItemFocusBorder: Property.Color
+    listItemFocusBorder: Property.Color;
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;

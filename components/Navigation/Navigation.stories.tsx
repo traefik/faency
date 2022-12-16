@@ -129,7 +129,11 @@ const MultipleSectionsTemplate: ComponentStory<typeof NavigationDrawerForStory> 
         <Text>Company Logo</Text>
       </NavigationContainer>
       <NavigationContainer css={{ flexGrow: 1 }}>
-        <NavigationItem css={{ c: '$hiContrast' }} {...navigationHandlerProps('/')} startAdornment={<DashboardIcon />}>
+        <NavigationItem
+          css={{ c: '$hiContrast' }}
+          {...navigationHandlerProps('/')}
+          startAdornment={<DashboardIcon />}
+        >
           Dashboard
         </NavigationItem>
         <NavigationItem {...navigationHandlerProps('/profile')} startAdornment={<PersonIcon />}>
