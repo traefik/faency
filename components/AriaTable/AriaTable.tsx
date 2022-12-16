@@ -6,8 +6,7 @@ import React, {
   Children,
   isValidElement,
 } from 'react';
-import * as Slot from '@radix-ui/react-slot';
-
+import { Slot } from '@radix-ui/react-slot';
 import { styled, VariantProps, CSS } from '../../stitches.config';
 import {
   Caption as TableCaption,
@@ -44,7 +43,7 @@ export const Tfoot = forwardRef<
 const StyledTr = styled('div', TableTr, {
   display: 'table-row',
 });
-const StyledTrSlot = styled(Slot.Root, StyledTr);
+const StyledTrSlot = styled(Slot, StyledTr);
 export interface TrProps
   extends Omit<ComponentProps<typeof StyledTr>, 'css'>,
     VariantProps<typeof StyledTr> {

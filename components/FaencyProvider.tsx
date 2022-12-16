@@ -1,11 +1,10 @@
 import React from 'react';
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 
-import * as Tooltip from '@radix-ui/react-tooltip';
-
-interface FaencyProviderProps extends Tooltip.TooltipProviderProps {
+interface FaencyProviderProps {
   children: React.ReactNode;
 }
 
-export const FaencyProvider = ({ children, ...tooltipConfig }: FaencyProviderProps) => (
-  <Tooltip.Provider {...tooltipConfig}>{children}</Tooltip.Provider>
+export const FaencyProvider = ({ children }: FaencyProviderProps) => (
+  <TooltipProvider>{children}</TooltipProvider>
 );

@@ -1,6 +1,6 @@
 import React, { ComponentProps, useMemo } from 'react';
 import { styled, VariantProps } from '../../stitches.config';
-import * as Slot from '@radix-ui/react-slot';
+import { Slot } from '@radix-ui/react-slot';
 
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 type COLOR_VALUES = typeof COLORS[number];
@@ -89,7 +89,7 @@ const BADGE_BASE_STYLES = {
 };
 
 const StyledSpanBadge = styled('span', BADGE_BASE_STYLES);
-const StyledSpanBadgeSlot = styled(Slot.Root, StyledSpanBadge);
+const StyledSpanBadgeSlot = styled(Slot, StyledSpanBadge);
 
 const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
   '&::before': {
@@ -118,7 +118,7 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
     variant: interactiveColorVariants,
   },
 });
-const StyledButtonBadgeSlot = styled(Slot.Root, StyledButtonBadge);
+const StyledButtonBadgeSlot = styled(Slot, StyledButtonBadge);
 
 interface BadgeProps
   extends ComponentProps<typeof StyledButtonBadge>,
