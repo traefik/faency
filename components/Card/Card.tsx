@@ -71,12 +71,12 @@ const StyledInteractiveCard = styled('button', StyledCard, {
   },
 });
 
-interface CardVariantProps
+export interface CardVariantProps
   extends ComponentProps<typeof StyledCard>,
     VariantProps<typeof StyledCard> {
   interactive?: false;
 }
-interface InteractiveCardProps
+export interface InteractiveCardProps
   extends VariantProps<typeof StyledInteractiveCard>,
     ComponentProps<typeof StyledInteractiveCard> {
   interactive: true;
