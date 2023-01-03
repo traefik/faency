@@ -1,4 +1,4 @@
-import { ComponentProps, ElementRef, forwardRef } from 'react';
+import React, { ComponentProps, ElementRef } from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation/Elevation';
 
@@ -83,7 +83,7 @@ interface InteractiveCardProps
 }
 export type CardProps = CardVariantProps | InteractiveCardProps;
 
-export const Card = forwardRef<ElementRef<typeof StyledCard>, CardProps>(
+export const Card = React.forwardRef<ElementRef<typeof StyledCard>, CardProps>(
   ({ interactive, ...props }, forwardedRef) => {
     if (interactive) {
       return (
