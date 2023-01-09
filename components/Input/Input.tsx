@@ -228,12 +228,14 @@ const InputWrapper = styled('div', {
     content: '""',
     position: 'absolute',
     inset: 0,
+    pointerEvents: 'none',
   },
   '&::after': {
     boxSizing: 'border-box',
     content: '""',
     position: 'absolute',
     inset: 0,
+    pointerEvents: 'none',
   },
 
   '&:focus-visible': {
