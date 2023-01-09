@@ -86,3 +86,4 @@ export const PopoverContent = React.forwardRef<
 export const PopoverTrigger = PopoverPrimitive.Trigger;
 export const PopoverClose = PopoverPrimitive.Close;
 export const PopoverAnchor = PopoverPrimitive.Anchor;
+export const PopoverPortal = PopoverPrimitive.Portal;

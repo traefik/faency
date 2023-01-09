@@ -15,7 +15,7 @@ import { Button } from '../Button';
 import { Text } from '../Text';
 import { Flex } from '../Flex';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { PopoverAnchor } from '@radix-ui/react-popover';
+import { PopoverAnchor, PopoverPortal } from '@radix-ui/react-popover';
 import { Box } from '../Box';
 
 const BasePopover = (props: PopoverProps): JSX.Element => <Popover {...props} />;
@@ -32,11 +32,13 @@ const Template: ComponentStory<typeof PopoverForStory> = (args) => (
       <PopoverTrigger asChild>
         <Button>Open</Button>
       </PopoverTrigger>
-      <PopoverContent>
-        <PopoverClose asChild>
-          <Button ghost>Close</Button>
-        </PopoverClose>
-      </PopoverContent>
+      <PopoverPortal>
+        <PopoverContent>
+          <PopoverClose asChild>
+            <Button ghost>Close</Button>
+          </PopoverClose>
+        </PopoverContent>
+      </PopoverPortal>
     </PopoverForStory>
   </Container>
 );
@@ -49,19 +51,21 @@ export const RichContent: ComponentStory<typeof PopoverForStory> = (args) => (
       <PopoverTrigger asChild>
         <Button>Open</Button>
       </PopoverTrigger>
-      <PopoverContent css={{ p: '$3' }}>
-        <Text as="p" css={{ mb: '$2', color: 'currentColor' }}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae iure tenetur velit
-          animi magni rerum nulla totam reprehenderit, cum fugit omnis optio dicta molestias dolore
-          itaque voluptatibus obcaecati eligendi. Architecto.
-        </Text>
-        <Flex css={{ justifyContent: 'space-between' }}>
-          <Button variant="secondary">Learn more</Button>
-          <PopoverClose asChild>
-            <Button variant="primary">Close</Button>
-          </PopoverClose>
-        </Flex>
-      </PopoverContent>
+      <PopoverPortal>
+        <PopoverContent css={{ p: '$3' }}>
+          <Text as="p" css={{ mb: '$2', color: 'currentColor' }}>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae iure tenetur velit
+            animi magni rerum nulla totam reprehenderit, cum fugit omnis optio dicta molestias
+            dolore itaque voluptatibus obcaecati eligendi. Architecto.
+          </Text>
+          <Flex css={{ justifyContent: 'space-between' }}>
+            <Button variant="secondary">Learn more</Button>
+            <PopoverClose asChild>
+              <Button variant="primary">Close</Button>
+            </PopoverClose>
+          </Flex>
+        </PopoverContent>
+      </PopoverPortal>
     </PopoverForStory>
   </Container>
 );
@@ -74,9 +78,11 @@ export const IconTrigger: ComponentStory<typeof PopoverForStory> = (args) => (
           <HamburgerMenuIcon />
         </Button>
       </PopoverTrigger>
-      <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
-        <Text css={{ c: '$loContrast' }}>Content</Text>
-      </PopoverContent>
+      <PopoverPortal>
+        <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
+          <Text css={{ c: '$loContrast' }}>Content</Text>
+        </PopoverContent>
+      </PopoverPortal>
     </PopoverForStory>
   </Container>
 );
@@ -95,9 +101,11 @@ export const RowAnchor: ComponentStory<typeof PopoverForStory> = (args) => (
           to open the anchor
         </Box>
       </PopoverAnchor>
-      <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
-        <Text css={{ c: '$loContrast' }}>Content</Text>
-      </PopoverContent>
+      <PopoverPortal>
+        <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
+          <Text css={{ c: '$loContrast' }}>Content</Text>
+        </PopoverContent>
+      </PopoverPortal>
     </PopoverForStory>
   </Container>
 );

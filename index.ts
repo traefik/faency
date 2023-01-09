@@ -66,6 +66,7 @@ export {
   PopoverContent,
   PopoverTrigger,
   PopoverAnchor,
+  PopoverPortal,
 } from './components/Popover';
 export { Portal } from '@radix-ui/react-portal';
 export { Radio, RadioGroup } from './components/Radio';
