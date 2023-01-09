@@ -42,6 +42,7 @@ export {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
+  DropdownMenuPortal,
 } from './components/DropdownMenu';
 export { Flex } from './components/Flex';
 export { Grid } from './components/Grid';
