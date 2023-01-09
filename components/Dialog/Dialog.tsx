@@ -11,7 +11,7 @@ type DialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
   children: React.ReactNode;
 };
 
-const StyledOverlay = styled(DialogPrimitive.Overlay, overlayStyles, {
+export const DialogOverlay = styled(DialogPrimitive.Overlay, overlayStyles, {
   position: 'fixed',
   top: 0,
   right: 0,
@@ -20,12 +20,7 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, overlayStyles, {
 });
 
 export function Dialog({ children, ...props }: DialogProps) {
-  return (
-    <DialogPrimitive.Root {...props}>
-      <StyledOverlay />
-      {children}
-    </DialogPrimitive.Root>
-  );
+  return <DialogPrimitive.Root {...props}>{children}</DialogPrimitive.Root>;
 }
 
 export const StyledContent = styled(DialogPrimitive.Content, Card, {
@@ -97,3 +92,4 @@ export const DialogContent = React.forwardRef<
 
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClosePrimitive = DialogPrimitive.Close;
+export const DialogPortal = DialogPrimitive.Portal;

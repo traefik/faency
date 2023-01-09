@@ -1,9 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Dialog, DialogContent, DialogTrigger, StyledContent } from './Dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  StyledContent,
+  DialogOverlay,
+  DialogPortal,
+} from './Dialog';
 import { Text } from '../Text';
 import { useState } from 'react';
 import { Button } from '../Button';
 import { Box } from '../Box';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 
 export default {
   title: 'Components/Dialog',
@@ -57,9 +65,12 @@ export const Basic: ComponentStory<any> = (args) => {
         ))}
       </Box>
 
-      <DialogContent>
-        <Content />
-      </DialogContent>
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogContent>
+          <Content />
+        </DialogContent>
+      </DialogPortal>
     </Dialog>
   );
 };
@@ -86,9 +97,12 @@ const Customize: ComponentStory<any> = (args) => {
         ))}
       </Box>
 
-      <DialogContent css={{ c: '$hiContrast' }} elevation={2}>
-        <Content />
-      </DialogContent>
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogContent css={{ c: '$hiContrast' }} elevation={2}>
+          <Content />
+        </DialogContent>
+      </DialogPortal>
     </Dialog>
   );
 };
@@ -115,9 +129,12 @@ export const NoCloseIcon: ComponentStory<any> = (args) => {
         ))}
       </Box>
 
-      <StyledContent>
-        <Content />
-      </StyledContent>
+      <DialogPortal>
+        <DialogOverlay />
+        <StyledContent>
+          <Content />
+        </StyledContent>
+      </DialogPortal>
     </Dialog>
   );
 };

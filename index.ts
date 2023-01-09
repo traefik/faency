@@ -28,6 +28,8 @@ export {
   StyledContent,
   DialogCloseIconButton,
   DialogTrigger,
+  DialogOverlay,
+  DialogPortal,
 } from './components/Dialog';
 export {
   DropdownMenu,
