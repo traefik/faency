@@ -17,7 +17,7 @@ import {
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Badge } from '../Badge';
 import { Text } from '../Text';
-import { useDebouncedCallback } from 'use-debounce/lib';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default {
   title: 'Components/Navigation',
