@@ -69,3 +69,4 @@ export const DropdownMenuCheckboxItem = React.forwardRef<
 export const DropdownMenuLabel = styled(DropdownMenuPrimitive.Label, labelCss);
 export const DropdownMenuRadioGroup = styled(DropdownMenuPrimitive.RadioGroup, {});
 export const DropdownMenuGroup = styled(DropdownMenuPrimitive.Group, {});
+export const DropdownMenuPortal = DropdownMenuPrimitive.Portal;

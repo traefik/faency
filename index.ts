@@ -42,6 +42,7 @@ export {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
+  DropdownMenuPortal,
 } from './components/DropdownMenu';
 export { Flex } from './components/Flex';
 export { Grid } from './components/Grid';
@@ -65,6 +66,7 @@ export {
   PopoverContent,
   PopoverTrigger,
   PopoverAnchor,
+  PopoverPortal,
 } from './components/Popover';
 export { Portal } from '@radix-ui/react-portal';
 export { Radio, RadioGroup } from './components/Radio';
