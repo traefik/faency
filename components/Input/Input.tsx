@@ -22,7 +22,6 @@ const StyledInput = styled('input', {
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
   // Custom
-  zIndex: 1,
   position: 'relative',
   backgroundColor: 'transparent',
   borderRadius: 'inherit', // inherit border radius from InputWrapper
@@ -317,7 +316,6 @@ const InputWrapper = styled('div', {
 const AdornmentWrapper = styled('div', {
   position: 'absolute',
   top: 0,
-  zIndex: 2,
   height: '100%',
   display: 'flex',
   alignItems: 'center',
