@@ -38,4 +38,6 @@ yarn-error.log*
 
 /dist
 
+/storybook-static
+
 .parcel-cache
