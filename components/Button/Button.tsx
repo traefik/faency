@@ -279,6 +279,7 @@ export interface ButtonVariants extends VariantProps<typeof StyledButton> {}
 export interface ButtonProps extends ComponentProps<typeof StyledButton>, ButtonVariants {
   css?: CSS;
   asChild?: boolean;
+  as?: string;
 }
 
 export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
