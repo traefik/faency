@@ -20,7 +20,6 @@ const StyledTextarea = styled('textarea', {
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 
   // Custom
-  zIndex: 1, // layer on top of before/after pseudo
   p: '$3',
   position: 'relative',
   flexGrow: 1, // make sure to grow fully inside TextareaWrapper
@@ -154,6 +153,7 @@ const TextareaWrapper = styled('div', {
     content: '""',
     position: 'absolute',
     inset: 0,
+    pointerEvents: 'none',
   },
   '&::after': {
     boxSizing: 'border-box',
@@ -161,6 +161,7 @@ const TextareaWrapper = styled('div', {
     content: '""',
     position: 'absolute',
     inset: 0,
+    pointerEvents: 'none',
   },
 
   '&:focus-visible': {
@@ -225,7 +226,6 @@ const AdornmentWrapperEnd = styled('div', {
   right: '$3',
   minWidth: '$5',
   minHeight: '$5',
-  zIndex: 1,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
