@@ -12,8 +12,8 @@ export interface TreeViewProps {
 
 const NavigationTreeContainer = ({
   children,
-  defaultCollapseIcon = <ChevronRightIcon />,
-  defaultExpandIcon = <ChevronDownIcon />,
+  defaultCollapseIcon = <ChevronDownIcon />,
+  defaultExpandIcon = <ChevronRightIcon />,
   ...props
 }: TreeViewProps & NavigationContainerProps) => {
   const renderChildren = React.Children.map(children, (child) => {

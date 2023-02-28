@@ -1,4 +1,3 @@
-import { ChevronDownIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import React, { useMemo, useState } from 'react';
 import { Box } from '../Box';
 import { NavigationItem, NavigationItemProps } from '../Navigation';
@@ -10,6 +9,8 @@ export interface NavigationTreeItemProps {
   onClick?: () => void;
   defaultExpandIcon?: React.ReactNode;
   defaultCollapseIcon?: React.ReactNode;
+  customExpandIcon?: React.ReactNode;
+  customCollapseIcon?: React.ReactNode;
 }
 
 const NavigationTreeItem = ({
@@ -18,6 +19,8 @@ const NavigationTreeItem = ({
   onClick,
   defaultCollapseIcon,
   defaultExpandIcon,
+  customCollapseIcon,
+  customExpandIcon,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -28,7 +31,11 @@ const NavigationTreeItem = ({
       <NavigationItem
         onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
         startAdornment={
-          isExpandable ? (isExpanded ? defaultExpandIcon : defaultCollapseIcon) : null
+          isExpandable
+            ? isExpanded
+              ? customCollapseIcon || defaultCollapseIcon
+              : customExpandIcon || defaultExpandIcon
+            : null
         }
         css={{ width: '100%' }}
         {...props}
