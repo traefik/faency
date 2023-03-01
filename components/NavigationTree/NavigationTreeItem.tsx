@@ -24,6 +24,7 @@ const NavigationTreeItem = ({
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const hasStartAdornment = useMemo(() => !!props?.startAdornment, [props]);
   const isExpandable = useMemo(() => React.Children.count(children) > 0, [children]);
 
   return (
@@ -40,10 +41,16 @@ const NavigationTreeItem = ({
         css={{ width: '100%' }}
         {...props}
       >
-        <Box css={{ ml: isExpandable ? 0 : '$4' }}>{label}</Box>
+        <Box css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}>{label}</Box>
       </NavigationItem>
       {isExpanded && (
-        <NavigationTreeContainer css={{ ml: '$4' }}>{children}</NavigationTreeContainer>
+        <NavigationTreeContainer
+          defaultCollapseIcon={defaultCollapseIcon}
+          defaultExpandIcon={defaultExpandIcon}
+          css={{ ml: '$4' }}
+        >
+          {children}
+        </NavigationTreeContainer>
       )}
     </Box>
   );

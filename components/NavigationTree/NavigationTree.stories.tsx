@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import NavigationTreeItem from './NavigationTreeItem';
+import NavigationTreeContainer from './NavigationTreeContainer';
+import { NavigationDrawer } from '../Navigation';
+import {
+  ArchiveIcon,
+  EyeOpenIcon,
+  EyeClosedIcon,
+  EnvelopeClosedIcon,
+  EnvelopeOpenIcon,
+} from '@radix-ui/react-icons';
+
+export default {
+  title: 'Components/NavigationTree',
+  component: NavigationTreeContainer,
+  argTypes: {
+    defaultExpandIcon: {
+      options: ['Eye', 'Envelope'],
+      mapping: {
+        Eye: <EyeClosedIcon />,
+        Envelope: <EnvelopeClosedIcon />,
+      },
+    },
+    defaultCollapseIcon: {
+      options: ['Eye', 'Envelope'],
+      mapping: {
+        Eye: <EyeOpenIcon />,
+        Envelope: <EnvelopeOpenIcon />,
+      },
+    },
+  },
+} as ComponentMeta<typeof NavigationDrawer>;
+
+const Template: ComponentStory<typeof NavigationDrawer> = (args) => {
+  const [currentRoute, setCurrentRoute] = useState('/');
+
+  const navigationHandlerProps = (route: string) => ({
+    active: route === currentRoute,
+    onClick: () => setCurrentRoute(route),
+  });
+
+  return (
+    <NavigationDrawer>
+      <NavigationTreeContainer {...args}>
+        <NavigationTreeItem {...navigationHandlerProps('one')} label="One">
+          <NavigationTreeItem {...navigationHandlerProps('one-one')} as="a" label="One.One" />
+          <NavigationTreeItem {...navigationHandlerProps('one-two')} label="One.Two">
+            <NavigationTreeItem
+              {...navigationHandlerProps('one-two-one')}
+              startAdornment={<ArchiveIcon />}
+              label="One.Two.One"
+            />
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+        <NavigationTreeItem {...navigationHandlerProps('two')} label="Two" />
+      </NavigationTreeContainer>
+    </NavigationDrawer>
+  );
+};
+
+export const Basic = Template.bind({});
+
+Basic.args = {};
