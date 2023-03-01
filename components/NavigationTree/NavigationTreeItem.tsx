@@ -30,7 +30,6 @@ export const NavigationTreeItem = ({
   return (
     <Box>
       <NavigationItem
-        onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
         css={{ width: '100%' }}
         {...props}
         startAdornment={
@@ -42,6 +41,7 @@ export const NavigationTreeItem = ({
               : customExpandIcon || defaultExpandIcon
             : null
         }
+        onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
       >
         <Box css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}>{label}</Box>
       </NavigationItem>
