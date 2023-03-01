@@ -24,7 +24,7 @@ export default {
       mapping: {
         Default: undefined,
         Eye: <EyeClosedIcon />,
-        Envelope: <EnvelopeClosedIcon />,
+        Envelope: <EnvelopeOpenIcon />,
       },
     },
     customCollapseIcon: {
@@ -32,14 +32,6 @@ export default {
       mapping: {
         Default: undefined,
         Eye: <EyeOpenIcon />,
-        Envelope: <EnvelopeOpenIcon />,
-      },
-    },
-    defaultExpandIcon: {
-      options: ['Default', 'Eye', 'Envelope'],
-      mapping: {
-        Default: undefined,
-        Eye: <EyeClosedIcon />,
         Envelope: <EnvelopeClosedIcon />,
       },
     },
@@ -47,8 +39,16 @@ export default {
       options: ['Default', 'Eye', 'Envelope'],
       mapping: {
         Default: undefined,
-        Eye: <EyeOpenIcon />,
+        Eye: <EyeClosedIcon />,
         Envelope: <EnvelopeOpenIcon />,
+      },
+    },
+    defaultExpandIcon: {
+      options: ['Default', 'Eye', 'Envelope'],
+      mapping: {
+        Default: undefined,
+        Eye: <EyeOpenIcon />,
+        Envelope: <EnvelopeClosedIcon />,
       },
     },
     label: {

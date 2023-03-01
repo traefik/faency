@@ -15,20 +15,20 @@ export default {
   title: 'Components/NavigationTree',
   component: NavigationTreeContainer,
   argTypes: {
-    defaultExpandIcon: {
-      options: ['Default', 'Eye', 'Envelope'],
-      mapping: {
-        Default: undefined,
-        Eye: <EyeClosedIcon />,
-        Envelope: <EnvelopeClosedIcon />,
-      },
-    },
     defaultCollapseIcon: {
       options: ['Default', 'Eye', 'Envelope'],
       mapping: {
         Default: undefined,
-        Eye: <EyeOpenIcon />,
+        Eye: <EyeClosedIcon />,
         Envelope: <EnvelopeOpenIcon />,
+      },
+    },
+    defaultExpandIcon: {
+      options: ['Default', 'Eye', 'Envelope'],
+      mapping: {
+        Default: undefined,
+        Eye: <EyeOpenIcon />,
+        Envelope: <EnvelopeClosedIcon />,
       },
     },
   },
