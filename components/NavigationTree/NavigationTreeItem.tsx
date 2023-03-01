@@ -1,0 +1,71 @@
+import React, { useMemo, useState } from 'react';
+import { Box } from '../Box';
+import { NavigationItem, NavigationItemProps } from '../Navigation';
+import { NavigationTreeContainer } from './NavigationTreeContainer';
+
+export interface NavigationTreeItemProps {
+  label: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
+  defaultExpandIcon?: React.ReactNode;
+  defaultCollapseIcon?: React.ReactNode;
+  customExpandIcon?: React.ReactNode;
+  customCollapseIcon?: React.ReactNode;
+}
+
+export const NavigationTreeItem = ({
+  label,
+  children,
+  onClick,
+  defaultCollapseIcon,
+  defaultExpandIcon,
+  customCollapseIcon,
+  customExpandIcon,
+  ...props
+}: NavigationTreeItemProps & NavigationItemProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isExpandable = useMemo(() => React.Children.count(children) > 0, [children]);
+  const hasStartAdornment = useMemo(() => !!props.startAdornment, [props.startAdornment]);
+  const usedStartAdornment = useMemo(
+    () =>
+      hasStartAdornment
+        ? props.startAdornment
+        : isExpandable
+        ? isExpanded
+          ? customCollapseIcon || defaultCollapseIcon
+          : customExpandIcon || defaultExpandIcon
+        : null,
+    [
+      hasStartAdornment,
+      isExpandable,
+      isExpanded,
+      defaultCollapseIcon,
+      defaultExpandIcon,
+      customCollapseIcon,
+      customExpandIcon,
+      props.startAdornment,
+    ]
+  );
+
+  return (
+    <Box>
+      <NavigationItem
+        css={{ width: '100%' }}
+        {...props}
+        startAdornment={usedStartAdornment}
+        onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
+      >
+        <Box css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}>{label}</Box>
+      </NavigationItem>
+      {isExpanded && (
+        <NavigationTreeContainer
+          defaultCollapseIcon={defaultCollapseIcon}
+          defaultExpandIcon={defaultExpandIcon}
+          css={{ ml: '$4' }}
+        >
+          {children}
+        </NavigationTreeContainer>
+      )}
+    </Box>
+  );
+};

@@ -59,6 +59,7 @@ export {
   NavigationItem,
   NavigationLink,
 } from './components/Navigation';
+export { NavigationTreeContainer, NavigationTreeItem } from './components/NavigationTree';
 export { Overlay } from './components/Overlay';
 export {
   Popover,
