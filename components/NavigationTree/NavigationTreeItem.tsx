@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Box } from '../Box';
 import { NavigationItem, NavigationItemProps } from '../Navigation';
-import NavigationTreeContainer from './NavigationTreeContainer';
+import { NavigationTreeContainer } from './NavigationTreeContainer';
 
 export interface NavigationTreeItemProps {
   label: string;
@@ -13,7 +13,7 @@ export interface NavigationTreeItemProps {
   customCollapseIcon?: React.ReactNode;
 }
 
-const NavigationTreeItem = ({
+export const NavigationTreeItem = ({
   label,
   children,
   onClick,
@@ -57,5 +57,3 @@ const NavigationTreeItem = ({
     </Box>
   );
 };
-
-export default NavigationTreeItem;

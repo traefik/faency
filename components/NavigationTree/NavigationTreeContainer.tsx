@@ -10,7 +10,7 @@ export interface TreeViewProps {
   css?: CSS;
 }
 
-const NavigationTreeContainer = ({
+export const NavigationTreeContainer = ({
   children,
   defaultCollapseIcon = <ChevronDownIcon />,
   defaultExpandIcon = <ChevronRightIcon />,
@@ -24,5 +24,3 @@ const NavigationTreeContainer = ({
   });
   return <NavigationContainer {...props}>{renderChildren}</NavigationContainer>;
 };
-
-export default NavigationTreeContainer;

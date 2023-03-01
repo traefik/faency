@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import NavigationTreeItem from './NavigationTreeItem';
-import NavigationTreeContainer from './NavigationTreeContainer';
+import { NavigationTreeItem } from './NavigationTreeItem';
+import { NavigationTreeContainer } from './NavigationTreeContainer';
 import { NavigationDrawer } from '../Navigation';
 import {
   ArchiveIcon,
