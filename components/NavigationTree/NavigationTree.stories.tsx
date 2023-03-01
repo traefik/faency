@@ -16,23 +16,25 @@ export default {
   component: NavigationTreeContainer,
   argTypes: {
     defaultExpandIcon: {
-      options: ['Eye', 'Envelope'],
+      options: ['Default', 'Eye', 'Envelope'],
       mapping: {
+        Default: undefined,
         Eye: <EyeClosedIcon />,
         Envelope: <EnvelopeClosedIcon />,
       },
     },
     defaultCollapseIcon: {
-      options: ['Eye', 'Envelope'],
+      options: ['Default', 'Eye', 'Envelope'],
       mapping: {
+        Default: undefined,
         Eye: <EyeOpenIcon />,
         Envelope: <EnvelopeOpenIcon />,
       },
     },
   },
-} as ComponentMeta<typeof NavigationDrawer>;
+} as ComponentMeta<typeof NavigationTreeContainer>;
 
-const Template: ComponentStory<typeof NavigationDrawer> = (args) => {
+const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
   const [currentRoute, setCurrentRoute] = useState('/');
 
   const navigationHandlerProps = (route: string) => ({

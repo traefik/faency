@@ -31,15 +31,17 @@ const NavigationTreeItem = ({
     <Box>
       <NavigationItem
         onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
+        css={{ width: '100%' }}
+        {...props}
         startAdornment={
-          isExpandable
+          hasStartAdornment
+            ? props.startAdornment
+            : isExpandable
             ? isExpanded
               ? customCollapseIcon || defaultCollapseIcon
               : customExpandIcon || defaultExpandIcon
             : null
         }
-        css={{ width: '100%' }}
-        {...props}
       >
         <Box css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}>{label}</Box>
       </NavigationItem>
