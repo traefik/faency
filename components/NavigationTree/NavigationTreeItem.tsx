@@ -24,23 +24,35 @@ export const NavigationTreeItem = ({
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const hasStartAdornment = useMemo(() => !!props?.startAdornment, [props]);
   const isExpandable = useMemo(() => React.Children.count(children) > 0, [children]);
+  const hasStartAdornment = useMemo(() => !!props.startAdornment, [props.startAdornment]);
+  const usedStartAdornment = useMemo(
+    () =>
+      hasStartAdornment
+        ? props.startAdornment
+        : isExpandable
+        ? isExpanded
+          ? customCollapseIcon || defaultCollapseIcon
+          : customExpandIcon || defaultExpandIcon
+        : null,
+    [
+      hasStartAdornment,
+      isExpandable,
+      isExpanded,
+      defaultCollapseIcon,
+      defaultExpandIcon,
+      customCollapseIcon,
+      customExpandIcon,
+      props.startAdornment,
+    ]
+  );
 
   return (
     <Box>
       <NavigationItem
         css={{ width: '100%' }}
         {...props}
-        startAdornment={
-          hasStartAdornment
-            ? props.startAdornment
-            : isExpandable
-            ? isExpanded
-              ? customCollapseIcon || defaultCollapseIcon
-              : customExpandIcon || defaultExpandIcon
-            : null
-        }
+        startAdornment={usedStartAdornment}
         onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
       >
         <Box css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}>{label}</Box>
