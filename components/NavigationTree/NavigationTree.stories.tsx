@@ -60,7 +60,31 @@ const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
             />
           </NavigationTreeItem>
         </NavigationTreeItem>
-        <NavigationTreeItem {...navigationHandlerProps('two')} label="Two" />
+        <NavigationTreeItem
+          {...navigationHandlerProps('two')}
+          label="Two"
+          subtitle="/two"
+          defaultExpanded
+        >
+          <NavigationTreeItem
+            {...navigationHandlerProps('two-one')}
+            as="a"
+            label="Two.One"
+            subtitle="/two-one"
+          />
+          <NavigationTreeItem
+            {...navigationHandlerProps('two-two')}
+            label="Two.Two"
+            subtitle="/two-two"
+          >
+            <NavigationTreeItem
+              {...navigationHandlerProps('two-two-one')}
+              startAdornment={<ArchiveIcon />}
+              label="Two.Two.One"
+            />
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+        <NavigationTreeItem {...navigationHandlerProps('three')} label="Three" />
       </NavigationTreeContainer>
     </NavigationDrawer>
   );
