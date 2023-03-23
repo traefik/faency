@@ -45,8 +45,13 @@ const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
   return (
     <NavigationDrawer>
       <NavigationTreeContainer {...args}>
-        <NavigationTreeItem {...navigationHandlerProps('one')} label="One">
-          <NavigationTreeItem {...navigationHandlerProps('one-one')} as="a" label="One.One" />
+        <NavigationTreeItem {...navigationHandlerProps('one')} label="One" subtitle="/one">
+          <NavigationTreeItem
+            {...navigationHandlerProps('one-one')}
+            as="a"
+            label="One.One"
+            subtitle="/one-one"
+          />
           <NavigationTreeItem {...navigationHandlerProps('one-two')} label="One.Two">
             <NavigationTreeItem
               {...navigationHandlerProps('one-two-one')}

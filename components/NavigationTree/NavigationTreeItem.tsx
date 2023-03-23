@@ -2,9 +2,12 @@ import React, { useMemo, useState } from 'react';
 import { Box } from '../Box';
 import { NavigationItem, NavigationItemProps } from '../Navigation';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
+import { Flex } from '../Flex';
+import { Text } from '../Text';
 
 export interface NavigationTreeItemProps {
   label: string;
+  subtitle?: string;
   children?: React.ReactNode;
   onClick?: () => void;
   defaultExpandIcon?: React.ReactNode;
@@ -15,6 +18,7 @@ export interface NavigationTreeItemProps {
 
 export const NavigationTreeItem = ({
   label,
+  subtitle,
   children,
   onClick,
   defaultCollapseIcon,
@@ -55,7 +59,19 @@ export const NavigationTreeItem = ({
         startAdornment={usedStartAdornment}
         onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
       >
-        <Box css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}>{label}</Box>
+        <Flex
+          direction="column"
+          align="start"
+          gap={1}
+          css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}
+        >
+          <Text>{label}</Text>
+          {subtitle && (
+            <Text variant="subtle" css={{ fontSize: '$3', opacity: 0.8 }}>
+              {subtitle}
+            </Text>
+          )}
+        </Flex>
       </NavigationItem>
       {isExpanded && (
         <NavigationTreeContainer
