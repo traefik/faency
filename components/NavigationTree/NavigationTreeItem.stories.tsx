@@ -94,7 +94,7 @@ const Template: ComponentStory<typeof NavigationTreeItem> = (args) => {
         defaultCollapseIcon={args.defaultCollapseIcon}
         defaultExpandIcon={args.defaultExpandIcon}
       >
-        <NavigationTreeItem {...navigationHandlerProps('one')} label="One">
+        <NavigationTreeItem {...navigationHandlerProps('one')} label="One" subtitle="/parent">
           <NavigationTreeItem {...navigationHandlerProps('one-one')} {...args}>
             <NavigationTreeItem
               {...navigationHandlerProps('one-one-one')}
