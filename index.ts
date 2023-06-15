@@ -91,6 +91,7 @@ export { VisuallyHidden } from './components/VisuallyHidden';
 export { Avatar } from './components/Avatar';
 export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
 export { TabsContainer, TabsList, TabsTrigger, TabsContent } from './components/Tabs';
+export { AccessibleIcon } from './components/AccessibleIcon';
 
 // Stitches
 export {
