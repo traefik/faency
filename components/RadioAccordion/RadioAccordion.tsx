@@ -48,16 +48,7 @@ const StyledRadio = styled('div', RADIO_BASE_STYLES, {
   mr: '$2',
 });
 
-const StyledIndicator = styled('div', INDICATOR_BASE_STYLES, {
-  '&::after': {
-    '[data-state=open] &': {
-      backgroundColor: '$radioIndicator',
-    },
-    '[data-state=closed] &': {
-      backgroundColor: 'transparent',
-    },
-  },
-});
+const StyledIndicator = styled('div', INDICATOR_BASE_STYLES);
 
 const StyledRadioAccordionTrigger = styled(StyledAccordionTrigger, {
   '@hover': {

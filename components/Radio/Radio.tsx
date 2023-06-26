@@ -19,7 +19,7 @@ export const INDICATOR_BASE_STYLES = {
     width: '8px',
     height: '8px',
     borderRadius: '$round',
-    backgroundColor: '$radioBorder',
+    backgroundColor: '$contentBg',
   },
 };
 
