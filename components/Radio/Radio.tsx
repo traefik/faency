@@ -19,7 +19,7 @@ export const INDICATOR_BASE_STYLES = {
     width: '8px',
     height: '8px',
     borderRadius: '$round',
-    backgroundColor: '$radioIndicator',
+    backgroundColor: '$radioBorder',
   },
 };
 
@@ -50,13 +50,15 @@ export const RADIO_BASE_STYLES = {
   color: '$hiContrast',
   boxShadow: 'inset 0 0 0 1px $colors$radioBorder',
   overflow: 'hidden',
+  '&[data-state=checked]': {
+    backgroundColor: '$radioIndicator',
+  },
 };
 const StyledRadio = styled(RadioGroupPrimitive.Item, RADIO_BASE_STYLES, {
   '@hover': {
     '&:hover': {
       cursor: 'pointer',
       boxShadow: 'inset 0 0 0 1px $colors$radioHoverBorder',
-      backgroundColor: '$radioHoverBg',
     },
   },
   '&:focus-visible': {

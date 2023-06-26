@@ -15,11 +15,11 @@ export namespace Theme {
   type Factory = (primaryColor: ColorInfo) => Colors;
 
   export const getLight: Factory = (primaryColor) => ({
-    radioIndicator: tinycolor(primaryColor.value).darken(20).toHslString(),
+    radioIndicator: '$primary',
     radioBorder: '$deepBlue6',
     radioHoverBg: 'transparent',
-    radioHoverBorder: tinycolor(primaryColor.value).darken(20).toHslString(),
-    radioFocusBorder: tinycolor(primaryColor.value).darken(20).toHslString(),
+    radioHoverBorder: '$primary',
+    radioFocusBorder: '$primary',
     radioDisabledBg: '$deepBlue3',
     radioDisabledBorder: '$deepBlue5',
     radioIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
