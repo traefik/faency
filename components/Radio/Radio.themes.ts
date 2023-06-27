@@ -16,7 +16,7 @@ export namespace Theme {
 
   export const getLight: Factory = (primaryColor) => ({
     radioIndicator: '$primary',
-    radioBorder: '$deepBlue6',
+    radioBorder: '$grayBlue9',
     radioHoverBg: 'transparent',
     radioHoverBorder: '$primary',
     radioFocusBorder: '$primary',
@@ -27,7 +27,7 @@ export namespace Theme {
 
   export const getDark: Factory = (primaryColor) => ({
     radioIndicator: '$primary',
-    radioBorder: '$deepBlue6',
+    radioBorder: '$grayBlue9',
     radioHoverBg: '$deepBlue3',
     radioHoverBorder: '$primary',
     radioFocusBorder: '$primary',
