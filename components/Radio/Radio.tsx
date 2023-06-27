@@ -16,8 +16,8 @@ export const INDICATOR_BASE_STYLES = {
   '&::after': {
     content: '""',
     display: 'block',
-    width: '8px',
-    height: '8px',
+    width: '7px',
+    height: '7px',
     borderRadius: '$round',
     backgroundColor: '$contentBg',
   },
