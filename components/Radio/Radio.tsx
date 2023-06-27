@@ -68,14 +68,16 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, RADIO_BASE_STYLES, {
 
   '&:disabled': {
     pointerEvents: 'none',
-    backgroundColor: '$radioDisabledBg',
     '&::placeholder': {
       color: '$radioDisabledText',
+    },
+    '&[data-state=checked]': {
+      backgroundColor: '$radioIndicatorDisabledBg',
     },
 
     [`& ${StyledIndicator}`]: {
       '&::after': {
-        backgroundColor: '$radioIndicatorDisabledBg',
+        backgroundColor: '$radioDisabledBg',
       },
     },
   },
