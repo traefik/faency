@@ -16,10 +16,10 @@ export const INDICATOR_BASE_STYLES = {
   '&::after': {
     content: '""',
     display: 'block',
-    width: '8px',
-    height: '8px',
+    width: '7px',
+    height: '7px',
     borderRadius: '$round',
-    backgroundColor: '$radioIndicator',
+    backgroundColor: '$contentBg',
   },
 };
 
@@ -50,13 +50,15 @@ export const RADIO_BASE_STYLES = {
   color: '$hiContrast',
   boxShadow: 'inset 0 0 0 1px $colors$radioBorder',
   overflow: 'hidden',
+  '&[data-state=checked]': {
+    backgroundColor: '$radioIndicator',
+  },
 };
 const StyledRadio = styled(RadioGroupPrimitive.Item, RADIO_BASE_STYLES, {
   '@hover': {
     '&:hover': {
       cursor: 'pointer',
       boxShadow: 'inset 0 0 0 1px $colors$radioHoverBorder',
-      backgroundColor: '$radioHoverBg',
     },
   },
   '&:focus-visible': {
@@ -66,14 +68,16 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, RADIO_BASE_STYLES, {
 
   '&:disabled': {
     pointerEvents: 'none',
-    backgroundColor: '$radioDisabledBg',
     '&::placeholder': {
       color: '$radioDisabledText',
+    },
+    '&[data-state=checked]': {
+      backgroundColor: '$radioIndicatorDisabledBg',
     },
 
     [`& ${StyledIndicator}`]: {
       '&::after': {
-        backgroundColor: '$radioIndicatorDisabledBg',
+        backgroundColor: '$radioDisabledBg',
       },
     },
   },

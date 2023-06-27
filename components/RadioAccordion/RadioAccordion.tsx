@@ -46,25 +46,18 @@ const StyledRadio = styled('div', RADIO_BASE_STYLES, {
   width: 18,
   height: 18,
   mr: '$2',
-});
-
-const StyledIndicator = styled('div', INDICATOR_BASE_STYLES, {
-  '&::after': {
-    '[data-state=open] &': {
-      backgroundColor: '$radioIndicator',
-    },
-    '[data-state=closed] &': {
-      backgroundColor: 'transparent',
-    },
+  '[data-state=open] &': {
+    backgroundColor: '$radioIndicator',
   },
 });
+
+const StyledIndicator = styled('div', INDICATOR_BASE_STYLES);
 
 const StyledRadioAccordionTrigger = styled(StyledAccordionTrigger, {
   '@hover': {
     '&:hover': {
       [`& ${StyledRadio}`]: {
         boxShadow: 'inset 0 0 0 1px $colors$radioHoverBorder',
-        backgroundColor: '$radioHoverBg',
       },
     },
   },
