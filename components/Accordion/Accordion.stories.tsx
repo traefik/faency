@@ -1,10 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from '.';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { VariantProps } from '../../stitches.config';
-
+import { Dialog, DialogContent, DialogTrigger, DialogOverlay, DialogPortal } from '../Dialog';
 import { Badge } from '../Badge';
+import { Button } from '../Button';
 import { Text } from '../Text';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
@@ -140,3 +141,69 @@ const Customize: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) 
     </AccordionForStory>
   </Box>
 );
+
+export const InsideModal: ComponentStory<typeof AccordionForStory> = (args) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
+      <DialogTrigger asChild>
+        <Button onClick={() => setOpen(true)}>Open dialog</Button>
+      </DialogTrigger>
+
+      <Box>
+        {[...Array(10)].map((_, i) => (
+          <Text key={i} css={{ my: '$1' }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+            mollit anim id est laborum.
+          </Text>
+        ))}
+      </Box>
+
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogContent>
+          <Box css={{ width: 300, mt: '$5' }}>
+            <AccordionForStory {...args}>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  <Flex css={{ flexGrow: 1 }} align="center" justify="space-between">
+                    <Text>Title</Text>
+                    <Badge>Status</Badge>
+                    <Text>Metadata</Text>
+                  </Flex>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <Flex gap="2">
+                    <MagnifyingGlassIcon />
+                    <Text>More information</Text>
+                    <Text>Version</Text>
+                  </Flex>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>Item2 Trigger</AccordionTrigger>
+                <AccordionContent>Item2 Content</AccordionContent>
+              </AccordionItem>
+            </AccordionForStory>
+          </Box>
+        </DialogContent>
+      </DialogPortal>
+    </Dialog>
+  );
+};
+
+InsideModal.args = {
+  type: 'multiple',
+  collapsible: true,
+};
+InsideModal.argTypes = {
+  size: {
+    control: 'inline-radio',
+    options: ['small', 'medium', 'large'],
+  },
+};

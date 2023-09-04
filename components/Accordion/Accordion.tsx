@@ -95,7 +95,7 @@ const StyledAccordionChevron = styled(ChevronRightIcon, {
   mr: '$2',
   c: '$accordionText',
   transition: 'transform 200ms ease-out',
-  '[data-state=open] &': {
+  '[data-state=open] > &': {
     transform: 'rotateZ(90deg)',
   },
 });
