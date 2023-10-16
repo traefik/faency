@@ -556,3 +556,76 @@ export const VerticalAlignment: ComponentStory<any> = (args) => (
     </Tbody>
   </TableForStory>
 );
+
+export const CollapsibleRow: ComponentStory<any> = (args) => (
+  <TableForStory>
+    <Thead>
+      <Tr emptyFirstColumn tableHead>
+        <Th>Firstname</Th>
+        <Th>Lastname</Th>
+        <Th>Status</Th>
+        <Th>Role</Th>
+      </Tr>
+    </Thead>
+    <Tbody>
+      <Tr
+        collapsedContent={
+          <>
+            <Tr>
+              <Td>Extra info</Td>
+              <Td>Hello</Td>
+              <Td />
+              <Td />
+            </Tr>
+            <Tr>
+              <Td>Additional</Td>
+              <Td>Information</Td>
+              <Td>And more</Td>
+              <Td />
+            </Tr>
+          </>
+        }
+        {...args}
+      >
+        <Td>John</Td>
+        <Td>Doe</Td>
+        <Td>
+          <Badge variant="green">Connected</Badge>
+        </Td>
+        <Td>Developer</Td>
+      </Tr>
+      <Tr
+        collapsedContent={
+          <>
+            <Tr>
+              <Td>Only</Td>
+              <Td>One</Td>
+              <Td>Line</Td>
+              <Td />
+            </Tr>
+          </>
+        }
+        {...args}
+      >
+        <Td>Johny</Td>
+        <Td>Depp</Td>
+        <Td>
+          <Badge variant="orange">AFK</Badge>
+        </Td>
+        <Td>Actor</Td>
+      </Tr>
+      <Tr {...args} active emptyFirstColumn>
+        <Td>Natalie</Td>
+        <Td>Portman</Td>
+        <Td>
+          <Badge variant="green">Connected</Badge>
+        </Td>
+        <Td>Actor</Td>
+      </Tr>
+    </Tbody>
+  </TableForStory>
+);
+
+CollapsibleRow.args = {
+  interactive: true,
+};

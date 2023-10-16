@@ -179,7 +179,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
 
     return (
       <>
-        <StyledTr {...props}>
+        <StyledTr ref={ref} {...props}>
           {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
           {!!collapsedContent && (
             <Td>
