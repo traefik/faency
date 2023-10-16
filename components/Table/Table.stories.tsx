@@ -709,11 +709,17 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
           <Tr
             interactive={interactive}
             collapsedContent={
-              <Tr>
-                <Td />
-                <Td>Extra info</Td>
-                <Td colSpan={3}>Hello</Td>
-              </Tr>
+              <>
+                <Tr>
+                  <Td>Extra info</Td>
+                  <Td colSpan={3}>Hello</Td>
+                </Tr>
+                <Tr>
+                  <Td>Additional</Td>
+                  <Td>Information</Td>
+                  <Td colSpan={2}>And more</Td>
+                </Tr>
+              </>
             }
             {...makeSelectableRowProps(1)}
           >
@@ -724,14 +730,34 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
             </Td>
             <Td subtle>Developer</Td>
           </Tr>
-          <Tr interactive={interactive} {...makeSelectableRowProps(2)}>
-            <Td />
+          <Tr
+            interactive={interactive}
+            collapsedContent={
+              <>
+                <Tr>
+                  <Td>Only</Td>
+                  <Td>One</Td>
+                  <Td colSpan={2}>Line</Td>
+                </Tr>
+              </>
+            }
+            {...makeSelectableRowProps(2)}
+          >
             <Td>Johnny</Td>
             <Td>Depp</Td>
             <Td subtle>
               <Badge variant="orange">AFK</Badge>
             </Td>
             <Td subtle>Actor</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(3)}>
+            <Td />
+            <Td>Natalie</Td>
+            <Td>Portman</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td>Actor</Td>
           </Tr>
         </Tbody>
         <Tfoot>

@@ -126,26 +126,37 @@ const StyledTr = styled('tr', {
 });
 
 const RenderedCollapsedContent = ({ isOpen, children }) => {
+  return Children.map(children.props.children, (child) => {
+    return <AnimatedTr isOpen={isOpen}>{child}</AnimatedTr>;
+  });
+};
+
+const AnimatedTr = ({ isOpen, children }) => {
+  const appliedStyle = useMemo(
+    () =>
+      isOpen
+        ? { transition: 'padding 0.2s ease-out' }
+        : { transition: 'padding 0.2s ease-out', lineHeight: 0, fontSize: 0, padding: '0px 16px' },
+    [isOpen]
+  );
+
   const renderedChildren = useMemo(() => {
     return Children.map(children.props.children, (child) =>
       cloneElement(child, {
-        style: isOpen
-          ? {
-              ...child.props.style,
-              transition: 'padding 0.2s ease-out',
-            }
-          : {
-              ...child.props.style,
-              transition: 'padding 0.2s ease-out',
-              lineHeight: 0,
-              fontSize: 0,
-              padding: '0px 16px',
-            },
+        style: {
+          ...child.props.style,
+          ...appliedStyle,
+        },
       })
     );
-  }, [isOpen, children]);
+  }, [children, isOpen]);
 
-  return <Tr>{renderedChildren}</Tr>;
+  return (
+    <Tr>
+      <Td css={appliedStyle} />
+      {renderedChildren}
+    </Tr>
+  );
 };
 
 export const Tr = ({
