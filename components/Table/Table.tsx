@@ -162,10 +162,14 @@ const AnimatedTr = ({ isOpen, children }) => {
 export const Tr = ({
   children,
   collapsedContent,
+  emptyFirstColumn = false,
+  tableHead = false,
   ...props
 }: VariantProps<typeof StyledTr> & {
   children: React.ReactNode;
   collapsedContent?: React.ReactNode;
+  emptyFirstColumn?: boolean;
+  tableHead?: boolean;
   css?: CSS;
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -173,6 +177,7 @@ export const Tr = ({
   return (
     <>
       <StyledTr {...props}>
+        {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
         {!!collapsedContent && (
           <Td>
             <Box

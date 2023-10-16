@@ -697,8 +697,7 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
     <Flex direction="column" gap="4">
       <TableForStory {...args}>
         <Thead>
-          <Tr>
-            <Th css={{ width: 18 }} />
+          <Tr emptyFirstColumn tableHead>
             <Th>First name</Th>
             <Th>Last name</Th>
             <Th>Status</Th>
@@ -750,8 +749,7 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
             </Td>
             <Td subtle>Actor</Td>
           </Tr>
-          <Tr interactive={interactive} {...makeSelectableRowProps(3)}>
-            <Td />
+          <Tr emptyFirstColumn interactive={interactive} {...makeSelectableRowProps(3)}>
             <Td>Natalie</Td>
             <Td>Portman</Td>
             <Td>
