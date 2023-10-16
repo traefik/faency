@@ -682,3 +682,77 @@ const Customize: ComponentStory<any> = (args) => (
     </Tfoot>
   </TableForStory>
 );
+
+export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) => {
+  const [selectedRow, setSelectedRow] = useState(3);
+  const makeSelectableRowProps = useCallback(
+    (rowNum: number) => ({
+      active: selectedRow === rowNum,
+      onClick: () => setSelectedRow(rowNum),
+    }),
+    [selectedRow, setSelectedRow]
+  );
+
+  return (
+    <Flex direction="column" gap="4">
+      <TableForStory {...args}>
+        <Thead>
+          <Tr>
+            <Th css={{ width: 18 }} />
+            <Th>First name</Th>
+            <Th>Last name</Th>
+            <Th>Status</Th>
+            <Th>Role</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr
+            interactive={interactive}
+            collapsedContent={
+              <Tr>
+                <Td />
+                <Td>Extra info</Td>
+                <Td colSpan={3}>Hello</Td>
+              </Tr>
+            }
+            {...makeSelectableRowProps(1)}
+          >
+            <Td>John</Td>
+            <Td>Doe</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td subtle>Developer</Td>
+          </Tr>
+          <Tr interactive={interactive} {...makeSelectableRowProps(2)}>
+            <Td />
+            <Td>Johnny</Td>
+            <Td>Depp</Td>
+            <Td subtle>
+              <Badge variant="orange">AFK</Badge>
+            </Td>
+            <Td subtle>Actor</Td>
+          </Tr>
+        </Tbody>
+        <Tfoot>
+          <Tr>
+            <Td colSpan={5} css={{ textAlign: 'center' }}>
+              <Button
+                ghost
+                variant="secondary"
+                css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
+              >
+                Load more...
+              </Button>
+            </Td>
+          </Tr>
+        </Tfoot>
+      </TableForStory>
+    </Flex>
+  );
+};
+
+CollapsibleRow.args = {
+  interactive: true,
+  elevation: '1',
+};

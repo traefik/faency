@@ -1,7 +1,11 @@
+import { ChevronDownIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { CSS, keyframes } from '@stitches/react';
+import { Children, cloneElement, useState, useMemo } from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { Label } from '../Label';
 import { Text } from '../Text';
+import { Box } from '../Box';
 
 export const Caption = styled('caption', Text, {
   display: 'table-caption',
@@ -82,7 +86,7 @@ export const Td = styled('td', {
   },
 });
 
-export const Tr = styled('tr', {
+const StyledTr = styled('tr', {
   verticalAlign: 'inherit',
   '&:hover': {
     color: '$tableHoverText',
@@ -120,6 +124,71 @@ export const Tr = styled('tr', {
     },
   ],
 });
+
+const RenderedCollapsedContent = ({ isOpen, children }) => {
+  const renderedChildren = useMemo(() => {
+    return Children.map(children.props.children, (child) =>
+      cloneElement(child, {
+        style: isOpen
+          ? {
+              ...child.props.style,
+              transition: 'padding 0.2s ease-out',
+            }
+          : {
+              ...child.props.style,
+              transition: 'padding 0.2s ease-out',
+              lineHeight: 0,
+              fontSize: 0,
+              padding: '0px 16px',
+            },
+      })
+    );
+  }, [isOpen, children]);
+
+  return <Tr>{renderedChildren}</Tr>;
+};
+
+export const Tr = ({
+  children,
+  collapsedContent,
+  ...props
+}: VariantProps<typeof StyledTr> & {
+  children: React.ReactNode;
+  collapsedContent?: React.ReactNode;
+  css?: CSS;
+}) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  return (
+    <>
+      <StyledTr {...props}>
+        {!!collapsedContent && (
+          <Td>
+            <Box
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            >
+              <ChevronRightIcon
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                style={{
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease-out',
+                  transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                }}
+              />
+            </Box>
+          </Td>
+        )}
+        {children}
+      </StyledTr>
+      {!!collapsedContent && (
+        <RenderedCollapsedContent isOpen={isCollapsed}>{collapsedContent}</RenderedCollapsedContent>
+      )}
+    </>
+  );
+};
 
 export const Tfoot = styled('tfoot', {
   verticalAlign: 'middle',
