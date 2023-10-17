@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import {
+import React, {
   Children,
   cloneElement,
   useState,
