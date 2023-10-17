@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Table,
   TableProps,
@@ -166,52 +166,63 @@ Alignment.args = {
   align: 'start',
 };
 
-export const Interactive: ComponentStory<any> = (args) => (
-  <TableForStory>
-    <Thead>
-      <Tr>
-        <Th>Firstname</Th>
-        <Th>Lastname</Th>
-        <Th>Status</Th>
-        <Th>Role</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr {...args}>
-        <Td>John</Td>
-        <Td>Doe</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Developer</Td>
-      </Tr>
-      <Tr {...args}>
-        <Td>Johny</Td>
-        <Td>Depp</Td>
-        <Td>
-          <Badge variant="orange">AFK</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr {...args} active>
-        <Td>Natalie</Td>
-        <Td>Portman</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr {...args}>
-        <Td>Luke</Td>
-        <Td>Skywalker</Td>
-        <Td>
-          <Badge variant="red">Disconnected</Badge>
-        </Td>
-        <Td>Star Wars</Td>
-      </Tr>
-    </Tbody>
-  </TableForStory>
-);
+export const Interactive: ComponentStory<any> = (args) => {
+  const [selectedRow, setSelectedRow] = useState(3);
+  const makeSelectableRowProps = useCallback(
+    (rowNum: number) => ({
+      active: selectedRow === rowNum,
+      onClick: () => setSelectedRow(rowNum),
+    }),
+    [selectedRow, setSelectedRow]
+  );
+
+  return (
+    <TableForStory>
+      <Thead>
+        <Tr>
+          <Th>Firstname</Th>
+          <Th>Lastname</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr {...args} {...makeSelectableRowProps(1)}>
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr {...args} {...makeSelectableRowProps(2)}>
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr {...args} {...makeSelectableRowProps(3)}>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr {...args} {...makeSelectableRowProps(4)}>
+          <Td>Luke</Td>
+          <Td>Skywalker</Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
+          <Td>Star Wars</Td>
+        </Tr>
+      </Tbody>
+    </TableForStory>
+  );
+};
 
 Interactive.args = {
   interactive: true,
@@ -557,74 +568,87 @@ export const VerticalAlignment: ComponentStory<any> = (args) => (
   </TableForStory>
 );
 
-export const CollapsibleRow: ComponentStory<any> = (args) => (
-  <TableForStory>
-    <Thead>
-      <Tr emptyFirstColumn tableHead>
-        <Th>Firstname</Th>
-        <Th>Lastname</Th>
-        <Th>Status</Th>
-        <Th>Role</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr
-        collapsedContent={
-          <>
-            <Tr>
-              <Td>Extra info</Td>
-              <Td>Hello</Td>
-              <Td />
-              <Td />
-            </Tr>
-            <Tr>
-              <Td>Additional</Td>
-              <Td>Information</Td>
-              <Td>And more</Td>
-              <Td />
-            </Tr>
-          </>
-        }
-        {...args}
-      >
-        <Td>John</Td>
-        <Td>Doe</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Developer</Td>
-      </Tr>
-      <Tr
-        collapsedContent={
-          <>
-            <Tr>
-              <Td>Only</Td>
-              <Td>One</Td>
-              <Td>Line</Td>
-              <Td />
-            </Tr>
-          </>
-        }
-        {...args}
-      >
-        <Td>Johny</Td>
-        <Td>Depp</Td>
-        <Td>
-          <Badge variant="orange">AFK</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr {...args} active emptyFirstColumn>
-        <Td>Natalie</Td>
-        <Td>Portman</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-    </Tbody>
-  </TableForStory>
-);
+export const CollapsibleRow: ComponentStory<any> = (args) => {
+  const [selectedRow, setSelectedRow] = useState(3);
+  const makeSelectableRowProps = useCallback(
+    (rowNum: number) => ({
+      active: selectedRow === rowNum,
+      onClick: () => setSelectedRow(rowNum),
+    }),
+    [selectedRow, setSelectedRow]
+  );
+
+  return (
+    <TableForStory>
+      <Thead>
+        <Tr emptyFirstColumn tableHead>
+          <Th>Firstname</Th>
+          <Th>Lastname</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr
+          collapsedContent={
+            <>
+              <Tr>
+                <Td>Extra info</Td>
+                <Td>Hello</Td>
+                <Td />
+                <Td />
+              </Tr>
+              <Tr>
+                <Td>Additional</Td>
+                <Td>Information</Td>
+                <Td>And more</Td>
+                <Td />
+              </Tr>
+            </>
+          }
+          {...makeSelectableRowProps(1)}
+          {...args}
+        >
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr
+          collapsedContent={
+            <>
+              <Tr>
+                <Td>Only</Td>
+                <Td>One</Td>
+                <Td>Line</Td>
+                <Td />
+              </Tr>
+            </>
+          }
+          {...makeSelectableRowProps(2)}
+          {...args}
+        >
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr {...args} {...makeSelectableRowProps(3)} emptyFirstColumn>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+      </Tbody>
+    </TableForStory>
+  );
+};
 
 CollapsibleRow.args = {
   interactive: true,
