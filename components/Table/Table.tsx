@@ -144,7 +144,13 @@ const AnimatedTr = ({ isOpen, children }) => {
     () =>
       isOpen
         ? { transition: 'padding 0.2s ease-out' }
-        : { transition: 'padding 0.2s ease-out', lineHeight: 0, fontSize: 0, padding: '0px 16px' },
+        : {
+            transition: 'padding 0.2s ease-out',
+            lineHeight: 0,
+            fontSize: 0,
+            padding: '0px 16px',
+            border: 'none',
+          },
     [isOpen]
   );
 
