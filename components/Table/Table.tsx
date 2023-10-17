@@ -1,5 +1,4 @@
-import { ChevronDownIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { CSS, keyframes } from '@stitches/react';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 import {
   Children,
   cloneElement,
@@ -8,6 +7,7 @@ import {
   forwardRef,
   ElementRef,
   ComponentProps,
+  ElementType,
 } from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
@@ -133,13 +133,36 @@ export const StyledTr = styled('tr', {
   ],
 });
 
-const RenderedCollapsedContent = ({ isOpen, children }) => {
+type CollapsedContentProps = {
+  isOpen: boolean;
+  TrComponent: ElementType;
+  TdComponent?: ElementType;
+  children: any;
+};
+
+export const RenderedCollapsedContent = ({
+  isOpen,
+  children,
+  TrComponent,
+  TdComponent = Td,
+}: CollapsedContentProps) => {
   return Children.map(children.props.children, (child) => {
-    return <AnimatedTr isOpen={isOpen}>{child}</AnimatedTr>;
+    return (
+      <AnimatedTr isOpen={isOpen} TrComponent={TrComponent} TdComponent={TdComponent}>
+        {child}
+      </AnimatedTr>
+    );
   });
 };
 
-const AnimatedTr = ({ isOpen, children }) => {
+const AnimatedTr = ({
+  isOpen,
+  TrComponent,
+  TdComponent,
+  children,
+}: CollapsedContentProps & {
+  TdComponent: ElementType;
+}) => {
   const appliedStyle = useMemo(
     () =>
       isOpen
@@ -166,10 +189,10 @@ const AnimatedTr = ({ isOpen, children }) => {
   }, [children, isOpen]);
 
   return (
-    <Tr>
-      <Td css={appliedStyle} />
+    <TrComponent>
+      <TdComponent css={appliedStyle} />
       {renderedChildren}
-    </Tr>
+    </TrComponent>
   );
 };
 export interface TrProps extends ComponentProps<typeof StyledTr>, VariantProps<typeof StyledTr> {
@@ -209,7 +232,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           {children}
         </StyledTr>
         {!!collapsedContent && (
-          <RenderedCollapsedContent isOpen={isCollapsed}>
+          <RenderedCollapsedContent isOpen={isCollapsed} TrComponent={Tr}>
             {collapsedContent}
           </RenderedCollapsedContent>
         )}

@@ -1,5 +1,4 @@
 import React, {
-  cloneElement,
   ComponentProps,
   ElementRef,
   forwardRef,
@@ -19,6 +18,7 @@ import {
   Td as TableTd,
   Thead as TableThead,
   Table as TableTable,
+  RenderedCollapsedContent,
 } from '../Table';
 import merge from 'lodash.merge';
 import { Box } from '../Box';
@@ -49,49 +49,6 @@ const StyledTr = styled('div', TableTr, {
 });
 const StyledTrSlot = styled(Slot, StyledTr);
 
-const RenderedCollapsedContent = ({ isOpen, UsedComponent, children }) => {
-  return Children.map(children.props.children, (child) => {
-    return (
-      <AnimatedTr isOpen={isOpen} UsedComponent={UsedComponent}>
-        {child}
-      </AnimatedTr>
-    );
-  });
-};
-
-const AnimatedTr = ({ isOpen, UsedComponent, children }) => {
-  const appliedStyle = useMemo(
-    () =>
-      isOpen
-        ? { transition: 'padding 0.2s ease-out' }
-        : {
-            transition: 'padding 0.2s ease-out',
-            lineHeight: 0,
-            fontSize: 0,
-            padding: '0px 16px',
-            border: 'none',
-          },
-    [isOpen]
-  );
-
-  const renderedChildren = useMemo(() => {
-    return Children.map(children.props.children, (child) =>
-      cloneElement(child, {
-        style: {
-          ...child.props.style,
-          ...appliedStyle,
-        },
-      })
-    );
-  }, [children, isOpen]);
-
-  return (
-    <UsedComponent>
-      <Td css={appliedStyle} />
-      {renderedChildren}
-    </UsedComponent>
-  );
-};
 export interface TrProps
   extends Omit<ComponentProps<typeof StyledTr>, 'css'>,
     VariantProps<typeof StyledTr> {
@@ -146,7 +103,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           {children}
         </Component>
         {!!collapsedContent && (
-          <RenderedCollapsedContent isOpen={isCollapsed} UsedComponent={Component}>
+          <RenderedCollapsedContent isOpen={isCollapsed} TrComponent={Component} TdComponent={Td}>
             {collapsedContent}
           </RenderedCollapsedContent>
         )}
