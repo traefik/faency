@@ -1,7 +1,5 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import React, {
-  Children,
-  cloneElement,
   useState,
   useMemo,
   forwardRef,
@@ -140,29 +138,7 @@ type CollapsedContentProps = {
   children: any;
 };
 
-export const RenderedCollapsedContent = ({
-  isOpen,
-  children,
-  TrComponent,
-  TdComponent = Td,
-}: CollapsedContentProps) => {
-  return Children.map(children.props.children, (child) => {
-    return (
-      <AnimatedTr isOpen={isOpen} TrComponent={TrComponent} TdComponent={TdComponent}>
-        {child}
-      </AnimatedTr>
-    );
-  });
-};
-
-const AnimatedTr = ({
-  isOpen,
-  TrComponent,
-  TdComponent,
-  children,
-}: CollapsedContentProps & {
-  TdComponent: ElementType;
-}) => {
+const AnimatedTr = ({ collapsedContentColSpan, isOpen, children }) => {
   const appliedStyle = useMemo(
     () =>
       isOpen
@@ -177,22 +153,26 @@ const AnimatedTr = ({
     [isOpen]
   );
 
-  const renderedChildren = useMemo(() => {
-    return Children.map(children.props.children, (child) =>
-      cloneElement(child, {
-        style: {
-          ...child.props.style,
-          ...appliedStyle,
-        },
-      })
-    );
-  }, [children, isOpen]);
+  const containerStyle = useMemo(
+    () =>
+      isOpen
+        ? { transition: 'all 0.2s ease-out' }
+        : {
+            transition: 'all 0.2s ease-out',
+            height: 0,
+            overflow: 'hidden',
+            display: 'none',
+            opacity: 0,
+          },
+    [isOpen]
+  );
 
   return (
-    <TrComponent>
-      <TdComponent css={appliedStyle} />
-      {renderedChildren}
-    </TrComponent>
+    <Tr>
+      <Td colSpan={collapsedContentColSpan} css={appliedStyle}>
+        <Box css={containerStyle}>{children}</Box>
+      </Td>
+    </Tr>
   );
 };
 export interface TrProps extends ComponentProps<typeof StyledTr>, VariantProps<typeof StyledTr> {
@@ -200,10 +180,21 @@ export interface TrProps extends ComponentProps<typeof StyledTr>, VariantProps<t
   collapsedContent?: React.ReactNode;
   emptyFirstColumn?: boolean;
   tableHead?: boolean;
+  collapsedContentColSpan?: number;
 }
 
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
-  ({ children, collapsedContent, emptyFirstColumn = false, tableHead = false, ...props }, ref) => {
+  (
+    {
+      children,
+      collapsedContent,
+      emptyFirstColumn = false,
+      tableHead = false,
+      collapsedContentColSpan = 1,
+      ...props
+    },
+    ref
+  ) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
@@ -232,9 +223,9 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           {children}
         </StyledTr>
         {!!collapsedContent && (
-          <RenderedCollapsedContent isOpen={isCollapsed} TrComponent={Tr}>
+          <AnimatedTr isOpen={isCollapsed} collapsedContentColSpan={collapsedContentColSpan}>
             {collapsedContent}
-          </RenderedCollapsedContent>
+          </AnimatedTr>
         )}
       </>
     );

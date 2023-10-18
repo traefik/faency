@@ -19,6 +19,10 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { Button } from '../Button';
 
+import { VerticalAlignment as AriaTableStory } from '../AriaTable/AriaTable.stories';
+import { Box } from '../Box';
+import { Text } from '../Text';
+
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
 
@@ -707,19 +711,8 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
         <Tbody>
           <Tr
             interactive={interactive}
-            collapsedContent={
-              <>
-                <Tr>
-                  <Td>Extra info</Td>
-                  <Td colSpan={3}>Hello</Td>
-                </Tr>
-                <Tr>
-                  <Td>Additional</Td>
-                  <Td>Information</Td>
-                  <Td colSpan={2}>And more</Td>
-                </Tr>
-              </>
-            }
+            collapsedContent={<AriaTableStory />}
+            collapsedContentColSpan={5}
             {...makeSelectableRowProps(1)}
           >
             <Td>John</Td>
@@ -732,14 +725,11 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
           <Tr
             interactive={interactive}
             collapsedContent={
-              <>
-                <Tr>
-                  <Td>Only</Td>
-                  <Td>One</Td>
-                  <Td colSpan={2}>Line</Td>
-                </Tr>
-              </>
+              <Text>
+                This is an additional description of this row above. It could be anything.
+              </Text>
             }
+            collapsedContentColSpan={5}
             {...makeSelectableRowProps(2)}
           >
             <Td>Johnny</Td>
