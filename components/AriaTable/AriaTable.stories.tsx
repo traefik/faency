@@ -15,7 +15,6 @@ import {
 import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
-import { Box } from '../Box';
 import { UnstyledLink } from '../Link';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Image } from '../Image';
@@ -591,20 +590,9 @@ export const CollapsibleRow: ComponentStory<any> = (args) => {
       <Tbody>
         <Tr
           collapsedContent={
-            <>
-              <Tr>
-                <Td>Extra info</Td>
-                <Td>Hello</Td>
-                <Td />
-                <Td />
-              </Tr>
-              <Tr>
-                <Td>Additional</Td>
-                <Td>Information</Td>
-                <Td>And more</Td>
-                <Td />
-              </Tr>
-            </>
+            <Flex>
+              <Text>I'm a text!!</Text>
+            </Flex>
           }
           {...makeSelectableRowProps(1)}
           {...args}
@@ -616,20 +604,7 @@ export const CollapsibleRow: ComponentStory<any> = (args) => {
           </Td>
           <Td>Developer</Td>
         </Tr>
-        <Tr
-          collapsedContent={
-            <>
-              <Tr>
-                <Td>Only</Td>
-                <Td>One</Td>
-                <Td>Line</Td>
-                <Td />
-              </Tr>
-            </>
-          }
-          {...makeSelectableRowProps(2)}
-          {...args}
-        >
+        <Tr collapsedContent={<VerticalAlignment />} {...makeSelectableRowProps(2)} {...args}>
           <Td>Johny</Td>
           <Td>Depp</Td>
           <Td>

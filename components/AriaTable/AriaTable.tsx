@@ -18,7 +18,6 @@ import {
   Td as TableTd,
   Thead as TableThead,
   Table as TableTable,
-  RenderedCollapsedContent,
 } from '../Table';
 import merge from 'lodash.merge';
 import { Box } from '../Box';
@@ -48,6 +47,50 @@ const StyledTr = styled('div', TableTr, {
   display: 'table-row',
 });
 const StyledTrSlot = styled(Slot, StyledTr);
+
+const AnimatedContainer = ({ isOpen, children, TrComponent }) => {
+  const appliedStyle = useMemo(
+    () =>
+      isOpen
+        ? {
+            transition: 'all 0.2s ease-out',
+            paddingBottom: 0,
+            paddingTop: 0,
+            borderBottom: '1px solid $tableRowBorder',
+          }
+        : {
+            transition: 'all 0.2s ease-out',
+            padding: '0px 16px',
+            pointerEvents: 'none',
+          },
+    [isOpen]
+  );
+
+  const containerStyle = useMemo(
+    () =>
+      isOpen
+        ? {
+            transition: 'all 0.2s ease-out',
+            padding: '16px',
+            paddingBottom: 0,
+          }
+        : {
+            transition: 'all 0.2s ease-out',
+            height: 0,
+            overflow: 'hidden',
+            padding: '0px 16px',
+          },
+    [isOpen]
+  );
+
+  return (
+    <TrComponent>
+      <Td css={appliedStyle} fullColSpan>
+        <Box css={containerStyle}>{children}</Box>
+      </Td>
+    </TrComponent>
+  );
+};
 
 export interface TrProps
   extends Omit<ComponentProps<typeof StyledTr>, 'css'>,
@@ -103,9 +146,9 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           {children}
         </Component>
         {!!collapsedContent && (
-          <RenderedCollapsedContent isOpen={isCollapsed} TrComponent={Component} TdComponent={Td}>
+          <AnimatedContainer isOpen={isCollapsed} TrComponent={Component}>
             {collapsedContent}
-          </RenderedCollapsedContent>
+          </AnimatedContainer>
         )}
       </>
     );

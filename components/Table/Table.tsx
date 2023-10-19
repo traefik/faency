@@ -12,6 +12,7 @@ import { elevationVariants } from '../Elevation';
 import { Label } from '../Label';
 import { Text } from '../Text';
 import { Box } from '../Box';
+import { Flex } from '../Flex';
 
 export const Caption = styled('caption', Text, {
   display: 'table-caption',
@@ -131,13 +132,6 @@ export const StyledTr = styled('tr', {
   ],
 });
 
-type CollapsedContentProps = {
-  isOpen: boolean;
-  TrComponent: ElementType;
-  TdComponent?: ElementType;
-  children: any;
-};
-
 const AnimatedTr = ({ collapsedContentColSpan, isOpen, children }) => {
   const appliedStyle = useMemo(
     () =>
@@ -161,8 +155,6 @@ const AnimatedTr = ({ collapsedContentColSpan, isOpen, children }) => {
             transition: 'all 0.2s ease-out',
             height: 0,
             overflow: 'hidden',
-            display: 'none',
-            opacity: 0,
           },
     [isOpen]
   );
@@ -203,7 +195,8 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
           {!!collapsedContent && (
             <Td>
-              <Box
+              <Flex
+                align="center"
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
@@ -217,7 +210,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                     transform: isCollapsed ? 'rotate(90deg)' : 'initial',
                   }}
                 />
-              </Box>
+              </Flex>
             </Td>
           )}
           {children}
