@@ -588,15 +588,7 @@ export const CollapsibleRow: ComponentStory<any> = (args) => {
         </Tr>
       </Thead>
       <Tbody>
-        <Tr
-          collapsedContent={
-            <Flex>
-              <Text>I'm a text!!</Text>
-            </Flex>
-          }
-          {...makeSelectableRowProps(1)}
-          {...args}
-        >
+        <Tr emptyFirstColumn {...makeSelectableRowProps(1)} {...args}>
           <Td>John</Td>
           <Td>Doe</Td>
           <Td>
@@ -612,7 +604,15 @@ export const CollapsibleRow: ComponentStory<any> = (args) => {
           </Td>
           <Td>Actor</Td>
         </Tr>
-        <Tr {...args} {...makeSelectableRowProps(3)} emptyFirstColumn>
+        <Tr
+          collapsedContent={
+            <Flex>
+              <Text>I'm a text!!</Text>
+            </Flex>
+          }
+          {...args}
+          {...makeSelectableRowProps(3)}
+        >
           <Td>Natalie</Td>
           <Td>Portman</Td>
           <Td>

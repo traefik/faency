@@ -688,7 +688,7 @@ const Customize: ComponentStory<any> = (args) => (
 );
 
 export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) => {
-  const [selectedRow, setSelectedRow] = useState(3);
+  const [selectedRow, setSelectedRow] = useState(1);
   const makeSelectableRowProps = useCallback(
     (rowNum: number) => ({
       active: selectedRow === rowNum,
@@ -709,12 +709,7 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
           </Tr>
         </Thead>
         <Tbody>
-          <Tr
-            interactive={interactive}
-            collapsedContent={<AriaTableStory />}
-            collapsedContentColSpan={5}
-            {...makeSelectableRowProps(1)}
-          >
+          <Tr emptyFirstColumn interactive={interactive} {...makeSelectableRowProps(1)}>
             <Td>John</Td>
             <Td>Doe</Td>
             <Td>
@@ -739,13 +734,18 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
             </Td>
             <Td subtle>Actor</Td>
           </Tr>
-          <Tr emptyFirstColumn interactive={interactive} {...makeSelectableRowProps(3)}>
+          <Tr
+            collapsedContent={<AriaTableStory />}
+            collapsedContentColSpan={5}
+            interactive={interactive}
+            {...makeSelectableRowProps(3)}
+          >
             <Td>Natalie</Td>
             <Td>Portman</Td>
             <Td>
               <Badge variant="green">Connected</Badge>
             </Td>
-            <Td>Actor</Td>
+            <Td subtle>Actor</Td>
           </Tr>
         </Tbody>
         <Tfoot>
