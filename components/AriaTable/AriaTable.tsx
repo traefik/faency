@@ -66,12 +66,13 @@ const AnimatedContainer = ({
             transition: 'all 0.2s ease-out',
             paddingBottom: 0,
             paddingTop: 0,
-            borderBottom: '1px solid $tableRowBorder',
+            border: 'none',
           }
         : {
             transition: 'all 0.2s ease-out',
             padding: '0px 16px',
             pointerEvents: 'none',
+            border: 'none',
           },
     [isOpen]
   );
@@ -94,7 +95,7 @@ const AnimatedContainer = ({
   );
 
   return (
-    <TrComponent>
+    <TrComponent css={isOpen ? { borderBottom: '1px solid $tableRowBorder' } : {}}>
       <Td css={appliedStyle} fullColSpan>
         <Box css={containerStyle}>{children}</Box>
       </Td>
@@ -230,8 +231,16 @@ const StyledTable = styled('div', TableTable, {
 });
 export const Table = forwardRef<
   ElementRef<typeof StyledTable>,
-  Omit<ComponentProps<typeof StyledTable>, 'css'> & VariantProps<typeof StyledTable> & { css?: CSS }
->((props, ref) => <StyledTable ref={ref} role="table" {...props} />);
+  Omit<ComponentProps<typeof StyledTable>, 'css'> &
+    VariantProps<typeof StyledTable> & { css?: CSS; hasCollapsibleChildren?: boolean }
+>(({ hasCollapsibleChildren, css, ...props }, ref) => (
+  <StyledTable
+    ref={ref}
+    role="table"
+    css={hasCollapsibleChildren ? { borderCollapse: 'collapse', ...css } : css}
+    {...props}
+  />
+));
 
 export type TableVariants = VariantProps<typeof Table>;
 export type TableProps = TableVariants & {};
