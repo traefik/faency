@@ -1,12 +1,5 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import React, {
-  useState,
-  useMemo,
-  forwardRef,
-  ElementRef,
-  ComponentProps,
-  ElementType,
-} from 'react';
+import React, { useState, useMemo, forwardRef, ElementRef, ComponentProps, ReactNode } from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { Label } from '../Label';
@@ -132,7 +125,15 @@ export const StyledTr = styled('tr', {
   ],
 });
 
-const AnimatedTr = ({ collapsedContentColSpan, isOpen, children }) => {
+const AnimatedTr = ({
+  collapsedContentColSpan,
+  isOpen,
+  children,
+}: {
+  collapsedContentColSpan: number;
+  isOpen: boolean;
+  children: ReactNode;
+}) => {
   const appliedStyle = useMemo(
     () =>
       isOpen

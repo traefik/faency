@@ -6,6 +6,8 @@ import React, {
   Children,
   isValidElement,
   useState,
+  ReactNode,
+  ElementType,
 } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { styled, VariantProps, CSS } from '../../stitches.config';
@@ -48,7 +50,15 @@ const StyledTr = styled('div', TableTr, {
 });
 const StyledTrSlot = styled(Slot, StyledTr);
 
-const AnimatedContainer = ({ isOpen, children, TrComponent }) => {
+const AnimatedContainer = ({
+  isOpen,
+  children,
+  TrComponent,
+}: {
+  isOpen: boolean;
+  children: ReactNode;
+  TrComponent: ElementType;
+}) => {
   const appliedStyle = useMemo(
     () =>
       isOpen
