@@ -7,7 +7,7 @@ import React, {
   isValidElement,
   useState,
   ReactNode,
-  ElementType,
+  cloneElement,
 } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { styled, VariantProps, CSS } from '../../stitches.config';
@@ -50,15 +50,7 @@ const StyledTr = styled('div', TableTr, {
 });
 const StyledTrSlot = styled(Slot, StyledTr);
 
-const AnimatedContainer = ({
-  isOpen,
-  children,
-  TrComponent,
-}: {
-  isOpen: boolean;
-  children: ReactNode;
-  TrComponent: ElementType;
-}) => {
+const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: ReactNode }) => {
   const appliedStyle = useMemo(
     () =>
       isOpen
@@ -95,11 +87,11 @@ const AnimatedContainer = ({
   );
 
   return (
-    <TrComponent css={isOpen ? { borderBottom: '1px solid $tableRowBorder' } : {}}>
+    <StyledTr css={isOpen ? { borderBottom: '1px solid $tableRowBorder' } : {}}>
       <Td css={appliedStyle} fullColSpan>
         <Box css={containerStyle}>{children}</Box>
       </Td>
-    </TrComponent>
+    </StyledTr>
   );
 };
 
@@ -131,35 +123,48 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       }
     }
 
+    const renderedChildren = useMemo(() => {
+      if (asChild) {
+        return Children.map(children, (child) =>
+          cloneElement(child as any, {
+            // @ts-ignore: Object is possibly 'null'.
+            style: { ...child.props.style, display: 'table-row' },
+          })
+        );
+      }
+
+      return children;
+    }, [asChild]);
+
     return (
       <>
         <Component ref={ref} role="row" {...props}>
-          {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
-          {!!collapsedContent && (
-            <Td>
-              <Box
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                }}
-              >
-                <ChevronRightIcon
-                  onClick={() => setIsCollapsed(!isCollapsed)}
-                  style={{
-                    cursor: 'pointer',
-                    transition: 'transform 0.2s ease-out',
-                    transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+          <>
+            {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
+            {!!collapsedContent && (
+              <Td>
+                <Box
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
                   }}
-                />
-              </Box>
-            </Td>
-          )}
-          {children}
+                >
+                  <ChevronRightIcon
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    style={{
+                      cursor: 'pointer',
+                      transition: 'transform 0.2s ease-out',
+                      transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                    }}
+                  />
+                </Box>
+              </Td>
+            )}
+            {renderedChildren}
+          </>
         </Component>
         {!!collapsedContent && (
-          <AnimatedContainer isOpen={isCollapsed} TrComponent={Component}>
-            {collapsedContent}
-          </AnimatedContainer>
+          <AnimatedContainer isOpen={isCollapsed}>{collapsedContent}</AnimatedContainer>
         )}
       </>
     );
