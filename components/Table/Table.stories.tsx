@@ -748,19 +748,6 @@ export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) =>
             <Td subtle>Actor</Td>
           </Tr>
         </Tbody>
-        <Tfoot>
-          <Tr>
-            <Td colSpan={5} css={{ textAlign: 'center' }}>
-              <Button
-                ghost
-                variant="secondary"
-                css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
-              >
-                Load more...
-              </Button>
-            </Td>
-          </Tr>
-        </Tfoot>
       </TableForStory>
     </Flex>
   );

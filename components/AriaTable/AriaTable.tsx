@@ -87,7 +87,9 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
   );
 
   return (
-    <StyledTr css={isOpen ? { borderBottom: '1px solid $tableRowBorder' } : {}}>
+    <StyledTr
+      css={isOpen ? { '&:not(:last-child)': { borderBottom: '1px solid $tableRowBorder' } } : {}}
+    >
       <Td css={appliedStyle} fullColSpan>
         <Box css={containerStyle}>{children}</Box>
       </Td>
@@ -105,7 +107,7 @@ export interface TrProps
   css?: CSS;
 }
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
-  ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, ...props }, ref) => {
+  ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, css, ...props }, ref) => {
     const Component = asChild ? StyledTrSlot : StyledTr;
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -159,10 +161,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           children as any,
           {
             // @ts-ignore: Object is possibly 'null'.
-            style: { ...children.props.style, display: 'table-row' },
+            style: { ...children?.props?.style, display: 'table-row' },
           },
           // @ts-ignore: Object is possibly 'null'.
-          [TdEl, ...children.props.children]
+          [TdEl, ...children?.props?.children]
         );
       }
 
@@ -172,11 +174,25 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           {children}
         </>
       );
-    }, [asChild, TdEl]);
+    }, [asChild, TdEl, children]);
 
     return (
       <>
-        <Component ref={ref} role="row" {...props}>
+        <Component
+          ref={ref}
+          role="row"
+          css={
+            !!collapsedContent && !isCollapsed
+              ? {
+                  ...css,
+                  [`&:nth-last-child(2) span`]: {
+                    borderBottom: 'none',
+                  },
+                }
+              : { ...css }
+          }
+          {...props}
+        >
           {renderedChildren}
         </Component>
         {!!collapsedContent && (

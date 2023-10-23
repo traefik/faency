@@ -228,7 +228,7 @@ Interactive.args = {
 };
 
 export const Links: ComponentStory<any> = (args) => (
-  <TableForStory aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
+  <Table hasCollapsibleChildren aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
     <Caption id="empty-table-caption">Table with empty data</Caption>
     <Thead>
       <Tr emptyFirstColumn tableHead>
@@ -239,25 +239,35 @@ export const Links: ComponentStory<any> = (args) => (
       </Tr>
     </Thead>
     <Tbody>
-      <Tr interactive asChild emptyFirstColumn>
+      <Tr
+        interactive
+        asChild
+        collapsedContent={
+          <Flex>
+            <Text>Additional description for this row.</Text>
+          </Flex>
+        }
+      >
         <UnstyledLink href="https://traefik.io" target="_blank">
-          <Td>John</Td>
-          <Td>Doe</Td>
+          <Td>Johnny</Td>
+          <Td>Depp</Td>
           <Td>
             <Badge variant="green">Connected</Badge>
           </Td>
           <Td>Developer</Td>
         </UnstyledLink>
       </Tr>
-      <Tr
-        interactive
-        asChild
-        collapsedContent={
-          <Flex>
-            <Text>I'm a text!!</Text>
-          </Flex>
-        }
-      >
+      <Tr emptyFirstColumn interactive asChild>
+        <UnstyledLink href="https://traefik.io" target="_blank">
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Admin</Td>
+        </UnstyledLink>
+      </Tr>
+      <Tr interactive asChild collapsedContent={<VerticalAlignment />}>
         <UnstyledLink href="https://traefik.io" target="_blank">
           <Td>Natalie</Td>
           <Td>Portman</Td>
@@ -268,7 +278,7 @@ export const Links: ComponentStory<any> = (args) => (
         </UnstyledLink>
       </Tr>
     </Tbody>
-  </TableForStory>
+  </Table>
 );
 
 const Customize: ComponentStory<any> = (args) => (
@@ -617,7 +627,7 @@ export const CollapsibleRow: ComponentStory<any> = (args) => {
         <Tr
           collapsedContent={
             <Flex>
-              <Text>I'm a text!!</Text>
+              <Text>Additional description.</Text>
             </Flex>
           }
           {...makeSelectableRowProps(2)}

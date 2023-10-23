@@ -1,5 +1,13 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import React, { useState, useMemo, forwardRef, ElementRef, ComponentProps, ReactNode } from 'react';
+import React, {
+  useState,
+  useMemo,
+  forwardRef,
+  ElementRef,
+  ComponentProps,
+  ReactNode,
+  Children,
+} from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { Label } from '../Label';
@@ -184,6 +192,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       emptyFirstColumn = false,
       tableHead = false,
       collapsedContentColSpan = 1,
+      css,
       ...props
     },
     ref
@@ -192,7 +201,20 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
 
     return (
       <>
-        <StyledTr ref={ref} {...props}>
+        <StyledTr
+          ref={ref}
+          css={
+            !!collapsedContent && !isCollapsed
+              ? {
+                  ...css,
+                  [`&:nth-last-child(2) ${Td}`]: {
+                    borderBottom: 'none',
+                  },
+                }
+              : { ...css }
+          }
+          {...props}
+        >
           {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
           {!!collapsedContent && (
             <Td>
