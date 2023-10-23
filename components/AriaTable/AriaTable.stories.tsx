@@ -240,7 +240,7 @@ export const Links: ComponentStory<any> = (args) => (
     </Thead>
     <Tbody>
       <Tr interactive asChild emptyFirstColumn>
-        <UnstyledLink href="https://traefik.io">
+        <UnstyledLink href="https://traefik.io" target="_blank">
           <Td>John</Td>
           <Td>Doe</Td>
           <Td>
@@ -258,11 +258,11 @@ export const Links: ComponentStory<any> = (args) => (
           </Flex>
         }
       >
-        <UnstyledLink href="https://traefik.io">
-          <Td>John</Td>
-          <Td>Doe</Td>
+        <UnstyledLink href="https://traefik.io" target="_blank">
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
           <Td>
-            <Badge variant="green">Connected</Badge>
+            <Badge variant="red">Offline</Badge>
           </Td>
           <Td>Developer</Td>
         </UnstyledLink>

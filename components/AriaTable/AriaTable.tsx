@@ -129,10 +129,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           tableHead ? (
             <Th css={{ width: 24 }} />
           ) : (
-            <Td />
+            <Td key="empty-td" />
           )
         ) : !!collapsedContent ? (
-          <Td>
+          <Td key="chevron-td">
             <Box
               onClick={(e) => {
                 e.stopPropagation();
