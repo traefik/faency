@@ -123,45 +123,61 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       }
     }
 
+    const TdEl = useMemo(
+      () =>
+        emptyFirstColumn ? (
+          tableHead ? (
+            <Th css={{ width: 24 }} />
+          ) : (
+            <Td />
+          )
+        ) : !!collapsedContent ? (
+          <Td>
+            <Box
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            >
+              <ChevronRightIcon
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                style={{
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease-out',
+                  transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                }}
+              />
+            </Box>
+          </Td>
+        ) : null,
+      [isCollapsed]
+    );
+
     const renderedChildren = useMemo(() => {
       if (asChild) {
-        return Children.map(children, (child) =>
-          cloneElement(child as any, {
+        return cloneElement(
+          children as any,
+          {
             // @ts-ignore: Object is possibly 'null'.
-            style: { ...child.props.style, display: 'table-row' },
-          })
+            style: { ...children.props.style, display: 'table-row' },
+          },
+          // @ts-ignore: Object is possibly 'null'.
+          [TdEl, ...children.props.children]
         );
       }
 
-      return children;
-    }, [asChild]);
+      return (
+        <>
+          {TdEl}
+          {children}
+        </>
+      );
+    }, [asChild, TdEl]);
 
     return (
       <>
         <Component ref={ref} role="row" {...props}>
-          <>
-            {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
-            {!!collapsedContent && (
-              <Td>
-                <Box
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                  }}
-                >
-                  <ChevronRightIcon
-                    onClick={() => setIsCollapsed(!isCollapsed)}
-                    style={{
-                      cursor: 'pointer',
-                      transition: 'transform 0.2s ease-out',
-                      transform: isCollapsed ? 'rotate(90deg)' : 'initial',
-                    }}
-                  />
-                </Box>
-              </Td>
-            )}
-            {renderedChildren}
-          </>
+          {renderedChildren}
         </Component>
         {!!collapsedContent && (
           <AnimatedContainer isOpen={isCollapsed}>{collapsedContent}</AnimatedContainer>

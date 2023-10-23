@@ -231,7 +231,7 @@ export const Links: ComponentStory<any> = (args) => (
   <TableForStory aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
     <Caption id="empty-table-caption">Table with empty data</Caption>
     <Thead>
-      <Tr>
+      <Tr emptyFirstColumn tableHead>
         <Th>first name</Th>
         <Th>last name</Th>
         <Th>Status</Th>
@@ -239,7 +239,25 @@ export const Links: ComponentStory<any> = (args) => (
       </Tr>
     </Thead>
     <Tbody>
-      <Tr interactive asChild>
+      <Tr interactive asChild emptyFirstColumn>
+        <UnstyledLink href="https://traefik.io">
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </UnstyledLink>
+      </Tr>
+      <Tr
+        interactive
+        asChild
+        collapsedContent={
+          <Flex>
+            <Text>I'm a text!!</Text>
+          </Flex>
+        }
+      >
         <UnstyledLink href="https://traefik.io">
           <Td>John</Td>
           <Td>Doe</Td>
