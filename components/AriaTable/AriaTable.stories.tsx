@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Table,
   TableProps,
@@ -15,7 +15,6 @@ import {
 import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
-import { Box } from '../Box';
 import { UnstyledLink } from '../Link';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Image } from '../Image';
@@ -166,62 +165,73 @@ Alignment.args = {
   align: 'start',
 };
 
-export const Interactive: ComponentStory<any> = (args) => (
-  <TableForStory>
-    <Thead>
-      <Tr>
-        <Th>Firstname</Th>
-        <Th>Lastname</Th>
-        <Th>Status</Th>
-        <Th>Role</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr {...args}>
-        <Td>John</Td>
-        <Td>Doe</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Developer</Td>
-      </Tr>
-      <Tr {...args}>
-        <Td>Johny</Td>
-        <Td>Depp</Td>
-        <Td>
-          <Badge variant="orange">AFK</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr {...args} active>
-        <Td>Natalie</Td>
-        <Td>Portman</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr {...args}>
-        <Td>Luke</Td>
-        <Td>Skywalker</Td>
-        <Td>
-          <Badge variant="red">Disconnected</Badge>
-        </Td>
-        <Td>Star Wars</Td>
-      </Tr>
-    </Tbody>
-  </TableForStory>
-);
+export const Interactive: ComponentStory<any> = (args) => {
+  const [selectedRow, setSelectedRow] = useState(3);
+  const makeSelectableRowProps = useCallback(
+    (rowNum: number) => ({
+      active: selectedRow === rowNum,
+      onClick: () => setSelectedRow(rowNum),
+    }),
+    [selectedRow, setSelectedRow]
+  );
+
+  return (
+    <TableForStory>
+      <Thead>
+        <Tr>
+          <Th>Firstname</Th>
+          <Th>Lastname</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr {...args} {...makeSelectableRowProps(1)}>
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr {...args} {...makeSelectableRowProps(2)}>
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr {...args} {...makeSelectableRowProps(3)}>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr {...args} {...makeSelectableRowProps(4)}>
+          <Td>Luke</Td>
+          <Td>Skywalker</Td>
+          <Td>
+            <Badge variant="red">Disconnected</Badge>
+          </Td>
+          <Td>Star Wars</Td>
+        </Tr>
+      </Tbody>
+    </TableForStory>
+  );
+};
 
 Interactive.args = {
   interactive: true,
 };
 
 export const Links: ComponentStory<any> = (args) => (
-  <TableForStory aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
+  <Table hasCollapsibleChildren aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
     <Caption id="empty-table-caption">Table with empty data</Caption>
     <Thead>
-      <Tr>
+      <Tr emptyFirstColumn tableHead>
         <Th>first name</Th>
         <Th>last name</Th>
         <Th>Status</Th>
@@ -229,18 +239,46 @@ export const Links: ComponentStory<any> = (args) => (
       </Tr>
     </Thead>
     <Tbody>
-      <Tr interactive asChild>
-        <UnstyledLink href="https://traefik.io">
-          <Td>John</Td>
-          <Td>Doe</Td>
+      <Tr
+        interactive
+        asChild
+        collapsedContent={
+          <Flex>
+            <Text>Additional description for this row.</Text>
+          </Flex>
+        }
+      >
+        <UnstyledLink href="https://traefik.io" target="_blank">
+          <Td>Johnny</Td>
+          <Td>Depp</Td>
           <Td>
             <Badge variant="green">Connected</Badge>
           </Td>
           <Td>Developer</Td>
         </UnstyledLink>
       </Tr>
+      <Tr emptyFirstColumn interactive asChild>
+        <UnstyledLink href="https://traefik.io" target="_blank">
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Admin</Td>
+        </UnstyledLink>
+      </Tr>
+      <Tr interactive asChild collapsedContent={<VerticalAlignment />}>
+        <UnstyledLink href="https://traefik.io" target="_blank">
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="red">Offline</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </UnstyledLink>
+      </Tr>
     </Tbody>
-  </TableForStory>
+  </Table>
 );
 
 const Customize: ComponentStory<any> = (args) => (
@@ -556,3 +594,65 @@ export const VerticalAlignment: ComponentStory<any> = (args) => (
     </Tbody>
   </TableForStory>
 );
+
+export const CollapsibleRow: ComponentStory<any> = (args) => {
+  const [selectedRow, setSelectedRow] = useState(3);
+  const makeSelectableRowProps = useCallback(
+    (rowNum: number) => ({
+      active: selectedRow === rowNum,
+      onClick: () => setSelectedRow(rowNum),
+    }),
+    [selectedRow, setSelectedRow]
+  );
+
+  return (
+    <Table hasCollapsibleChildren>
+      <Thead>
+        <Tr emptyFirstColumn tableHead>
+          <Th>Firstname</Th>
+          <Th>Lastname</Th>
+          <Th>Status</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr emptyFirstColumn {...makeSelectableRowProps(1)} {...args}>
+          <Td>John</Td>
+          <Td>Doe</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Developer</Td>
+        </Tr>
+        <Tr
+          collapsedContent={
+            <Flex>
+              <Text>Additional description.</Text>
+            </Flex>
+          }
+          {...makeSelectableRowProps(2)}
+          {...args}
+        >
+          <Td>Johny</Td>
+          <Td>Depp</Td>
+          <Td>
+            <Badge variant="orange">AFK</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+        <Tr collapsedContent={<VerticalAlignment />} {...args} {...makeSelectableRowProps(3)}>
+          <Td>Natalie</Td>
+          <Td>Portman</Td>
+          <Td>
+            <Badge variant="green">Connected</Badge>
+          </Td>
+          <Td>Actor</Td>
+        </Tr>
+      </Tbody>
+    </Table>
+  );
+};
+
+CollapsibleRow.args = {
+  interactive: true,
+};

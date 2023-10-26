@@ -1,7 +1,19 @@
+import { ChevronRightIcon } from '@radix-ui/react-icons';
+import React, {
+  useState,
+  useMemo,
+  forwardRef,
+  ElementRef,
+  ComponentProps,
+  ReactNode,
+  Children,
+} from 'react';
 import { styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { Label } from '../Label';
 import { Text } from '../Text';
+import { Box } from '../Box';
+import { Flex } from '../Flex';
 
 export const Caption = styled('caption', Text, {
   display: 'table-caption',
@@ -82,7 +94,7 @@ export const Td = styled('td', {
   },
 });
 
-export const Tr = styled('tr', {
+export const StyledTr = styled('tr', {
   verticalAlign: 'inherit',
   '&:hover': {
     color: '$tableHoverText',
@@ -120,6 +132,121 @@ export const Tr = styled('tr', {
     },
   ],
 });
+
+const AnimatedTr = ({
+  collapsedContentColSpan,
+  isOpen,
+  children,
+}: {
+  collapsedContentColSpan: number;
+  isOpen: boolean;
+  children: ReactNode;
+}) => {
+  const appliedStyle = useMemo(
+    () =>
+      isOpen
+        ? { transition: 'padding 0.2s ease-out' }
+        : {
+            transition: 'padding 0.2s ease-out',
+            lineHeight: 0,
+            fontSize: 0,
+            padding: '0px 16px',
+            border: 'none',
+          },
+    [isOpen]
+  );
+
+  const containerStyle = useMemo(
+    () =>
+      isOpen
+        ? { transition: 'all 0.2s ease-out' }
+        : {
+            transition: 'all 0.2s ease-out',
+            height: 0,
+            overflow: 'hidden',
+          },
+    [isOpen]
+  );
+
+  return (
+    <Tr>
+      <Td colSpan={collapsedContentColSpan} css={appliedStyle}>
+        <Box css={containerStyle}>{children}</Box>
+      </Td>
+    </Tr>
+  );
+};
+export interface TrProps extends ComponentProps<typeof StyledTr>, VariantProps<typeof StyledTr> {
+  children: React.ReactNode;
+  collapsedContent?: React.ReactNode;
+  emptyFirstColumn?: boolean;
+  tableHead?: boolean;
+  collapsedContentColSpan?: number;
+}
+
+export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
+  (
+    {
+      children,
+      collapsedContent,
+      emptyFirstColumn = false,
+      tableHead = false,
+      collapsedContentColSpan = 1,
+      css,
+      ...props
+    },
+    ref
+  ) => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
+    return (
+      <>
+        <StyledTr
+          ref={ref}
+          css={
+            !!collapsedContent && !isCollapsed
+              ? {
+                  ...css,
+                  [`&:nth-last-child(2) ${Td}`]: {
+                    borderBottom: 'none',
+                  },
+                }
+              : { ...css }
+          }
+          {...props}
+        >
+          {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
+          {!!collapsedContent && (
+            <Td>
+              <Flex
+                align="center"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+              >
+                <ChevronRightIcon
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                  style={{
+                    cursor: 'pointer',
+                    transition: 'transform 0.2s ease-out',
+                    transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                  }}
+                />
+              </Flex>
+            </Td>
+          )}
+          {children}
+        </StyledTr>
+        {!!collapsedContent && (
+          <AnimatedTr isOpen={isCollapsed} collapsedContentColSpan={collapsedContentColSpan}>
+            {collapsedContent}
+          </AnimatedTr>
+        )}
+      </>
+    );
+  }
+);
 
 export const Tfoot = styled('tfoot', {
   verticalAlign: 'middle',

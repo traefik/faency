@@ -5,6 +5,9 @@ import React, {
   useMemo,
   Children,
   isValidElement,
+  useState,
+  ReactNode,
+  cloneElement,
 } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { styled, VariantProps, CSS } from '../../stitches.config';
@@ -12,13 +15,15 @@ import {
   Caption as TableCaption,
   Tbody as TableTbody,
   Tfoot as TableTfoot,
-  Tr as TableTr,
+  StyledTr as TableTr,
   Th as TableTh,
   Td as TableTd,
   Thead as TableThead,
   Table as TableTable,
 } from '../Table';
 import merge from 'lodash.merge';
+import { Box } from '../Box';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 export const Caption = styled('div', TableCaption, {
   display: 'table-caption',
@@ -44,15 +49,67 @@ const StyledTr = styled('div', TableTr, {
   display: 'table-row',
 });
 const StyledTrSlot = styled(Slot, StyledTr);
+
+const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: ReactNode }) => {
+  const appliedStyle = useMemo(
+    () =>
+      isOpen
+        ? {
+            transition: 'all 0.2s ease-out',
+            paddingBottom: 0,
+            paddingTop: 0,
+            border: 'none',
+          }
+        : {
+            transition: 'all 0.2s ease-out',
+            padding: '0px 16px',
+            pointerEvents: 'none',
+            border: 'none',
+          },
+    [isOpen]
+  );
+
+  const containerStyle = useMemo(
+    () =>
+      isOpen
+        ? {
+            transition: 'all 0.2s ease-out',
+            padding: '16px',
+            paddingBottom: 0,
+          }
+        : {
+            transition: 'all 0.2s ease-out',
+            height: 0,
+            overflow: 'hidden',
+            padding: '0px 16px',
+          },
+    [isOpen]
+  );
+
+  return (
+    <StyledTr
+      css={isOpen ? { '&:not(:last-child)': { borderBottom: '1px solid $tableRowBorder' } } : {}}
+    >
+      <Td css={appliedStyle} fullColSpan>
+        <Box css={containerStyle}>{children}</Box>
+      </Td>
+    </StyledTr>
+  );
+};
+
 export interface TrProps
   extends Omit<ComponentProps<typeof StyledTr>, 'css'>,
     VariantProps<typeof StyledTr> {
   asChild?: boolean;
+  collapsedContent?: React.ReactNode;
+  emptyFirstColumn?: boolean;
+  tableHead?: boolean;
   css?: CSS;
 }
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
-  ({ asChild, children, ...props }, ref) => {
+  ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, css, ...props }, ref) => {
     const Component = asChild ? StyledTrSlot : StyledTr;
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     if (!asChild) {
       const arrayChildren = Children.toArray(children);
@@ -68,10 +125,80 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       }
     }
 
+    const TdEl = useMemo(
+      () =>
+        emptyFirstColumn ? (
+          tableHead ? (
+            <Th css={{ width: 24 }} />
+          ) : (
+            <Td key="empty-td" />
+          )
+        ) : !!collapsedContent ? (
+          <Td key="chevron-td">
+            <Box
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            >
+              <ChevronRightIcon
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                style={{
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease-out',
+                  transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                }}
+              />
+            </Box>
+          </Td>
+        ) : null,
+      [isCollapsed]
+    );
+
+    const renderedChildren = useMemo(() => {
+      if (asChild) {
+        return cloneElement(
+          children as any,
+          {
+            // @ts-ignore: Object is possibly 'null'.
+            style: { ...children?.props?.style, display: 'table-row' },
+          },
+          // @ts-ignore: Object is possibly 'null'.
+          [TdEl, ...children?.props?.children]
+        );
+      }
+
+      return (
+        <>
+          {TdEl}
+          {children}
+        </>
+      );
+    }, [asChild, TdEl, children]);
+
     return (
-      <Component ref={ref} role="row" {...props}>
-        {children}
-      </Component>
+      <>
+        <Component
+          ref={ref}
+          role="row"
+          css={
+            !!collapsedContent && !isCollapsed
+              ? {
+                  ...css,
+                  [`&:nth-last-child(2) span`]: {
+                    borderBottom: 'none',
+                  },
+                }
+              : { ...css }
+          }
+          {...props}
+        >
+          {renderedChildren}
+        </Component>
+        {!!collapsedContent && (
+          <AnimatedContainer isOpen={isCollapsed}>{collapsedContent}</AnimatedContainer>
+        )}
+      </>
     );
   }
 );
@@ -141,8 +268,16 @@ const StyledTable = styled('div', TableTable, {
 });
 export const Table = forwardRef<
   ElementRef<typeof StyledTable>,
-  Omit<ComponentProps<typeof StyledTable>, 'css'> & VariantProps<typeof StyledTable> & { css?: CSS }
->((props, ref) => <StyledTable ref={ref} role="table" {...props} />);
+  Omit<ComponentProps<typeof StyledTable>, 'css'> &
+    VariantProps<typeof StyledTable> & { css?: CSS; hasCollapsibleChildren?: boolean }
+>(({ hasCollapsibleChildren, css, ...props }, ref) => (
+  <StyledTable
+    ref={ref}
+    role="table"
+    css={hasCollapsibleChildren ? { borderCollapse: 'collapse', ...css } : css}
+    {...props}
+  />
+));
 
 export type TableVariants = VariantProps<typeof Table>;
 export type TableProps = TableVariants & {};

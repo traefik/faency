@@ -19,6 +19,10 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { Button } from '../Button';
 
+import { VerticalAlignment as AriaTableStory } from '../AriaTable/AriaTable.stories';
+import { Box } from '../Box';
+import { Text } from '../Text';
+
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
 
@@ -682,3 +686,74 @@ const Customize: ComponentStory<any> = (args) => (
     </Tfoot>
   </TableForStory>
 );
+
+export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) => {
+  const [selectedRow, setSelectedRow] = useState(1);
+  const makeSelectableRowProps = useCallback(
+    (rowNum: number) => ({
+      active: selectedRow === rowNum,
+      onClick: () => setSelectedRow(rowNum),
+    }),
+    [selectedRow, setSelectedRow]
+  );
+
+  return (
+    <Flex direction="column" gap="4">
+      <TableForStory {...args}>
+        <Thead>
+          <Tr emptyFirstColumn tableHead>
+            <Th>First name</Th>
+            <Th>Last name</Th>
+            <Th>Status</Th>
+            <Th>Role</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr emptyFirstColumn interactive={interactive} {...makeSelectableRowProps(1)}>
+            <Td>John</Td>
+            <Td>Doe</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td subtle>Developer</Td>
+          </Tr>
+          <Tr
+            interactive={interactive}
+            collapsedContent={
+              <Text>
+                This is an additional description of this row above. It could be anything.
+              </Text>
+            }
+            collapsedContentColSpan={5}
+            {...makeSelectableRowProps(2)}
+          >
+            <Td>Johnny</Td>
+            <Td>Depp</Td>
+            <Td subtle>
+              <Badge variant="orange">AFK</Badge>
+            </Td>
+            <Td subtle>Actor</Td>
+          </Tr>
+          <Tr
+            collapsedContent={<AriaTableStory />}
+            collapsedContentColSpan={5}
+            interactive={interactive}
+            {...makeSelectableRowProps(3)}
+          >
+            <Td>Natalie</Td>
+            <Td>Portman</Td>
+            <Td>
+              <Badge variant="green">Connected</Badge>
+            </Td>
+            <Td subtle>Actor</Td>
+          </Tr>
+        </Tbody>
+      </TableForStory>
+    </Flex>
+  );
+};
+
+CollapsibleRow.args = {
+  interactive: true,
+  elevation: '1',
+};
