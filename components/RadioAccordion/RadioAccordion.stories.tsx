@@ -8,6 +8,8 @@ import {
   RadioAccordionTrigger,
 } from './RadioAccordion';
 import { Box } from '../Box';
+import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '../Accordion';
+import { Text } from '../Text';
 
 export default {
   title: 'Components/RadioAccordion',
@@ -31,6 +33,32 @@ export const Basic: ComponentStory<typeof RadioAccordionRoot> = (args) => (
       </RadioAccordionItem>
     </RadioAccordionRoot>
   </Box>
+);
+
+export const UnderAccordion: ComponentStory<typeof RadioAccordionRoot> = (args) => (
+  <AccordionRoot type="single" collapsible>
+    <AccordionItem value="default" css={{ boxShadow: 'none' }}>
+      <AccordionTrigger>
+        <Text>Open the accordion</Text>
+      </AccordionTrigger>
+      <AccordionContent>
+        <RadioAccordionRoot {...args}>
+          <RadioAccordionItem value="item-1">
+            <RadioAccordionTrigger>Item1 Trigger</RadioAccordionTrigger>
+            <RadioAccordionContent>Item1 Content</RadioAccordionContent>
+          </RadioAccordionItem>
+          <RadioAccordionItem value="item-2">
+            <RadioAccordionTrigger>Item2 Trigger</RadioAccordionTrigger>
+            <RadioAccordionContent>Item2 Content</RadioAccordionContent>
+          </RadioAccordionItem>
+          <RadioAccordionItem value="item-3">
+            <RadioAccordionTrigger>Item3 Trigger</RadioAccordionTrigger>
+            <RadioAccordionContent>Item3 Content</RadioAccordionContent>
+          </RadioAccordionItem>
+        </RadioAccordionRoot>
+      </AccordionContent>
+    </AccordionItem>
+  </AccordionRoot>
 );
 
 const Customize: ComponentStory<typeof RadioAccordionRoot> = (args) => (
