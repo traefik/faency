@@ -46,7 +46,7 @@ const StyledRadio = styled('div', RADIO_BASE_STYLES, {
   width: 18,
   height: 18,
   mr: '$2',
-  '[data-state=open] &': {
+  '[data-state=open] > &': {
     backgroundColor: '$radioIndicator',
   },
 });
