@@ -161,7 +161,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           children as any,
           {
             // @ts-ignore: Object is possibly 'null'.
-            style: { ...children?.props?.style, display: 'table-row' },
+            ...children?.props,
           },
           // @ts-ignore: Object is possibly 'null'.
           [TdEl, ...children?.props?.children]
