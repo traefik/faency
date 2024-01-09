@@ -83,9 +83,9 @@ export const NavigationTreeItem = ({
           direction="column"
           align="start"
           gap={1}
-          css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}
+          css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4', color: 'inherit' }}
         >
-          <Text>{label}</Text>
+          <Text css={{ color: 'inherit' }}>{label}</Text>
           {subtitle && (
             <Text variant="subtle" css={{ fontSize: '$3', opacity: 0.8 }}>
               {subtitle}
