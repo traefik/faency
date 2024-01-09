@@ -41,9 +41,6 @@ export default {
     active: {
       control: 'boolean',
     },
-    fullWidth: {
-      control: 'boolean',
-    },
   },
 } as ComponentMeta<typeof NavigationDrawer>;
 
@@ -87,7 +84,6 @@ Basic.args = {
   startAdornment: 'Gear',
   endAdornment: 1,
   active: false,
-  fullWidth: false,
 };
 
 export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => {

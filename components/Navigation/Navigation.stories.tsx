@@ -26,6 +26,9 @@ export default {
     elevation: {
       control: 'number',
     },
+    fullWidth: {
+      control: 'boolean',
+    },
   },
 } as ComponentMeta<typeof NavigationDrawer>;
 
@@ -65,6 +68,7 @@ export const Basic = Template.bind({});
 
 Basic.args = {
   elevation: 1,
+  fullWidth: false,
 };
 
 const AdornmentsTemplate: ComponentStory<typeof NavigationDrawerForStory> = (args) => {

@@ -114,28 +114,9 @@ const baseNavItemCss = css({
         },
       },
     },
-    fullWidth: {
-      true: {
-        px: 0,
-        borderRadius: 0,
-
-        '&::before': {
-          borderRadius: 0,
-          left: '-$3',
-          right: '-$3',
-        },
-
-        '&::after': {
-          borderRadius: 0,
-          left: '-$3',
-          right: '-$3',
-        },
-      },
-    },
   },
   defaultVariants: {
     active: false,
-    fullWidth: false,
   },
 });
 
@@ -156,9 +137,26 @@ export const NavigationDrawer = styled('nav', {
   flexDirection: 'column',
   variants: {
     elevation: elevationVariants,
+    fullWidth: {
+      true: {
+        px: 0,
+        '> *': {
+          borderRadius: 0,
+
+          '&::before': {
+            borderRadius: 0,
+          },
+
+          '&::after': {
+            borderRadius: 0,
+          },
+        },
+      },
+    },
   },
   defaultVariants: {
     elevation: 1,
+    fullWidth: false,
   },
 });
 
