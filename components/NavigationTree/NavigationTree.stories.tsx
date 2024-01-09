@@ -115,7 +115,7 @@ const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) =>
           <NavigationTreeItem
             {...navigationHandlerProps('one-two')}
             label="One.Two"
-            nestedChildrenLevel={1}
+            nestedChildrenLevel={2}
           >
             <NavigationTreeItem
               {...navigationHandlerProps('one-two-one')}
@@ -140,12 +140,12 @@ const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) =>
             {...navigationHandlerProps('two-two')}
             label="Two.Two"
             subtitle="/two-two"
-            nestedChildrenLevel={1}
+            nestedChildrenLevel={2}
           >
             <NavigationTreeItem
               {...navigationHandlerProps('two-two-one')}
               label="Two.Two.One"
-              nestedChildrenLevel={2}
+              nestedChildrenLevel={3}
             >
               <NavigationTreeItem
                 {...navigationHandlerProps('two-two-one-one')}

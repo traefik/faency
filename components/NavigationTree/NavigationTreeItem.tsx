@@ -30,7 +30,7 @@ export const NavigationTreeItem = ({
   defaultExpandIcon,
   customCollapseIcon,
   customExpandIcon,
-  nestedChildrenLevel = 0,
+  nestedChildrenLevel = 1,
   fullWidth = false,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
@@ -65,7 +65,7 @@ export const NavigationTreeItem = ({
       pl: '$4',
       '> div > *': {
         '&::before, &::after': {
-          left: fullWidth ? `calc(${nestedChildrenLevel + 1} * -20px)` : 0,
+          left: fullWidth ? `calc(${nestedChildrenLevel} * -20px)` : 0,
         },
       },
     };
