@@ -104,7 +104,7 @@ const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) =>
 
   return (
     <NavigationDrawer fullWidth>
-      <NavigationTreeContainer {...args}>
+      <NavigationTreeContainer fullWidth {...args}>
         <NavigationTreeItem {...navigationHandlerProps('one')} label="One" subtitle="/one">
           <NavigationTreeItem
             {...navigationHandlerProps('one-one')}

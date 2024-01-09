@@ -8,18 +8,21 @@ export interface TreeViewProps {
   defaultExpandIcon?: React.ReactNode;
   defaultCollapseIcon?: React.ReactNode;
   css?: CSS;
+  fullWidth?: boolean;
 }
 
 export const NavigationTreeContainer = ({
   children,
   defaultCollapseIcon = <ChevronDownIcon />,
   defaultExpandIcon = <ChevronRightIcon />,
+  fullWidth = false,
   ...props
 }: TreeViewProps & NavigationContainerProps) => {
   const renderChildren = React.Children.map(children, (child) => {
     return React.cloneElement(child as React.ReactElement, {
       defaultCollapseIcon,
       defaultExpandIcon,
+      fullWidth,
     });
   });
   return <NavigationContainer {...props}>{renderChildren}</NavigationContainer>;
