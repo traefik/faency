@@ -140,7 +140,7 @@ export const NavigationDrawer = styled('nav', {
     fullWidth: {
       true: {
         px: 0,
-        '> *': {
+        '> *, > div > *,': {
           borderRadius: 0,
 
           '&::before': {
