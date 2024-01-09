@@ -93,3 +93,74 @@ const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
 export const Basic = Template.bind({});
 
 Basic.args = {};
+
+const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) => {
+  const [currentRoute, setCurrentRoute] = useState('/');
+
+  const navigationHandlerProps = (route: string) => ({
+    active: route === currentRoute,
+    onClick: () => setCurrentRoute(route),
+  });
+
+  return (
+    <NavigationDrawer fullWidth>
+      <NavigationTreeContainer {...args}>
+        <NavigationTreeItem {...navigationHandlerProps('one')} label="One" subtitle="/one">
+          <NavigationTreeItem
+            {...navigationHandlerProps('one-one')}
+            as="a"
+            label="One.One"
+            subtitle="/one-one"
+          />
+          <NavigationTreeItem
+            {...navigationHandlerProps('one-two')}
+            label="One.Two"
+            nestedLevel={1}
+          >
+            <NavigationTreeItem
+              {...navigationHandlerProps('one-two-one')}
+              startAdornment={<ArchiveIcon />}
+              label="One.Two.One"
+            />
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+        <NavigationTreeItem
+          {...navigationHandlerProps('two')}
+          label="Two"
+          subtitle="/two"
+          defaultExpanded
+        >
+          <NavigationTreeItem
+            {...navigationHandlerProps('two-one')}
+            as="a"
+            label="Two.One"
+            subtitle="/two-one"
+          />
+          <NavigationTreeItem
+            {...navigationHandlerProps('two-two')}
+            label="Two.Two"
+            subtitle="/two-two"
+            nestedLevel={1}
+          >
+            <NavigationTreeItem
+              {...navigationHandlerProps('two-two-one')}
+              label="Two.Two.One"
+              nestedLevel={2}
+            >
+              <NavigationTreeItem
+                {...navigationHandlerProps('two-two-one-one')}
+                startAdornment={<ArchiveIcon />}
+                label="Two.Two.One.One"
+              />
+            </NavigationTreeItem>
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+        <NavigationTreeItem {...navigationHandlerProps('three')} label="Three" />
+      </NavigationTreeContainer>
+    </NavigationDrawer>
+  );
+};
+
+export const FullWidth = FullWidthStory.bind({});
+
+FullWidth.args = {};

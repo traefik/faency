@@ -4,6 +4,7 @@ import { NavigationItem, NavigationItemProps } from '../Navigation';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
+import { CSS } from '../..';
 
 export interface NavigationTreeItemProps {
   label: string;
@@ -15,6 +16,7 @@ export interface NavigationTreeItemProps {
   defaultCollapseIcon?: React.ReactNode;
   customExpandIcon?: React.ReactNode;
   customCollapseIcon?: React.ReactNode;
+  nestedLevel?: number;
 }
 
 export const NavigationTreeItem = ({
@@ -27,6 +29,7 @@ export const NavigationTreeItem = ({
   defaultExpandIcon,
   customCollapseIcon,
   customExpandIcon,
+  nestedLevel = 0,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -53,6 +56,19 @@ export const NavigationTreeItem = ({
     ]
   );
 
+  const childCss = useMemo(() => {
+    if (!isExpandable) return null;
+
+    return {
+      pl: '$4',
+      '> div > *': {
+        '&::before, &::after': {
+          left: `calc(${nestedLevel + 1} * -20px)`,
+        },
+      },
+    };
+  }, [isExpandable, nestedLevel]);
+
   return (
     <Box>
       <NavigationItem
@@ -77,9 +93,10 @@ export const NavigationTreeItem = ({
       </NavigationItem>
       {isExpanded && (
         <NavigationTreeContainer
+          key={label}
           defaultCollapseIcon={defaultCollapseIcon}
           defaultExpandIcon={defaultExpandIcon}
-          css={{ ml: '$4' }}
+          css={childCss as CSS}
         >
           {children}
         </NavigationTreeContainer>

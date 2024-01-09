@@ -150,6 +150,11 @@ export const NavigationDrawer = styled('nav', {
           '&::after': {
             borderRadius: 0,
           },
+
+          '&:focus': {
+            border: 'none',
+            boxShadow: 'none',
+          },
         },
       },
     },
