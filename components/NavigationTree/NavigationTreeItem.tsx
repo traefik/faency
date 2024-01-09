@@ -16,7 +16,7 @@ export interface NavigationTreeItemProps {
   defaultCollapseIcon?: React.ReactNode;
   customExpandIcon?: React.ReactNode;
   customCollapseIcon?: React.ReactNode;
-  nestedLevel?: number;
+  nestedChildrenLevel?: number;
   fullWidth?: boolean;
 }
 
@@ -30,7 +30,7 @@ export const NavigationTreeItem = ({
   defaultExpandIcon,
   customCollapseIcon,
   customExpandIcon,
-  nestedLevel = 0,
+  nestedChildrenLevel = 0,
   fullWidth = false,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
@@ -65,11 +65,11 @@ export const NavigationTreeItem = ({
       pl: '$4',
       '> div > *': {
         '&::before, &::after': {
-          left: fullWidth ? `calc(${nestedLevel + 1} * -20px)` : 0,
+          left: fullWidth ? `calc(${nestedChildrenLevel + 1} * -20px)` : 0,
         },
       },
     };
-  }, [isExpandable, nestedLevel]);
+  }, [isExpandable, nestedChildrenLevel]);
 
   return (
     <Box>
