@@ -115,6 +115,9 @@ const baseNavItemCss = css({
       },
     },
   },
+  defaultVariants: {
+    active: false,
+  },
 });
 
 export const NavigationContainer = styled('div', {
@@ -134,9 +137,31 @@ export const NavigationDrawer = styled('nav', {
   flexDirection: 'column',
   variants: {
     elevation: elevationVariants,
+    fullWidth: {
+      true: {
+        px: 0,
+        '> *, > div > *,': {
+          borderRadius: 0,
+
+          '&::before': {
+            borderRadius: 0,
+          },
+
+          '&::after': {
+            borderRadius: 0,
+          },
+
+          '&:focus': {
+            border: 'none',
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
   },
   defaultVariants: {
     elevation: 1,
+    fullWidth: false,
   },
 });
 

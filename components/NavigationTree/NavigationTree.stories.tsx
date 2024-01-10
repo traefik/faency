@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { NavigationTreeItem } from './NavigationTreeItem';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
-import { NavigationDrawer } from '../Navigation';
 import {
   ArchiveIcon,
   EyeOpenIcon,
@@ -10,6 +9,7 @@ import {
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
 } from '@radix-ui/react-icons';
+import { NavigationTreeDrawer } from '.';
 
 export default {
   title: 'Components/NavigationTree',
@@ -43,7 +43,7 @@ const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
   });
 
   return (
-    <NavigationDrawer>
+    <NavigationTreeDrawer>
       <NavigationTreeContainer {...args}>
         <NavigationTreeItem {...navigationHandlerProps('one')} label="One" subtitle="/one">
           <NavigationTreeItem
@@ -86,10 +86,63 @@ const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
         </NavigationTreeItem>
         <NavigationTreeItem {...navigationHandlerProps('three')} label="Three" />
       </NavigationTreeContainer>
-    </NavigationDrawer>
+    </NavigationTreeDrawer>
   );
 };
 
 export const Basic = Template.bind({});
 
 Basic.args = {};
+
+const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) => {
+  const [currentRoute, setCurrentRoute] = useState('/');
+
+  const navigationHandlerProps = (route: string) => ({
+    active: route === currentRoute,
+    onClick: () => setCurrentRoute(route),
+  });
+
+  return (
+    <NavigationTreeDrawer fullWidth>
+      <NavigationTreeContainer {...args}>
+        <NavigationTreeItem label="One" subtitle="/one">
+          <NavigationTreeItem
+            {...navigationHandlerProps('one-one')}
+            as="a"
+            label="One.One"
+            subtitle="/one-one"
+          />
+          <NavigationTreeItem label="One.Two" nestedChildrenLevel={2}>
+            <NavigationTreeItem
+              {...navigationHandlerProps('one-two-one')}
+              startAdornment={<ArchiveIcon />}
+              label="One.Two.One"
+            />
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+        <NavigationTreeItem label="Two" subtitle="/two" defaultExpanded>
+          <NavigationTreeItem
+            {...navigationHandlerProps('two-one')}
+            as="a"
+            label="Two.One"
+            subtitle="/two-one"
+          />
+          <NavigationTreeItem label="Two.Two" subtitle="/two-two" nestedChildrenLevel={2}>
+            <NavigationTreeItem label="Two.Two.One" nestedChildrenLevel={3}>
+              <NavigationTreeItem
+                {...navigationHandlerProps('two-two-one-one')}
+                startAdornment={<ArchiveIcon />}
+                label="Two.Two.One.One"
+              />
+            </NavigationTreeItem>
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+        <NavigationTreeItem {...navigationHandlerProps('three')} label="Three" />
+      </NavigationTreeContainer>
+    </NavigationTreeDrawer>
+  );
+};
+
+export const FullWidth = FullWidthStory.bind({});
+
+FullWidth.args = {};

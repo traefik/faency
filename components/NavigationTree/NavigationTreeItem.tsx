@@ -4,6 +4,7 @@ import { NavigationItem, NavigationItemProps } from '../Navigation';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
+import { CSS } from '../..';
 
 export interface NavigationTreeItemProps {
   label: string;
@@ -15,6 +16,8 @@ export interface NavigationTreeItemProps {
   defaultCollapseIcon?: React.ReactNode;
   customExpandIcon?: React.ReactNode;
   customCollapseIcon?: React.ReactNode;
+  nestedChildrenLevel?: number;
+  fullWidth?: boolean;
 }
 
 export const NavigationTreeItem = ({
@@ -27,6 +30,8 @@ export const NavigationTreeItem = ({
   defaultExpandIcon,
   customCollapseIcon,
   customExpandIcon,
+  nestedChildrenLevel = 1,
+  fullWidth = false,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -53,10 +58,40 @@ export const NavigationTreeItem = ({
     ]
   );
 
+  const childCss = useMemo(() => {
+    if (!isExpandable) return null;
+
+    return {
+      pl: '$4',
+      '> div > *': {
+        '&::before, &::after': {
+          left: fullWidth ? `calc(${nestedChildrenLevel} * -20px)` : 0,
+        },
+      },
+    };
+  }, [isExpandable, nestedChildrenLevel]);
+
+  const focusStyle = useMemo(() => {
+    if (!isExpandable) return {};
+
+    return {
+      '&:focus': {
+        boxShadow: 'none',
+
+        '&::before': {
+          background: 'none',
+        },
+        '&::after': {
+          background: 'none',
+        },
+      },
+    };
+  }, [isExpandable]);
+
   return (
     <Box>
       <NavigationItem
-        css={{ width: '100%' }}
+        css={{ width: '100%', ...focusStyle }}
         {...props}
         startAdornment={usedStartAdornment}
         onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
@@ -65,9 +100,9 @@ export const NavigationTreeItem = ({
           direction="column"
           align="start"
           gap={1}
-          css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4' }}
+          css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4', color: 'inherit' }}
         >
-          <Text>{label}</Text>
+          <Text css={{ color: 'inherit' }}>{label}</Text>
           {subtitle && (
             <Text variant="subtle" css={{ fontSize: '$3', opacity: 0.8 }}>
               {subtitle}
@@ -79,7 +114,8 @@ export const NavigationTreeItem = ({
         <NavigationTreeContainer
           defaultCollapseIcon={defaultCollapseIcon}
           defaultExpandIcon={defaultExpandIcon}
-          css={{ ml: '$4' }}
+          fullWidth={fullWidth}
+          css={childCss as CSS}
         >
           {children}
         </NavigationTreeContainer>
