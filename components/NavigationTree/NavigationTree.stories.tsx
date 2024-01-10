@@ -105,18 +105,14 @@ const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) =>
   return (
     <NavigationDrawer fullWidth>
       <NavigationTreeContainer fullWidth {...args}>
-        <NavigationTreeItem {...navigationHandlerProps('one')} label="One" subtitle="/one">
+        <NavigationTreeItem label="One" subtitle="/one">
           <NavigationTreeItem
             {...navigationHandlerProps('one-one')}
             as="a"
             label="One.One"
             subtitle="/one-one"
           />
-          <NavigationTreeItem
-            {...navigationHandlerProps('one-two')}
-            label="One.Two"
-            nestedChildrenLevel={2}
-          >
+          <NavigationTreeItem label="One.Two" nestedChildrenLevel={2}>
             <NavigationTreeItem
               {...navigationHandlerProps('one-two-one')}
               startAdornment={<ArchiveIcon />}
@@ -124,29 +120,15 @@ const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) =>
             />
           </NavigationTreeItem>
         </NavigationTreeItem>
-        <NavigationTreeItem
-          {...navigationHandlerProps('two')}
-          label="Two"
-          subtitle="/two"
-          defaultExpanded
-        >
+        <NavigationTreeItem label="Two" subtitle="/two" defaultExpanded>
           <NavigationTreeItem
             {...navigationHandlerProps('two-one')}
             as="a"
             label="Two.One"
             subtitle="/two-one"
           />
-          <NavigationTreeItem
-            {...navigationHandlerProps('two-two')}
-            label="Two.Two"
-            subtitle="/two-two"
-            nestedChildrenLevel={2}
-          >
-            <NavigationTreeItem
-              {...navigationHandlerProps('two-two-one')}
-              label="Two.Two.One"
-              nestedChildrenLevel={3}
-            >
+          <NavigationTreeItem label="Two.Two" subtitle="/two-two" nestedChildrenLevel={2}>
+            <NavigationTreeItem label="Two.Two.One" nestedChildrenLevel={3}>
               <NavigationTreeItem
                 {...navigationHandlerProps('two-two-one-one')}
                 startAdornment={<ArchiveIcon />}
