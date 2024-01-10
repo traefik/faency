@@ -57,7 +57,7 @@ export const NavigationTreeItem = ({
       props.startAdornment,
     ]
   );
-  console.log(fullWidth);
+
   const childCss = useMemo(() => {
     if (!isExpandable) return null;
 
