@@ -71,10 +71,27 @@ export const NavigationTreeItem = ({
     };
   }, [isExpandable, nestedChildrenLevel]);
 
+  const focusStyle = useMemo(() => {
+    if (!isExpandable) return {};
+
+    return {
+      '&:focus': {
+        boxShadow: 'none',
+
+        '&::before': {
+          background: 'none',
+        },
+        '&::after': {
+          background: 'none',
+        },
+      },
+    };
+  }, [isExpandable]);
+
   return (
     <Box>
       <NavigationItem
-        css={{ width: '100%' }}
+        css={{ width: '100%', ...focusStyle }}
         {...props}
         startAdornment={usedStartAdornment}
         onClick={isExpandable ? () => setIsExpanded(!isExpanded) : onClick}
