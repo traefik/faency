@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { NavigationTreeItem } from './NavigationTreeItem';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
-import { NavigationDrawer } from '../Navigation';
 import {
   ArchiveIcon,
   EyeOpenIcon,
@@ -10,6 +9,7 @@ import {
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
 } from '@radix-ui/react-icons';
+import { NavigationTreeDrawer } from '.';
 
 export default {
   title: 'Components/NavigationTree',
@@ -43,7 +43,7 @@ const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
   });
 
   return (
-    <NavigationDrawer>
+    <NavigationTreeDrawer>
       <NavigationTreeContainer {...args}>
         <NavigationTreeItem {...navigationHandlerProps('one')} label="One" subtitle="/one">
           <NavigationTreeItem
@@ -86,7 +86,7 @@ const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
         </NavigationTreeItem>
         <NavigationTreeItem {...navigationHandlerProps('three')} label="Three" />
       </NavigationTreeContainer>
-    </NavigationDrawer>
+    </NavigationTreeDrawer>
   );
 };
 
@@ -103,8 +103,8 @@ const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) =>
   });
 
   return (
-    <NavigationDrawer fullWidth>
-      <NavigationTreeContainer fullWidth {...args}>
+    <NavigationTreeDrawer fullWidth>
+      <NavigationTreeContainer {...args}>
         <NavigationTreeItem label="One" subtitle="/one">
           <NavigationTreeItem
             {...navigationHandlerProps('one-one')}
@@ -139,7 +139,7 @@ const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) =>
         </NavigationTreeItem>
         <NavigationTreeItem {...navigationHandlerProps('three')} label="Three" />
       </NavigationTreeContainer>
-    </NavigationDrawer>
+    </NavigationTreeDrawer>
   );
 };
 

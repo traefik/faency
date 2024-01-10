@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationContainer, NavigationContainerProps } from '../Navigation';
 import { CSS } from '../../stitches.config';
 
-export interface TreeViewProps {
+export interface NavigationTreeProps {
   children: React.ReactNode;
   defaultExpandIcon?: React.ReactNode;
   defaultCollapseIcon?: React.ReactNode;
@@ -17,7 +17,7 @@ export const NavigationTreeContainer = ({
   defaultExpandIcon = <ChevronRightIcon />,
   fullWidth = false,
   ...props
-}: TreeViewProps & NavigationContainerProps) => {
+}: NavigationTreeProps & NavigationContainerProps) => {
   const renderChildren = React.Children.map(children, (child) => {
     return React.cloneElement(child as React.ReactElement, {
       defaultCollapseIcon,
@@ -25,5 +25,6 @@ export const NavigationTreeContainer = ({
       fullWidth,
     });
   });
+
   return <NavigationContainer {...props}>{renderChildren}</NavigationContainer>;
 };
