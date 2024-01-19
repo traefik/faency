@@ -12,6 +12,7 @@ export namespace Theme {
     cardActiveBackground: Property.Color;
     cardActiveBorder: Property.Color;
     cardGhostBackground: Property.Color;
+    innerCardBgColor: Property.Color;
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;
@@ -25,6 +26,7 @@ export namespace Theme {
     cardActiveBackground: 'rgba(0,0,0,.03)',
     cardActiveBorder: '$primary',
     cardGhostBackground: '$deepBlue2',
+    innerCardBgColor: tinycolor('black').setAlpha(0.04).toHslString(),
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -36,5 +38,6 @@ export namespace Theme {
     cardActiveBackground: 'rgba(255,255,255,.07)',
     cardActiveBorder: tinycolor(primaryColor.value).setAlpha(0.4).toHslString(),
     cardGhostBackground: '$deepBlue1',
+    innerCardBgColor: tinycolor('white').setAlpha(0.07).toHslString(),
   });
 }

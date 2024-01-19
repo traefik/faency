@@ -37,7 +37,7 @@ const StyledCard = styled('div', {
     elevation: elevationVariants,
     variant: {
       inner: {
-        backgroundColor: 'rgba(255,255,255,.07)',
+        backgroundColor: '$innerCardBgColor',
       },
       ghost: {
         backgroundColor: 'transparent',
