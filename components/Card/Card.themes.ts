@@ -12,6 +12,7 @@ export namespace Theme {
     cardActiveBackground: Property.Color;
     cardActiveBorder: Property.Color;
     cardGhostBackground: Property.Color;
+    innerCardBgColor: Property.Color;
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;
