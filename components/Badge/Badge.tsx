@@ -8,6 +8,7 @@ type COLOR_VALUES = typeof COLORS[number];
 const getColorBadgeStyles = (color: COLOR_VALUES) => ({
   bc: `$${color}6`,
   color: `$${color}10`,
+  border: `1px solid $${color}10`,
 });
 
 type ColorVariants = Record<COLOR_VALUES, { bc: string; color: string }>;
@@ -80,11 +81,17 @@ const BADGE_BASE_STYLES = {
     alphaBg: {
       true: {},
     },
+    borderless: {
+      true: {
+        border: 'none',
+      },
+    },
   },
   compoundVariants: alphaColorCompoundVariants,
   defaultVariants: {
     size: 'small',
     variant: 'gray',
+    borderless: false,
   },
 };
 
@@ -116,6 +123,11 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
 
   variants: {
     variant: interactiveColorVariants,
+    borderless: {
+      true: {
+        border: 'none',
+      },
+    },
   },
 });
 const StyledButtonBadgeSlot = styled(Slot, StyledButtonBadge);

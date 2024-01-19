@@ -18,6 +18,7 @@ export default {
   argTypes: {
     size: { control: 'inline-radio' },
     variant: { control: 'select' },
+    borderless: { control: 'boolean' },
   },
 } as ComponentMeta<typeof BadgeForStory>;
 
@@ -36,6 +37,7 @@ Colors.args = {
   interactive: false,
   size: 'small',
   variant: 'gray',
+  borderless: false,
 };
 
 export const AlphaBackground = Colors.bind({});
@@ -52,6 +54,7 @@ Small.args = {
   interactive: false,
   size: 'small',
   variant: 'blue',
+  borderless: false,
 };
 
 export const Large: ComponentStory<typeof BadgeForStory> = (args) => (
@@ -62,6 +65,7 @@ Large.args = {
   interactive: false,
   size: 'large',
   variant: 'green',
+  borderless: false,
 };
 
 export const Interactive: ComponentStory<typeof BadgeForStory> = (args) => (
@@ -79,6 +83,7 @@ Interactive.args = {
   interactive: true,
   size: 'small',
   variant: 'gray',
+  borderless: false,
 };
 
 const Customize: ComponentStory<typeof BadgeForStory> = (args) => (
@@ -92,3 +97,14 @@ export const BadgeLink: ComponentStory<typeof BadgeForStory> = (args) => (
     <UnstyledLink href="https://traefik.io">Link</UnstyledLink>
   </Badge>
 );
+
+export const Borderless: ComponentStory<typeof BadgeForStory> = (args) => (
+  <Badge {...args}>Borderless badge</Badge>
+);
+
+Borderless.args = {
+  interactive: true,
+  size: 'small',
+  variant: 'neon',
+  borderless: true,
+};
