@@ -91,6 +91,7 @@ const BADGE_BASE_STYLES = {
   defaultVariants: {
     size: 'small',
     variant: 'gray',
+    borderless: false,
   },
 };
 
@@ -122,6 +123,11 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
 
   variants: {
     variant: interactiveColorVariants,
+    borderless: {
+      true: {
+        border: 'none',
+      },
+    },
   },
 });
 const StyledButtonBadgeSlot = styled(Slot, StyledButtonBadge);
