@@ -218,7 +218,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
           {!!collapsedContent && (
             <Td
-              css={{ paddingRight: 0 }}
+              css={{ padding: '0 0 0 $3' }}
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -228,6 +228,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                 align="center"
                 justify="center"
                 css={{
+                  height: '40px',
                   '&:hover': {
                     color: '$tableActiveText',
                   },
