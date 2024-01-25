@@ -224,7 +224,16 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                 e.preventDefault();
               }}
             >
-              <Flex align="center" justify="center" onClick={() => setIsCollapsed(!isCollapsed)}>
+              <Flex
+                align="center"
+                justify="center"
+                css={{
+                  '&:hover': {
+                    color: '$tableActiveText',
+                  },
+                }}
+                onClick={() => setIsCollapsed(!isCollapsed)}
+              >
                 <ChevronRightIcon
                   style={{
                     cursor: 'pointer',
