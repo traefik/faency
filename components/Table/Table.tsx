@@ -217,16 +217,25 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
         >
           {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
           {!!collapsedContent && (
-            <Td>
+            <Td
+              css={{ padding: '0 0 0 $3' }}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            >
               <Flex
                 align="center"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
+                justify="center"
+                css={{
+                  height: '40px',
+                  '&:hover': {
+                    color: '$tableActiveText',
+                  },
                 }}
+                onClick={() => setIsCollapsed(!isCollapsed)}
               >
                 <ChevronRightIcon
-                  onClick={() => setIsCollapsed(!isCollapsed)}
                   style={{
                     cursor: 'pointer',
                     transition: 'transform 0.2s ease-out',
