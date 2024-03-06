@@ -1,6 +1,7 @@
+import React from 'react';
 import { FaencyProvider } from '../components/FaencyProvider';
 import { DocsContainer } from './components/DocContainer';
-import { globalCss } from '../';
+import { globalCss } from '../dist';
 import { darkTheme, lightTheme } from '../stitches.config';
 import { useEffect } from 'react';
 
@@ -15,9 +16,10 @@ export const parameters = {
   darkMode: {
     stylePreview: true,
   },
-  docs: {
-    container: DocsContainer,
-  },
+  // TODO bring back doc container
+  // docs: {
+  //   container: DocsContainer,
+  // },
 };
 
 const globalStyle = globalCss({
