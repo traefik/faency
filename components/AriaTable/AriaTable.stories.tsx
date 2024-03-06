@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
 import {
   Table,
@@ -26,9 +26,9 @@ const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTabl
 export default {
   title: 'Components/AriaTable',
   component: TableForStory,
-} as ComponentMeta<typeof TableForStory>;
+} as Meta<typeof TableForStory>;
 
-export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
+export const Basic: StoryFn<any> = ({ transform, ...args }) => (
   <TableForStory aria-label="People" aria-describedby="basic-table-caption" {...args}>
     <Caption id="basic-table-caption" size="10">
       People with some information
@@ -107,7 +107,7 @@ Basic.argTypes = {
   },
 };
 
-export const Alignment: ComponentStory<any> = (args) => (
+export const Alignment: StoryFn<any> = (args) => (
   <TableForStory>
     <Thead>
       <Tr>
@@ -165,7 +165,7 @@ Alignment.args = {
   align: 'start',
 };
 
-export const Interactive: ComponentStory<any> = (args) => {
+export const Interactive: StoryFn<any> = (args) => {
   const [selectedRow, setSelectedRow] = useState(3);
   const makeSelectableRowProps = useCallback(
     (rowNum: number) => ({
@@ -227,7 +227,7 @@ Interactive.args = {
   interactive: true,
 };
 
-export const Links: ComponentStory<any> = (args) => (
+export const Links: StoryFn<any> = (args) => (
   <Table hasCollapsibleChildren aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
     <Caption id="empty-table-caption">Table with empty data</Caption>
     <Thead>
@@ -281,7 +281,7 @@ export const Links: ComponentStory<any> = (args) => (
   </Table>
 );
 
-const Customize: ComponentStory<any> = (args) => (
+const Customize: StoryFn<any> = (args) => (
   <TableForStory
     css={{ c: '$hiContrast' }}
     aria-label="People"
@@ -349,7 +349,7 @@ const Customize: ComponentStory<any> = (args) => (
   </TableForStory>
 );
 
-export const Columns: ComponentStory<any> = ({ transform, ...args }) => (
+export const Columns: StoryFn<any> = ({ transform, ...args }) => (
   <Flex direction="column" gap="4">
     <TableForStory aria-label="People" aria-describedby="basic-table-caption" {...args}>
       <Caption size="10" id="basic-table-caption">
@@ -572,7 +572,7 @@ const FlexIssue = () => (
   </Flex>
 );
 
-export const VerticalAlignment: ComponentStory<any> = (args) => (
+export const VerticalAlignment: StoryFn<any> = (args) => (
   <TableForStory>
     <Thead>
       <Tr>
@@ -595,7 +595,7 @@ export const VerticalAlignment: ComponentStory<any> = (args) => (
   </TableForStory>
 );
 
-export const CollapsibleRow: ComponentStory<any> = (args) => {
+export const CollapsibleRow: StoryFn<any> = (args) => {
   const [selectedRow, setSelectedRow] = useState(3);
   const makeSelectableRowProps = useCallback(
     (rowNum: number) => ({

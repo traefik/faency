@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Text } from '../Text';
 import { Card } from './Card';
 import { H2 } from '../Heading';
@@ -8,9 +8,9 @@ import { Flex } from '../Flex';
 export default {
   title: 'Components/Card',
   component: Card,
-} as ComponentMeta<typeof Card>;
+} as Meta<typeof Card>;
 
-const Template: ComponentStory<any> = (args) => (
+const Template: StoryFn<any> = (args) => (
   <Card {...args}>
     <H2 css={{ mb: '$3' }}>Card</H2>
     <Text>
@@ -45,7 +45,7 @@ Interactive.args = {
   interactive: true,
 };
 
-export const Inner: ComponentStory<typeof Card> = (args) => (
+export const Inner: StoryFn<typeof Card> = (args) => (
   <Card>
     <H2 css={{ mb: '$3' }}>Wrapping Card</H2>
     <Template {...args} />
@@ -56,7 +56,7 @@ Inner.args = {
   variant: 'inner',
 };
 
-export const Elevation: ComponentStory<typeof Card> = (args) => (
+export const Elevation: StoryFn<typeof Card> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Card elevation={0}>
       <H2 css={{ mb: '$3' }}>No Elevation</H2>
@@ -123,4 +123,4 @@ export const Elevation: ComponentStory<typeof Card> = (args) => (
 
 Elevation.args = {};
 
-const Customize: ComponentStory<any> = (args) => <Card css={{ c: '$hiContrast' }} {...args}></Card>;
+const Customize: StoryFn<any> = (args) => <Card css={{ c: '$hiContrast' }} {...args}></Card>;

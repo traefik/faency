@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import {
   DashboardIcon,
   PersonIcon,
@@ -30,7 +30,7 @@ export default {
       control: 'boolean',
     },
   },
-} as ComponentMeta<typeof NavigationDrawer>;
+} as Meta<typeof NavigationDrawer>;
 
 const BaseNavigationDrawer = (props: NavigationDrawerProps): JSX.Element => (
   <NavigationDrawer {...props} />
@@ -51,7 +51,7 @@ const useNavigationSample = (initialRoute = '/') => {
   return { navigationHandlerProps };
 };
 
-const Template: ComponentStory<typeof NavigationDrawerForStory> = (args) => {
+const Template: StoryFn<typeof NavigationDrawerForStory> = (args) => {
   const { navigationHandlerProps } = useNavigationSample();
 
   return (
@@ -71,7 +71,7 @@ Basic.args = {
   fullWidth: false,
 };
 
-const AdornmentsTemplate: ComponentStory<typeof NavigationDrawerForStory> = (args) => {
+const AdornmentsTemplate: StoryFn<typeof NavigationDrawerForStory> = (args) => {
   const { navigationHandlerProps } = useNavigationSample();
 
   return (
@@ -116,7 +116,7 @@ Adornments.args = {
   elevation: 1,
 };
 
-const MultipleSectionsTemplate: ComponentStory<typeof NavigationDrawerForStory> = (args) => {
+const MultipleSectionsTemplate: StoryFn<typeof NavigationDrawerForStory> = (args) => {
   const { navigationHandlerProps } = useNavigationSample();
 
   return (

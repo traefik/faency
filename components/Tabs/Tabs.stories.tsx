@@ -1,4 +1,5 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { H2 } from '../Heading';
 import { Text } from '../Text';
 import { TabsContainer, TabsList, TabsTrigger, TabsContent } from './Tabs';
@@ -6,9 +7,9 @@ import { TabsContainer, TabsList, TabsTrigger, TabsContent } from './Tabs';
 export default {
   title: 'Components/Tabs',
   component: TabsContainer,
-} as ComponentMeta<typeof TabsContainer>;
+} as Meta<typeof TabsContainer>;
 
-export const Basic: ComponentStory<any> = (args) => {
+export const Basic: StoryFn<any> = (args) => {
   return (
     <TabsContainer defaultValue="tab1">
       <TabsList aria-label="Tabs Group">

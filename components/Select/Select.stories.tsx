@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Select, SelectProps, SelectVariants } from './Select';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -13,9 +13,9 @@ const SelectForStory = modifyVariantsForStory<
 export default {
   title: 'Components/Select',
   component: SelectForStory,
-} as ComponentMeta<typeof SelectForStory>;
+} as Meta<typeof SelectForStory>;
 
-const Template: ComponentStory<typeof SelectForStory> = (args) => (
+const Template: StoryFn<typeof SelectForStory> = (args) => (
   <SelectForStory {...args}>
     <option value="option1">Option 1</option>
     <option value="option2">Option 2</option>
@@ -51,7 +51,7 @@ export const Disabled = Template.bind({});
 
 Disabled.args = { disabled: true, defaultValue: 'option3' };
 
-export const Overflow: ComponentStory<typeof SelectForStory> = ({ width, ...args }) => (
+export const Overflow: StoryFn<typeof SelectForStory> = ({ width, ...args }) => (
   <SelectForStory css={{ width }} {...args}>
     <option value="option1">Too long option, I have to cut</option>
     <option value="option2">Option 2</option>
@@ -73,7 +73,7 @@ Overflow.argTypes = {
   },
 };
 
-const Customize: ComponentStory<typeof SelectForStory> = (args) => (
+const Customize: StoryFn<typeof SelectForStory> = (args) => (
   <Select css={{ c: '$hiContrast' }} {...args}>
     <option value="option1">Option 1</option>
     <option value="option2">Option 2</option>

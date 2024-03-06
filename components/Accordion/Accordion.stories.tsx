@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 import { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from '.';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -19,9 +19,9 @@ const AccordionForStory = modifyVariantsForStory<AccordionVariants, any>(BaseAcc
 export default {
   title: 'Components/Accordion',
   component: AccordionForStory,
-} as ComponentMeta<typeof AccordionForStory>;
+} as Meta<typeof AccordionForStory>;
 
-const Template: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) => (
+const Template: StoryFn<typeof AccordionForStory> = ({ size, ...args }) => (
   <Box css={{ width: 300 }}>
     <AccordionForStory {...args}>
       <AccordionItem value="item-1">
@@ -81,7 +81,7 @@ MultipleCollapsible.argTypes = {
   },
 };
 
-export const Complex: ComponentStory<typeof AccordionForStory> = (args) => (
+export const Complex: StoryFn<typeof AccordionForStory> = (args) => (
   <Box css={{ width: 300 }}>
     <AccordionForStory {...args}>
       <AccordionItem value="item-1">
@@ -119,7 +119,7 @@ Complex.argTypes = {
   },
 };
 
-const Customize: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) => (
+const Customize: StoryFn<typeof AccordionForStory> = ({ size, ...args }) => (
   <Box css={{ width: 300 }}>
     <AccordionForStory css={{ maxWidth: 250 }} {...args}>
       <AccordionItem css={{ bc: '$hiContrast' }} value="item-1">
@@ -142,7 +142,7 @@ const Customize: ComponentStory<typeof AccordionForStory> = ({ size, ...args }) 
   </Box>
 );
 
-export const InsideModal: ComponentStory<typeof AccordionForStory> = (args) => {
+export const InsideModal: StoryFn<typeof AccordionForStory> = (args) => {
   const [open, setOpen] = useState(false);
 
   return (

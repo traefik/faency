@@ -1,12 +1,13 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Avatar } from './Avatar';
 
 export default {
   title: 'Components/Avatar',
   component: Avatar,
-} as ComponentMeta<any>;
+} as Meta<any>;
 
-export const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
+export const Template: StoryFn<typeof Avatar> = (args) => <Avatar {...args} />;
 
 Template.args = {
   src: 'https://picsum.photos/100',
@@ -89,6 +90,4 @@ Variants.argTypes = {
     options: ['gray', 'red', 'purple', 'blue', 'green', 'orange'],
   },
 };
-const Customize: ComponentStory<typeof Avatar> = (args) => (
-  <Avatar css={{ c: '$hiContrast' }} {...args} />
-);
+const Customize: StoryFn<typeof Avatar> = (args) => <Avatar css={{ c: '$hiContrast' }} {...args} />;

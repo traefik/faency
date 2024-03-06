@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Ul, Li, ListProps } from './List';
 import { Avatar } from '../Avatar';
@@ -13,9 +13,9 @@ import { InfoCircledIcon } from '@radix-ui/react-icons';
 export default {
   title: 'Components/List',
   component: Ul,
-} as ComponentMeta<typeof Ul>;
+} as Meta<typeof Ul>;
 
-const Template: ComponentStory<typeof Ul> = (args) => (
+const Template: StoryFn<typeof Ul> = (args) => (
   <Ul {...args}>
     <Li>Dashboard</Li>
     <Li>Profile</Li>
@@ -24,7 +24,7 @@ const Template: ComponentStory<typeof Ul> = (args) => (
   </Ul>
 );
 
-const Customize: ComponentStory<typeof Ul> = (args) => (
+const Customize: StoryFn<typeof Ul> = (args) => (
   <Ul css={{ mt: '$1' }} {...args}>
     <Li css={{ color: '$hiContrast' }}>Dashboard</Li>
     <Li>Profile</Li>
@@ -40,7 +40,7 @@ Interactive.args = {
   interactive: true,
 };
 
-export const Users: ComponentStory<typeof Ul> = (args) => (
+export const Users: StoryFn<typeof Ul> = (args) => (
   <Ul {...args}>
     <Li gap="3">
       <Avatar id="100" src="https://picsum.photos/100" />
@@ -69,7 +69,7 @@ Users.args = {
   interactive: true,
 };
 
-export const Controls: ComponentStory<typeof Ul> = (args) => (
+export const Controls: StoryFn<typeof Ul> = (args) => (
   <Ul {...args}>
     <Li gap="3" controls={<Checkbox />}>
       <Avatar id="100" src="https://picsum.photos/100" />

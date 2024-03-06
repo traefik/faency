@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -18,9 +18,9 @@ const ContainerForStory = modifyVariantsForStory<
 export default {
   title: 'Components/Container',
   component: ContainerForStory,
-} as ComponentMeta<typeof ContainerForStory>;
+} as Meta<typeof ContainerForStory>;
 
-const Template: ComponentStory<typeof ContainerForStory> = (args) => (
+const Template: StoryFn<typeof ContainerForStory> = (args) => (
   <Container {...args} css={{ bc: '$deepBlue3' }}>
     <Paragraph>
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, iste. Perferendis saepe aperiam

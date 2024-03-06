@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { styled } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
@@ -29,9 +29,9 @@ export default {
   title: 'Components/Input',
   component: InputForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as ComponentMeta<typeof InputForStory>;
+} as Meta<typeof InputForStory>;
 
-export const Basic: ComponentStory<typeof InputForStory> = ({ id, ...args }) => (
+export const Basic: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>
     <Box>
       <Label htmlFor={`${id}-small`}>Small</Label>
@@ -90,7 +90,7 @@ const INPUT_TYPES = [
   'url',
 ];
 
-export const Types: ComponentStory<typeof InputForStory> = ({ type, ...args }) => (
+export const Types: StoryFn<typeof InputForStory> = ({ type, ...args }) => (
   <Flex direction="column" gap={2}>
     {INPUT_TYPES.map((type) => (
       <>
@@ -118,7 +118,7 @@ export const ReadOnly = Basic.bind({});
 ReadOnly.args = { id: 'readonly', readOnly: true, defaultValue: 'value' };
 ignoreArgType('id', ReadOnly);
 
-export const Ghost: ComponentStory<typeof InputForStory> = (args) => (
+export const Ghost: StoryFn<typeof InputForStory> = (args) => (
   <Flex direction="column" gap={2}>
     <Box>
       <Label htmlFor="ghost-small">Small</Label>
@@ -181,7 +181,7 @@ Adornments.argTypes = {
 };
 ignoreArgType('id', Adornments);
 
-export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
+export const Autofill: StoryFn<typeof InputForStory> = (args) => (
   <form>
     <Flex direction="column" gap={2}>
       <Box>
@@ -248,6 +248,6 @@ export const Autofill: ComponentStory<typeof InputForStory> = (args) => (
   </form>
 );
 
-const Customize: ComponentStory<typeof InputForStory> = ({ id, ...args }) => (
+const Customize: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
   <InputForStory css={{ c: '$hiContrast' }} {...args} />
 );

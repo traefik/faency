@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { VisuallyHidden } from './VisuallyHidden';
 import { Table, Caption } from '../Table';
@@ -22,22 +22,22 @@ const ContrastDiv = styled('div', {
 export default {
   title: 'Components/VisuallyHidden',
   component: VisuallyHidden,
-} as ComponentMeta<typeof VisuallyHidden>;
+} as Meta<typeof VisuallyHidden>;
 
-export const Basic: ComponentStory<typeof VisuallyHidden> = (args) => (
+export const Basic: StoryFn<typeof VisuallyHidden> = (args) => (
   <ContrastDiv>
     <VisuallyHidden {...args}>Hidden visually</VisuallyHidden>
   </ContrastDiv>
 );
 
-export const HiddenButtonText: ComponentStory<typeof VisuallyHidden> = (args) => (
+export const HiddenButtonText: StoryFn<typeof VisuallyHidden> = (args) => (
   <FlexButton>
     <GearIcon />
     <VisuallyHidden {...args}>Settings</VisuallyHidden>
   </FlexButton>
 );
 
-export const AsChild: ComponentStory<typeof VisuallyHidden> = (args) => (
+export const AsChild: StoryFn<typeof VisuallyHidden> = (args) => (
   <ContrastDiv>
     <Card>
       <Table css={{ minHeight: 50, border: '1px dashed $hiContrast' }}>

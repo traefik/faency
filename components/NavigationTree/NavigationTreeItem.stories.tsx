@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { NavigationTreeItem } from './NavigationTreeItem';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 import { NavigationDrawer } from '../Navigation';
@@ -78,9 +78,9 @@ export default {
       control: 'boolean',
     },
   },
-} as ComponentMeta<typeof NavigationTreeItem>;
+} as Meta<typeof NavigationTreeItem>;
 
-const Template: ComponentStory<typeof NavigationTreeItem> = (args) => {
+const Template: StoryFn<typeof NavigationTreeItem> = (args) => {
   const [currentRoute, setCurrentRoute] = useState('/');
 
   const navigationHandlerProps = (route: string) => ({

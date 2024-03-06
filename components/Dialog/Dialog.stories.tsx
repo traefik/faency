@@ -1,4 +1,5 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import {
   Dialog,
   DialogContent,
@@ -16,7 +17,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 export default {
   title: 'Components/Dialog',
   component: Dialog,
-} as ComponentMeta<typeof Dialog>;
+} as Meta<typeof Dialog>;
 
 const Content: React.FC = () => {
   const [count, setCount] = useState(1);
@@ -43,7 +44,7 @@ const Content: React.FC = () => {
   );
 };
 
-export const Basic: ComponentStory<any> = (args) => {
+export const Basic: StoryFn<any> = (args) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -75,7 +76,7 @@ export const Basic: ComponentStory<any> = (args) => {
   );
 };
 
-const Customize: ComponentStory<any> = (args) => {
+const Customize: StoryFn<any> = (args) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -107,7 +108,7 @@ const Customize: ComponentStory<any> = (args) => {
   );
 };
 
-export const NoCloseIcon: ComponentStory<any> = (args) => {
+export const NoCloseIcon: StoryFn<any> = (args) => {
   const [open, setOpen] = useState(false);
 
   return (

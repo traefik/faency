@@ -1,6 +1,6 @@
 import React from 'react';
 import { VariantProps } from '../../stitches.config';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Radio, RadioVariants, RadioProps, RadioGroup } from './Radio';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -20,9 +20,9 @@ const RadioGroupForStory = modifyVariantsForStory<
 export default {
   title: 'Components/Radio',
   component: RadioForStory,
-} as ComponentMeta<typeof RadioForStory>;
+} as Meta<typeof RadioForStory>;
 
-const Template: ComponentStory<typeof RadioForStory> = ({ value, ...args }) => (
+const Template: StoryFn<typeof RadioForStory> = ({ value, ...args }) => (
   <RadioGroupForStory defaultValue="1">
     <RadioForStory value="1" css={{ mr: '$5' }} {...args} />
     <RadioForStory value="2" css={{ mr: '$5' }} {...args} />
@@ -46,7 +46,7 @@ Disabled.args = {
   size: 2,
 };
 
-const Customize: ComponentStory<typeof RadioForStory> = ({ value, ...args }) => (
+const Customize: StoryFn<typeof RadioForStory> = ({ value, ...args }) => (
   <RadioGroup css={{ c: '$hiContrast' }} defaultValue="1">
     <RadioForStory value="1" css={{ mr: '$5' }} {...args} />
     <RadioForStory value="2" css={{ mr: '$5' }} {...args} />

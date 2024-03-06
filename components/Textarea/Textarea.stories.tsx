@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 import { Textarea, TextareaProps, TextareaVariants } from './Textarea';
@@ -16,9 +16,9 @@ const TextareaForStory = modifyVariantsForStory<TextareaVariants, TextareaProps>
 export default {
   title: 'Components/Textarea',
   component: TextareaForStory,
-} as ComponentMeta<typeof TextareaForStory>;
+} as Meta<typeof TextareaForStory>;
 
-const Template: ComponentStory<typeof TextareaForStory> = (args) => (
+const Template: StoryFn<typeof TextareaForStory> = (args) => (
   <Box>
     <TextareaForStory {...args} />
   </Box>
@@ -82,7 +82,7 @@ export const ReadOnly = Template.bind({});
 ReadOnly.args = { id: 'readonly-textarea', readOnly: true, defaultValue: 'default value' };
 ignoreArgType('id', ReadOnly);
 
-export const Ghost: ComponentStory<typeof TextareaForStory> = (args) => (
+export const Ghost: StoryFn<typeof TextareaForStory> = (args) => (
   <Flex direction="column" gap={2}>
     <TextareaForStory id="ghost-textarea" label="Ghost textarea" {...args} />
     <TextareaForStory
@@ -120,7 +120,7 @@ EndAdornment.args = {
   endAdornment: <InfoCircledIcon />,
 };
 
-export const ReadOnlyCopy: ComponentStory<typeof TextareaForStory> = (args) => {
+export const ReadOnlyCopy: StoryFn<typeof TextareaForStory> = (args) => {
   const toCopy = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
   labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
   laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
@@ -158,6 +158,6 @@ export const ReadOnlyCopy: ComponentStory<typeof TextareaForStory> = (args) => {
   );
 };
 
-const Customize: ComponentStory<typeof TextareaForStory> = (args) => (
+const Customize: StoryFn<typeof TextareaForStory> = (args) => (
   <Textarea {...args} css={{ c: '$hiContrast' }} />
 );

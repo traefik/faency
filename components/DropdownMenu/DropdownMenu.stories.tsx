@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import {
   DropdownMenu,
@@ -20,9 +20,9 @@ export default {
   title: 'Components/DropdownMenu',
   component: DropdownMenu,
   argTypes: { onOpenChange: { action: 'clicked' } },
-} as ComponentMeta<typeof DropdownMenu>;
+} as Meta<typeof DropdownMenu>;
 
-const Template: ComponentStory<typeof DropdownMenu> = (args) => (
+const Template: StoryFn<typeof DropdownMenu> = (args) => (
   <DropdownMenu {...args}>
     <DropdownMenuTrigger asChild>
       <Button>Dropdown</Button>
@@ -64,7 +64,7 @@ DefaultOpen.args = {
   defaultOpen: true,
 };
 
-const Customize: ComponentStory<typeof DropdownMenu> = (args) => (
+const Customize: StoryFn<typeof DropdownMenu> = (args) => (
   <DropdownMenu {...args}>
     <DropdownMenuTrigger asChild>
       <Button>Dropdown</Button>

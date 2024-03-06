@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Flex } from '../Flex';
 import { Label } from '../Label';
@@ -26,13 +26,11 @@ export default {
   title: 'Components/TextField',
   component: TextFieldForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as ComponentMeta<typeof TextFieldForStory>;
+} as Meta<typeof TextFieldForStory>;
 
-const Template: ComponentStory<typeof TextFieldForStory> = (args) => (
-  <TextFieldForStory {...args} />
-);
+const Template: StoryFn<typeof TextFieldForStory> = (args) => <TextFieldForStory {...args} />;
 
-export const Basic: ComponentStory<typeof TextFieldForStory> = ({ id, ...args }) => (
+export const Basic: StoryFn<typeof TextFieldForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>
     <TextFieldForStory
       size="small"
@@ -95,7 +93,7 @@ const StyledCopyIcon = styled(CopyIcon, {
   },
 });
 
-export const ReadOnlyCopy: ComponentStory<typeof TextFieldForStory> = (args) => {
+export const ReadOnlyCopy: StoryFn<typeof TextFieldForStory> = (args) => {
   const toCopy = 'Text to copy';
   const [copied, setCopied] = useState(false);
 
@@ -127,7 +125,7 @@ export const ReadOnlyCopy: ComponentStory<typeof TextFieldForStory> = (args) => 
   );
 };
 
-export const Display: ComponentStory<typeof TextFieldForStory> = ({ id, ...args }) => (
+export const Display: StoryFn<typeof TextFieldForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>
     <TextFieldForStory
       id={`${id}-disabled`}
@@ -160,7 +158,7 @@ DisplayClearable.args = {
 };
 ignoreArgType('id', DisplayClearable);
 
-export const LabelComponent: ComponentStory<typeof TextFieldForStory> = ({ id, ...args }) => (
+export const LabelComponent: StoryFn<typeof TextFieldForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>
     <TextFieldForStory id={`${id}-basic`} {...args} />
     <TextFieldForStory id={`${id}-invalid`} state="invalid" {...args} />
@@ -201,6 +199,6 @@ LabelComponent.args = {
 };
 ignoreArgType('id', LabelComponent);
 
-const Customize: ComponentStory<typeof TextFieldForStory> = (args) => (
+const Customize: StoryFn<typeof TextFieldForStory> = (args) => (
   <TextFieldForStory css={{ c: '$hiContrast' }} {...args} />
 );

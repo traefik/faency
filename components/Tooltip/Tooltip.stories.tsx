@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Tooltip, TooltipProps, TooltipVariants } from './Tooltip';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -21,9 +21,9 @@ const SpacedBox = styled(Box, {
 export default {
   title: 'Components/Tooltip',
   component: TooltipForStory,
-} as ComponentMeta<typeof TooltipForStory>;
+} as Meta<typeof TooltipForStory>;
 
-const Template: ComponentStory<typeof TooltipForStory> = (args) => (
+const Template: StoryFn<typeof TooltipForStory> = (args) => (
   <Container>
     <TooltipForStory {...args}>
       <Text css={{ display: 'inline-block' }}>Tooltip label</Text>
@@ -81,7 +81,7 @@ NodeContent.argTypes = {
   },
 };
 
-const Customize: ComponentStory<typeof TooltipForStory> = (args) => (
+const Customize: StoryFn<typeof TooltipForStory> = (args) => (
   <Container>
     <TooltipForStory css={{ c: '$hiContrast' }} {...args}>
       <Text css={{ display: 'inline-block' }}>Tooltip label</Text>

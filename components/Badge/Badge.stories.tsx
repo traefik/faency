@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { VariantProps } from '../../stitches.config';
 import { Badge, COLORS } from './Badge';
@@ -20,9 +20,9 @@ export default {
     variant: { control: 'select' },
     borderless: { control: 'boolean' },
   },
-} as ComponentMeta<typeof BadgeForStory>;
+} as Meta<typeof BadgeForStory>;
 
-export const Colors: ComponentStory<typeof BadgeForStory> = (args) => (
+export const Colors: StoryFn<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Badge {...args}>Default</Badge>
     {COLORS.map((color) => (
@@ -46,9 +46,7 @@ AlphaBackground.args = {
   alphaBg: true,
 };
 
-export const Small: ComponentStory<typeof BadgeForStory> = (args) => (
-  <Badge {...args}>Small badge</Badge>
-);
+export const Small: StoryFn<typeof BadgeForStory> = (args) => <Badge {...args}>Small badge</Badge>;
 
 Small.args = {
   interactive: false,
@@ -57,9 +55,7 @@ Small.args = {
   borderless: false,
 };
 
-export const Large: ComponentStory<typeof BadgeForStory> = (args) => (
-  <Badge {...args}>Large badge</Badge>
-);
+export const Large: StoryFn<typeof BadgeForStory> = (args) => <Badge {...args}>Large badge</Badge>;
 
 Large.args = {
   interactive: false,
@@ -68,7 +64,7 @@ Large.args = {
   borderless: false,
 };
 
-export const Interactive: ComponentStory<typeof BadgeForStory> = (args) => (
+export const Interactive: StoryFn<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Badge {...args}>Default</Badge>
     {COLORS.map((color) => (
@@ -86,19 +82,19 @@ Interactive.args = {
   borderless: false,
 };
 
-const Customize: ComponentStory<typeof BadgeForStory> = (args) => (
+const Customize: StoryFn<typeof BadgeForStory> = (args) => (
   <Badge css={{ c: '$hiContrast' }} {...args}>
     Customize
   </Badge>
 );
 
-export const BadgeLink: ComponentStory<typeof BadgeForStory> = (args) => (
+export const BadgeLink: StoryFn<typeof BadgeForStory> = (args) => (
   <Badge asChild interactive {...args}>
     <UnstyledLink href="https://traefik.io">Link</UnstyledLink>
   </Badge>
 );
 
-export const Borderless: ComponentStory<typeof BadgeForStory> = (args) => (
+export const Borderless: StoryFn<typeof BadgeForStory> = (args) => (
   <Badge {...args}>Borderless badge</Badge>
 );
 
