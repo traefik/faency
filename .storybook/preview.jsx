@@ -1,9 +1,11 @@
 import React from 'react';
 import { FaencyProvider } from '../components/FaencyProvider';
-import { DocsContainer } from './components/DocContainer';
+import { DocsContainer } from '@storybook/addon-docs';
 import { globalCss } from '../dist';
 import { darkTheme, lightTheme } from '../stitches.config';
 import { useEffect } from 'react';
+import { themes } from '@storybook/theming';
+import { useDarkMode } from 'storybook-dark-mode';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -16,10 +18,18 @@ export const parameters = {
   darkMode: {
     stylePreview: true,
   },
-  // TODO bring back doc container
-  // docs: {
-  //   container: DocsContainer,
-  // },
+  docs: {
+    container: (context) => {
+      const isDark = useDarkMode();
+
+      const props = {
+        ...context,
+        theme: isDark ? themes.dark : themes.light,
+      };
+
+      return React.createElement(DocsContainer, props);
+    },
+  },
 };
 
 const globalStyle = globalCss({
