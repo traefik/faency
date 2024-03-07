@@ -1,8 +1,6 @@
-module.exports = {
-  features: {
-    previewMdx2: true,
-  },
+import type { StorybookConfig } from '@storybook/react-vite';
 
+const config: StorybookConfig = {
   stories: [
     '../stories/**/*.stories.mdx',
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
@@ -26,7 +24,7 @@ module.exports = {
   },
 
   framework: {
-    name: '@storybook/react-webpack5',
+    name: '@storybook/react-vite',
     options: {},
   },
 
@@ -34,3 +32,5 @@ module.exports = {
     autodocs: true,
   },
 };
+
+export default config;

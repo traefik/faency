@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaencyProvider } from '../components/FaencyProvider';
 import { DocsContainer } from '@storybook/addon-docs';
-import { globalCss } from '../dist';
+import { globalCss } from '../';
 import { darkTheme, lightTheme } from '../stitches.config';
 import { useEffect } from 'react';
 import { themes } from '@storybook/theming';
