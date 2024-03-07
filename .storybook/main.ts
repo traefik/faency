@@ -16,7 +16,6 @@ const config: StorybookConfig = {
       },
     },
     'storybook-dark-mode',
-    '@storybook/addon-mdx-gfm',
   ],
 
   core: {
