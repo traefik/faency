@@ -97,11 +97,8 @@ const ListContext = createContext({
   interactive: false,
 });
 
-export interface ListProps
-  extends Omit<ComponentProps<typeof StyledUl>, 'css'>,
-    VariantProps<typeof StyledUl> {
+export interface ListProps extends ComponentProps<typeof StyledUl>, VariantProps<typeof StyledUl> {
   interactive?: boolean;
-  css?: CSS;
 }
 export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>(
   ({ interactive, ...props }, forwardedRef) => {
@@ -128,11 +125,10 @@ const ControlsWrapper = styled('div', {
 });
 
 export interface ListItemProps
-  extends Omit<ComponentProps<typeof StyledLi>, 'css'>,
+  extends ComponentProps<typeof StyledLi>,
     VariantProps<typeof StyledLi>,
     VariantProps<typeof Flex> {
   controls?: ReactNode;
-  css?: CSS;
 }
 export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemProps>(
   ({ children, controls, align, justify, direction, gap, wrap, ...props }, forwardedRef) => {
