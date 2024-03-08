@@ -44,6 +44,14 @@ const StyledCard = styled('div', {
         boxShadow: 'none',
       },
     },
+    active: {
+      true: {
+        '&::before': {
+          outline: '1px solid $colors$cardActiveBorder',
+          backgroundColor: '$cardActiveBackground',
+        },
+      },
+    },
   },
   defaultVariants: {
     elevation: 1,

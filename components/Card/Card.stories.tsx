@@ -10,7 +10,7 @@ export default {
   component: Card,
 } as Meta<typeof Card>;
 
-const Template: StoryFn<any> = (args) => (
+const Template: StoryFn<typeof Card> = (args) => (
   <Card {...args}>
     <H2 css={{ mb: '$3' }}>Card</H2>
     <Text>
@@ -123,4 +123,6 @@ export const Elevation: StoryFn<typeof Card> = (args) => (
 
 Elevation.args = {};
 
-const Customize: StoryFn<any> = (args) => <Card css={{ c: '$hiContrast' }} {...args}></Card>;
+const Customize: StoryFn<typeof Card> = (args) => (
+  <Card css={{ c: '$hiContrast' }} {...args}></Card>
+);
