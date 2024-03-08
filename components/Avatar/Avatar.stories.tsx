@@ -5,7 +5,7 @@ import { Avatar } from './Avatar';
 export default {
   title: 'Components/Avatar',
   component: Avatar,
-} as Meta<any>;
+} as Meta<typeof Avatar>;
 
 export const Template: StoryFn<typeof Avatar> = (args) => <Avatar {...args} />;
 

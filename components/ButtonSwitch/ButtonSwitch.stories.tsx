@@ -8,7 +8,7 @@ export default {
   component: ButtonSwitchContainer,
 } as Meta<typeof ButtonSwitchContainer>;
 
-export const Basic: StoryFn<any> = (args) => {
+export const Basic: StoryFn<typeof ButtonSwitchContainer> = () => {
   const [value, setValue] = useState('left');
 
   return (
@@ -19,7 +19,7 @@ export const Basic: StoryFn<any> = (args) => {
   );
 };
 
-export const Multiple: StoryFn<any> = (args) => {
+export const Multiple: StoryFn<typeof ButtonSwitchContainer> = () => {
   const [value, setValue] = useState<string[]>([]);
 
   return (

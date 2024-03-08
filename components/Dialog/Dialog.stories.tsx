@@ -44,7 +44,7 @@ const Content: React.FC = () => {
   );
 };
 
-export const Basic: StoryFn<any> = (args) => {
+export const Basic: StoryFn<typeof Dialog> = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -76,7 +76,7 @@ export const Basic: StoryFn<any> = (args) => {
   );
 };
 
-const Customize: StoryFn<any> = (args) => {
+const Customize: StoryFn<typeof Dialog> = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -108,7 +108,7 @@ const Customize: StoryFn<any> = (args) => {
   );
 };
 
-export const NoCloseIcon: StoryFn<any> = (args) => {
+export const NoCloseIcon: StoryFn<typeof Dialog> = () => {
   const [open, setOpen] = useState(false);
 
   return (

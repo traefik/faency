@@ -9,7 +9,7 @@ export default {
   component: TabsContainer,
 } as Meta<typeof TabsContainer>;
 
-export const Basic: StoryFn<any> = (args) => {
+export const Basic: StoryFn<typeof TabsContainer> = (args) => {
   return (
     <TabsContainer defaultValue="tab1">
       <TabsList aria-label="Tabs Group">

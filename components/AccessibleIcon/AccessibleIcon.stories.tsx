@@ -9,18 +9,18 @@ export default {
   title: 'Components/AccessibleIcon',
   component: AccessibleIcon,
   tags: ['autodocs'],
-} as Meta<any>;
+} as Meta<typeof AccessibleIcon>;
 
-export const Basic: StoryFn<any> = (args) => (
+export const Basic: StoryFn<typeof AccessibleIcon> = () => (
   <Flex gap={3} align="center">
     <IconButton>
-      <AccessibleIcon label="notification" {...args} size="1">
+      <AccessibleIcon label="notification">
         <Icons.BellIcon />
       </AccessibleIcon>
     </IconButton>
 
     <IconButton>
-      <AccessibleIcon label="user settings" {...args} size="2">
+      <AccessibleIcon label="user settings">
         <Icons.AvatarIcon />
       </AccessibleIcon>
     </IconButton>
