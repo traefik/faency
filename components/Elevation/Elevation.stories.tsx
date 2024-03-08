@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Elevation } from './Elevation';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
@@ -7,9 +7,9 @@ import { Text } from '../Text';
 export default {
   title: 'Components/Elevation',
   component: Elevation,
-} as ComponentMeta<typeof Elevation>;
+} as Meta<typeof Elevation>;
 
-export const Basic: ComponentStory<typeof Elevation> = (args) => (
+export const Basic: StoryFn<typeof Elevation> = (args) => (
   <Flex gap={3}>
     <Elevation variant={0}>
       <Flex
@@ -77,6 +77,6 @@ Basic.argTypes = {
   },
 };
 
-const Customize: ComponentStory<typeof Elevation> = () => (
+const Customize: StoryFn<typeof Elevation> = () => (
   <Elevation css={{ c: '$hiContrast' }} variant={0} />
 );

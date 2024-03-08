@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Flex } from '../Flex';
 import { H1, H2, H3, H4, H5, H6 } from './Heading';
@@ -7,9 +7,9 @@ import { H1, H2, H3, H4, H5, H6 } from './Heading';
 export default {
   title: 'Components/Heading',
   component: H1,
-} as ComponentMeta<typeof H1>;
+} as Meta<typeof H1>;
 
-const Template: ComponentStory<typeof H1> = (args) => (
+const Template: StoryFn<typeof H1> = (args) => (
   <Flex direction="column">
     <H1 {...args}>Heading level 1</H1>
     <H2 {...args}>Heading level 2</H2>
@@ -30,7 +30,7 @@ Basic.argTypes = {
   },
 };
 
-export const Transform: ComponentStory<typeof H1> = (args) => (
+export const Transform: StoryFn<typeof H1> = (args) => (
   <Flex direction="column">
     <H1 {...args}>heading level 1 default</H1>
     <H1 {...args} transform="uppercase">
@@ -45,7 +45,7 @@ export const Transform: ComponentStory<typeof H1> = (args) => (
   </Flex>
 );
 
-const Customize: ComponentStory<typeof H1> = (args) => (
+const Customize: StoryFn<typeof H1> = (args) => (
   <H1 css={{ fontWeight: '$semiBold' }} {...args}>
     Heading level 1 SemiBold
   </H1>

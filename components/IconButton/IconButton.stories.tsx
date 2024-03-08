@@ -1,4 +1,5 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { IconButton } from './IconButton';
 import * as Icons from '@radix-ui/react-icons';
 import { Flex } from '../Flex';
@@ -6,9 +7,9 @@ import { Flex } from '../Flex';
 export default {
   title: 'Components/IconButton',
   component: IconButton,
-} as ComponentMeta<any>;
+} as Meta<typeof IconButton>;
 
-export const Sizes: ComponentStory<any> = (args) => (
+export const Sizes: StoryFn<typeof IconButton> = (args) => (
   <Flex gap={3} align="center">
     <IconButton {...args} size="1">
       <Icons.BellIcon />
@@ -36,7 +37,7 @@ Sizes.argTypes = {
   },
 };
 
-export const Variants: ComponentStory<any> = (args) => (
+export const Variants: StoryFn<typeof IconButton> = (args) => (
   <Flex gap={3} align="center">
     <IconButton {...args} variant="default">
       <Icons.BellIcon />
@@ -70,6 +71,6 @@ Variants.argTypes = {
   },
 };
 
-const Customize: ComponentStory<any> = (args) => (
+const Customize: StoryFn<typeof IconButton> = (args) => (
   <IconButton css={{ c: '$hiContrast' }} {...args} size="1"></IconButton>
 );

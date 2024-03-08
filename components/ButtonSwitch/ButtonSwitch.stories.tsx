@@ -1,13 +1,14 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { ButtonSwitchContainer, ButtonSwitchItem } from './ButtonSwitch';
 import { useState } from 'react';
 
 export default {
   title: 'Components/ButtonSwitch',
   component: ButtonSwitchContainer,
-} as ComponentMeta<typeof ButtonSwitchContainer>;
+} as Meta<typeof ButtonSwitchContainer>;
 
-export const Basic: ComponentStory<any> = (args) => {
+export const Basic: StoryFn<typeof ButtonSwitchContainer> = () => {
   const [value, setValue] = useState('left');
 
   return (
@@ -18,7 +19,7 @@ export const Basic: ComponentStory<any> = (args) => {
   );
 };
 
-export const Multiple: ComponentStory<any> = (args) => {
+export const Multiple: StoryFn<typeof ButtonSwitchContainer> = () => {
   const [value, setValue] = useState<string[]>([]);
 
   return (

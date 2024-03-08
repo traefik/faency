@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { VariantProps } from '../../stitches.config';
 import { Bubble } from './Bubble';
 import { Flex } from '../Flex';
@@ -14,9 +14,9 @@ const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseB
 export default {
   title: 'Components/Bubble',
   component: BubbleForStory,
-} as ComponentMeta<typeof BubbleForStory>;
+} as Meta<typeof BubbleForStory>;
 
-export const Colors: ComponentStory<typeof BubbleForStory> = (args) => (
+export const Colors: StoryFn<typeof BubbleForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Bubble {...args} variant="red" />
     <Bubble {...args} variant="green" />
@@ -43,7 +43,7 @@ Colors.argTypes = {
   },
 };
 
-export const Sizes: ComponentStory<typeof BubbleForStory> = (args) => (
+export const Sizes: StoryFn<typeof BubbleForStory> = (args) => (
   <Flex css={{ gap: '$3', alignItems: 'center' }}>
     <Bubble {...args} size="x-small" />
     <Bubble {...args} size="small" />
@@ -67,6 +67,6 @@ Sizes.argTypes = {
   },
 };
 
-const Customize: ComponentStory<typeof BubbleForStory> = (args) => (
+const Customize: StoryFn<typeof BubbleForStory> = (args) => (
   <Bubble {...args} css={{ c: '$hiContrast' }} />
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Text, TextProps, TextVariants } from './Text';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -14,9 +14,9 @@ const TextForStory = modifyVariantsForStory<TextVariants, TextProps & React.HTML
 export default {
   title: 'Components/Text',
   component: TextForStory,
-} as ComponentMeta<typeof TextForStory>;
+} as Meta<typeof TextForStory>;
 
-const Template: ComponentStory<typeof TextForStory> = (args) => (
+const Template: StoryFn<typeof TextForStory> = (args) => (
   <TextForStory {...args}>Makes Networking Boring</TextForStory>
 );
 
@@ -26,7 +26,7 @@ Basic.args = {};
 
 const VARIANT_PARENTS = ['$primary', '$purple10'];
 
-export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args }) => (
+export const Variant: StoryFn<typeof TextForStory> = ({ variant, ...args }) => (
   <Flex
     align="center"
     justify="center"
@@ -53,7 +53,7 @@ export const Variant: ComponentStory<typeof TextForStory> = ({ variant, ...args 
   </Flex>
 );
 
-export const Transform: ComponentStory<typeof TextForStory> = ({ transform, ...args }) => (
+export const Transform: StoryFn<typeof TextForStory> = ({ transform, ...args }) => (
   <Flex gap={2}>
     <TextForStory {...args}>default text</TextForStory>
     <TextForStory {...args} transform="uppercase">
@@ -89,7 +89,7 @@ export const Transform: ComponentStory<typeof TextForStory> = ({ transform, ...a
 
 const SIZE_PARENTS = ['$4', '$12'];
 
-export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => (
+export const Size: StoryFn<typeof TextForStory> = ({ size, ...args }) => (
   <Flex gap={2} direction="column">
     <TextForStory {...args} size="0">
       Makes Networking Boring
@@ -147,7 +147,7 @@ export const Size: ComponentStory<typeof TextForStory> = ({ size, ...args }) => 
   </Flex>
 );
 
-export const Weight: ComponentStory<typeof TextForStory> = (args) => (
+export const Weight: StoryFn<typeof TextForStory> = (args) => (
   <Flex gap={2} direction="column">
     <TextForStory {...args}>Default</TextForStory>
     <TextForStory {...args} weight="light">
@@ -168,7 +168,7 @@ export const Weight: ComponentStory<typeof TextForStory> = (args) => (
   </Flex>
 );
 
-const Customize: ComponentStory<typeof TextForStory> = (args) => (
+const Customize: StoryFn<typeof TextForStory> = (args) => (
   <TextForStory css={{ fontWeight: '$semiBold' }} {...args}>
     SemiBold
   </TextForStory>

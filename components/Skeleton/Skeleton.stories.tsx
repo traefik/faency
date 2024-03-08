@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Skeleton, SkeletonProps, SkeletonVariants } from './Skeleton';
@@ -19,9 +19,9 @@ const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>
 export default {
   title: 'Components/Skeleton',
   component: SkeletonForStory,
-} as ComponentMeta<typeof SkeletonForStory>;
+} as Meta<typeof SkeletonForStory>;
 
-export const Square: ComponentStory<typeof SkeletonForStory> = () => (
+export const Square: StoryFn<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
     <Skeleton variant="square" css={{ size: '$3' }} />
     <Skeleton variant="square" css={{ size: '$6' }} />
@@ -29,7 +29,7 @@ export const Square: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const Circle: ComponentStory<typeof SkeletonForStory> = () => (
+export const Circle: StoryFn<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
     <Skeleton variant="circle" css={{ size: '$3' }} />
     <Skeleton variant="circle" css={{ size: '$6' }} />
@@ -37,7 +37,7 @@ export const Circle: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const Badge: ComponentStory<typeof SkeletonForStory> = () => (
+export const Badge: StoryFn<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
     <Skeleton variant="badge" css={{ height: '$5', width: '$6' }} />
     <Skeleton variant="badge" css={{ height: '$5', width: '$8' }} />
@@ -45,7 +45,7 @@ export const Badge: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const Button: ComponentStory<typeof SkeletonForStory> = () => (
+export const Button: StoryFn<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
     <Skeleton variant="button" css={{ height: '$5', width: '$6' }} />
     <Skeleton variant="button" css={{ height: '$5', width: '$8' }} />
@@ -53,7 +53,7 @@ export const Button: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const Text: ComponentStory<typeof SkeletonForStory> = () => (
+export const Text: StoryFn<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
     <Skeleton variant="text" css={{ height: '$5', width: '$6' }} />
     <Skeleton variant="text" css={{ height: '$5', width: '$8' }} />
@@ -63,7 +63,7 @@ export const Text: ComponentStory<typeof SkeletonForStory> = () => (
 
 const TEXT_SIZES = ['3', '6', '9', '12'] as const;
 
-export const Typographies: ComponentStory<typeof SkeletonForStory> = () => (
+export const Typographies: StoryFn<typeof SkeletonForStory> = () => (
   <Flex gap="3" direction="column">
     <H1>
       <Skeleton variant="text" />
@@ -94,7 +94,7 @@ export const Typographies: ComponentStory<typeof SkeletonForStory> = () => (
 
 const AVATAR_SIZES = ['1', '2', '3', '4', '5', '6'] as const;
 
-export const Avatars: ComponentStory<typeof SkeletonForStory> = () => (
+export const Avatars: StoryFn<typeof SkeletonForStory> = () => (
   <Flex gap="3" align="center">
     {AVATAR_SIZES.map((size) => (
       <Flex gap="3" align="center" direction="column">
@@ -109,7 +109,7 @@ export const Avatars: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const ButtonInferred: ComponentStory<typeof SkeletonForStory> = () => (
+export const ButtonInferred: StoryFn<typeof SkeletonForStory> = () => (
   <Flex gap="3" direction="column">
     <Skeleton variant="button">
       <FaencyButton css={{ width: 60 }} size="small" />
@@ -123,7 +123,7 @@ export const ButtonInferred: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const BadgeInferred: ComponentStory<typeof SkeletonForStory> = () => (
+export const BadgeInferred: StoryFn<typeof SkeletonForStory> = () => (
   <Flex gap="3" direction="column">
     <Skeleton variant="badge">
       <FaencyBadge css={{ width: 60 }} size="small" />
@@ -134,7 +134,7 @@ export const BadgeInferred: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const BubbleInferred: ComponentStory<typeof SkeletonForStory> = () => (
+export const BubbleInferred: StoryFn<typeof SkeletonForStory> = () => (
   <Flex gap="3" direction="column">
     <Skeleton variant="circle">
       <Bubble noAnimation size="x-small" />
@@ -154,7 +154,7 @@ export const BubbleInferred: ComponentStory<typeof SkeletonForStory> = () => (
   </Flex>
 );
 
-export const CustomInferred: ComponentStory<typeof SkeletonForStory> = (args) => (
+export const CustomInferred: StoryFn<typeof SkeletonForStory> = (args) => (
   <Flex gap="3" direction="column">
     <Skeleton {...args}>
       <Box css={{ width: 35, height: 20 }} />
@@ -174,7 +174,7 @@ CustomInferred.argTypes = {
   },
 };
 
-export const Customs: ComponentStory<typeof SkeletonForStory> = () => (
+export const Customs: StoryFn<typeof SkeletonForStory> = () => (
   <Flex direction="column" gap={3}>
     <Skeleton css={{ width: '30%' }} />
     <Skeleton css={{ width: '20%' }} />

@@ -12,9 +12,9 @@ import { INDICATOR_BASE_STYLES, RADIO_BASE_STYLES } from '../Radio';
 import type { AccordionSingleProps } from '@radix-ui/react-accordion';
 
 export interface RadioAccordionRootProps
-  extends Omit<AccordionSingleProps, 'type' | 'collapsible' | 'css'>,
+  extends Omit<AccordionSingleProps, 'type' | 'collapsible'>,
     Omit<VariantProps<typeof AccordionRoot>, 'type' | 'collapsible'> {
-  css?: CSS;
+  css?: CSS; // could not skipped
 }
 
 export const RadioAccordionRoot: (props: RadioAccordionRootProps) => JSX.Element = (props) => (
@@ -22,10 +22,8 @@ export const RadioAccordionRoot: (props: RadioAccordionRootProps) => JSX.Element
 );
 
 export interface RadioAccordionItemProps
-  extends Omit<ComponentProps<typeof AccordionItem>, 'css'>,
-    VariantProps<typeof AccordionItem> {
-  css?: CSS;
-}
+  extends ComponentProps<typeof AccordionItem>,
+    VariantProps<typeof AccordionItem> {}
 export const RadioAccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionItem>,
   RadioAccordionItemProps

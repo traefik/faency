@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import {
   RadioAccordionRoot,
@@ -14,9 +14,9 @@ import { Text } from '../Text';
 export default {
   title: 'Components/RadioAccordion',
   component: RadioAccordionRoot,
-} as ComponentMeta<typeof RadioAccordionRoot>;
+} as Meta<typeof RadioAccordionRoot>;
 
-export const Basic: ComponentStory<typeof RadioAccordionRoot> = (args) => (
+export const Basic: StoryFn<typeof RadioAccordionRoot> = (args) => (
   <Box css={{ width: 300 }}>
     <RadioAccordionRoot {...args}>
       <RadioAccordionItem value="item-1">
@@ -35,7 +35,7 @@ export const Basic: ComponentStory<typeof RadioAccordionRoot> = (args) => (
   </Box>
 );
 
-export const UnderAccordion: ComponentStory<typeof RadioAccordionRoot> = (args) => (
+export const UnderAccordion: StoryFn<typeof RadioAccordionRoot> = (args) => (
   <AccordionRoot type="single" collapsible>
     <AccordionItem value="default" css={{ boxShadow: 'none' }}>
       <AccordionTrigger>
@@ -61,7 +61,7 @@ export const UnderAccordion: ComponentStory<typeof RadioAccordionRoot> = (args) 
   </AccordionRoot>
 );
 
-const Customize: ComponentStory<typeof RadioAccordionRoot> = (args) => (
+const Customize: StoryFn<typeof RadioAccordionRoot> = (args) => (
   <Box css={{ width: 300 }}>
     <RadioAccordionRoot {...args} css={{ bc: '$red9' }}>
       <RadioAccordionItem value="item-1" css={{ bc: '$red9' }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { ButtonForStory } from './Button';
 import { Flex } from '../Flex';
@@ -11,9 +11,9 @@ export default {
   title: 'Components/Button',
   component: ButtonForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as ComponentMeta<typeof ButtonForStory>;
+} as Meta<typeof ButtonForStory>;
 
-const Template: ComponentStory<typeof ButtonForStory> = (args) => (
+const Template: StoryFn<typeof ButtonForStory> = (args) => (
   <ButtonForStory {...args}>Button</ButtonForStory>
 );
 
@@ -46,7 +46,7 @@ Disabled.args = {
   disabled: true,
 };
 
-const TemplateWithIcon: ComponentStory<typeof ButtonForStory> = (args) => (
+const TemplateWithIcon: StoryFn<typeof ButtonForStory> = (args) => (
   <ButtonForStory {...args}>
     <Flex css={{ gap: '$2', alignItems: 'center' }}>
       <InfoCircledIcon />
@@ -57,7 +57,7 @@ const TemplateWithIcon: ComponentStory<typeof ButtonForStory> = (args) => (
 
 export const WithIcon = TemplateWithIcon.bind({});
 
-const TemplateWithActive: ComponentStory<typeof ButtonForStory> = ({ state, ...args }) => {
+const TemplateWithActive: StoryFn<typeof ButtonForStory> = ({ state, ...args }) => {
   const [active, setActive] = React.useState(0);
 
   return (
@@ -88,13 +88,13 @@ Waiting.args = {
   state: 'waiting',
 };
 
-const Customize: ComponentStory<typeof ButtonForStory> = (args) => (
+const Customize: StoryFn<typeof ButtonForStory> = (args) => (
   <ButtonForStory css={{ c: '$hiContrast' }} {...args}>
     Button
   </ButtonForStory>
 );
 
-export const ButtonLink: ComponentStory<typeof ButtonForStory> = (args) => (
+export const ButtonLink: StoryFn<typeof ButtonForStory> = (args) => (
   <ButtonForStory asChild {...args}>
     <UnstyledLink href="https://traefik.io">Button</UnstyledLink>
   </ButtonForStory>

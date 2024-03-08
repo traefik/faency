@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { NavigationTreeItem } from './NavigationTreeItem';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 import {
@@ -32,9 +32,9 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof NavigationTreeContainer>;
+} as Meta<typeof NavigationTreeContainer>;
 
-const Template: ComponentStory<typeof NavigationTreeContainer> = (args) => {
+const Template: StoryFn<typeof NavigationTreeContainer> = (args) => {
   const [currentRoute, setCurrentRoute] = useState('/');
 
   const navigationHandlerProps = (route: string) => ({
@@ -94,7 +94,7 @@ export const Basic = Template.bind({});
 
 Basic.args = {};
 
-const FullWidthStory: ComponentStory<typeof NavigationTreeContainer> = (args) => {
+const FullWidthStory: StoryFn<typeof NavigationTreeContainer> = (args) => {
   const [currentRoute, setCurrentRoute] = useState('/');
 
   const navigationHandlerProps = (route: string) => ({

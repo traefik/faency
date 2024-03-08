@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import {
   DashboardIcon,
   PersonIcon,
@@ -42,7 +42,7 @@ export default {
       control: 'boolean',
     },
   },
-} as ComponentMeta<typeof NavigationDrawer>;
+} as Meta<typeof NavigationDrawer>;
 
 const BaseNavigationItem = (props: NavigationItemProps): JSX.Element => (
   <NavigationItem {...props} />
@@ -51,7 +51,7 @@ const NavigationItemForStory = modifyVariantsForStory<NavigationItemVariants, Na
   BaseNavigationItem
 );
 
-const Template: ComponentStory<typeof NavigationItem> = (args) => (
+const Template: StoryFn<typeof NavigationItem> = (args) => (
   <NavigationDrawer css={{ height: '200px' }}>
     <NavigationItem
       {...args}
@@ -86,7 +86,7 @@ Basic.args = {
   active: false,
 };
 
-export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => {
+export const ButtonProps: StoryFn<typeof NavigationItem> = (args) => {
   const noop = () => undefined;
   return (
     <NavigationDrawer css={{ height: '200px' }}>
@@ -100,7 +100,7 @@ export const ButtonProps: ComponentStory<typeof NavigationItem> = (args) => {
   };
 };
 
-export const LinkProps: ComponentStory<typeof NavigationItem> = (args) => (
+export const LinkProps: StoryFn<typeof NavigationItem> = (args) => (
   <NavigationDrawer css={{ height: '200px' }}>
     <NavigationItem as="a" href="https://traefik.io">
       Navigation Item

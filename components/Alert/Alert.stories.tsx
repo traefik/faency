@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Text } from '../Text';
 import { H2 } from '../Heading';
 import { Alert, AlertProps, AlertVariants } from './Alert';
@@ -11,9 +11,9 @@ const AlertForStory = modifyVariantsForStory<AlertVariants, AlertProps>(BaseAler
 export default {
   title: 'Components/Alert',
   component: Alert,
-} as ComponentMeta<typeof AlertForStory>;
+} as Meta<typeof AlertForStory>;
 
-export const Variants: ComponentStory<typeof AlertForStory> = (args) => (
+export const Variants: StoryFn<typeof AlertForStory> = (args) => (
   <Alert {...args}>
     <H2 css={{ mb: '$3' }}>Alert</H2>
     <Text css={{ mb: '$3' }}>
@@ -37,7 +37,7 @@ Variants.argTypes = {
   },
 };
 
-const Customize: ComponentStory<typeof AlertForStory> = (args) => (
+const Customize: StoryFn<typeof AlertForStory> = (args) => (
   <Alert {...args} css={{ mt: '$1' }}>
     <H2 css={{ mb: '$3' }}>Alert</H2>
     <Text css={{ mb: '$3' }}>

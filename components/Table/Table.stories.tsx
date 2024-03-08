@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
 import {
   Table,
@@ -29,9 +29,9 @@ const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTabl
 export default {
   title: 'Components/Table',
   component: TableForStory,
-} as ComponentMeta<typeof TableForStory>;
+} as Meta<typeof TableForStory>;
 
-export const Basic: ComponentStory<any> = ({ transform, ...args }) => (
+export const Basic: StoryFn<any> = ({ transform, ...args }) => (
   <TableForStory {...args}>
     <Thead>
       <Tr>
@@ -94,7 +94,7 @@ Basic.argTypes = {
   },
 };
 
-export const Alignment: ComponentStory<any> = (args) => (
+export const Alignment: StoryFn<any> = (args) => (
   <TableForStory>
     <Thead>
       <Tr>
@@ -152,7 +152,7 @@ Alignment.args = {
   align: 'start',
 };
 
-export const Interactive: ComponentStory<any> = ({ interactive, ...args }) => {
+export const Interactive: StoryFn<any> = ({ interactive, ...args }) => {
   const [selectedRow, setSelectedRow] = useState(3);
   const makeSelectableRowProps = useCallback(
     (rowNum: number) => ({
@@ -280,7 +280,7 @@ Interactive.argTypes = {
     options: ['1', '2', '3', '4', '5'],
   },
 };
-export const WithFooter: ComponentStory<any> = (args) => (
+export const WithFooter: StoryFn<any> = (args) => (
   <TableForStory {...args}>
     <Thead>
       <Tr>
@@ -333,7 +333,7 @@ export const WithFooter: ComponentStory<any> = (args) => (
   </TableForStory>
 );
 
-export const WithCaption: ComponentStory<any> = (args) => {
+export const WithCaption: StoryFn<any> = (args) => {
   const id = 'described-heading';
   const title = 'Title not child of table';
   return (
@@ -484,7 +484,7 @@ export const WithCaption: ComponentStory<any> = (args) => {
   );
 };
 
-export const Empty: ComponentStory<any> = (args) => (
+export const Empty: StoryFn<any> = (args) => (
   <Flex direction="column" gap="4">
     <TableForStory {...args}>
       <Thead />
@@ -635,7 +635,7 @@ export const Empty: ComponentStory<any> = (args) => (
   </Flex>
 );
 
-const Customize: ComponentStory<any> = (args) => (
+const Customize: StoryFn<any> = (args) => (
   <TableForStory css={{ c: '$hiContrast' }} {...args}>
     <Thead css={{ c: '$hiContrast' }}>
       <Tr css={{ c: '$hiContrast' }}>
@@ -687,7 +687,7 @@ const Customize: ComponentStory<any> = (args) => (
   </TableForStory>
 );
 
-export const CollapsibleRow: ComponentStory<any> = ({ interactive, ...args }) => {
+export const CollapsibleRow: StoryFn<any> = ({ interactive, ...args }) => {
   const [selectedRow, setSelectedRow] = useState(1);
   const makeSelectableRowProps = useCallback(
     (rowNum: number) => ({

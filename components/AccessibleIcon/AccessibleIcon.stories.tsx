@@ -1,4 +1,5 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { AccessibleIcon } from './AccessibleIcon';
 import * as Icons from '@radix-ui/react-icons';
 import { Flex } from '../Flex';
@@ -7,18 +8,19 @@ import { IconButton } from '../IconButton';
 export default {
   title: 'Components/AccessibleIcon',
   component: AccessibleIcon,
-} as ComponentMeta<any>;
+  tags: ['autodocs'],
+} as Meta<typeof AccessibleIcon>;
 
-export const Basic: ComponentStory<any> = (args) => (
+export const Basic: StoryFn<typeof AccessibleIcon> = () => (
   <Flex gap={3} align="center">
     <IconButton>
-      <AccessibleIcon label="notification" {...args} size="1">
+      <AccessibleIcon label="notification">
         <Icons.BellIcon />
       </AccessibleIcon>
     </IconButton>
 
     <IconButton>
-      <AccessibleIcon label="user settings" {...args} size="2">
+      <AccessibleIcon label="user settings">
         <Icons.AvatarIcon />
       </AccessibleIcon>
     </IconButton>

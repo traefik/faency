@@ -1,5 +1,5 @@
 import React, { LinkHTMLAttributes } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -16,9 +16,9 @@ const LinkForStory = modifyVariantsForStory<LinkVariants, LinkProps & LinkHTMLAt
 export default {
   title: 'Components/Link',
   component: LinkForStory,
-} as ComponentMeta<typeof LinkForStory>;
+} as Meta<typeof LinkForStory>;
 
-const Template: ComponentStory<typeof LinkForStory> = (args) => (
+const Template: StoryFn<typeof LinkForStory> = (args) => (
   <LinkForStory href="https://traefik.io" {...args}>
     https://traefik.io
   </LinkForStory>
@@ -40,7 +40,7 @@ Variant.argTypes = {
   },
 };
 
-const Customize: ComponentStory<typeof LinkForStory> = (args) => (
+const Customize: StoryFn<typeof LinkForStory> = (args) => (
   <Link css={{ c: '$hiContraqt' }} href="https://traefik.io" {...args}>
     https://traefik.io
   </Link>

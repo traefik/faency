@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Grid } from './Grid';
 import { Box } from '../Box';
@@ -8,9 +8,9 @@ import { Text } from '../Text';
 export default {
   title: 'Components/Grid',
   component: Grid,
-} as ComponentMeta<typeof Grid>;
+} as Meta<typeof Grid>;
 
-export const Basic: ComponentStory<typeof Grid> = (args) => (
+export const Basic: StoryFn<typeof Grid> = (args) => (
   <Grid {...args}>
     <Box>
       <Text as="p" size="4" css={{ lineHeight: '27px' }}>
@@ -41,6 +41,4 @@ Basic.args = {
   gap: '6',
 };
 
-const Customize: ComponentStory<typeof Grid> = (args) => (
-  <Grid {...args} css={{ c: '$hiContrast' }} />
-);
+const Customize: StoryFn<typeof Grid> = (args) => <Grid {...args} css={{ c: '$hiContrast' }} />;

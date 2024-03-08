@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Checkbox, CheckboxProps, CheckboxVariants } from './Checkbox';
@@ -14,9 +14,9 @@ export default {
   title: 'Components/Checkbox',
   component: CheckboxForStory,
   argTypes: { onCheckedChange: { action: 'checkedChange' } },
-} as ComponentMeta<typeof CheckboxForStory>;
+} as Meta<typeof CheckboxForStory>;
 
-const Template: ComponentStory<typeof CheckboxForStory> = (args) => <CheckboxForStory {...args} />;
+const Template: StoryFn<typeof CheckboxForStory> = (args) => <CheckboxForStory {...args} />;
 
 export const Basic = Template.bind({});
 
@@ -36,6 +36,6 @@ Disabled.args = {
   size: 'large',
 };
 
-const Customize: ComponentStory<typeof CheckboxForStory> = (args) => (
+const Customize: StoryFn<typeof CheckboxForStory> = (args) => (
   <CheckboxForStory css={{ c: '$hiContrast' }} {...args} />
 );

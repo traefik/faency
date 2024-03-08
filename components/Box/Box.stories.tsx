@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -17,9 +17,9 @@ const BoxForStory = modifyVariantsForStory<BoxVariants, BoxProps & React.HTMLAtt
 export default {
   title: 'Components/Box',
   component: BoxForStory,
-} as ComponentMeta<typeof BoxForStory>;
+} as Meta<typeof BoxForStory>;
 
-export const Basic: ComponentStory<typeof BoxForStory> = (args) => (
+export const Basic: StoryFn<typeof BoxForStory> = (args) => (
   <Box css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }} {...args}>
     <Text as="p" size="4" css={{ lineHeight: '27px' }}>
       Traefik Labs develops the world's most popular cloud-native application networking software.

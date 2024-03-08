@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { VariantProps } from '../../stitches.config';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
@@ -19,9 +19,9 @@ const LabelForStory = modifyVariantsForStory<
 export default {
   title: 'Components/Label',
   component: LabelForStory,
-} as ComponentMeta<typeof LabelForStory>;
+} as Meta<typeof LabelForStory>;
 
-const Template: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
+const Template: StoryFn<typeof LabelForStory> = ({ id, ...args }) => (
   <Box>
     <Label htmlFor={id} css={{ mr: '$2' }} {...args}>
       Email field
@@ -66,7 +66,7 @@ Invalid.args = {
 };
 ignoreArgType('id', Invalid);
 
-export const Disabled: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => (
+export const Disabled: StoryFn<typeof LabelForStory> = ({ id, ...args }) => (
   <Box>
     <Label htmlFor={id} css={{ mr: '$2' }} variant="subtle" {...args}>
       Email field
@@ -79,7 +79,7 @@ Disabled.args = {
 };
 ignoreArgType('id', Disabled);
 
-export const FocusContrast: ComponentStory<typeof LabelForStory> = ({ id, ...args }) => {
+export const FocusContrast: StoryFn<typeof LabelForStory> = ({ id, ...args }) => {
   const [hasFocus, setHasFocus] = React.useState(false);
 
   const onFocus = React.useCallback(() => {

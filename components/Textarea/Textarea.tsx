@@ -236,11 +236,10 @@ export interface TextareaVariants
 
 export interface TextareaProps
   extends TextareaVariants,
-    Omit<React.ComponentProps<typeof StyledTextarea>, 'css' | 'endAdornment'> {
+    Omit<React.ComponentProps<typeof StyledTextarea>, 'endAdornment'> {
   label?: string;
   endAdornment?: React.ReactNode;
   rootCss?: CSS;
-  css?: CSS;
 }
 
 export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>, TextareaProps>(

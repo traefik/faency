@@ -172,13 +172,12 @@ const StyledLink = styled('a', baseNavItemCss, {
   textDecoration: 'none',
 });
 
-type StyledLinkProps = VariantProps<typeof StyledLink> &
-  Omit<React.ComponentProps<typeof StyledLink>, 'css'>;
+type StyledLinkProps = VariantProps<typeof StyledLink> & React.ComponentProps<typeof StyledLink>;
 
 const StyledButton = styled('button', baseNavItemCss);
 
 type StyledButtonProps = VariantProps<typeof StyledButton> &
-  Omit<React.ComponentProps<typeof StyledButton>, 'css'>;
+  React.ComponentProps<typeof StyledButton>;
 interface NavigationItemBaseProps {
   css?: CSS;
   startAdornment?: ReactNode;

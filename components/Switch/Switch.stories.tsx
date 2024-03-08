@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import { Switch, SwitchProps, SwitchVariants } from './Switch';
 import { Flex } from '../Flex';
@@ -17,9 +17,9 @@ export default {
   title: 'Components/Switch',
   component: SwitchForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as ComponentMeta<typeof SwitchForStory>;
+} as Meta<typeof SwitchForStory>;
 
-const Template: ComponentStory<typeof SwitchForStory> = (args) => <SwitchForStory {...args} />;
+const Template: StoryFn<typeof SwitchForStory> = (args) => <SwitchForStory {...args} />;
 
 export const Basic = Template.bind({});
 
@@ -33,7 +33,7 @@ export const Disabled = Template.bind({});
 
 Disabled.args = { disabled: true };
 
-export const Labelled: ComponentStory<typeof SwitchForStory> = ({ id, ...args }) => (
+export const Labelled: StoryFn<typeof SwitchForStory> = ({ id, ...args }) => (
   <Flex align="center">
     <Label variant="contrast" htmlFor={id}>
       label
@@ -50,7 +50,7 @@ interface ExtendedSwitchProps extends React.ComponentProps<typeof SwitchForStory
   invalid?: boolean;
 }
 
-export const LabelAndTitle: ComponentStory<(props: ExtendedSwitchProps) => JSX.Element> = ({
+export const LabelAndTitle: StoryFn<(props: ExtendedSwitchProps) => JSX.Element> = ({
   id,
   onFocus,
   onBlur,
@@ -130,6 +130,6 @@ LabelAndTitle.args = {
 };
 ignoreArgType('id', LabelAndTitle);
 
-const Customize: ComponentStory<typeof SwitchForStory> = (args) => (
+const Customize: StoryFn<typeof SwitchForStory> = (args) => (
   <SwitchForStory css={{ c: '$hiContrast' }} {...args} />
 );

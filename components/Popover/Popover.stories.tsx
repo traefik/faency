@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import {
   Popover,
@@ -24,9 +24,9 @@ const PopoverForStory = modifyVariantsForStory<PopoverVariants, PopoverProps>(Ba
 export default {
   title: 'Components/Popover',
   component: PopoverForStory,
-} as ComponentMeta<typeof PopoverForStory>;
+} as Meta<typeof PopoverForStory>;
 
-const Template: ComponentStory<typeof PopoverForStory> = (args) => (
+const Template: StoryFn<typeof PopoverForStory> = (args) => (
   <Container>
     <PopoverForStory {...args}>
       <PopoverTrigger asChild>
@@ -45,7 +45,7 @@ const Template: ComponentStory<typeof PopoverForStory> = (args) => (
 
 export const Basic = Template.bind({});
 
-export const RichContent: ComponentStory<typeof PopoverForStory> = (args) => (
+export const RichContent: StoryFn<typeof PopoverForStory> = (args) => (
   <Container>
     <PopoverForStory {...args}>
       <PopoverTrigger asChild>
@@ -70,7 +70,7 @@ export const RichContent: ComponentStory<typeof PopoverForStory> = (args) => (
   </Container>
 );
 
-export const IconTrigger: ComponentStory<typeof PopoverForStory> = (args) => (
+export const IconTrigger: StoryFn<typeof PopoverForStory> = (args) => (
   <Container>
     <PopoverForStory {...args}>
       <PopoverTrigger asChild>
@@ -87,7 +87,7 @@ export const IconTrigger: ComponentStory<typeof PopoverForStory> = (args) => (
   </Container>
 );
 
-export const RowAnchor: ComponentStory<typeof PopoverForStory> = (args) => (
+export const RowAnchor: StoryFn<typeof PopoverForStory> = (args) => (
   <Container>
     <PopoverForStory {...args}>
       <PopoverAnchor asChild>

@@ -34,7 +34,7 @@ const StyledTbody = styled('div', TableTbody, {
 });
 export const Tbody = forwardRef<
   ElementRef<typeof StyledTbody>,
-  Omit<ComponentProps<typeof StyledTbody>, 'css'> & VariantProps<typeof StyledTbody> & { css?: CSS }
+  ComponentProps<typeof StyledTbody> & VariantProps<typeof StyledTbody>
 >((props, ref) => <StyledTbody ref={ref} role="rowgroup" {...props} />);
 
 const StyledTfoot = styled('div', TableTfoot, {
@@ -42,7 +42,7 @@ const StyledTfoot = styled('div', TableTfoot, {
 });
 export const Tfoot = forwardRef<
   ElementRef<typeof StyledTfoot>,
-  Omit<ComponentProps<typeof StyledTfoot>, 'css'> & VariantProps<typeof StyledTfoot> & { css?: CSS }
+  ComponentProps<typeof StyledTfoot> & VariantProps<typeof StyledTfoot>
 >((props, ref) => <StyledTfoot ref={ref} role="rowgroup" {...props} />);
 
 const StyledTr = styled('div', TableTr, {
@@ -97,14 +97,11 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
   );
 };
 
-export interface TrProps
-  extends Omit<ComponentProps<typeof StyledTr>, 'css'>,
-    VariantProps<typeof StyledTr> {
+export interface TrProps extends ComponentProps<typeof StyledTr>, VariantProps<typeof StyledTr> {
   asChild?: boolean;
   collapsedContent?: React.ReactNode;
   emptyFirstColumn?: boolean;
   tableHead?: boolean;
-  css?: CSS;
 }
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
   ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, css, ...props }, ref) => {
@@ -206,11 +203,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
 const StyledTh = styled('span', TableTh, {
   display: 'table-cell',
 });
-export interface ThProps
-  extends Omit<ComponentProps<typeof StyledTh>, 'css'>,
-    VariantProps<typeof StyledTh> {
-  css?: CSS;
-}
+export interface ThProps extends ComponentProps<typeof StyledTh>, VariantProps<typeof StyledTh> {}
 export const Th = forwardRef<ElementRef<typeof StyledTh>, ThProps>((props, ref) => (
   <StyledTh ref={ref} role="columnheader" {...props} />
 ));
@@ -223,10 +216,9 @@ const FillerTd = styled(StyledTd, {
   visibility: 'hidden',
 });
 export interface TdProps
-  extends Omit<ComponentProps<typeof StyledTd>, 'css'>,
+  extends ComponentProps<typeof StyledTd>,
     VariantProps<typeof StyledTd>,
     VariantProps<typeof TableTd> {
-  css?: CSS;
   fullColSpan?: boolean;
 }
 export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
@@ -260,7 +252,7 @@ const StyledThead = styled('div', TableThead, {
 });
 export const Thead = forwardRef<
   ElementRef<typeof StyledThead>,
-  Omit<ComponentProps<typeof StyledThead>, 'css'> & VariantProps<typeof StyledThead> & { css?: CSS }
+  ComponentProps<typeof StyledThead> & VariantProps<typeof StyledThead> & {}
 >((props, ref) => <StyledThead ref={ref} role="rowgroup" {...props} />);
 
 const StyledTable = styled('div', TableTable, {
@@ -268,8 +260,8 @@ const StyledTable = styled('div', TableTable, {
 });
 export const Table = forwardRef<
   ElementRef<typeof StyledTable>,
-  Omit<ComponentProps<typeof StyledTable>, 'css'> &
-    VariantProps<typeof StyledTable> & { css?: CSS; hasCollapsibleChildren?: boolean }
+  ComponentProps<typeof StyledTable> &
+    VariantProps<typeof StyledTable> & { hasCollapsibleChildren?: boolean }
 >(({ hasCollapsibleChildren, css, ...props }, ref) => (
   <StyledTable
     ref={ref}
