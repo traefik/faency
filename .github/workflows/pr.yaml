@@ -1,0 +1,28 @@
+name: Pull Request Lint
+
+on:
+  pull_request:
+
+jobs:
+  faency:
+    name: Test, lint and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Test
+        run: yarn test:ci
+
+      - name: Build
+        run: yarn build
