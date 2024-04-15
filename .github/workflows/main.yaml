@@ -1,0 +1,39 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  faency:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Config git
+        run: |
+          git config --local user.email "30906710+traefiker@users.noreply.github.com"
+          git config --local user.name "traefiker"
+
+      - name: Install
+        run: yarn install --frozen-lockfile --production
+
+      - name: Build
+        env:
+          NODE_ENV: production
+        run: yarn build
+
+      - name: Deploy
+        run: yarn deploy-storybook
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
