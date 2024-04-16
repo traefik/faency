@@ -107,8 +107,12 @@
     "@types/tinycolor2": "^1.4.3",
     "babel-loader": "^8.2.2",
     "conventional-changelog-conventionalcommits": "^4.6.3",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.0",
+    "lint-staged": "13.1.0",
     "lodash.merge": "^4.6.2",
     "np": "^8.0.4",
+    "prettier": "^2.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rollup": "^2.70.1",
@@ -125,12 +129,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "babel-jest": "^27.5.1",
-    "cross-env": "^7.0.3",
-    "husky": "^8.0.0",
     "jest": "^27.5.1",
-    "jest-axe": "^6.0.0",
-    "lint-staged": "13.1.0",
-    "prettier": "^2.1.2"
+    "jest-axe": "^6.0.0"
   },
   "publishConfig": {
     "access": "public",
