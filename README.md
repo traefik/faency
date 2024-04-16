@@ -14,6 +14,10 @@ You can find the Storybook with an example for every component in this library [
 
 ```sh
 npm install @traefiklabs/faency@next
+
+# or
+
+yarn add @traefiklabs/faency@next
 ```
 
 Then you need to wire up the FaencyProvider which will hold the context with the Theme configuration and everything global that the components will need to work well.
@@ -51,13 +55,13 @@ docker run -it -v $(pwd):/usr/local/src/ -w /usr/local/src/ -p 3000:3000 node:la
 - Install the project dependencies
 
 ```sh
-npm install
+yarn install
 ```
 
 - Run the Storybook
 
 ```sh
-npm run storybook
+yarn storybook
 ```
 
 At this point, Storybook should automatically open up in your browser and you can start coding, it has hot reload so it will automatically re-render whenever a change is detected on the code.
