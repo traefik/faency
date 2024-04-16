@@ -33,7 +33,7 @@
   "scripts": {
     "prettier": "prettier --write .",
     "build": "rollup -c",
-    "release": "npm run build && np",
+    "release": "yarn build && np",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006 -h localhost",
     "storybook-docs": "storybook dev --docs",
     "build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",
