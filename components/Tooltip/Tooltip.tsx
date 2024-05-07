@@ -47,33 +47,41 @@ export function Tooltip({
   return (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
-
-      <Content css={css} side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
-        {isContentString ? (
-          <Text
-            size="1"
-            as="p"
-            css={{
-              color: 'currentColor',
-              lineHeight: multiline ? '20px' : undefined,
-            }}
-          >
-            {content}
-          </Text>
-        ) : (
-          content
-        )}
-        <ArrowBox>
-          <TooltipPrimitive.Arrow
-            offset={5}
-            width={11}
-            height={5}
-            style={{
-              fill: 'currentColor',
-            }}
-          />
-        </ArrowBox>
-      </Content>
+      <TooltipPrimitive.Portal>
+        <Content
+          css={css}
+          side="top"
+          align="center"
+          sideOffset={5}
+          {...props}
+          multiline={multiline}
+        >
+          {isContentString ? (
+            <Text
+              size="1"
+              as="p"
+              css={{
+                color: 'currentColor',
+                lineHeight: multiline ? '20px' : undefined,
+              }}
+            >
+              {content}
+            </Text>
+          ) : (
+            content
+          )}
+          <ArrowBox>
+            <TooltipPrimitive.Arrow
+              offset={5}
+              width={11}
+              height={5}
+              style={{
+                fill: 'currentColor',
+              }}
+            />
+          </ArrowBox>
+        </Content>
+      </TooltipPrimitive.Portal>
     </TooltipPrimitive.Root>
   );
 }
