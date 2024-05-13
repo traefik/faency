@@ -7,7 +7,7 @@ import { Box } from '../Box';
 
 export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
   React.ComponentProps<typeof TooltipPrimitive.Content> & {
-    children: React.ReactElement;
+    children: React.ReactElement | string;
     content: React.ReactNode;
     multiline?: boolean;
     css?: CSS;
@@ -33,6 +33,38 @@ const ArrowBox = styled(Box, {
   color: '$tooltipContentBg',
 });
 
+export const TooltipContent = ({ css, multiline, children, ...props }: Partial<TooltipProps>) => {
+  const isContentString = React.useMemo(() => typeof children === 'string', [children]);
+  return (
+    <Content css={css} side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
+      {isContentString ? (
+        <Text
+          size="1"
+          as="p"
+          css={{
+            color: 'currentColor',
+            lineHeight: multiline ? '20px' : undefined,
+          }}
+        >
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
+      <ArrowBox>
+        <TooltipPrimitive.Arrow
+          offset={5}
+          width={11}
+          height={5}
+          style={{
+            fill: 'currentColor',
+          }}
+        />
+      </ArrowBox>
+    </Content>
+  );
+};
+
 export function Tooltip({
   children,
   content,
@@ -43,47 +75,20 @@ export function Tooltip({
   css,
   ...props
 }: TooltipProps) {
-  const isContentString = React.useMemo(() => typeof content === 'string', [content]);
   return (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal>
-        <Content
-          css={css}
-          side="top"
-          align="center"
-          sideOffset={5}
-          {...props}
-          multiline={multiline}
-        >
-          {isContentString ? (
-            <Text
-              size="1"
-              as="p"
-              css={{
-                color: 'currentColor',
-                lineHeight: multiline ? '20px' : undefined,
-              }}
-            >
-              {content}
-            </Text>
-          ) : (
-            content
-          )}
-          <ArrowBox>
-            <TooltipPrimitive.Arrow
-              offset={5}
-              width={11}
-              height={5}
-              style={{
-                fill: 'currentColor',
-              }}
-            />
-          </ArrowBox>
-        </Content>
+        <TooltipContent css={css} multiline={multiline} {...props}>
+          {children}
+        </TooltipContent>
       </TooltipPrimitive.Portal>
     </TooltipPrimitive.Root>
   );
 }
+
+export const TooltipRoot = TooltipPrimitive.Root;
+export const TooltipTrigger = TooltipPrimitive.Trigger;
+export const TooltipPortal = TooltipPrimitive.Portal;
 
 export type TooltipVariants = VariantProps<typeof Tooltip>;

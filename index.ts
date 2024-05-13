@@ -90,7 +90,7 @@ export {
 } from './components/AriaTable';
 export { Caption, Tbody, Tfoot, Tr, Th, Td, Thead, Table } from './components/Table';
 export { Text } from './components/Text';
-export { Tooltip } from './components/Tooltip';
+export { Tooltip, TooltipRoot, TooltipTrigger, TooltipContent } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
 export { Avatar } from './components/Avatar';
 export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
