@@ -4,10 +4,10 @@ import { StoryFn, Meta } from '@storybook/react';
 import { Flex } from '../Flex';
 import { H1, H2, H3, H4, H5, H6 } from './Heading';
 
-export default {
+const Component: Meta<typeof H1> = {
   title: 'Components/Heading',
   component: H1,
-} as Meta<typeof H1>;
+};
 
 const Template: StoryFn<typeof H1> = (args) => (
   <Flex direction="column">
@@ -20,7 +20,7 @@ const Template: StoryFn<typeof H1> = (args) => (
   </Flex>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof H1> = Template.bind({});
 
 Basic.args = {};
 Basic.argTypes = {
@@ -50,3 +50,5 @@ const Customize: StoryFn<typeof H1> = (args) => (
     Heading level 1 SemiBold
   </H1>
 );
+
+export default Component;

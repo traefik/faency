@@ -11,16 +11,16 @@ const TextForStory = modifyVariantsForStory<TextVariants, TextProps & React.HTML
   BaseText
 );
 
-export default {
+const Component: Meta<typeof TextForStory> = {
   title: 'Components/Text',
   component: TextForStory,
-} as Meta<typeof TextForStory>;
+};
 
 const Template: StoryFn<typeof TextForStory> = (args) => (
   <TextForStory {...args}>Makes Networking Boring</TextForStory>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof TextForStory> = Template.bind({});
 
 Basic.args = {};
 
@@ -173,3 +173,5 @@ const Customize: StoryFn<typeof TextForStory> = (args) => (
     SemiBold
   </TextForStory>
 );
+
+export default Component;

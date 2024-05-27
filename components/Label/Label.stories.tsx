@@ -16,10 +16,10 @@ const LabelForStory = modifyVariantsForStory<
   LabelProps & React.LabelHTMLAttributes<any>
 >(BaseLabel);
 
-export default {
+const Component: Meta<typeof LabelForStory> = {
   title: 'Components/Label',
   component: LabelForStory,
-} as Meta<typeof LabelForStory>;
+};
 
 const Template: StoryFn<typeof LabelForStory> = ({ id, ...args }) => (
   <Box>
@@ -30,21 +30,21 @@ const Template: StoryFn<typeof LabelForStory> = ({ id, ...args }) => (
   </Box>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof LabelForStory> = Template.bind({});
 
 Basic.args = {
   id: 'basic',
 };
 ignoreArgType('id', Basic);
 
-export const Capitalized = Template.bind({});
+export const Capitalized: StoryFn<typeof LabelForStory> = Template.bind({});
 
 Capitalized.args = {
   id: 'capitalize',
 };
 ignoreArgType('id', Capitalized);
 
-export const CapitalizedWords = Template.bind({});
+export const CapitalizedWords: StoryFn<typeof LabelForStory> = Template.bind({});
 
 CapitalizedWords.args = {
   id: 'capitalize-words',
@@ -52,14 +52,14 @@ CapitalizedWords.args = {
 };
 ignoreArgType('id', CapitalizedWords);
 
-export const Uppercased = Template.bind({});
+export const Uppercased: StoryFn<typeof LabelForStory> = Template.bind({});
 Uppercased.args = {
   id: 'uppercase',
   transform: 'uppercase',
 };
 ignoreArgType('id', Uppercased);
 
-export const Invalid = Template.bind({});
+export const Invalid: StoryFn<typeof LabelForStory> = Template.bind({});
 Invalid.args = {
   id: 'invalidvariant',
   variant: 'invalid',
@@ -103,3 +103,5 @@ FocusContrast.args = {
   id: 'focuscontrastvariants',
 };
 ignoreArgType('id', FocusContrast);
+
+export default Component;

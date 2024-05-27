@@ -4,10 +4,10 @@ import { H2 } from '../Heading';
 import { Text } from '../Text';
 import { TabsContainer, TabsList, TabsTrigger, TabsContent } from './Tabs';
 
-export default {
+const Component: Meta<typeof TabsContainer> = {
   title: 'Components/Tabs',
   component: TabsContainer,
-} as Meta<typeof TabsContainer>;
+};
 
 export const Basic: StoryFn<typeof TabsContainer> = (args) => {
   return (
@@ -72,3 +72,5 @@ export const Basic: StoryFn<typeof TabsContainer> = (args) => {
     </TabsContainer>
   );
 };
+
+export default Component;

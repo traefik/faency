@@ -10,10 +10,10 @@ import { Button } from '../Button';
 
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 
-export default {
+const Component: Meta<typeof Ul> = {
   title: 'Components/List',
   component: Ul,
-} as Meta<typeof Ul>;
+};
 
 const Template: StoryFn<typeof Ul> = (args) => (
   <Ul {...args}>
@@ -33,9 +33,9 @@ const Customize: StoryFn<typeof Ul> = (args) => (
   </Ul>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof Ul> = Template.bind({});
 
-export const Interactive = Template.bind({});
+export const Interactive: StoryFn<typeof Ul> = Template.bind({});
 Interactive.args = {
   interactive: true,
 };
@@ -97,3 +97,5 @@ export const Controls: StoryFn<typeof Ul> = (args) => (
 Controls.args = {
   interactive: true,
 };
+
+export default Component;

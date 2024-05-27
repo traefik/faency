@@ -4,7 +4,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -14,11 +14,17 @@
     "sourceMap": true,
     "strict": true,
     "target": "es5",
+    "noImplicitAny": false,
+    "incremental": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "isolatedModules": true,
     "paths": {
       "@emotion/core": ["./types/index.d.ts"],
-      "@storybook/theming": ["./types/index.d.ts"]
+      "@storybook/theming": ["./types/index.d.ts"],
+      "react": ["./node_modules/@types/react"]
     }
   },
-  "exclude": ["node_modules", "pages"],
+  "exclude": ["node_modules", "pages", "*.test.ts"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

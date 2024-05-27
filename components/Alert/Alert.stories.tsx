@@ -8,10 +8,10 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 const BaseAlert = (props: AlertProps): JSX.Element => <Alert {...props} />;
 const AlertForStory = modifyVariantsForStory<AlertVariants, AlertProps>(BaseAlert);
 
-export default {
+const Component: Meta<typeof AlertForStory> = {
   title: 'Components/Alert',
   component: Alert,
-} as Meta<typeof AlertForStory>;
+};
 
 export const Variants: StoryFn<typeof AlertForStory> = (args) => (
   <Alert {...args}>
@@ -49,3 +49,5 @@ const Customize: StoryFn<typeof AlertForStory> = (args) => (
     </Text>
   </Alert>
 );
+
+export default Component;

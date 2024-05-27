@@ -2,10 +2,10 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { Avatar } from './Avatar';
 
-export default {
+const Component: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
   component: Avatar,
-} as Meta<typeof Avatar>;
+};
 
 export const Template: StoryFn<typeof Avatar> = (args) => <Avatar {...args} />;
 
@@ -21,7 +21,7 @@ Template.argTypes = {
   },
 };
 
-export const Shape = Template.bind({});
+export const Shape: StoryFn<typeof Avatar> = Template.bind({});
 
 Shape.args = {
   src: 'https://picsum.photos/100',
@@ -40,7 +40,7 @@ Shape.argTypes = {
   },
 };
 
-export const Fallback = Template.bind({});
+export const Fallback: StoryFn<typeof Avatar> = Template.bind({});
 
 Fallback.args = {
   fallback: 'M',
@@ -67,7 +67,7 @@ Fallback.argTypes = {
   },
 };
 
-export const Variants = Template.bind({});
+export const Variants: StoryFn<typeof Avatar> = Template.bind({});
 
 Variants.args = {
   fallback: 'M',
@@ -91,3 +91,5 @@ Variants.argTypes = {
   },
 };
 const Customize: StoryFn<typeof Avatar> = (args) => <Avatar css={{ c: '$hiContrast' }} {...args} />;
+
+export default Component;

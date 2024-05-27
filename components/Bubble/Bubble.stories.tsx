@@ -11,10 +11,10 @@ type BubbleProps = BubbleVariants & {};
 const BaseBubble = (props: BubbleProps): JSX.Element => <Bubble {...props} />;
 const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseBubble);
 
-export default {
+const Component: Meta<typeof BubbleForStory> = {
   title: 'Components/Bubble',
   component: BubbleForStory,
-} as Meta<typeof BubbleForStory>;
+};
 
 export const Colors: StoryFn<typeof BubbleForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
@@ -70,3 +70,5 @@ Sizes.argTypes = {
 const Customize: StoryFn<typeof BubbleForStory> = (args) => (
   <Bubble {...args} css={{ c: '$hiContrast' }} />
 );
+
+export default Component;

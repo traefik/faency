@@ -5,10 +5,10 @@ import { Grid } from './Grid';
 import { Box } from '../Box';
 import { Text } from '../Text';
 
-export default {
+const Component: Meta<typeof Grid> = {
   title: 'Components/Grid',
   component: Grid,
-} as Meta<typeof Grid>;
+};
 
 export const Basic: StoryFn<typeof Grid> = (args) => (
   <Grid {...args}>
@@ -42,3 +42,5 @@ Basic.args = {
 };
 
 const Customize: StoryFn<typeof Grid> = (args) => <Grid {...args} css={{ c: '$hiContrast' }} />;
+
+export default Component;

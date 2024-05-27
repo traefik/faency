@@ -19,10 +19,10 @@ const ContrastDiv = styled('div', {
   color: '$hiContrast',
 });
 
-export default {
+const Component: Meta<typeof VisuallyHidden> = {
   title: 'Components/VisuallyHidden',
   component: VisuallyHidden,
-} as Meta<typeof VisuallyHidden>;
+};
 
 export const Basic: StoryFn<typeof VisuallyHidden> = (args) => (
   <ContrastDiv>
@@ -57,3 +57,5 @@ export const AsChild: StoryFn<typeof VisuallyHidden> = (args) => (
 AsChild.args = {
   asChild: true,
 };
+
+export default Component;

@@ -3,23 +3,25 @@ import { StoryFn, Meta } from '@storybook/react';
 
 import { Image } from './Image';
 
-export default {
+const Component: Meta<typeof Image> = {
   title: 'Components/Image',
   component: Image,
-} as Meta<typeof Image>;
+};
 
 const Template: StoryFn<typeof Image> = (args) => <Image {...args} />;
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof Image> = Template.bind({});
 
 Basic.args = {
   src: 'https://picsum.photos/200/300',
 };
 
-export const Large = Template.bind({});
+export const Large: StoryFn<typeof Image> = Template.bind({});
 
 Large.args = {
   src: 'https://picsum.photos/2000/3000',
 };
 
 const Customize: StoryFn<typeof Image> = (args) => <Image css={{ c: '$hiContrast' }} {...args} />;
+
+export default Component;

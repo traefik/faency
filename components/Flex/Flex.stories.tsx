@@ -4,10 +4,10 @@ import { StoryFn, Meta } from '@storybook/react';
 import { Flex } from './Flex';
 import { Box } from '../Box';
 
-export default {
+const Component: Meta<typeof Flex> = {
   title: 'Components/Flex',
   component: Flex,
-} as Meta<typeof Flex>;
+};
 
 export const Basic: StoryFn<typeof Flex> = (args) => (
   <Flex {...args}>
@@ -24,3 +24,5 @@ Basic.args = {
 };
 
 const Customize: StoryFn<typeof Flex> = (args) => <Flex {...args} css={{ c: '$hiContrast' }} />;
+
+export default Component;

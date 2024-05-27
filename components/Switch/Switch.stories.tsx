@@ -13,23 +13,23 @@ const SwitchForStory = modifyVariantsForStory<
   SwitchProps & React.InputHTMLAttributes<any>
 >(BaseSwitch);
 
-export default {
+const Component: Meta<typeof SwitchForStory> = {
   title: 'Components/Switch',
   component: SwitchForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as Meta<typeof SwitchForStory>;
+};
 
 const Template: StoryFn<typeof SwitchForStory> = (args) => <SwitchForStory {...args} />;
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof SwitchForStory> = Template.bind({});
 
 Basic.args = {};
 
-export const Large = Template.bind({});
+export const Large: StoryFn<typeof SwitchForStory> = Template.bind({});
 
 Large.args = { size: '2' };
 
-export const Disabled = Template.bind({});
+export const Disabled: StoryFn<typeof SwitchForStory> = Template.bind({});
 
 Disabled.args = { disabled: true };
 
@@ -133,3 +133,5 @@ ignoreArgType('id', LabelAndTitle);
 const Customize: StoryFn<typeof SwitchForStory> = (args) => (
   <SwitchForStory css={{ c: '$hiContrast' }} {...args} />
 );
+
+export default Component;

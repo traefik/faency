@@ -15,7 +15,7 @@ import {
   QuestionMarkCircledIcon,
 } from '@radix-ui/react-icons';
 
-export default {
+const Component: Meta<typeof NavigationTreeItem> = {
   title: 'Components/NavigationTree',
   component: NavigationTreeItem,
   argTypes: {
@@ -78,7 +78,7 @@ export default {
       control: 'boolean',
     },
   },
-} as Meta<typeof NavigationTreeItem>;
+};
 
 const Template: StoryFn<typeof NavigationTreeItem> = (args) => {
   const [currentRoute, setCurrentRoute] = useState('/');
@@ -108,7 +108,9 @@ const Template: StoryFn<typeof NavigationTreeItem> = (args) => {
   );
 };
 
-export const TreeItem = Template.bind({});
+export const TreeItem: StoryFn<typeof NavigationTreeItem> = Template.bind({});
 TreeItem.args = {
   label: 'One.One',
 };
+
+export default Component;

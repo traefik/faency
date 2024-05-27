@@ -14,10 +14,10 @@ const BoxForStory = modifyVariantsForStory<BoxVariants, BoxProps & React.HTMLAtt
   BaseBox
 );
 
-export default {
+const Component: Meta<typeof BoxForStory> = {
   title: 'Components/Box',
   component: BoxForStory,
-} as Meta<typeof BoxForStory>;
+};
 
 export const Basic: StoryFn<typeof BoxForStory> = (args) => (
   <Box css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }} {...args}>
@@ -28,3 +28,5 @@ export const Basic: StoryFn<typeof BoxForStory> = (args) => (
     </Text>
   </Box>
 );
+
+export default Component;

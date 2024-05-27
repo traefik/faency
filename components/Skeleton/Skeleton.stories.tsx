@@ -16,10 +16,10 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
 const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(BaseSkeleton);
 
-export default {
+const Component: Meta<typeof SkeletonForStory> = {
   title: 'Components/Skeleton',
   component: SkeletonForStory,
-} as Meta<typeof SkeletonForStory>;
+};
 
 export const Square: StoryFn<typeof SkeletonForStory> = () => (
   <Flex align="center" direction="row" gap="3">
@@ -202,3 +202,5 @@ export const Customs: StoryFn<typeof SkeletonForStory> = () => (
     </Flex>
   </Flex>
 );
+
+export default Component;

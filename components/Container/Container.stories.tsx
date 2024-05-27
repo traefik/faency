@@ -15,10 +15,10 @@ const ContainerForStory = modifyVariantsForStory<
   ContainerProps & React.HTMLAttributes<any>
 >(BaseContainer);
 
-export default {
+const Component: Meta<typeof ContainerForStory> = {
   title: 'Components/Container',
   component: ContainerForStory,
-} as Meta<typeof ContainerForStory>;
+};
 
 const Template: StoryFn<typeof ContainerForStory> = (args) => (
   <Container {...args} css={{ bc: '$deepBlue3' }}>
@@ -35,14 +35,16 @@ const Template: StoryFn<typeof ContainerForStory> = (args) => (
   </Container>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof ContainerForStory> = Template.bind({});
 
 Basic.args = {};
 
-export const Size = Template.bind({});
+export const Size: StoryFn<typeof ContainerForStory> = Template.bind({});
 
 Size.args = { size: '1' };
 
-export const NoGutter = Template.bind({});
+export const NoGutter: StoryFn<typeof ContainerForStory> = Template.bind({});
 
 NoGutter.args = { noGutter: true };
+
+export default Component;

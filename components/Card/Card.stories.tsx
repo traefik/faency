@@ -5,10 +5,10 @@ import { Card } from './Card';
 import { H2 } from '../Heading';
 import { Flex } from '../Flex';
 
-export default {
+const Component: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
-} as Meta<typeof Card>;
+};
 
 const Template: StoryFn<typeof Card> = (args) => (
   <Card {...args}>
@@ -23,23 +23,23 @@ const Template: StoryFn<typeof Card> = (args) => (
   </Card>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof Card> = Template.bind({});
 
 Basic.args = {};
 
-export const Ghost = Template.bind({});
+export const Ghost: StoryFn<typeof Card> = Template.bind({});
 
 Ghost.args = {
   variant: 'ghost',
 };
 
-export const Active = Template.bind({});
+export const Active: StoryFn<typeof Card> = Template.bind({});
 
 Active.args = {
   active: true,
 };
 
-export const Interactive = Template.bind({});
+export const Interactive: StoryFn<typeof Card> = Template.bind({});
 
 Interactive.args = {
   interactive: true,
@@ -126,3 +126,5 @@ Elevation.args = {};
 const Customize: StoryFn<typeof Card> = (args) => (
   <Card css={{ c: '$hiContrast' }} {...args}></Card>
 );
+
+export default Component;

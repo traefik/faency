@@ -25,11 +25,11 @@ const InputForStory = modifyVariantsForStory<
   InputProps & React.InputHTMLAttributes<any>
 >(BaseInput);
 
-export default {
+const Component: Meta<typeof InputForStory> = {
   title: 'Components/Input',
   component: InputForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as Meta<typeof InputForStory>;
+};
 
 export const Basic: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>
@@ -105,16 +105,16 @@ export const Types: StoryFn<typeof InputForStory> = ({ type, ...args }) => (
 
 Types.args = {};
 
-export const Invalid = Basic.bind({});
+export const Invalid: StoryFn<typeof InputForStory> = Basic.bind({});
 Invalid.args = { id: 'invalid', state: 'invalid' };
 ignoreArgType('id', Invalid);
 
-export const Disabled = Basic.bind({});
+export const Disabled: StoryFn<typeof InputForStory> = Basic.bind({});
 
 Disabled.args = { id: 'disabled', disabled: true, defaultValue: 'value' };
 ignoreArgType('id', Disabled);
 
-export const ReadOnly = Basic.bind({});
+export const ReadOnly: StoryFn<typeof InputForStory> = Basic.bind({});
 ReadOnly.args = { id: 'readonly', readOnly: true, defaultValue: 'value' };
 ignoreArgType('id', ReadOnly);
 
@@ -157,7 +157,7 @@ export const Ghost: StoryFn<typeof InputForStory> = (args) => (
 );
 Ghost.args = { defaultValue: 'value', variant: 'ghost' };
 
-export const Adornments = Basic.bind({});
+export const Adornments: StoryFn<typeof InputForStory> = Basic.bind({});
 Adornments.args = {
   id: 'adornments',
   startAdornment: <MagnifyingGlassIcon />,
@@ -251,3 +251,5 @@ export const Autofill: StoryFn<typeof InputForStory> = (args) => (
 const Customize: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
   <InputForStory css={{ c: '$hiContrast' }} {...args} />
 );
+
+export default Component;

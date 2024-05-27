@@ -13,10 +13,10 @@ const LinkForStory = modifyVariantsForStory<LinkVariants, LinkProps & LinkHTMLAt
   BaseLink
 );
 
-export default {
+const Component: Meta<typeof LinkForStory> = {
   title: 'Components/Link',
   component: LinkForStory,
-} as Meta<typeof LinkForStory>;
+};
 
 const Template: StoryFn<typeof LinkForStory> = (args) => (
   <LinkForStory href="https://traefik.io" {...args}>
@@ -24,11 +24,11 @@ const Template: StoryFn<typeof LinkForStory> = (args) => (
   </LinkForStory>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof LinkForStory> = Template.bind({});
 
 Basic.args = {};
 
-export const Variant = Template.bind({});
+export const Variant: StoryFn<typeof LinkForStory> = Template.bind({});
 
 Variant.args = {
   variant: 'primary',
@@ -45,3 +45,5 @@ const Customize: StoryFn<typeof LinkForStory> = (args) => (
     https://traefik.io
   </Link>
 );
+
+export default Component;

@@ -12,12 +12,11 @@ import { Text } from '../Text';
 import { useState } from 'react';
 import { Button } from '../Button';
 import { Box } from '../Box';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
 
-export default {
+const Component: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
   component: Dialog,
-} as Meta<typeof Dialog>;
+};
 
 const Content: React.FC = () => {
   const [count, setCount] = useState(1);
@@ -139,3 +138,5 @@ export const NoCloseIcon: StoryFn<typeof Dialog> = () => {
     </Dialog>
   );
 };
+
+export default Component;

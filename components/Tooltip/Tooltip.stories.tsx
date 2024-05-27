@@ -18,10 +18,10 @@ const SpacedBox = styled(Box, {
   border: '1px dashed $primary',
 });
 
-export default {
+const Component: Meta<typeof TooltipForStory> = {
   title: 'Components/Tooltip',
   component: TooltipForStory,
-} as Meta<typeof TooltipForStory>;
+};
 
 const Template: StoryFn<typeof TooltipForStory> = (args) => (
   <Container>
@@ -31,13 +31,13 @@ const Template: StoryFn<typeof TooltipForStory> = (args) => (
   </Container>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof TooltipForStory> = Template.bind({});
 
 Basic.args = {
   content: 'This is some tooltip text',
 };
 
-export const MultiLine = Template.bind({});
+export const MultiLine: StoryFn<typeof TooltipForStory> = Template.bind({});
 
 MultiLine.args = {
   multiline: true,
@@ -45,7 +45,7 @@ MultiLine.args = {
     'This is some tooltip text. This box shows the max amount of text to display. If more room is needed, use a modal instead.',
 };
 
-export const NodeContent = Template.bind({});
+export const NodeContent: StoryFn<typeof TooltipForStory> = Template.bind({});
 
 const WarningOption = (
   <Flex align="center" gap={2}>
@@ -67,6 +67,7 @@ const HeadingOption = (
 );
 
 NodeContent.args = {
+  // @ts-ignore
   content: WarningOption,
 };
 
@@ -88,3 +89,5 @@ const Customize: StoryFn<typeof TooltipForStory> = (args) => (
     </TooltipForStory>
   </Container>
 );
+
+export default Component;
