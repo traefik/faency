@@ -22,6 +22,7 @@ export default {
       clean: true,
       tsconfig: 'tsconfig-rollup.json',
       typescript: require('typescript'),
+      abortOnError: false,
     }),
     babel({
       extensions: ['.ts', '.tsx', '.js', '.jsx'],

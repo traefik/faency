@@ -8,7 +8,7 @@ import { Box } from '../Box';
 export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
   React.ComponentProps<typeof TooltipPrimitive.Content> & {
     children: React.ReactElement | React.ReactNode;
-    content: React.ReactNode;
+    content: React.ReactElement | React.ReactNode;
     multiline?: boolean;
     css?: CSS;
   };
