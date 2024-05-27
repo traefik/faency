@@ -16,13 +16,16 @@ export default {
       format: 'es',
     },
   ],
-  external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+  external: [
+    'react/jsx-runtime',
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.peerDependencies || {}),
+  ],
   plugins: [
     typescript({
       clean: true,
       tsconfig: 'tsconfig-rollup.json',
       typescript: require('typescript'),
-      abortOnError: false,
     }),
     babel({
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
