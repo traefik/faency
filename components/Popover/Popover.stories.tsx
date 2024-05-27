@@ -21,10 +21,10 @@ import { Box } from '../Box';
 const BasePopover = (props: PopoverProps): JSX.Element => <Popover {...props} />;
 const PopoverForStory = modifyVariantsForStory<PopoverVariants, PopoverProps>(BasePopover);
 
-export default {
+const Component: Meta<typeof PopoverForStory> = {
   title: 'Components/Popover',
   component: PopoverForStory,
-} as Meta<typeof PopoverForStory>;
+};
 
 const Template: StoryFn<typeof PopoverForStory> = (args) => (
   <Container>
@@ -43,7 +43,7 @@ const Template: StoryFn<typeof PopoverForStory> = (args) => (
   </Container>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof PopoverForStory> = Template.bind({});
 
 export const RichContent: StoryFn<typeof PopoverForStory> = (args) => (
   <Container>
@@ -109,3 +109,5 @@ export const RowAnchor: StoryFn<typeof PopoverForStory> = (args) => (
     </PopoverForStory>
   </Container>
 );
+
+export default Component;

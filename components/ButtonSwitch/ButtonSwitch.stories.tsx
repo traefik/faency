@@ -3,10 +3,10 @@ import { Meta, StoryFn } from '@storybook/react';
 import { ButtonSwitchContainer, ButtonSwitchItem } from './ButtonSwitch';
 import { useState } from 'react';
 
-export default {
+const Component: Meta<typeof ButtonSwitchContainer> = {
   title: 'Components/ButtonSwitch',
   component: ButtonSwitchContainer,
-} as Meta<typeof ButtonSwitchContainer>;
+};
 
 export const Basic: StoryFn<typeof ButtonSwitchContainer> = () => {
   const [value, setValue] = useState('left');
@@ -31,3 +31,5 @@ export const Multiple: StoryFn<typeof ButtonSwitchContainer> = () => {
     </ButtonSwitchContainer>
   );
 };
+
+export default Component;

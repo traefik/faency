@@ -5,11 +5,11 @@ import * as Icons from '@radix-ui/react-icons';
 import { Flex } from '../Flex';
 import { IconButton } from '../IconButton';
 
-export default {
+const Component: Meta<typeof AccessibleIcon> = {
   title: 'Components/AccessibleIcon',
   component: AccessibleIcon,
   tags: ['autodocs'],
-} as Meta<typeof AccessibleIcon>;
+};
 
 export const Basic: StoryFn<typeof AccessibleIcon> = () => (
   <Flex gap={3} align="center">
@@ -26,3 +26,5 @@ export const Basic: StoryFn<typeof AccessibleIcon> = () => (
     </IconButton>
   </Flex>
 );
+
+export default Component;

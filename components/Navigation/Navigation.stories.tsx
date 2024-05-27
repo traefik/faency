@@ -19,7 +19,7 @@ import { Badge } from '../Badge';
 import { Text } from '../Text';
 import { useDebouncedCallback } from 'use-debounce';
 
-export default {
+const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/Navigation',
   component: NavigationDrawer,
   argTypes: {
@@ -30,7 +30,7 @@ export default {
       control: 'boolean',
     },
   },
-} as Meta<typeof NavigationDrawer>;
+};
 
 const BaseNavigationDrawer = (props: NavigationDrawerProps): JSX.Element => (
   <NavigationDrawer {...props} />
@@ -64,7 +64,7 @@ const Template: StoryFn<typeof NavigationDrawerForStory> = (args) => {
   );
 };
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof NavigationDrawerForStory> = Template.bind({});
 
 Basic.args = {
   elevation: 1,
@@ -110,7 +110,7 @@ const AdornmentsTemplate: StoryFn<typeof NavigationDrawerForStory> = (args) => {
   );
 };
 
-export const Adornments = AdornmentsTemplate.bind({});
+export const Adornments: StoryFn<typeof NavigationDrawerForStory> = AdornmentsTemplate.bind({});
 
 Adornments.args = {
   elevation: 1,
@@ -159,8 +159,12 @@ const MultipleSectionsTemplate: StoryFn<typeof NavigationDrawerForStory> = (args
   );
 };
 
-export const MultiSection = MultipleSectionsTemplate.bind({});
+export const MultiSection: StoryFn<typeof NavigationDrawerForStory> = MultipleSectionsTemplate.bind(
+  {}
+);
 
 MultiSection.args = {
   elevation: 1,
 };
+
+export default Component;

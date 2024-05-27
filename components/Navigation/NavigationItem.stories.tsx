@@ -16,7 +16,7 @@ import {
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Badge } from '../Badge';
 
-export default {
+const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/NavigationItem',
   component: NavigationItem,
   argTypes: {
@@ -42,7 +42,7 @@ export default {
       control: 'boolean',
     },
   },
-} as Meta<typeof NavigationDrawer>;
+};
 
 const BaseNavigationItem = (props: NavigationItemProps): JSX.Element => (
   <NavigationItem {...props} />
@@ -76,7 +76,7 @@ const Template: StoryFn<typeof NavigationItem> = (args) => (
   </NavigationDrawer>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof NavigationItem> = Template.bind({});
 
 Basic.args = {
   as: 'a',
@@ -110,3 +110,5 @@ export const LinkProps: StoryFn<typeof NavigationItem> = (args) => (
 LinkProps.args = {
   as: 'a',
 };
+
+export default Component;

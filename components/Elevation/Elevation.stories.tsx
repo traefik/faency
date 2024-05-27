@@ -4,10 +4,10 @@ import { Elevation } from './Elevation';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
 
-export default {
+const Component: Meta<typeof Elevation> = {
   title: 'Components/Elevation',
   component: Elevation,
-} as Meta<typeof Elevation>;
+};
 
 export const Basic: StoryFn<typeof Elevation> = (args) => (
   <Flex gap={3}>
@@ -80,3 +80,5 @@ Basic.argTypes = {
 const Customize: StoryFn<typeof Elevation> = () => (
   <Elevation css={{ c: '$hiContrast' }} variant={0} />
 );
+
+export default Component;

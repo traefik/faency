@@ -11,10 +11,10 @@ import { Box } from '../Box';
 import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '../Accordion';
 import { Text } from '../Text';
 
-export default {
+const Component: Meta<typeof RadioAccordionRoot> = {
   title: 'Components/RadioAccordion',
   component: RadioAccordionRoot,
-} as Meta<typeof RadioAccordionRoot>;
+};
 
 export const Basic: StoryFn<typeof RadioAccordionRoot> = (args) => (
   <Box css={{ width: 300 }}>
@@ -79,3 +79,5 @@ const Customize: StoryFn<typeof RadioAccordionRoot> = (args) => (
     </RadioAccordionRoot>
   </Box>
 );
+
+export default Component;

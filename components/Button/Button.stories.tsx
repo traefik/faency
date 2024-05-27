@@ -7,40 +7,40 @@ import { Text } from '../Text';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { UnstyledLink } from '../Link';
 
-export default {
+const Component: Meta<typeof ButtonForStory> = {
   title: 'Components/Button',
   component: ButtonForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as Meta<typeof ButtonForStory>;
+};
 
 const Template: StoryFn<typeof ButtonForStory> = (args) => (
   <ButtonForStory {...args}>Button</ButtonForStory>
 );
 
-export const Primary = Template.bind({});
+export const Primary: StoryFn<typeof ButtonForStory> = Template.bind({});
 
 Primary.args = {};
 
-export const Secondary = Template.bind({});
+export const Secondary: StoryFn<typeof ButtonForStory> = Template.bind({});
 
 Secondary.args = {
   variant: 'secondary',
 };
 
-export const Red = Template.bind({});
+export const Red: StoryFn<typeof ButtonForStory> = Template.bind({});
 
 Red.args = {
   variant: 'red',
 };
 
-export const Ghost = Template.bind({});
+export const Ghost: StoryFn<typeof ButtonForStory> = Template.bind({});
 
 Ghost.args = {
   ghost: true,
   variant: 'secondary',
 };
 
-export const Disabled = Template.bind({});
+export const Disabled: StoryFn<typeof ButtonForStory> = Template.bind({});
 
 Disabled.args = {
   disabled: true,
@@ -55,7 +55,7 @@ const TemplateWithIcon: StoryFn<typeof ButtonForStory> = (args) => (
   </ButtonForStory>
 );
 
-export const WithIcon = TemplateWithIcon.bind({});
+export const WithIcon: StoryFn<typeof ButtonForStory> = TemplateWithIcon.bind({});
 
 const TemplateWithActive: StoryFn<typeof ButtonForStory> = ({ state, ...args }) => {
   const [active, setActive] = React.useState(0);
@@ -78,11 +78,11 @@ const TemplateWithActive: StoryFn<typeof ButtonForStory> = ({ state, ...args }) 
   );
 };
 
-export const Active = TemplateWithActive.bind({});
+export const Active: StoryFn<typeof ButtonForStory> = TemplateWithActive.bind({});
 
 Active.args = {};
 
-export const Waiting = Template.bind({});
+export const Waiting: StoryFn<typeof ButtonForStory> = Template.bind({});
 
 Waiting.args = {
   state: 'waiting',
@@ -105,3 +105,5 @@ ButtonLink.argTypes = {
     control: 'inline-radio',
   },
 };
+
+export default Component;

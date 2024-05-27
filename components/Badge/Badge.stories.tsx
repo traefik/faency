@@ -12,7 +12,7 @@ type BadgeProps = BadgeVariants & {};
 const BaseBadge = (props: BadgeProps): JSX.Element => <Badge {...props} />;
 const BadgeForStory = modifyVariantsForStory<BadgeVariants, BadgeProps>(BaseBadge);
 
-export default {
+const Component: Meta<typeof BadgeForStory> = {
   title: 'Components/Badge',
   component: BadgeForStory,
   argTypes: {
@@ -20,7 +20,7 @@ export default {
     variant: { control: 'select' },
     borderless: { control: 'boolean' },
   },
-} as Meta<typeof BadgeForStory>;
+};
 
 export const Colors: StoryFn<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
@@ -40,7 +40,7 @@ Colors.args = {
   borderless: false,
 };
 
-export const AlphaBackground = Colors.bind({});
+export const AlphaBackground: StoryFn<typeof BadgeForStory> = Colors.bind({});
 
 AlphaBackground.args = {
   alphaBg: true,
@@ -104,3 +104,5 @@ Borderless.args = {
   variant: 'neon',
   borderless: true,
 };
+
+export default Component;

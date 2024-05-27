@@ -16,10 +16,10 @@ type AccordionVariants = VariantProps<typeof AccordionRoot>;
 const BaseAccordion = (props: any): JSX.Element => <AccordionRoot {...props} />;
 const AccordionForStory = modifyVariantsForStory<AccordionVariants, any>(BaseAccordion);
 
-export default {
+const Component: Meta<typeof AccordionForStory> = {
   title: 'Components/Accordion',
   component: AccordionForStory,
-} as Meta<typeof AccordionForStory>;
+};
 
 const Template: StoryFn<typeof AccordionForStory> = ({ size, ...args }) => (
   <Box css={{ width: 300 }}>
@@ -40,7 +40,7 @@ const Template: StoryFn<typeof AccordionForStory> = ({ size, ...args }) => (
   </Box>
 );
 
-export const Single = Template.bind({});
+export const Single: StoryFn<typeof AccordionForStory> = Template.bind({});
 Single.args = {
   type: 'single',
   size: 'small',
@@ -52,12 +52,12 @@ Single.argTypes = {
   },
 };
 
-export const Large = Template.bind({});
+export const Large: StoryFn<typeof AccordionForStory> = Template.bind({});
 Large.args = {
   size: 'large',
 };
 
-export const Collapsible = Template.bind({});
+export const Collapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 Collapsible.args = {
   type: 'single',
   collapsible: true,
@@ -69,7 +69,7 @@ Collapsible.argTypes = {
   },
 };
 
-export const MultipleCollapsible = Template.bind({});
+export const MultipleCollapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 MultipleCollapsible.args = {
   type: 'multiple',
   collapsible: true,
@@ -207,3 +207,5 @@ InsideModal.argTypes = {
     options: ['small', 'medium', 'large'],
   },
 };
+
+export default Component;

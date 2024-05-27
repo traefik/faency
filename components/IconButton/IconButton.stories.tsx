@@ -4,10 +4,10 @@ import { IconButton } from './IconButton';
 import * as Icons from '@radix-ui/react-icons';
 import { Flex } from '../Flex';
 
-export default {
+const Component: Meta<typeof IconButton> = {
   title: 'Components/IconButton',
   component: IconButton,
-} as Meta<typeof IconButton>;
+};
 
 export const Sizes: StoryFn<typeof IconButton> = (args) => (
   <Flex gap={3} align="center">
@@ -74,3 +74,5 @@ Variants.argTypes = {
 const Customize: StoryFn<typeof IconButton> = (args) => (
   <IconButton css={{ c: '$hiContrast' }} {...args} size="1"></IconButton>
 );
+
+export default Component;

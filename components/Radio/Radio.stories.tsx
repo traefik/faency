@@ -17,10 +17,10 @@ const RadioGroupForStory = modifyVariantsForStory<
   RadioGroupProps & React.InputHTMLAttributes<any>
 >(BaseRadioGroup);
 
-export default {
+const Component: Meta<typeof RadioForStory> = {
   title: 'Components/Radio',
   component: RadioForStory,
-} as Meta<typeof RadioForStory>;
+};
 
 const Template: StoryFn<typeof RadioForStory> = ({ value, ...args }) => (
   <RadioGroupForStory defaultValue="1">
@@ -29,17 +29,17 @@ const Template: StoryFn<typeof RadioForStory> = ({ value, ...args }) => (
   </RadioGroupForStory>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof RadioForStory> = Template.bind({});
 
 Basic.args = {};
 
-export const Size = Template.bind({});
+export const Size: StoryFn<typeof RadioForStory> = Template.bind({});
 
 Size.args = {
   size: '2',
 };
 
-export const Disabled = Template.bind({});
+export const Disabled: StoryFn<typeof RadioForStory> = Template.bind({});
 
 Disabled.args = {
   disabled: true,
@@ -52,3 +52,5 @@ const Customize: StoryFn<typeof RadioForStory> = ({ value, ...args }) => (
     <RadioForStory value="2" css={{ mr: '$5' }} {...args} />
   </RadioGroup>
 );
+
+export default Component;

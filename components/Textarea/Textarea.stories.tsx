@@ -13,10 +13,10 @@ const BaseTextarea = (props: TextareaProps): JSX.Element => <Textarea {...props}
 
 const TextareaForStory = modifyVariantsForStory<TextareaVariants, TextareaProps>(BaseTextarea);
 
-export default {
+const Component: Meta<typeof TextareaForStory> = {
   title: 'Components/Textarea',
   component: TextareaForStory,
-} as Meta<typeof TextareaForStory>;
+};
 
 const Template: StoryFn<typeof TextareaForStory> = (args) => (
   <Box>
@@ -24,14 +24,14 @@ const Template: StoryFn<typeof TextareaForStory> = (args) => (
   </Box>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof TextareaForStory> = Template.bind({});
 Basic.args = {
   id: 'basic-textarea',
   placeholder: 'Basic',
 };
 ignoreArgType('id', Basic);
 
-export const RowsCols = Template.bind({});
+export const RowsCols: StoryFn<typeof TextareaForStory> = Template.bind({});
 RowsCols.args = {
   id: 'rowscols-textarea',
   label: 'RowCols',
@@ -40,7 +40,7 @@ RowsCols.args = {
 };
 ignoreArgType('id', RowsCols);
 
-export const Resize = Template.bind({});
+export const Resize: StoryFn<typeof TextareaForStory> = Template.bind({});
 Resize.args = {
   id: 'resize-textarea',
   label: 'Resize',
@@ -54,14 +54,14 @@ Resize.argTypes = {
   },
 };
 
-export const Labelled = Template.bind({});
+export const Labelled: StoryFn<typeof TextareaForStory> = Template.bind({});
 Labelled.args = {
   id: 'labelled-textarea',
   label: 'Labelled',
 };
 ignoreArgType('id', Labelled);
 
-export const Invalid = Template.bind({});
+export const Invalid: StoryFn<typeof TextareaForStory> = Template.bind({});
 Invalid.args = {
   id: 'invalid-textarea',
   label: 'Invalid',
@@ -69,7 +69,7 @@ Invalid.args = {
 };
 ignoreArgType('id', Invalid);
 
-export const Disabled = Template.bind({});
+export const Disabled: StoryFn<typeof TextareaForStory> = Template.bind({});
 Disabled.args = {
   id: 'disabled-textarea',
   label: 'disabled',
@@ -78,7 +78,7 @@ Disabled.args = {
 };
 ignoreArgType('id', Disabled);
 
-export const ReadOnly = Template.bind({});
+export const ReadOnly: StoryFn<typeof TextareaForStory> = Template.bind({});
 ReadOnly.args = { id: 'readonly-textarea', readOnly: true, defaultValue: 'default value' };
 ignoreArgType('id', ReadOnly);
 
@@ -115,7 +115,7 @@ const StyledCopyIcon = styled(CopyIcon, {
   },
 });
 
-export const EndAdornment = Template.bind({});
+export const EndAdornment: StoryFn<typeof TextareaForStory> = Template.bind({});
 EndAdornment.args = {
   endAdornment: <InfoCircledIcon />,
 };
@@ -161,3 +161,5 @@ export const ReadOnlyCopy: StoryFn<typeof TextareaForStory> = (args) => {
 const Customize: StoryFn<typeof TextareaForStory> = (args) => (
   <Textarea {...args} css={{ c: '$hiContrast' }} />
 );
+
+export default Component;

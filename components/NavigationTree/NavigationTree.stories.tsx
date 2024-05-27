@@ -11,7 +11,7 @@ import {
 } from '@radix-ui/react-icons';
 import { NavigationTreeDrawer } from '.';
 
-export default {
+const Component: Meta<typeof NavigationTreeContainer> = {
   title: 'Components/NavigationTree',
   component: NavigationTreeContainer,
   argTypes: {
@@ -32,7 +32,7 @@ export default {
       },
     },
   },
-} as Meta<typeof NavigationTreeContainer>;
+};
 
 const Template: StoryFn<typeof NavigationTreeContainer> = (args) => {
   const [currentRoute, setCurrentRoute] = useState('/');
@@ -90,7 +90,7 @@ const Template: StoryFn<typeof NavigationTreeContainer> = (args) => {
   );
 };
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof NavigationTreeContainer> = Template.bind({});
 
 Basic.args = {};
 
@@ -143,6 +143,8 @@ const FullWidthStory: StoryFn<typeof NavigationTreeContainer> = (args) => {
   );
 };
 
-export const FullWidth = FullWidthStory.bind({});
+export const FullWidth: StoryFn<typeof NavigationTreeContainer> = FullWidthStory.bind({});
 
 FullWidth.args = {};
+
+export default Component;

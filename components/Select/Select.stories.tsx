@@ -10,10 +10,10 @@ const SelectForStory = modifyVariantsForStory<
   SelectProps & React.InputHTMLAttributes<any>
 >(BaseSelect);
 
-export default {
+const Component: Meta<typeof SelectForStory> = {
   title: 'Components/Select',
   component: SelectForStory,
-} as Meta<typeof SelectForStory>;
+};
 
 const Template: StoryFn<typeof SelectForStory> = (args) => (
   <SelectForStory {...args}>
@@ -25,15 +25,15 @@ const Template: StoryFn<typeof SelectForStory> = (args) => (
   </SelectForStory>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof SelectForStory> = Template.bind({});
 
 Basic.args = {};
 
-export const Size = Template.bind({});
+export const Size: StoryFn<typeof SelectForStory> = Template.bind({});
 
 Size.args = { size: 'large', placeholder: 'placeholder' };
 
-export const Variant = Template.bind({});
+export const Variant: StoryFn<typeof SelectForStory> = Template.bind({});
 
 Variant.args = { variant: 'ghost', defaultValue: 'option3' };
 Variant.argTypes = {
@@ -43,11 +43,11 @@ Variant.argTypes = {
   },
 };
 
-export const State = Template.bind({});
+export const State: StoryFn<typeof SelectForStory> = Template.bind({});
 
 State.args = { state: 'invalid' };
 
-export const Disabled = Template.bind({});
+export const Disabled: StoryFn<typeof SelectForStory> = Template.bind({});
 
 Disabled.args = { disabled: true, defaultValue: 'option3' };
 
@@ -82,3 +82,5 @@ const Customize: StoryFn<typeof SelectForStory> = (args) => (
     <option value="option5">Option 5</option>
   </Select>
 );
+
+export default Component;

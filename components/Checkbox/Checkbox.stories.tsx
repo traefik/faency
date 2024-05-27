@@ -10,25 +10,25 @@ const CheckboxForStory = modifyVariantsForStory<
   CheckboxProps & React.InputHTMLAttributes<any>
 >(BaseCheckbox);
 
-export default {
+const Component: Meta<typeof CheckboxForStory> = {
   title: 'Components/Checkbox',
   component: CheckboxForStory,
   argTypes: { onCheckedChange: { action: 'checkedChange' } },
-} as Meta<typeof CheckboxForStory>;
+};
 
 const Template: StoryFn<typeof CheckboxForStory> = (args) => <CheckboxForStory {...args} />;
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof CheckboxForStory> = Template.bind({});
 
 Basic.args = {};
 
-export const Size = Template.bind({});
+export const Size: StoryFn<typeof CheckboxForStory> = Template.bind({});
 
 Size.args = {
   size: 'large',
 };
 
-export const Disabled = Template.bind({});
+export const Disabled: StoryFn<typeof CheckboxForStory> = Template.bind({});
 
 Disabled.args = {
   disabled: true,
@@ -39,3 +39,5 @@ Disabled.args = {
 const Customize: StoryFn<typeof CheckboxForStory> = (args) => (
   <CheckboxForStory css={{ c: '$hiContrast' }} {...args} />
 );
+
+export default Component;

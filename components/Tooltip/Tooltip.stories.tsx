@@ -18,10 +18,10 @@ const SpacedBox = styled(Box, {
   border: '1px dashed $primary',
 });
 
-export default {
+const Component: Meta<typeof TooltipForStory> = {
   title: 'Components/Tooltip',
   component: TooltipForStory,
-} as Meta<typeof TooltipForStory>;
+};
 
 const Template: StoryFn<typeof TooltipForStory> = (args) => (
   <Container>
@@ -89,3 +89,5 @@ const Customize: StoryFn<typeof TooltipForStory> = (args) => (
     </TooltipForStory>
   </Container>
 );
+
+export default Component;

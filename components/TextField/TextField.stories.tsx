@@ -22,11 +22,11 @@ const TextFieldForStory = modifyVariantsForStory<
   TextFieldProps & React.InputHTMLAttributes<any>
 >(BaseTextField);
 
-export default {
+const Component: Meta<typeof TextFieldForStory> = {
   title: 'Components/TextField',
   component: TextFieldForStory,
   argTypes: { onClick: { action: 'clicked' } },
-} as Meta<typeof TextFieldForStory>;
+};
 
 const Template: StoryFn<typeof TextFieldForStory> = (args) => <TextFieldForStory {...args} />;
 
@@ -69,19 +69,19 @@ Basic.args = {
 };
 ignoreArgType('id', Basic);
 
-export const PasswordType = Template.bind({});
+export const PasswordType: StoryFn<typeof TextFieldForStory> = Template.bind({});
 PasswordType.args = { type: 'password', id: 'passwordtype', label: 'password' };
 ignoreArgType('id', PasswordType);
 
-export const Clearable = Basic.bind({});
+export const Clearable: StoryFn<typeof TextFieldForStory> = Basic.bind({});
 Clearable.args = { id: 'clearable', clearable: true };
 ignoreArgType('id', Clearable);
 
-export const Disabled = Basic.bind({});
+export const Disabled: StoryFn<typeof TextFieldForStory> = Basic.bind({});
 Disabled.args = { id: 'disabled', disabled: true };
 ignoreArgType('id', Disabled);
 
-export const ReadOnly = Basic.bind({});
+export const ReadOnly: StoryFn<typeof TextFieldForStory> = Basic.bind({});
 ReadOnly.args = { id: 'readonly', readOnly: true };
 ignoreArgType('id', ReadOnly);
 
@@ -151,7 +151,7 @@ Display.args = {
 };
 ignoreArgType('id', Display);
 
-export const DisplayClearable = Display.bind({});
+export const DisplayClearable: StoryFn<typeof TextFieldForStory> = Display.bind({});
 DisplayClearable.args = {
   id: 'displayclearable',
   clearable: true,
@@ -202,3 +202,5 @@ ignoreArgType('id', LabelComponent);
 const Customize: StoryFn<typeof TextFieldForStory> = (args) => (
   <TextFieldForStory css={{ c: '$hiContrast' }} {...args} />
 );
+
+export default Component;

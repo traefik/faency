@@ -16,11 +16,11 @@ import {
 } from './DropdownMenu';
 import { Button } from '../Button';
 
-export default {
+const Component: Meta<typeof DropdownMenu> = {
   title: 'Components/DropdownMenu',
   component: DropdownMenu,
   argTypes: { onOpenChange: { action: 'clicked' } },
-} as Meta<typeof DropdownMenu>;
+};
 
 const Template: StoryFn<typeof DropdownMenu> = (args) => (
   <DropdownMenu {...args}>
@@ -50,15 +50,15 @@ const Template: StoryFn<typeof DropdownMenu> = (args) => (
   </DropdownMenu>
 );
 
-export const Basic = Template.bind({});
+export const Basic: StoryFn<typeof DropdownMenu> = Template.bind({});
 
-export const Modal = Template.bind({});
+export const Modal: StoryFn<typeof DropdownMenu> = Template.bind({});
 
 Modal.args = {
   modal: true,
 };
 
-export const DefaultOpen = Template.bind({});
+export const DefaultOpen: StoryFn<typeof DropdownMenu> = Template.bind({});
 
 DefaultOpen.args = {
   defaultOpen: true,
@@ -93,3 +93,5 @@ const Customize: StoryFn<typeof DropdownMenu> = (args) => (
     </DropdownMenuPortal>
   </DropdownMenu>
 );
+
+export default Component;

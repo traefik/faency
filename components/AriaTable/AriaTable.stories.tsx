@@ -23,10 +23,10 @@ import { Text } from '../Text';
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
 
-export default {
+const Component: Meta<typeof TableForStory> = {
   title: 'Components/AriaTable',
   component: TableForStory,
-} as Meta<typeof TableForStory>;
+};
 
 export const Basic: StoryFn<any> = ({ transform, ...args }) => (
   <TableForStory aria-label="People" aria-describedby="basic-table-caption" {...args}>
@@ -656,3 +656,5 @@ export const CollapsibleRow: StoryFn<any> = (args) => {
 CollapsibleRow.args = {
   interactive: true,
 };
+
+export default Component;
