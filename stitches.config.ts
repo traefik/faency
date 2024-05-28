@@ -50,7 +50,7 @@ export const colors: Record<string, Property.Color> = {
   divider: 'hsl(207, 10%, 82%)',
 };
 
-const stitches = (createStitches as any)({
+const stitches = createStitches({
   theme: {
     colors: {
       ...colors,
@@ -270,6 +270,7 @@ export type CSS<T = typeof stitches.config> = StitchesCSS<T>;
 
 export const { styled, css, createTheme, getCssText, globalCss, keyframes, config } = stitches;
 
+// @ts-expect-error
 export const utils = config.utils;
 
 export const darkTheme = (primary: PrimaryColor) => {
