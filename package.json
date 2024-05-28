@@ -40,6 +40,7 @@
     "deploy-storybook": "storybook-to-ghpages",
     "test": "jest --watch",
     "test:ci": "jest --ci --silent",
+    "patch": "patch-package",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
@@ -113,6 +114,7 @@
     "lint-staged": "13.1.0",
     "lodash.merge": "^4.6.2",
     "np": "^8.0.4",
+    "patch-package": "^8.0.0",
     "prettier": "^2.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

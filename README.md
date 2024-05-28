@@ -58,6 +58,14 @@ docker run -it -v $(pwd):/usr/local/src/ -w /usr/local/src/ -p 3000:3000 node:la
 yarn install
 ```
 
+- Patch the package
+
+Stitches package needs to be patched after the upgrade to TypeScript version 5. You can run this script after installing the dependencies to apply the patch:
+
+```sh
+yarn patch
+```
+
 - Run the Storybook
 
 ```sh

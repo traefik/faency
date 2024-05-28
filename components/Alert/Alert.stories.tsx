@@ -10,6 +10,7 @@ const AlertForStory = modifyVariantsForStory<AlertVariants, AlertProps>(BaseAler
 
 const Component: Meta<typeof AlertForStory> = {
   title: 'Components/Alert',
+  // @ts-expect-error
   component: Alert,
 };
 

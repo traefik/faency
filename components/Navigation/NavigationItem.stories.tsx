@@ -18,8 +18,10 @@ import { Badge } from '../Badge';
 
 const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/NavigationItem',
+  // @ts-expect-error
   component: NavigationItem,
   argTypes: {
+    // @ts-expect-error
     as: {
       options: ['a', 'button'],
     },
