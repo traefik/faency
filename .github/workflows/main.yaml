@@ -13,6 +13,7 @@ permissions:
 jobs:
   faency:
     name: Deploy
+    if: github.repository == 'traefik/faency'
     runs-on: ubuntu-latest
 
     steps:
