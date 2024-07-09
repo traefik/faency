@@ -5,9 +5,15 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   faency:
     name: Deploy
+    if: github.repository == 'traefik/faency'
     runs-on: ubuntu-latest
 
     steps:
@@ -25,18 +31,12 @@ jobs:
           git config --local user.email "30906710+traefiker@users.noreply.github.com"
           git config --local user.name "traefiker"
 
-      - name: Install
-        run: yarn install --frozen-lockfile --production
-
-      - name: Patch
-        run: yarn patch
-
-      - name: Build
+      - name: Deploy
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
         env:
           NODE_ENV: production
-        run: yarn build
-
-      - name: Deploy
-        run: yarn deploy-storybook
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          install_command: yarn install --frozen-lockfile --production && yarn patch
+          build_command: yarn build-storybook
+          path: storybook-static
+          checkout: false
