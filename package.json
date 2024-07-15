@@ -39,7 +39,6 @@
     "build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",
     "test": "jest --watch",
     "test:ci": "jest --ci --silent",
-    "patch": "patch-package",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },

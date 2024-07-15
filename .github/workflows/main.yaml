@@ -39,7 +39,7 @@ jobs:
         env:
           NODE_ENV: production
         with:
-          install_command: yarn workspaces focus --all --production && yarn patch
+          install_command: yarn workspaces focus --all --production && yarn patch-package
           build_command: yarn build-storybook
           path: storybook-static
           checkout: false

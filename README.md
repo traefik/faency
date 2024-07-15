@@ -63,7 +63,7 @@ yarn install
 Stitches package needs to be patched after the upgrade to TypeScript version 5. You can run this script after installing the dependencies to apply the patch:
 
 ```sh
-yarn patch
+yarn patch-package
 ```
 
 - Run the Storybook
