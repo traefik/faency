@@ -22,7 +22,7 @@ jobs:
           cache: yarn
 
       - name: Install
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install
 
       - name: Patch
         run: yarn patch
