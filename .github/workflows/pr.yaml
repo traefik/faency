@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: enable corepack
+        run: corepack enable
+
       - name: Setup node
         uses: actions/setup-node@v4
         with:
@@ -19,10 +22,10 @@ jobs:
           cache: yarn
 
       - name: Install
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install
 
       - name: Patch
-        run: yarn patch
+        run: yarn patch-package
 
       - name: Test
         run: yarn test:ci

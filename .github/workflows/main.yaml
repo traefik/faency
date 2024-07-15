@@ -20,6 +20,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: enable corepack
+        run: corepack enable
+
       - name: Setup node
         uses: actions/setup-node@v4
         with:
@@ -36,7 +39,7 @@ jobs:
         env:
           NODE_ENV: production
         with:
-          install_command: yarn install --frozen-lockfile --production && yarn patch
+          install_command: yarn workspaces focus --all --production && yarn patch-package
           build_command: yarn build-storybook
           path: storybook-static
           checkout: false

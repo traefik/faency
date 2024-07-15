@@ -14,6 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: enable corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -21,10 +24,10 @@ jobs:
           cache: yarn
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --production
+        run: yarn workspaces focus --all --production
 
       - name: Patch
-        run: yarn patch
+        run: yarn patch-package
 
       - name: Build
         run: yarn build
