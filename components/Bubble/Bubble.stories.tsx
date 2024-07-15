@@ -38,9 +38,6 @@ Colors.argTypes = {
     control: 'inline-radio',
     options: ['x-small', 'small', 'medium', 'large', 'x-large'],
   },
-  variant: {
-    control: true,
-  },
 };
 
 export const Sizes: StoryFn<typeof BubbleForStory> = (args) => (

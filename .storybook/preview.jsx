@@ -1,14 +1,16 @@
-import React from 'react';
-import { FaencyProvider } from '../components/FaencyProvider';
 import { DocsContainer } from '@storybook/addon-docs';
-import { globalCss } from '../';
-import { darkTheme, lightTheme } from '../stitches.config';
-import { useEffect } from 'react';
+import { addons } from '@storybook/preview-api';
 import { themes } from '@storybook/theming';
-import { useDarkMode } from 'storybook-dark-mode';
+import React from 'react';
+import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+
+import { globalCss } from '../';
+import { FaencyProvider } from '../components/FaencyProvider';
+import { darkTheme, lightTheme } from '../stitches.config';
+
+const channel = addons.getChannel();
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -20,7 +22,12 @@ export const parameters = {
   },
   docs: {
     container: (context) => {
-      const isDark = useDarkMode();
+      const [isDark, setDark] = React.useState();
+
+      React.useEffect(() => {
+        channel.on(DARK_MODE_EVENT_NAME, setDark);
+        return () => channel.removeListener(DARK_MODE_EVENT_NAME, setDark);
+      }, [channel, setDark]);
 
       const props = {
         ...context,
@@ -40,7 +47,7 @@ const globalStyle = globalCss({
 
 export const decorators = [
   (renderStory) => {
-    useEffect(() => {
+    React.useEffect(() => {
       darkTheme('neon').toString();
       lightTheme('neon').toString();
     }, []);
@@ -53,3 +60,5 @@ export const decorators = [
     );
   },
 ];
+
+export const tags = ['autodocs'];

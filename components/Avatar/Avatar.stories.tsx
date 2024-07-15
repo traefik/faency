@@ -63,7 +63,7 @@ Fallback.argTypes = {
     options: ['gray', 'red', 'purple', 'blue', 'green', 'orange'],
   },
   fallback: {
-    control: 'string',
+    control: 'text',
   },
 };
 
