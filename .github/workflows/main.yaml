@@ -26,6 +26,9 @@ jobs:
           node-version-file: .nvmrc
           cache: yarn
 
+      - name: enable corepack
+        run: corepack enable
+
       - name: Config git
         run: |
           git config --local user.email "30906710+traefiker@users.noreply.github.com"
@@ -36,7 +39,7 @@ jobs:
         env:
           NODE_ENV: production
         with:
-          install_command: yarn install --frozen-lockfile --production && yarn patch
+          install_command: yarn workspaces focus --all --production && yarn patch
           build_command: yarn build-storybook
           path: storybook-static
           checkout: false

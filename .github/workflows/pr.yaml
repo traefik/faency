@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: enable corepack
+        run: corepack enable
+
       - name: Setup node
         uses: actions/setup-node@v4
         with:

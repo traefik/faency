@@ -20,8 +20,11 @@ jobs:
           node-version-file: .nvmrc
           cache: yarn
 
+      - name: enable corepack
+        run: corepack enable
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --production
+        run: yarn workspaces focus --all --production
 
       - name: Patch
         run: yarn patch
