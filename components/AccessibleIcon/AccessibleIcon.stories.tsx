@@ -1,9 +1,10 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { AccessibleIcon } from './AccessibleIcon';
 import * as Icons from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
 import { Flex } from '../Flex';
 import { IconButton } from '../IconButton';
+import { AccessibleIcon } from './AccessibleIcon';
 
 const Component: Meta<typeof AccessibleIcon> = {
   title: 'Components/AccessibleIcon',

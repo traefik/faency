@@ -1,6 +1,7 @@
-import React from 'react';
 import { Property } from '@stitches/react/types/css';
+import React from 'react';
 import { useDarkMode } from 'storybook-dark-mode';
+
 import { Box, Flex, H1, H2, Text } from '../index';
 import { colors } from '../stitches.config';
 

@@ -1,15 +1,16 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
 import { H2 } from '../Heading';
 import { Text } from '../Text';
-import { TabsContainer, TabsList, TabsTrigger, TabsContent } from './Tabs';
+import { TabsContainer, TabsContent, TabsList, TabsTrigger } from './Tabs';
 
 const Component: Meta<typeof TabsContainer> = {
   title: 'Components/Tabs',
   component: TabsContainer,
 };
 
-export const Basic: StoryFn<typeof TabsContainer> = (args) => {
+export const Basic: StoryFn<typeof TabsContainer> = () => {
   return (
     <TabsContainer defaultValue="tab1">
       <TabsList aria-label="Tabs Group">

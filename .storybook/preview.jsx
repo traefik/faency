@@ -22,12 +22,14 @@ export const parameters = {
   },
   docs: {
     container: (context) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const [isDark, setDark] = React.useState();
 
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       React.useEffect(() => {
         channel.on(DARK_MODE_EVENT_NAME, setDark);
         return () => channel.removeListener(DARK_MODE_EVENT_NAME, setDark);
-      }, [channel, setDark]);
+      }, [setDark]);
 
       const props = {
         ...context,

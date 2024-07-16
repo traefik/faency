@@ -1,5 +1,5 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
 import { Flex } from '../Flex';
 import { H1, H2, H3, H4, H5, H6 } from './Heading';
@@ -45,6 +45,7 @@ export const Transform: StoryFn<typeof H1> = (args) => (
   </Flex>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof H1> = (args) => (
   <H1 css={{ fontWeight: '$semiBold' }} {...args}>
     Heading level 1 SemiBold

@@ -1,20 +1,20 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 import {
   DashboardIcon,
-  PersonIcon,
   GearIcon,
+  PersonIcon,
   QuestionMarkCircledIcon,
 } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
 
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Badge } from '../Badge';
 import {
   NavigationDrawer,
   NavigationItem,
   NavigationItemProps,
   NavigationItemVariants,
 } from './Navigation';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Badge } from '../Badge';
 
 const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/NavigationItem',
@@ -49,6 +49,8 @@ const Component: Meta<typeof NavigationDrawer> = {
 const BaseNavigationItem = (props: NavigationItemProps): JSX.Element => (
   <NavigationItem {...props} />
 );
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const NavigationItemForStory = modifyVariantsForStory<NavigationItemVariants, NavigationItemProps>(
   BaseNavigationItem
 );
@@ -97,20 +99,14 @@ export const ButtonProps: StoryFn<typeof NavigationItem> = (args) => {
       </NavigationItem>
     </NavigationDrawer>
   );
-  ButtonProps.args = {
-    as: 'button',
-  };
 };
 
-export const LinkProps: StoryFn<typeof NavigationItem> = (args) => (
+export const LinkProps: StoryFn<typeof NavigationItem> = () => (
   <NavigationDrawer css={{ height: '200px' }}>
     <NavigationItem as="a" href="https://traefik.io">
       Navigation Item
     </NavigationItem>
   </NavigationDrawer>
 );
-LinkProps.args = {
-  as: 'a',
-};
 
 export default Component;

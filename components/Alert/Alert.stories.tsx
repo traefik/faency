@@ -1,9 +1,10 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { Text } from '../Text';
-import { H2 } from '../Heading';
-import { Alert, AlertProps, AlertVariants } from './Alert';
+import React from 'react';
+
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { H2 } from '../Heading';
+import { Text } from '../Text';
+import { Alert, AlertProps, AlertVariants } from './Alert';
 
 const BaseAlert = (props: AlertProps): JSX.Element => <Alert {...props} />;
 const AlertForStory = modifyVariantsForStory<AlertVariants, AlertProps>(BaseAlert);
@@ -38,6 +39,7 @@ Variants.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof AlertForStory> = (args) => (
   <Alert {...args} css={{ mt: '$1' }}>
     <H2 css={{ mb: '$3' }}>Alert</H2>

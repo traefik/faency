@@ -1,9 +1,10 @@
 // @ts-nocheck
-import React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { keyframes, styled, VariantProps, CSS } from '../../stitches.config';
-import { elevationVariants } from '../Elevation';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
+import React from 'react';
+
+import { CSS, keyframes, styled, VariantProps } from '../../stitches.config';
+import { elevationVariants } from '../Elevation';
 
 const open = keyframes({
   from: { height: 0 },

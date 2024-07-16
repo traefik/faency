@@ -1,4 +1,4 @@
-import { keyframes, styled, config } from '../../stitches.config';
+import { keyframes, styled } from '../../stitches.config';
 
 const bip = keyframes({
   '0%': {

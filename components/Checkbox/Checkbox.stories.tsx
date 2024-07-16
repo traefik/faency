@@ -1,5 +1,5 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Checkbox, CheckboxProps, CheckboxVariants } from './Checkbox';
@@ -36,6 +36,7 @@ Disabled.args = {
   size: 'large',
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof CheckboxForStory> = (args) => (
   <CheckboxForStory css={{ c: '$hiContrast' }} {...args} />
 );

@@ -1,8 +1,9 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { IconButton } from './IconButton';
 import * as Icons from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
 import { Flex } from '../Flex';
+import { IconButton } from './IconButton';
 
 const Component: Meta<typeof IconButton> = {
   title: 'Components/IconButton',
@@ -71,6 +72,7 @@ Variants.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof IconButton> = (args) => (
   <IconButton css={{ c: '$hiContrast' }} {...args} size="1"></IconButton>
 );

@@ -1,4 +1,5 @@
 import { Property } from '@stitches/react/types/css';
+
 import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 import { Theme as InputTheme } from '../Input/Input.themes';
 

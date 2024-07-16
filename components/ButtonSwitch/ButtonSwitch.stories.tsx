@@ -1,7 +1,8 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { ButtonSwitchContainer, ButtonSwitchItem } from './ButtonSwitch';
+import React from 'react';
 import { useState } from 'react';
+
+import { ButtonSwitchContainer, ButtonSwitchItem } from './ButtonSwitch';
 
 const Component: Meta<typeof ButtonSwitchContainer> = {
   title: 'Components/ButtonSwitch',

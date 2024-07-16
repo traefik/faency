@@ -1,15 +1,16 @@
+import type { AccordionSingleProps } from '@radix-ui/react-accordion';
 import React, { ComponentProps } from 'react';
-import { styled, VariantProps, CSS } from '../../stitches.config';
+
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import {
-  StyledAccordionTrigger,
-  StyledAccordionHeader,
-  AccordionRoot,
   AccordionContent,
   AccordionItem,
+  AccordionRoot,
   AccordionTriggerProps,
+  StyledAccordionHeader,
+  StyledAccordionTrigger,
 } from '../Accordion';
 import { INDICATOR_BASE_STYLES, RADIO_BASE_STYLES } from '../Radio';
-import type { AccordionSingleProps } from '@radix-ui/react-accordion';
 
 export interface RadioAccordionRootProps
   extends Omit<AccordionSingleProps, 'type' | 'collapsible'>,

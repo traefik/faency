@@ -1,11 +1,11 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
-import { Switch, SwitchProps, SwitchVariants } from './Switch';
+import ignoreArgType from '../../utils/ignoreArgType';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import ignoreArgType from '../../utils/ignoreArgType';
+import { Switch, SwitchProps, SwitchVariants } from './Switch';
 
 const BaseSwitch = (props: SwitchProps): JSX.Element => <Switch {...props} />;
 const SwitchForStory = modifyVariantsForStory<
@@ -130,6 +130,7 @@ LabelAndTitle.args = {
 };
 ignoreArgType('id', LabelAndTitle);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof SwitchForStory> = (args) => (
   <SwitchForStory css={{ c: '$hiContrast' }} {...args} />
 );

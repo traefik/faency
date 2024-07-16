@@ -1,6 +1,7 @@
-import React from 'react';
-import { styled, CSS, VariantProps } from '../../stitches.config';
 import { CaretSortIcon } from '@radix-ui/react-icons';
+import React from 'react';
+
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 
 // CONSTANTS

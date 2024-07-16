@@ -1,11 +1,12 @@
-import React from 'react';
-import * as MenuPrimitive from '@radix-ui/react-menu';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { styled, css, CSS } from '../stitches.config';
+import * as MenuPrimitive from '@radix-ui/react-menu';
+import React from 'react';
+
+import { CSS, css, styled } from '../stitches.config';
 import { Box } from './Box';
+import { elevationVariants } from './Elevation/Elevation';
 import { Flex } from './Flex';
 import { panelStyles } from './Panel';
-import { elevationVariants } from './Elevation/Elevation';
 
 export const baseItemCss = css({
   display: 'flex',

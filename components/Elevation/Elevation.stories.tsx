@@ -1,15 +1,16 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { Elevation } from './Elevation';
+import React from 'react';
+
 import { Flex } from '../Flex';
 import { Text } from '../Text';
+import { Elevation } from './Elevation';
 
 const Component: Meta<typeof Elevation> = {
   title: 'Components/Elevation',
   component: Elevation,
 };
 
-export const Basic: StoryFn<typeof Elevation> = (args) => (
+export const Basic: StoryFn<typeof Elevation> = () => (
   <Flex gap={3}>
     <Elevation variant={0}>
       <Flex
@@ -77,6 +78,7 @@ Basic.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Elevation> = () => (
   <Elevation css={{ c: '$hiContrast' }} variant={0} />
 );

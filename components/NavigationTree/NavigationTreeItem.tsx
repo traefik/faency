@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { Box } from '../Box';
-import { NavigationItem, NavigationItemProps } from '../Navigation';
-import { NavigationTreeContainer } from './NavigationTreeContainer';
-import { Flex } from '../Flex';
-import { Text } from '../Text';
+
 import { CSS } from '../..';
+import { Box } from '../Box';
+import { Flex } from '../Flex';
+import { NavigationItem, NavigationItemProps } from '../Navigation';
+import { Text } from '../Text';
+import { NavigationTreeContainer } from './NavigationTreeContainer';
 
 export interface NavigationTreeItemProps {
   label: string;
@@ -69,6 +70,7 @@ export const NavigationTreeItem = ({
         },
       },
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isExpandable, nestedChildrenLevel]);
 
   const focusStyle = useMemo(() => {

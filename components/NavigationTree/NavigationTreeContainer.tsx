@@ -1,7 +1,8 @@
 import { ChevronDownIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import React from 'react';
-import { NavigationContainer, NavigationContainerProps } from '../Navigation';
+
 import { CSS } from '../../stitches.config';
+import { NavigationContainer, NavigationContainerProps } from '../Navigation';
 
 export interface NavigationTreeProps {
   children: React.ReactNode;

@@ -1,7 +1,8 @@
-import React from 'react';
-import { Text } from './Text';
-import { VariantProps, CSS } from '../stitches.config';
 import merge from 'lodash.merge';
+import React from 'react';
+
+import { CSS, VariantProps } from '../stitches.config';
+import { Text } from './Text';
 
 const DEFAULT_TAG = 'p';
 

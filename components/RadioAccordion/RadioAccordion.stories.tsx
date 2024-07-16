@@ -1,15 +1,15 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
+import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '../Accordion';
+import { Box } from '../Box';
+import { Text } from '../Text';
 import {
-  RadioAccordionRoot,
-  RadioAccordionItem,
   RadioAccordionContent,
+  RadioAccordionItem,
+  RadioAccordionRoot,
   RadioAccordionTrigger,
 } from './RadioAccordion';
-import { Box } from '../Box';
-import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '../Accordion';
-import { Text } from '../Text';
 
 const Component: Meta<typeof RadioAccordionRoot> = {
   title: 'Components/RadioAccordion',
@@ -61,6 +61,7 @@ export const UnderAccordion: StoryFn<typeof RadioAccordionRoot> = (args) => (
   </AccordionRoot>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof RadioAccordionRoot> = (args) => (
   <Box css={{ width: 300 }}>
     <RadioAccordionRoot {...args} css={{ bc: '$red9' }}>

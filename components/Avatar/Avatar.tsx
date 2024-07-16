@@ -1,6 +1,7 @@
-import React from 'react';
-import { styled, VariantProps, CSS } from '../../stitches.config';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import React from 'react';
+
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Box } from '../Box';
 
 const StyledAvatar = styled(AvatarPrimitive.Root, {

@@ -1,6 +1,7 @@
-import { Button } from './Button';
-import { UnstyledLink } from '../Link';
 import { render } from '@testing-library/react';
+
+import { UnstyledLink } from '../Link';
+import { Button } from './Button';
 
 describe('Button', () => {
   it('should render Button as link', () => {

@@ -33,6 +33,8 @@
   "scripts": {
     "prettier": "prettier --write .",
     "build": "rollup -c",
+    "lint": "eslint \"./components/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --fix \"./components/**/*.{ts,tsx}\"",
     "release": "yarn build && np",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006 -h localhost",
     "storybook-docs": "storybook dev --docs",
@@ -126,12 +128,23 @@
     "vite": "^5.1.5"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@eslint/js": "^9.7.0",
     "@storybook/types": "^8.2.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "babel-jest": "^27.5.1",
+    "eslint": "9.x",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^15.8.0",
     "jest": "^27.5.1",
-    "jest-axe": "^6.0.0"
+    "jest-axe": "^6.0.0",
+    "typescript-eslint": "^7.16.0"
   },
   "publishConfig": {
     "access": "public",

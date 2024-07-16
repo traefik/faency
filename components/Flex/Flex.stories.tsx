@@ -1,8 +1,8 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
-import { Flex } from './Flex';
 import { Box } from '../Box';
+import { Flex } from './Flex';
 
 const Component: Meta<typeof Flex> = {
   title: 'Components/Flex',
@@ -23,6 +23,7 @@ Basic.args = {
   gap: '6',
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Flex> = (args) => <Flex {...args} css={{ c: '$hiContrast' }} />;
 
 export default Component;

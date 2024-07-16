@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { CheckCircledIcon, CopyIcon, InfoCircledIcon } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React, { useCallback, useState } from 'react';
 
-import { Textarea, TextareaProps, TextareaVariants } from './Textarea';
+import { styled } from '../../stitches.config';
+import ignoreArgType from '../../utils/ignoreArgType';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
-import ignoreArgType from '../../utils/ignoreArgType';
-import { CopyIcon, CheckCircledIcon, InfoCircledIcon } from '@radix-ui/react-icons';
-import { styled } from '../../stitches.config';
+import { Textarea, TextareaProps, TextareaVariants } from './Textarea';
 
 const BaseTextarea = (props: TextareaProps): JSX.Element => <Textarea {...props} />;
 
@@ -158,6 +158,7 @@ export const ReadOnlyCopy: StoryFn<typeof TextareaForStory> = (args) => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof TextareaForStory> = (args) => (
   <Textarea {...args} css={{ c: '$hiContrast' }} />
 );

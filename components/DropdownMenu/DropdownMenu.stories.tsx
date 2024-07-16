@@ -1,20 +1,20 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
+import { Button } from '../Button';
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuCheckboxItem,
-  DropdownMenuRadioItem,
+  DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuRadioGroup,
+  DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from './DropdownMenu';
-import { Button } from '../Button';
 
 const Component: Meta<typeof DropdownMenu> = {
   title: 'Components/DropdownMenu',
@@ -64,6 +64,7 @@ DefaultOpen.args = {
   defaultOpen: true,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof DropdownMenu> = (args) => (
   <DropdownMenu {...args}>
     <DropdownMenuTrigger asChild>

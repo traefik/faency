@@ -1,11 +1,11 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-
-import { ButtonForStory } from './Button';
-import { Flex } from '../Flex';
-import { Text } from '../Text';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
+import { Flex } from '../Flex';
 import { UnstyledLink } from '../Link';
+import { Text } from '../Text';
+import { ButtonForStory } from './Button';
 
 const Component: Meta<typeof ButtonForStory> = {
   title: 'Components/Button',
@@ -57,6 +57,7 @@ const TemplateWithIcon: StoryFn<typeof ButtonForStory> = (args) => (
 
 export const WithIcon: StoryFn<typeof ButtonForStory> = TemplateWithIcon.bind({});
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TemplateWithActive: StoryFn<typeof ButtonForStory> = ({ state, ...args }) => {
   const [active, setActive] = React.useState(0);
 
@@ -88,6 +89,7 @@ Waiting.args = {
   state: 'waiting',
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof ButtonForStory> = (args) => (
   <ButtonForStory css={{ c: '$hiContrast' }} {...args}>
     Button

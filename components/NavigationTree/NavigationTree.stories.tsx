@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { NavigationTreeItem } from './NavigationTreeItem';
-import { NavigationTreeContainer } from './NavigationTreeContainer';
 import {
   ArchiveIcon,
-  EyeOpenIcon,
-  EyeClosedIcon,
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
+  EyeClosedIcon,
+  EyeOpenIcon,
 } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React, { useState } from 'react';
+
 import { NavigationTreeDrawer } from '.';
+import { NavigationTreeContainer } from './NavigationTreeContainer';
+import { NavigationTreeItem } from './NavigationTreeItem';
 
 const Component: Meta<typeof NavigationTreeContainer> = {
   title: 'Components/NavigationTree',

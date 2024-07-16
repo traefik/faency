@@ -1,17 +1,17 @@
+import { Cross1Icon } from '@radix-ui/react-icons';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import { Skeleton, SkeletonProps, SkeletonVariants } from './Skeleton';
-import { Flex } from '../Flex';
-import { Box } from '../Box';
-import { H1, H2, H3, H4, H5, H6 } from '../Heading';
-import { Text as FaencyText } from '../Text';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Avatar } from '../Avatar';
 import { Badge as FaencyBadge } from '../Badge';
+import { Box } from '../Box';
 import { Bubble } from '../Bubble';
 import { Button as FaencyButton } from '../Button';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Cross1Icon } from '@radix-ui/react-icons';
+import { Flex } from '../Flex';
+import { H1, H2, H3, H4, H5, H6 } from '../Heading';
+import { Text as FaencyText } from '../Text';
+import { Skeleton, SkeletonProps, SkeletonVariants } from './Skeleton';
 
 const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
 const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(BaseSkeleton);

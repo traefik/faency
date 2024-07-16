@@ -1,24 +1,25 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
+
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Badge } from '../Badge';
+import { Button } from '../Button';
+import { Flex } from '../Flex';
+import { Image } from '../Image';
+import { UnstyledLink } from '../Link';
+import { Text } from '../Text';
 import {
+  Caption,
   Table,
   TableProps,
   TableVariants,
   Tbody,
   Td,
+  Tfoot,
   Th,
   Thead,
   Tr,
-  Caption,
-  Tfoot,
 } from './AriaTable';
-import { Badge } from '../Badge';
-import { Button } from '../Button';
-import { Flex } from '../Flex';
-import { UnstyledLink } from '../Link';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Image } from '../Image';
-import { Text } from '../Text';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
@@ -281,6 +282,7 @@ export const Links: StoryFn<any> = (args) => (
   </Table>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<any> = (args) => (
   <TableForStory
     css={{ c: '$hiContrast' }}
@@ -572,7 +574,7 @@ const FlexIssue = () => (
   </Flex>
 );
 
-export const VerticalAlignment: StoryFn<any> = (args) => (
+export const VerticalAlignment: StoryFn<any> = () => (
   <TableForStory>
     <Thead>
       <Tr>

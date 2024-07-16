@@ -1,17 +1,18 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+import { useState } from 'react';
+
+import { Box } from '../Box';
+import { Button } from '../Button';
+import { Text } from '../Text';
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
-  StyledContent,
   DialogOverlay,
   DialogPortal,
+  DialogTrigger,
+  StyledContent,
 } from './Dialog';
-import { Text } from '../Text';
-import { useState } from 'react';
-import { Button } from '../Button';
-import { Box } from '../Box';
 
 const Component: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
@@ -75,6 +76,7 @@ export const Basic: StoryFn<typeof Dialog> = () => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Dialog> = () => {
   const [open, setOpen] = useState(false);
 

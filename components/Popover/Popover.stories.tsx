@@ -1,22 +1,22 @@
-import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-
-import {
-  Popover,
-  PopoverProps,
-  PopoverVariants,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverClose,
-} from './Popover';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Container } from '../Container';
-import { Button } from '../Button';
-import { Text } from '../Text';
-import { Flex } from '../Flex';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { PopoverAnchor, PopoverPortal } from '@radix-ui/react-popover';
+import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Box } from '../Box';
+import { Button } from '../Button';
+import { Container } from '../Container';
+import { Flex } from '../Flex';
+import { Text } from '../Text';
+import {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverProps,
+  PopoverTrigger,
+  PopoverVariants,
+} from './Popover';
 
 const BasePopover = (props: PopoverProps): JSX.Element => <Popover {...props} />;
 const PopoverForStory = modifyVariantsForStory<PopoverVariants, PopoverProps>(BasePopover);

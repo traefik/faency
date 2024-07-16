@@ -1,9 +1,10 @@
-import React, { ComponentProps, useMemo } from 'react';
-import { styled, VariantProps } from '../../stitches.config';
 import { Slot } from '@radix-ui/react-slot';
+import React, { ComponentProps, useMemo } from 'react';
+
+import { styled, VariantProps } from '../../stitches.config';
 
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
-type COLOR_VALUES = typeof COLORS[number];
+type COLOR_VALUES = (typeof COLORS)[number];
 
 const getColorBadgeStyles = (color: COLOR_VALUES) => ({
   bc: `$${color}6`,
@@ -146,6 +147,7 @@ export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>
         return asChild ? StyledButtonBadgeSlot : StyledButtonBadge;
       }
       return asChild ? StyledSpanBadgeSlot : StyledSpanBadge;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [asChild]);
 
     return <Component {...props} ref={forwardedRef} />;

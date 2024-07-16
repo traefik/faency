@@ -1,14 +1,14 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { VariantProps } from '../../stitches.config';
 
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Label } from './Label';
-import { Box } from '../Box';
+import { VariantProps } from '../../stitches.config';
 import ignoreArgType from '../../utils/ignoreArgType';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Box } from '../Box';
+import { Label } from './Label';
 
 type LabelVariants = VariantProps<typeof Label>;
-type LabelProps = LabelVariants & {};
+type LabelProps = LabelVariants & NonNullable<unknown>;
 
 const BaseLabel = (props: LabelProps): JSX.Element => <Label {...props} />;
 const LabelForStory = modifyVariantsForStory<

@@ -1,4 +1,5 @@
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+
 import { styled } from '../../stitches.config';
 
 export const ButtonSwitchContainer = styled(ToggleGroupPrimitive.Root, {

@@ -1,6 +1,7 @@
-import React from 'react';
-import { styled, VariantProps, CSS } from '../../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
+import React from 'react';
+
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 
 // CONSTANTS

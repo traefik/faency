@@ -1,11 +1,12 @@
-import React, { ComponentProps } from 'react';
-import { CSS, styled, VariantProps } from '../../stitches.config';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { overlayStyles } from '../Overlay';
-import { IconButton } from '../IconButton';
+import React, { ComponentProps } from 'react';
+
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Card } from '../Card';
 import { elevationVariants } from '../Elevation/Elevation';
+import { IconButton } from '../IconButton';
+import { overlayStyles } from '../Overlay';
 
 type DialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
   children: React.ReactNode;

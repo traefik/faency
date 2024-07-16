@@ -1,7 +1,7 @@
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import React from 'react';
 
 import { Badge, Box, Button, Card, Flex, H1, H2, H3, Text, TextField } from '../../index';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 export const Dashboard = () => (
   <Box css={{ p: '$6' }}>

@@ -1,5 +1,5 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
 import { Image } from './Image';
 
@@ -22,6 +22,7 @@ Large.args = {
   src: 'https://picsum.photos/2000/3000',
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Image> = (args) => <Image css={{ c: '$hiContrast' }} {...args} />;
 
 export default Component;

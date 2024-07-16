@@ -1,8 +1,9 @@
-import React from 'react';
-import { styled, CSS, VariantProps } from '../../stitches.config';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { panelStyles } from '../Panel';
+import React from 'react';
+
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
+import { panelStyles } from '../Panel';
 
 export type PopoverProps = React.ComponentProps<typeof PopoverPrimitive.Root> & {
   children: React.ReactNode;

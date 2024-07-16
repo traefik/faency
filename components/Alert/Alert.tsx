@@ -37,4 +37,4 @@ export const Alert = styled(Card, {
 });
 
 export type AlertVariants = VariantProps<typeof Alert>;
-export type AlertProps = AlertVariants & {};
+export type AlertProps = AlertVariants & NonNullable<unknown>;
