@@ -1,4 +1,4 @@
-import { styled, CSS } from '../stitches.config';
+import { CSS, styled } from '../stitches.config';
 
 export const overlayStyles: CSS = {
   backgroundColor: 'hsla(0, 0%, 0%, 0.7)',

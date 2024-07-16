@@ -1,12 +1,12 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React, { LinkHTMLAttributes } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { VariantProps } from '../../stitches.config';
 
+import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Link } from './Link';
 
 type LinkVariants = VariantProps<typeof Link>;
-type LinkProps = LinkVariants & {};
+type LinkProps = LinkVariants & NonNullable<unknown>;
 
 const BaseLink = (props: LinkProps): JSX.Element => <Link {...props} />;
 const LinkForStory = modifyVariantsForStory<LinkVariants, LinkProps & LinkHTMLAttributes<any>>(
@@ -40,6 +40,7 @@ Variant.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof LinkForStory> = (args) => (
   <Link css={{ c: '$hiContraqt' }} href="https://traefik.io" {...args}>
     https://traefik.io

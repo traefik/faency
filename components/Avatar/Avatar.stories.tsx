@@ -1,5 +1,6 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
 import { Avatar } from './Avatar';
 
 const Component: Meta<typeof Avatar> = {
@@ -90,6 +91,8 @@ Variants.argTypes = {
     options: ['gray', 'red', 'purple', 'blue', 'green', 'orange'],
   },
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Avatar> = (args) => <Avatar css={{ c: '$hiContrast' }} {...args} />;
 
 export default Component;

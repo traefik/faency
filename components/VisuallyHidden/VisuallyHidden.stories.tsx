@@ -1,10 +1,11 @@
+import { GearIcon } from '@radix-ui/react-icons';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { VisuallyHidden } from './VisuallyHidden';
-import { Table, Caption } from '../Table';
-import { Card } from '../Card';
-import { GearIcon } from '@radix-ui/react-icons';
+
 import { styled } from '../../stitches.config';
+import { Card } from '../Card';
+import { Caption, Table } from '../Table';
+import { VisuallyHidden } from './VisuallyHidden';
 
 const FlexButton = styled('button', {
   m: 0,

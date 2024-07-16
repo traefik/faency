@@ -1,15 +1,14 @@
+import { EyeOpenIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { styled } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
-import { Input, InputProps, InputVariants } from './Input';
+import { styled } from '../../stitches.config';
+import ignoreArgType from '../../utils/ignoreArgType';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
-
-import { MagnifyingGlassIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import ignoreArgType from '../../utils/ignoreArgType';
+import { Input, InputProps, InputVariants } from './Input';
 
 const StyledEyeOpenIcon = styled(EyeOpenIcon, {
   '@hover': {
@@ -90,6 +89,7 @@ const INPUT_TYPES = [
   'url',
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Types: StoryFn<typeof InputForStory> = ({ type, ...args }) => (
   <Flex direction="column" gap={2}>
     {INPUT_TYPES.map((type) => (
@@ -248,6 +248,7 @@ export const Autofill: StoryFn<typeof InputForStory> = (args) => (
   </form>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
   <InputForStory css={{ c: '$hiContrast' }} {...args} />
 );

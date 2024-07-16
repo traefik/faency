@@ -1,17 +1,7 @@
-import {
-  Table,
-  TableProps,
-  TableVariants,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  Caption,
-  Tfoot,
-} from './AriaTable';
-import { axe } from 'jest-axe';
 import { render } from '@testing-library/react';
+import { axe } from 'jest-axe';
+
+import { Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './AriaTable';
 
 describe('AriaTable', () => {
   it('should render table with no a11y issue', async () => {

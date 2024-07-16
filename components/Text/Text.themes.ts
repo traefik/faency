@@ -1,5 +1,6 @@
 import { Property } from '@stitches/react/types/css';
 import tinycolor from 'tinycolor2';
+
 import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
@@ -13,7 +14,7 @@ export namespace Theme {
 
   type Factory = (primaryColor: ColorInfo) => Colors;
 
-  export const getLight: Factory = (primaryColor) => ({
+  export const getLight: Factory = () => ({
     textSubtle: tinycolor('black').setAlpha(0.51).toHslString(),
     textDefault: tinycolor('black').setAlpha(0.74).toHslString(),
     textContrast: 'black',
@@ -21,7 +22,7 @@ export namespace Theme {
     textRed: '$red10',
   });
 
-  export const getDark: Factory = (primaryColor) => ({
+  export const getDark: Factory = () => ({
     textSubtle: tinycolor('white').setAlpha(0.51).toHslString(),
     textDefault: tinycolor('white').setAlpha(0.74).toHslString(),
     textContrast: 'white',

@@ -1,12 +1,13 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
 import { VariantProps } from '../../stitches.config';
-import { Bubble } from './Bubble';
-import { Flex } from '../Flex';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Flex } from '../Flex';
+import { Bubble } from './Bubble';
 
 type BubbleVariants = VariantProps<typeof Bubble>;
-type BubbleProps = BubbleVariants & {};
+type BubbleProps = BubbleVariants & NonNullable<unknown>;
 
 const BaseBubble = (props: BubbleProps): JSX.Element => <Bubble {...props} />;
 const BubbleForStory = modifyVariantsForStory<BubbleVariants, BubbleProps>(BaseBubble);
@@ -64,6 +65,7 @@ Sizes.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof BubbleForStory> = (args) => (
   <Bubble {...args} css={{ c: '$hiContrast' }} />
 );

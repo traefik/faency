@@ -1,13 +1,14 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
+
 import { VariantProps } from '../../stitches.config';
-import { Badge, COLORS } from './Badge';
-import { Flex } from '../Flex';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Flex } from '../Flex';
 import { UnstyledLink } from '../Link';
+import { Badge, COLORS } from './Badge';
 
 type BadgeVariants = VariantProps<typeof Badge>;
-type BadgeProps = BadgeVariants & {};
+type BadgeProps = BadgeVariants & NonNullable<unknown>;
 
 const BaseBadge = (props: BadgeProps): JSX.Element => <Badge {...props} />;
 const BadgeForStory = modifyVariantsForStory<BadgeVariants, BadgeProps>(BaseBadge);
@@ -82,6 +83,7 @@ Interactive.args = {
   borderless: false,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof BadgeForStory> = (args) => (
   <Badge css={{ c: '$hiContrast' }} {...args}>
     Customize

@@ -1,9 +1,10 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import React from 'react';
+
+import { Flex } from '../Flex';
+import { H2 } from '../Heading';
 import { Text } from '../Text';
 import { Card } from './Card';
-import { H2 } from '../Heading';
-import { Flex } from '../Flex';
 
 const Component: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -56,7 +57,7 @@ Inner.args = {
   variant: 'inner',
 };
 
-export const Elevation: StoryFn<typeof Card> = (args) => (
+export const Elevation: StoryFn<typeof Card> = () => (
   <Flex css={{ gap: '$3' }}>
     <Card elevation={0}>
       <H2 css={{ mb: '$3' }}>No Elevation</H2>
@@ -123,6 +124,7 @@ export const Elevation: StoryFn<typeof Card> = (args) => (
 
 Elevation.args = {};
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Card> = (args) => (
   <Card css={{ c: '$hiContrast' }} {...args}></Card>
 );

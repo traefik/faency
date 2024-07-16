@@ -1,13 +1,13 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { VariantProps } from '../../stitches.config';
 
+import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Box } from './Box';
 import { Text } from '../Text';
+import { Box } from './Box';
 
 type BoxVariants = VariantProps<typeof Box>;
-type BoxProps = BoxVariants & {};
+type BoxProps = BoxVariants & NonNullable<unknown>;
 
 const BaseBox = (props: BoxProps): JSX.Element => <Box {...props} />;
 const BoxForStory = modifyVariantsForStory<BoxVariants, BoxProps & React.HTMLAttributes<any>>(

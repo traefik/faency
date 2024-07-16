@@ -1,29 +1,30 @@
+import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { Slot } from '@radix-ui/react-slot';
+import merge from 'lodash.merge';
 import React, {
+  Children,
+  cloneElement,
   ComponentProps,
   ElementRef,
   forwardRef,
-  useMemo,
-  Children,
   isValidElement,
-  useState,
   ReactNode,
-  cloneElement,
+  useMemo,
+  useState,
 } from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { styled, VariantProps, CSS } from '../../stitches.config';
+
+import { styled, VariantProps } from '../../stitches.config';
+import { Box } from '../Box';
 import {
   Caption as TableCaption,
-  Tbody as TableTbody,
-  Tfoot as TableTfoot,
   StyledTr as TableTr,
-  Th as TableTh,
-  Td as TableTd,
-  Thead as TableThead,
   Table as TableTable,
+  Tbody as TableTbody,
+  Td as TableTd,
+  Tfoot as TableTfoot,
+  Th as TableTh,
+  Thead as TableThead,
 } from '../Table';
-import merge from 'lodash.merge';
-import { Box } from '../Box';
-import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 export const Caption = styled('div', TableCaption, {
   display: 'table-caption',
@@ -130,7 +131,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           ) : (
             <Td key="empty-td" />
           )
-        ) : !!collapsedContent ? (
+        ) : collapsedContent ? (
           <Td key="chevron-td">
             <Box
               onClick={(e) => {
@@ -149,6 +150,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
             </Box>
           </Td>
         ) : null,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [isCollapsed]
     );
 
@@ -161,7 +163,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
             ...children?.props,
           },
           // @ts-ignore: Object is possibly 'null'.
-          [TdEl, ...children?.props?.children]
+          [TdEl, ...(children?.props?.children || [])]
         );
       }
 
@@ -252,7 +254,7 @@ const StyledThead = styled('div', TableThead, {
 });
 export const Thead = forwardRef<
   ElementRef<typeof StyledThead>,
-  ComponentProps<typeof StyledThead> & VariantProps<typeof StyledThead> & {}
+  ComponentProps<typeof StyledThead> & VariantProps<typeof StyledThead> & NonNullable<unknown>
 >((props, ref) => <StyledThead ref={ref} role="rowgroup" {...props} />);
 
 const StyledTable = styled('div', TableTable, {
@@ -272,4 +274,4 @@ export const Table = forwardRef<
 ));
 
 export type TableVariants = VariantProps<typeof Table>;
-export type TableProps = TableVariants & {};
+export type TableProps = TableVariants & NonNullable<unknown>;

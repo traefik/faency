@@ -1,8 +1,8 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
-import { Select, SelectProps, SelectVariants } from './Select';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Select, SelectProps, SelectVariants } from './Select';
 
 const BaseSelect = (props: SelectProps): JSX.Element => <Select {...props} />;
 const SelectForStory = modifyVariantsForStory<
@@ -73,6 +73,7 @@ Overflow.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof SelectForStory> = (args) => (
   <Select css={{ c: '$hiContrast' }} {...args}>
     <option value="option1">Option 1</option>

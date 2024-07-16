@@ -1,9 +1,9 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
-import { Grid } from './Grid';
 import { Box } from '../Box';
 import { Text } from '../Text';
+import { Grid } from './Grid';
 
 const Component: Meta<typeof Grid> = {
   title: 'Components/Grid',
@@ -41,6 +41,7 @@ Basic.args = {
   gap: '6',
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Grid> = (args) => <Grid {...args} css={{ c: '$hiContrast' }} />;
 
 export default Component;

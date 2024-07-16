@@ -1,27 +1,26 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
+
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { VerticalAlignment as AriaTableStory } from '../AriaTable/AriaTable.stories';
+import { Badge } from '../Badge';
+import { Button } from '../Button';
+import { Flex } from '../Flex';
+import { H1 } from '../Heading';
+import { Text } from '../Text';
+import { VisuallyHidden } from '../VisuallyHidden';
 import {
+  Caption,
   Table,
   TableProps,
   TableVariants,
   Tbody,
   Td,
+  Tfoot,
   Th,
   Thead,
   Tr,
-  Tfoot,
-  Caption,
 } from './Table';
-import { Badge } from '../Badge';
-import { Flex } from '../Flex';
-import { H1 } from '../Heading';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { VisuallyHidden } from '../VisuallyHidden';
-import { Button } from '../Button';
-
-import { VerticalAlignment as AriaTableStory } from '../AriaTable/AriaTable.stories';
-import { Box } from '../Box';
-import { Text } from '../Text';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
@@ -635,6 +634,7 @@ export const Empty: StoryFn<any> = (args) => (
   </Flex>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<any> = (args) => (
   <TableForStory css={{ c: '$hiContrast' }} {...args}>
     <Thead css={{ c: '$hiContrast' }}>

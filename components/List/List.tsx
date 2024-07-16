@@ -1,5 +1,6 @@
 import React, { ComponentProps, createContext, ReactNode, useContext, useMemo } from 'react';
-import { styled, VariantProps, CSS } from '../../stitches.config';
+
+import { styled, VariantProps } from '../../stitches.config';
 import { BUTTON_BASE_STYLES } from '../Button';
 import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';

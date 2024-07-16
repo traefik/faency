@@ -1,19 +1,12 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import React, {
-  useState,
-  useMemo,
-  forwardRef,
-  ElementRef,
-  ComponentProps,
-  ReactNode,
-  Children,
-} from 'react';
+import React, { ComponentProps, ElementRef, forwardRef, ReactNode, useMemo, useState } from 'react';
+
 import { styled, VariantProps } from '../../stitches.config';
+import { Box } from '../Box';
 import { elevationVariants } from '../Elevation';
+import { Flex } from '../Flex';
 import { Label } from '../Label';
 import { Text } from '../Text';
-import { Box } from '../Box';
-import { Flex } from '../Flex';
 
 export const Caption = styled('caption', Text, {
   display: 'table-caption',
@@ -333,4 +326,4 @@ export const Table = styled('table', {
 });
 
 export type TableVariants = VariantProps<typeof Table>;
-export type TableProps = TableVariants & {};
+export type TableProps = TableVariants & NonNullable<unknown>;

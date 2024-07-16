@@ -1,13 +1,13 @@
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { VariantProps } from '../../stitches.config';
 
+import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Container } from './Container';
 import { Paragraph } from '../Paragraph';
+import { Container } from './Container';
 
 type ContainerVariants = VariantProps<typeof Container>;
-type ContainerProps = ContainerVariants & {};
+type ContainerProps = ContainerVariants & NonNullable<unknown>;
 
 const BaseContainer = (props: ContainerProps): JSX.Element => <Container {...props} />;
 const ContainerForStory = modifyVariantsForStory<

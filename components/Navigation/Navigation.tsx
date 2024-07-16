@@ -1,5 +1,6 @@
-import React, { useMemo, ReactNode } from 'react';
-import { styled, css, CSS, VariantProps } from '../../stitches.config';
+import React, { ReactNode, useMemo } from 'react';
+
+import { CSS, css, styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
 
@@ -127,7 +128,7 @@ export const NavigationContainer = styled('div', {
 });
 
 export type NavigationContainerVariants = VariantProps<typeof NavigationContainer>;
-export type NavigationContainerProps = NavigationContainerVariants & {};
+export type NavigationContainerProps = NavigationContainerVariants & NonNullable<unknown>;
 
 export const NavigationDrawer = styled('nav', {
   display: 'flex',
@@ -166,7 +167,7 @@ export const NavigationDrawer = styled('nav', {
 });
 
 export type NavigationDrawerVariants = VariantProps<typeof NavigationDrawer>;
-export type NavigationDrawerProps = NavigationDrawerVariants & {};
+export type NavigationDrawerProps = NavigationDrawerVariants & NonNullable<unknown>;
 
 const StyledLink = styled('a', baseNavItemCss, {
   textDecoration: 'none',
@@ -228,4 +229,4 @@ export const NavigationLink = (props: Omit<NavigationItemLinkProps, 'as'>) => (
 
 export type NavigationLinkVariants = VariantProps<typeof NavigationLink>;
 
-export type NavigationLinkProps = NavigationLinkVariants & {};
+export type NavigationLinkProps = NavigationLinkVariants & NonNullable<unknown>;

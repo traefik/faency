@@ -1,7 +1,8 @@
-import React, { ComponentProps, useMemo } from 'react';
-import { styled, keyframes, CSS, VariantProps } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Slot } from '@radix-ui/react-slot';
+import React, { ComponentProps, useMemo } from 'react';
+
+import { CSS, keyframes, styled, VariantProps } from '../../stitches.config';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const BUTTON_BASE_STYLES = {
   appearance: 'none',

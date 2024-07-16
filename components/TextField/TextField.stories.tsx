@@ -1,20 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import {
+  CheckCircledIcon,
+  CopyIcon,
+  InfoCircledIcon,
+  MagnifyingGlassIcon,
+} from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React, { useCallback, useState } from 'react';
 
+import { styled } from '../../stitches.config';
+import ignoreArgType from '../../utils/ignoreArgType';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
+import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
 import { Text } from '../Text';
-import { Popover, PopoverTrigger, PopoverContent } from '../Popover';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
-import {
-  MagnifyingGlassIcon,
-  InfoCircledIcon,
-  CopyIcon,
-  CheckCircledIcon,
-} from '@radix-ui/react-icons';
-import { styled } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import ignoreArgType from '../../utils/ignoreArgType';
 
 const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
 const TextFieldForStory = modifyVariantsForStory<
@@ -199,6 +199,7 @@ LabelComponent.args = {
 };
 ignoreArgType('id', LabelComponent);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof TextFieldForStory> = (args) => (
   <TextFieldForStory css={{ c: '$hiContrast' }} {...args} />
 );

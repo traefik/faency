@@ -1,4 +1,4 @@
-import { styled, CSS } from '../../stitches.config';
+import { CSS, styled } from '../../stitches.config';
 
 type ElevationVariant = Record<number, CSS>;
 

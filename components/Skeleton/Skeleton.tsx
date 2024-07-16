@@ -65,4 +65,4 @@ export const Skeleton = styled('div', {
 });
 
 export type SkeletonVariants = VariantProps<typeof Skeleton>;
-export type SkeletonProps = SkeletonVariants & {};
+export type SkeletonProps = SkeletonVariants & NonNullable<unknown>;

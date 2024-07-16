@@ -1,16 +1,16 @@
+import {
+  CrossCircledIcon,
+  ExclamationTriangleIcon,
+  EyeClosedIcon,
+  EyeOpenIcon,
+} from '@radix-ui/react-icons';
 import React from 'react';
-import { styled } from '../../stitches.config';
 
+import { styled } from '../../stitches.config';
 import { Box } from '../Box';
 import { Input, InputHandle, InputProps, InputVariants } from '../Input';
 import { Label } from '../Label';
 import { Tooltip } from '../Tooltip';
-import {
-  ExclamationTriangleIcon,
-  CrossCircledIcon,
-  EyeOpenIcon,
-  EyeClosedIcon,
-} from '@radix-ui/react-icons';
 
 // TYPES
 export interface TextFieldLabelProps {
@@ -117,17 +117,15 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
 
     const isPasswordType = React.useMemo(() => type === 'password', [type]);
 
-    const typeOrInnerType = React.useMemo(() => (isPasswordType ? innerType : type), [
-      isPasswordType,
-      type,
-      innerType,
-    ]);
+    const typeOrInnerType = React.useMemo(
+      () => (isPasswordType ? innerType : type),
+      [isPasswordType, type, innerType]
+    );
 
-    const hasInnerAdornment = React.useMemo(() => clearable || isPasswordType || invalid, [
-      clearable,
-      isPasswordType,
-      invalid,
-    ]);
+    const hasInnerAdornment = React.useMemo(
+      () => clearable || isPasswordType || invalid,
+      [clearable, isPasswordType, invalid]
+    );
 
     const hasAdornmentGroup = React.useMemo(
       () => (clearable && invalid) || (clearable && isPasswordType) || (invalid && isPasswordType),

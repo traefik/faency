@@ -1,9 +1,9 @@
-import React from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import React from 'react';
 
-import { styled, CSS, VariantProps } from '../../stitches.config';
-import { Text } from '../Text';
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Box } from '../Box';
+import { Text } from '../Text';
 
 export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
   React.ComponentProps<typeof TooltipPrimitive.Content> & {

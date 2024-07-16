@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { NavigationTreeItem } from './NavigationTreeItem';
-import { NavigationTreeContainer } from './NavigationTreeContainer';
-import { NavigationDrawer } from '../Navigation';
 import {
   ArchiveIcon,
-  EyeOpenIcon,
-  EyeClosedIcon,
+  DashboardIcon,
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
-  DashboardIcon,
-  PersonIcon,
+  EyeClosedIcon,
+  EyeOpenIcon,
   GearIcon,
+  PersonIcon,
   QuestionMarkCircledIcon,
 } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React, { useState } from 'react';
+
+import { NavigationDrawer } from '../Navigation';
+import { NavigationTreeContainer } from './NavigationTreeContainer';
+import { NavigationTreeItem } from './NavigationTreeItem';
 
 const Component: Meta<typeof NavigationTreeItem> = {
   title: 'Components/NavigationTree',

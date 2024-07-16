@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavigationDrawer, NavigationDrawerProps } from '../Navigation';
+
 import { CSS } from '../../stitches.config';
+import { NavigationDrawer, NavigationDrawerProps } from '../Navigation';
 
 export interface NavigationTreeDrawerProps {
   children: React.ReactNode;

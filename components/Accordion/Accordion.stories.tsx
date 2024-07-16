@@ -1,15 +1,16 @@
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
-import { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from '.';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+
 import { VariantProps } from '../../stitches.config';
-import { Dialog, DialogContent, DialogTrigger, DialogOverlay, DialogPortal } from '../Dialog';
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Badge } from '../Badge';
-import { Button } from '../Button';
-import { Text } from '../Text';
 import { Box } from '../Box';
+import { Button } from '../Button';
+import { Dialog, DialogContent, DialogOverlay, DialogPortal, DialogTrigger } from '../Dialog';
 import { Flex } from '../Flex';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Text } from '../Text';
+import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '.';
 
 type AccordionVariants = VariantProps<typeof AccordionRoot>;
 
@@ -119,6 +120,7 @@ Complex.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof AccordionForStory> = ({ size, ...args }) => (
   <Box css={{ width: 300 }}>
     <AccordionForStory css={{ maxWidth: 250 }} {...args}>

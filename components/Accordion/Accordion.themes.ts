@@ -1,6 +1,7 @@
 import { Property } from '@stitches/react/types/css';
-import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 import tinycolor from 'tinycolor2';
+
+import { ColorInfo } from '../../utils/getPrimaryColorInfo';
 
 export namespace Theme {
   type Colors = {

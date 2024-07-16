@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 import {
   DashboardIcon,
-  PersonIcon,
   GearIcon,
+  PersonIcon,
   QuestionMarkCircledIcon,
 } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
+import React, { useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Badge } from '../Badge';
+import { Text } from '../Text';
 import {
-  NavigationDrawer,
   NavigationContainer,
+  NavigationDrawer,
   NavigationDrawerProps,
   NavigationDrawerVariants,
   NavigationItem,
 } from './Navigation';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Badge } from '../Badge';
-import { Text } from '../Text';
-import { useDebouncedCallback } from 'use-debounce';
 
 const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/Navigation',

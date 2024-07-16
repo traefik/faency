@@ -1,14 +1,13 @@
+import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
-import { Ul, Li, ListProps } from './List';
 import { Avatar } from '../Avatar';
+import { Button } from '../Button';
+import { Checkbox } from '../Checkbox';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
-import { Checkbox } from '../Checkbox';
-import { Button } from '../Button';
-
-import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { Li, Ul } from './List';
 
 const Component: Meta<typeof Ul> = {
   title: 'Components/List',
@@ -24,6 +23,7 @@ const Template: StoryFn<typeof Ul> = (args) => (
   </Ul>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof Ul> = (args) => (
   <Ul css={{ mt: '$1' }} {...args}>
     <Li css={{ color: '$hiContrast' }}>Dashboard</Li>

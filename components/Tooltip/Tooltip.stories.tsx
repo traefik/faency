@@ -1,22 +1,15 @@
+import { CrossCircledIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
 
-import { Tooltip, TooltipProps, TooltipVariants } from './Tooltip';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Text } from '../Text';
 import { Container } from '../Container';
 import { Flex } from '../Flex';
-import { Box } from '../Box';
-import { CrossCircledIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons';
-import { styled } from '../../stitches.config';
+import { Text } from '../Text';
+import { Tooltip, TooltipProps, TooltipVariants } from './Tooltip';
 
 const BaseTooltip = (props: TooltipProps): JSX.Element => <Tooltip {...props} />;
 const TooltipForStory = modifyVariantsForStory<TooltipVariants, TooltipProps>(BaseTooltip);
-
-const SpacedBox = styled(Box, {
-  my: '$8',
-  border: '1px dashed $primary',
-});
 
 const Component: Meta<typeof TooltipForStory> = {
   title: 'Components/Tooltip',
@@ -82,6 +75,7 @@ NodeContent.argTypes = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Customize: StoryFn<typeof TooltipForStory> = (args) => (
   <Container>
     <TooltipForStory css={{ c: '$hiContrast' }} {...args}>
