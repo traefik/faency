@@ -1,6 +1,7 @@
 import { Property } from '@stitches/react/types/css';
-import { PrimaryColor } from '../stitches.config';
+
 import { ColorMap } from '../colors';
+import { PrimaryColor } from '../stitches.config';
 
 type ColorScale = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 

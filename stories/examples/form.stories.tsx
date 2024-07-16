@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from '../../components/Link';
 
-import { Button, Card, Checkbox, Flex, Label, H1, TextField } from '../../index';
+import { Link } from '../../components/Link';
+import { Button, Card, Checkbox, Flex, H1, Label, TextField } from '../../index';
 
 export const Form = () => (
   <Flex css={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
