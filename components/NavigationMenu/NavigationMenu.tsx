@@ -13,6 +13,7 @@ const StyledRoot = styled(NavigationMenuPrimitive.Root, {
     p: 0,
     listStyleType: 'none',
     li: {
+      position: 'relative',
       display: 'inline',
     },
   },
@@ -39,6 +40,9 @@ export const NavigationMenu = React.forwardRef<
 // #region Content
 
 const StyledContent = styled(NavigationMenuPrimitive.Content, panelStyles, {
+  position: 'absolute',
+  left: 0,
+  p: '$2',
   color: '$hiContrast',
   '&:focus': {
     outline: 'none',

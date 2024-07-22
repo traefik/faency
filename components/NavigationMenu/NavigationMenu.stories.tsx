@@ -4,9 +4,8 @@ import React from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Container } from '../Container';
-import { Flex } from '../Flex';
 import { Link } from '../Link';
-import { NavigationTreeContainer, NavigationTreeItem } from '../NavigationTree';
+import { NavigationItem } from '../Navigation';
 import { Text } from '../Text';
 import {
   NavigationMenu,
@@ -17,7 +16,6 @@ import {
   NavigationMenuProps,
   NavigationMenuTrigger,
   NavigationMenuVariants,
-  NavigationMenuViewport,
 } from './NavigationMenu';
 
 const BaseNavigationMenu = (props: NavigationMenuProps): JSX.Element => (
@@ -39,34 +37,32 @@ const Template: StoryFn<typeof NavigationMenuForStory> = (args) => (
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            <Text css={{ cursor: 'pointer' }}>Menu links</Text>
+            <Text css={{ cursor: 'pointer' }}>Links</Text>
           </NavigationMenuTrigger>
-          <NavigationMenuContent css={{ maxWidth: 265, p: '$2' }}>
-            <Flex direction="column" gap={1}>
-              <NavigationMenuLink asChild>
-                <Link href="#">A link</Link>
-              </NavigationMenuLink>
-              <NavigationMenuLink asChild>
-                <Link href="#">Another link</Link>
-              </NavigationMenuLink>
-            </Flex>
+          <NavigationMenuContent css={{ display: 'flex', flexDirection: 'column', gap: '$1' }}>
+            <NavigationMenuLink asChild>
+              <Link href="#">A link</Link>
+            </NavigationMenuLink>
+            <NavigationMenuLink asChild>
+              <Link href="#">Another link</Link>
+            </NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            <Text css={{ cursor: 'pointer' }}>Navigation tree items</Text>
+            <Text css={{ cursor: 'pointer' }}>Navigation items</Text>
           </NavigationMenuTrigger>
-          <NavigationMenuContent css={{ maxWidth: 265, p: '$2' }}>
-            <NavigationTreeContainer>
-              <NavigationTreeItem label="Profile" startAdornment={<PersonIcon />} />
-              <NavigationTreeItem label="Settings" startAdornment={<GearIcon />} />
-            </NavigationTreeContainer>
+          <NavigationMenuContent>
+            <NavigationMenuLink>
+              <NavigationItem startAdornment={<PersonIcon />}>Profile</NavigationItem>
+            </NavigationMenuLink>
+            <NavigationMenuLink>
+              <NavigationItem startAdornment={<GearIcon />}>Settings</NavigationItem>
+            </NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
-
-      <NavigationMenuViewport />
     </NavigationMenuForStory>
   </Container>
 );
