@@ -25,7 +25,7 @@ const BaseNavigationMenu = (props: NavigationMenuProps): JSX.Element => (
 );
 
 const NavigationMenuForStory = modifyVariantsForStory<NavigationMenuVariants, NavigationMenuProps>(
-  BaseNavigationMenu
+  BaseNavigationMenu,
 );
 
 const Component: Meta<typeof NavigationMenuForStory> = {
@@ -72,22 +72,5 @@ const Template: StoryFn<typeof NavigationMenuForStory> = (args) => (
 );
 
 export const Basic: StoryFn<typeof NavigationMenuForStory> = Template.bind({});
-
-// export const IconTrigger: StoryFn<typeof NavigationMenuForStory> = (args) => (
-//   <Container>
-//     <NavigationMenuForStory {...args}>
-//       <PopoverTrigger asChild>
-//         <Button size="small">
-//           <HamburgerMenuIcon />
-//         </Button>
-//       </PopoverTrigger>
-//       <PopoverPortal>
-//         <PopoverContent arrowCss={{ fill: '$primary' }} css={{ bc: '$primary', p: '$2' }}>
-//           <Text css={{ c: '$loContrast' }}>Content</Text>
-//         </PopoverContent>
-//       </PopoverPortal>
-//     </NavigationMenuForStory>
-//   </Container>
-// );
 
 export default Component;
