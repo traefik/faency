@@ -23,13 +23,15 @@ export { Elevation, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
 export {
   Dialog,
+  DialogCloseIconButton,
   DialogClosePrimitive,
   DialogContent,
-  StyledContent,
-  DialogCloseIconButton,
-  DialogTrigger,
+  DialogDescription,
   DialogOverlay,
   DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+  StyledContent,
 } from './components/Dialog';
 export {
   DropdownMenu,
