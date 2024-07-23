@@ -42,6 +42,7 @@ export const NavigationMenu = React.forwardRef<
 const StyledContent = styled(NavigationMenuPrimitive.Content, panelStyles, {
   position: 'absolute',
   left: 0,
+  zIndex: 1,
   p: '$2',
   color: '$hiContrast',
   '&:focus': {
