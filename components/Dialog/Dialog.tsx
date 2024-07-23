@@ -91,6 +91,8 @@ export const DialogContent = React.forwardRef<
   </StyledContent>
 ));
 
-export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClosePrimitive = DialogPrimitive.Close;
+export const DialogDescription = DialogPrimitive.Description;
 export const DialogPortal = DialogPrimitive.Portal;
+export const DialogTitle = DialogPrimitive.Title;
+export const DialogTrigger = DialogPrimitive.Trigger;
