@@ -60,6 +60,16 @@ export {
   NavigationLink,
 } from './components/Navigation';
 export {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from './components/NavigationMenu';
+export {
   NavigationTreeDrawer,
   NavigationTreeContainer,
   NavigationTreeItem,

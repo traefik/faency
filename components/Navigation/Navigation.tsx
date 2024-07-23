@@ -25,6 +25,7 @@ const baseNavItemCss = css({
   color: '$navButtonText',
   border: 'none',
   minHeight: '$7',
+  width: '100%',
   px: '$3',
   py: '$2',
   borderRadius: '$3',
