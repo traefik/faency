@@ -36,13 +36,13 @@ const StyledAccordionItem = styled(AccordionPrimitive.Item, {
   boxShadow: '0 1px 0 0 $colors$divider',
 });
 
-export const StyledAccordionHeader = (styled as any)('AccordionPrimitive.Header', {
+export const StyledAccordionHeader = styled(AccordionPrimitive.Header, {
   all: 'unset',
   display: 'flex',
   borderRadius: 'inherit',
 });
 
-export const StyledAccordionTrigger = (styled as any)(AccordionPrimitive.Trigger, {
+export const StyledAccordionTrigger = styled(AccordionPrimitive.Trigger, {
   all: 'unset',
   borderRadius: 'inherit',
   fontFamily: 'inherit',
@@ -102,7 +102,7 @@ const StyledAccordionChevron = styled(ChevronRightIcon, {
   },
 });
 
-const StyledAccordionContent = (styled as any)(AccordionPrimitive.Content, {
+const StyledAccordionContent = styled(AccordionPrimitive.Content, {
   overflow: 'hidden',
   fontSize: '$3',
   c: '$accordionText',
@@ -114,7 +114,7 @@ const StyledAccordionContent = (styled as any)(AccordionPrimitive.Content, {
   },
 });
 
-const StyledAccordionContentWrapper = (styled as any)('div', {
+const StyledAccordionContentWrapper = styled('div', {
   variants: {
     size: {
       small: {

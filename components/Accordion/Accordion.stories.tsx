@@ -73,6 +73,7 @@ Collapsible.argTypes = {
 export const MultipleCollapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 MultipleCollapsible.args = {
   type: 'multiple',
+  // @FIXME console warning of this props not being a boolean attribute
   collapsible: true,
 };
 MultipleCollapsible.argTypes = {
