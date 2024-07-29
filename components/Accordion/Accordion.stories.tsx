@@ -73,6 +73,7 @@ Collapsible.argTypes = {
 export const MultipleCollapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 MultipleCollapsible.args = {
   type: 'multiple',
+  // @FIXME console warning of this props not being a boolean attribute
   collapsible: true,
 };
 MultipleCollapsible.argTypes = {
@@ -119,30 +120,6 @@ Complex.argTypes = {
     options: ['small', 'medium', 'large'],
   },
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof AccordionForStory> = ({ size, ...args }) => (
-  <Box css={{ width: 300 }}>
-    <AccordionForStory css={{ maxWidth: 250 }} {...args}>
-      <AccordionItem css={{ bc: '$hiContrast' }} value="item-1">
-        <AccordionTrigger css={{ c: '$hiContrast' }} size={size}>
-          Item1 Trigger
-        </AccordionTrigger>
-        <AccordionContent css={{ c: '$hiContrast' }} size={size}>
-          Item1 Content
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger size={size}>Item2 Trigger</AccordionTrigger>
-        <AccordionContent size={size}>Item2 Content</AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger size={size}>Item3 Trigger</AccordionTrigger>
-        <AccordionContent size={size}>Item3 Content</AccordionContent>
-      </AccordionItem>
-    </AccordionForStory>
-  </Box>
-);
 
 export const InsideModal: StoryFn<typeof AccordionForStory> = (args) => {
   const [open, setOpen] = useState(false);

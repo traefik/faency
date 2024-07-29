@@ -22,11 +22,10 @@ const Component: Meta<typeof RadioForStory> = {
   component: RadioForStory,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Template: StoryFn<typeof RadioForStory> = ({ value, ...args }) => (
+const Template: StoryFn<typeof RadioForStory> = ({ value, ...rest }) => (
   <RadioGroupForStory defaultValue="1">
-    <RadioForStory value="1" css={{ mr: '$5' }} {...args} />
-    <RadioForStory value="2" css={{ mr: '$5' }} {...args} />
+    <RadioForStory value={value || '1'} css={{ mr: '$5' }} {...rest} />
+    <RadioForStory value={value || '2'} css={{ mr: '$5' }} {...rest} />
   </RadioGroupForStory>
 );
 
@@ -46,13 +45,5 @@ Disabled.args = {
   disabled: true,
   size: 2,
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof RadioForStory> = ({ value, ...args }) => (
-  <RadioGroup css={{ c: '$hiContrast' }} defaultValue="1">
-    <RadioForStory value="1" css={{ mr: '$5' }} {...args} />
-    <RadioForStory value="2" css={{ mr: '$5' }} {...args} />
-  </RadioGroup>
-);
 
 export default Component;

@@ -92,7 +92,4 @@ Variants.argTypes = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Avatar> = (args) => <Avatar css={{ c: '$hiContrast' }} {...args} />;
-
 export default Component;

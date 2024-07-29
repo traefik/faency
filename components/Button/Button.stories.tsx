@@ -57,8 +57,7 @@ const TemplateWithIcon: StoryFn<typeof ButtonForStory> = (args) => (
 
 export const WithIcon: StoryFn<typeof ButtonForStory> = TemplateWithIcon.bind({});
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TemplateWithActive: StoryFn<typeof ButtonForStory> = ({ state, ...args }) => {
+const TemplateWithActive: StoryFn<typeof ButtonForStory> = ({ ...args }) => {
   const [active, setActive] = React.useState(0);
 
   return (
@@ -67,6 +66,7 @@ const TemplateWithActive: StoryFn<typeof ButtonForStory> = ({ state, ...args }) 
       <Flex css={{ gap: '$3' }}>
         {[...Array(4)].map((_, i) => (
           <ButtonForStory
+            key={`button-story-${i}`}
             {...args}
             {...(active === i ? { state: 'active' } : {})}
             onClick={() => setActive(i)}
@@ -88,13 +88,6 @@ export const Waiting: StoryFn<typeof ButtonForStory> = Template.bind({});
 Waiting.args = {
   state: 'waiting',
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof ButtonForStory> = (args) => (
-  <ButtonForStory css={{ c: '$hiContrast' }} {...args}>
-    Button
-  </ButtonForStory>
-);
 
 export const ButtonLink: StoryFn<typeof ButtonForStory> = (args) => (
   <ButtonForStory asChild {...args}>

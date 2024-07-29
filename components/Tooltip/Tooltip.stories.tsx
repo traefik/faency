@@ -75,13 +75,4 @@ NodeContent.argTypes = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof TooltipForStory> = (args) => (
-  <Container>
-    <TooltipForStory css={{ c: '$hiContrast' }} {...args}>
-      <Text css={{ display: 'inline-block' }}>Tooltip label</Text>
-    </TooltipForStory>
-  </Container>
-);
-
 export default Component;

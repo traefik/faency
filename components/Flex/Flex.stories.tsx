@@ -23,7 +23,4 @@ Basic.args = {
   gap: '6',
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Flex> = (args) => <Flex {...args} css={{ c: '$hiContrast' }} />;
-
 export default Component;

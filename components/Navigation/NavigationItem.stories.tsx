@@ -7,14 +7,8 @@ import {
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Badge } from '../Badge';
-import {
-  NavigationDrawer,
-  NavigationItem,
-  NavigationItemProps,
-  NavigationItemVariants,
-} from './Navigation';
+import { NavigationDrawer, NavigationItem } from './Navigation';
 
 const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/NavigationItem',
@@ -45,15 +39,6 @@ const Component: Meta<typeof NavigationDrawer> = {
     },
   },
 };
-
-const BaseNavigationItem = (props: NavigationItemProps): JSX.Element => (
-  <NavigationItem {...props} />
-);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const NavigationItemForStory = modifyVariantsForStory<NavigationItemVariants, NavigationItemProps>(
-  BaseNavigationItem
-);
 
 const Template: StoryFn<typeof NavigationItem> = (args) => (
   <NavigationDrawer css={{ height: '200px' }}>

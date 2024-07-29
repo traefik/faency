@@ -73,15 +73,4 @@ Overflow.argTypes = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof SelectForStory> = (args) => (
-  <Select css={{ c: '$hiContrast' }} {...args}>
-    <option value="option1">Option 1</option>
-    <option value="option2">Option 2</option>
-    <option value="option3">Option 3</option>
-    <option value="option4">Option 4</option>
-    <option value="option5">Option 5</option>
-  </Select>
-);
-
 export default Component;

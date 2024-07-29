@@ -65,9 +65,4 @@ Sizes.argTypes = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof BubbleForStory> = (args) => (
-  <Bubble {...args} css={{ c: '$hiContrast' }} />
-);
-
 export default Component;

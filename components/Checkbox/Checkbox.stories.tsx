@@ -36,9 +36,4 @@ Disabled.args = {
   size: 'large',
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof CheckboxForStory> = (args) => (
-  <CheckboxForStory css={{ c: '$hiContrast' }} {...args} />
-);
-
 export default Component;

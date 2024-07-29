@@ -158,7 +158,7 @@ export const Interactive: StoryFn<any> = ({ interactive, ...args }) => {
       active: selectedRow === rowNum,
       onClick: () => setSelectedRow(rowNum),
     }),
-    [selectedRow, setSelectedRow]
+    [selectedRow, setSelectedRow],
   );
 
   return (
@@ -634,59 +634,6 @@ export const Empty: StoryFn<any> = (args) => (
   </Flex>
 );
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<any> = (args) => (
-  <TableForStory css={{ c: '$hiContrast' }} {...args}>
-    <Thead css={{ c: '$hiContrast' }}>
-      <Tr css={{ c: '$hiContrast' }}>
-        <Th css={{ c: '$hiContrast' }}>Firstname</Th>
-        <Th>Lastname</Th>
-        <Th>Status</Th>
-        <Th>Role</Th>
-      </Tr>
-    </Thead>
-    <Tbody css={{ c: '$hiContrast' }}>
-      <Tr css={{ c: '$hiContrast' }}>
-        <Td css={{ c: '$hiContrast' }}>John</Td>
-        <Td>Doe</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Developer</Td>
-      </Tr>
-      <Tr>
-        <Td>Johny</Td>
-        <Td>Depp</Td>
-        <Td>
-          <Badge variant="orange">AFK</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr>
-        <Td>Natalie</Td>
-        <Td>Portman</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr>
-        <Td>Luke</Td>
-        <Td>Skywalker</Td>
-        <Td>
-          <Badge variant="red">Disconnected</Badge>
-        </Td>
-        <Td>Star wars</Td>
-      </Tr>
-    </Tbody>
-    <Tfoot css={{ c: '$hiContrast' }}>
-      <Tr>
-        <Td colSpan={4}>Footer information</Td>
-      </Tr>
-    </Tfoot>
-  </TableForStory>
-);
-
 export const CollapsibleRow: StoryFn<any> = ({ interactive, ...args }) => {
   const [selectedRow, setSelectedRow] = useState(1);
   const makeSelectableRowProps = useCallback(
@@ -694,7 +641,7 @@ export const CollapsibleRow: StoryFn<any> = ({ interactive, ...args }) => {
       active: selectedRow === rowNum,
       onClick: () => setSelectedRow(rowNum),
     }),
-    [selectedRow, setSelectedRow]
+    [selectedRow, setSelectedRow],
   );
 
   return (

@@ -173,7 +173,7 @@ export const Interactive: StoryFn<any> = (args) => {
       active: selectedRow === rowNum,
       onClick: () => setSelectedRow(rowNum),
     }),
-    [selectedRow, setSelectedRow]
+    [selectedRow, setSelectedRow],
   );
 
   return (
@@ -280,75 +280,6 @@ export const Links: StoryFn<any> = (args) => (
       </Tr>
     </Tbody>
   </Table>
-);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<any> = (args) => (
-  <TableForStory
-    css={{ c: '$hiContrast' }}
-    aria-label="People"
-    aria-describedby="basic-table-caption"
-    {...args}
-  >
-    <Caption css={{ c: '$hiContrast' }} id="basic-table-caption">
-      People with some information
-    </Caption>
-    <Thead css={{ c: '$hiContrast' }}>
-      <Tr css={{ c: '$hiContrast' }}>
-        <Th css={{ c: '$hiContrast' }}>first name</Th>
-        <Th>last name</Th>
-        <Th>Status</Th>
-        <Th>Role</Th>
-      </Tr>
-    </Thead>
-    <Tbody css={{ c: '$hiContrast' }}>
-      <Tr>
-        <Td>John</Td>
-        <Td>Doe</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Developer</Td>
-      </Tr>
-      <Tr>
-        <Td>Johny</Td>
-        <Td>Depp</Td>
-        <Td>
-          <Badge variant="orange">AFK</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr>
-        <Td>Natalie</Td>
-        <Td>Portman</Td>
-        <Td>
-          <Badge variant="green">Connected</Badge>
-        </Td>
-        <Td>Actor</Td>
-      </Tr>
-      <Tr>
-        <Td>Luke</Td>
-        <Td>Skywalker</Td>
-        <Td>
-          <Badge variant="red">Disconnected</Badge>
-        </Td>
-        <Td>Star wars</Td>
-      </Tr>
-    </Tbody>
-    <Tfoot css={{ c: '$hiContrast' }}>
-      <Tr>
-        <Td css={{ textAlign: 'center' }}>
-          <Button
-            ghost
-            variant="secondary"
-            css={{ fontSize: '$1', height: '$5', boxShadow: 'none' }}
-          >
-            Load more...
-          </Button>
-        </Td>
-      </Tr>
-    </Tfoot>
-  </TableForStory>
 );
 
 export const Columns: StoryFn<any> = ({ transform, ...args }) => (
@@ -604,7 +535,7 @@ export const CollapsibleRow: StoryFn<any> = (args) => {
       active: selectedRow === rowNum,
       onClick: () => setSelectedRow(rowNum),
     }),
-    [selectedRow, setSelectedRow]
+    [selectedRow, setSelectedRow],
   );
 
   return (
