@@ -89,16 +89,13 @@ const INPUT_TYPES = [
   'url',
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Types: StoryFn<typeof InputForStory> = ({ type, ...args }) => (
+export const Types: StoryFn<typeof InputForStory> = ({ ...args }) => (
   <Flex direction="column" gap={2}>
     {INPUT_TYPES.map((type) => (
-      <>
-        <Label htmlFor={`types-${type}`} key={type}>
-          {type}
-        </Label>
+      <Box key={type}>
+        <Label htmlFor={`types-${type}`}>{type}</Label>
         <InputForStory id={`types-${type}`} {...args} type={type} />
-      </>
+      </Box>
     ))}
   </Flex>
 );
@@ -246,11 +243,6 @@ export const Autofill: StoryFn<typeof InputForStory> = (args) => (
       </Box>
     </Flex>
   </form>
-);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
-  <InputForStory css={{ c: '$hiContrast' }} {...args} />
 );
 
 export default Component;

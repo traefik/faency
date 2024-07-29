@@ -83,13 +83,6 @@ Interactive.args = {
   borderless: false,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof BadgeForStory> = (args) => (
-  <Badge css={{ c: '$hiContrast' }} {...args}>
-    Customize
-  </Badge>
-);
-
 export const BadgeLink: StoryFn<typeof BadgeForStory> = (args) => (
   <Badge asChild interactive {...args}>
     <UnstyledLink href="https://traefik.io">Link</UnstyledLink>

@@ -64,35 +64,4 @@ DefaultOpen.args = {
   defaultOpen: true,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof DropdownMenu> = (args) => (
-  <DropdownMenu {...args}>
-    <DropdownMenuTrigger asChild>
-      <Button>Dropdown</Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuPortal>
-      <DropdownMenuContent css={{ c: '$hiContrast' }} align="end">
-        <DropdownMenuGroup css={{ c: '$hiContrast' }}>
-          <DropdownMenuItem css={{ c: '$hiContrast' }}>Item</DropdownMenuItem>
-          <DropdownMenuItem>Item</DropdownMenuItem>
-          <DropdownMenuItem>Item</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuCheckboxItem css={{ c: '$hiContrast' }}>Item</DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem checked>Item</DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem>Item</DropdownMenuCheckboxItem>
-          <DropdownMenuSeparator css={{ c: '$hiContrast' }} />
-          <DropdownMenuLabel css={{ c: '$hiContrast' }}>Choose one</DropdownMenuLabel>
-          <DropdownMenuRadioGroup css={{ c: '$hiContrast' }} value="one">
-            <DropdownMenuRadioItem value="one" css={{ c: '$hiContrast' }}>
-              Item
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="two">Item</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="three">Item</DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenuPortal>
-  </DropdownMenu>
-);
-
 export default Component;

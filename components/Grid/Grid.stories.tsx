@@ -41,7 +41,4 @@ Basic.args = {
   gap: '6',
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Grid> = (args) => <Grid {...args} css={{ c: '$hiContrast' }} />;
-
 export default Component;

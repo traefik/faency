@@ -72,9 +72,4 @@ Variants.argTypes = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof IconButton> = (args) => (
-  <IconButton css={{ c: '$hiContrast' }} {...args} size="1"></IconButton>
-);
-
 export default Component;

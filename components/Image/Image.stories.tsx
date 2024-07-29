@@ -22,7 +22,4 @@ Large.args = {
   src: 'https://picsum.photos/2000/3000',
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Image> = (args) => <Image css={{ c: '$hiContrast' }} {...args} />;
-
 export default Component;

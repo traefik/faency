@@ -124,9 +124,4 @@ export const Elevation: StoryFn<typeof Card> = () => (
 
 Elevation.args = {};
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Card> = (args) => (
-  <Card css={{ c: '$hiContrast' }} {...args}></Card>
-);
-
 export default Component;

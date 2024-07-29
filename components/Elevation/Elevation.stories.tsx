@@ -78,9 +78,4 @@ Basic.argTypes = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Elevation> = () => (
-  <Elevation css={{ c: '$hiContrast' }} variant={0} />
-);
-
 export default Component;

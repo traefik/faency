@@ -45,11 +45,4 @@ export const Transform: StoryFn<typeof H1> = (args) => (
   </Flex>
 );
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof H1> = (args) => (
-  <H1 css={{ fontWeight: '$semiBold' }} {...args}>
-    Heading level 1 SemiBold
-  </H1>
-);
-
 export default Component;

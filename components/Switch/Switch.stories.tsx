@@ -90,7 +90,7 @@ export const LabelAndTitle: StoryFn<(props: ExtendedSwitchProps) => JSX.Element>
       }
       setHasFocus(true);
     },
-    [onFocus, setHasFocus]
+    [onFocus, setHasFocus],
   );
 
   const handleBlur = React.useCallback(
@@ -100,7 +100,7 @@ export const LabelAndTitle: StoryFn<(props: ExtendedSwitchProps) => JSX.Element>
       }
       setHasFocus(false);
     },
-    [onBlur, setHasFocus]
+    [onBlur, setHasFocus],
   );
 
   return (
@@ -129,10 +129,5 @@ LabelAndTitle.args = {
   disabled: false,
 };
 ignoreArgType('id', LabelAndTitle);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof SwitchForStory> = (args) => (
-  <SwitchForStory css={{ c: '$hiContrast' }} {...args} />
-);
 
 export default Component;

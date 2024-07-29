@@ -199,9 +199,4 @@ LabelComponent.args = {
 };
 ignoreArgType('id', LabelComponent);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof TextFieldForStory> = (args) => (
-  <TextFieldForStory css={{ c: '$hiContrast' }} {...args} />
-);
-
 export default Component;

@@ -23,16 +23,6 @@ const Template: StoryFn<typeof Ul> = (args) => (
   </Ul>
 );
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Ul> = (args) => (
-  <Ul css={{ mt: '$1' }} {...args}>
-    <Li css={{ color: '$hiContrast' }}>Dashboard</Li>
-    <Li>Profile</Li>
-    <Li>Settings</Li>
-    <Li>Help</Li>
-  </Ul>
-);
-
 export const Basic: StoryFn<typeof Ul> = Template.bind({});
 
 export const Interactive: StoryFn<typeof Ul> = Template.bind({});

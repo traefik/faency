@@ -76,39 +76,6 @@ export const Basic: StoryFn<typeof Dialog> = () => {
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof Dialog> = () => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
-      <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      </DialogTrigger>
-
-      <Box>
-        {[...Array(10)].map((_, i) => (
-          <Text key={i} css={{ my: '$1' }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
-          </Text>
-        ))}
-      </Box>
-
-      <DialogPortal>
-        <DialogOverlay />
-        <DialogContent css={{ c: '$hiContrast' }} elevation={2}>
-          <Content />
-        </DialogContent>
-      </DialogPortal>
-    </Dialog>
-  );
-};
-
 export const NoCloseIcon: StoryFn<typeof Dialog> = () => {
   const [open, setOpen] = useState(false);
 

@@ -158,9 +158,4 @@ export const ReadOnlyCopy: StoryFn<typeof TextareaForStory> = (args) => {
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof TextareaForStory> = (args) => (
-  <Textarea {...args} css={{ c: '$hiContrast' }} />
-);
-
 export default Component;

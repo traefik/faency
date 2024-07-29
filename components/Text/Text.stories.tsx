@@ -8,7 +8,7 @@ import { Text, TextProps, TextVariants } from './Text';
 
 const BaseText = (props: TextProps): JSX.Element => <Text {...props} />;
 const TextForStory = modifyVariantsForStory<TextVariants, TextProps & React.HTMLAttributes<any>>(
-  BaseText
+  BaseText,
 );
 
 const Component: Meta<typeof TextForStory> = {
@@ -26,8 +26,7 @@ Basic.args = {};
 
 const VARIANT_PARENTS = ['$primary', '$purple10'];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Variant: StoryFn<typeof TextForStory> = ({ variant, ...args }) => (
+export const Variant: StoryFn<typeof TextForStory> = ({ ...args }) => (
   <Flex
     align="center"
     justify="center"
@@ -54,8 +53,7 @@ export const Variant: StoryFn<typeof TextForStory> = ({ variant, ...args }) => (
   </Flex>
 );
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Transform: StoryFn<typeof TextForStory> = ({ transform, ...args }) => (
+export const Transform: StoryFn<typeof TextForStory> = ({ ...args }) => (
   <Flex gap={2}>
     <TextForStory {...args}>default text</TextForStory>
     <TextForStory {...args} transform="uppercase">
@@ -91,8 +89,7 @@ export const Transform: StoryFn<typeof TextForStory> = ({ transform, ...args }) 
 
 const SIZE_PARENTS = ['$4', '$12'];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Size: StoryFn<typeof TextForStory> = ({ size, ...args }) => (
+export const Size: StoryFn<typeof TextForStory> = ({ ...args }) => (
   <Flex gap={2} direction="column">
     <TextForStory {...args} size="0">
       Makes Networking Boring
@@ -169,13 +166,6 @@ export const Weight: StoryFn<typeof TextForStory> = (args) => (
       Bold
     </TextForStory>
   </Flex>
-);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Customize: StoryFn<typeof TextForStory> = (args) => (
-  <TextForStory css={{ fontWeight: '$semiBold' }} {...args}>
-    SemiBold
-  </TextForStory>
 );
 
 export default Component;
