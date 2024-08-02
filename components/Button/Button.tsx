@@ -233,6 +233,14 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       },
     },
     {
+      variant: 'secondary',
+      ghost: true,
+      css: {
+        backgroundColor: 'transparent',
+        color: '$buttonSecondaryText',
+      },
+    },
+    {
       variant: 'red',
       state: 'waiting',
       css: {
