@@ -228,7 +228,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       variant: 'secondary',
       state: 'active',
       css: {
-        backgroundColor: '$buttonPrimaryBg',
+        backgroundColor: '$buttonSecondaryBorder',
         color: '$buttonPrimaryText',
       },
     },
@@ -238,6 +238,21 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       css: {
         backgroundColor: '$deepBlue3',
         color: 'transparent',
+      },
+    },
+    {
+      variant: 'red',
+      state: 'active',
+      css: {
+        backgroundColor: '$buttonRedBg',
+        color: '$buttonRedText',
+
+        '&::before': {
+          backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        },
+        '&::after': {
+          opacity: 0.05,
+        },
       },
     },
     {
@@ -291,7 +306,7 @@ export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, Bu
         {children}
       </Component>
     );
-  }
+  },
 );
 
 const BaseButton = (props: ButtonProps): JSX.Element => <Button {...props} />;
