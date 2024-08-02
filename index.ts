@@ -21,6 +21,7 @@ export { Checkbox } from './components/Checkbox';
 export { Container } from './components/Container';
 export { Elevation, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
+export { DateTimePicker } from './components/DateTimePicker';
 export {
   Dialog,
   DialogCloseIconButton,
