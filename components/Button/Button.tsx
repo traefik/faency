@@ -217,6 +217,15 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       },
     },
     {
+      variant: 'primary',
+      state: 'active',
+      css: {
+        backgroundColor: '$buttonPrimaryFocusBg',
+        color: '$buttonPrimaryText',
+        boxShadow: 'inset 0 0 0 2px $colors$buttonPrimaryBg',
+      },
+    },
+    {
       variant: 'secondary',
       state: 'waiting',
       css: {
@@ -252,15 +261,9 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       variant: 'red',
       state: 'active',
       css: {
-        backgroundColor: '$buttonRedBg',
+        backgroundColor: '$buttonRedFocusBg',
         color: '$buttonRedText',
-
-        '&::before': {
-          backgroundColor: 'rgba(255, 255, 255, 0.15)',
-        },
-        '&::after': {
-          opacity: 0.05,
-        },
+        boxShadow: 'inset 0 0 0 2px $colors$buttonRedBg',
       },
     },
     {
