@@ -222,7 +222,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       css: {
         backgroundColor: '$buttonPrimaryFocusBg',
         color: '$buttonPrimaryText',
-        boxShadow: 'inset 0 0 0 2px $colors$buttonPrimaryBg',
+        boxShadow: 'inset 0 0 0 2px white',
       },
     },
     {
