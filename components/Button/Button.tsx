@@ -235,14 +235,6 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
     },
     {
       variant: 'secondary',
-      state: 'active',
-      css: {
-        backgroundColor: '$buttonSecondaryBorder',
-        color: '$buttonPrimaryText',
-      },
-    },
-    {
-      variant: 'secondary',
       ghost: true,
       css: {
         backgroundColor: 'transparent',
