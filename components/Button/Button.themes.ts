@@ -25,6 +25,7 @@ export namespace Theme {
 
   export const getLight: Factory = (primaryColor) => ({
     buttonPrimaryBg: '$primary',
+    buttonPrimaryFocusBg: tinycolor(primaryColor.value).lighten(10).toHslString(),
     buttonPrimaryText: 'white',
     buttonPrimaryFocusBorder: primaryColor.helpers.pickScale(6, { alpha: true }),
     buttonPrimaryGhostHoverText: '$deepBlue9',
@@ -42,6 +43,7 @@ export namespace Theme {
 
   export const getDark: Factory = (primaryColor) => ({
     buttonPrimaryBg: '$primary',
+    buttonPrimaryFocusBg: tinycolor(primaryColor.value).lighten(10).toHslString(),
     buttonPrimaryText: '$deepBlue2',
     buttonPrimaryFocusBorder: primaryColor.helpers.pickScale(12, { alpha: true }),
     buttonPrimaryGhostHoverText: tinycolor(primaryColor.value).lighten(10).toHslString(),

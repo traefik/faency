@@ -217,6 +217,15 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       },
     },
     {
+      variant: 'primary',
+      state: 'active',
+      css: {
+        backgroundColor: '$buttonPrimaryFocusBg',
+        color: '$buttonPrimaryText',
+        boxShadow: 'inset 0 0 0 2px white',
+      },
+    },
+    {
       variant: 'secondary',
       state: 'waiting',
       css: {
@@ -226,10 +235,10 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
     },
     {
       variant: 'secondary',
-      state: 'active',
+      ghost: true,
       css: {
-        backgroundColor: '$buttonPrimaryBg',
-        color: '$buttonPrimaryText',
+        backgroundColor: 'transparent',
+        color: '$buttonSecondaryText',
       },
     },
     {
@@ -238,6 +247,15 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       css: {
         backgroundColor: '$deepBlue3',
         color: 'transparent',
+      },
+    },
+    {
+      variant: 'red',
+      state: 'active',
+      css: {
+        backgroundColor: '$buttonRedFocusBg',
+        color: '$buttonRedText',
+        boxShadow: 'inset 0 0 0 2px white',
       },
     },
     {
@@ -291,7 +309,7 @@ export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, Bu
         {children}
       </Component>
     );
-  }
+  },
 );
 
 const BaseButton = (props: ButtonProps): JSX.Element => <Button {...props} />;
