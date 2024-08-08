@@ -107,7 +107,7 @@ const StyledWrapper = styled('div', {
 
     '.react-datepicker__navigation': {
       '.react-datepicker__navigation-icon::before': {
-        borderColor: '$gray10',
+        borderColor: '$gray11',
       },
     },
 
@@ -156,7 +156,7 @@ const StyledWrapper = styled('div', {
         color: '$textDefault',
 
         '.react-datepicker__time-box': {
-          // scrollbarColor: 'var(--colors-gray1) var(--colors-gray1)',
+          scrollbarColor: 'var(--colors-gray7) var(--colors-gray2)',
         },
 
         '.react-datepicker__time-list .react-datepicker__time-list-item': {
