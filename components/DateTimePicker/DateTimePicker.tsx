@@ -1,7 +1,7 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { addMonths, addYears } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DatePicker, { CalendarContainer, DatePickerProps } from 'react-datepicker';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
@@ -192,6 +192,8 @@ export const DateTimePicker = React.forwardRef<
   React.ElementRef<typeof StyledWrapper>,
   DateTimePickerProps
 >(({ css, selected, onChange, ...props }, fowardedRef) => {
+  const datePickerRef = useRef<DatePicker | null>(null);
+
   const [selectedDate, setSelectedDate] = useState(selected || new Date());
 
   const CalendarContainerWrapper = ({ className, children }) => {
@@ -204,7 +206,10 @@ export const DateTimePicker = React.forwardRef<
           <Button
             type="button"
             variant="secondary"
-            onClick={() => setSelectedDate(addMonths(new Date(), 1))}
+            onClick={() => {
+              setSelectedDate(addMonths(new Date(), 1));
+              datePickerRef?.current?.setOpen(false);
+            }}
             css={{ flex: '1 1 0px' }}
           >
             Now + 1 M
@@ -212,7 +217,10 @@ export const DateTimePicker = React.forwardRef<
           <Button
             type="button"
             variant="secondary"
-            onClick={() => setSelectedDate(addMonths(new Date(), 3))}
+            onClick={() => {
+              setSelectedDate(addMonths(new Date(), 3));
+              datePickerRef?.current?.setOpen(false);
+            }}
             css={{ flex: '1 1 0px' }}
           >
             Now + 3 M
@@ -220,7 +228,10 @@ export const DateTimePicker = React.forwardRef<
           <Button
             type="button"
             variant="secondary"
-            onClick={() => setSelectedDate(addYears(new Date(), 1))}
+            onClick={() => {
+              setSelectedDate(addYears(new Date(), 1));
+              datePickerRef?.current?.setOpen(false);
+            }}
             css={{ flex: '1 1 0px' }}
           >
             Now + 1 Y
@@ -239,6 +250,7 @@ export const DateTimePicker = React.forwardRef<
       <DatePicker
         calendarContainer={CalendarContainerWrapper}
         customInput={<Input />}
+        ref={datePickerRef}
         showTimeSelect
         {...props}
         selected={selectedDate}
