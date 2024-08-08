@@ -35,7 +35,6 @@ const Template: StoryFn<typeof DateTimePickerForStory> = (args) => {
           <DateTimePickerForStory
             {...args}
             id="expiration-datetime"
-            calendarStartDay={1}
             dateFormat="MMMM d, yyyy h:mm aa"
             onChange={(date) => setDate(date)}
             selected={date}

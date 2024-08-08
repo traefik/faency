@@ -118,6 +118,10 @@ const StyledWrapper = styled('div', {
         boxSizing: 'border-box',
         color: '$textDefault',
 
+        '&--outside-month': {
+          color: '$textSubtle',
+        },
+
         '&--today': {
           border: '1px solid $buttonSecondaryBorder',
           borderRadius: '$3',
