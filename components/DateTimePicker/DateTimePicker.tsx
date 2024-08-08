@@ -113,10 +113,25 @@ const StyledWrapper = styled('div', {
 
     '.react-datepicker__month-container': {
       '.react-datepicker__day': {
+        border: '1px solid transparent',
+        borderRadius: '$3',
+        boxSizing: 'border-box',
         color: '$textDefault',
+
+        '&--today': {
+          border: '1px solid $buttonSecondaryBorder',
+          borderRadius: '$3',
+          fontWeight: 'normal',
+        },
 
         '&:hover': {
           backgroundColor: '$gray6',
+        },
+
+        '&--keyboard-selected': {
+          backgroundColor: 'inherit',
+          border: '1px solid $primary',
+          borderRadius: '$3',
         },
 
         '&--selected': {
@@ -127,13 +142,6 @@ const StyledWrapper = styled('div', {
           '&:hover': {
             backgroundColor: '$primary',
           },
-        },
-
-        '&--today': {
-          border: '1px solid $colors$buttonSecondaryBorder',
-          borderRadius: '$3',
-          boxSizing: 'border-box',
-          fontWeight: 'normal',
         },
       },
 
