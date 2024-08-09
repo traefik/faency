@@ -1,5 +1,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
+import { CalendarIcon } from '@radix-ui/react-icons';
 import { addMonths, addYears } from 'date-fns';
 import React, { useEffect, useRef, useState } from 'react';
 import DatePicker, { CalendarContainer, DatePickerProps } from 'react-datepicker';
@@ -180,6 +181,8 @@ const StyledWrapper = styled('div', {
   },
 
   '.react-datepicker-popper[data-placement] .react-datepicker__triangle': {
+    left: '50% !important',
+    transform: 'rotate(180deg) translateY(-1px) translateX(50%) !important',
     color: '$01dp',
     fill: '$01dp',
     stroke: '$01dp',
@@ -195,7 +198,7 @@ export type DateTimePickerVariants = VariantProps<typeof DateTimePicker>;
 export const DateTimePicker = React.forwardRef<
   React.ElementRef<typeof StyledWrapper>,
   DateTimePickerProps
->(({ css, selected, onChange, ...props }, fowardedRef) => {
+>(({ css, onChange, selected, showIcon, ...props }, fowardedRef) => {
   const datePickerRef = useRef<DatePicker | null>(null);
 
   const [selectedDate, setSelectedDate] = useState(selected || new Date());
@@ -253,7 +256,7 @@ export const DateTimePicker = React.forwardRef<
     <StyledWrapper css={css} ref={fowardedRef}>
       <DatePicker
         calendarContainer={CalendarContainerWrapper}
-        customInput={<Input />}
+        customInput={<Input startAdornment={showIcon ? <CalendarIcon /> : undefined} />}
         ref={datePickerRef}
         showTimeSelect
         {...props}
