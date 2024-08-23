@@ -127,8 +127,7 @@
     "tinycolor2": "^1.4.2",
     "typescript": "5.4.5",
     "use-debounce": "9.0.2",
-    "vite": "^5.1.5",
-    "webpack": "^5.94.0"
+    "vite": "^5.1.5"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
@@ -147,7 +146,8 @@
     "globals": "^15.8.0",
     "jest": "^27.5.1",
     "jest-axe": "^6.0.0",
-    "typescript-eslint": "^7.16.0"
+    "typescript-eslint": "^7.16.0",
+    "webpack": "^5.94.0"
   },
   "publishConfig": {
     "access": "public",
