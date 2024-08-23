@@ -127,7 +127,8 @@
     "tinycolor2": "^1.4.2",
     "typescript": "5.4.5",
     "use-debounce": "9.0.2",
-    "vite": "^5.1.5"
+    "vite": "^5.1.5",
+    "webpack": "^5.94.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
@@ -180,5 +181,5 @@
   "engines": {
     "node": ">=18.12.1"
   },
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "yarn@4.4.0"
 }
