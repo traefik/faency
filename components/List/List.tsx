@@ -18,7 +18,7 @@ const StyledSpan = styled('span', Flex, {
   // APPLY BUTTON STYLES
   ...LIST_ITEM_CONTENT_STYLES,
   // CUSTOM
-  p: '$2',
+  p: '$1',
 });
 
 const StyledListItemButton = styled('button', Flex, {
@@ -71,11 +71,9 @@ const StyledListItemButton = styled('button', Flex, {
 });
 
 const StyledLi = styled('li', {
-  borderRadius: '$1',
   m: '$2',
   outline: 'none',
   position: 'relative',
-  display: 'flex',
   '&:focus-within': {
     boxShadow: 'none',
   },
@@ -83,15 +81,26 @@ const StyledLi = styled('li', {
     elevation: elevationVariants,
   },
   defaultVariants: {
-    elevation: '1',
+    elevation: '0',
   },
 });
 
 const StyledUl = styled('ul', {
-  listStyleType: 'none',
   m: 0,
   p: 0,
   color: '$hiContrast',
+});
+
+const StyledOl = styled('ol', {
+  m: 0,
+  p: 0,
+  color: '$hiContrast',
+
+  '> li::marker': {
+    fontSize: '$3',
+    color: '$hiContrast',
+    fontFamily: '$rubik',
+  },
 });
 
 const ListContext = createContext({
@@ -110,7 +119,25 @@ export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>
         <StyledUl role="list" ref={forwardedRef} {...props} />
       </ListContext.Provider>
     );
-  }
+  },
+);
+
+export interface OrderedListProps
+  extends ComponentProps<typeof StyledOl>,
+    VariantProps<typeof StyledOl> {
+  interactive?: boolean;
+}
+
+export const Ol = React.forwardRef<React.ElementRef<typeof StyledOl>, OrderedListProps>(
+  ({ interactive, ...props }, forwardedRef) => {
+    const contextValue = useMemo(() => ({ interactive: !!interactive }), [interactive]);
+
+    return (
+      <ListContext.Provider value={contextValue}>
+        <StyledOl role="list" ref={forwardedRef} {...props} />
+      </ListContext.Provider>
+    );
+  },
 );
 
 const ControlsWrapper = styled('div', {
@@ -161,5 +188,5 @@ export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemPr
         {!!controls && <ControlsWrapper>{controls}</ControlsWrapper>}
       </StyledLi>
     );
-  }
+  },
 );
