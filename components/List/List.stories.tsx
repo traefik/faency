@@ -31,7 +31,7 @@ Interactive.args = {
 };
 
 export const Users: StoryFn<typeof Ul> = (args) => (
-  <Ul {...args}>
+  <Ul css={{ listStyleType: 'none' }} {...args}>
     <Li gap="3">
       <Avatar id="100" src="https://picsum.photos/100" />
       <Flex align="start" direction="column">
@@ -60,7 +60,7 @@ Users.args = {
 };
 
 export const Controls: StoryFn<typeof Ul> = (args) => (
-  <Ul {...args}>
+  <Ul css={{ listStyleType: 'none' }} {...args}>
     <Li gap="3" controls={<Checkbox />}>
       <Avatar id="100" src="https://picsum.photos/100" />
       <Flex align="start" direction="column">
