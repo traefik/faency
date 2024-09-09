@@ -91,6 +91,18 @@ const StyledUl = styled('ul', {
   color: '$hiContrast',
 });
 
+const StyledOl = styled('ol', {
+  m: 0,
+  p: 0,
+  color: '$hiContrast',
+
+  '> li::marker': {
+    fontSize: '$3',
+    color: '$hiContrast',
+    fontFamily: '$rubik',
+  },
+});
+
 const ListContext = createContext({
   interactive: false,
 });
@@ -105,6 +117,24 @@ export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>
     return (
       <ListContext.Provider value={contextValue}>
         <StyledUl role="list" ref={forwardedRef} {...props} />
+      </ListContext.Provider>
+    );
+  },
+);
+
+export interface OrderedListProps
+  extends ComponentProps<typeof StyledOl>,
+    VariantProps<typeof StyledOl> {
+  interactive?: boolean;
+}
+
+export const Ol = React.forwardRef<React.ElementRef<typeof StyledOl>, OrderedListProps>(
+  ({ interactive, ...props }, forwardedRef) => {
+    const contextValue = useMemo(() => ({ interactive: !!interactive }), [interactive]);
+
+    return (
+      <ListContext.Provider value={contextValue}>
+        <StyledOl role="list" ref={forwardedRef} {...props} />
       </ListContext.Provider>
     );
   },

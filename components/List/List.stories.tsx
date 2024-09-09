@@ -7,7 +7,7 @@ import { Button } from '../Button';
 import { Checkbox } from '../Checkbox';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
-import { Li, Ul } from './List';
+import { Li, Ol, Ul } from './List';
 
 const Component: Meta<typeof Ul> = {
   title: 'Components/List',
@@ -24,6 +24,15 @@ const Template: StoryFn<typeof Ul> = (args) => (
 );
 
 export const Basic: StoryFn<typeof Ul> = Template.bind({});
+
+export const Ordered: StoryFn<typeof Ol> = (args) => (
+  <Ol {...args}>
+    <Li>Dashboard</Li>
+    <Li>Profile</Li>
+    <Li>Settings</Li>
+    <Li>Help</Li>
+  </Ol>
+);
 
 export const Interactive: StoryFn<typeof Ul> = Template.bind({});
 Interactive.args = {
