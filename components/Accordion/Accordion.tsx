@@ -4,6 +4,7 @@ import { ChevronRightIcon } from '@radix-ui/react-icons';
 import React from 'react';
 
 import { CSS, keyframes, styled, VariantProps } from '../../stitches.config';
+import { Box } from '../Box';
 import { elevationVariants } from '../Elevation';
 
 const open = keyframes({
@@ -67,10 +68,12 @@ export const StyledAccordionTrigger = styled(AccordionPrimitive.Trigger, {
     boxShadow: 'inset 0 0 0 1px $colors$accordionActiveShadow',
   },
   '@hover': {
-    '&:hover': {
-      cursor: 'pointer',
-      '&::before': {
-        backgroundColor: '$accordionHoverShadow',
+    '&:not([disabled])': {
+      '&:hover': {
+        cursor: 'pointer',
+        '&::before': {
+          backgroundColor: '$accordionHoverShadow',
+        },
       },
     },
   },
@@ -139,15 +142,25 @@ export const AccordionItem = StyledAccordionItem as any;
 export type AccordionTriggerProps = React.ComponentProps<typeof StyledAccordionTrigger> &
   VariantProps<typeof StyledAccordionTrigger> & {
     children: React.ReactNode;
+    customIcon?: React.ReactNode;
+    noIcon?: boolean;
   };
 export const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof StyledAccordionTrigger>,
   AccordionTriggerProps
->(({ children, ...props }, forwardedRef) => (
+>(({ children, noIcon = false, customIcon, ...props }, forwardedRef) => (
   <StyledAccordionHeader>
     <StyledAccordionTrigger ref={forwardedRef} {...props}>
-      <StyledAccordionChevron aria-hidden />
-      {children}
+      {!noIcon ? (
+        customIcon ? (
+          <Box css={{ mr: '$2', c: '$accordionText' }} aria-hidden>
+            {customIcon}
+          </Box>
+        ) : (
+          <StyledAccordionChevron aria-hidden />
+        )
+      ) : null}
+      <Box css={{ ml: noIcon ? '$5' : 0, width: '100%' }}>{children}</Box>
     </StyledAccordionTrigger>
   </StyledAccordionHeader>
 ));

@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { BookmarkIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -61,7 +61,7 @@ Large.args = {
 export const Collapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 Collapsible.args = {
   type: 'single',
-  collapsible: true,
+  collapsible: 'true',
 };
 Collapsible.argTypes = {
   size: {
@@ -73,14 +73,37 @@ Collapsible.argTypes = {
 export const MultipleCollapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 MultipleCollapsible.args = {
   type: 'multiple',
-  // @FIXME console warning of this props not being a boolean attribute
-  collapsible: true,
+  collapsible: 'true',
 };
 MultipleCollapsible.argTypes = {
   size: {
     control: 'inline-radio',
     options: ['small', 'medium', 'large'],
   },
+};
+
+export const DisabledAndCustomTrigger: StoryFn<typeof AccordionForStory> = (args) => (
+  <Box css={{ width: 300 }}>
+    <AccordionForStory {...args}>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Item1 Trigger</AccordionTrigger>
+        <AccordionContent>Item1 Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger disabled noIcon>
+          Disabled item
+        </AccordionTrigger>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger customIcon={<BookmarkIcon />}>Custom Icon</AccordionTrigger>
+        <AccordionContent>Item3 Content</AccordionContent>
+      </AccordionItem>
+    </AccordionForStory>
+  </Box>
+);
+DisabledAndCustomTrigger.args = {
+  type: 'multiple',
+  collapsible: 'true',
 };
 
 export const Complex: StoryFn<typeof AccordionForStory> = (args) => (
@@ -112,7 +135,7 @@ export const Complex: StoryFn<typeof AccordionForStory> = (args) => (
 
 Complex.args = {
   type: 'multiple',
-  collapsible: true,
+  collapsible: 'true',
 };
 Complex.argTypes = {
   size: {
@@ -178,7 +201,7 @@ export const InsideModal: StoryFn<typeof AccordionForStory> = (args) => {
 
 InsideModal.args = {
   type: 'multiple',
-  collapsible: true,
+  collapsible: 'true',
 };
 InsideModal.argTypes = {
   size: {
