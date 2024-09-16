@@ -61,7 +61,7 @@ Large.args = {
 export const Collapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 Collapsible.args = {
   type: 'single',
-  collapsible: true,
+  collapsible: 'true',
 };
 Collapsible.argTypes = {
   size: {
@@ -73,8 +73,7 @@ Collapsible.argTypes = {
 export const MultipleCollapsible: StoryFn<typeof AccordionForStory> = Template.bind({});
 MultipleCollapsible.args = {
   type: 'multiple',
-  // @FIXME console warning of this props not being a boolean attribute
-  collapsible: true,
+  collapsible: 'true',
 };
 MultipleCollapsible.argTypes = {
   size: {
@@ -104,7 +103,7 @@ export const DisabledAndCustomTrigger: StoryFn<typeof AccordionForStory> = (args
 );
 DisabledAndCustomTrigger.args = {
   type: 'multiple',
-  collapsible: true,
+  collapsible: 'true',
 };
 
 export const Complex: StoryFn<typeof AccordionForStory> = (args) => (
@@ -136,7 +135,7 @@ export const Complex: StoryFn<typeof AccordionForStory> = (args) => (
 
 Complex.args = {
   type: 'multiple',
-  collapsible: true,
+  collapsible: 'true',
 };
 Complex.argTypes = {
   size: {
@@ -202,7 +201,7 @@ export const InsideModal: StoryFn<typeof AccordionForStory> = (args) => {
 
 InsideModal.args = {
   type: 'multiple',
-  collapsible: true,
+  collapsible: 'true',
 };
 InsideModal.argTypes = {
   size: {
