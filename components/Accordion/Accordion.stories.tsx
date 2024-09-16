@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { BookmarkIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
@@ -83,7 +83,7 @@ MultipleCollapsible.argTypes = {
   },
 };
 
-export const DisabledItem: StoryFn<typeof AccordionForStory> = (args) => (
+export const DisabledAndCustomTrigger: StoryFn<typeof AccordionForStory> = (args) => (
   <Box css={{ width: 300 }}>
     <AccordionForStory {...args}>
       <AccordionItem value="item-1">
@@ -96,13 +96,13 @@ export const DisabledItem: StoryFn<typeof AccordionForStory> = (args) => (
         </AccordionTrigger>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionTrigger>Item3 Trigger</AccordionTrigger>
+        <AccordionTrigger customIcon={<BookmarkIcon />}>Custom Icon</AccordionTrigger>
         <AccordionContent>Item3 Content</AccordionContent>
       </AccordionItem>
     </AccordionForStory>
   </Box>
 );
-DisabledItem.args = {
+DisabledAndCustomTrigger.args = {
   type: 'multiple',
   collapsible: true,
 };
