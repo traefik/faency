@@ -83,6 +83,30 @@ MultipleCollapsible.argTypes = {
   },
 };
 
+export const DisabledItem: StoryFn<typeof AccordionForStory> = (args) => (
+  <Box css={{ width: 300 }}>
+    <AccordionForStory {...args}>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Item1 Trigger</AccordionTrigger>
+        <AccordionContent>Item1 Content</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger disabled noIcon>
+          Disabled item
+        </AccordionTrigger>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Item3 Trigger</AccordionTrigger>
+        <AccordionContent>Item3 Content</AccordionContent>
+      </AccordionItem>
+    </AccordionForStory>
+  </Box>
+);
+DisabledItem.args = {
+  type: 'multiple',
+  collapsible: true,
+};
+
 export const Complex: StoryFn<typeof AccordionForStory> = (args) => (
   <Box css={{ width: 300 }}>
     <AccordionForStory {...args}>
