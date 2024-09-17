@@ -18,6 +18,7 @@ export {
 } from './components/AriaTable';
 export { Avatar } from './components/Avatar';
 export { Badge } from './components/Badge';
+export { Blockquote } from './components/Blockquote';
 export { Box } from './components/Box';
 export { Bubble } from './components/Bubble';
 export { Button } from './components/Button';
