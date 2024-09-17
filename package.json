@@ -110,6 +110,7 @@
     "babel-loader": "^8.2.2",
     "conventional-changelog-conventionalcommits": "^4.6.3",
     "cross-env": "^7.0.3",
+    "date-fns": "^4.1.0",
     "husky": "^8.0.0",
     "lint-staged": "13.1.0",
     "lodash.merge": "^4.6.2",
