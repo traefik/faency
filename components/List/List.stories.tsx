@@ -25,6 +25,27 @@ const Template: StoryFn<typeof Ul> = (args) => (
 
 export const Basic: StoryFn<typeof Ul> = Template.bind({});
 
+export const Checkboxes: StoryFn<typeof Ul> = (args) => (
+  <Ul {...args}>
+    <Li>
+      <input type="checkbox" disabled />
+      Dashboard
+    </Li>
+    <Li>
+      <input type="checkbox" disabled />
+      Profile
+    </Li>
+    <Li>
+      <input type="checkbox" disabled />
+      Settings
+    </Li>
+    <Li>
+      <input type="checkbox" disabled />
+      Help
+    </Li>
+  </Ul>
+);
+
 export const Ordered: StoryFn<typeof Ol> = (args) => (
   <Ol {...args}>
     <Li>Dashboard</Li>

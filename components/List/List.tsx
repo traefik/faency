@@ -19,6 +19,7 @@ const StyledSpan = styled('span', Flex, {
   ...LIST_ITEM_CONTENT_STYLES,
   // CUSTOM
   p: '$1',
+  gap: '$1',
 });
 
 const StyledListItemButton = styled('button', Flex, {
@@ -86,19 +87,18 @@ const StyledLi = styled('li', {
 });
 
 const StyledUl = styled('ul', {
-  m: 0,
+  m: '0 0 0 8px',
   p: 0,
-  color: '$hiContrast',
+  color: '$textDefault',
 });
 
 const StyledOl = styled('ol', {
-  m: 0,
+  m: '0 0 0 8px',
   p: 0,
-  color: '$hiContrast',
+  color: '$textDefault',
 
   '> li::marker': {
     fontSize: '$3',
-    color: '$hiContrast',
     fontFamily: '$rubik',
   },
 });
@@ -175,7 +175,7 @@ export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemPr
           </StyledListItemButton>
         ) : (
           <StyledSpan
-            align={align}
+            align={align || 'center'}
             justify={justify}
             direction={direction}
             gap={gap}
