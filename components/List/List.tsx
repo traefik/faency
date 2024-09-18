@@ -91,7 +91,7 @@ const StyledUl = styled('ul', {
   p: 0,
   color: '$textDefault',
 
-  '&:has(li > span > input)': {
+  '&:has(li > span > input[type="checkbox"])': {
     m: 0,
     listStyle: 'none',
     li: {
