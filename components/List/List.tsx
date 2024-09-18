@@ -90,6 +90,19 @@ const StyledUl = styled('ul', {
   m: '0 0 0 8px',
   p: 0,
   color: '$textDefault',
+
+  '&:has(li > span > input)': {
+    m: 0,
+    listStyle: 'none',
+    li: {
+      marginLeft: 0,
+      span: {
+        input: {
+          margin: '0 3px 0 0',
+        },
+      },
+    },
+  },
 });
 
 const StyledOl = styled('ol', {
