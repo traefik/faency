@@ -67,7 +67,7 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
             pointerEvents: 'none',
             border: 'none',
           },
-    [isOpen]
+    [isOpen],
   );
 
   const containerStyle = useMemo(
@@ -84,7 +84,7 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
             overflow: 'hidden',
             padding: '0px 16px',
           },
-    [isOpen]
+    [isOpen],
   );
 
   return (
@@ -151,7 +151,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
           </Td>
         ) : null,
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [isCollapsed]
+      [isCollapsed],
     );
 
     const renderedChildren = useMemo(() => {
@@ -163,7 +163,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
             ...children?.props,
           },
           // @ts-ignore: Object is possibly 'null'.
-          [TdEl, ...(children?.props?.children || [])]
+          [TdEl, ...(children?.props?.children || [])],
         );
       }
 
@@ -184,7 +184,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
             !!collapsedContent && !isCollapsed
               ? {
                   ...css,
-                  [`&:nth-last-child(2) span`]: {
+                  [`&:nth-last-child(2) > span`]: {
                     borderBottom: 'none',
                   },
                 }
@@ -199,7 +199,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
         )}
       </>
     );
-  }
+  },
 );
 
 const StyledTh = styled('span', TableTh, {
@@ -235,7 +235,7 @@ export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
               height: '100%',
             }
           : {},
-      [fullColSpan]
+      [fullColSpan],
     );
     if (fullColSpan) {
       return (
@@ -246,7 +246,7 @@ export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
       );
     }
     return <StyledTd ref={ref} role="cell" css={css} {...props} />;
-  }
+  },
 );
 
 const StyledThead = styled('div', TableThead, {
