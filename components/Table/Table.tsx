@@ -92,7 +92,7 @@ export const StyledTr = styled('tr', {
   '&:hover': {
     color: '$tableHoverText',
   },
-  [`&:last-child ${Td}`]: {
+  [`&:last-child > ${Td}`]: {
     borderBottom: 'none',
   },
 
@@ -146,7 +146,7 @@ const AnimatedTr = ({
             padding: '0px 16px',
             border: 'none',
           },
-    [isOpen]
+    [isOpen],
   );
 
   const containerStyle = useMemo(
@@ -158,7 +158,7 @@ const AnimatedTr = ({
             height: 0,
             overflow: 'hidden',
           },
-    [isOpen]
+    [isOpen],
   );
 
   return (
@@ -188,7 +188,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       css,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -200,7 +200,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
             !!collapsedContent && !isCollapsed
               ? {
                   ...css,
-                  [`&:nth-last-child(2) ${Td}`]: {
+                  [`&:nth-last-child(2) > ${Td}`]: {
                     borderBottom: 'none',
                   },
                 }
@@ -247,7 +247,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
         )}
       </>
     );
-  }
+  },
 );
 
 export const Tfoot = styled('tfoot', {
