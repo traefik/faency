@@ -27,6 +27,7 @@ const Template: StoryFn<typeof DateTimePicker2ForStory> = (args) => {
     <Flex direction="column" gap={3}>
       <DateTimePicker2ForStory
         {...args}
+        dates={{ minDate: new Date() }}
         calendar={{ startDay: 1 }}
         onDatesChange={onDatesChange}
         selectedDates={selectedDates}

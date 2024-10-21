@@ -108,7 +108,7 @@ export const DateTimePicker2 = React.forwardRef<
                   css={{
                     width: '32px',
                     px: 0,
-                    color: !d.inCurrentMonth ? '$textSubtle' : undefined,
+                    color: !d.disabled && !d.inCurrentMonth ? '$textSubtle' : undefined,
                     fontWeight: d.now && !d.selected ? '$bold' : undefined,
                     textAlign: 'center',
                   }}
