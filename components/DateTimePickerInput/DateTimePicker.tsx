@@ -60,6 +60,7 @@ function Header({
 
 export type DateTimePickerProps = DPUserConfig & {
   css?: CSS;
+  showTimePicker?: boolean;
 };
 
 export type DateTimePickerVariants = VariantProps<DateTimePickerProps>;
@@ -67,9 +68,9 @@ export type DateTimePickerVariants = VariantProps<DateTimePickerProps>;
 export const DateTimePicker2 = React.forwardRef<
   React.ElementRef<typeof StyledWrapper>,
   DateTimePickerProps
->(({ css, ...config }, fowardedRef) => {
+>(({ css, showTimePicker, ...config }, fowardedRef) => {
   const {
-    data: { calendars, months, weekDays, years },
+    data: { calendars, months, time, weekDays, years },
     propGetters: {
       addOffset,
       dayButton,
@@ -77,6 +78,7 @@ export const DateTimePicker2 = React.forwardRef<
       nextYearsButton,
       previousYearsButton,
       subtractOffset,
+      timeButton,
       yearButton,
     },
   } = useDatePicker(config);
@@ -87,104 +89,129 @@ export const DateTimePicker2 = React.forwardRef<
 
   return (
     <StyledWrapper css={css} ref={fowardedRef}>
-      <Flex direction="column" gap="2" css={{ minWidth: '248px' }}>
-        {page === 0 ? (
-          <>
-            <Header
-              centerButtonLabel={month}
-              centerButtonOnClick={() => setPage(1)}
-              leftButtonProps={subtractOffset({ months: 1 })}
-              rightButtonProps={addOffset({ months: 1 })}
-            />
-            <SevenColGrid>
-              {weekDays.map((weekDay, index) => (
-                <Text key={index} css={{ mb: '$1', textAlign: 'center' }}>
-                  {weekDay}
-                </Text>
-              ))}
-              {days.map((d) => (
+      <Flex align="stretch" gap="1">
+        <Flex direction="column" gap="2" css={{ minWidth: '248px' }}>
+          {page === 0 ? (
+            <>
+              <Header
+                centerButtonLabel={month}
+                centerButtonOnClick={() => setPage(1)}
+                leftButtonProps={subtractOffset({ months: 1 })}
+                rightButtonProps={addOffset({ months: 1 })}
+              />
+              <SevenColGrid>
+                {weekDays.map((weekDay, index) => (
+                  <Text key={index} css={{ mb: '$1', textAlign: 'center' }}>
+                    {weekDay}
+                  </Text>
+                ))}
+                {days.map((d) => (
+                  <Button
+                    key={d.$date.toString()}
+                    css={{
+                      width: '32px',
+                      px: 0,
+                      color:
+                        !d.disabled && !d.inCurrentMonth && !d.selected ? '$textSubtle' : undefined,
+                      fontWeight: d.now && !d.selected ? '$bold' : undefined,
+                      textAlign: 'center',
+                    }}
+                    ghost={!d.selected}
+                    variant={d.now || d.selected ? 'primary' : 'secondary'}
+                    {...dayButton(d)}
+                  >
+                    {d.day}
+                  </Button>
+                ))}
+              </SevenColGrid>
+            </>
+          ) : undefined}
+          {page === 1 ? (
+            <>
+              <Header
+                centerButtonLabel={year}
+                centerButtonOnClick={() => setPage(2)}
+                leftButtonProps={subtractOffset({ years: 1 })}
+                rightButtonProps={addOffset({ years: 1 })}
+              />
+              <ThreeColGrid>
+                {months.map((m) => (
+                  <Button
+                    key={m.$date.toString()}
+                    css={{
+                      px: 0,
+                      fontWeight: m.now && !m.selected ? '$bold' : undefined,
+                      textAlign: 'center',
+                    }}
+                    ghost={!m.selected}
+                    variant={m.now || m.selected ? 'primary' : 'secondary'}
+                    {...monthButton(m)}
+                    onClick={(evt) => {
+                      setPage(0);
+                      const fn = monthButton(m).onClick;
+                      if (typeof fn !== 'undefined') fn(evt);
+                    }}
+                  >
+                    {m.month}
+                  </Button>
+                ))}
+              </ThreeColGrid>
+            </>
+          ) : undefined}
+          {page === 2 ? (
+            <>
+              <Header
+                centerButtonLabel={`${years[0].year} - ${years[years.length - 1].year}`}
+                centerButtonOnClick={() => setPage(0)}
+                leftButtonProps={previousYearsButton()}
+                rightButtonProps={nextYearsButton()}
+              />
+              <ThreeColGrid>
+                {years.map((y) => (
+                  <Button
+                    key={y.$date.toString()}
+                    css={{
+                      px: 0,
+                      fontWeight: y.now && !y.selected ? '$bold' : undefined,
+                      textAlign: 'center',
+                    }}
+                    ghost={!y.selected}
+                    variant={y.now || y.selected ? 'primary' : 'secondary'}
+                    {...yearButton(y)}
+                    onClick={(evt) => {
+                      setPage(0);
+                      const fn = yearButton(y).onClick;
+                      if (typeof fn !== 'undefined') fn(evt);
+                    }}
+                  >
+                    {y.year}
+                  </Button>
+                ))}
+              </ThreeColGrid>
+            </>
+          ) : undefined}
+        </Flex>
+        {showTimePicker ? (
+          <Flex direction="column" gap="2" css={{ maxHeight: '274px' }}>
+            <Text css={{ mt: '40px', mr: '14px', textAlign: 'center' }}>Time</Text>
+            <Flex direction="column" gap="1" css={{ overflow: 'auto', px: '$1' }}>
+              {time.map((t) => (
                 <Button
-                  key={d.$date.toString()}
+                  key={t.$date.toString()}
                   css={{
-                    width: '32px',
-                    px: 0,
-                    color: !d.disabled && !d.inCurrentMonth ? '$textSubtle' : undefined,
-                    fontWeight: d.now && !d.selected ? '$bold' : undefined,
+                    px: '$2',
+                    fontWeight: t.now && !t.selected ? '$bold' : undefined,
                     textAlign: 'center',
                   }}
-                  ghost={!d.selected}
-                  variant={d.now || d.selected ? 'primary' : 'secondary'}
-                  {...dayButton(d)}
+                  ghost={!t.selected}
+                  variant={t.now || t.selected ? 'primary' : 'secondary'}
+                  {...timeButton(t)}
                 >
-                  {d.day}
+                  {t.time}
                 </Button>
               ))}
-            </SevenColGrid>
-          </>
-        ) : undefined}
-        {page === 1 ? (
-          <>
-            <Header
-              centerButtonLabel={year}
-              centerButtonOnClick={() => setPage(2)}
-              leftButtonProps={subtractOffset({ years: 1 })}
-              rightButtonProps={addOffset({ years: 1 })}
-            />
-            <ThreeColGrid>
-              {months.map((m) => (
-                <Button
-                  key={m.$date.toString()}
-                  css={{
-                    px: 0,
-                    fontWeight: m.now && !m.selected ? '$bold' : undefined,
-                    textAlign: 'center',
-                  }}
-                  ghost={!m.selected}
-                  variant={m.now || m.selected ? 'primary' : 'secondary'}
-                  {...monthButton(m)}
-                  onClick={(evt) => {
-                    setPage(0);
-                    const fn = monthButton(m).onClick;
-                    if (typeof fn !== 'undefined') fn(evt);
-                  }}
-                >
-                  {m.month}
-                </Button>
-              ))}
-            </ThreeColGrid>
-          </>
-        ) : undefined}
-        {page === 2 ? (
-          <>
-            <Header
-              centerButtonLabel={`${years[0].year} - ${years[years.length - 1].year}`}
-              centerButtonOnClick={() => setPage(0)}
-              leftButtonProps={previousYearsButton()}
-              rightButtonProps={nextYearsButton()}
-            />
-            <ThreeColGrid>
-              {years.map((y) => (
-                <Button
-                  key={y.$date.toString()}
-                  css={{
-                    px: 0,
-                    fontWeight: y.now && !y.selected ? '$bold' : undefined,
-                    textAlign: 'center',
-                  }}
-                  ghost={!y.selected}
-                  variant={y.now || y.selected ? 'primary' : 'secondary'}
-                  {...yearButton(y)}
-                  onClick={(evt) => {
-                    setPage(0);
-                    const fn = yearButton(y).onClick;
-                    if (typeof fn !== 'undefined') fn(evt);
-                  }}
-                >
-                  {y.year}
-                </Button>
-              ))}
-            </ThreeColGrid>
-          </>
+            </Flex>
+          </Flex>
         ) : undefined}
       </Flex>
     </StyledWrapper>

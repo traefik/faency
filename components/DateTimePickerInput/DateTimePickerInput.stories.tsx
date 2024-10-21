@@ -31,6 +31,7 @@ const Template: StoryFn<typeof DateTimePicker2ForStory> = (args) => {
         calendar={{ startDay: 1 }}
         onDatesChange={onDatesChange}
         selectedDates={selectedDates}
+        showTimePicker
       />
       <Flex direction="column" css={{ gap: '2px' }}>
         <Label htmlFor="selected-dates">Selected date:</Label>
