@@ -83,6 +83,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@radix-ui/react-use-layout-effect": "^1.0.0",
     "@radix-ui/react-visually-hidden": "^1.0.1",
+    "@rehookify/datepicker": "^6.6.7",
     "@rollup/plugin-babel": "^5.3.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/github": "^8.0.2",

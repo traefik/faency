@@ -5292,6 +5292,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rehookify/datepicker@npm:^6.6.7":
+  version: 6.6.7
+  resolution: "@rehookify/datepicker@npm:6.6.7"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 10c0/78dec650b8bd414f8d2774b9d369a91759c07cec8e5329aa5b3ec782d9ddb2c49b166dc20c234c202916ed3fcb67d29e5606f83e4f8c509f67f3742dfecf6548
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-babel@npm:^5.3.1":
   version: 5.3.1
   resolution: "@rollup/plugin-babel@npm:5.3.1"
@@ -6211,6 +6220,7 @@ __metadata:
     "@radix-ui/react-tooltip": "npm:^1.0.7"
     "@radix-ui/react-use-layout-effect": "npm:^1.0.0"
     "@radix-ui/react-visually-hidden": "npm:^1.0.1"
+    "@rehookify/datepicker": "npm:^6.6.7"
     "@rollup/plugin-babel": "npm:^5.3.1"
     "@semantic-release/commit-analyzer": "npm:^9.0.2"
     "@semantic-release/github": "npm:^8.0.2"
