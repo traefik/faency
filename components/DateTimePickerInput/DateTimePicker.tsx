@@ -98,7 +98,7 @@ export const DateTimePicker2 = React.forwardRef<
             />
             <SevenColGrid>
               {weekDays.map((weekDay, index) => (
-                <Text key={index} css={{ textAlign: 'center' }}>
+                <Text key={index} css={{ mb: '$1', textAlign: 'center' }}>
                   {weekDay}
                 </Text>
               ))}
