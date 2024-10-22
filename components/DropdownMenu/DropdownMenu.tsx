@@ -5,8 +5,8 @@ import React from 'react';
 import { CSS, styled } from '../../stitches.config';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
-import { itemCss, labelCss, menuCss, separatorCss } from '../Menu';
 import { panelStyles } from '../Panel';
+import { itemCss, labelCss, menuCss, separatorCss } from './styles';
 
 export const DropdownMenu = DropdownMenuPrimitive.Root;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
