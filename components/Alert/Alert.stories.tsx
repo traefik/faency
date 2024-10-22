@@ -6,13 +6,13 @@ import { H2 } from '../Heading';
 import { Text } from '../Text';
 import { Alert, AlertProps, AlertVariants } from './Alert';
 
-const BaseAlert = (props: AlertProps): JSX.Element => <Alert {...props} />;
-const AlertForStory = modifyVariantsForStory<AlertVariants, AlertProps>(BaseAlert);
+const AlertWrapper = (props: AlertProps): JSX.Element => <Alert {...props} />;
+
+const AlertForStory = modifyVariantsForStory<AlertVariants, AlertProps>(AlertWrapper);
 
 const Component: Meta<typeof AlertForStory> = {
   title: 'Components/Alert',
-  // @ts-expect-error
-  component: Alert,
+  component: AlertForStory,
 };
 
 export const Variants: StoryFn<typeof AlertForStory> = (args) => (
