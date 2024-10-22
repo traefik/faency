@@ -18,6 +18,11 @@ const DateTimePicker2ForStory = modifyVariantsForStory<DateTimePickerVariants, D
 const Component: Meta<typeof DateTimePicker2ForStory> = {
   title: 'Components/DateTimePickerInput',
   component: DateTimePicker2ForStory,
+  argTypes: {
+    showTimePicker: {
+      control: 'boolean',
+    },
+  },
 };
 
 const Template: StoryFn<typeof DateTimePicker2ForStory> = (args) => {
@@ -31,7 +36,6 @@ const Template: StoryFn<typeof DateTimePicker2ForStory> = (args) => {
         calendar={{ startDay: 1 }}
         onDatesChange={onDatesChange}
         selectedDates={selectedDates}
-        showTimePicker
       />
       <Flex direction="column" css={{ gap: '2px' }}>
         <Label htmlFor="selected-dates">Selected date:</Label>
@@ -46,5 +50,9 @@ const Template: StoryFn<typeof DateTimePicker2ForStory> = (args) => {
 };
 
 export const Base: StoryFn<typeof DateTimePicker2ForStory> = Template.bind({});
+
+Base.args = {
+  showTimePicker: true,
+};
 
 export default Component;

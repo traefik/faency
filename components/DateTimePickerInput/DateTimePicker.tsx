@@ -9,7 +9,9 @@ import { Text } from '../Text';
 
 const CalendarGrid = styled('div', {
   display: 'grid',
+  alignItems: 'center',
   gap: '$1',
+  p: '0 $2 $2 $2',
 });
 
 const SevenColGrid = styled(CalendarGrid, {
@@ -18,6 +20,7 @@ const SevenColGrid = styled(CalendarGrid, {
 
 const ThreeColGrid = styled(CalendarGrid, {
   gridTemplateColumns: 'repeat(3, 1fr)',
+  height: '100%',
 });
 
 const StyledWrapper = styled('div', {
@@ -39,7 +42,7 @@ function Header({
   rightButtonProps,
 }: HeaderProps) {
   return (
-    <Flex align="center" gap="2">
+    <Flex align="center" gap="2" css={{ p: '$2 $2 0 $2' }}>
       <Button ghost variant="secondary" {...leftButtonProps}>
         <ChevronLeftIcon />
       </Button>
@@ -89,8 +92,8 @@ export const DateTimePicker2 = React.forwardRef<
 
   return (
     <StyledWrapper css={css} ref={fowardedRef}>
-      <Flex align="stretch" gap="1">
-        <Flex direction="column" gap="2" css={{ minWidth: '248px' }}>
+      <Flex align="stretch">
+        <Flex direction="column" gap="2" css={{ minWidth: '265px' }}>
           {page === 0 ? (
             <>
               <Header
@@ -99,7 +102,7 @@ export const DateTimePicker2 = React.forwardRef<
                 leftButtonProps={subtractOffset({ months: 1 })}
                 rightButtonProps={addOffset({ months: 1 })}
               />
-              <SevenColGrid>
+              <SevenColGrid css={{ borderRight: showTimePicker ? '1px solid $gray11' : undefined }}>
                 {weekDays.map((weekDay, index) => (
                   <Text key={index} css={{ mb: '$1', textAlign: 'center' }}>
                     {weekDay}
@@ -134,7 +137,7 @@ export const DateTimePicker2 = React.forwardRef<
                 leftButtonProps={subtractOffset({ years: 1 })}
                 rightButtonProps={addOffset({ years: 1 })}
               />
-              <ThreeColGrid>
+              <ThreeColGrid css={{ borderRight: showTimePicker ? '1px solid $gray11' : undefined }}>
                 {months.map((m) => (
                   <Button
                     key={m.$date.toString()}
@@ -166,7 +169,7 @@ export const DateTimePicker2 = React.forwardRef<
                 leftButtonProps={previousYearsButton()}
                 rightButtonProps={nextYearsButton()}
               />
-              <ThreeColGrid>
+              <ThreeColGrid css={{ borderRight: showTimePicker ? '1px solid $gray11' : undefined }}>
                 {years.map((y) => (
                   <Button
                     key={y.$date.toString()}
@@ -192,9 +195,9 @@ export const DateTimePicker2 = React.forwardRef<
           ) : undefined}
         </Flex>
         {showTimePicker ? (
-          <Flex direction="column" gap="2" css={{ maxHeight: '274px' }}>
-            <Text css={{ mt: '40px', mr: '14px', textAlign: 'center' }}>Time</Text>
-            <Flex direction="column" gap="1" css={{ overflow: 'auto', px: '$1' }}>
+          <Flex direction="column" gap="2" css={{ maxHeight: '290px', p: '$2 0 0 $2' }}>
+            <Text css={{ mt: '40px', ml: '8px' }}>Time</Text>
+            <Flex direction="column" gap="1" css={{ overflow: 'auto', p: '0 $2 $2 0' }}>
               {time.map((t) => (
                 <Button
                   key={t.$date.toString()}
