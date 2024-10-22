@@ -2,52 +2,65 @@ import { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Box } from '../Box';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
 import { Text } from '../Text';
 import { DateTimePicker, DateTimePickerProps, DateTimePickerVariants } from './DateTimePicker';
 
-const BaseDateTimePicker = (props: DateTimePickerProps): JSX.Element => (
+const DateTimePickerWrapper = (props: DateTimePickerProps): JSX.Element => (
   <DateTimePicker {...props} />
 );
 
 const DateTimePickerForStory = modifyVariantsForStory<DateTimePickerVariants, DateTimePickerProps>(
-  BaseDateTimePicker,
+  DateTimePickerWrapper,
 );
 
 const Component: Meta<typeof DateTimePickerForStory> = {
   title: 'Components/DateTimePicker',
   component: DateTimePickerForStory,
+  argTypes: {
+    showTimePicker: {
+      control: 'boolean',
+    },
+  },
 };
 
-const Template: StoryFn<typeof DateTimePickerForStory> = (args) => {
-  const [date, setDate] = useState(new Date());
+const DateTimePickerTemplate: StoryFn<typeof DateTimePickerForStory> = (args) => {
+  const [selectedDates, onDatesChange] = useState<Date[]>([]);
 
   return (
-    <form>
-      <Flex direction="column" gap={3}>
-        <Box>
-          <Label htmlFor="expiration-input">Expiration</Label>
-          <DateTimePickerForStory
-            {...args}
-            id="expiration-input"
-            dateFormat="MMMM d, yyyy h:mm aa"
-            onChange={(date) => setDate(date)}
-            popperPlacement="bottom-start"
-            selected={date}
-            showIcon
-          />
-        </Box>
-        <Flex direction="column" css={{ gap: '2px' }}>
-          <Label htmlFor="expiration-date">Expiration date</Label>
-          <Text id="expiration-date">{date.toISOString()}</Text>
-        </Flex>
+    <Flex direction="column" gap={3}>
+      <DateTimePickerForStory
+        {...args}
+        dates={{ minDate: new Date() }}
+        calendar={{ startDay: 1 }}
+        onDatesChange={onDatesChange}
+        selectedDates={selectedDates}
+      />
+      <Flex direction="column" css={{ gap: '2px' }}>
+        <Label htmlFor="selected-dates">Selected date:</Label>
+        <Text id="selected-dates">
+          {selectedDates.length
+            ? selectedDates.map((date) => date.toISOString()).join(', ')
+            : 'None.'}
+        </Text>
       </Flex>
-    </form>
+    </Flex>
   );
 };
 
-export const Basic: StoryFn<typeof DateTimePickerForStory> = Template.bind({});
+export const Base: StoryFn<typeof DateTimePickerForStory> = DateTimePickerTemplate.bind({});
+
+Base.args = {
+  showTimePicker: false,
+};
+
+export const WithTimePicker: StoryFn<typeof DateTimePickerForStory> = DateTimePickerTemplate.bind(
+  {},
+);
+
+WithTimePicker.args = {
+  showTimePicker: true,
+};
 
 export default Component;

@@ -1,1 +1,1 @@
-export * from './DateTimePicker';
+export * from './DateTimePickerInput';
