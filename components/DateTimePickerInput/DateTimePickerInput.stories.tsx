@@ -24,6 +24,9 @@ const Component: Meta<typeof DateTimePickerInputForStory> = {
   title: 'Components/DateTimePickerInput',
   component: DateTimePickerInputForStory,
   argTypes: {
+    showFastTravel: {
+      control: 'boolean',
+    },
     showTimePicker: {
       control: 'boolean',
     },
@@ -59,6 +62,7 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerInputForStory> = (arg
 export const Base: StoryFn<typeof DateTimePickerInputForStory> = DateTimePickerTemplate.bind({});
 
 Base.args = {
+  showFastTravel: true,
   showTimePicker: true,
 };
 

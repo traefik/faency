@@ -19,6 +19,9 @@ const Component: Meta<typeof DateTimePickerForStory> = {
   title: 'Components/DateTimePicker',
   component: DateTimePickerForStory,
   argTypes: {
+    showFastTravel: {
+      control: 'boolean',
+    },
     showTimePicker: {
       control: 'boolean',
     },
@@ -52,6 +55,16 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerForStory> = (args) =>
 export const Base: StoryFn<typeof DateTimePickerForStory> = DateTimePickerTemplate.bind({});
 
 Base.args = {
+  showFastTravel: false,
+  showTimePicker: false,
+};
+
+export const WithFastTravel: StoryFn<typeof DateTimePickerForStory> = DateTimePickerTemplate.bind(
+  {},
+);
+
+WithFastTravel.args = {
+  showFastTravel: true,
   showTimePicker: false,
 };
 
@@ -60,6 +73,7 @@ export const WithTimePicker: StoryFn<typeof DateTimePickerForStory> = DateTimePi
 );
 
 WithTimePicker.args = {
+  showFastTravel: false,
   showTimePicker: true,
 };
 
