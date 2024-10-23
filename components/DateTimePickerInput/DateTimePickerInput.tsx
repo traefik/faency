@@ -1,11 +1,25 @@
-import * as Popover from '@radix-ui/react-popover';
+import {
+  arrow,
+  autoUpdate,
+  flip,
+  FloatingArrow,
+  FloatingFocusManager,
+  offset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  useRole,
+} from '@floating-ui/react';
+import { CalendarIcon } from '@radix-ui/react-icons';
 import { DPUserConfig } from '@rehookify/datepicker';
-import React, { useState } from 'react';
+import React, { Ref, useRef, useState } from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Card } from '../Card';
 import { DateTimePicker } from '../DateTimePicker';
-import { Input } from '../Input';
+import { Input, InputHandle } from '../Input';
 
 const StyledWrapper = styled('div', {
   display: 'flex',
@@ -14,7 +28,7 @@ const StyledWrapper = styled('div', {
 
 export type DateTimePickerInputProps = Omit<DPUserConfig, 'onDatesChange' | 'selectedDates'> & {
   inputCSS?: CSS;
-  inputProps?: Omit<typeof Input, 'css' | 'onBlur' | 'onFocus'>;
+  inputProps?: Omit<typeof Input, 'css' | 'onChange' | 'ref' | 'value'>;
   onChange?: React.ChangeEventHandler<string>;
   pickerCSS?: CSS;
   showTimePicker?: boolean;
@@ -27,35 +41,63 @@ export const DateTimePickerInput = React.forwardRef<
   React.ElementRef<typeof StyledWrapper>,
   DateTimePickerInputProps
 >(({ inputCSS, inputProps, pickerCSS, showTimePicker, ...pickerProps }, fowardedRef) => {
+  const arrowRef = useRef(null);
+
+  const [inputValue, setInputValue] = useState<string>('');
   const [selectedDates, onDatesChange] = useState<Date[]>([]);
-  const [showPicker, setShowPicker] = useState(false);
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
+
+  const { refs, floatingStyles, context } = useFloating({
+    open: isPickerOpen,
+    onOpenChange: setIsPickerOpen,
+    middleware: [
+      offset(10),
+      flip(),
+      shift(),
+      arrow({
+        element: arrowRef,
+      }),
+    ],
+    whileElementsMounted: autoUpdate,
+  });
+
+  const click = useClick(context);
+  const dismiss = useDismiss(context);
+  const role = useRole(context);
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
 
   return (
     <StyledWrapper ref={fowardedRef}>
-      <Popover.Root open={showPicker}>
-        <Popover.Anchor asChild>
-          <Input {...inputProps} css={inputCSS} onFocus={() => setShowPicker(true)} />
-        </Popover.Anchor>
-        <Popover.Portal>
-          <Popover.Content
-            onEscapeKeyDown={() => setShowPicker(false)}
-            onFocusOutside={() => setShowPicker(false)}
-            onPointerDownOutside={() => setShowPicker(false)}
-          >
+      <Input
+        startAdornment={<CalendarIcon />}
+        {...getReferenceProps()}
+        {...inputProps}
+        css={inputCSS}
+        onChange={(evt) => setInputValue(evt.currentTarget.value)}
+        ref={refs.setReference as Ref<InputHandle>}
+        value={inputValue}
+      />
+      {isPickerOpen && (
+        <FloatingFocusManager context={context} initialFocus={-1} modal={false}>
+          <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
             <Card>
               <DateTimePicker
                 {...pickerProps}
                 css={pickerCSS}
-                onDatesChange={onDatesChange}
-                onTimeButtonClick={() => setShowPicker(false)}
+                onDatesChange={(d) => {
+                  onDatesChange(d);
+                  setInputValue(d.toString());
+                }}
+                onTimeButtonClick={() => setIsPickerOpen(false)}
                 selectedDates={selectedDates}
                 showTimePicker={showTimePicker}
               />
             </Card>
-            <Popover.Arrow />
-          </Popover.Content>
-        </Popover.Portal>
-      </Popover.Root>
+            <FloatingArrow ref={arrowRef} context={context} fill="var(--colors-01dp)" />
+          </div>
+        </FloatingFocusManager>
+      )}
     </StyledWrapper>
   );
 });

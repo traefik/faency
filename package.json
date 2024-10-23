@@ -54,6 +54,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@floating-ui/react": "^0.26.25",
     "@mdx-js/react": "^2.1.5",
     "@radix-ui/colors": "^2.1.0",
     "@radix-ui/react-accessible-icon": "^1.0.3",
