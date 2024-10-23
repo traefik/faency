@@ -14,6 +14,7 @@ import {
 } from '@floating-ui/react';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { DPUserConfig } from '@rehookify/datepicker';
+import { format, parse } from 'date-fns';
 import React, { Ref, useRef, useState } from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
@@ -29,10 +30,9 @@ const StyledWrapper = styled('div', {
 export type DateTimePickerInputProps = Omit<DPUserConfig, 'onDatesChange' | 'selectedDates'> & {
   inputCSS?: CSS;
   inputProps?: Omit<typeof Input, 'css' | 'onChange' | 'ref' | 'value'>;
-  onChange?: React.ChangeEventHandler<string>;
+  onChange?: (d: Date[]) => void;
   pickerCSS?: CSS;
   showTimePicker?: boolean;
-  value?: string;
 };
 
 export type DateTimePickerInputVariants = VariantProps<DateTimePickerInputProps>;
@@ -40,7 +40,7 @@ export type DateTimePickerInputVariants = VariantProps<DateTimePickerInputProps>
 export const DateTimePickerInput = React.forwardRef<
   React.ElementRef<typeof StyledWrapper>,
   DateTimePickerInputProps
->(({ inputCSS, inputProps, pickerCSS, showTimePicker, ...pickerProps }, fowardedRef) => {
+>(({ inputCSS, inputProps, onChange, pickerCSS, showTimePicker, ...pickerProps }, fowardedRef) => {
   const arrowRef = useRef(null);
 
   const [inputValue, setInputValue] = useState<string>('');
@@ -74,7 +74,20 @@ export const DateTimePickerInput = React.forwardRef<
         {...getReferenceProps()}
         {...inputProps}
         css={inputCSS}
-        onChange={(evt) => setInputValue(evt.currentTarget.value)}
+        onChange={(evt) => {
+          const value = evt.currentTarget.value;
+          setInputValue(value);
+          try {
+            const newDates = (value as string)
+              .split(',')
+              .map((d) => parse(d, 'yyyy-MM-dd HH:mm:ss XXX', new Date()));
+            onDatesChange(newDates);
+            if (onChange) onChange(newDates);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          } catch (err) {
+            // empty
+          }
+        }}
         ref={refs.setReference as Ref<InputHandle>}
         value={inputValue}
       />
@@ -87,7 +100,10 @@ export const DateTimePickerInput = React.forwardRef<
                 css={pickerCSS}
                 onDatesChange={(d) => {
                   onDatesChange(d);
-                  setInputValue(d.toString());
+                  setInputValue(
+                    d.map((date) => format(date, 'yyyy-MM-dd HH:mm:ss XXX')).join(', '),
+                  );
+                  if (onChange) onChange(d);
                 }}
                 onTimeButtonClick={() => setIsPickerOpen(false)}
                 selectedDates={selectedDates}

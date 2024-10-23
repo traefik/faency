@@ -31,7 +31,7 @@ const Component: Meta<typeof DateTimePickerInputForStory> = {
 };
 
 const DateTimePickerTemplate: StoryFn<typeof DateTimePickerInputForStory> = (args) => {
-  const [value, setValue] = useState<string>('');
+  const [selectedDates, onDatesChange] = useState<Date[]>([]);
 
   return (
     <form>
@@ -41,12 +41,15 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerInputForStory> = (arg
           calendar={{ startDay: 1 }}
           dates={{ minDate: new Date() }}
           inputCSS={{ width: '100%' }}
-          onChange={(s) => setValue(s.currentTarget.valueOf)}
-          value={value}
+          onChange={onDatesChange}
         />
         <Flex direction="column" css={{ gap: '2px' }}>
           <Label htmlFor="selected-dates">Selected date:</Label>
-          <Text id="selected-dates">{value || 'None.'}</Text>
+          <Text id="selected-dates">
+            {selectedDates.length
+              ? selectedDates.map((date) => date.toISOString()).join(', ')
+              : 'None.'}
+          </Text>
         </Flex>
       </Flex>
     </form>
