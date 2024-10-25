@@ -11,15 +11,27 @@ const DateTimePickerWrapper = (props: DateTimePickerProps): JSX.Element => (
   <DateTimePicker {...props} />
 );
 
-const DateTimePickerForStory = modifyVariantsForStory<DateTimePickerVariants, DateTimePickerProps>(
-  DateTimePickerWrapper,
-);
+const DateTimePickerForStory = modifyVariantsForStory<
+  DateTimePickerVariants,
+  DateTimePickerProps & {
+    calendarMode?: 'fluid' | 'static' | undefined;
+    maxDate?: Date;
+    minDate?: Date;
+  }
+>(DateTimePickerWrapper);
 
 const Component: Meta<typeof DateTimePickerForStory> = {
   title: 'Components/DateTimePicker',
   component: DateTimePickerForStory,
   argTypes: {
-    showFastTravel: {
+    calendarMode: {
+      control: 'inline-radio',
+      options: ['fluid', 'static'],
+    },
+    minDate: {
+      control: 'date',
+    },
+    showDatePresets: {
       control: 'boolean',
     },
     showTimePicker: {
@@ -35,8 +47,10 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerForStory> = (args) =>
     <Flex direction="column" gap={3}>
       <DateTimePickerForStory
         {...args}
-        dates={{ minDate: new Date() }}
-        calendar={{ startDay: 1 }}
+        dates={{
+          minDate: new Date(args.minDate || Date.now()),
+        }}
+        calendar={{ mode: args.calendarMode, startDay: 1 }}
         onDatesChange={onDatesChange}
         selectedDates={selectedDates}
       />
@@ -55,16 +69,20 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerForStory> = (args) =>
 export const Base: StoryFn<typeof DateTimePickerForStory> = DateTimePickerTemplate.bind({});
 
 Base.args = {
-  showFastTravel: false,
+  calendarMode: 'static',
+  minDate: new Date(),
+  showDatePresets: false,
   showTimePicker: false,
 };
 
-export const WithFastTravel: StoryFn<typeof DateTimePickerForStory> = DateTimePickerTemplate.bind(
+export const WithDatePresets: StoryFn<typeof DateTimePickerForStory> = DateTimePickerTemplate.bind(
   {},
 );
 
-WithFastTravel.args = {
-  showFastTravel: true,
+WithDatePresets.args = {
+  calendarMode: 'static',
+  minDate: new Date(),
+  showDatePresets: true,
   showTimePicker: false,
 };
 
@@ -73,7 +91,9 @@ export const WithTimePicker: StoryFn<typeof DateTimePickerForStory> = DateTimePi
 );
 
 WithTimePicker.args = {
-  showFastTravel: false,
+  calendarMode: 'static',
+  minDate: new Date(),
+  showDatePresets: false,
   showTimePicker: true,
 };
 

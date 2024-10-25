@@ -28,11 +28,12 @@ const StyledWrapper = styled('div', {
 });
 
 export type DateTimePickerInputProps = Omit<DPUserConfig, 'onDatesChange' | 'selectedDates'> & {
+  formatStr?: string;
   inputCSS?: CSS;
   inputProps?: Omit<typeof Input, 'css' | 'onChange' | 'ref' | 'value'>;
   onChange?: (d: Date[]) => void;
   pickerCSS?: CSS;
-  showFastTravel?: boolean;
+  showDatePresets?: boolean;
   showTimePicker?: boolean;
 };
 
@@ -43,7 +44,16 @@ export const DateTimePickerInput = React.forwardRef<
   DateTimePickerInputProps
 >(
   (
-    { inputCSS, inputProps, onChange, pickerCSS, showFastTravel, showTimePicker, ...pickerProps },
+    {
+      formatStr = 'yyyy/MM/dd, HH:mm XXX',
+      inputCSS,
+      inputProps,
+      onChange,
+      pickerCSS,
+      showDatePresets,
+      showTimePicker,
+      ...pickerProps
+    },
     fowardedRef,
   ) => {
     const arrowRef = useRef(null);
@@ -85,7 +95,7 @@ export const DateTimePickerInput = React.forwardRef<
             try {
               const newDates = (value as string)
                 .split(',')
-                .map((d) => parse(d, 'yyyy-MM-dd HH:mm:ss XXX', new Date()));
+                .map((d) => parse(d.trim(), formatStr, new Date()));
               onDatesChange(newDates);
               if (onChange) onChange(newDates);
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -105,15 +115,13 @@ export const DateTimePickerInput = React.forwardRef<
                   css={pickerCSS}
                   onDatesChange={(d) => {
                     onDatesChange(d);
-                    setInputValue(
-                      d.map((date) => format(date, 'yyyy-MM-dd HH:mm:ss XXX')).join(', '),
-                    );
+                    setInputValue(d.map((date) => format(date, formatStr)).join(', '));
                     if (onChange) onChange(d);
                   }}
                   onFastTravelClick={() => setIsPickerOpen(false)}
                   onTimeButtonClick={() => setIsPickerOpen(false)}
                   selectedDates={selectedDates}
-                  showFastTravel={showFastTravel}
+                  showDatePresets={showDatePresets}
                   showTimePicker={showTimePicker}
                 />
               </Card>

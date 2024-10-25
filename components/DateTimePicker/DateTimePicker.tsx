@@ -14,6 +14,8 @@ const CalendarGrid = styled('div', {
   alignItems: 'center',
   gap: '$1',
   px: '$2',
+  borderLeft: '2px solid $buttonSecondaryBorder',
+  borderRight: '2px solid $buttonSecondaryBorder',
 });
 
 const SevenColGrid = styled(CalendarGrid, {
@@ -25,10 +27,7 @@ const ThreeColGrid = styled(CalendarGrid, {
   height: '100%',
 });
 
-const StyledWrapper = styled('div', {
-  display: 'flex',
-  width: '100%',
-});
+const StyledDiv = styled('div');
 
 type HeaderProps = {
   centerButtonLabel: string;
@@ -70,18 +69,18 @@ export type DateTimePickerProps = DPUserConfig & {
   css?: CSS;
   onFastTravelClick?: () => void;
   onTimeButtonClick?: () => void;
-  showFastTravel?: boolean;
+  showDatePresets?: boolean;
   showTimePicker?: boolean;
 };
 
 export type DateTimePickerVariants = VariantProps<DateTimePickerProps>;
 
 export const DateTimePicker = React.forwardRef<
-  React.ElementRef<typeof StyledWrapper>,
+  React.ElementRef<typeof StyledDiv>,
   DateTimePickerProps
 >(
   (
-    { css, onFastTravelClick, onTimeButtonClick, showFastTravel, showTimePicker, ...config },
+    { css, onFastTravelClick, onTimeButtonClick, showDatePresets, showTimePicker, ...config },
     fowardedRef,
   ) => {
     const {
@@ -103,233 +102,207 @@ export const DateTimePicker = React.forwardRef<
     const { days, month, year } = calendars[0];
 
     return (
-      <StyledWrapper css={css} ref={fowardedRef}>
-        <Flex css={{ py: '$2' }}>
-          {showFastTravel ? (
-            <Flex direction="column" gap="1" css={{ maxHeight: '280px', pl: '$2' }}>
-              <Text css={{ mt: '32px', ml: '8px', lineHeight: '$sizes$6' }}>&nbsp;</Text>
-              <Flex direction="column" gap="1" css={{ overflow: 'auto', pr: '$2' }}>
-                <Button
-                  type="button"
-                  css={{ px: '$2', textAlign: 'center' }}
-                  ghost
-                  variant="secondary"
-                  onClick={() => {
-                    config.onDatesChange([addMonths(new Date(), 1)]);
-                    if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                  }}
+      <StyledDiv css={css} ref={fowardedRef}>
+        <Flex direction="column" gap="2" css={{ display: 'inline-flex' }}>
+          <Flex>
+            <Box
+              css={{
+                flex: 1,
+                minHeight: config.calendar?.mode === 'fluid' ? '244px' : '280px',
+                minWidth: '268px',
+              }}
+            >
+              <Flex
+                direction="column"
+                css={{ display: page === 0 ? 'flex' : 'none', height: '100%' }}
+              >
+                <Header
+                  centerButtonLabel={month}
+                  centerButtonOnClick={() => setPage(1)}
+                  leftButtonProps={subtractOffset({ months: 1 })}
+                  rightButtonProps={addOffset({ months: 1 })}
+                />
+                <SevenColGrid>
+                  {weekDays.map((weekDay, index) => (
+                    <Text key={index} css={{ lineHeight: '$sizes$6', textAlign: 'center' }}>
+                      {weekDay}
+                    </Text>
+                  ))}
+                  {days.map((d) => (
+                    <Button
+                      key={d.$date.toString()}
+                      type="button"
+                      css={{
+                        width: '32px',
+                        px: 0,
+                        color:
+                          !d.disabled && !d.inCurrentMonth && !d.selected
+                            ? '$textSubtle'
+                            : undefined,
+                        fontWeight: d.now && !d.selected ? '$bold' : undefined,
+                        textAlign: 'center',
+                      }}
+                      ghost={!d.selected}
+                      variant={d.now || d.selected ? 'primary' : 'secondary'}
+                      {...dayButton(d)}
+                      tabIndex={dayButton(d).disabled ? dayButton(d).tabIndex : 0}
+                    >
+                      {d.day}
+                    </Button>
+                  ))}
+                </SevenColGrid>
+              </Flex>
+
+              <Flex
+                direction="column"
+                css={{ display: page === 1 ? 'flex' : 'none', height: '100%' }}
+              >
+                <Header
+                  centerButtonLabel={year}
+                  centerButtonOnClick={() => setPage(2)}
+                  leftButtonProps={subtractOffset({ years: 1 })}
+                  rightButtonProps={addOffset({ years: 1 })}
+                />
+                <ThreeColGrid>
+                  {months.map((m) => (
+                    <Button
+                      key={m.$date.toString()}
+                      type="button"
+                      css={{
+                        px: 0,
+                        fontWeight: m.now && !m.selected ? '$bold' : undefined,
+                        textAlign: 'center',
+                      }}
+                      ghost={!m.selected}
+                      variant={m.now || m.selected ? 'primary' : 'secondary'}
+                      {...monthButton(m)}
+                      onClick={(evt) => {
+                        setPage(0);
+                        const fn = monthButton(m).onClick;
+                        if (typeof fn !== 'undefined') fn(evt);
+                      }}
+                      tabIndex={monthButton(m).disabled ? monthButton(m).tabIndex : 0}
+                    >
+                      {m.month}
+                    </Button>
+                  ))}
+                </ThreeColGrid>
+              </Flex>
+
+              <Flex
+                direction="column"
+                css={{ display: page === 2 ? 'flex' : 'none', height: '100%' }}
+              >
+                <Header
+                  centerButtonLabel={`${years[0].year} - ${years[years.length - 1].year}`}
+                  centerButtonOnClick={() => setPage(0)}
+                  leftButtonProps={previousYearsButton()}
+                  rightButtonProps={nextYearsButton()}
+                />
+                <ThreeColGrid>
+                  {years.map((y) => (
+                    <Button
+                      key={y.$date.toString()}
+                      type="button"
+                      css={{
+                        px: 0,
+                        fontWeight: y.now && !y.selected ? '$bold' : undefined,
+                        textAlign: 'center',
+                      }}
+                      ghost={!y.selected}
+                      variant={y.now || y.selected ? 'primary' : 'secondary'}
+                      {...yearButton(y)}
+                      onClick={(evt) => {
+                        setPage(0);
+                        const fn = yearButton(y).onClick;
+                        if (typeof fn !== 'undefined') fn(evt);
+                      }}
+                      tabIndex={yearButton(y).disabled ? yearButton(y).tabIndex : 0}
+                    >
+                      {y.year}
+                    </Button>
+                  ))}
+                </ThreeColGrid>
+              </Flex>
+            </Box>
+
+            {showTimePicker ? (
+              <Box css={{ flex: 1, width: '90px', position: 'relative', overflow: 'auto' }}>
+                <Flex
+                  direction="column"
+                  gap="1"
+                  css={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
                 >
-                  + 1 M
-                </Button>
+                  <Text css={{ mt: '32px', ml: '8px', lineHeight: '$sizes$6' }}>Time</Text>
+                  <Flex direction="column" gap="1" css={{ overflow: 'auto', px: '$2' }}>
+                    {time.map((t) => (
+                      <Button
+                        key={t.$date.toString()}
+                        type="button"
+                        css={{
+                          px: '$2',
+                          fontWeight: t.now && !t.selected ? '$bold' : undefined,
+                          textAlign: 'center',
+                        }}
+                        ghost={!t.selected}
+                        variant={t.now || t.selected ? 'primary' : 'secondary'}
+                        {...timeButton(t)}
+                        onClick={(evt) => {
+                          const fn = timeButton(t).onClick;
+                          if (typeof fn !== 'undefined') fn(evt);
+                          if (typeof onTimeButtonClick !== 'undefined') onTimeButtonClick();
+                        }}
+                      >
+                        {t.time}
+                      </Button>
+                    ))}
+                  </Flex>
+                </Flex>
+              </Box>
+            ) : undefined}
+          </Flex>
+
+          {showDatePresets ? (
+            <Flex gap="2">
+              <Button
+                type="button"
+                css={{ flex: '1 1 0' }}
+                variant="secondary"
+                onClick={() => {
+                  config.onDatesChange([addMonths(new Date(), 1)]);
+                  if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
+                }}
+              >
+                Now + 1 M
+              </Button>
+              <Button
+                type="button"
+                css={{ flex: '1 1 0' }}
+                variant="secondary"
+                onClick={() => {
+                  config.onDatesChange([addMonths(new Date(), 3)]);
+                  if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
+                }}
+              >
+                Now + 3 M
+              </Button>
+              {showTimePicker ? (
                 <Button
                   type="button"
-                  css={{ px: '$2', textAlign: 'center' }}
-                  ghost
-                  variant="secondary"
-                  onClick={() => {
-                    config.onDatesChange([addMonths(new Date(), 3)]);
-                    if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                  }}
-                >
-                  + 3 M
-                </Button>
-                <Button
-                  type="button"
-                  css={{ px: '$2', textAlign: 'center' }}
-                  ghost
-                  variant="secondary"
-                  onClick={() => {
-                    config.onDatesChange([addMonths(new Date(), 6)]);
-                    if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                  }}
-                >
-                  + 6 M
-                </Button>
-                <Button
-                  type="button"
-                  css={{ px: '$2', textAlign: 'center' }}
-                  ghost
+                  css={{ flex: '1 1 0' }}
                   variant="secondary"
                   onClick={() => {
                     config.onDatesChange([addYears(new Date(), 1)]);
                     if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
                   }}
                 >
-                  + 1 Y
+                  Now + 1 Y
                 </Button>
-                <Button
-                  type="button"
-                  css={{ px: '$2', textAlign: 'center' }}
-                  ghost
-                  variant="secondary"
-                  onClick={() => {
-                    config.onDatesChange([addYears(new Date(), 2)]);
-                    if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                  }}
-                >
-                  + 2 Y
-                </Button>
-                <Button
-                  type="button"
-                  css={{ px: '$2', textAlign: 'center' }}
-                  ghost
-                  variant="secondary"
-                  onClick={() => {
-                    config.onDatesChange([addYears(new Date(), 3)]);
-                    if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                  }}
-                >
-                  + 3 Y
-                </Button>
-              </Flex>
-            </Flex>
-          ) : undefined}
-
-          <Box css={{ minWidth: '265px' }}>
-            <Flex
-              direction="column"
-              css={{ display: page === 0 ? 'flex' : 'none', height: '100%' }}
-            >
-              <Header
-                centerButtonLabel={month}
-                centerButtonOnClick={() => setPage(1)}
-                leftButtonProps={subtractOffset({ months: 1 })}
-                rightButtonProps={addOffset({ months: 1 })}
-              />
-              <SevenColGrid
-                css={{
-                  borderLeft: `1px solid ${showFastTravel ? '$gray11' : 'transparent'}`,
-                  borderRight: `1px solid ${showTimePicker ? '$gray11' : 'transparent'}`,
-                }}
-              >
-                {weekDays.map((weekDay, index) => (
-                  <Text key={index} css={{ lineHeight: '$sizes$6', textAlign: 'center' }}>
-                    {weekDay}
-                  </Text>
-                ))}
-                {days.map((d) => (
-                  <Button
-                    key={d.$date.toString()}
-                    type="button"
-                    css={{
-                      width: '32px',
-                      px: 0,
-                      color:
-                        !d.disabled && !d.inCurrentMonth && !d.selected ? '$textSubtle' : undefined,
-                      fontWeight: d.now && !d.selected ? '$bold' : undefined,
-                      textAlign: 'center',
-                    }}
-                    ghost={!d.selected}
-                    variant={d.now || d.selected ? 'primary' : 'secondary'}
-                    {...dayButton(d)}
-                  >
-                    {d.day}
-                  </Button>
-                ))}
-              </SevenColGrid>
-            </Flex>
-
-            <Flex
-              direction="column"
-              css={{ display: page === 1 ? 'flex' : 'none', height: '100%' }}
-            >
-              <Header
-                centerButtonLabel={year}
-                centerButtonOnClick={() => setPage(2)}
-                leftButtonProps={subtractOffset({ years: 1 })}
-                rightButtonProps={addOffset({ years: 1 })}
-              />
-              <ThreeColGrid css={{ borderRight: showTimePicker ? '1px solid $gray11' : undefined }}>
-                {months.map((m) => (
-                  <Button
-                    key={m.$date.toString()}
-                    type="button"
-                    css={{
-                      px: 0,
-                      fontWeight: m.now && !m.selected ? '$bold' : undefined,
-                      textAlign: 'center',
-                    }}
-                    ghost={!m.selected}
-                    variant={m.now || m.selected ? 'primary' : 'secondary'}
-                    {...monthButton(m)}
-                    onClick={(evt) => {
-                      setPage(0);
-                      const fn = monthButton(m).onClick;
-                      if (typeof fn !== 'undefined') fn(evt);
-                    }}
-                  >
-                    {m.month}
-                  </Button>
-                ))}
-              </ThreeColGrid>
-            </Flex>
-
-            <Flex
-              direction="column"
-              css={{ display: page === 2 ? 'flex' : 'none', height: '100%' }}
-            >
-              <Header
-                centerButtonLabel={`${years[0].year} - ${years[years.length - 1].year}`}
-                centerButtonOnClick={() => setPage(0)}
-                leftButtonProps={previousYearsButton()}
-                rightButtonProps={nextYearsButton()}
-              />
-              <ThreeColGrid css={{ borderRight: showTimePicker ? '1px solid $gray11' : undefined }}>
-                {years.map((y) => (
-                  <Button
-                    key={y.$date.toString()}
-                    type="button"
-                    css={{
-                      px: 0,
-                      fontWeight: y.now && !y.selected ? '$bold' : undefined,
-                      textAlign: 'center',
-                    }}
-                    ghost={!y.selected}
-                    variant={y.now || y.selected ? 'primary' : 'secondary'}
-                    {...yearButton(y)}
-                    onClick={(evt) => {
-                      setPage(0);
-                      const fn = yearButton(y).onClick;
-                      if (typeof fn !== 'undefined') fn(evt);
-                    }}
-                  >
-                    {y.year}
-                  </Button>
-                ))}
-              </ThreeColGrid>
-            </Flex>
-          </Box>
-
-          {showTimePicker ? (
-            <Flex direction="column" gap="1" css={{ maxHeight: '280px', pl: '$2' }}>
-              <Text css={{ mt: '32px', ml: '8px', lineHeight: '$sizes$6' }}>Time</Text>
-              <Flex direction="column" gap="1" css={{ overflow: 'auto', pr: '$2' }}>
-                {time.map((t) => (
-                  <Button
-                    key={t.$date.toString()}
-                    type="button"
-                    css={{
-                      px: '$2',
-                      fontWeight: t.now && !t.selected ? '$bold' : undefined,
-                      textAlign: 'center',
-                    }}
-                    ghost={!t.selected}
-                    variant={t.now || t.selected ? 'primary' : 'secondary'}
-                    {...timeButton(t)}
-                    onClick={(evt) => {
-                      const fn = timeButton(t).onClick;
-                      if (typeof fn !== 'undefined') fn(evt);
-                      if (typeof onTimeButtonClick !== 'undefined') onTimeButtonClick();
-                    }}
-                  >
-                    {t.time}
-                  </Button>
-                ))}
-              </Flex>
+              ) : undefined}
             </Flex>
           ) : undefined}
         </Flex>
-      </StyledWrapper>
+      </StyledDiv>
     );
   },
 );

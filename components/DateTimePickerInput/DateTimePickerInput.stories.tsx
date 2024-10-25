@@ -24,7 +24,10 @@ const Component: Meta<typeof DateTimePickerInputForStory> = {
   title: 'Components/DateTimePickerInput',
   component: DateTimePickerInputForStory,
   argTypes: {
-    showFastTravel: {
+    formatStr: {
+      control: 'text',
+    },
+    showDatePresets: {
       control: 'boolean',
     },
     showTimePicker: {
@@ -50,7 +53,9 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerInputForStory> = (arg
           <Label htmlFor="selected-dates">Selected date:</Label>
           <Text id="selected-dates">
             {selectedDates.length
-              ? selectedDates.map((date) => date.toISOString()).join(', ')
+              ? selectedDates
+                  .map((date) => (!isNaN(date.getTime()) ? date.toISOString() : 'Invalid date'))
+                  .join(', ')
               : 'None.'}
           </Text>
         </Flex>
@@ -62,7 +67,8 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerInputForStory> = (arg
 export const Base: StoryFn<typeof DateTimePickerInputForStory> = DateTimePickerTemplate.bind({});
 
 Base.args = {
-  showFastTravel: true,
+  formatStr: 'yyyy/MM/dd, HH:mm XXX',
+  showDatePresets: true,
   showTimePicker: true,
 };
 
