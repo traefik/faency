@@ -28,7 +28,6 @@ const StyledWrapper = styled('div', {
 });
 
 export type DateTimePickerInputProps = Omit<DPUserConfig, 'onDatesChange' | 'selectedDates'> & {
-  formatStr?: string;
   inputCSS?: CSS;
   inputProps?: Omit<typeof Input, 'css' | 'onChange' | 'ref' | 'value'>;
   onChange?: (d: Date[]) => void;
@@ -44,18 +43,11 @@ export const DateTimePickerInput = React.forwardRef<
   DateTimePickerInputProps
 >(
   (
-    {
-      formatStr = 'yyyy/MM/dd, HH:mm XXX',
-      inputCSS,
-      inputProps,
-      onChange,
-      pickerCSS,
-      showDatePresets,
-      showTimePicker,
-      ...pickerProps
-    },
+    { inputCSS, inputProps, onChange, pickerCSS, showDatePresets, showTimePicker, ...pickerProps },
     fowardedRef,
   ) => {
+    const formatStr = "yyyy-MM-dd'T'HH:mm";
+
     const arrowRef = useRef(null);
 
     const [inputValue, setInputValue] = useState<string>('');
@@ -88,7 +80,7 @@ export const DateTimePickerInput = React.forwardRef<
           startAdornment={<CalendarIcon />}
           {...getReferenceProps()}
           {...inputProps}
-          css={inputCSS}
+          css={{ '& ::-webkit-calendar-picker-indicator': { display: 'none' }, ...inputCSS }}
           onChange={(evt) => {
             const value = evt.currentTarget.value;
             setInputValue(value);
@@ -104,6 +96,7 @@ export const DateTimePickerInput = React.forwardRef<
             }
           }}
           ref={refs.setReference as Ref<InputHandle>}
+          type="datetime-local"
           value={inputValue}
         />
         {isPickerOpen && (

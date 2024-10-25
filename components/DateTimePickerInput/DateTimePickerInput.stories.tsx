@@ -24,9 +24,6 @@ const Component: Meta<typeof DateTimePickerInputForStory> = {
   title: 'Components/DateTimePickerInput',
   component: DateTimePickerInputForStory,
   argTypes: {
-    formatStr: {
-      control: 'text',
-    },
     showDatePresets: {
       control: 'boolean',
     },
@@ -67,7 +64,6 @@ const DateTimePickerTemplate: StoryFn<typeof DateTimePickerInputForStory> = (arg
 export const Base: StoryFn<typeof DateTimePickerInputForStory> = DateTimePickerTemplate.bind({});
 
 Base.args = {
-  formatStr: 'yyyy/MM/dd, HH:mm XXX',
   showDatePresets: true,
   showTimePicker: true,
 };
