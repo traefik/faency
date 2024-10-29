@@ -15,7 +15,7 @@ import {
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { DPUserConfig } from '@rehookify/datepicker';
 import { format, parse } from 'date-fns';
-import React, { Ref, useRef, useState } from 'react';
+import React, { MouseEventHandler, Ref, useRef, useState } from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Card } from '../Card';
@@ -24,7 +24,57 @@ import { Input, InputHandle } from '../Input';
 
 const StyledWrapper = styled('div', {
   display: 'flex',
+  position: 'relative',
   width: '100%',
+
+  '@supports (-moz-appearance: none)': {
+    '& .firefox-patch': {
+      display: 'block',
+      width: '20px',
+      height: '20px',
+      position: 'absolute',
+      right: '17px',
+      top: '6px',
+      background: '$inputBg',
+
+      '&::before': {
+        boxSizing: 'border-box',
+        content: '""',
+        position: 'absolute',
+        inset: 0,
+        pointerEvents: 'none',
+      },
+      '&::after': {
+        boxSizing: 'border-box',
+        content: '""',
+        position: 'absolute',
+        inset: 0,
+        pointerEvents: 'none',
+      },
+
+      '&:focus-visible': {
+        '&::before': {
+          backgroundColor: '$inputFocusBg',
+        },
+        '&::after': {
+          backgroundColor: '$primary',
+          opacity: 0.15,
+        },
+      },
+    },
+
+    '@hover': {
+      '&:hover .firefox-patch': {
+        '&::before': {
+          backgroundColor: '$inputHoverBg',
+        },
+        '&::after': {
+          backgroundColor: '$primary',
+          opacity: 0.05,
+        },
+      },
+    },
+  },
 });
 
 export type DateTimePickerInputProps = Omit<DPUserConfig, 'onDatesChange' | 'selectedDates'> & {
@@ -73,6 +123,7 @@ export const DateTimePickerInput = React.forwardRef<
     const role = useRole(context);
 
     const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
+    const { onClick: onFirefoxPatchClick } = getReferenceProps();
 
     return (
       <StyledWrapper ref={fowardedRef}>
@@ -80,7 +131,7 @@ export const DateTimePickerInput = React.forwardRef<
           startAdornment={<CalendarIcon />}
           {...getReferenceProps()}
           {...inputProps}
-          css={{ '& ::-webkit-calendar-picker-indicator': { display: 'none' }, ...inputCSS }}
+          css={{ '& input::-webkit-calendar-picker-indicator': { display: 'none' }, ...inputCSS }}
           onChange={(evt) => {
             const value = evt.currentTarget.value;
             setInputValue(value);
@@ -98,6 +149,10 @@ export const DateTimePickerInput = React.forwardRef<
           ref={refs.setReference as Ref<InputHandle>}
           type="datetime-local"
           value={inputValue}
+        />
+        <div
+          className="firefox-patch"
+          onClick={onFirefoxPatchClick as MouseEventHandler<HTMLDivElement>}
         />
         {isPickerOpen && (
           <FloatingFocusManager context={context} initialFocus={-1} modal={false}>
