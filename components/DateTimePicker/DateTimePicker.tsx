@@ -252,6 +252,7 @@ export const DateTimePicker = React.forwardRef<
                           if (typeof fn !== 'undefined') fn(evt);
                           if (typeof onTimeButtonClick !== 'undefined') onTimeButtonClick();
                         }}
+                        tabIndex={timeButton(t).disabled ? timeButton(t).tabIndex : 0}
                       >
                         {t.time}
                       </Button>
