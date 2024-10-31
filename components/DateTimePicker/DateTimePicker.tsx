@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { DPPropGetter, DPUserConfig, useDatePicker } from '@rehookify/datepicker';
+import { DPDatesConfig, DPPropGetter, DPUserConfig, useDatePicker } from '@rehookify/datepicker';
 import { addMonths, addYears } from 'date-fns';
 import React, { useState } from 'react';
 
@@ -65,7 +65,13 @@ function Header({
   );
 }
 
-export type DateTimePickerProps = DPUserConfig & {
+type CustomDPDatesConfig = Omit<DPDatesConfig, 'mode'>;
+
+type CustomDPUserConfig = Omit<DPUserConfig, 'dates'> & {
+  dates?: Partial<CustomDPDatesConfig>;
+};
+
+export type DateTimePickerProps = CustomDPUserConfig & {
   css?: CSS;
   onFastTravelClick?: () => void;
   onTimeButtonClick?: () => void;
