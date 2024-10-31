@@ -27,6 +27,10 @@ const StyledWrapper = styled('div', {
   position: 'relative',
   width: '100%',
 
+  '& .firefox-patch': {
+    display: 'none',
+  },
+
   '@supports (-moz-appearance: none)': {
     '& .firefox-patch': {
       display: 'block',
