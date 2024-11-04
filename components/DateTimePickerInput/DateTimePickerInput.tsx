@@ -5,6 +5,7 @@ import {
   FloatingArrow,
   FloatingFocusManager,
   offset,
+  Placement,
   shift,
   useClick,
   useDismiss,
@@ -86,6 +87,7 @@ export type DateTimePickerInputProps = Omit<DPUserConfig, 'onDatesChange' | 'sel
   inputProps?: Omit<typeof Input, 'css' | 'onChange' | 'ref' | 'value'>;
   onChange?: (d: Date[]) => void;
   pickerCSS?: CSS;
+  pickerPlacement?: Placement;
   showDatePresets?: boolean;
   showTimePicker?: boolean;
 };
@@ -97,7 +99,16 @@ export const DateTimePickerInput = React.forwardRef<
   DateTimePickerInputProps
 >(
   (
-    { inputCSS, inputProps, onChange, pickerCSS, showDatePresets, showTimePicker, ...pickerProps },
+    {
+      inputCSS,
+      inputProps,
+      onChange,
+      pickerCSS,
+      pickerPlacement,
+      showDatePresets,
+      showTimePicker,
+      ...pickerProps
+    },
     fowardedRef,
   ) => {
     const formatStr = "yyyy-MM-dd'T'HH:mm";
@@ -111,6 +122,7 @@ export const DateTimePickerInput = React.forwardRef<
     const { refs, floatingStyles, context } = useFloating({
       open: isPickerOpen,
       onOpenChange: setIsPickerOpen,
+      placement: pickerPlacement,
       middleware: [
         offset(10),
         flip(),

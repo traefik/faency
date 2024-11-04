@@ -24,6 +24,23 @@ const Component: Meta<typeof DateTimePickerInputForStory> = {
   title: 'Components/DateTimePickerInput',
   component: DateTimePickerInputForStory,
   argTypes: {
+    pickerPlacement: {
+      control: 'inline-radio',
+      options: [
+        'top-start',
+        'right-start',
+        'bottom-start',
+        'left-start',
+        'top',
+        'right',
+        'bottom',
+        'left',
+        'top-end',
+        'right-end',
+        'bottom-end',
+        'left-end',
+      ],
+    },
     showDatePresets: {
       control: 'boolean',
     },
