@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['react-datepicker', 'storybook'],
+    exclude: ['storybook'],
   },
   plugins: [react()],
 });

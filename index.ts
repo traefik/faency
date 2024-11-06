@@ -27,6 +27,7 @@ export { Card } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 export { Container } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
+export { DateTimePickerInput } from './components/DateTimePickerInput';
 export {
   Dialog,
   DialogCloseIconButton,
