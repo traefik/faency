@@ -1,33 +1,32 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import type * as Stitches from '@stitches/react';
 import { createStitches, CSS as StitchesCSS } from '@stitches/react';
+import { Property } from '@stitches/react/types/css';
 
+import { darkColors, lightColors } from './colors';
 import { Theme as AccordionTheme } from './components/Accordion/Accordion.themes';
 import { Theme as BadgeTheme } from './components/Badge/Badge.themes';
 import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as ButtonSwitchTheme } from './components/ButtonSwitch/ButtonSwitch.themes';
-import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
-import { Theme as SwitchTheme } from './components/Switch/Switch.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
+import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
+import { Theme as HeadingTheme } from './components/Heading/Heading.themes';
+import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
+import { Theme as InputTheme } from './components/Input/Input.themes';
 import { Theme as LinkTheme } from './components/Link/Link.themes';
 import { Theme as ListTheme } from './components/List/List.themes';
-import { Theme as RadioTheme } from './components/Radio/Radio.themes';
-import { Theme as TextTheme } from './components/Text/Text.themes';
-import { Theme as InputTheme } from './components/Input/Input.themes';
-import { Theme as TableTheme } from './components/Table/Table.themes';
-import { Theme as SelectTheme } from './components/Select/Select.themes';
-import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
-import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as NavigationTheme } from './components/Navigation/Navigation.themes';
-import { Theme as TooltipTheme } from './components/Tooltip/Tooltip.themes';
+import { Theme as RadioTheme } from './components/Radio/Radio.themes';
+import { Theme as SelectTheme } from './components/Select/Select.themes';
+import { Theme as SidePanelTheme } from './components/SidePanel/SidePanel.themes';
+import { Theme as SkeletonTheme } from './components/Skeleton/Skeleton.themes';
+import { Theme as SwitchTheme } from './components/Switch/Switch.themes';
+import { Theme as TableTheme } from './components/Table/Table.themes';
+import { Theme as TextTheme } from './components/Text/Text.themes';
 import { Theme as TextareaTheme } from './components/Textarea/Textarea.themes';
-import { Theme as HeadingTheme } from './components/Heading/Heading.themes';
-
-import { lightColors, darkColors } from './colors';
+import { Theme as TooltipTheme } from './components/Tooltip/Tooltip.themes';
 import getPrimaryColorInfo from './utils/getPrimaryColorInfo';
-import { Property } from '@stitches/react/types/css';
 
 export type { VariantProps } from '@stitches/react';
 
@@ -74,6 +73,7 @@ const stitches = createStitches({
       ...TooltipTheme.getLight(defaultPrimaryColor),
       ...TextareaTheme.getLight(defaultPrimaryColor),
       ...HeadingTheme.getLight(defaultPrimaryColor),
+      ...SidePanelTheme.getLight(defaultPrimaryColor),
     },
     fonts: {
       rubik:
@@ -307,6 +307,7 @@ export const darkTheme = (primary: PrimaryColor) => {
       ...TooltipTheme.getDark(darkPrimaryColor),
       ...TextareaTheme.getDark(darkPrimaryColor),
       ...HeadingTheme.getDark(darkPrimaryColor),
+      ...SidePanelTheme.getDark(darkPrimaryColor),
     },
   });
 };
@@ -338,6 +339,7 @@ export const lightTheme = (primary: PrimaryColor) => {
       ...TooltipTheme.getLight(lightPrimaryColor),
       ...TextareaTheme.getLight(lightPrimaryColor),
       ...HeadingTheme.getLight(lightPrimaryColor),
+      ...SidePanelTheme.getLight(lightPrimaryColor),
     },
   });
 };
