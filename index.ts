@@ -102,7 +102,7 @@ export {
   RadioAccordionTrigger,
 } from './components/RadioAccordion';
 export { Select } from './components/Select';
-export { SidePanel, SidePanelCloseIconButton } from './components/SidePanel';
+export { SidePanel } from './components/SidePanel';
 export { Skeleton } from './components/Skeleton';
 export { Switch } from './components/Switch';
 export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';

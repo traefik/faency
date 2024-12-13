@@ -77,6 +77,7 @@ export const Basic: StoryFn<typeof SidePanel> = (args) => {
 Basic.args = {
   noOverlay: false,
   side: 'right',
+  noCloseIcon: false,
 };
 
 export const CombinedWithModal: StoryFn<typeof SidePanel> = (args) => {
@@ -120,6 +121,7 @@ export const CombinedWithModal: StoryFn<typeof SidePanel> = (args) => {
 CombinedWithModal.args = {
   noOverlay: true,
   side: 'right',
+  noCloseIcon: true,
 };
 
 export default Component;

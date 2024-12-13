@@ -103,7 +103,7 @@ interface SidePanelCloseButtonProps
   extends VariantProps<typeof IconButton>,
     ComponentProps<typeof IconButton> {}
 
-export const SidePanelCloseIconButton = React.forwardRef<
+const SidePanelCloseIconButton = React.forwardRef<
   React.ElementRef<typeof IconButton>,
   SidePanelCloseButtonProps
 >((props, forwardedRef) => (
@@ -119,16 +119,19 @@ type SidePanelContentPrimitiveProps = React.ComponentProps<typeof DialogPrimitiv
 type SidePanelRootPrimitiveProps = React.ComponentProps<typeof DialogPrimitive.Root>;
 type SidePanelProps = SidePanelContentPrimitiveProps &
   SidePanelRootPrimitiveProps &
-  SidePanelContentVariants & { css?: CSS; noOverlay?: boolean };
+  SidePanelContentVariants & { css?: CSS; noOverlay?: boolean; noCloseIcon?: boolean };
 
 export const SidePanel = React.forwardRef<React.ElementRef<typeof StyledContent>, SidePanelProps>(
-  ({ noOverlay = false, children, onOpenChange, open, ...props }, forwardedRef) => (
+  (
+    { noOverlay = false, noCloseIcon = false, children, onOpenChange, open, ...props },
+    forwardedRef,
+  ) => (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>
         {!noOverlay && <SidePanelOverlay />}
         <StyledContent {...props} ref={forwardedRef}>
           {children}
-          <SidePanelCloseIconButton />
+          {!noCloseIcon && <SidePanelCloseIconButton />}
         </StyledContent>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>
