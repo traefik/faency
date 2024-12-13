@@ -67,7 +67,7 @@ export const Basic: StoryFn<typeof SidePanel> = (args) => {
         </Box>
       </Box>
 
-      <SidePanel open={open} onOpenChange={(isOpen) => setOpen(isOpen)} {...args}>
+      <SidePanel {...args} open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
         <Content />
       </SidePanel>
     </>
@@ -95,7 +95,7 @@ export const CombinedWithModal: StoryFn<typeof SidePanel> = (args) => {
         </DialogPortal>
       </Dialog>
 
-      <SidePanel open={open} onOpenChange={(isOpen) => setOpen(isOpen)} {...args}>
+      <SidePanel {...args} open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
         <Content ctaLabel="Open modal" onClickBtn={() => setModalOpen(true)} />
       </SidePanel>
 

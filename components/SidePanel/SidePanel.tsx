@@ -116,17 +116,30 @@ const SidePanelCloseIconButton = React.forwardRef<
 
 type SidePanelContentVariants = VariantProps<typeof StyledContent>;
 type SidePanelContentPrimitiveProps = React.ComponentProps<typeof DialogPrimitive.Content>;
-type SidePanelRootPrimitiveProps = React.ComponentProps<typeof DialogPrimitive.Root>;
 type SidePanelProps = SidePanelContentPrimitiveProps &
-  SidePanelRootPrimitiveProps &
-  SidePanelContentVariants & { css?: CSS; noOverlay?: boolean; noCloseIcon?: boolean };
+  SidePanelContentVariants & {
+    css?: CSS;
+    noOverlay?: boolean;
+    noCloseIcon?: boolean;
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange(open: boolean): void;
+  };
 
 export const SidePanel = React.forwardRef<React.ElementRef<typeof StyledContent>, SidePanelProps>(
   (
-    { noOverlay = false, noCloseIcon = false, children, onOpenChange, open, ...props },
+    {
+      noOverlay = false,
+      noCloseIcon = false,
+      children,
+      onOpenChange,
+      open = false,
+      defaultOpen = false,
+      ...props
+    },
     forwardedRef,
   ) => (
-    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
       <DialogPrimitive.Portal>
         {!noOverlay && <SidePanelOverlay />}
         <StyledContent {...props} ref={forwardedRef}>
