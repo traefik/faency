@@ -33,10 +33,21 @@ const ArrowBox = styled(Box, {
   color: '$tooltipContentBg',
 });
 
-export const TooltipContent = ({ css, multiline, children, ...props }: Partial<TooltipProps>) => {
+export const TooltipContent = React.forwardRef<
+  React.ElementRef<typeof Content>,
+  Partial<TooltipProps>
+>(({ css, multiline, children, ...props }, forwardedRef) => {
   const isContentString = React.useMemo(() => typeof children === 'string', [children]);
   return (
-    <Content css={css} side="top" align="center" sideOffset={5} {...props} multiline={multiline}>
+    <Content
+      css={css}
+      side="top"
+      align="center"
+      sideOffset={5}
+      {...props}
+      multiline={multiline}
+      ref={forwardedRef}
+    >
       {isContentString ? (
         <Text
           size="1"
@@ -63,29 +74,23 @@ export const TooltipContent = ({ css, multiline, children, ...props }: Partial<T
       </ArrowBox>
     </Content>
   );
-};
+});
 
-export function Tooltip({
-  children,
-  content,
-  open,
-  defaultOpen,
-  onOpenChange,
-  multiline,
-  css,
-  ...props
-}: TooltipProps) {
-  return (
+export const Tooltip = React.forwardRef<React.ElementRef<typeof Content>, TooltipProps>(
+  (
+    { children, content, open, defaultOpen, onOpenChange, multiline, css, ...props },
+    forwardedRef,
+  ) => (
     <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal>
-        <TooltipContent css={css} multiline={multiline} {...props}>
+        <TooltipContent css={css} multiline={multiline} ref={forwardedRef} {...props}>
           {content}
         </TooltipContent>
       </TooltipPrimitive.Portal>
     </TooltipPrimitive.Root>
-  );
-}
+  ),
+);
 
 export const TooltipRoot = TooltipPrimitive.Root;
 export const TooltipTrigger = TooltipPrimitive.Trigger;
