@@ -3,6 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Bubble as BubbleComponent } from '../Bubble';
 import { Container } from '../Container';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
@@ -74,5 +75,11 @@ NodeContent.argTypes = {
     },
   },
 };
+
+export const Bubble: StoryFn<typeof TooltipForStory> = (args) => (
+  <TooltipForStory {...args} content="This is a green bubble">
+    <BubbleComponent variant="green" size="large" />
+  </TooltipForStory>
+);
 
 export default Component;
