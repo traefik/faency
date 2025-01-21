@@ -67,7 +67,12 @@ export const Basic: StoryFn<typeof SidePanel> = (args) => {
         </Box>
       </Box>
 
-      <SidePanel {...args} open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
+      <SidePanel
+        {...args}
+        description="Lorem ipsum dolor sit amet"
+        open={open}
+        onOpenChange={(isOpen) => setOpen(isOpen)}
+      >
         <Content />
       </SidePanel>
     </>

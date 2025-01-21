@@ -1,5 +1,6 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import React, { ComponentProps } from 'react';
 
 import { CSS, keyframes, styled, VariantProps } from '../../stitches.config';
@@ -119,6 +120,7 @@ type SidePanelContentPrimitiveProps = React.ComponentProps<typeof DialogPrimitiv
 type SidePanelProps = SidePanelContentPrimitiveProps &
   SidePanelContentVariants & {
     css?: CSS;
+    description?: string;
     noOverlay?: boolean;
     noCloseIcon?: boolean;
     open?: boolean;
@@ -129,6 +131,7 @@ type SidePanelProps = SidePanelContentPrimitiveProps &
 export const SidePanel = React.forwardRef<React.ElementRef<typeof StyledContent>, SidePanelProps>(
   (
     {
+      description,
       noOverlay = false,
       noCloseIcon = false,
       children,
@@ -143,6 +146,11 @@ export const SidePanel = React.forwardRef<React.ElementRef<typeof StyledContent>
       <DialogPrimitive.Portal>
         {!noOverlay && <SidePanelOverlay />}
         <StyledContent {...props} ref={forwardedRef}>
+          {description ? (
+            <VisuallyHidden asChild>
+              <DialogPrimitive.Description>{description}</DialogPrimitive.Description>
+            </VisuallyHidden>
+          ) : null}
           {children}
           {!noCloseIcon && <SidePanelCloseIconButton />}
         </StyledContent>
