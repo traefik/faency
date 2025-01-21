@@ -14,7 +14,7 @@ body:
         DO NOT FILE ISSUES FOR GENERAL SUPPORT QUESTIONS.
 
       options:
-        - label: Yes, I've searched similar issues on [GitHub](https://github.com/traefik/whoami/issues) and didn't find any.
+        - label: Yes, I've searched similar issues on [GitHub](https://github.com/traefik/faency/issues) and didn't find any.
           required: true
 
   - type: textarea
