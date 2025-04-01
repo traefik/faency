@@ -233,11 +233,6 @@ export const NavigationLink = (props: Omit<NavigationItemLinkProps, 'as'>) => (
   <NavigationItem as="a" {...props} />
 );
 
-// export const NavigationLink = forwardRef<
-//   React.ElementRef<typeof NavigationItem>,
-//   Omit<NavigationItemLinkProps, 'as'>
-// >((props, forwardedRef) => <NavigationItem as="a" {...props} ref={forwardedRef} />);
-
 export type NavigationLinkVariants = VariantProps<typeof NavigationLink>;
 
 export type NavigationLinkProps = NavigationLinkVariants & NonNullable<unknown>;
