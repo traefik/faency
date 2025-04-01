@@ -295,11 +295,12 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
 const StyledButtonSlot = styled(Slot, StyledButton);
 
 export interface ButtonVariants extends VariantProps<typeof StyledButton> {}
-export interface ButtonProps extends ComponentProps<typeof StyledButton>, ButtonVariants {
-  css?: CSS;
-  asChild?: boolean;
-  as?: string;
-}
+export type ButtonProps = ComponentProps<typeof StyledButton> &
+  ButtonVariants & {
+    css?: CSS;
+    asChild?: boolean;
+    as?: string;
+  };
 
 export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
   ({ children, asChild, ...props }, forwardedRef) => {
