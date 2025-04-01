@@ -169,13 +169,14 @@ const AnimatedTr = ({
     </Tr>
   );
 };
-export interface TrProps extends ComponentProps<typeof StyledTr>, VariantProps<typeof StyledTr> {
-  children: React.ReactNode;
-  collapsedContent?: React.ReactNode;
-  emptyFirstColumn?: boolean;
-  tableHead?: boolean;
-  collapsedContentColSpan?: number;
-}
+export type TrProps = ComponentProps<typeof StyledTr> &
+  VariantProps<typeof StyledTr> & {
+    children: React.ReactNode;
+    collapsedContent?: React.ReactNode;
+    emptyFirstColumn?: boolean;
+    tableHead?: boolean;
+    collapsedContentColSpan?: number;
+  };
 
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
   (

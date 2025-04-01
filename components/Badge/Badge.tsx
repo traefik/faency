@@ -18,7 +18,7 @@ const colorVariants: ColorVariants = COLORS.reduce(
     ...variants,
     [color]: getColorBadgeStyles(color),
   }),
-  {} as ColorVariants
+  {} as ColorVariants,
 );
 
 const interactiveColorVariants: ColorVariants = COLORS.reduce(
@@ -28,7 +28,7 @@ const interactiveColorVariants: ColorVariants = COLORS.reduce(
       ...getColorBadgeStyles(color),
     },
   }),
-  {} as ColorVariants
+  {} as ColorVariants,
 );
 
 const alphaColorCompoundVariants = COLORS.map((color) => ({
@@ -133,12 +133,11 @@ const StyledButtonBadge = styled('button', BADGE_BASE_STYLES, {
 });
 const StyledButtonBadgeSlot = styled(Slot, StyledButtonBadge);
 
-interface BadgeProps
-  extends ComponentProps<typeof StyledButtonBadge>,
-    VariantProps<typeof StyledButtonBadge> {
-  asChild?: boolean;
-  interactive?: boolean;
-}
+type BadgeProps = ComponentProps<typeof StyledButtonBadge> &
+  VariantProps<typeof StyledButtonBadge> & {
+    asChild?: boolean;
+    interactive?: boolean;
+  };
 
 export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>, BadgeProps>(
   ({ interactive, asChild, ...props }, forwardedRef) => {
@@ -151,5 +150,5 @@ export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>
     }, [asChild]);
 
     return <Component {...props} ref={forwardedRef} />;
-  }
+  },
 );

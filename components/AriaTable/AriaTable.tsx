@@ -98,12 +98,14 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
   );
 };
 
-export interface TrProps extends ComponentProps<typeof StyledTr>, VariantProps<typeof StyledTr> {
-  asChild?: boolean;
-  collapsedContent?: React.ReactNode;
-  emptyFirstColumn?: boolean;
-  tableHead?: boolean;
-}
+export type TrProps = ComponentProps<typeof StyledTr> &
+  VariantProps<typeof StyledTr> & {
+    asChild?: boolean;
+    collapsedContent?: React.ReactNode;
+    emptyFirstColumn?: boolean;
+    tableHead?: boolean;
+  };
+
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
   ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, css, ...props }, ref) => {
     const Component = asChild ? StyledTrSlot : StyledTr;
@@ -217,12 +219,12 @@ const StyledTd = styled('span', TableTd, {
 const FillerTd = styled(StyledTd, {
   visibility: 'hidden',
 });
-export interface TdProps
-  extends ComponentProps<typeof StyledTd>,
-    VariantProps<typeof StyledTd>,
-    VariantProps<typeof TableTd> {
-  fullColSpan?: boolean;
-}
+export type TdProps = ComponentProps<typeof StyledTd> &
+  VariantProps<typeof StyledTd> &
+  VariantProps<typeof TableTd> & {
+    fullColSpan?: boolean;
+  };
+
 export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
   ({ fullColSpan, css, ...props }, ref) => {
     const fullColSpanCss = useMemo(
