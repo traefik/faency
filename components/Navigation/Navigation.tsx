@@ -184,14 +184,19 @@ interface NavigationItemBaseProps {
   css?: CSS;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
+  children?: ReactNode;
+  active?: boolean;
 }
 
-interface NavigationItemButtonProps extends NavigationItemBaseProps, StyledButtonProps {
-  as?: 'button';
-}
-interface NavigationItemLinkProps extends NavigationItemBaseProps, StyledLinkProps {
-  as: 'a';
-}
+type NavigationItemButtonProps = NavigationItemBaseProps &
+  StyledButtonProps & {
+    as?: 'button';
+  };
+type NavigationItemLinkProps = NavigationItemBaseProps &
+  StyledLinkProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+    as: 'a';
+  };
 
 export type NavigationItemProps = NavigationItemButtonProps | NavigationItemLinkProps;
 
@@ -227,6 +232,11 @@ export type NavigationItemVariants = VariantProps<typeof NavigationItem>;
 export const NavigationLink = (props: Omit<NavigationItemLinkProps, 'as'>) => (
   <NavigationItem as="a" {...props} />
 );
+
+// export const NavigationLink = forwardRef<
+//   React.ElementRef<typeof NavigationItem>,
+//   Omit<NavigationItemLinkProps, 'as'>
+// >((props, forwardedRef) => <NavigationItem as="a" {...props} ref={forwardedRef} />);
 
 export type NavigationLinkVariants = VariantProps<typeof NavigationLink>;
 
