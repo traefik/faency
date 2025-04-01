@@ -184,14 +184,19 @@ interface NavigationItemBaseProps {
   css?: CSS;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
+  children?: ReactNode;
+  active?: boolean;
 }
 
-interface NavigationItemButtonProps extends NavigationItemBaseProps, StyledButtonProps {
-  as?: 'button';
-}
-interface NavigationItemLinkProps extends NavigationItemBaseProps, StyledLinkProps {
-  as: 'a';
-}
+type NavigationItemButtonProps = NavigationItemBaseProps &
+  StyledButtonProps & {
+    as?: 'button';
+  };
+type NavigationItemLinkProps = NavigationItemBaseProps &
+  StyledLinkProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+    as: 'a';
+  };
 
 export type NavigationItemProps = NavigationItemButtonProps | NavigationItemLinkProps;
 

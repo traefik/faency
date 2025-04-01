@@ -80,16 +80,14 @@ const StyledInteractiveCard = styled('button', StyledCard, {
   },
 });
 
-export interface CardVariantProps
-  extends ComponentProps<typeof StyledCard>,
-    VariantProps<typeof StyledCard> {
-  interactive?: false;
-}
-export interface InteractiveCardProps
-  extends VariantProps<typeof StyledInteractiveCard>,
-    ComponentProps<typeof StyledInteractiveCard> {
-  interactive: true;
-}
+export type CardVariantProps = ComponentProps<typeof StyledCard> &
+  VariantProps<typeof StyledCard> & {
+    interactive?: false;
+  };
+export type InteractiveCardProps = VariantProps<typeof StyledInteractiveCard> &
+  ComponentProps<typeof StyledInteractiveCard> & {
+    interactive: true;
+  };
 export type CardProps = CardVariantProps | InteractiveCardProps;
 
 export const Card = React.forwardRef<ElementRef<typeof StyledCard>, CardProps>(
@@ -109,5 +107,5 @@ export const Card = React.forwardRef<ElementRef<typeof StyledCard>, CardProps>(
         {...(props as CardVariantProps)}
       />
     );
-  }
+  },
 );
