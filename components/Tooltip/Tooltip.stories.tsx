@@ -61,7 +61,6 @@ const HeadingOption = (
 );
 
 NodeContent.args = {
-  // @ts-ignore
   content: WarningOption,
 };
 
@@ -77,9 +76,8 @@ NodeContent.argTypes = {
 };
 
 export const Bubble: StoryFn<typeof TooltipForStory> = (args) => (
-  <TooltipForStory {...args} content="This is a green bubble">
+  <TooltipForStory {...args} content={<Text css={{ color: 'black' }}>This is a green bubble</Text>}>
     <BubbleComponent variant="green" size="large" />
   </TooltipForStory>
 );
-
 export default Component;
