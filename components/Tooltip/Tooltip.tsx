@@ -6,7 +6,7 @@ import { Box } from '../Box';
 import { Text } from '../Text';
 
 export type TooltipProps = React.ComponentProps<typeof TooltipPrimitive.Root> &
-  React.ComponentProps<typeof TooltipPrimitive.Content> & {
+  Omit<React.ComponentProps<typeof TooltipPrimitive.Content>, 'content'> & {
     children: React.ReactElement | React.ReactNode;
     content: React.ReactElement | React.ReactNode;
     multiline?: boolean;
@@ -44,7 +44,7 @@ export const TooltipContent = React.forwardRef<
       side="top"
       align="center"
       sideOffset={5}
-      {...props}
+      {...(props as React.ComponentProps<typeof TooltipPrimitive.Content>)}
       multiline={multiline}
       ref={forwardedRef}
     >
