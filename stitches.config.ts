@@ -273,10 +273,10 @@ export const { styled, css, createTheme, getCssText, globalCss, keyframes, confi
 // @ts-expect-error
 export const utils = config.utils;
 
-export const darkTheme = (primary: PrimaryColor) => {
+export const darkTheme = (primary: PrimaryColor, name = 'dark') => {
   const darkPrimaryColor = getPrimaryColorInfo(primary, darkColors);
 
-  return createTheme('dark', {
+  return createTheme(name, {
     colors: {
       ...darkColors,
 
@@ -312,10 +312,10 @@ export const darkTheme = (primary: PrimaryColor) => {
   });
 };
 
-export const lightTheme = (primary: PrimaryColor) => {
+export const lightTheme = (primary: PrimaryColor, name = 'light') => {
   const lightPrimaryColor = getPrimaryColorInfo(primary, lightColors);
 
-  return createTheme('light', {
+  return createTheme(name, {
     colors: {
       primary: lightPrimaryColor.token,
       ...AccordionTheme.getLight(lightPrimaryColor),
