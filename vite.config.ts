@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      tsconfigPath: 'tsconfig-rollup.json',
+      tsconfigPath: 'tsconfig-build.json',
       outDir: 'dist/types',
       insertTypesEntry: true,
       cleanVueFileName: true,
