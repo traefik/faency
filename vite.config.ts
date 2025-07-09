@@ -11,7 +11,7 @@ export default defineConfig({
     react(),
     dts({
       tsconfigPath: 'tsconfig-build.json',
-      outDir: 'dist/types',
+      outDir: 'dist',
       insertTypesEntry: true,
       cleanVueFileName: true,
     }),

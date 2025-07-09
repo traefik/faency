@@ -15,6 +15,7 @@ import React, {
 
 import { styled, VariantProps } from '../../stitches.config';
 import { Box } from '../Box';
+import type { TableVariants } from '../Table';
 import {
   Caption as TableCaption,
   StyledTr as TableTr,
@@ -98,15 +99,16 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
   );
 };
 
-export type TrProps = ComponentProps<typeof StyledTr> &
+export type AriaTrProps = ComponentProps<typeof StyledTr> &
   VariantProps<typeof StyledTr> & {
     asChild?: boolean;
     collapsedContent?: React.ReactNode;
     emptyFirstColumn?: boolean;
     tableHead?: boolean;
+    children?: React.ReactNode;
   };
 
-export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
+export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
   ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, css, ...props }, ref) => {
     const Component = asChild ? StyledTrSlot : StyledTr;
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -275,5 +277,5 @@ export const Table = forwardRef<
   />
 ));
 
-export type TableVariants = VariantProps<typeof Table>;
-export type TableProps = TableVariants & NonNullable<unknown>;
+export type AriaTableVariants = VariantProps<typeof Table>;
+export type AriaTableProps = TableVariants & NonNullable<unknown>;

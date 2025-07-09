@@ -7,7 +7,7 @@
     "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",
-    "noEmit": true,
+    "noEmit": false,
     "outDir": "dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
