@@ -89,7 +89,7 @@
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^9.0.0",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "@stitches/react": "1.2.7",
+    "@stitches/react": "1.2.8",
     "@storybook/addon-docs": "^8.2.5",
     "@storybook/addon-essentials": "^8.2.5",
     "@storybook/addon-links": "^8.2.2",
@@ -122,7 +122,7 @@
     "storybook": "^8.2.5",
     "storybook-dark-mode": "^4.0.2",
     "tinycolor2": "^1.4.2",
-    "typescript": "5.4.5",
+    "typescript": "^5.8.3",
     "use-debounce": "9.0.2",
     "vite": "^5.1.5"
   },

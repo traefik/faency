@@ -6179,12 +6179,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stitches/react@npm:1.2.7":
-  version: 1.2.7
-  resolution: "@stitches/react@npm:1.2.7"
+"@stitches/react@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@stitches/react@npm:1.2.8"
   peerDependencies:
     react: ">= 16.3.0"
-  checksum: 10c0/c5da5e4b862306d2dd0545765c497bf5b972315a801ee7120374c13950db49587fe3f3ef5282be1ce189f9de2acbe3a4d0f8ba40283fe058b8d056674a336e60
+  checksum: 10c0/d9c03cd88ac25edc493b23a1359f36aa9a497d13bb7a833204d8228b09b6227c1a8ea22e946312ca605f7819fbdd3c49d5f8a5f14b2801c9a31d36172d7f60ac
   languageName: node
   linkType: hard
 
@@ -6767,7 +6767,7 @@ __metadata:
     "@semantic-release/github": "npm:^8.0.2"
     "@semantic-release/npm": "npm:^9.0.0"
     "@semantic-release/release-notes-generator": "npm:^10.0.3"
-    "@stitches/react": "npm:1.2.7"
+    "@stitches/react": "npm:1.2.8"
     "@storybook/addon-docs": "npm:^8.2.5"
     "@storybook/addon-essentials": "npm:^8.2.5"
     "@storybook/addon-links": "npm:^8.2.2"
@@ -6814,7 +6814,7 @@ __metadata:
     storybook: "npm:^8.2.5"
     storybook-dark-mode: "npm:^4.0.2"
     tinycolor2: "npm:^1.4.2"
-    typescript: "npm:5.4.5"
+    typescript: "npm:^5.8.3"
     typescript-eslint: "npm:^8.11.0"
     use-debounce: "npm:9.0.2"
     vite: "npm:^5.1.5"
@@ -19642,16 +19642,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.4.5":
-  version: 5.4.5
-  resolution: "typescript@npm:5.4.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/2954022ada340fd3d6a9e2b8e534f65d57c92d5f3989a263754a78aba549f7e6529acc1921913560a4b816c46dce7df4a4d29f9f11a3dc0d4213bb76d043251e
-  languageName: node
-  linkType: hard
-
 "typescript@npm:5.8.2":
   version: 5.8.2
   resolution: "typescript@npm:5.8.2"
@@ -19662,13 +19652,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>":
-  version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
+"typescript@npm:^5.8.3":
+  version: 5.8.3
+  resolution: "typescript@npm:5.8.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/db2ad2a16ca829f50427eeb1da155e7a45e598eec7b086d8b4e8ba44e5a235f758e606d681c66992230d3fc3b8995865e5fd0b22a2c95486d0b3200f83072ec9
+  checksum: 10c0/5f8bb01196e542e64d44db3d16ee0e4063ce4f3e3966df6005f2588e86d91c03e1fb131c2581baf0fb65ee79669eea6e161cd448178986587e9f6844446dbb48
   languageName: node
   linkType: hard
 
@@ -19679,6 +19669,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/5448a08e595cc558ab321e49d4cac64fb43d1fa106584f6ff9a8d8e592111b373a995a1d5c7f3046211c8a37201eb6d0f1566f15cdb7a62a5e3be01d087848e2
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.8.3#optional!builtin<compat/typescript>":
+  version: 5.8.3
+  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/39117e346ff8ebd87ae1510b3a77d5d92dae5a89bde588c747d25da5c146603a99c8ee588c7ef80faaf123d89ed46f6dbd918d534d641083177d5fac38b8a1cb
   languageName: node
   linkType: hard
 
