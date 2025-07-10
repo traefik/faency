@@ -25,6 +25,14 @@
       "react": ["./node_modules/@types/react"]
     }
   },
-  "exclude": ["node_modules", "pages", "**/*.test.tsx"],
+  "exclude": [
+    "node_modules",
+    "pages",
+    "**/*.test.tsx",
+    "**/*.test.ts",
+    "**/*.stories.tsx",
+    "**/*.stories.ts",
+    "stories"
+  ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

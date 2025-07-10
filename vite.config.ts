@@ -14,6 +14,13 @@ export default defineConfig({
       outDir: 'dist',
       insertTypesEntry: true,
       cleanVueFileName: true,
+      exclude: [
+        '**/*.stories.tsx',
+        '**/*.stories.ts',
+        '**/*.test.tsx',
+        '**/*.test.ts',
+        'stories/**',
+      ],
     }),
   ],
   build: {
