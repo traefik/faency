@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prettier": "prettier --write .",
-    "build": "rollup -c",
+    "build": "vite build",
     "lint": "eslint \"./components/**/*.{ts,tsx}\"",
     "lint:fix": "eslint --fix \"./components/**/*.{ts,tsx}\"",
     "release": "yarn build && np",
@@ -85,13 +85,11 @@
     "@radix-ui/react-use-layout-effect": "^1.0.0",
     "@radix-ui/react-visually-hidden": "^1.0.1",
     "@rehookify/datepicker": "^6.6.7",
-    "@rollup/plugin-babel": "^5.3.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^9.0.0",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "@stitches/react": "1.2.7",
-    "@storybook/addon-actions": "^8.2.2",
+    "@stitches/react": "1.2.8",
     "@storybook/addon-docs": "^8.2.5",
     "@storybook/addon-essentials": "^8.2.5",
     "@storybook/addon-links": "^8.2.2",
@@ -120,13 +118,11 @@
     "prettier": "^3.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "rollup": "^2.70.1",
-    "rollup-plugin-typescript2": "^0.36.0",
     "semantic-release": "^19.0.2",
     "storybook": "^8.2.5",
     "storybook-dark-mode": "^4.0.2",
     "tinycolor2": "^1.4.2",
-    "typescript": "5.4.5",
+    "typescript": "^5.8.3",
     "use-debounce": "9.0.2",
     "vite": "^5.1.5"
   },
@@ -148,6 +144,7 @@
     "jest": "^27.5.1",
     "jest-axe": "^6.0.0",
     "typescript-eslint": "^8.11.0",
+    "vite-plugin-dts": "^4.5.4",
     "webpack": "^5.94.0"
   },
   "publishConfig": {
@@ -180,7 +177,7 @@
     ]
   },
   "engines": {
-    "node": ">=18.12.1"
+    "node": ">=20.0.0"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.9.1"
 }

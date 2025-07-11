@@ -9,10 +9,10 @@ import { Image } from '../Image';
 import { UnstyledLink } from '../Link';
 import { Text } from '../Text';
 import {
+  AriaTableProps,
+  AriaTableVariants,
   Caption,
   Table,
-  TableProps,
-  TableVariants,
   Tbody,
   Td,
   Tfoot,
@@ -21,8 +21,8 @@ import {
   Tr,
 } from './AriaTable';
 
-const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
-const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
+const BaseTable = (props: AriaTableProps): JSX.Element => <Table {...props} />;
+const TableForStory = modifyVariantsForStory<AriaTableVariants, AriaTableProps>(BaseTable);
 
 const Component: Meta<typeof TableForStory> = {
   title: 'Components/AriaTable',
