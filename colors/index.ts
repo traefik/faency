@@ -1,10 +1,3 @@
-import * as elevation from './elevation';
-import * as deepBlue from './deepBlue';
-import * as grayBlue from './grayBlue';
-import * as neon from './neon';
-import * as orange from './orange';
-import * as red from './red';
-
 import {
   blackA,
   blue,
@@ -30,7 +23,14 @@ import {
   whiteA,
 } from '@radix-ui/colors';
 
-const customColors = {
+import * as deepBlue from './deepBlue';
+import * as elevation from './elevation';
+import * as grayBlue from './grayBlue';
+import * as neon from './neon';
+import * as orange from './orange';
+import * as red from './red';
+
+export const customColors = {
   ...elevation,
   ...deepBlue,
   ...grayBlue,
@@ -46,7 +46,7 @@ export type ColorMap = {
 export const lightColors: ColorMap = Object.entries(customColors)
   .filter(([colorName]) => !colorName.includes('Dark'))
   .reduce(
-    (acc, [_, colors]) => ({
+    (acc, [, colors]) => ({
       ...acc,
       ...colors,
     }),
@@ -64,13 +64,13 @@ export const lightColors: ColorMap = Object.entries(customColors)
       ...purpleA,
       ...whiteA,
       ...blackA,
-    }
+    },
   );
 
 export const darkColors: ColorMap = Object.entries(customColors)
   .filter(([colorName]) => colorName.includes('Dark'))
   .reduce(
-    (acc, [_, colors]) => ({
+    (acc, [, colors]) => ({
       ...acc,
       ...colors,
     }),
@@ -88,14 +88,12 @@ export const darkColors: ColorMap = Object.entries(customColors)
       ...purpleDarkA,
       ...whiteA,
       ...blackA,
-    }
+    },
   );
 
-export * as elevation from './elevation';
 export * as deepBlue from './deepBlue';
+export * as elevation from './elevation';
 export * as grayBlue from './grayBlue';
 export * as neon from './neon';
 export * as orange from './orange';
 export * as red from './red';
-
-export default customColors;
