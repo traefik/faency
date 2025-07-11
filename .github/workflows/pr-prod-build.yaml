@@ -1,0 +1,30 @@
+name: Production build test
+
+on:
+  pull_request:
+
+jobs:
+  faency:
+    name: Production build test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: enable corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install production dependencies
+        run: yarn workspaces focus --all --production
+
+      - name: Patch
+        run: yarn patch-package
+
+      - name: Build
+        run: yarn build
