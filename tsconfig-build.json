@@ -22,7 +22,6 @@
     "paths": {
       "@emotion/core": ["./types/index.d.ts"],
       "@storybook/theming": ["./types/index.d.ts"],
-      "react": ["./node_modules/@types/react"]
     }
   },
   "exclude": [
