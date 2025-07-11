@@ -60,6 +60,7 @@ export { Grid } from './components/Grid';
 export { H1, H2, H3, H4, H5, H6 } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Image } from './components/Image';
+export type { InputHandle } from './components/Input';
 export { Input } from './components/Input';
 export { Label } from './components/Label';
 export { Link } from './components/Link';
