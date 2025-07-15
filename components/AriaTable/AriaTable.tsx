@@ -209,10 +209,12 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
 const StyledTh = styled('span', TableTh, {
   display: 'table-cell',
 });
+
 export interface ThProps extends ComponentProps<typeof StyledTh>, VariantProps<typeof StyledTh> {}
-export const Th = forwardRef<ElementRef<typeof StyledTh>, ThProps>((props, ref) => (
-  <StyledTh ref={ref} role="columnheader" {...props} />
-));
+
+export const Th = forwardRef<ElementRef<typeof StyledTh>, ComponentProps<typeof StyledTh>>(
+  (props, ref) => <StyledTh ref={ref} role="columnheader" {...props} />,
+);
 
 const StyledTd = styled('span', TableTd, {
   display: 'table-cell',

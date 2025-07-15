@@ -12,6 +12,7 @@ export default defineConfig({
     dts({
       tsconfigPath: 'tsconfig-build.json',
       outDir: 'dist',
+      rollupTypes: true,
       insertTypesEntry: true,
       cleanVueFileName: true,
       exclude: [
