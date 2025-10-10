@@ -117,28 +117,9 @@ const stitches = createStitches({
       11: '32px',
       12: '38px',
     },
-    fontWeights: {
-      light: 300,
-      regular: 400,
-      medium: 500,
-      semiBold: 600,
-      bold: 700,
-    },
-    radii: {
-      1: '4px',
-      2: '6px',
-      3: '8px',
-      4: '12px',
-      round: '50%',
-      pill: '9999px',
-    },
-    zIndices: {
-      1: '100',
-      2: '200',
-      3: '300',
-      4: '400',
-      max: '999',
-    },
+    fontWeights: { light: 300, regular: 400, medium: 500, semiBold: 600, bold: 700 },
+    radii: { 1: '4px', 2: '6px', 3: '8px', 4: '12px', round: '50%', pill: '9999px' },
+    zIndices: { 1: '100', 2: '200', 3: '300', 4: '400', max: '999' },
   },
   media: {
     bp1: '(min-width: 520px) and (max-width: 899px)',
@@ -151,21 +132,11 @@ const stitches = createStitches({
     light: '(prefers-color-scheme: light)',
   },
   utils: {
-    p: (value: Stitches.PropertyValue<'padding'>) => ({
-      padding: value,
-    }),
-    pt: (value: Stitches.PropertyValue<'paddingTop'>) => ({
-      paddingTop: value,
-    }),
-    pr: (value: Stitches.PropertyValue<'paddingRight'>) => ({
-      paddingRight: value,
-    }),
-    pb: (value: Stitches.PropertyValue<'paddingBottom'>) => ({
-      paddingBottom: value,
-    }),
-    pl: (value: Stitches.PropertyValue<'paddingLeft'>) => ({
-      paddingLeft: value,
-    }),
+    p: (value: Stitches.PropertyValue<'padding'>) => ({ padding: value }),
+    pt: (value: Stitches.PropertyValue<'paddingTop'>) => ({ paddingTop: value }),
+    pr: (value: Stitches.PropertyValue<'paddingRight'>) => ({ paddingRight: value }),
+    pb: (value: Stitches.PropertyValue<'paddingBottom'>) => ({ paddingBottom: value }),
+    pl: (value: Stitches.PropertyValue<'paddingLeft'>) => ({ paddingLeft: value }),
     px: (value: Stitches.PropertyValue<'paddingLeft'>) => ({
       paddingLeft: value,
       paddingRight: value,
@@ -175,29 +146,16 @@ const stitches = createStitches({
       paddingBottom: value,
     }),
 
-    m: (value: Stitches.PropertyValue<'margin'>) => ({
-      margin: value,
-    }),
-    mt: (value: Stitches.PropertyValue<'marginTop'>) => ({
-      marginTop: value,
-    }),
-    mr: (value: Stitches.PropertyValue<'marginRight'>) => ({
-      marginRight: value,
-    }),
-    mb: (value: Stitches.PropertyValue<'marginBottom'>) => ({
-      marginBottom: value,
-    }),
-    ml: (value: Stitches.PropertyValue<'marginLeft'>) => ({
-      marginLeft: value,
-    }),
+    m: (value: Stitches.PropertyValue<'margin'>) => ({ margin: value }),
+    mt: (value: Stitches.PropertyValue<'marginTop'>) => ({ marginTop: value }),
+    mr: (value: Stitches.PropertyValue<'marginRight'>) => ({ marginRight: value }),
+    mb: (value: Stitches.PropertyValue<'marginBottom'>) => ({ marginBottom: value }),
+    ml: (value: Stitches.PropertyValue<'marginLeft'>) => ({ marginLeft: value }),
     mx: (value: Stitches.PropertyValue<'marginLeft'>) => ({
       marginLeft: value,
       marginRight: value,
     }),
-    my: (value: Stitches.PropertyValue<'marginTop'>) => ({
-      marginTop: value,
-      marginBottom: value,
-    }),
+    my: (value: Stitches.PropertyValue<'marginTop'>) => ({ marginTop: value, marginBottom: value }),
 
     ta: (value: Stitches.PropertyValue<'textAlign'>) => ({ textAlign: value }),
 
@@ -214,9 +172,7 @@ const stitches = createStitches({
 
     bc: (value: Stitches.PropertyValue<'backgroundColor'>) => ({ backgroundColor: value }),
 
-    br: (value: Stitches.PropertyValue<'borderRadius'>) => ({
-      borderRadius: value,
-    }),
+    br: (value: Stitches.PropertyValue<'borderRadius'>) => ({ borderRadius: value }),
     btrr: (value: Stitches.PropertyValue<'borderTopRightRadius'>) => ({
       borderTopRightRadius: value,
     }),
@@ -250,10 +206,7 @@ const stitches = createStitches({
       userSelect: value,
     }),
 
-    size: (value: Stitches.PropertyValue<'width'>) => ({
-      width: value,
-      height: value,
-    }),
+    size: (value: Stitches.PropertyValue<'width'>) => ({ width: value, height: value }),
 
     appearance: (value: Stitches.PropertyValue<'appearance'>) => ({
       WebkitAppearance: value,

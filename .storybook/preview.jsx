@@ -7,6 +7,7 @@ import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 import { globalCss } from '../';
 import { FaencyProvider } from '../components/FaencyProvider';
 import { darkTheme, lightTheme } from '../stitches.config';
+import { VanillaExtractThemeProvider } from '../styles/themeContext';
 
 const channel = addons.getChannel();
 
@@ -49,16 +50,25 @@ const globalStyle = globalCss({
 
 export const decorators = [
   (renderStory) => {
+    const [isDark, setDark] = React.useState(false);
+
     React.useEffect(() => {
       darkTheme('neon').toString();
       lightTheme('neon').toString();
     }, []);
 
+    React.useEffect(() => {
+      channel.on(DARK_MODE_EVENT_NAME, setDark);
+      return () => channel.removeListener(DARK_MODE_EVENT_NAME, setDark);
+    }, []);
+
     return (
-      <FaencyProvider>
-        {globalStyle()}
-        {renderStory()}
-      </FaencyProvider>
+      <VanillaExtractThemeProvider forcedTheme={isDark ? 'dark' : 'light'}>
+        <FaencyProvider>
+          {globalStyle()}
+          {renderStory()}
+        </FaencyProvider>
+      </VanillaExtractThemeProvider>
     );
   },
 ];
