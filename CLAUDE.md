@@ -67,6 +67,7 @@ Components follow a consistent pattern:
 ### Code Style
 
 - **No Unnecessary Comments**: Do not add obvious or redundant comments. Code should be self-explanatory through clear naming and structure. Only add comments when explaining complex logic, non-obvious decisions, or documenting public APIs.
+- **No Unnecessary Emojis**: OK for console warnings/errors, but avoid in code comments or commit messages.
 
 ### Adding New Components
 

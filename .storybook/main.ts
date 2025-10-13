@@ -1,3 +1,4 @@
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
@@ -29,6 +30,13 @@ const config: StorybookConfig = {
 
   typescript: {
     reactDocgen: 'react-docgen-typescript',
+  },
+
+  async viteFinal(config) {
+    // Add Vanilla Extract plugin to Storybook's Vite config
+    config.plugins = config.plugins || [];
+    config.plugins.push(vanillaExtractPlugin());
+    return config;
   },
 };
 

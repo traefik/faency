@@ -37,10 +37,7 @@ export interface CSSProps {
   };
 }
 
-export function processCSSProp(
-  css: CSSProps['css'] = {},
-  colors?: Record<string, string>,
-): {
+export function processCSSProp(css: CSSProps['css'] = {}): {
   style: React.CSSProperties;
   vars: Record<string, string>;
 } {
@@ -207,15 +204,13 @@ export function processCSSProp(
         break;
 
       case 'bc':
-        // Handle Stitches color tokens like '$deepBlue6'
+        // Handle Stitches color tokens like '$deepBlue6' or '$primary'
         if (typeof value === 'string' && value.startsWith('$')) {
           const colorToken = value.slice(1); // Remove '$' prefix
 
-          if (colors && colorToken in colors) {
-            style.backgroundColor = colors[colorToken];
-          } else {
-            style.backgroundColor = `var(--${colorToken})`;
-          }
+          // Always use CSS variables for theming - this matches Stitches behavior
+          // The actual color values are set by the theme classes
+          style.backgroundColor = `var(--colors-${colorToken})`;
         } else {
           style.backgroundColor = value;
         }
@@ -230,7 +225,13 @@ export function processCSSProp(
         }
         break;
       case 'c':
-        style.color = value;
+        // Handle color tokens - use CSS variables
+        if (typeof value === 'string' && value.startsWith('$')) {
+          const colorToken = value.slice(1);
+          style.color = `var(--colors-${colorToken})`;
+        } else {
+          style.color = value;
+        }
         break;
 
       case 'fontSize':

@@ -83,30 +83,7 @@ export const SimpleComparison: StoryFn = () => (
   </div>
 );
 
-export const ThemeComparison: StoryFn = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-    <div>
-      <h3>Stitches (Storybook theme)</h3>
-      <Box css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }}>
-        <Text as="p" size="4">
-          Stitches - follows Storybook theme toggle
-        </Text>
-      </Box>
-    </div>
-
-    <div>
-      <h3>Vanilla-Extract (Storybook theme)</h3>
-      <BoxVanilla css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }}>
-        <Text as="p" size="4">
-          Vanilla Extract - follows Storybook theme toggle
-        </Text>
-      </BoxVanilla>
-    </div>
-  </div>
-);
-
 VanillaExtractVersion.storyName = 'Stitches vs Vanilla-Extract Comparison';
 SimpleComparison.storyName = 'Simple Comparison';
-ThemeComparison.storyName = 'Theme Comparison';
 
 export default Component;
