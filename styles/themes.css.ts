@@ -1,6 +1,7 @@
 import { createTheme } from '@vanilla-extract/css';
 
 import { darkColors, lightColors } from '../colors';
+import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
 import { tokens } from './tokens.css';
 
 // Type for primary colors
@@ -180,6 +181,7 @@ const lightSemanticColors = {
   destructive: '#dc2626',
   destructiveForeground: '#ffffff',
   ring: '#3b82f6',
+  ...badgeLightTheme,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -270,6 +272,7 @@ const darkSemanticColors = {
   destructive: '#dc2626',
   destructiveForeground: '#ffffff',
   ring: '#60a5fa',
+  ...badgeDarkTheme,
 };
 
 export const darkThemeBlue = createTheme(tokens, {

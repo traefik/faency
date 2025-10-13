@@ -17,7 +17,8 @@ export {
   Tr as AriaTr,
 } from './components/AriaTable';
 export { Avatar } from './components/Avatar';
-export { Badge } from './components/Badge';
+export type { BadgeVanillaProps } from './components/Badge';
+export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export { Blockquote } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';

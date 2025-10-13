@@ -27,7 +27,7 @@ export const Basic: StoryFn<typeof BoxForStory> = (args) => (
   </Box>
 );
 
-export const VanillaExtractVersion: StoryFn = () => (
+export const Comparison: StoryFn = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
     <div>
       <h3>Original Stitches Version</h3>
@@ -61,29 +61,6 @@ export const VanillaExtractVersion: StoryFn = () => (
   </div>
 );
 
-export const SimpleComparison: StoryFn = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-    <div>
-      <h3>Stitches (Reference)</h3>
-      <Box css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }}>
-        <Text as="p" size="4">
-          Stitches version
-        </Text>
-      </Box>
-    </div>
-
-    <div>
-      <h3>Vanilla-Extract (Should Match)</h3>
-      <BoxVanilla css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }}>
-        <Text as="p" size="4">
-          Vanilla Extract version
-        </Text>
-      </BoxVanilla>
-    </div>
-  </div>
-);
-
-VanillaExtractVersion.storyName = 'Stitches vs Vanilla-Extract Comparison';
-SimpleComparison.storyName = 'Simple Comparison';
+Comparison.storyName = 'Comparison';
 
 export default Component;

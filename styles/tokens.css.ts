@@ -87,6 +87,10 @@ export const tokens = createThemeContract({
     '12dp': null,
     '16dp': null,
     '24dp': null,
+
+    // Component-specific tokens - Badge
+    badgeInteractiveBackgroundHover: null,
+    badgeInteractiveBackgroundActive: null,
   },
   fonts: {
     rubik: null,
