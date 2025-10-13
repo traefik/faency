@@ -53,7 +53,62 @@ export function VanillaExtractThemeProvider({
 
   const resolvedTheme: 'light' | 'dark' = forcedTheme || (mode === 'system' ? systemTheme : mode);
 
-  const colors = resolvedTheme === 'dark' ? darkColors : lightColors;
+  const baseColors = resolvedTheme === 'dark' ? darkColors : lightColors;
+
+  // Add semantic colors based on the current theme and primary color
+  const semanticColors =
+    resolvedTheme === 'dark'
+      ? {
+          primary: darkColors[`${primaryColor}9`],
+          contentBg: darkColors['00dp'],
+          hiContrast: 'white',
+          loContrast: darkColors.deepBlue2,
+          focusOutline: 'hsl(216, 100%, 64%)',
+          divider: 'hsl(209, 29%, 19%)',
+          background: '#0a0a0a',
+          foreground: '#ffffff',
+          muted: '#1a1a1a',
+          mutedForeground: '#b4b4b4',
+          card: '#1a1a1a',
+          cardForeground: '#ffffff',
+          popover: '#1a1a1a',
+          popoverForeground: '#ffffff',
+          border: '#3a3a3a',
+          input: '#3a3a3a',
+          accent: '#3b82f6',
+          accentForeground: '#ffffff',
+          destructive: '#dc2626',
+          destructiveForeground: '#ffffff',
+          ring: '#60a5fa',
+        }
+      : {
+          primary: lightColors[`${primaryColor}9`],
+          contentBg: lightColors['00dp'],
+          hiContrast: lightColors.deepBlue11,
+          loContrast: 'white',
+          focusOutline: 'hsl(216, 100%, 64%)',
+          divider: 'hsl(207, 10%, 82%)',
+          background: '#fcfcfc',
+          foreground: '#1a1a1a',
+          muted: '#f4f4f4',
+          mutedForeground: '#646464',
+          card: '#ffffff',
+          cardForeground: '#1a1a1a',
+          popover: '#ffffff',
+          popoverForeground: '#1a1a1a',
+          border: '#e3e3e3',
+          input: '#e3e3e3',
+          accent: '#60a5fa',
+          accentForeground: '#ffffff',
+          destructive: '#dc2626',
+          destructiveForeground: '#ffffff',
+          ring: '#3b82f6',
+        };
+
+  const colors = {
+    ...baseColors,
+    ...semanticColors,
+  };
 
   useEffect(() => {
     const themeClass = themes[resolvedTheme][primaryColor];

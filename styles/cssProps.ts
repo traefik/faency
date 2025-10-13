@@ -37,7 +37,10 @@ export interface CSSProps {
   };
 }
 
-export function processCSSProp(css: CSSProps['css'] = {}): {
+export function processCSSProp(
+  css: CSSProps['css'] = {},
+  colors?: Record<string, any>,
+): {
   style: React.CSSProperties;
   vars: Record<string, string>;
 } {
@@ -204,13 +207,17 @@ export function processCSSProp(css: CSSProps['css'] = {}): {
         break;
 
       case 'bc':
-        // Handle Stitches color tokens like '$deepBlue6' or '$primary'
+        // Handle Stitches color tokens like '$deepBlue6' or '$primary' or '$badgeInteractiveBackgroundHover'
         if (typeof value === 'string' && value.startsWith('$')) {
           const colorToken = value.slice(1); // Remove '$' prefix
 
-          // Always use CSS variables for theming - this matches Stitches behavior
-          // The actual color values are set by the theme classes
-          style.backgroundColor = `var(--colors-${colorToken})`;
+          // Look up the color value from the colors object
+          if (colors && colorToken in colors) {
+            style.backgroundColor = colors[colorToken];
+          } else {
+            // Fallback: pass through the value as-is (for literal colors)
+            style.backgroundColor = value;
+          }
         } else {
           style.backgroundColor = value;
         }
@@ -225,10 +232,17 @@ export function processCSSProp(css: CSSProps['css'] = {}): {
         }
         break;
       case 'c':
-        // Handle color tokens - use CSS variables
+        // Handle color tokens like '$deepBlue6' or '$badgeInteractiveBackgroundHover'
         if (typeof value === 'string' && value.startsWith('$')) {
           const colorToken = value.slice(1);
-          style.color = `var(--colors-${colorToken})`;
+
+          // Look up the color value from the colors object
+          if (colors && colorToken in colors) {
+            style.color = colors[colorToken];
+          } else {
+            // Fallback: pass through the value as-is
+            style.color = value;
+          }
         } else {
           style.color = value;
         }
