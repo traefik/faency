@@ -49,7 +49,6 @@ const globalStyle = globalCss({
   },
 });
 
-// Vanilla Extract Provider Wrapper
 const VanillaProviderWrapper = ({ children, isDark, primaryColor }) => {
   const [Provider, setProvider] = React.useState(null);
   const [loading, setLoading] = React.useState(true);

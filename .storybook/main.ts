@@ -1,5 +1,5 @@
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import type { StorybookConfig } from '@storybook/react-vite';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 const config: StorybookConfig = {
   stories: [
@@ -33,7 +33,6 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config) {
-    // Add Vanilla Extract plugin to Storybook's Vite config
     config.plugins = config.plugins || [];
     config.plugins.push(vanillaExtractPlugin());
     return config;

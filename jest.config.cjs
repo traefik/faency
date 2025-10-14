@@ -8,4 +8,7 @@ module.exports = {
     '\\.css\\.ts$': '<rootDir>/jest.cssTransform.cjs',
     '\\.(js|jsx|tsx?)$': 'babel-jest',
   },
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.css$': '$1.css.ts',
+  },
 };
