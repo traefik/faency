@@ -3,8 +3,6 @@ import { recipe } from '@vanilla-extract/recipes';
 
 import { tokens } from '../../styles/tokens.css';
 
-export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
-
 const baseBadge = style({
   alignItems: 'center',
   appearance: 'none',

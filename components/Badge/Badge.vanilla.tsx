@@ -5,9 +5,9 @@ import React, { useMemo } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
-import { badgeRecipe, COLORS, interactiveBadgeRecipe } from './Badge.vanilla.css';
+import { badgeRecipe, interactiveBadgeRecipe } from './Badge.vanilla.css';
 
-export { COLORS };
+export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 
 type BadgeRecipeVariants = RecipeVariants<typeof badgeRecipe>;
 

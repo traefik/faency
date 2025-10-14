@@ -75,7 +75,7 @@ const VanillaProviderWrapper = ({ children, isDark, primaryColor }) => {
       Provider,
       {
         forcedTheme: isDark ? 'dark' : 'light',
-        defaultPrimaryColor: primaryColor,
+        primaryColor,
       },
       children,
     );

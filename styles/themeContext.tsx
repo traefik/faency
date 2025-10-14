@@ -9,7 +9,7 @@ export type { PrimaryColor };
 interface ThemeContextValue {
   mode: ThemeMode;
   resolvedTheme: 'light' | 'dark';
-  primaryColor: PrimaryColor;
+  primColor: PrimaryColor;
   colors: typeof lightColors | typeof darkColors;
   setMode: (mode: ThemeMode) => void;
   setPrimaryColor: (color: PrimaryColor) => void;
@@ -19,25 +19,24 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 interface VanillaExtractThemeProviderProps {
   children: React.ReactNode;
-  defaultMode?: ThemeMode;
-  defaultPrimaryColor?: PrimaryColor;
+  defaultTheme?: ThemeMode;
+  primaryColor?: PrimaryColor;
   forcedTheme?: 'light' | 'dark';
 }
 
 export function VanillaExtractThemeProvider({
   children,
-  defaultMode = 'system',
-  defaultPrimaryColor = 'blue',
+  defaultTheme = 'system',
+  primaryColor = 'blue',
   forcedTheme,
 }: VanillaExtractThemeProviderProps) {
-  const [mode, setMode] = useState<ThemeMode>(defaultMode);
-  const [primaryColor, setPrimaryColor] = useState<PrimaryColor>(defaultPrimaryColor);
+  const [mode, setMode] = useState<ThemeMode>(defaultTheme);
+  const [primColor, setPrimaryColor] = useState<PrimaryColor>(primaryColor);
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light');
 
-  // Update primaryColor when defaultPrimaryColor prop changes
   useEffect(() => {
-    setPrimaryColor(defaultPrimaryColor);
-  }, [defaultPrimaryColor]);
+    setPrimaryColor(primaryColor);
+  }, [primaryColor]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -59,7 +58,7 @@ export function VanillaExtractThemeProvider({
   const semanticColors =
     resolvedTheme === 'dark'
       ? {
-          primary: darkColors[`${primaryColor}9`],
+          primary: darkColors[`${primColor}9`],
           contentBg: darkColors['00dp'],
           hiContrast: 'white',
           loContrast: darkColors.deepBlue2,
@@ -82,7 +81,7 @@ export function VanillaExtractThemeProvider({
           ring: '#60a5fa',
         }
       : {
-          primary: lightColors[`${primaryColor}9`],
+          primary: lightColors[`${primColor}9`],
           contentBg: lightColors['00dp'],
           hiContrast: lightColors.deepBlue11,
           loContrast: 'white',
@@ -111,7 +110,7 @@ export function VanillaExtractThemeProvider({
   };
 
   useEffect(() => {
-    const themeClass = themes[resolvedTheme][primaryColor];
+    const themeClass = themes[resolvedTheme][primColor];
 
     // Remove all theme classes
     Object.values(themes.light).forEach((cls) => document.body.classList.remove(cls));
@@ -123,12 +122,12 @@ export function VanillaExtractThemeProvider({
     return () => {
       document.body.classList.remove(themeClass);
     };
-  }, [resolvedTheme, primaryColor]);
+  }, [resolvedTheme, primColor]);
 
   const contextValue: ThemeContextValue = {
     mode,
     resolvedTheme,
-    primaryColor,
+    primColor,
     colors,
     setMode,
     setPrimaryColor,

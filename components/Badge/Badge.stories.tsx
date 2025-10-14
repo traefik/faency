@@ -5,8 +5,8 @@ import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Flex } from '../Flex';
 import { UnstyledLink } from '../Link';
-import { Badge, COLORS } from './Badge';
-import { BadgeVanilla } from './Badge.vanilla';
+import { Badge } from './Badge';
+import { BadgeVanilla, COLORS } from './Badge.vanilla';
 
 type BadgeVariants = VariantProps<typeof Badge>;
 type BadgeProps = BadgeVariants & NonNullable<unknown>;
