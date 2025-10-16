@@ -2,8 +2,8 @@ import { Slot } from '@radix-ui/react-slot';
 import React, { ComponentProps, useMemo } from 'react';
 
 import { styled, VariantProps } from '../../stitches.config';
+import { COLORS } from './Badge.vanilla';
 
-export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 type COLOR_VALUES = (typeof COLORS)[number];
 
 const getColorBadgeStyles = (color: COLOR_VALUES) => ({

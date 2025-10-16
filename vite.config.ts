@@ -1,3 +1,4 @@
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
 import { createRequire } from 'module';
 import { defineConfig } from 'vite';
@@ -9,6 +10,7 @@ const pkg = require('./package.json');
 export default defineConfig({
   plugins: [
     react(),
+    vanillaExtractPlugin(),
     dts({
       tsconfigPath: 'tsconfig-build.json',
       outDir: 'dist',
@@ -38,10 +40,7 @@ export default defineConfig({
         ...Object.keys(pkg.peerDependencies || {}),
       ],
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
+        globals: { react: 'React', 'react-dom': 'ReactDOM' },
         preserveModules: true,
         preserveModulesRoot: '.',
       },

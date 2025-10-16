@@ -20,7 +20,9 @@ npm install @traefiklabs/faency@next
 yarn add @traefiklabs/faency@next
 ```
 
-Then you need to wire up the FaencyProvider which will hold the context with the Theme configuration and everything global that the components will need to work well.
+#### Using Stitches Components (Current)
+
+Wire up the FaencyProvider which will hold the context with the Theme configuration:
 
 > The provider accepts one parameter besides the `children`, which is the `primaryColor`, that will be used to build the colors used on the Theme. This color can be one of the colors exported by the `Stitches` config, just by adding `$` as a prefix, or can be any string that represents a CSS color.
 
@@ -44,9 +46,36 @@ const Container = styled(Flex, {
 const MyComponent = () => <Container>{children}</Container>;
 ```
 
+#### Using Vanilla Extract Components (New - Recommended)
+
+For better performance with static CSS, use the new Vanilla Extract components:
+
+1. Import the CSS file in your app's entry point:
+
+```jsx
+import '@traefiklabs/faency/dist/style.css';
+```
+
+2. Wrap your app with the VanillaExtractThemeProvider:
+
+```jsx
+import { VanillaExtractThemeProvider } from '@traefiklabs/faency';
+import { BoxVanilla, BadgeVanilla } from '@traefiklabs/faency';
+
+const App = () => (
+  <VanillaExtractThemeProvider defaultTheme="light" primaryColor="blue">
+    <BoxVanilla css={{ p: '$4' }}>
+      <BadgeVanilla variant="blue">Hello Faency!</BadgeVanilla>
+    </BoxVanilla>
+  </VanillaExtractThemeProvider>
+);
+```
+
+> **Note**: Vanilla Extract components use static CSS generated at build time, providing better performance than runtime CSS-in-JS. Components with the `Vanilla` suffix (e.g., `BadgeVanilla`, `BoxVanilla`) require the CSS import above.
+
 ## How to contribute
 
-- Make sure you have Node 12+, or if you prefer, you can work in a Docker container:
+- Make sure you have Node 18+, or if you prefer, you can work in a Docker container:
 
 ```sh
 docker run -it -v $(pwd):/usr/local/src/ -w /usr/local/src/ -p 3000:3000 node:latest bash

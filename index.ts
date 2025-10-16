@@ -17,9 +17,10 @@ export {
   Tr as AriaTr,
 } from './components/AriaTable';
 export { Avatar } from './components/Avatar';
-export { Badge } from './components/Badge';
+export type { BadgeVanillaProps } from './components/Badge';
+export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export { Blockquote } from './components/Blockquote';
-export { Box } from './components/Box';
+export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';
 export { Button } from './components/Button';
 export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
@@ -129,3 +130,13 @@ export {
   lightTheme,
   styled,
 } from './stitches.config';
+
+// Vanilla Extract
+export type { CSSProps } from './styles/cssProps';
+export type { PrimaryColor, ThemeMode } from './styles/themeContext';
+export { useVanillaExtractTheme, VanillaExtractThemeProvider } from './styles/themeContext';
+export {
+  darkTheme as vanillaDarkTheme,
+  lightTheme as vanillaLightTheme,
+  themes as vanillaThemes,
+} from './styles/themes.css';

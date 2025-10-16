@@ -23,6 +23,7 @@ import {
   whiteA,
 } from '@radix-ui/colors';
 
+import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
 import * as deepBlue from './deepBlue';
 import * as elevation from './elevation';
 import * as grayBlue from './grayBlue';
@@ -64,6 +65,8 @@ export const lightColors: ColorMap = Object.entries(customColors)
       ...purpleA,
       ...whiteA,
       ...blackA,
+      // component-specific theme tokens
+      ...badgeLightTheme,
     },
   );
 
@@ -88,6 +91,8 @@ export const darkColors: ColorMap = Object.entries(customColors)
       ...purpleDarkA,
       ...whiteA,
       ...blackA,
+      // component-specific theme tokens
+      ...badgeDarkTheme,
     },
   );
 
