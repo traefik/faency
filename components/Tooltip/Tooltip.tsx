@@ -81,7 +81,12 @@ export const Tooltip = React.forwardRef<React.ElementRef<typeof Content>, Toolti
     { children, content, open, defaultOpen, onOpenChange, multiline, css, ...props },
     forwardedRef,
   ) => (
-    <TooltipPrimitive.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
+    <TooltipPrimitive.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={onOpenChange}
+      delayDuration={400}
+    >
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal>
         <TooltipContent css={css} multiline={multiline} ref={forwardedRef} {...props}>
