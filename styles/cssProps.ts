@@ -22,17 +22,31 @@ export interface CSSProps {
     fd?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
     fw?: 'wrap' | 'nowrap' | 'wrap-reverse';
     ai?: FlexAlign;
+    ac?: FlexAlign | 'space-between' | 'space-around' | 'space-evenly';
     jc?: FlexJustify;
     as?: 'auto' | FlexAlign;
     fg?: 0 | 1;
     fs?: 0 | 1;
+    fb?: SizeToken;
 
     bc?: string;
     br?: string;
+    btrr?: string;
+    bbrr?: string;
+    bblr?: string;
+    btlr?: string;
+    bs?: string;
     c?: string;
 
     width?: SizeToken;
     height?: SizeToken;
+    size?: SizeToken;
+
+    ox?: 'visible' | 'hidden' | 'scroll' | 'auto';
+    oy?: 'visible' | 'hidden' | 'scroll' | 'auto';
+
+    pe?: 'auto' | 'none' | 'all';
+    us?: 'none' | 'auto' | 'text' | 'contain' | 'all';
 
     fontSize?: string;
     fontWeight?: string;
@@ -198,6 +212,9 @@ export function processCSSProp(
       case 'ai':
         style.alignItems = value as React.CSSProperties['alignItems'];
         break;
+      case 'ac':
+        style.alignContent = value as React.CSSProperties['alignContent'];
+        break;
       case 'jc':
         style.justifyContent = value as React.CSSProperties['justifyContent'];
         break;
@@ -209,6 +226,15 @@ export function processCSSProp(
         break;
       case 'fs':
         style.flexShrink = value;
+        break;
+      case 'fb':
+        if (typeof value === 'string' && value.startsWith('$')) {
+          const tokenValue = value.slice(1);
+          const sizeValue = getSizeValue(tokenValue);
+          style.flexBasis = sizeValue;
+        } else {
+          style.flexBasis = value;
+        }
         break;
 
       case 'bc':
@@ -235,6 +261,45 @@ export function processCSSProp(
             style.borderRadius = radiiValue;
           }
         }
+        break;
+      case 'btrr':
+        if (typeof value === 'string') {
+          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
+          const radiiValue = getRadiiValue(tokenValue);
+          if (radiiValue !== '0px') {
+            style.borderTopRightRadius = radiiValue;
+          }
+        }
+        break;
+      case 'bbrr':
+        if (typeof value === 'string') {
+          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
+          const radiiValue = getRadiiValue(tokenValue);
+          if (radiiValue !== '0px') {
+            style.borderBottomRightRadius = radiiValue;
+          }
+        }
+        break;
+      case 'bblr':
+        if (typeof value === 'string') {
+          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
+          const radiiValue = getRadiiValue(tokenValue);
+          if (radiiValue !== '0px') {
+            style.borderBottomLeftRadius = radiiValue;
+          }
+        }
+        break;
+      case 'btlr':
+        if (typeof value === 'string') {
+          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
+          const radiiValue = getRadiiValue(tokenValue);
+          if (radiiValue !== '0px') {
+            style.borderTopLeftRadius = radiiValue;
+          }
+        }
+        break;
+      case 'bs':
+        style.boxShadow = value;
         break;
       case 'c':
         // Handle color tokens like '$deepBlue6' or '$badgeInteractiveBackgroundHover'
@@ -282,6 +347,32 @@ export function processCSSProp(
         } else {
           (style as any)[key] = value;
         }
+        break;
+
+      case 'size':
+        if (typeof value === 'string' && value.startsWith('$')) {
+          const tokenValue = value.slice(1);
+          const sizeValue = getSizeValue(tokenValue);
+          style.width = sizeValue;
+          style.height = sizeValue;
+        } else {
+          style.width = value;
+          style.height = value;
+        }
+        break;
+
+      case 'ox':
+        style.overflowX = value as React.CSSProperties['overflowX'];
+        break;
+      case 'oy':
+        style.overflowY = value as React.CSSProperties['overflowY'];
+        break;
+
+      case 'pe':
+        style.pointerEvents = value as React.CSSProperties['pointerEvents'];
+        break;
+      case 'us':
+        style.userSelect = value as React.CSSProperties['userSelect'];
         break;
 
       default:
