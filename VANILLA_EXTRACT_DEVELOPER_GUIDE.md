@@ -956,7 +956,88 @@ export const Button = ButtonVanillaComponent as ButtonComponent;
 <Button as="a" href="/link">Button as link</Button>
 ```
 
-### Pattern 4: Accessing Theme in Components
+### Pattern 4: Migrating from `asChild` to Polymorphic `as`
+
+**⚠️ IMPORTANT:** When migrating components that used `asChild` (Badge, Button, AriaTable), replace it with the polymorphic `as` pattern.
+
+**Before (Stitches with `asChild`):**
+
+```tsx
+import { Slot } from '@radix-ui/react-slot';
+
+interface BadgeProps {
+  asChild?: boolean;
+  variant?: string;
+}
+
+export const Badge = ({ asChild, ...props }: BadgeProps) => {
+  const Component = asChild ? Slot : 'span';
+  return <Component {...props} />;
+};
+
+// Usage:
+<Badge asChild variant="success">
+  <a href="/profile">Link Badge</a>
+</Badge>;
+```
+
+**After (Vanilla Extract with polymorphic `as`):**
+
+```tsx
+import { ElementType, forwardRef } from 'react';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
+
+interface BadgeOwnProps extends CSSProps {
+  variant?: string;
+}
+
+export type BadgeProps<C extends ElementType = 'span'> = PolymorphicComponentProps<
+  C,
+  BadgeOwnProps
+>;
+type BadgeComponent = PolymorphicComponent<'span', BadgeProps<ElementType>>;
+
+const BadgeImpl = forwardRef(
+  <C extends ElementType = 'span'>(
+    { as, variant, ...props }: BadgeProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'span';
+    return <Component ref={ref} {...props} />;
+  },
+);
+
+export const Badge = BadgeImpl as BadgeComponent;
+
+// Usage:
+<Badge as="a" href="/profile" variant="success">
+  Link Badge
+</Badge>;
+```
+
+**Key Migration Steps:**
+
+1. Remove `@radix-ui/react-slot` import and dependency
+2. Import polymorphic types: `PolymorphicComponent`, `PolymorphicComponentProps`, `PolymorphicRef`
+3. Replace `asChild?: boolean` with generic type parameter `<C extends ElementType>`
+4. Update props type to use `PolymorphicComponentProps<C, YourOwnProps>`
+5. Replace `asChild` destructuring with `as`
+6. Use `as || 'defaultElement'` instead of ternary with Slot
+7. Cast implementation to `PolymorphicComponent` type
+
+**Benefits:**
+
+- Better TypeScript inference (element-specific props are automatically typed)
+- More ergonomic API (no wrapper element needed)
+- Removes external dependency on `@radix-ui/react-slot`
+
+See [BREAKING_CHANGES.md](./BREAKING_CHANGES.md#polymorphic-components-aschild--as-prop) for complete details.
+
+### Pattern 5: Accessing Theme in Components
 
 Use the theme context hook when you need programmatic access to theme values:
 
@@ -970,7 +1051,7 @@ export const MyComponent = () => {
 };
 ```
 
-### Pattern 5: Conditional Styles
+### Pattern 6: Conditional Styles
 
 For theme-dependent conditional styles:
 
@@ -1004,7 +1085,7 @@ const { resolvedTheme } = useVanillaExtractTheme();
 <button className={themeButton[resolvedTheme]} />;
 ```
 
-### Pattern 5: Global Styles
+### Pattern 7: Global Styles
 
 For global styles or resets:
 
