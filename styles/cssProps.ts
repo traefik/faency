@@ -1,33 +1,38 @@
+import { FlexAlign, FlexJustify, SizeToken, SpacingToken } from './types';
+
 export interface CSSProps {
   css?: {
-    p?: string;
-    pt?: string;
-    pr?: string;
-    pb?: string;
-    pl?: string;
-    px?: string;
-    py?: string;
+    p?: SpacingToken;
+    pt?: SpacingToken;
+    pr?: SpacingToken;
+    pb?: SpacingToken;
+    pl?: SpacingToken;
+    px?: SpacingToken;
+    py?: SpacingToken;
 
-    m?: string;
-    mt?: string;
-    mr?: string;
-    mb?: string;
-    ml?: string;
-    mx?: string;
-    my?: string;
+    m?: SpacingToken;
+    mt?: SpacingToken;
+    mr?: SpacingToken;
+    mb?: SpacingToken;
+    ml?: SpacingToken;
+    mx?: SpacingToken;
+    my?: SpacingToken;
 
     ta?: 'left' | 'center' | 'right' | 'justify';
     fd?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
     fw?: 'wrap' | 'nowrap' | 'wrap-reverse';
-    ai?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
-    jc?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
-    as?: 'auto' | 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
+    ai?: FlexAlign;
+    jc?: FlexJustify;
+    as?: 'auto' | FlexAlign;
     fg?: 0 | 1;
     fs?: 0 | 1;
 
     bc?: string;
     br?: string;
     c?: string;
+
+    width?: SizeToken;
+    height?: SizeToken;
 
     fontSize?: string;
     fontWeight?: string;
@@ -268,6 +273,17 @@ export function processCSSProp(
         style.lineHeight = value;
         break;
 
+      case 'width':
+      case 'height':
+        if (typeof value === 'string' && value.startsWith('$')) {
+          const tokenValue = value.slice(1);
+          const sizeValue = getSizeValue(tokenValue);
+          style[key] = sizeValue;
+        } else {
+          (style as any)[key] = value;
+        }
+        break;
+
       default:
         (style as any)[key] = value;
         break;
@@ -290,6 +306,22 @@ function getSpaceValue(key: string): string {
     '9': '80px',
   };
   return spaceMap[key] || '0px';
+}
+
+function getSizeValue(key: string): string {
+  const sizeMap: Record<string, string> = {
+    '1': '4px',
+    '2': '8px',
+    '3': '16px',
+    '4': '20px',
+    '5': '24px',
+    '6': '32px',
+    '7': '40px',
+    '8': '48px',
+    '9': '64px',
+    '10': '80px',
+  };
+  return sizeMap[key] || key;
 }
 
 function getRadiiValue(key: string): string {
