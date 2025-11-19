@@ -2,7 +2,6 @@ import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-
 import { BadgeVanilla, COLORS } from './Badge.vanilla';
 
 describe('BadgeVanilla', () => {
