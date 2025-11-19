@@ -1,9 +1,13 @@
-import { Slot } from '@radix-ui/react-slot';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
-import React, { useMemo } from 'react';
+import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { badgeRecipe, interactiveBadgeRecipe } from './Badge.vanilla.css';
 
@@ -11,18 +15,35 @@ export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple
 
 type BadgeRecipeVariants = RecipeVariants<typeof badgeRecipe>;
 
-export type BadgeVanillaProps = Omit<React.HTMLAttributes<HTMLElement>, 'color'> &
-  BadgeRecipeVariants &
-  CSSProps & {
-    asChild?: boolean;
-    interactive?: boolean;
-  };
+interface BadgeOwnProps extends Omit<BadgeRecipeVariants, 'color'>, CSSProps {
+  interactive?: boolean;
+}
 
-export const BadgeVanilla = React.forwardRef<HTMLElement, BadgeVanillaProps>(
-  (
-    { interactive, asChild, className, css, style, size, variant, alphaBg, borderless, ...props },
-    ref,
+export type BadgeVanillaProps<C extends ElementType = 'span'> = PolymorphicComponentProps<
+  C,
+  BadgeOwnProps
+>;
+
+type BadgeVanillaComponent = PolymorphicComponent<'span', BadgeVanillaProps<ElementType>>;
+
+const BadgeVanillaComponentImpl = forwardRef(
+  <C extends ElementType = 'span'>(
+    {
+      as,
+      interactive,
+      className,
+      css,
+      style,
+      size,
+      variant,
+      alphaBg,
+      borderless,
+      ...props
+    }: BadgeVanillaProps<C>,
+    ref?: PolymorphicRef<C>,
   ) => {
+    const Component = as || (interactive ? 'button' : 'span');
+
     const { colors } = useVanillaExtractTheme();
 
     const { style: cssStyles, vars } = processCSSProp(css, colors);
@@ -36,16 +57,9 @@ export const BadgeVanilla = React.forwardRef<HTMLElement, BadgeVanillaProps>(
     const recipe = interactive ? interactiveBadgeRecipe : badgeRecipe;
     const recipeClass = recipe({ size, variant, alphaBg, borderless });
 
-    const Component = useMemo(() => {
-      if (interactive) {
-        return asChild ? Slot : 'button';
-      }
-      return asChild ? Slot : 'span';
-    }, [interactive, asChild]);
-
     return (
       <Component
-        ref={ref as React.Ref<any>}
+        ref={ref}
         className={`${recipeClass} ${className || ''}`.trim()}
         style={mergedStyles}
         {...props}
@@ -54,4 +68,6 @@ export const BadgeVanilla = React.forwardRef<HTMLElement, BadgeVanillaProps>(
   },
 );
 
-BadgeVanilla.displayName = 'BadgeVanilla';
+BadgeVanillaComponentImpl.displayName = 'BadgeVanilla';
+
+export const BadgeVanilla = BadgeVanillaComponentImpl as BadgeVanillaComponent;

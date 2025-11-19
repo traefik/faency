@@ -1,17 +1,25 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { forwardRef } from 'react';
+import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { box } from './Box.vanilla.css';
 
-interface BoxProps extends React.HTMLAttributes<HTMLDivElement>, CSSProps {
-  as?: keyof JSX.IntrinsicElements;
-}
+export type BoxProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
 
-export const BoxVanilla = forwardRef<HTMLDivElement, BoxProps>(
-  ({ as: Component = 'div', className, css, style, ...props }, ref) => {
-    const Element = Component as 'div';
+type BoxComponent = PolymorphicComponent<'div', BoxProps<ElementType>>;
+
+const BoxVanillaComponent = forwardRef(
+  <C extends ElementType = 'div'>(
+    { as, className, css, style, ...props }: BoxProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'div';
 
     const { colors } = useVanillaExtractTheme();
 
@@ -24,7 +32,7 @@ export const BoxVanilla = forwardRef<HTMLDivElement, BoxProps>(
     };
 
     return (
-      <Element
+      <Component
         ref={ref}
         className={`${box} ${className || ''}`.trim()}
         style={mergedStyles}
@@ -34,4 +42,6 @@ export const BoxVanilla = forwardRef<HTMLDivElement, BoxProps>(
   },
 );
 
-BoxVanilla.displayName = 'BoxVanilla';
+BoxVanillaComponent.displayName = 'BoxVanilla';
+
+export const BoxVanilla = BoxVanillaComponent as BoxComponent;

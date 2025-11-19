@@ -35,6 +35,7 @@ styles/
 ├── themes.css.ts          # Light/dark theme implementations
 ├── themeContext.tsx       # React context for theme switching
 ├── cssProps.ts            # CSS prop processor (Stitches-like API)
+├── polymorphic.ts         # Reusable polymorphic component types
 └── utils.css.ts           # Utility functions and recipes
 ```
 
@@ -44,7 +45,8 @@ styles/
 2. **Theme Implementations** (`themes.css.ts`): Provides actual values for light and dark themes
 3. **Theme Provider** (`themeContext.tsx`): React context that manages theme state and applies theme classes
 4. **CSS Props** (`cssProps.ts`): Provides Stitches-compatible API for backward compatibility
-5. **Build-Time Processing**: Vanilla Extract generates static CSS at build time (no runtime CSS-in-JS)
+5. **Polymorphic Types** (`polymorphic.ts`): Reusable TypeScript utilities for components with `as` prop
+6. **Build-Time Processing**: Vanilla Extract generates static CSS at build time (no runtime CSS-in-JS)
 
 ### Theming System
 
@@ -664,23 +666,31 @@ export const box = style({
 
 // Box.tsx
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { forwardRef } from 'react';
+import { ElementType, forwardRef } from 'react';
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { box } from './Box.css';
 
-interface BoxProps extends React.HTMLAttributes<HTMLDivElement>, CSSProps {
-  as?: keyof JSX.IntrinsicElements;
-}
+export type BoxProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
 
-export const Box = forwardRef<HTMLDivElement, BoxProps>(
-  ({ as: Component = 'div', className, css, style, ...props }, ref) => {
-    const Element = Component as 'div';
+type BoxComponent = PolymorphicComponent<'div', BoxProps<ElementType>>;
+
+const BoxVanillaComponent = forwardRef(
+  <C extends ElementType = 'div'>(
+    { as, className, css, style, ...props }: BoxProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'div';
     const { colors } = useVanillaExtractTheme();
     const { style: cssStyles, vars } = processCSSProp(css, colors);
 
     return (
-      <Element
+      <Component
         ref={ref}
         className={`${box} ${className || ''}`.trim()}
         style={{ ...cssStyles, ...style, ...assignInlineVars(vars) }}
@@ -690,7 +700,9 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(
   },
 );
 
-Box.displayName = 'Box';
+BoxVanillaComponent.displayName = 'Box';
+
+export const Box = BoxVanillaComponent as BoxComponent;
 
 // Usage (same as before!)
 <Box css={{ px: '$4', py: '$6', bc: '$deepBlue6' }}>Content</Box>;
@@ -874,7 +886,158 @@ Use the `css` prop for one-off overrides (maintains Stitches API):
 <BoxVanilla css={{ px: '$4', bc: '$blue6' }}>Vanilla Extract</BoxVanilla>
 ```
 
-### Pattern 3: Accessing Theme in Components
+### Pattern 3: Reusable Polymorphic Components
+
+For components that support the `as` prop, use the polymorphic utilities:
+
+```tsx
+// styles/polymorphic.ts - Reusable utilities (already provided)
+import { ComponentPropsWithRef, ElementType } from 'react';
+
+export type PolymorphicRef<C extends ElementType> = ComponentPropsWithRef<C>['ref'];
+
+export type PolymorphicComponentProps<
+  C extends ElementType,
+  Props = object,
+> = {
+  as?: C;
+} & Props &
+  Omit<ComponentPropsWithRef<C>, keyof Props | 'as'>;
+
+export type PolymorphicComponent<
+  C extends ElementType = 'div',
+  Props extends PolymorphicComponentProps<any, any> = PolymorphicComponentProps<C>,
+> = <E extends ElementType = C>(props: Props & { as?: E }) => React.ReactElement | null;
+
+// Simple component example - Box
+import { PolymorphicComponent, PolymorphicComponentProps, PolymorphicRef } from '../../styles/polymorphic';
+
+export type BoxProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
+type BoxComponent = PolymorphicComponent<'div', BoxProps<ElementType>>;
+
+const BoxVanillaComponent = forwardRef(
+  <C extends ElementType = 'div'>(
+    { as, className, css, style, ...props }: BoxProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'div';
+    // ... implementation
+    return <Component ref={ref} {...props} />;
+  },
+);
+
+export const Box = BoxVanillaComponent as BoxComponent;
+
+// Complex component example - Button with custom props
+interface ButtonOwnProps extends CSSProps {
+  variant?: 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+  loading?: boolean;
+}
+
+export type ButtonProps<C extends ElementType = 'button'> = PolymorphicComponentProps<C, ButtonOwnProps>;
+type ButtonComponent = PolymorphicComponent<'button', ButtonProps<ElementType>>;
+
+const ButtonVanillaComponent = forwardRef(
+  <C extends ElementType = 'button'>(
+    { as, variant, size, loading, ...props }: ButtonProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'button';
+    // ... implementation
+    return <Component ref={ref} {...props} />;
+  },
+);
+
+export const Button = ButtonVanillaComponent as ButtonComponent;
+
+// Usage:
+<Box as="section">Box as section</Box>
+<Button as="a" href="/link">Button as link</Button>
+```
+
+### Pattern 4: Migrating from `asChild` to Polymorphic `as`
+
+**⚠️ IMPORTANT:** When migrating components that used `asChild` (Badge, Button, AriaTable), replace it with the polymorphic `as` pattern.
+
+**Before (Stitches with `asChild`):**
+
+```tsx
+import { Slot } from '@radix-ui/react-slot';
+
+interface BadgeProps {
+  asChild?: boolean;
+  variant?: string;
+}
+
+export const Badge = ({ asChild, ...props }: BadgeProps) => {
+  const Component = asChild ? Slot : 'span';
+  return <Component {...props} />;
+};
+
+// Usage:
+<Badge asChild variant="success">
+  <a href="/profile">Link Badge</a>
+</Badge>;
+```
+
+**After (Vanilla Extract with polymorphic `as`):**
+
+```tsx
+import { ElementType, forwardRef } from 'react';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
+
+interface BadgeOwnProps extends CSSProps {
+  variant?: string;
+}
+
+export type BadgeProps<C extends ElementType = 'span'> = PolymorphicComponentProps<
+  C,
+  BadgeOwnProps
+>;
+type BadgeComponent = PolymorphicComponent<'span', BadgeProps<ElementType>>;
+
+const BadgeImpl = forwardRef(
+  <C extends ElementType = 'span'>(
+    { as, variant, ...props }: BadgeProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'span';
+    return <Component ref={ref} {...props} />;
+  },
+);
+
+export const Badge = BadgeImpl as BadgeComponent;
+
+// Usage:
+<Badge as="a" href="/profile" variant="success">
+  Link Badge
+</Badge>;
+```
+
+**Key Migration Steps:**
+
+1. Remove `@radix-ui/react-slot` import and dependency
+2. Import polymorphic types: `PolymorphicComponent`, `PolymorphicComponentProps`, `PolymorphicRef`
+3. Replace `asChild?: boolean` with generic type parameter `<C extends ElementType>`
+4. Update props type to use `PolymorphicComponentProps<C, YourOwnProps>`
+5. Replace `asChild` destructuring with `as`
+6. Use `as || 'defaultElement'` instead of ternary with Slot
+7. Cast implementation to `PolymorphicComponent` type
+
+**Benefits:**
+
+- Better TypeScript inference (element-specific props are automatically typed)
+- More ergonomic API (no wrapper element needed)
+- Removes external dependency on `@radix-ui/react-slot`
+
+See [BREAKING_CHANGES.md](./BREAKING_CHANGES.md#polymorphic-components-aschild--as-prop) for complete details.
+
+### Pattern 5: Accessing Theme in Components
 
 Use the theme context hook when you need programmatic access to theme values:
 
@@ -888,7 +1051,7 @@ export const MyComponent = () => {
 };
 ```
 
-### Pattern 4: Conditional Styles
+### Pattern 6: Conditional Styles
 
 For theme-dependent conditional styles:
 
@@ -922,7 +1085,7 @@ const { resolvedTheme } = useVanillaExtractTheme();
 <button className={themeButton[resolvedTheme]} />;
 ```
 
-### Pattern 5: Global Styles
+### Pattern 7: Global Styles
 
 For global styles or resets:
 

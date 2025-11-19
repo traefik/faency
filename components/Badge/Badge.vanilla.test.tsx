@@ -2,7 +2,6 @@ import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-import { UnstyledLink } from '../Link';
 import { BadgeVanilla, COLORS } from './Badge.vanilla';
 
 describe('BadgeVanilla', () => {
@@ -25,15 +24,24 @@ describe('BadgeVanilla', () => {
     expect(badge?.nodeName).toBe('BUTTON');
   });
 
-  it('should render as link with asChild and interactive', () => {
+  it('should render with custom element via as prop', () => {
+    const { container } = renderWithTheme(<BadgeVanilla as="section">Badge</BadgeVanilla>);
+    const badge = container.firstChild;
+
+    expect(badge?.nodeName).toBe('SECTION');
+    expect(badge).toHaveTextContent('Badge');
+  });
+
+  it('should render as link with as prop and interactive', () => {
     const { getByRole } = renderWithTheme(
-      <BadgeVanilla asChild interactive>
-        <UnstyledLink href="https://traefik.io">Link Badge</UnstyledLink>
+      <BadgeVanilla as="a" href="https://traefik.io" interactive>
+        Link Badge
       </BadgeVanilla>,
     );
 
     expect(getByRole('link')).toBeInTheDocument();
     expect(getByRole('link')).toHaveTextContent('Link Badge');
+    expect(getByRole('link')).toHaveAttribute('href', 'https://traefik.io');
   });
 
   it('should render with custom className', () => {
@@ -104,18 +112,18 @@ describe('BadgeVanilla', () => {
 
   it('should apply CSS prop styles', () => {
     const { container } = renderWithTheme(
-      <BadgeVanilla css={{ padding: '20px', margin: '10px' }}>Badge</BadgeVanilla>,
+      <BadgeVanilla css={{ padding: '$4', margin: '$2' }}>Badge</BadgeVanilla>,
     );
     const badge = container.firstChild as HTMLElement;
 
     expect(badge.style.padding).toBe('20px');
-    expect(badge.style.margin).toBe('10px');
+    expect(badge.style.margin).toBe('8px');
   });
 
   it('should merge style and css props correctly', () => {
     const { container } = renderWithTheme(
       <BadgeVanilla
-        css={{ padding: '20px', margin: '10px' }}
+        css={{ padding: '$4', margin: '$2' }}
         style={{ backgroundColor: 'blue', padding: '30px' }}
       >
         Badge
@@ -124,9 +132,8 @@ describe('BadgeVanilla', () => {
     const badge = container.firstChild as HTMLElement;
 
     expect(badge.style.backgroundColor).toBe('blue');
-    // style prop should override css prop
     expect(badge.style.padding).toBe('30px');
-    expect(badge.style.margin).toBe('10px');
+    expect(badge.style.margin).toBe('8px');
   });
 
   it('should forward ref correctly', () => {
