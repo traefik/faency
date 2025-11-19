@@ -56,332 +56,9 @@ export interface CSSProps {
   };
 }
 
-export function processCSSProp(
-  css: CSSProps['css'] = {},
-  colors?: Record<string, any>,
-): {
-  style: React.CSSProperties;
-  vars: Record<string, string>;
-} {
-  const style: React.CSSProperties = {};
-  const vars: Record<string, string> = {};
-
-  Object.entries(css).forEach(([key, value]) => {
-    switch (key) {
-      case 'p':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.padding = spaceValue;
-          }
-        }
-        break;
-      case 'pt':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.paddingTop = spaceValue;
-          }
-        }
-        break;
-      case 'pr':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.paddingRight = spaceValue;
-          }
-        }
-        break;
-      case 'pb':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.paddingBottom = spaceValue;
-          }
-        }
-        break;
-      case 'pl':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.paddingLeft = spaceValue;
-          }
-        }
-        break;
-      case 'px':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.paddingLeft = spaceValue;
-            style.paddingRight = spaceValue;
-          }
-        }
-        break;
-      case 'py':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.paddingTop = spaceValue;
-            style.paddingBottom = spaceValue;
-          }
-        }
-        break;
-
-      case 'm':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.margin = spaceValue;
-          }
-        }
-        break;
-      case 'mt':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.marginTop = spaceValue;
-          }
-        }
-        break;
-      case 'mr':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.marginRight = spaceValue;
-          }
-        }
-        break;
-      case 'mb':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.marginBottom = spaceValue;
-          }
-        }
-        break;
-      case 'ml':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.marginLeft = spaceValue;
-          }
-        }
-        break;
-      case 'mx':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.marginLeft = spaceValue;
-            style.marginRight = spaceValue;
-          }
-        }
-        break;
-      case 'my':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const spaceValue = getSpaceValue(tokenValue);
-          if (spaceValue !== '0px') {
-            style.marginTop = spaceValue;
-            style.marginBottom = spaceValue;
-          }
-        }
-        break;
-
-      case 'ta':
-        style.textAlign = value as React.CSSProperties['textAlign'];
-        break;
-      case 'fd':
-        style.flexDirection = value as React.CSSProperties['flexDirection'];
-        break;
-      case 'fw':
-        style.flexWrap = value as React.CSSProperties['flexWrap'];
-        break;
-      case 'ai':
-        style.alignItems = value as React.CSSProperties['alignItems'];
-        break;
-      case 'ac':
-        style.alignContent = value as React.CSSProperties['alignContent'];
-        break;
-      case 'jc':
-        style.justifyContent = value as React.CSSProperties['justifyContent'];
-        break;
-      case 'as':
-        style.alignSelf = value as React.CSSProperties['alignSelf'];
-        break;
-      case 'fg':
-        style.flexGrow = value;
-        break;
-      case 'fs':
-        style.flexShrink = value;
-        break;
-      case 'fb':
-        if (typeof value === 'string' && value.startsWith('$')) {
-          const tokenValue = value.slice(1);
-          const sizeValue = getSizeValue(tokenValue);
-          style.flexBasis = sizeValue;
-        } else {
-          style.flexBasis = value;
-        }
-        break;
-
-      case 'bc':
-        // Handle Stitches color tokens like '$deepBlue6' or '$primary' or '$badgeInteractiveBackgroundHover'
-        if (typeof value === 'string' && value.startsWith('$')) {
-          const colorToken = value.slice(1); // Remove '$' prefix
-
-          // Look up the color value from the colors object
-          if (colors && colorToken in colors) {
-            style.backgroundColor = colors[colorToken];
-          } else {
-            // Fallback: pass through the value as-is (for literal colors)
-            style.backgroundColor = value;
-          }
-        } else {
-          style.backgroundColor = value;
-        }
-        break;
-      case 'br':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const radiiValue = getRadiiValue(tokenValue);
-          if (radiiValue !== '0px') {
-            style.borderRadius = radiiValue;
-          }
-        }
-        break;
-      case 'btrr':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const radiiValue = getRadiiValue(tokenValue);
-          if (radiiValue !== '0px') {
-            style.borderTopRightRadius = radiiValue;
-          }
-        }
-        break;
-      case 'bbrr':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const radiiValue = getRadiiValue(tokenValue);
-          if (radiiValue !== '0px') {
-            style.borderBottomRightRadius = radiiValue;
-          }
-        }
-        break;
-      case 'bblr':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const radiiValue = getRadiiValue(tokenValue);
-          if (radiiValue !== '0px') {
-            style.borderBottomLeftRadius = radiiValue;
-          }
-        }
-        break;
-      case 'btlr':
-        if (typeof value === 'string') {
-          const tokenValue = value.startsWith('$') ? value.slice(1) : value;
-          const radiiValue = getRadiiValue(tokenValue);
-          if (radiiValue !== '0px') {
-            style.borderTopLeftRadius = radiiValue;
-          }
-        }
-        break;
-      case 'bs':
-        style.boxShadow = value;
-        break;
-      case 'c':
-        // Handle color tokens like '$deepBlue6' or '$badgeInteractiveBackgroundHover'
-        if (typeof value === 'string' && value.startsWith('$')) {
-          const colorToken = value.slice(1);
-
-          // Look up the color value from the colors object
-          if (colors && colorToken in colors) {
-            style.color = colors[colorToken];
-          } else {
-            // Fallback: pass through the value as-is
-            style.color = value;
-          }
-        } else {
-          style.color = value;
-        }
-        break;
-
-      case 'fontSize':
-        if (typeof value === 'string') {
-          const fontSizeValue = getFontSizeValue(value);
-          if (fontSizeValue !== '16px') {
-            style.fontSize = fontSizeValue;
-          }
-        }
-        break;
-      case 'fontWeight':
-        if (typeof value === 'string') {
-          const fontWeightValue = getFontWeightValue(value);
-          if (fontWeightValue !== '400') {
-            style.fontWeight = fontWeightValue;
-          }
-        }
-        break;
-      case 'lh':
-        style.lineHeight = value;
-        break;
-
-      case 'width':
-      case 'height':
-        if (typeof value === 'string' && value.startsWith('$')) {
-          const tokenValue = value.slice(1);
-          const sizeValue = getSizeValue(tokenValue);
-          style[key] = sizeValue;
-        } else {
-          (style as any)[key] = value;
-        }
-        break;
-
-      case 'size':
-        if (typeof value === 'string' && value.startsWith('$')) {
-          const tokenValue = value.slice(1);
-          const sizeValue = getSizeValue(tokenValue);
-          style.width = sizeValue;
-          style.height = sizeValue;
-        } else {
-          style.width = value;
-          style.height = value;
-        }
-        break;
-
-      case 'ox':
-        style.overflowX = value as React.CSSProperties['overflowX'];
-        break;
-      case 'oy':
-        style.overflowY = value as React.CSSProperties['overflowY'];
-        break;
-
-      case 'pe':
-        style.pointerEvents = value as React.CSSProperties['pointerEvents'];
-        break;
-      case 'us':
-        style.userSelect = value as React.CSSProperties['userSelect'];
-        break;
-
-      default:
-        (style as any)[key] = value;
-        break;
-    }
-  });
-
-  return { style, vars };
+// HELPERS
+function processToken(value: string): string {
+  return value.startsWith('$') ? value.slice(1) : value;
 }
 
 function getSpaceValue(key: string): string {
@@ -455,4 +132,291 @@ function getFontWeightValue(key: string): string {
     bold: '700',
   };
   return fontWeightMap[key] || '400';
+}
+
+function applySpacing(
+  style: React.CSSProperties,
+  property: keyof React.CSSProperties,
+  value: string,
+): void {
+  if (typeof value === 'string') {
+    const tokenValue = processToken(value);
+    const spaceValue = getSpaceValue(tokenValue);
+    if (spaceValue !== '0px') {
+      (style as any)[property] = spaceValue;
+    }
+  }
+}
+
+function applyRadii(
+  style: React.CSSProperties,
+  property: keyof React.CSSProperties,
+  value: string,
+): void {
+  if (typeof value === 'string') {
+    const tokenValue = processToken(value);
+    const radiiValue = getRadiiValue(tokenValue);
+    if (radiiValue !== '0px') {
+      (style as any)[property] = radiiValue;
+    }
+  }
+}
+
+function applyColor(
+  style: React.CSSProperties,
+  property: keyof React.CSSProperties,
+  value: string,
+  colors?: Record<string, any>,
+): void {
+  if (typeof value === 'string' && value.startsWith('$')) {
+    const colorToken = value.slice(1);
+    if (colors && colorToken in colors) {
+      (style as any)[property] = colors[colorToken];
+    } else {
+      (style as any)[property] = value;
+    }
+  } else {
+    (style as any)[property] = value;
+  }
+}
+
+function applySize(
+  style: React.CSSProperties,
+  property: keyof React.CSSProperties,
+  value: string,
+): void {
+  if (typeof value === 'string' && value.startsWith('$')) {
+    const tokenValue = processToken(value);
+    const sizeValue = getSizeValue(tokenValue);
+    (style as any)[property] = sizeValue;
+  } else {
+    (style as any)[property] = value;
+  }
+}
+
+// CSS PROCESSOR
+export function processCSSProp(
+  css: CSSProps['css'] = {},
+  colors?: Record<string, any>,
+): {
+  style: React.CSSProperties;
+  vars: Record<string, string>;
+} {
+  const style: React.CSSProperties = {};
+  const vars: Record<string, string> = {};
+
+  Object.entries(css).forEach(([key, value]) => {
+    switch (key) {
+      case 'p':
+      case 'padding':
+        applySpacing(style, 'padding', value);
+        break;
+      case 'pt':
+      case 'paddingTop':
+        applySpacing(style, 'paddingTop', value);
+        break;
+      case 'pr':
+      case 'paddingRight':
+        applySpacing(style, 'paddingRight', value);
+        break;
+      case 'pb':
+      case 'paddingBottom':
+        applySpacing(style, 'paddingBottom', value);
+        break;
+      case 'pl':
+      case 'paddingLeft':
+        applySpacing(style, 'paddingLeft', value);
+        break;
+      case 'px':
+        applySpacing(style, 'paddingLeft', value);
+        applySpacing(style, 'paddingRight', value);
+        break;
+      case 'py':
+        applySpacing(style, 'paddingTop', value);
+        applySpacing(style, 'paddingBottom', value);
+        break;
+
+      case 'm':
+      case 'margin':
+        applySpacing(style, 'margin', value);
+        break;
+      case 'mt':
+      case 'marginTop':
+        applySpacing(style, 'marginTop', value);
+        break;
+      case 'mr':
+      case 'marginRight':
+        applySpacing(style, 'marginRight', value);
+        break;
+      case 'mb':
+      case 'marginBottom':
+        applySpacing(style, 'marginBottom', value);
+        break;
+      case 'ml':
+      case 'marginLeft':
+        applySpacing(style, 'marginLeft', value);
+        break;
+      case 'mx':
+        applySpacing(style, 'marginLeft', value);
+        applySpacing(style, 'marginRight', value);
+        break;
+      case 'my':
+        applySpacing(style, 'marginTop', value);
+        applySpacing(style, 'marginBottom', value);
+        break;
+
+      case 'ta':
+        style.textAlign = value as React.CSSProperties['textAlign'];
+        break;
+      case 'fd':
+        style.flexDirection = value as React.CSSProperties['flexDirection'];
+        break;
+      case 'fw':
+        style.flexWrap = value as React.CSSProperties['flexWrap'];
+        break;
+      case 'ai':
+        style.alignItems = value as React.CSSProperties['alignItems'];
+        break;
+      case 'ac':
+        style.alignContent = value as React.CSSProperties['alignContent'];
+        break;
+      case 'jc':
+        style.justifyContent = value as React.CSSProperties['justifyContent'];
+        break;
+      case 'as':
+        style.alignSelf = value as React.CSSProperties['alignSelf'];
+        break;
+      case 'fg':
+        style.flexGrow = value;
+        break;
+      case 'fs':
+        style.flexShrink = value;
+        break;
+      case 'fb':
+        applySize(style, 'flexBasis', value);
+        break;
+
+      case 'bc':
+      case 'backgroundColor':
+        applyColor(style, 'backgroundColor', value, colors);
+        break;
+      case 'br':
+      case 'borderRadius':
+        applyRadii(style, 'borderRadius', value);
+        break;
+      case 'btrr':
+      case 'borderTopRightRadius':
+        applyRadii(style, 'borderTopRightRadius', value);
+        break;
+      case 'bbrr':
+      case 'borderBottomRightRadius':
+        applyRadii(style, 'borderBottomRightRadius', value);
+        break;
+      case 'bblr':
+      case 'borderBottomLeftRadius':
+        applyRadii(style, 'borderBottomLeftRadius', value);
+        break;
+      case 'btlr':
+      case 'borderTopLeftRadius':
+        applyRadii(style, 'borderTopLeftRadius', value);
+        break;
+      case 'bs':
+      case 'boxShadow':
+        style.boxShadow = value;
+        break;
+      case 'c':
+      case 'color':
+        applyColor(style, 'color', value, colors);
+        break;
+
+      case 'fontSize':
+        if (typeof value === 'string') {
+          const fontSizeValue = getFontSizeValue(value);
+          if (fontSizeValue !== '16px') {
+            style.fontSize = fontSizeValue;
+          }
+        }
+        break;
+      case 'fontWeight':
+        if (typeof value === 'string') {
+          const fontWeightValue = getFontWeightValue(value);
+          if (fontWeightValue !== '400') {
+            style.fontWeight = fontWeightValue;
+          }
+        }
+        break;
+      case 'lh':
+        style.lineHeight = value;
+        break;
+
+      case 'width':
+      case 'w':
+        applySize(style, 'width', value);
+        break;
+      case 'height':
+      case 'h':
+        applySize(style, 'height', value);
+        break;
+
+      case 'size':
+        applySize(style, 'width', value);
+        applySize(style, 'height', value);
+        break;
+
+      case 'ox':
+        style.overflowX = value as React.CSSProperties['overflowX'];
+        break;
+      case 'oy':
+        style.overflowY = value as React.CSSProperties['overflowY'];
+        break;
+
+      case 'pe':
+        style.pointerEvents = value as React.CSSProperties['pointerEvents'];
+        break;
+      case 'us':
+        style.userSelect = value as React.CSSProperties['userSelect'];
+        break;
+
+      default:
+        // Handle token syntax for any property that falls through to default
+        if (typeof value === 'string' && value.startsWith('$')) {
+          const tokenValue = processToken(value);
+
+          // Try spacing tokens first (most common for gap, etc)
+          const spaceValue = getSpaceValue(tokenValue);
+          if (spaceValue !== '0px') {
+            (style as any)[key] = spaceValue;
+            break;
+          }
+
+          // Try size tokens
+          const sizeValue = getSizeValue(tokenValue);
+          if (sizeValue !== tokenValue) {
+            (style as any)[key] = sizeValue;
+            break;
+          }
+
+          // Try radii tokens
+          const radiiValue = getRadiiValue(tokenValue);
+          if (radiiValue !== '0px') {
+            (style as any)[key] = radiiValue;
+            break;
+          }
+
+          // Try color tokens
+          if (colors && tokenValue in colors) {
+            (style as any)[key] = colors[tokenValue];
+            break;
+          }
+
+          // If no token matches, pass through as-is
+          (style as any)[key] = value;
+        } else {
+          (style as any)[key] = value;
+        }
+        break;
+    }
+  });
+
+  return { style, vars };
 }

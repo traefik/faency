@@ -46,18 +46,18 @@ describe('BoxVanilla', () => {
 
   it('should apply CSS prop styles', () => {
     const { container } = renderWithTheme(
-      <BoxVanilla css={{ padding: '20px', margin: '10px' }}>Content</BoxVanilla>,
+      <BoxVanilla css={{ padding: '$4', margin: '$2' }}>Content</BoxVanilla>,
     );
     const box = container.firstChild as HTMLElement;
 
     expect(box.style.padding).toBe('20px');
-    expect(box.style.margin).toBe('10px');
+    expect(box.style.margin).toBe('8px');
   });
 
   it('should merge style and css props correctly', () => {
     const { container } = renderWithTheme(
       <BoxVanilla
-        css={{ padding: '20px', margin: '10px' }}
+        css={{ padding: '$4', margin: '$2' }}
         style={{ backgroundColor: 'blue', padding: '30px' }}
       >
         Content
@@ -68,7 +68,7 @@ describe('BoxVanilla', () => {
     expect(box.style.backgroundColor).toBe('blue');
     // style prop should override css prop
     expect(box.style.padding).toBe('30px');
-    expect(box.style.margin).toBe('10px');
+    expect(box.style.margin).toBe('8px');
   });
 
   it('should forward ref correctly', () => {
