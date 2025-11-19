@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Faency is a React component library and design system for Traefik Labs, built with React, TypeScript, Stitches CSS-in-JS, and Radix UI Primitives. It provides accessible, themed components with light/dark mode support.
 
+**Migration Status**: Currently migrating from Stitches to vanilla-extract (Phase 2 complete). Most components use Stitches (`.tsx`), some have vanilla-extract versions (`.vanilla.tsx`). Prefer editing Stitches versions unless explicitly migrating. See `VANILLA_EXTRACT_MIGRATION.md` for details.
+
 ## Development Commands
 
 ### Core Development
@@ -27,10 +29,12 @@ Faency is a React component library and design system for Traefik Labs, built wi
 
 ### Styling System
 
-- **Stitches CSS-in-JS**: Core styling system with design tokens and utilities
-- **Design Tokens**: Defined in `stitches.config.ts` with semantic color system
+- **Stitches CSS-in-JS**: Current primary styling system with design tokens and utilities
+- **vanilla-extract**: New styling system (migration in progress - see `VANILLA_EXTRACT_MIGRATION.md`)
+- **Build Tool**: Vite with vanilla-extract plugin
+- **Design Tokens**: Defined in `stitches.config.ts` (Stitches) and `styles/tokens.css.ts` (vanilla-extract)
 - **Theme Support**: Light/dark themes with customizable primary colors
-- **Component Themes**: Each component has its own theme file (e.g., `Button.themes.ts`)
+- **Component Themes**: Stitches components have theme files (e.g., `Button.themes.ts`)
 
 ### Component Structure
 
@@ -86,10 +90,10 @@ Components follow a consistent pattern:
 
 ### Testing Strategy
 
-- Jest with React Testing Library setup
+- Jest with React Testing Library configured
 - jsdom environment for DOM testing
 - Focus on accessibility and component behavior
-- Run tests before submitting changes
+- Test coverage is currently being developed
 
 ## Important Notes
 
