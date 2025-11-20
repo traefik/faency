@@ -26,7 +26,7 @@ export { Button } from './components/Button';
 export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
 export { Card } from './components/Card';
 export { Checkbox } from './components/Checkbox';
-export { Container } from './components/Container';
+export { Container, ContainerVanilla } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
 export { DateTimePickerInput } from './components/DateTimePickerInput';
 export {
@@ -56,8 +56,8 @@ export {
 } from './components/DropdownMenu';
 export { Elevation, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
-export { Flex } from './components/Flex';
-export { Grid } from './components/Grid';
+export { Flex, FlexVanilla } from './components/Flex';
+export { Grid, GridVanilla } from './components/Grid';
 export { H1, H2, H3, H4, H5, H6 } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Image } from './components/Image';
