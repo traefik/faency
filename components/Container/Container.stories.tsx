@@ -3,6 +3,9 @@ import React from 'react';
 
 import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { BoxVanilla } from '../Box';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H3 } from '../Heading';
 import { Paragraph } from '../Paragraph';
 import { Container } from './Container';
 import { ContainerVanilla } from './Container.vanilla';
@@ -49,14 +52,14 @@ export const NoGutter: StoryFn<typeof ContainerForStory> = Template.bind({});
 NoGutter.args = { noGutter: true };
 
 export const Comparison: StoryFn = (args) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-    <div>
-      <h3>Original Stitches Version</h3>
+  <FlexVanilla direction="column" gap={5}>
+    <BoxVanilla>
+      <H3>Original Stitches Version</H3>
       <Template {...args} />
-    </div>
+    </BoxVanilla>
 
-    <div>
-      <h3>Vanilla-Extract Version (Same API)</h3>
+    <BoxVanilla>
+      <H3>Vanilla-Extract Version (Same API)</H3>
       <ContainerVanilla {...args} css={{ bc: '$deepBlue3' }}>
         <Paragraph>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, iste. Perferendis saepe
@@ -69,8 +72,8 @@ export const Comparison: StoryFn = (args) => (
           fugit quos obcaecati, molestiae nemo nobis aliquid saepe, impedit at.
         </Paragraph>
       </ContainerVanilla>
-    </div>
-  </div>
+    </BoxVanilla>
+  </FlexVanilla>
 );
 
 Comparison.args = { noGutter: false, size: '1' };

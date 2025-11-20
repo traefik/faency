@@ -2,7 +2,7 @@ import { Property } from '@stitches/react/types/css';
 import React from 'react';
 import { useDarkMode } from 'storybook-dark-mode';
 
-import { Box, Flex, H1, H2, Text } from '../index';
+import { BoxVanilla, FlexVanilla, H1, H2, Text } from '../index';
 import { colors } from '../stitches.config';
 
 type Color = { token: string };
@@ -51,27 +51,27 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
 
     return [...acc, { name: colorGroupName, colors: [{ token }], alphaColors: [] } as ColorGroup];
   },
-  []
+  [],
 );
 
 export const Colors = () => {
   useDarkMode(); // force re-render on theme change
 
   return (
-    <Flex css={{ flexDirection: 'column' }}>
+    <FlexVanilla css={{ flexDirection: 'column' }}>
       <H1 css={{ mb: '$6' }}>Colors</H1>
 
       {colorGroups.map((colorGroup) => (
-        <Box key={colorGroup.name} css={{ mb: '$3' }}>
+        <BoxVanilla key={colorGroup.name} css={{ mb: '$3' }}>
           <H2 css={{ mb: '$2', '&:first-letter': { textTransform: 'uppercase' } }}>
             {aliases[colorGroup.name] || colorGroup.name}
           </H2>
           {['colors', 'alphaColors'].map((type) => (
             <>
               {!!colorGroup?.[type]?.length && (
-                <Flex key={type} css={{ bc: '$contentBg', mb: '$3', gap: '$3' }}>
+                <FlexVanilla key={type} css={{ bc: '$contentBg', mb: '$3', gap: '$3' }}>
                   {colorGroup[type].map((color) => (
-                    <Flex
+                    <FlexVanilla
                       key={color.token}
                       css={{
                         flexDirection: 'column',
@@ -79,14 +79,14 @@ export const Colors = () => {
                         maxWidth: 80,
                       }}
                     >
-                      <Box css={{ bc: `$${colorGroup.name}1`, mb: '$2' }}>
-                        <Box
+                      <BoxVanilla css={{ bc: `$${colorGroup.name}1`, mb: '$2' }}>
+                        <BoxVanilla
                           css={{
                             size: 80,
                             bc: `$${color.token}`,
                           }}
                         />
-                      </Box>
+                      </BoxVanilla>
                       <Text variant="subtle" css={{ pb: '$1', textAlign: 'center' }}>
                         {color.token}
                       </Text>
@@ -95,15 +95,15 @@ export const Colors = () => {
                           .getComputedStyle(document.body)
                           .getPropertyValue(`--colors-${color.token}`)}
                       </Text>
-                    </Flex>
+                    </FlexVanilla>
                   ))}
-                </Flex>
+                </FlexVanilla>
               )}
             </>
           ))}
-        </Box>
+        </BoxVanilla>
       ))}
-    </Flex>
+    </FlexVanilla>
   );
 };
 

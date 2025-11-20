@@ -2,6 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Box, BoxVanilla } from '../Box';
+import { H3 } from '../Heading';
 import { Flex } from './Flex';
 import { FlexVanilla } from './Flex.vanilla';
 
@@ -26,21 +27,21 @@ Basic.args = {
 
 export const Comparison: StoryFn = (args) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <div>
-        <h3>Original Stitches Version</h3>
+    <FlexVanilla direction="column" gap={5}>
+      <BoxVanilla>
+        <H3>Original Stitches Version</H3>
         <Basic {...args} />
-      </div>
+      </BoxVanilla>
 
-      <div>
-        <h3>Vanilla-Extract Version (Same API)</h3>
+      <BoxVanilla>
+        <H3>Vanilla-Extract Version (Same API)</H3>
         <FlexVanilla {...args}>
           <BoxVanilla css={{ width: '$8', height: '$8', bc: '$blue9' }}></BoxVanilla>
           <BoxVanilla css={{ width: '$5', height: '$5', bc: '$blue9' }}></BoxVanilla>
           <BoxVanilla css={{ width: '$7', height: '$7', bc: '$blue9' }}></BoxVanilla>
         </FlexVanilla>
-      </div>
-    </div>
+      </BoxVanilla>
+    </FlexVanilla>
   );
 };
 
