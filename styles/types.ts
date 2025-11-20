@@ -19,3 +19,7 @@ export type FlexJustifySimplified =
   | 'space-between'
   | 'space-around'
   | 'space-evenly';
+
+export type GridAlign = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
+export type GridJustify = 'start' | 'center' | 'end' | 'between';
+export type GridFlow = 'row' | 'column' | 'dense' | 'rowDense' | 'columnDense';
