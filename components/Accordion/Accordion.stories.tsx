@@ -1,5 +1,5 @@
 import { BookmarkIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
 import { VariantProps } from '../../stitches.config';

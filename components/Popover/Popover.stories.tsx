@@ -1,6 +1,6 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { PopoverAnchor, PopoverPortal } from '@radix-ui/react-popover';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';

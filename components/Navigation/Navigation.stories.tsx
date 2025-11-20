@@ -4,7 +4,7 @@ import {
   PersonIcon,
   QuestionMarkCircledIcon,
 } from '@radix-ui/react-icons';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -160,7 +160,7 @@ const MultipleSectionsTemplate: StoryFn<typeof NavigationDrawerForStory> = (args
 };
 
 export const MultiSection: StoryFn<typeof NavigationDrawerForStory> = MultipleSectionsTemplate.bind(
-  {}
+  {},
 );
 
 MultiSection.args = {

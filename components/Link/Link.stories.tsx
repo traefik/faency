@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { LinkHTMLAttributes } from 'react';
 
 import { VariantProps } from '../../stitches.config';
@@ -10,7 +10,7 @@ type LinkProps = LinkVariants & NonNullable<unknown>;
 
 const BaseLink = (props: LinkProps): JSX.Element => <Link {...props} />;
 const LinkForStory = modifyVariantsForStory<LinkVariants, LinkProps & LinkHTMLAttributes<any>>(
-  BaseLink
+  BaseLink,
 );
 
 const Component: Meta<typeof LinkForStory> = {

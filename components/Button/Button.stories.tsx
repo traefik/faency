@@ -1,5 +1,5 @@
 import { InfoCircledIcon } from '@radix-ui/react-icons';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
 import { Flex } from '../Flex';
