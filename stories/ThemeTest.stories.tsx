@@ -151,7 +151,7 @@ export const PrimaryColorShowcase: StoryFn = () => {
 
 export const ThemeAPITest: StoryFn = () => {
   const ThemeInfo = () => {
-    const { mode, resolvedTheme, primaryColor, setPrimaryColor } = useVanillaExtractTheme();
+    const { mode, resolvedTheme, primColor, setPrimaryColor } = useVanillaExtractTheme();
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '24px' }}>
@@ -167,7 +167,7 @@ export const ThemeAPITest: StoryFn = () => {
               <strong>Resolved Theme:</strong> {resolvedTheme}
             </Text>
             <Text size="3">
-              <strong>Primary Color:</strong> {primaryColor}
+              <strong>Primary Color:</strong> {primColor}
             </Text>
           </div>
         </BoxVanilla>
@@ -183,11 +183,11 @@ export const ThemeAPITest: StoryFn = () => {
                 onClick={() => setPrimaryColor(color as any)}
                 style={{
                   padding: '12px 24px',
-                  border: primaryColor === color ? '3px solid #000' : '1px solid #ccc',
+                  border: primColor === color ? '3px solid #000' : '1px solid #ccc',
                   borderRadius: '8px',
-                  background: primaryColor === color ? '#f0f0f0' : 'white',
+                  background: primColor === color ? '#f0f0f0' : 'white',
                   cursor: 'pointer',
-                  fontWeight: primaryColor === color ? 'bold' : 'normal',
+                  fontWeight: primColor === color ? 'bold' : 'normal',
                   fontSize: '14px',
                 }}
               >
@@ -202,16 +202,16 @@ export const ThemeAPITest: StoryFn = () => {
             Demo Content with Current Theme
           </Text>
           <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: '1fr 1fr' }}>
-            <BoxVanilla css={{ p: '$4', bc: `$${primaryColor}4`, br: '$2' }}>
-              <Text css={{ c: `$${primaryColor}11` }}>Primary Color Step 4</Text>
+            <BoxVanilla css={{ p: '$4', bc: `$${primColor}4`, br: '$2' }}>
+              <Text css={{ c: `$${primColor}11` }}>Primary Color Step 4</Text>
             </BoxVanilla>
-            <BoxVanilla css={{ p: '$4', bc: `$${primaryColor}6`, br: '$2' }}>
-              <Text css={{ c: `$${primaryColor}12` }}>Primary Color Step 6</Text>
+            <BoxVanilla css={{ p: '$4', bc: `$${primColor}6`, br: '$2' }}>
+              <Text css={{ c: `$${primColor}12` }}>Primary Color Step 6</Text>
             </BoxVanilla>
-            <BoxVanilla css={{ p: '$4', bc: `$${primaryColor}8`, br: '$2' }}>
+            <BoxVanilla css={{ p: '$4', bc: `$${primColor}8`, br: '$2' }}>
               <Text css={{ c: '$loContrast' }}>Primary Color Step 8</Text>
             </BoxVanilla>
-            <BoxVanilla css={{ p: '$4', bc: `$${primaryColor}10`, br: '$2' }}>
+            <BoxVanilla css={{ p: '$4', bc: `$${primColor}10`, br: '$2' }}>
               <Text css={{ c: '$loContrast' }}>Primary Color Step 10</Text>
             </BoxVanilla>
           </div>
