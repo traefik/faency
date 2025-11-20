@@ -3,6 +3,8 @@ import React from 'react';
 
 import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H3 } from '../Heading';
 import { Text } from '../Text';
 import { Box } from './Box';
 import { BoxVanilla } from './Box.vanilla';
@@ -28,37 +30,37 @@ export const Basic: StoryFn<typeof BoxForStory> = (args) => (
 );
 
 export const Comparison: StoryFn = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-    <div>
-      <h3>Original Stitches Version</h3>
+  <FlexVanilla direction="column" gap={5}>
+    <Box>
+      <H3>Original Stitches Version</H3>
       <Box css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }}>
         <Text as="p" size="4" css={{ lineHeight: '27px' }}>
           Original Stitches-based Box component using css prop.
         </Text>
       </Box>
-    </div>
+    </Box>
 
-    <div>
-      <h3>Vanilla-Extract Version (Same API)</h3>
+    <BoxVanilla>
+      <H3>Vanilla-Extract Version (Same API)</H3>
       <BoxVanilla css={{ px: '$4', py: '$6', bc: '$deepBlue6', ta: 'center' }}>
         <Text as="p" size="4" css={{ lineHeight: '27px' }}>
           Vanilla-extract Box component using the same css prop
         </Text>
       </BoxVanilla>
-    </div>
+    </BoxVanilla>
 
-    <div>
-      <h3>Both Components Support Identical CSS Props</h3>
-      <div style={{ display: 'flex', gap: '16px' }}>
+    <BoxVanilla>
+      <H3>Both Components Support Identical CSS Props</H3>
+      <FlexVanilla gap={3}>
         <Box css={{ p: '$3', bc: '$blue4', br: '$2', c: 'white', ta: 'center', fg: 1 }}>
           <Text size="2">Stitches Box</Text>
         </Box>
         <BoxVanilla css={{ p: '$3', bc: '$blue4', br: '$2', c: 'white', ta: 'center', fg: 1 }}>
           <Text size="2">Vanilla Box</Text>
         </BoxVanilla>
-      </div>
-    </div>
-  </div>
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
 );
 
 Comparison.storyName = 'Comparison';

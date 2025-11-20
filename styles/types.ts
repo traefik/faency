@@ -1,6 +1,29 @@
 export type Gap = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-export type SpacingToken = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
-export type SizeToken = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | string;
+export type SpacingToken =
+  | '$1'
+  | '$2'
+  | '$3'
+  | '$4'
+  | '$5'
+  | '$6'
+  | '$7'
+  | '$8'
+  | '$9'
+  | string
+  | number;
+export type SizeToken =
+  | '$1'
+  | '$2'
+  | '$3'
+  | '$4'
+  | '$5'
+  | '$6'
+  | '$7'
+  | '$8'
+  | '$9'
+  | '$10'
+  | string
+  | number;
 export type FlexDirection = 'row' | 'column' | 'rowReverse' | 'columnReverse';
 export type FlexAlign = 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 export type FlexJustify =
@@ -19,3 +42,7 @@ export type FlexJustifySimplified =
   | 'space-between'
   | 'space-around'
   | 'space-evenly';
+
+export type GridAlign = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
+export type GridJustify = 'start' | 'center' | 'end' | 'between';
+export type GridFlow = 'row' | 'column' | 'dense' | 'rowDense' | 'columnDense';
