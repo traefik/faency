@@ -8,19 +8,11 @@ const config: StorybookConfig = {
     '../components/**/*.stories.@(js|jsx|ts|tsx)',
   ],
 
-  addons: [
-    '@storybook/addon-links',
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        backgrounds: false,
-      },
-    },
-    'storybook-dark-mode',
-  ],
+  addons: ['@storybook/addon-links', '@storybook/addon-docs', '@vueless/storybook-dark-mode'],
 
   core: {
     builder: '@storybook/builder-vite',
+    disableTelemetry: true,
   },
 
   framework: {
@@ -36,6 +28,10 @@ const config: StorybookConfig = {
     config.plugins = config.plugins || [];
     config.plugins.push(vanillaExtractPlugin());
     return config;
+  },
+
+  features: {
+    backgrounds: false,
   },
 };
 

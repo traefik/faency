@@ -1,5 +1,5 @@
 import { CheckCircledIcon, CopyIcon, InfoCircledIcon } from '@radix-ui/react-icons';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useCallback, useState } from 'react';
 
 import { styled } from '../../stitches.config';

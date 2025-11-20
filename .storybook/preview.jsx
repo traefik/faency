@@ -1,8 +1,8 @@
-import { DocsContainer } from '@storybook/addon-docs';
-import { addons } from '@storybook/preview-api';
-import { themes } from '@storybook/theming';
+import { DocsContainer } from '@storybook/addon-docs/blocks';
+import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 import React from 'react';
-import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+import { addons } from 'storybook/preview-api';
+import { themes } from 'storybook/theming';
 
 import { globalCss } from '../';
 import { FaencyProvider } from '../components/FaencyProvider';

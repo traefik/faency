@@ -1,6 +1,6 @@
 import { Property } from '@stitches/react/types/css';
+import { useDarkMode } from '@vueless/storybook-dark-mode';
 import React from 'react';
-import { useDarkMode } from 'storybook-dark-mode';
 
 import { Box, Flex, H1, H2, Text } from '../index';
 import { colors } from '../stitches.config';
@@ -51,7 +51,7 @@ const colorGroups = (Object.keys(colors) as string[]).reduce<ColorGroup[]>(
 
     return [...acc, { name: colorGroupName, colors: [{ token }], alphaColors: [] } as ColorGroup];
   },
-  []
+  [],
 );
 
 export const Colors = () => {
