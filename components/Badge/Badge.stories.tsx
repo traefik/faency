@@ -3,7 +3,10 @@ import React from 'react';
 
 import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { BoxVanilla } from '../Box';
 import { Flex } from '../Flex';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H3 } from '../Heading';
 import { UnstyledLink } from '../Link';
 import { Badge } from './Badge';
 import { BadgeVanilla, COLORS } from './Badge.vanilla';
@@ -124,10 +127,10 @@ export const VanillaExtractInteractive: StoryFn = () => (
 );
 
 export const Comparison: StoryFn = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-    <div>
-      <h3 style={{ marginBottom: '16px' }}>Stitches Version</h3>
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
+  <FlexVanilla direction="column" gap={6}>
+    <BoxVanilla>
+      <H3 css={{ marginBottom: '16px' }}>Stitches Version</H3>
+      <FlexVanilla gap={2} wrap="wrap" css={{ marginBottom: '16px' }}>
         <Badge size="small" variant="gray">
           Gray Small
         </Badge>
@@ -149,8 +152,8 @@ export const Comparison: StoryFn = () => (
         <Badge size="small" variant="purple">
           Purple
         </Badge>
-      </div>
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
+      </FlexVanilla>
+      <FlexVanilla gap={2} wrap="wrap" css={{ marginBottom: '16px' }}>
         <Badge interactive size="small" variant="gray">
           Interactive Gray
         </Badge>
@@ -160,8 +163,8 @@ export const Comparison: StoryFn = () => (
         <Badge interactive size="small" variant="green">
           Interactive Green
         </Badge>
-      </div>
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      </FlexVanilla>
+      <FlexVanilla gap={2} wrap="wrap">
         <Badge alphaBg size="small" variant="gray">
           Alpha Gray
         </Badge>
@@ -171,12 +174,12 @@ export const Comparison: StoryFn = () => (
         <Badge borderless size="small" variant="neon">
           Borderless Neon
         </Badge>
-      </div>
-    </div>
+      </FlexVanilla>
+    </BoxVanilla>
 
-    <div>
-      <h3 style={{ marginBottom: '16px' }}>Vanilla Extract Version</h3>
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
+    <BoxVanilla>
+      <H3 css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3>
+      <FlexVanilla gap={2} wrap="wrap" css={{ marginBottom: '16px' }}>
         <BadgeVanilla size="small" variant="gray">
           Gray Small
         </BadgeVanilla>
@@ -198,8 +201,8 @@ export const Comparison: StoryFn = () => (
         <BadgeVanilla size="small" variant="purple">
           Purple
         </BadgeVanilla>
-      </div>
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
+      </FlexVanilla>
+      <FlexVanilla gap={2} wrap="wrap" css={{ marginBottom: '16px' }}>
         <BadgeVanilla interactive size="small" variant="gray">
           Interactive Gray
         </BadgeVanilla>
@@ -209,8 +212,8 @@ export const Comparison: StoryFn = () => (
         <BadgeVanilla interactive size="small" variant="green">
           Interactive Green
         </BadgeVanilla>
-      </div>
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      </FlexVanilla>
+      <FlexVanilla gap={2} wrap="wrap">
         <BadgeVanilla alphaBg size="small" variant="gray">
           Alpha Gray
         </BadgeVanilla>
@@ -220,9 +223,9 @@ export const Comparison: StoryFn = () => (
         <BadgeVanilla borderless size="small" variant="neon">
           Borderless Neon
         </BadgeVanilla>
-      </div>
-    </div>
-  </div>
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
 );
 
 export default Component;

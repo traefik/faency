@@ -2,6 +2,8 @@ import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Box, BoxVanilla } from '../Box';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H3 } from '../Heading';
 import { Text } from '../Text';
 import { Grid } from './Grid';
 import { GridVanilla } from './Grid.vanilla';
@@ -44,14 +46,14 @@ Basic.args = {
 
 export const Comparison: StoryFn = (args) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <div>
-        <h3>Original Stitches Version</h3>
+    <FlexVanilla direction="column" gap={5}>
+      <BoxVanilla>
+        <H3>Original Stitches Version</H3>
         <Basic {...args} />
-      </div>
+      </BoxVanilla>
 
-      <div>
-        <h3>Vanilla-Extract Version (Same API)</h3>
+      <BoxVanilla>
+        <H3>Vanilla-Extract Version (Same API)</H3>
         <GridVanilla {...args}>
           <BoxVanilla>
             <Text as="p" size="4" css={{ lineHeight: '27px' }}>
@@ -75,8 +77,8 @@ export const Comparison: StoryFn = (args) => {
             </Text>
           </BoxVanilla>
         </GridVanilla>
-      </div>
-    </div>
+      </BoxVanilla>
+    </FlexVanilla>
   );
 };
 
