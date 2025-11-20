@@ -139,12 +139,14 @@ function applySpacing(
   property: keyof React.CSSProperties,
   value: string,
 ): void {
-  if (typeof value === 'string') {
+  if (typeof value === 'string' && value.startsWith('$')) {
     const tokenValue = processToken(value);
     const spaceValue = getSpaceValue(tokenValue);
     if (spaceValue !== '0px') {
       (style as any)[property] = spaceValue;
     }
+  } else {
+    (style as any)[property] = value;
   }
 }
 
@@ -153,12 +155,14 @@ function applyRadii(
   property: keyof React.CSSProperties,
   value: string,
 ): void {
-  if (typeof value === 'string') {
+  if (typeof value === 'string' && value.startsWith('$')) {
     const tokenValue = processToken(value);
     const radiiValue = getRadiiValue(tokenValue);
     if (radiiValue !== '0px') {
       (style as any)[property] = radiiValue;
     }
+  } else {
+    (style as any)[property] = value;
   }
 }
 
