@@ -88,6 +88,8 @@ export {
   NavigationTreeItem,
 } from './components/NavigationTree';
 export { Overlay } from './components/Overlay';
+export type { ParagraphVanillaProps } from './components/Paragraph';
+export { Paragraph, ParagraphVanilla } from './components/Paragraph';
 export {
   Popover,
   PopoverAnchor,

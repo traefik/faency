@@ -1,8 +1,8 @@
 import merge from 'lodash.merge';
 import React from 'react';
 
-import { CSS, VariantProps } from '../stitches.config';
-import { Text } from './Text';
+import { CSS, VariantProps } from '../../stitches.config';
+import { Text } from '../Text';
 
 const DEFAULT_TAG = 'p';
 
@@ -40,5 +40,5 @@ export const Paragraph = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, 
         }}
       />
     );
-  }
+  },
 );
