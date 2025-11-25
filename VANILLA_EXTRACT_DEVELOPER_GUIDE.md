@@ -1030,6 +1030,40 @@ Use this checklist for each component migration:
 - Test both light and dark themes
 - Migrate one component at a time
 
+### Critical Pattern: Include All Base Styles in Recipes
+
+**⚠️ IMPORTANT:** When recipes have variants, include ALL base styles (font sizes, dimensions, etc.) in the recipe's base array, not in separate style constants.
+
+**Why:** If styles are split and components conditionally apply recipe classes, base styles will be missing when variants are used.
+
+**❌ Wrong:**
+
+```typescript
+export const h1Recipe = recipe({
+  base: headingBase, // Missing fontSize!
+  variants: { transform: { uppercase: { textTransform: 'uppercase' } } },
+});
+
+export const h1Style = style([headingBase, { fontSize: tokens.fontSizes['12'] }]);
+
+// Component: fontSize missing when transform is used!
+const className = transform ? h1Recipe({ transform }) : h1Style;
+```
+
+**✅ Correct:**
+
+```typescript
+export const h1Recipe = recipe({
+  base: [headingBase, { fontSize: tokens.fontSizes['12'] }], // All styles in recipe
+  variants: { transform: { uppercase: { textTransform: 'uppercase' } } },
+});
+
+// Component: always includes fontSize
+const className = h1Recipe({ transform });
+```
+
+**Rule:** Put ALL styling in recipe base if component has variants. Test variant combinations to verify.
+
 ---
 
 ## Reference: Future Migration Phases
