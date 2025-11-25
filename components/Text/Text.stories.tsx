@@ -3,8 +3,12 @@ import React from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Box } from '../Box';
+import { BoxVanilla } from '../Box/Box.vanilla';
 import { Flex } from '../Flex';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H3 } from '../Heading';
 import { Text, TextProps, TextVariants } from './Text';
+import { TextVanilla } from './Text.vanilla';
 
 const BaseText = (props: TextProps): JSX.Element => <Text {...props} />;
 const TextForStory = modifyVariantsForStory<TextVariants, TextProps & React.HTMLAttributes<any>>(
@@ -166,6 +170,74 @@ export const Weight: StoryFn<typeof TextForStory> = (args) => (
       Bold
     </TextForStory>
   </Flex>
+);
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={6}>
+    <BoxVanilla>
+      <H3 css={{ marginBottom: '16px' }}>Stitches Version</H3>
+      <FlexVanilla direction="column" gap={3}>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Text size="1">Size 1</Text>
+          <Text size="3">Size 3 (default)</Text>
+          <Text size="5">Size 5</Text>
+          <Text size="7">Size 7</Text>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Text variant="default">Default</Text>
+          <Text variant="subtle">Subtle</Text>
+          <Text variant="contrast">Contrast</Text>
+          <Text variant="red">Red</Text>
+          <Text variant="invalid">Invalid</Text>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Text weight="light">Light</Text>
+          <Text weight="regular">Regular</Text>
+          <Text weight="medium">Medium</Text>
+          <Text weight="semiBold">SemiBold</Text>
+          <Text weight="bold">Bold</Text>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Text>default text</Text>
+          <Text transform="uppercase">uppercase text</Text>
+          <Text transform="capitalize">capitalize text</Text>
+          <Text transform="capitalizeWords">capitalize each word</Text>
+        </FlexVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+
+    <BoxVanilla>
+      <H3 css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3>
+      <FlexVanilla direction="column" gap={3}>
+        <FlexVanilla gap={2} wrap="wrap">
+          <TextVanilla size="1">Size 1</TextVanilla>
+          <TextVanilla size="3">Size 3 (default)</TextVanilla>
+          <TextVanilla size="5">Size 5</TextVanilla>
+          <TextVanilla size="7">Size 7</TextVanilla>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <TextVanilla variant="default">Default</TextVanilla>
+          <TextVanilla variant="subtle">Subtle</TextVanilla>
+          <TextVanilla variant="contrast">Contrast</TextVanilla>
+          <TextVanilla variant="red">Red</TextVanilla>
+          <TextVanilla variant="invalid">Invalid</TextVanilla>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <TextVanilla weight="light">Light</TextVanilla>
+          <TextVanilla weight="regular">Regular</TextVanilla>
+          <TextVanilla weight="medium">Medium</TextVanilla>
+          <TextVanilla weight="semiBold">SemiBold</TextVanilla>
+          <TextVanilla weight="bold">Bold</TextVanilla>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <TextVanilla>default text</TextVanilla>
+          <TextVanilla transform="uppercase">uppercase text</TextVanilla>
+          <TextVanilla transform="capitalize">capitalize text</TextVanilla>
+          <TextVanilla transform="capitalizeWords">capitalize each word</TextVanilla>
+        </FlexVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
 );
 
 export default Component;
