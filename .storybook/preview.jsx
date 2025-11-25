@@ -23,7 +23,22 @@ export const parameters = {
   docs: {
     container: (context) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const [isDark, setDark] = React.useState();
+      const [isDark, setDark] = React.useState(() => {
+        // Initialize from system preference or localStorage
+        if (typeof window !== 'undefined') {
+          const stored = localStorage.getItem('sb-addon-themes-3');
+          if (stored) {
+            try {
+              const parsed = JSON.parse(stored);
+              return parsed.current === 'dark';
+            } catch (e) {
+              // Fall through
+            }
+          }
+          return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        return false;
+      });
 
       // eslint-disable-next-line react-hooks/rules-of-hooks
       React.useEffect(() => {
@@ -86,7 +101,24 @@ const VanillaProviderWrapper = ({ children, isDark, primaryColor }) => {
 
 export const decorators = [
   (renderStory) => {
-    const [isDark, setDark] = React.useState(false);
+    // Initialize isDark from system preference or localStorage to avoid flash
+    const [isDark, setDark] = React.useState(() => {
+      // Check if storybook-dark-mode has a stored preference
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('sb-addon-themes-3');
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            if (parsed.current === 'dark') return true;
+          } catch (e) {
+            // Fall through to system preference
+          }
+        }
+        // Fallback to system preference
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      return false;
+    });
 
     React.useEffect(() => {
       darkTheme('blue').toString();
