@@ -4,6 +4,7 @@ import {
   PersonIcon,
   QuestionMarkCircledIcon,
 } from '@radix-ui/react-icons';
+// @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
@@ -12,10 +13,8 @@ import { NavigationDrawer, NavigationItem } from './Navigation';
 
 const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/NavigationItem',
-  // @ts-expect-error
   component: NavigationItem,
   argTypes: {
-    // @ts-expect-error
     as: {
       options: ['a', 'button'],
     },

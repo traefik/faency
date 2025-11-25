@@ -1,4 +1,5 @@
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+// @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import react from '@vitejs/plugin-react';
 import { createRequire } from 'module';
 import { defineConfig } from 'vite';
