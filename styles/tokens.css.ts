@@ -98,6 +98,9 @@ export const tokens = createThemeContract({
     textContrast: null,
     textInvalid: null,
     textRed: null,
+
+    // Component-specific tokens - Heading
+    headingDefault: null,
   },
   fonts: {
     rubik: null,
