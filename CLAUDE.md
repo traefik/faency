@@ -93,6 +93,7 @@ Components follow a consistent pattern:
 - Jest with React Testing Library configured
 - jsdom environment for DOM testing
 - Focus on accessibility and component behavior
+- Run tests before submitting changes
 - Test coverage is currently being developed
 
 ## Important Notes
