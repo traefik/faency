@@ -1,9 +1,8 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { breakpoints } from '../../styles/breakpoints.css';
 import { tokens } from '../../styles/tokens.css';
-
-const bp2 = '(min-width: 900px) and (max-width: 1199px)';
 
 // Base text styles (from Text component)
 const paragraphBase = style({
@@ -24,7 +23,7 @@ export const paragraphRecipe = recipe({
         color: tokens.colors.textDefault,
         lineHeight: '25px',
         '@media': {
-          [bp2]: {
+          [breakpoints.bp2]: {
             fontSize: tokens.fontSizes['4'],
             lineHeight: '27px',
           },
@@ -35,7 +34,7 @@ export const paragraphRecipe = recipe({
         color: tokens.colors.slate[11],
         lineHeight: '27px',
         '@media': {
-          [bp2]: {
+          [breakpoints.bp2]: {
             fontSize: tokens.fontSizes['6'],
             lineHeight: '30px',
           },
