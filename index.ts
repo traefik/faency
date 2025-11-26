@@ -25,7 +25,7 @@ export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';
 export { Button } from './components/Button';
 export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
-export { Card } from './components/Card';
+export { Card, CardVanilla } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 export { Container, ContainerVanilla } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
