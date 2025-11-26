@@ -19,7 +19,8 @@ export {
 export { Avatar } from './components/Avatar';
 export type { BadgeVanillaProps } from './components/Badge';
 export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
-export { Blockquote } from './components/Blockquote';
+export type { BlockquoteVanillaProps } from './components/Blockquote';
+export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';
 export { Button } from './components/Button';
