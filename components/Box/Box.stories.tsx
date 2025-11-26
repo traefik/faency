@@ -64,6 +64,4 @@ export const Comparison: StoryFn = () => (
   </FlexVanilla>
 );
 
-Comparison.storyName = 'Comparison';
-
 export default Component;
