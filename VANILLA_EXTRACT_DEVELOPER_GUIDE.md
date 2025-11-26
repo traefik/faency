@@ -36,6 +36,7 @@ styles/
 ├── themeContext.tsx       # React context for theme switching
 ├── cssProps.ts            # CSS prop processor (Stitches-like API)
 ├── polymorphic.ts         # Reusable polymorphic component types
+├── textVariants.css.ts    # Shared text variant definitions (DRY)
 └── utils.css.ts           # Utility functions and recipes
 ```
 
@@ -937,6 +938,25 @@ import { useVanillaExtractTheme } from '../../styles/themeContext';
 
 const { colors, resolvedTheme } = useVanillaExtractTheme();
 ```
+
+### Using Shared Text Variants (DRY Pattern)
+
+For Text-based components needing identical variant behavior. Import from `styles/textVariants.css.ts`: `sizeVariants`, `weightVariants`, `colorVariants`, `gradientVariants`, `transformVariants`, `noWrapVariants`
+
+**Benefits:** Single source of truth, ~70% code reduction, consistency
+
+**Example:**
+
+```typescript
+import { colorVariants, sizeVariants, weightVariants } from '../../styles/textVariants.css';
+
+export const componentRecipe = recipe({
+  base: componentBase,
+  variants: { size: sizeVariants, weight: weightVariants, variant: colorVariants },
+});
+```
+
+**Don't use** if component needs custom variant behavior. **See:** Text, Label, Blockquote
 
 ---
 
