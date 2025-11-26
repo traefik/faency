@@ -509,48 +509,6 @@ After adding the Comparison story:
 
 ---
 
-### Troubleshooting Theme Flash on Initial Load
-
-If vanilla-extract components show wrong colors on first load in dark mode:
-
-**Root Cause:** Theme state initialized to `'light'` instead of reading actual preference.
-
-**Solution Applied:**
-
-```tsx
-// styles/themeContext.tsx
-const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => {
-  // Initialize with actual system preference to avoid flash
-  if (typeof window !== 'undefined') {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  return 'light';
-});
-```
-
-```jsx
-// .storybook/preview.jsx
-const [isDark, setDark] = React.useState(() => {
-  // Check if storybook-dark-mode has a stored preference
-  if (typeof window !== 'undefined') {
-    const stored = localStorage.getItem('sb-addon-themes-3');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (parsed.current === 'dark') return true;
-      } catch (e) {
-        // Fall through
-      }
-    }
-    // Fallback to system preference
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  }
-  return false;
-});
-```
-
----
-
 #### 4. Verify Visual Parity
 
 1. Run Storybook: `yarn storybook`
