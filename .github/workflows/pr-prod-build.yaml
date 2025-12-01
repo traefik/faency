@@ -3,6 +3,9 @@ name: Production build test
 on:
   pull_request:
 
+env:
+  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 360  # 15 days
+
 jobs:
   faency:
     name: Production build test
@@ -19,6 +22,11 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
+
+      - name: Setup safe-chain
+        run: |
+          npm i -g @aikidosec/safe-chain
+          safe-chain setup-ci
 
       - name: Install production dependencies
         run: yarn workspaces focus --all --production

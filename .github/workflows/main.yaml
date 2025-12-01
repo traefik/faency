@@ -10,6 +10,9 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 360  # 15 days
+
 jobs:
   faency:
     name: Deploy
@@ -28,6 +31,11 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
+
+      - name: Setup safe-chain
+        run: |
+          npm i -g @aikidosec/safe-chain
+          safe-chain setup-ci
 
       - name: Config git
         run: |

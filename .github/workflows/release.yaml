@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 360  # 15 days
+
 jobs:
   faency:
     name: Release
@@ -22,6 +25,11 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
+
+      - name: Setup safe-chain
+        run: |
+          npm i -g @aikidosec/safe-chain
+          safe-chain setup-ci
 
       - name: Install dependencies
         run: yarn workspaces focus --all --production
