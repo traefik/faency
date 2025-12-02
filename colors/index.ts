@@ -25,6 +25,7 @@ import {
 
 import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme';
 import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme';
+import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme';
 import * as deepBlue from './deepBlue';
 import * as elevation from './elevation';
 import * as grayBlue from './grayBlue';
@@ -69,6 +70,7 @@ export const lightColors: ColorMap = Object.entries(customColors)
       // component-specific theme tokens
       ...badgeLightTheme,
       ...cardLightTheme,
+      ...panelLightTheme,
     },
   );
 
@@ -96,6 +98,7 @@ export const darkColors: ColorMap = Object.entries(customColors)
       // component-specific theme tokens
       ...badgeDarkTheme,
       ...cardDarkTheme,
+      ...panelDarkTheme,
     },
   );
 
