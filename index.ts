@@ -55,7 +55,7 @@ export {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './components/DropdownMenu';
-export { Elevation, elevationVariants } from './components/Elevation';
+export { Elevation, elevationVariants, ElevationVanilla } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
