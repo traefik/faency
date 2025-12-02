@@ -1,3 +1,4 @@
+// @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
 

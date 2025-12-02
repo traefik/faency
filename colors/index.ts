@@ -23,7 +23,7 @@ import {
   whiteA,
 } from '@radix-ui/colors';
 
-import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
+import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme';
 import * as deepBlue from './deepBlue';
 import * as elevation from './elevation';
 import * as grayBlue from './grayBlue';
