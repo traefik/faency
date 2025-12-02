@@ -25,6 +25,7 @@ import {
 
 import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme';
 import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme';
+import { inputDarkTheme, inputLightTheme } from '../components/Input/Input.theme';
 import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme';
 import * as deepBlue from './deepBlue';
 import * as elevation from './elevation';
@@ -71,6 +72,7 @@ export const lightColors: ColorMap = Object.entries(customColors)
       ...badgeLightTheme,
       ...cardLightTheme,
       ...panelLightTheme,
+      ...inputLightTheme,
     },
   );
 
@@ -99,6 +101,7 @@ export const darkColors: ColorMap = Object.entries(customColors)
       ...badgeDarkTheme,
       ...cardDarkTheme,
       ...panelDarkTheme,
+      ...inputDarkTheme,
     },
   );
 

@@ -9,7 +9,9 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
+import { Text } from '../Text';
 import { Input, InputProps, InputVariants } from './Input';
+import { InputVanilla } from './Input.vanilla';
 
 const StyledEyeOpenIcon = styled(EyeOpenIcon, {
   '@hover': {
@@ -245,5 +247,101 @@ export const Autofill: StoryFn<typeof InputForStory> = (args) => (
     </Flex>
   </form>
 );
+
+export const Comparison: StoryFn = () => {
+  return (
+    <Flex css={{ gap: '$3' }}>
+      {/* Stitches Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text weight="medium">Stitches</Text>
+
+        <Box>
+          <Label htmlFor="stitches-small">Small</Label>
+          <Input id="stitches-small" size="small" placeholder="Small input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="stitches-default">Default</Label>
+          <Input id="stitches-default" placeholder="Default input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="stitches-large">Large</Label>
+          <Input id="stitches-large" size="large" placeholder="Large input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="stitches-ghost">Ghost</Label>
+          <Input id="stitches-ghost" variant="ghost" placeholder="Ghost input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="stitches-invalid">Invalid</Label>
+          <Input id="stitches-invalid" state="invalid" placeholder="Invalid input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="stitches-disabled">Disabled</Label>
+          <Input id="stitches-disabled" disabled defaultValue="Disabled input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="stitches-adornments">Adornments</Label>
+          <Input
+            id="stitches-adornments"
+            startAdornment={<MagnifyingGlassIcon />}
+            endAdornment={<StyledEyeOpenIcon />}
+            placeholder="With adornments"
+          />
+        </Box>
+      </Flex>
+
+      {/* Vanilla Extract Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text weight="medium">Vanilla Extract</Text>
+
+        <Box>
+          <Label htmlFor="vanilla-small">Small</Label>
+          <InputVanilla id="vanilla-small" size="small" placeholder="Small input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="vanilla-default">Default</Label>
+          <InputVanilla id="vanilla-default" placeholder="Default input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="vanilla-large">Large</Label>
+          <InputVanilla id="vanilla-large" size="large" placeholder="Large input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="vanilla-ghost">Ghost</Label>
+          <InputVanilla id="vanilla-ghost" variant="ghost" placeholder="Ghost input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="vanilla-invalid">Invalid</Label>
+          <InputVanilla id="vanilla-invalid" state="invalid" placeholder="Invalid input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="vanilla-disabled">Disabled</Label>
+          <InputVanilla id="vanilla-disabled" disabled defaultValue="Disabled input" />
+        </Box>
+
+        <Box>
+          <Label htmlFor="vanilla-adornments">Adornments</Label>
+          <InputVanilla
+            id="vanilla-adornments"
+            startAdornment={<MagnifyingGlassIcon />}
+            endAdornment={<StyledEyeOpenIcon />}
+            placeholder="With adornments"
+          />
+        </Box>
+      </Flex>
+    </Flex>
+  );
+};
 
 export default Component;

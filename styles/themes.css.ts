@@ -4,6 +4,7 @@ import { darkColors, lightColors } from '../colors';
 import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
 import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme.css';
 import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
+import { inputDarkTheme, inputLightTheme } from '../components/Input/Input.theme.css';
 import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
 import { tokens } from './tokens.css';
@@ -193,6 +194,7 @@ const lightSemanticColors = {
   textInvalid: lightColors.red9,
   textRed: lightColors.red10,
   ...headingLightTheme,
+  ...inputLightTheme,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -290,6 +292,7 @@ const darkSemanticColors = {
   textInvalid: darkColors.red9,
   textRed: darkColors.red10,
   ...headingDarkTheme,
+  ...inputDarkTheme,
 };
 
 export const darkThemeBlue = createTheme(tokens, {
