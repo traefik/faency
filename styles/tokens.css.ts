@@ -101,6 +101,17 @@ export const tokens = createThemeContract({
 
     // Component-specific tokens - Heading
     headingDefault: null,
+
+    // Component-specific tokens - Input
+    inputBg: null,
+    inputBorder: null,
+    inputFocusBg: null,
+    inputFocusBorder: null,
+    inputHoverBg: null,
+    inputText: null,
+    inputPlaceholder: null,
+    inputDisabledText: null,
+    inputInvalidBorder: null,
   },
   fonts: {
     rubik: null,
