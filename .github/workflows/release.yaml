@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 360  # 15 days
+  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 288  # 15 days
 
 jobs:
   faency:
