@@ -32,7 +32,13 @@ export function VanillaExtractThemeProvider({
 }: VanillaExtractThemeProviderProps) {
   const [mode, setMode] = useState<ThemeMode>(defaultTheme);
   const [appliedPrimaryColor, setPrimaryColor] = useState<PrimaryColor>(primaryColor);
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light');
+  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => {
+    // Initialize with actual system preference to avoid flash
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return 'light';
+  });
 
   useEffect(() => {
     setPrimaryColor(primaryColor);

@@ -19,7 +19,8 @@ export {
 export { Avatar } from './components/Avatar';
 export type { BadgeVanillaProps } from './components/Badge';
 export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
-export { Blockquote } from './components/Blockquote';
+export type { BlockquoteVanillaProps } from './components/Blockquote';
+export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';
 export { Button } from './components/Button';
@@ -63,7 +64,8 @@ export { IconButton } from './components/IconButton';
 export { Image } from './components/Image';
 export type { InputHandle } from './components/Input';
 export { Input } from './components/Input';
-export { Label } from './components/Label';
+export type { LabelVanillaProps } from './components/Label';
+export { Label, LabelVanilla } from './components/Label';
 export { Link } from './components/Link';
 export { Li, Ol, Ul } from './components/List';
 export {
@@ -88,6 +90,8 @@ export {
   NavigationTreeItem,
 } from './components/NavigationTree';
 export { Overlay } from './components/Overlay';
+export type { ParagraphVanillaProps } from './components/Paragraph';
+export { Paragraph, ParagraphVanilla } from './components/Paragraph';
 export {
   Popover,
   PopoverAnchor,
