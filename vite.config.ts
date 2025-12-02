@@ -9,6 +9,9 @@ const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
 
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['@vanilla-extract/recipes/createRuntimeFn'],
+  },
   plugins: [
     react(),
     vanillaExtractPlugin(),
