@@ -100,6 +100,7 @@ export {
   PopoverPortal,
   PopoverTrigger,
 } from './components/Popover';
+export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export { Radio, RadioGroup } from './components/Radio';
 export {
   RadioAccordionContent,

@@ -4,6 +4,7 @@ import { darkColors, lightColors } from '../colors';
 import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
 import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme.css';
 import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
+import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
 import { tokens } from './tokens.css';
 
@@ -187,6 +188,7 @@ const lightSemanticColors = {
   ring: '#3b82f6',
   ...badgeLightTheme,
   ...cardLightTheme,
+  ...panelLightTheme,
   ...textLightTheme,
   textInvalid: lightColors.red9,
   textRed: lightColors.red10,
@@ -283,6 +285,7 @@ const darkSemanticColors = {
   ring: '#60a5fa',
   ...badgeDarkTheme,
   ...cardDarkTheme,
+  ...panelDarkTheme,
   ...textDarkTheme,
   textInvalid: darkColors.red9,
   textRed: darkColors.red10,

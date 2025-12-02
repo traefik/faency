@@ -110,6 +110,9 @@ export const tokens = createThemeContract({
 
     // Component-specific tokens - Heading
     headingDefault: null,
+
+    // Component-specific tokens - Panel
+    panelShadowLight: null,
   },
   fonts: {
     rubik: null,
