@@ -945,12 +945,44 @@ See step-by-step guide for complete implementation.
 
 ### TypeScript Errors
 
-Use `RecipeVariants` type for recipe-based components:
+#### Problem: RecipeVariants returns undefined and variant properties don't exist
+
+Always wrap `RecipeVariants` with `NonNullable` to ensure TypeScript properly extracts variant types:
 
 ```tsx
 import { RecipeVariants } from '@vanilla-extract/recipes';
+
+// ❌ Bad - may return undefined
 type MyComponentVariants = RecipeVariants<typeof myComponentRecipe>;
+
+// ✅ Good - guaranteed to have variant properties
+type MyComponentVariants = NonNullable<RecipeVariants<typeof myComponentRecipe>>;
+
+export interface MyComponentOwnProps extends CSSProps {
+  size?: MyComponentVariants['size'];
+  variant?: MyComponentVariants['variant'];
+}
 ```
+
+Without `NonNullable`, TypeScript may treat the variants as `undefined`, causing errors like "Property 'size' does not exist on type 'MyComponentVariants'".
+
+#### Problem: Stitches components used in vanilla components cause type errors
+
+Never use Stitches components (like `Box`, `Label`) inside vanilla-extract components:
+
+```tsx
+// ❌ Bad - Type error: CSSProps not assignable to Stitches CSS type
+import { Box } from '../Box';
+<Box css={rootCss}>...</Box>
+
+// ✅ Good - Use plain HTML or vanilla components
+<div style={rootMergedStyles}>...</div>
+// OR
+import { LabelVanilla } from '../Label';
+<LabelVanilla variant={variant}>...</LabelVanilla>
+```
+
+Stitches components expect Stitches `CSS` type, but vanilla components use vanilla-extract `CSSProps` type. Always use vanilla-extract versions of components (e.g., `BoxVanilla`, `LabelVanilla`) or plain HTML elements.
 
 ### Build or Storybook Issues
 
