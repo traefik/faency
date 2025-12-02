@@ -7,6 +7,7 @@ import { headingDarkTheme, headingLightTheme } from '../components/Heading/Headi
 import { inputDarkTheme, inputLightTheme } from '../components/Input/Input.theme.css';
 import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
+import { textareaDarkTheme, textareaLightTheme } from '../components/Textarea/Textarea.theme.css';
 import { tokens } from './tokens.css';
 
 // Type for primary colors
@@ -195,6 +196,7 @@ const lightSemanticColors = {
   textRed: lightColors.red10,
   ...headingLightTheme,
   ...inputLightTheme,
+  ...textareaLightTheme,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -293,6 +295,7 @@ const darkSemanticColors = {
   textRed: darkColors.red10,
   ...headingDarkTheme,
   ...inputDarkTheme,
+  ...textareaDarkTheme,
 };
 
 export const darkThemeBlue = createTheme(tokens, {

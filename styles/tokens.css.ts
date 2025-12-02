@@ -123,6 +123,17 @@ export const tokens = createThemeContract({
     inputPlaceholder: null,
     inputDisabledText: null,
     inputInvalidBorder: null,
+
+    // Component-specific tokens - Textarea
+    textareaBg: null,
+    textareaBorder: null,
+    textareaFocusBg: null,
+    textareaFocusBorder: null,
+    textareaHoverBg: null,
+    textareaText: null,
+    textareaPlaceholder: null,
+    textareaDisabledText: null,
+    textareaInvalidBorder: null,
   },
   fonts: {
     rubik: null,

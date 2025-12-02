@@ -8,7 +8,9 @@ import ignoreArgType from '../../utils/ignoreArgType';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Box } from '../Box';
 import { Flex } from '../Flex';
+import { Text } from '../Text';
 import { Textarea, TextareaProps, TextareaVariants } from './Textarea';
+import { TextareaVanilla } from './Textarea.vanilla';
 
 const BaseTextarea = (props: TextareaProps): JSX.Element => <Textarea {...props} />;
 
@@ -155,6 +157,96 @@ export const ReadOnlyCopy: StoryFn<typeof TextareaForStory> = (args) => {
         }
         {...args}
       />
+    </Flex>
+  );
+};
+
+export const Comparison: StoryFn = () => {
+  return (
+    <Flex css={{ gap: '$3' }}>
+      {/* Stitches Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text weight="medium">Stitches</Text>
+
+        <Textarea id="stitches-basic" label="Basic" placeholder="Basic textarea" rows={4} />
+        <Textarea
+          id="stitches-invalid"
+          state="invalid"
+          label="Invalid"
+          placeholder="Invalid textarea"
+          rows={4}
+        />
+        <Textarea
+          id="stitches-disabled"
+          disabled
+          label="Disabled"
+          defaultValue="Disabled textarea"
+          rows={4}
+        />
+        <Textarea
+          id="stitches-ghost"
+          variant="ghost"
+          label="Ghost"
+          placeholder="Ghost variant"
+          rows={4}
+        />
+        <Textarea
+          id="stitches-resize-none"
+          resize="none"
+          label="No Resize"
+          placeholder="Cannot resize"
+          rows={4}
+        />
+        <Textarea
+          id="stitches-resize-vertical"
+          resize="vertical"
+          label="Vertical Resize"
+          placeholder="Vertical resize only"
+          rows={4}
+        />
+      </Flex>
+
+      {/* Vanilla Extract Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text weight="medium">Vanilla Extract</Text>
+
+        <TextareaVanilla id="vanilla-basic" label="Basic" placeholder="Basic textarea" rows={4} />
+        <TextareaVanilla
+          id="vanilla-invalid"
+          state="invalid"
+          label="Invalid"
+          placeholder="Invalid textarea"
+          rows={4}
+        />
+        <TextareaVanilla
+          id="vanilla-disabled"
+          disabled
+          label="Disabled"
+          defaultValue="Disabled textarea"
+          rows={4}
+        />
+        <TextareaVanilla
+          id="vanilla-ghost"
+          variant="ghost"
+          label="Ghost"
+          placeholder="Ghost variant"
+          rows={4}
+        />
+        <TextareaVanilla
+          id="vanilla-resize-none"
+          resize="none"
+          label="No Resize"
+          placeholder="Cannot resize"
+          rows={4}
+        />
+        <TextareaVanilla
+          id="vanilla-resize-vertical"
+          resize="vertical"
+          label="Vertical Resize"
+          placeholder="Vertical resize only"
+          rows={4}
+        />
+      </Flex>
     </Flex>
   );
 };
