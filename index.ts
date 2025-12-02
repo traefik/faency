@@ -116,7 +116,8 @@ export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Ta
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
 export { Text } from './components/Text';
 export { Textarea } from './components/Textarea';
-export { TextField } from './components/TextField';
+export type { TextFieldVanillaProps } from './components/TextField';
+export { TextField, TextFieldVanilla } from './components/TextField';
 export { Tooltip, TooltipContent, TooltipRoot, TooltipTrigger } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
