@@ -7,9 +7,9 @@ import {
 import React from 'react';
 
 import { styled } from '../../stitches.config';
-import { Box } from '../Box';
+import { BoxVanilla } from '../Box';
 import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '../Input';
-import { Label } from '../Label';
+import { LabelVanilla } from '../Label';
 import { Tooltip } from '../Tooltip';
 
 // TYPES
@@ -109,9 +109,9 @@ export const TextFieldVanilla = React.forwardRef<
       }
       if (typeof LabelOrComponent === 'string') {
         return (
-          <Label variant={labelVariant} htmlFor={id}>
+          <LabelVanilla variant={labelVariant} htmlFor={id}>
             {LabelOrComponent}
-          </Label>
+          </LabelVanilla>
         );
       }
       return <LabelOrComponent variant={labelVariant} htmlFor={id} />;
@@ -183,7 +183,7 @@ export const TextFieldVanilla = React.forwardRef<
     );
 
     return (
-      <Box css={css}>
+      <BoxVanilla css={css}>
         {LabelNode}
         <InputVanilla
           id={id}
@@ -216,7 +216,7 @@ export const TextFieldVanilla = React.forwardRef<
           onBlur={handleBlur}
           {...props}
         />
-      </Box>
+      </BoxVanilla>
     );
   },
 );

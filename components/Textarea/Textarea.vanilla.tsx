@@ -20,7 +20,7 @@ export interface TextareaVanillaOwnProps extends CSSProps {
   resize?: StyledTextareaRecipeVariants['resize'];
   label?: string;
   endAdornment?: React.ReactNode;
-  rootCss?: CSSProps;
+  rootCss?: CSSProps['css'];
 }
 
 export type TextareaVanillaProps = Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> &
