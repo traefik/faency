@@ -945,12 +945,131 @@ See step-by-step guide for complete implementation.
 
 ### TypeScript Errors
 
-Use `RecipeVariants` type for recipe-based components:
+#### Problem: RecipeVariants returns undefined and variant properties don't exist
+
+Always wrap `RecipeVariants` with `NonNullable` to ensure TypeScript properly extracts variant types:
 
 ```tsx
 import { RecipeVariants } from '@vanilla-extract/recipes';
+
+// ❌ Bad - may return undefined
 type MyComponentVariants = RecipeVariants<typeof myComponentRecipe>;
+
+// ✅ Good - guaranteed to have variant properties
+type MyComponentVariants = NonNullable<RecipeVariants<typeof myComponentRecipe>>;
+
+export interface MyComponentOwnProps extends CSSProps {
+  size?: MyComponentVariants['size'];
+  variant?: MyComponentVariants['variant'];
+}
 ```
+
+Without `NonNullable`, TypeScript may treat the variants as `undefined`, causing errors like "Property 'size' does not exist on type 'MyComponentVariants'".
+
+#### Problem: Stitches components used in vanilla components cause type errors
+
+**CRITICAL RULE:** Never mix Stitches and vanilla-extract components. Always use vanilla-extract versions inside vanilla components.
+
+```tsx
+// ❌ Bad - Type error: CSSProps not assignable to Stitches CSS type
+import { Box } from '../Box';
+import { Label } from '../Label';
+<Box css={rootCss}>...</Box>
+<Label variant={variant}>...</Label>
+
+// ✅ Good - Use vanilla-extract components
+import { BoxVanilla } from '../Box';
+import { LabelVanilla } from '../Label';
+<BoxVanilla css={rootCss}>...</BoxVanilla>
+<LabelVanilla variant={variant}>...</LabelVanilla>
+
+// ✅ Also good - Use plain HTML when vanilla version doesn't exist
+<div style={rootMergedStyles}>...</div>
+```
+
+**Why this matters:**
+
+- Stitches components expect Stitches `CSS` type
+- Vanilla components use vanilla-extract `CSSProps` type
+- Mixing them causes TypeScript errors and architectural inconsistency
+- Always prefer vanilla-extract components (`BoxVanilla`, `LabelVanilla`, etc.) over plain HTML for consistency
+
+**Real-world example from TextField migration:**
+
+```tsx
+// Before (wrong):
+import { Box } from '../Box';
+import { Label } from '../Label';
+
+// After (correct):
+import { BoxVanilla } from '../Box';
+import { LabelVanilla } from '../Label';
+```
+
+#### Problem: Props typed as `CSSProps` require `as any` in tests
+
+If you see `as any` being used to pass CSS properties to a component prop, this indicates a type mismatch.
+
+**Root cause:** The prop is typed as `CSSProps` but should be `CSSProps['css']`.
+
+```tsx
+// ❌ Wrong - requires 'as any' in tests
+interface MyComponentProps {
+  rootCss?: CSSProps; // Wrong type
+}
+
+// Component implementation
+const { style: rootCssStyles, vars: rootVars } = processCSSProp(rootCss, colors);
+// TypeScript error: rootCss is CSSProps but processCSSProp expects CSSProps['css']
+
+// ✅ Correct - no 'as any' needed
+interface MyComponentProps {
+  rootCss?: CSSProps['css']; // Correct type
+}
+
+// Component implementation
+const { style: rootCssStyles, vars: rootVars } = processCSSProp(rootCss, colors);
+// Works perfectly!
+```
+
+**When to use each type:**
+
+- `extends CSSProps` - For component interfaces that expose a `css` prop
+- `rootCss?: CSSProps['css']` - For additional CSS props that pass directly to `processCSSProp()`
+
+**Example from Textarea component:**
+
+```tsx
+// Correct typing:
+export interface TextareaVanillaOwnProps extends CSSProps {
+  // ... other props
+  rootCss?: CSSProps['css']; // ← Correct: expects inner CSS object
+}
+
+// Usage in tests (no 'as any' needed):
+<TextareaVanilla rootCss={{ p: '$4', m: '$2' }} />;
+```
+
+**Understanding CSSProps property names:**
+
+The `CSSProps` interface accepts both abbreviated and full property names:
+
+```tsx
+// Both work identically:
+<Component css={{ p: '$4', m: '$2' }} />              // Abbreviated
+<Component css={{ padding: '$4', margin: '$2' }} />   // Full names
+```
+
+This flexibility exists because:
+
+1. `CSSProps` has a `[key: string]: any` index signature (line 55 in cssProps.ts)
+2. `processCSSProp()` explicitly handles both forms in its switch statement (lines 214-270)
+
+**When debugging type errors:**
+
+1. Check if prop is typed as `CSSProps` when it should be `CSSProps['css']`
+2. Verify the prop value is passed directly to `processCSSProp()`
+3. Remove `as any` and fix the type definition instead
 
 ### Build or Storybook Issues
 

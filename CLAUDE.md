@@ -103,3 +103,66 @@ Components follow a consistent pattern:
 - **Conventional Commits**: Follow conventional commit format for semantic releases
 - **Accessibility**: All components must be accessible and support keyboard navigation
 - **Storybook**: Every component requires comprehensive stories showing all variants
+
+## Vanilla Extract Migration Guidelines
+
+When working with vanilla-extract components during the migration:
+
+### Component Isolation Rule
+
+**CRITICAL:** Never mix Stitches and vanilla-extract components. Always use vanilla-extract versions of components inside vanilla-extract components.
+
+```tsx
+// ❌ Wrong - mixing Stitches and vanilla-extract
+import { Box } from '../Box';
+import { Label } from '../Label';
+<Box css={css}>...</Box>;
+
+// ✅ Correct - use vanilla versions or plain HTML
+import { BoxVanilla } from '../Box';
+import { LabelVanilla } from '../Label';
+<BoxVanilla css={css}>...</BoxVanilla>;
+```
+
+**Why:** Stitches components expect Stitches `CSS` type, but vanilla components use `CSSProps` type. Mixing them causes type errors and architectural inconsistency.
+
+**When vanilla version doesn't exist:** Use plain HTML elements (`<div>`, `<span>`, etc.) with manual style processing.
+
+### CSSProps Type System
+
+Understanding the `CSSProps` interface is crucial for proper type safety:
+
+**Key Pattern - `CSSProps['css']` vs `CSSProps`:**
+
+```tsx
+// For props that accept CSS properties directly
+interface MyComponentProps {
+  rootCss?: CSSProps['css']; // ✅ Correct - expects inner CSS object
+  // NOT: rootCss?: CSSProps  // ❌ Wrong - expects wrapper with css property
+}
+
+// Usage in component
+const { style: rootCssStyles, vars: rootVars } = processCSSProp(rootCss, colors);
+```
+
+**When to use each:**
+
+- `css?: CSSProps['css']` - For props that pass directly to `processCSSProp()`
+- `extends CSSProps` - For components that have a `css` prop on the interface
+
+**Property Name Flexibility:**
+
+The `CSSProps` interface accepts both abbreviated and full property names:
+
+```tsx
+// Both work identically
+<Component css={{ p: '$4', m: '$2' }} />        // Abbreviated
+<Component css={{ padding: '$4', margin: '$2' }} />  // Full names
+```
+
+This works because:
+
+1. `CSSProps` has `[key: string]: any` index signature
+2. `processCSSProp()` explicitly handles both forms in its switch statement
+
+**When you see `as any` in tests:** This usually indicates a type mismatch. Check if the prop should be `CSSProps['css']` instead of `CSSProps`.
