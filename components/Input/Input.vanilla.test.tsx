@@ -1,8 +1,9 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-import { InputVanilla } from './Input.vanilla';
+import { InputVanilla, InputVanillaHandle } from './Input.vanilla';
 
 describe('InputVanilla', () => {
   const renderWithTheme = (ui: React.ReactElement) => {
@@ -125,7 +126,7 @@ describe('InputVanilla', () => {
   });
 
   it('should forward ref correctly', () => {
-    const ref = { current: null };
+    const ref = React.createRef<InputVanillaHandle>();
     renderWithTheme(<InputVanilla ref={ref} />);
 
     expect(ref.current).not.toBeNull();
@@ -133,7 +134,7 @@ describe('InputVanilla', () => {
   });
 
   it('should have clear method on ref', () => {
-    const ref = { current: null };
+    const ref = React.createRef<InputVanillaHandle>();
     const { container } = renderWithTheme(<InputVanilla ref={ref} defaultValue="test value" />);
     const wrapper = container.firstChild;
     const input = wrapper?.firstChild as HTMLInputElement;
@@ -141,7 +142,7 @@ describe('InputVanilla', () => {
     expect(input.value).toBe('test value');
 
     if (ref.current) {
-      (ref.current as any).clear();
+      ref.current.clear();
     }
 
     expect(input.value).toBe('');
