@@ -6,6 +6,7 @@ import { Flex } from '../Flex';
 import { H2 } from '../Heading';
 import { Text } from '../Text';
 import { Card } from './Card';
+import { CardVanilla } from './Card.vanilla';
 
 const Component: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -124,5 +125,107 @@ export const Elevation: StoryFn<typeof Card> = () => (
 );
 
 Elevation.args = {};
+
+export const Comparison: StoryFn = () => {
+  const cardContent = (
+    <>
+      <H2 css={{ mb: '$3' }}>Card Title</H2>
+      <Text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua.
+      </Text>
+    </>
+  );
+
+  return (
+    <Flex css={{ gap: '$3' }}>
+      {/* Stitches Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text css={{ fontWeight: 'bold' }}>Stitches</Text>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Basic</Text>
+          <Card>{cardContent}</Card>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Ghost</Text>
+          <Card variant="ghost">{cardContent}</Card>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Inner</Text>
+          <Card>
+            <H2 css={{ mb: '$3' }}>Outer Card</H2>
+            <Card variant="inner">{cardContent}</Card>
+          </Card>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Active</Text>
+          <Card active>{cardContent}</Card>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Interactive</Text>
+          <Card interactive>{cardContent}</Card>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Elevation 2</Text>
+          <Card elevation={2}>{cardContent}</Card>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Elevation 5</Text>
+          <Card elevation={5}>{cardContent}</Card>
+        </div>
+      </Flex>
+
+      {/* Vanilla Extract Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text css={{ fontWeight: 'bold' }}>Vanilla Extract</Text>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Basic</Text>
+          <CardVanilla>{cardContent}</CardVanilla>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Ghost</Text>
+          <CardVanilla variant="ghost">{cardContent}</CardVanilla>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Inner</Text>
+          <CardVanilla>
+            <H2 css={{ mb: '$3' }}>Outer Card</H2>
+            <CardVanilla variant="inner">{cardContent}</CardVanilla>
+          </CardVanilla>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Active</Text>
+          <CardVanilla active>{cardContent}</CardVanilla>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Interactive</Text>
+          <CardVanilla interactive>{cardContent}</CardVanilla>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Elevation 2</Text>
+          <CardVanilla elevation={2}>{cardContent}</CardVanilla>
+        </div>
+
+        <div>
+          <Text css={{ mb: '$2' }}>Elevation 5</Text>
+          <CardVanilla elevation={5}>{cardContent}</CardVanilla>
+        </div>
+      </Flex>
+    </Flex>
+  );
+};
 
 export default Component;

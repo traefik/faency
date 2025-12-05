@@ -82,6 +82,7 @@ export const tokens = createThemeContract({
     '02dp': null,
     '03dp': null,
     '04dp': null,
+    '05dp': null,
     '06dp': null,
     '08dp': null,
     '12dp': null,
@@ -92,6 +93,14 @@ export const tokens = createThemeContract({
     badgeInteractiveBackgroundHover: null,
     badgeInteractiveBackgroundActive: null,
 
+    // Component-specific tokens - Card
+    cardBackground: null,
+    cardHoverBackground: null,
+    cardHoverBorder: null,
+    cardActiveBackground: null,
+    cardActiveBorder: null,
+    innerCardBgColor: null,
+
     // Component-specific tokens - Text
     textSubtle: null,
     textDefault: null,
@@ -101,6 +110,9 @@ export const tokens = createThemeContract({
 
     // Component-specific tokens - Heading
     headingDefault: null,
+
+    // Component-specific tokens - Panel
+    panelShadowLight: null,
   },
   fonts: {
     rubik: null,

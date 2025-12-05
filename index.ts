@@ -25,7 +25,7 @@ export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';
 export { Button } from './components/Button';
 export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
-export { Card } from './components/Card';
+export { Card, CardVanilla } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 export { Container, ContainerVanilla } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
@@ -55,7 +55,7 @@ export {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './components/DropdownMenu';
-export { Elevation, elevationVariants } from './components/Elevation';
+export { Elevation, elevationVariants, ElevationVanilla } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
@@ -100,6 +100,7 @@ export {
   PopoverPortal,
   PopoverTrigger,
 } from './components/Popover';
+export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export { Radio, RadioGroup } from './components/Radio';
 export {
   RadioAccordionContent,
