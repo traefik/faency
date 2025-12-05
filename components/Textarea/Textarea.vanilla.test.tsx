@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
@@ -65,7 +65,7 @@ describe('TextareaVanilla', () => {
   });
 
   it('should render with endAdornment', () => {
-    const { container } = renderWithTheme(
+    renderWithTheme(
       <TextareaVanilla
         endAdornment={<span>End Adornment</span>}
         placeholder="Textarea with end adornment"
