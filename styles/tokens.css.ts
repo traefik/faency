@@ -113,6 +113,27 @@ export const tokens = createThemeContract({
 
     // Component-specific tokens - Panel
     panelShadowLight: null,
+    // Component-specific tokens - Input
+    inputBg: null,
+    inputBorder: null,
+    inputFocusBg: null,
+    inputFocusBorder: null,
+    inputHoverBg: null,
+    inputText: null,
+    inputPlaceholder: null,
+    inputDisabledText: null,
+    inputInvalidBorder: null,
+
+    // Component-specific tokens - Textarea
+    textareaBg: null,
+    textareaBorder: null,
+    textareaFocusBg: null,
+    textareaFocusBorder: null,
+    textareaHoverBg: null,
+    textareaText: null,
+    textareaPlaceholder: null,
+    textareaDisabledText: null,
+    textareaInvalidBorder: null,
   },
   fonts: {
     rubik: null,

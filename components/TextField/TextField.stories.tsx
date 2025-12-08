@@ -16,6 +16,7 @@ import { Label } from '../Label';
 import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
 import { Text } from '../Text';
 import { TextField, TextFieldProps, TextFieldVariants } from './TextField';
+import { TextFieldVanilla } from './TextField.vanilla';
 
 const BaseTextField = (props: TextFieldProps): JSX.Element => <TextField {...props} />;
 const TextFieldForStory = modifyVariantsForStory<
@@ -199,5 +200,84 @@ LabelComponent.args = {
   label: label,
 };
 ignoreArgType('id', LabelComponent);
+
+export const Comparison: StoryFn = () => {
+  return (
+    <Flex css={{ gap: '$3' }}>
+      {/* Stitches Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text weight="medium">Stitches</Text>
+
+        <TextField id="stitches-small" size="small" label="Small" placeholder="Small input" />
+        <TextField id="stitches-default" label="Default" placeholder="Default input" />
+        <TextField id="stitches-large" size="large" label="Large" placeholder="Large input" />
+        <TextField
+          id="stitches-invalid"
+          state="invalid"
+          label="Invalid"
+          placeholder="Invalid input"
+        />
+        <TextField id="stitches-disabled" disabled label="Disabled" defaultValue="Disabled input" />
+        <TextField
+          id="stitches-clearable"
+          clearable
+          label="Clearable"
+          placeholder="Clearable input"
+        />
+        <TextField
+          id="stitches-password"
+          type="password"
+          label="Password"
+          placeholder="Enter password"
+        />
+        <TextField
+          id="stitches-adornment"
+          startAdornment={<MagnifyingGlassIcon />}
+          label="With Adornment"
+          placeholder="Search..."
+        />
+      </Flex>
+
+      {/* Vanilla Extract Column */}
+      <Flex css={{ flex: 1, flexDirection: 'column', gap: '$3' }}>
+        <Text weight="medium">Vanilla Extract</Text>
+
+        <TextFieldVanilla id="vanilla-small" size="small" label="Small" placeholder="Small input" />
+        <TextFieldVanilla id="vanilla-default" label="Default" placeholder="Default input" />
+        <TextFieldVanilla id="vanilla-large" size="large" label="Large" placeholder="Large input" />
+        <TextFieldVanilla
+          id="vanilla-invalid"
+          state="invalid"
+          label="Invalid"
+          placeholder="Invalid input"
+        />
+        <TextFieldVanilla
+          id="vanilla-disabled"
+          disabled
+          label="Disabled"
+          defaultValue="Disabled input"
+        />
+        <TextFieldVanilla
+          id="vanilla-clearable"
+          clearable
+          label="Clearable"
+          placeholder="Clearable input"
+        />
+        <TextFieldVanilla
+          id="vanilla-password"
+          type="password"
+          label="Password"
+          placeholder="Enter password"
+        />
+        <TextFieldVanilla
+          id="vanilla-adornment"
+          startAdornment={<MagnifyingGlassIcon />}
+          label="With Adornment"
+          placeholder="Search..."
+        />
+      </Flex>
+    </Flex>
+  );
+};
 
 export default Component;
