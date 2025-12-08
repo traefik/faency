@@ -7,9 +7,9 @@ import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { labelRecipe } from './Label.vanilla.css';
 
-type LabelRecipeVariants = RecipeVariants<typeof labelRecipe>;
+type LabelRecipeVariants = NonNullable<RecipeVariants<typeof labelRecipe>>;
 
-interface LabelOwnProps extends Omit<LabelRecipeVariants, never>, CSSProps {}
+interface LabelOwnProps extends LabelRecipeVariants, CSSProps {}
 
 export type LabelVanillaProps = LabelPrimitive.LabelProps & LabelOwnProps;
 

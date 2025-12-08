@@ -2,7 +2,9 @@ import { createTheme } from '@vanilla-extract/css';
 
 import { darkColors, lightColors } from '../colors';
 import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
+import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme.css';
 import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
+import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
 import { tokens } from './tokens.css';
 
@@ -150,6 +152,7 @@ function createBaseColors(colors: typeof lightColors | typeof darkColors) {
     '02dp': colors['02dp'],
     '03dp': colors['03dp'],
     '04dp': colors['04dp'],
+    '05dp': colors['05dp'],
     '06dp': colors['06dp'],
     '08dp': colors['08dp'],
     '12dp': colors['12dp'],
@@ -184,6 +187,8 @@ const lightSemanticColors = {
   destructiveForeground: '#ffffff',
   ring: '#3b82f6',
   ...badgeLightTheme,
+  ...cardLightTheme,
+  ...panelLightTheme,
   ...textLightTheme,
   textInvalid: lightColors.red9,
   textRed: lightColors.red10,
@@ -279,6 +284,8 @@ const darkSemanticColors = {
   destructiveForeground: '#ffffff',
   ring: '#60a5fa',
   ...badgeDarkTheme,
+  ...cardDarkTheme,
+  ...panelDarkTheme,
   ...textDarkTheme,
   textInvalid: darkColors.red9,
   textRed: darkColors.red10,
