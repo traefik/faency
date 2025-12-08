@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useLayoutEffect, useState } from 'react';
 
 import { darkColors, lightColors } from '../colors';
 import { PrimaryColor, themes } from './themes.css';
@@ -33,7 +33,9 @@ export function VanillaExtractThemeProvider({
   const [mode, setMode] = useState<ThemeMode>(defaultTheme);
   const [appliedPrimaryColor, setPrimaryColor] = useState<PrimaryColor>(primaryColor);
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => {
-    // Initialize with actual system preference to avoid flash
+    if (forcedTheme) {
+      return forcedTheme;
+    }
     if (typeof window !== 'undefined') {
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
@@ -45,6 +47,11 @@ export function VanillaExtractThemeProvider({
   }, [primaryColor]);
 
   useEffect(() => {
+    if (forcedTheme) {
+      setSystemTheme(forcedTheme);
+      return;
+    }
+
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
 
@@ -54,13 +61,12 @@ export function VanillaExtractThemeProvider({
 
     mediaQuery.addEventListener('change', handler);
     return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
+  }, [forcedTheme]);
 
   const resolvedTheme: 'light' | 'dark' = forcedTheme || (mode === 'system' ? systemTheme : mode);
 
   const baseColors = resolvedTheme === 'dark' ? darkColors : lightColors;
 
-  // Add semantic colors based on the current theme and primary color
   const semanticColors =
     resolvedTheme === 'dark'
       ? {
@@ -115,14 +121,13 @@ export function VanillaExtractThemeProvider({
     ...semanticColors,
   };
 
-  useEffect(() => {
+  // Use useLayoutEffect to apply theme class synchronously before paint
+  useLayoutEffect(() => {
     const themeClass = themes[resolvedTheme][appliedPrimaryColor];
 
-    // Remove all theme classes
     Object.values(themes.light).forEach((cls) => document.body.classList.remove(cls));
     Object.values(themes.dark).forEach((cls) => document.body.classList.remove(cls));
 
-    // Add current theme class
     document.body.classList.add(themeClass);
 
     return () => {
