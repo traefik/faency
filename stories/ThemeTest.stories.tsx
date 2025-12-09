@@ -223,6 +223,3 @@ export const ThemeAPITest: StoryFn = () => {
 
   return <ThemeInfo />;
 };
-
-PrimaryColorShowcase.storyName = 'Primary Color Showcase';
-ThemeAPITest.storyName = 'Theme API Test';
