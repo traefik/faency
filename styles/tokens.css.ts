@@ -134,6 +134,33 @@ export const tokens = createThemeContract({
     textareaPlaceholder: null,
     textareaDisabledText: null,
     textareaInvalidBorder: null,
+
+    // Component-specific tokens - Button
+    buttonPrimaryText: null,
+    buttonPrimaryFocusBorder: null,
+    buttonPrimaryFocusBg: null,
+    buttonPrimaryGhostHoverText: null,
+    buttonSecondaryBg: null,
+    buttonSecondaryText: null,
+    buttonSecondaryBorder: null,
+    buttonSecondaryFocusBorder: null,
+    buttonRedBg: null,
+    buttonRedText: null,
+    buttonRedHoverText: null,
+    buttonRedFocusBg: null,
+
+    // Component-specific tokens - IconButton
+    iconButtonBackground: null,
+    iconButtonHoverBorder: null,
+    iconButtonHoverBackground: null,
+    iconButtonFocusBorder: null,
+
+    // Component-specific tokens - ButtonSwitch
+    buttonSwitchContainerBg: null,
+    buttonSwitchActiveBg: null,
+    buttonSwitchOffBg: null,
+    buttonSwitchOffColor: null,
+    buttonSwitchActiveColor: null,
   },
   fonts: {
     rubik: null,
