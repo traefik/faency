@@ -134,6 +134,20 @@ export const tokens = createThemeContract({
     textareaPlaceholder: null,
     textareaDisabledText: null,
     textareaInvalidBorder: null,
+
+    // Component-specific tokens - Button
+    buttonPrimaryText: null,
+    buttonPrimaryFocusBorder: null,
+    buttonPrimaryFocusBg: null,
+    buttonPrimaryGhostHoverText: null,
+    buttonSecondaryBg: null,
+    buttonSecondaryText: null,
+    buttonSecondaryBorder: null,
+    buttonSecondaryFocusBorder: null,
+    buttonRedBg: null,
+    buttonRedText: null,
+    buttonRedHoverText: null,
+    buttonRedFocusBg: null,
   },
   fonts: {
     rubik: null,
