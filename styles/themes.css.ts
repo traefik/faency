@@ -4,6 +4,10 @@ import tinycolor from 'tinycolor2';
 import { darkColors, lightColors } from '../colors';
 import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
 import { buttonDarkTheme, buttonLightTheme } from '../components/Button/Button.theme.css';
+import {
+  buttonSwitchDarkTheme,
+  buttonSwitchLightTheme,
+} from '../components/ButtonSwitch/ButtonSwitch.theme.css';
 import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme.css';
 import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
 import {
@@ -198,6 +202,19 @@ function getButtonDarkColors(primaryColorName: string) {
   };
 }
 
+// Helper functions to generate ButtonSwitch theme colors based on primary color
+function getButtonSwitchLightColors(primaryColorName: string) {
+  return {
+    buttonSwitchActiveBg: lightColors[`${primaryColorName}9`],
+  };
+}
+
+function getButtonSwitchDarkColors(primaryColorName: string) {
+  return {
+    buttonSwitchActiveBg: darkColors[`${primaryColorName}9`],
+  };
+}
+
 // ============================================================================
 // LIGHT THEMES
 // ============================================================================
@@ -237,6 +254,9 @@ const lightSemanticColors = {
   buttonPrimaryText: 'white',
   buttonRedText: 'white',
   buttonRedHoverText: lightColors.red10,
+  ...buttonSwitchLightTheme,
+  buttonSwitchContainerBg: lightColors['02dp'],
+  buttonSwitchOffColor: lightColors.deepBlue11,
   iconButtonHoverBorder: lightColors.slate9,
   iconButtonHoverBackground: lightColors.slateA3,
   iconButtonFocusBorder: lightColors.slate10,
@@ -247,6 +267,7 @@ export const lightThemeBlue = createTheme(tokens, {
     primary: lightColors.blue9, // Set primary to the actual color value
     ...lightSemanticColors,
     ...getButtonLightColors('blue'),
+    ...getButtonSwitchLightColors('blue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -257,6 +278,7 @@ export const lightThemeNeon = createTheme(tokens, {
     primary: lightColors.neon9, // Set primary to the actual color value
     ...lightSemanticColors,
     ...getButtonLightColors('neon'),
+    ...getButtonSwitchLightColors('neon'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -267,6 +289,7 @@ export const lightThemeOrange = createTheme(tokens, {
     primary: lightColors.orange9, // Set primary to the actual color value
     ...lightSemanticColors,
     ...getButtonLightColors('orange'),
+    ...getButtonSwitchLightColors('orange'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -277,6 +300,7 @@ export const lightThemeRed = createTheme(tokens, {
     primary: lightColors.red9, // Set primary to the actual color value
     ...lightSemanticColors,
     ...getButtonLightColors('red'),
+    ...getButtonSwitchLightColors('red'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -287,6 +311,7 @@ export const lightThemeGreen = createTheme(tokens, {
     primary: lightColors.green9, // Set primary to the actual color value
     ...lightSemanticColors,
     ...getButtonLightColors('green'),
+    ...getButtonSwitchLightColors('green'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -297,6 +322,7 @@ export const lightThemeDeepBlue = createTheme(tokens, {
     primary: lightColors.deepBlue9, // Set primary to the actual color value
     ...lightSemanticColors,
     ...getButtonLightColors('deepBlue'),
+    ...getButtonSwitchLightColors('deepBlue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -307,6 +333,7 @@ export const lightThemeGrayBlue = createTheme(tokens, {
     primary: lightColors.grayBlue9, // Set primary to the actual color value
     ...lightSemanticColors,
     ...getButtonLightColors('grayBlue'),
+    ...getButtonSwitchLightColors('grayBlue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -351,6 +378,10 @@ const darkSemanticColors = {
   buttonPrimaryText: darkColors.deepBlue2,
   buttonRedText: 'white',
   buttonRedHoverText: darkColors.red10,
+  ...buttonSwitchDarkTheme,
+  buttonSwitchContainerBg: darkColors['02dp'],
+  buttonSwitchOffColor: 'white',
+  buttonSwitchActiveColor: darkColors.deepBlue2,
   iconButtonBackground: darkColors.deepBlue2,
   iconButtonHoverBorder: darkColors.deepBlue6,
   iconButtonHoverBackground: darkColors.slateA4,
@@ -362,6 +393,7 @@ export const darkThemeBlue = createTheme(tokens, {
     primary: darkColors.blue9, // Set primary to the actual color value
     ...darkSemanticColors,
     ...getButtonDarkColors('blue'),
+    ...getButtonSwitchDarkColors('blue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -372,6 +404,7 @@ export const darkThemeNeon = createTheme(tokens, {
     primary: darkColors.neon9, // Set primary to the actual color value
     ...darkSemanticColors,
     ...getButtonDarkColors('neon'),
+    ...getButtonSwitchDarkColors('neon'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -382,6 +415,7 @@ export const darkThemeOrange = createTheme(tokens, {
     primary: darkColors.orange9, // Set primary to the actual color value
     ...darkSemanticColors,
     ...getButtonDarkColors('orange'),
+    ...getButtonSwitchDarkColors('orange'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -392,6 +426,7 @@ export const darkThemeRed = createTheme(tokens, {
     primary: darkColors.red9, // Set primary to the actual color value
     ...darkSemanticColors,
     ...getButtonDarkColors('red'),
+    ...getButtonSwitchDarkColors('red'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -402,6 +437,7 @@ export const darkThemeGreen = createTheme(tokens, {
     primary: darkColors.green9, // Set primary to the actual color value
     ...darkSemanticColors,
     ...getButtonDarkColors('green'),
+    ...getButtonSwitchDarkColors('green'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -412,6 +448,7 @@ export const darkThemeDeepBlue = createTheme(tokens, {
     primary: darkColors.deepBlue9, // Set primary to the actual color value
     ...darkSemanticColors,
     ...getButtonDarkColors('deepBlue'),
+    ...getButtonSwitchDarkColors('deepBlue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -422,6 +459,7 @@ export const darkThemeGrayBlue = createTheme(tokens, {
     primary: darkColors.grayBlue9, // Set primary to the actual color value
     ...darkSemanticColors,
     ...getButtonDarkColors('grayBlue'),
+    ...getButtonSwitchDarkColors('grayBlue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,

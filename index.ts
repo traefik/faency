@@ -25,7 +25,12 @@ export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';
 export type { ButtonVanillaProps } from './components/Button';
 export { Button, ButtonVanilla } from './components/Button';
-export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
+export {
+  ButtonSwitchContainer,
+  ButtonSwitchContainerVanilla,
+  ButtonSwitchItem,
+  ButtonSwitchItemVanilla,
+} from './components/ButtonSwitch';
 export { Card, CardVanilla } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 export { Container, ContainerVanilla } from './components/Container';
