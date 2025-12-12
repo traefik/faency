@@ -1,15 +1,17 @@
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { ComponentProps, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { buttonSwitchContainer, buttonSwitchItem } from './ButtonSwitch.vanilla.css';
 
 // Container Component
-interface ButtonSwitchContainerVanillaProps
-  extends ComponentProps<typeof ToggleGroupPrimitive.Root>,
-    CSSProps {}
+type ButtonSwitchContainerVanillaProps = (
+  | ToggleGroupPrimitive.ToggleGroupSingleProps
+  | ToggleGroupPrimitive.ToggleGroupMultipleProps
+) &
+  CSSProps;
 
 export const ButtonSwitchContainerVanilla = forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
@@ -38,9 +40,8 @@ export const ButtonSwitchContainerVanilla = forwardRef<
 ButtonSwitchContainerVanilla.displayName = 'ButtonSwitchContainerVanilla';
 
 // Item Component
-interface ButtonSwitchItemVanillaProps
-  extends ComponentProps<typeof ToggleGroupPrimitive.Item>,
-    CSSProps {}
+type ButtonSwitchItemVanillaProps = Omit<ToggleGroupPrimitive.ToggleGroupItemProps, 'css'> &
+  CSSProps;
 
 export const ButtonSwitchItemVanilla = forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Item>,
