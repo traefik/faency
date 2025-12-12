@@ -148,6 +148,12 @@ export const tokens = createThemeContract({
     buttonRedText: null,
     buttonRedHoverText: null,
     buttonRedFocusBg: null,
+
+    // Component-specific tokens - IconButton
+    iconButtonBackground: null,
+    iconButtonHoverBorder: null,
+    iconButtonHoverBackground: null,
+    iconButtonFocusBorder: null,
   },
   fonts: {
     rubik: null,
