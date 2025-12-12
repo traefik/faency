@@ -166,3 +166,72 @@ This works because:
 2. `processCSSProp()` explicitly handles both forms in its switch statement
 
 **When you see `as any` in tests:** This usually indicates a type mismatch. Check if the prop should be `CSSProps['css']` instead of `CSSProps`.
+
+### Testing Vanilla Extract Components
+
+**REQUIRED:** Every vanilla-extract component MUST have a corresponding `.vanilla.test.tsx` file with comprehensive tests.
+
+**Test File Naming:**
+
+- Vanilla-extract components: `ComponentName.vanilla.test.tsx`
+- Stitches components: `ComponentName.test.tsx`
+
+**Required Test Coverage:**
+
+- Basic rendering and element types
+- Custom className support
+- All variant props (size, weight, variant, gradient, transform, noWrap, etc.)
+- Custom styling (CSS prop and style prop)
+- Style merging behavior
+- Polymorphic rendering (if component supports `as` prop)
+- Ref forwarding
+- HTML attribute pass-through
+- Accessibility testing with jest-axe
+- Theme support (light/dark and different primary colors)
+
+**Testing Pattern:**
+
+```tsx
+import { render } from '@testing-library/react';
+import { axe } from 'jest-axe';
+import React from 'react';
+
+import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { ComponentVanilla } from './Component.vanilla';
+
+describe('ComponentVanilla', () => {
+  const renderWithTheme = (ui: React.ReactElement) => {
+    return render(<VanillaExtractThemeProvider>{ui}</VanillaExtractThemeProvider>);
+  };
+
+  it('should render correctly', () => {
+    const { container } = renderWithTheme(<ComponentVanilla>Content</ComponentVanilla>);
+    expect(container.firstChild).toBeInTheDocument();
+  });
+
+  it('should have no accessibility violations', async () => {
+    const { container } = renderWithTheme(<ComponentVanilla>Content</ComponentVanilla>);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  // Use unmount() in loops to prevent "multiple elements found" errors
+  it('should apply size variants', () => {
+    const sizes = ['small', 'medium', 'large'] as const;
+    sizes.forEach((size) => {
+      const { container, unmount } = renderWithTheme(
+        <ComponentVanilla size={size}>Content</ComponentVanilla>,
+      );
+      expect(container.firstChild).toBeInTheDocument();
+      unmount();
+    });
+  });
+});
+```
+
+**Important Notes:**
+
+- Always wrap components in `VanillaExtractThemeProvider` for tests
+- Use `unmount()` in forEach loops to prevent DOM element accumulation
+- For Radix-based components, use the correct role (e.g., `role="radio"` for ButtonSwitch items, not `role="button"`)
+- Reference the `Input.vanilla.test.tsx` file as the gold standard for test patterns

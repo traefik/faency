@@ -518,37 +518,152 @@ After adding the Comparison story:
 5. Test responsive behavior
 6. Check accessibility (keyboard navigation, focus states)
 
-#### 5. Update Tests (if applicable)
+#### 5. Create Tests for Vanilla Extract Component
 
-Update Jest tests to work with the new component:
+**REQUIRED:** Every migrated component MUST have a corresponding `.vanilla.test.tsx` file with comprehensive tests.
+
+Create `ComponentName.vanilla.test.tsx` following the pattern from `Input.vanilla.test.tsx`:
 
 ```tsx
-// Button.test.tsx
-import { render, screen } from '@testing-library/react';
+// Button.vanilla.test.tsx
+import { render } from '@testing-library/react';
+import { axe } from 'jest-axe';
 import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
 import { ButtonVanilla } from './Button.vanilla';
 
-// Wrap with theme provider for tests
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(
-    <VanillaExtractThemeProvider defaultTheme="light">{ui}</VanillaExtractThemeProvider>,
-  );
-};
-
 describe('ButtonVanilla', () => {
-  it('renders with correct text', () => {
-    renderWithTheme(<ButtonVanilla>Click Me</ButtonVanilla>);
-    expect(screen.getByText('Click Me')).toBeInTheDocument();
+  const renderWithTheme = (ui: React.ReactElement) => {
+    return render(<VanillaExtractThemeProvider>{ui}</VanillaExtractThemeProvider>);
+  };
+
+  it('should render as button element by default', () => {
+    const { getByRole } = renderWithTheme(<ButtonVanilla>Click me</ButtonVanilla>);
+    const button = getByRole('button');
+
+    expect(button.nodeName).toBe('BUTTON');
+    expect(button).toHaveTextContent('Click me');
   });
 
-  it('applies size variants correctly', () => {
-    const { container } = renderWithTheme(<ButtonVanilla size="large">Large Button</ButtonVanilla>);
-    // Add assertions based on your needs
+  it('should render with custom className', () => {
+    const { getByRole } = renderWithTheme(
+      <ButtonVanilla className="custom-button">Button</ButtonVanilla>,
+    );
+    const button = getByRole('button');
+
+    expect(button.className).toContain('custom-button');
+  });
+
+  it('should apply size prop', () => {
+    const sizes = ['small', 'medium', 'large'] as const;
+
+    sizes.forEach((size) => {
+      const { getByRole, unmount } = renderWithTheme(
+        <ButtonVanilla size={size}>Button</ButtonVanilla>,
+      );
+      expect(getByRole('button')).toBeInTheDocument();
+      unmount();
+    });
+  });
+
+  it('should apply CSS prop styles', () => {
+    const { getByRole } = renderWithTheme(
+      <ButtonVanilla css={{ padding: '$4', margin: '$2' }}>Button</ButtonVanilla>,
+    );
+    const button = getByRole('button');
+
+    expect(button.style.padding).toBe('20px');
+    expect(button.style.margin).toBe('8px');
+  });
+
+  it('should merge style and css props correctly', () => {
+    const { getByRole } = renderWithTheme(
+      <ButtonVanilla
+        css={{ padding: '$4', margin: '$2' }}
+        style={{ backgroundColor: 'blue', padding: '30px' }}
+      >
+        Button
+      </ButtonVanilla>,
+    );
+    const button = getByRole('button');
+
+    expect(button.style.backgroundColor).toBe('blue');
+    expect(button.style.padding).toBe('30px');
+    expect(button.style.margin).toBe('8px');
+  });
+
+  it('should forward ref correctly', () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    renderWithTheme(<ButtonVanilla ref={ref}>Button</ButtonVanilla>);
+
+    expect(ref.current).not.toBeNull();
+    expect(ref.current?.nodeName).toBe('BUTTON');
+  });
+
+  it('should have no accessibility violations', async () => {
+    const { container } = renderWithTheme(<ButtonVanilla>Accessible Button</ButtonVanilla>);
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
+  });
+
+  it('should work with light theme', () => {
+    const { getByRole } = render(
+      <VanillaExtractThemeProvider defaultTheme="light">
+        <ButtonVanilla>Light Button</ButtonVanilla>
+      </VanillaExtractThemeProvider>,
+    );
+
+    expect(getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should work with dark theme', () => {
+    const { getByRole } = render(
+      <VanillaExtractThemeProvider defaultTheme="dark">
+        <ButtonVanilla>Dark Button</ButtonVanilla>
+      </VanillaExtractThemeProvider>,
+    );
+
+    expect(getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should work with different primary colors', () => {
+    const colors = ['neon', 'blue', 'orange', 'red', 'green'] as const;
+
+    colors.forEach((color) => {
+      const { getByRole, unmount } = render(
+        <VanillaExtractThemeProvider primaryColor={color}>
+          <ButtonVanilla>Button</ButtonVanilla>
+        </VanillaExtractThemeProvider>,
+      );
+
+      expect(getByRole('button')).toBeInTheDocument();
+      unmount();
+    });
   });
 });
 ```
+
+**Required test coverage:**
+
+- Basic rendering and element types
+- Custom className support
+- All variant props (size, weight, variant, etc.)
+- Custom styling (CSS prop and style prop)
+- Style merging behavior
+- Polymorphic rendering (if applicable)
+- Ref forwarding
+- HTML attribute pass-through
+- Accessibility testing with jest-axe
+- Theme support (light/dark and different primary colors)
+
+**Important notes:**
+
+- Use `unmount()` in loops to prevent "multiple elements found" errors
+- Always wrap components in `VanillaExtractThemeProvider`
+- For Radix-based components, use the correct role (e.g., `role="radio"` for ButtonSwitch items)
+- Test files should be named `ComponentName.vanilla.test.tsx`
 
 #### 6. Export the Component
 
@@ -1108,8 +1223,18 @@ Use this checklist for each component migration:
 - [ ] Test all variants in Storybook
 - [ ] Test light/dark theme switching
 - [ ] Verify visual parity with original component
-- [ ] Update or create Jest tests
-- [ ] Run tests: `yarn test`
+- [ ] **REQUIRED:** Create `ComponentName.vanilla.test.tsx` with comprehensive tests
+- [ ] Test basic rendering and element types
+- [ ] Test custom className support
+- [ ] Test all variant props (size, weight, variant, etc.)
+- [ ] Test custom styling (CSS prop and style prop)
+- [ ] Test style merging behavior
+- [ ] Test polymorphic rendering (if applicable)
+- [ ] Test ref forwarding
+- [ ] Test HTML attribute pass-through
+- [ ] Test accessibility with jest-axe
+- [ ] Test theme support (light/dark and different primary colors)
+- [ ] Run tests: `yarn test` (verify all tests pass)
 - [ ] Run build: `yarn build`
 
 ### 4. Finalize
