@@ -6,6 +6,10 @@ import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme
 import { buttonDarkTheme, buttonLightTheme } from '../components/Button/Button.theme.css';
 import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme.css';
 import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
+import {
+  iconButtonDarkTheme,
+  iconButtonLightTheme,
+} from '../components/IconButton/IconButton.theme.css';
 import { inputDarkTheme, inputLightTheme } from '../components/Input/Input.theme.css';
 import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
@@ -226,12 +230,16 @@ const lightSemanticColors = {
   textInvalid: lightColors.red9,
   textRed: lightColors.red10,
   ...headingLightTheme,
+  ...iconButtonLightTheme,
   ...inputLightTheme,
   ...textareaLightTheme,
   ...buttonLightTheme,
   buttonPrimaryText: 'white',
   buttonRedText: 'white',
   buttonRedHoverText: lightColors.red10,
+  iconButtonHoverBorder: lightColors.slate9,
+  iconButtonHoverBackground: lightColors.slateA3,
+  iconButtonFocusBorder: lightColors.slate10,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -336,12 +344,17 @@ const darkSemanticColors = {
   textInvalid: darkColors.red9,
   textRed: darkColors.red10,
   ...headingDarkTheme,
+  ...iconButtonDarkTheme,
   ...inputDarkTheme,
   ...textareaDarkTheme,
   ...buttonDarkTheme,
   buttonPrimaryText: darkColors.deepBlue2,
   buttonRedText: 'white',
   buttonRedHoverText: darkColors.red10,
+  iconButtonBackground: darkColors.deepBlue2,
+  iconButtonHoverBorder: darkColors.deepBlue6,
+  iconButtonHoverBackground: darkColors.slateA4,
+  iconButtonFocusBorder: darkColors.deepBlue7,
 };
 
 export const darkThemeBlue = createTheme(tokens, {
