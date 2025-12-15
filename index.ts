@@ -23,8 +23,14 @@ export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
 export { Bubble } from './components/Bubble';
-export { Button } from './components/Button';
-export { ButtonSwitchContainer, ButtonSwitchItem } from './components/ButtonSwitch';
+export type { ButtonVanillaProps } from './components/Button';
+export { Button, ButtonVanilla } from './components/Button';
+export {
+  ButtonSwitchContainer,
+  ButtonSwitchContainerVanilla,
+  ButtonSwitchItem,
+  ButtonSwitchItemVanilla,
+} from './components/ButtonSwitch';
 export { Card, CardVanilla } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 export { Container, ContainerVanilla } from './components/Container';
@@ -60,7 +66,8 @@ export { FaencyProvider } from './components/FaencyProvider';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
 export { H1, H2, H3, H4, H5, H6 } from './components/Heading';
-export { IconButton } from './components/IconButton';
+export type { IconButtonVanillaProps } from './components/IconButton';
+export { IconButton, IconButtonVanilla } from './components/IconButton';
 export { Image } from './components/Image';
 export type { InputHandle, InputVanillaHandle, InputVanillaProps } from './components/Input';
 export { Input, InputVanilla } from './components/Input';
