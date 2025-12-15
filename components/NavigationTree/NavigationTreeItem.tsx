@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 
 import { CSS } from '../..';
 import { Box } from '../Box';
@@ -8,7 +8,7 @@ import { Text } from '../Text';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 
 export interface NavigationTreeItemProps {
-  label: string;
+  label: string | ReactNode;
   subtitle?: string;
   children?: React.ReactNode;
   defaultExpanded?: boolean;
@@ -43,10 +43,10 @@ export const NavigationTreeItem = ({
       hasStartAdornment
         ? props.startAdornment
         : isExpandable
-        ? isExpanded
-          ? customCollapseIcon || defaultCollapseIcon
-          : customExpandIcon || defaultExpandIcon
-        : null,
+          ? isExpanded
+            ? customCollapseIcon || defaultCollapseIcon
+            : customExpandIcon || defaultExpandIcon
+          : null,
     [
       hasStartAdornment,
       isExpandable,
@@ -56,7 +56,7 @@ export const NavigationTreeItem = ({
       customCollapseIcon,
       customExpandIcon,
       props.startAdornment,
-    ]
+    ],
   );
 
   const childCss = useMemo(() => {
@@ -102,9 +102,13 @@ export const NavigationTreeItem = ({
           direction="column"
           align="start"
           gap={1}
-          css={{ ml: isExpandable || hasStartAdornment ? 0 : '$4', color: 'inherit' }}
+          css={{
+            ml: isExpandable || hasStartAdornment ? 0 : '$4',
+            color: 'inherit',
+            width: '100%',
+          }}
         >
-          <Text css={{ color: 'inherit' }}>{label}</Text>
+          {typeof label === 'string' ? <Text css={{ color: 'inherit' }}>{label}</Text> : label}
           {subtitle && (
             <Text variant="subtle" css={{ fontSize: '$3', opacity: 0.8 }}>
               {subtitle}

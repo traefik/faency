@@ -13,7 +13,10 @@ import {
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
+import { Button } from '../Button';
+import { Flex } from '../Flex';
 import { NavigationDrawer } from '../Navigation';
+import { Text } from '../Text';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 import { NavigationTreeItem } from './NavigationTreeItem';
 
@@ -102,6 +105,31 @@ const Template: StoryFn<typeof NavigationTreeItem> = (args) => {
               {...navigationHandlerProps('one-one-one')}
               startAdornment={<ArchiveIcon />}
               label="One.One.One"
+            />
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+
+        <NavigationTreeItem
+          {...navigationHandlerProps('two')}
+          label={
+            <Flex
+              gap={2}
+              align="center"
+              justify="space-between"
+              css={{ width: '100%', color: 'inherit' }}
+            >
+              <Text css={{ color: 'inherit' }}>Node label</Text>
+              <Button as="div" size="small">
+                Click
+              </Button>
+            </Flex>
+          }
+        >
+          <NavigationTreeItem {...navigationHandlerProps('two-one')} {...args}>
+            <NavigationTreeItem
+              {...navigationHandlerProps('two-one-one')}
+              startAdornment={<ArchiveIcon />}
+              label="Two.One.One"
             />
           </NavigationTreeItem>
         </NavigationTreeItem>
