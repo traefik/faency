@@ -236,28 +236,86 @@ Create `ComponentName.vanilla.tsx`.
 
 **Required:** Every migrated component MUST have a Comparison story that shows both versions side-by-side.
 
-**Reference Implementation:**
+**IMPORTANT:** Always use vanilla-extract components in Comparison stories when they exist. This ensures consistency and avoids mixing Stitches and vanilla-extract components.
 
-See [`components/Text/Text.stories.tsx`](components/Text/Text.stories.tsx) - Look for the `Comparison` export which shows Stitches vs Vanilla Extract side-by-side.
-
-**Pattern:**
+Add imports for vanilla-extract layout components and the migrated component:
 
 ```tsx
 // Import vanilla layout components
 import { BoxVanilla } from '../Box/Box.vanilla';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
-import { H3 } from '../Heading';
+import { H3Vanilla } from '../Heading'; // ✅ Use vanilla version when available
 import { ComponentNameVanilla } from './ComponentName.vanilla';
 
 export const Comparison: StoryFn = () => (
   <FlexVanilla direction="column" gap={6}>
     <BoxVanilla>
-      <H3 css={{ marginBottom: '16px' }}>Stitches Version</H3>
-      {/* Show all major variants */}
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        {/* Show all major variants grouped by type */}
+        <FlexVanilla gap={2} wrap="wrap">
+          <ComponentName variant="option1">Option 1</ComponentName>
+          <ComponentName variant="option2">Option 2</ComponentName>
+        </FlexVanilla>
+      </FlexVanilla>
     </BoxVanilla>
     <BoxVanilla>
-      <H3 css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3>
-      {/* Mirror the exact same variants */}
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        {/* Mirror the exact same variants */}
+        <FlexVanilla gap={2} wrap="wrap">
+          <ComponentNameVanilla variant="option1">Option 1</ComponentNameVanilla>
+          <ComponentNameVanilla variant="option2">Option 2</ComponentNameVanilla>
+        </FlexVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
+);
+```
+
+**Real Example from Text component:**
+
+```tsx
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={6}>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Text size="1">Size 1</Text>
+          <Text size="3">Size 3 (default)</Text>
+          <Text size="5">Size 5</Text>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Text variant="default">Default</Text>
+          <Text variant="subtle">Subtle</Text>
+          <Text variant="red">Red</Text>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Text weight="light">Light</Text>
+          <Text weight="bold">Bold</Text>
+        </FlexVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        <FlexVanilla gap={2} wrap="wrap">
+          <TextVanilla size="1">Size 1</TextVanilla>
+          <TextVanilla size="3">Size 3 (default)</TextVanilla>
+          <TextVanilla size="5">Size 5</TextVanilla>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <TextVanilla variant="default">Default</TextVanilla>
+          <TextVanilla variant="subtle">Subtle</TextVanilla>
+          <TextVanilla variant="red">Red</TextVanilla>
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap">
+          <TextVanilla weight="light">Light</TextVanilla>
+          <TextVanilla weight="bold">Bold</TextVanilla>
+        </FlexVanilla>
+      </FlexVanilla>
     </BoxVanilla>
   </FlexVanilla>
 );
