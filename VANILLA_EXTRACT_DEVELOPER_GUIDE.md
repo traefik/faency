@@ -320,6 +320,21 @@ Other examples:
 - For Radix-based components, use the correct role (e.g., `role="radio"` for ButtonSwitch items)
 - Test files should be named `ComponentName.vanilla.test.tsx`
 
+**Test Coverage Guidelines:**
+
+- ✅ Basic rendering and element type
+- ✅ All variant props
+- ✅ Custom className
+- ✅ Style prop
+- ✅ CSS prop (with token processing)
+- ✅ Style + CSS prop merging
+- ✅ Ref forwarding
+- ✅ HTML attribute pass-through
+- ✅ Accessibility (axe violations)
+- ✅ Light/dark theme switching
+
+**Reference:** See [Badge.vanilla.test.tsx](../components/Badge/Badge.vanilla.test.tsx) and [Skeleton.vanilla.test.tsx](../components/Skeleton/Skeleton.vanilla.test.tsx) for complete examples.
+
 #### 6. Export the Component
 
 Update the component's exports following the [Export Strategy](#export-and-build-strategy).
@@ -569,7 +584,80 @@ Ensure you follow the pattern in any vanilla component (e.g., [`components/Butto
 
 Always wrap `RecipeVariants` with `NonNullable`. See any vanilla component for the pattern.
 
+<<<<<<< HEAD
+
 #### Problem: Stitches components in vanilla components cause type errors
+
+=======
+
+```tsx
+import { RecipeVariants } from '@vanilla-extract/recipes';
+
+// ❌ Bad - may return undefined
+type MyComponentVariants = RecipeVariants<typeof myComponentRecipe>;
+
+// ✅ Good - guaranteed to have variant properties
+type MyComponentVariants = NonNullable<RecipeVariants<typeof myComponentRecipe>>;
+
+export interface MyComponentOwnProps extends CSSProps {
+  size?: MyComponentVariants['size'];
+  variant?: MyComponentVariants['variant'];
+}
+```
+
+Without `NonNullable`, TypeScript may treat the variants as `undefined`, causing errors like "Property 'size' does not exist on type 'MyComponentVariants'".
+
+#### Problem: Invalid selector error for child elements
+
+**Error:** `Invalid selector: &:not(:empty) > *` or similar errors when using selectors that target child elements.
+
+**Why it happens:** Vanilla-extract has strict rules about selectors. Each style block can only target the `&` character (the element itself) along with pseudo-classes and pseudo-elements. Selectors that target child elements (like `& > *`, `& h1`, etc.) are not allowed in the `style()` or `selectors:` object.
+
+**Solution:** Use the `globalStyle()` function for selectors that target child elements:
+
+```tsx
+// ❌ Bad - causes "Invalid selector" error
+const skeleton = style({
+  selectors: {
+    '&:not(:empty) > *': {
+      visibility: 'hidden',
+      display: 'block',
+    },
+  },
+});
+
+// ✅ Good - use globalStyle for child selectors
+import { globalStyle, style } from '@vanilla-extract/css';
+
+const skeleton = style({
+  // Only self-targeting selectors here
+  selectors: {
+    '&:not(:empty)': {
+      maxWidth: 'fit-content',
+    },
+  },
+});
+
+// Child selectors use globalStyle
+globalStyle(`${skeleton}:not(:empty) > *`, {
+  visibility: 'hidden',
+  display: 'block',
+});
+```
+
+**Key rule:** If your selector goes beyond `&` to target children, siblings, or global elements, use `globalStyle()` instead.
+
+**Examples:**
+
+- `& > div` → Use `globalStyle()`
+- `& h1` → Use `globalStyle()`
+- `& + &` → Use `globalStyle()` (sibling selector)
+- `&:hover` → OK in `style()` (self-targeting)
+- `&::before` → OK in `style()` (pseudo-element on self)
+
+#### Problem: Stitches components used in vanilla components cause type errors
+
+> > > > > > > 45a6a4c (feat: vanilla skeleton component)
 
 **CRITICAL RULE:** Never mix Stitches and vanilla-extract components. Always use vanilla-extract versions inside vanilla components.
 
@@ -628,6 +716,7 @@ Use this checklist for each component migration:
 - [ ] Test all variants in Storybook
 - [ ] Test light/dark theme switching
 - [ ] Verify visual parity with original component
+      <<<<<<< HEAD
 - [ ] **REQUIRED:** Create `ComponentName.vanilla.test.tsx` (see [`Input.vanilla.test.tsx`](components/Input/Input.vanilla.test.tsx))
 - [ ] Test basic rendering and element types
 - [ ] Test custom className support
@@ -639,7 +728,20 @@ Use this checklist for each component migration:
 - [ ] Test HTML attribute pass-through
 - [ ] Test accessibility with jest-axe
 - [ ] Test theme support (light/dark and different primary colors)
-- [ ] Run tests: `yarn test` (verify all tests pass)
+- [ ] # Run tests: `yarn test` (verify all tests pass)
+- [ ] **REQUIRED:** Create `ComponentName.vanilla.test.tsx` with comprehensive tests
+  - [ ] Basic rendering and element type
+  - [ ] All variant props
+  - [ ] Custom className
+  - [ ] Style prop
+  - [ ] CSS prop (with token processing)
+  - [ ] Style + CSS prop merging
+  - [ ] Ref forwarding
+  - [ ] HTML attribute pass-through
+  - [ ] Accessibility (axe violations)
+  - [ ] Light/dark theme switching
+- [ ] Run tests: `yarn test`
+  > > > > > > > 45a6a4c (feat: vanilla skeleton component)
 - [ ] Run build: `yarn build`
 
 ### 4. Finalize

@@ -61,7 +61,7 @@ export {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './components/DropdownMenu';
-export { Elevation, elevationVariants, ElevationVanilla } from './components/Elevation';
+export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
@@ -97,6 +97,7 @@ export {
   NavigationTreeItem,
 } from './components/NavigationTree';
 export { Overlay } from './components/Overlay';
+export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export type { ParagraphVanillaProps } from './components/Paragraph';
 export { Paragraph, ParagraphVanilla } from './components/Paragraph';
 export {
@@ -107,7 +108,6 @@ export {
   PopoverPortal,
   PopoverTrigger,
 } from './components/Popover';
-export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export { Radio, RadioGroup } from './components/Radio';
 export {
   RadioAccordionContent,
@@ -117,7 +117,8 @@ export {
 } from './components/RadioAccordion';
 export { Select } from './components/Select';
 export { SidePanel } from './components/SidePanel';
-export { Skeleton } from './components/Skeleton';
+export type { SkeletonVanillaProps } from './components/Skeleton';
+export { Skeleton, SkeletonVanilla } from './components/Skeleton';
 export { Switch } from './components/Switch';
 export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';

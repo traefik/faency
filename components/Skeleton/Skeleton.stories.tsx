@@ -7,12 +7,16 @@ import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Avatar } from '../Avatar';
 import { Badge as FaencyBadge } from '../Badge';
 import { Box } from '../Box';
+import { BoxVanilla } from '../Box/Box.vanilla';
 import { Bubble } from '../Bubble';
 import { Button as FaencyButton } from '../Button';
 import { Flex } from '../Flex';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
 import { H1, H2, H3, H4, H5, H6 } from '../Heading';
+import { H3Vanilla } from '../Heading/Heading.vanilla';
 import { Text as FaencyText } from '../Text';
 import { Skeleton, SkeletonProps, SkeletonVariants } from './Skeleton';
+import { SkeletonVanilla } from './Skeleton.vanilla';
 
 const BaseSkeleton = (props: SkeletonProps): JSX.Element => <Skeleton {...props} />;
 const SkeletonForStory = modifyVariantsForStory<SkeletonVariants, SkeletonProps>(BaseSkeleton);
@@ -202,6 +206,52 @@ export const Customs: StoryFn<typeof SkeletonForStory> = () => (
       <Skeleton css={{ height: '350px', flex: 1 }} />
     </Flex>
   </Flex>
+);
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={6}>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        <FlexVanilla gap={2} wrap="wrap">
+          <Skeleton variant="square" css={{ size: '$6' }} />
+          <Skeleton variant="circle" css={{ size: '$6' }} />
+          <Skeleton variant="badge" css={{ height: '$5', width: '$8' }} />
+          <Skeleton variant="button" css={{ height: '$5', width: '$8' }} />
+          <Skeleton variant="text" css={{ height: '$5', width: '$10' }} />
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap" align="center">
+          <Skeleton variant="circle">
+            <Avatar size="3" />
+          </Skeleton>
+          <Skeleton variant="square">
+            <Avatar size="3" />
+          </Skeleton>
+        </FlexVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        <FlexVanilla gap={2} wrap="wrap">
+          <SkeletonVanilla variant="square" css={{ size: '$6' }} />
+          <SkeletonVanilla variant="circle" css={{ size: '$6' }} />
+          <SkeletonVanilla variant="badge" css={{ height: '$5', width: '$8' }} />
+          <SkeletonVanilla variant="button" css={{ height: '$5', width: '$8' }} />
+          <SkeletonVanilla variant="text" css={{ height: '$5', width: '$10' }} />
+        </FlexVanilla>
+        <FlexVanilla gap={2} wrap="wrap" align="center">
+          <SkeletonVanilla variant="circle">
+            <Avatar size="3" />
+          </SkeletonVanilla>
+          <SkeletonVanilla variant="square">
+            <Avatar size="3" />
+          </SkeletonVanilla>
+        </FlexVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
 );
 
 export default Component;
