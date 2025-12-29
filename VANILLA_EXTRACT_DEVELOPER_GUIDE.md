@@ -238,6 +238,10 @@ Create `ComponentName.vanilla.tsx`.
 
 **IMPORTANT:** Always use vanilla-extract components in Comparison stories when they exist. This ensures consistency and avoids mixing Stitches and vanilla-extract components.
 
+**Reference Implementation:**
+
+See [`components/Text/Text.stories.tsx`](components/Text/Text.stories.tsx) - Look for the `Comparison` export which shows Stitches vs Vanilla Extract side-by-side.
+
 Add imports for vanilla-extract layout components and the migrated component:
 
 ```tsx
@@ -642,8 +646,6 @@ Ensure you follow the pattern in any vanilla component (e.g., [`components/Butto
 
 Always wrap `RecipeVariants` with `NonNullable`. See any vanilla component for the pattern.
 
-<<<<<<< HEAD
-
 #### Problem: Stitches components in vanilla components cause type errors
 
 =======
@@ -714,8 +716,6 @@ globalStyle(`${skeleton}:not(:empty) > *`, {
 - `&::before` → OK in `style()` (pseudo-element on self)
 
 #### Problem: Stitches components used in vanilla components cause type errors
-
-> > > > > > > 45a6a4c (feat: vanilla skeleton component)
 
 **CRITICAL RULE:** Never mix Stitches and vanilla-extract components. Always use vanilla-extract versions inside vanilla components.
 
@@ -799,7 +799,6 @@ Use this checklist for each component migration:
   - [ ] Accessibility (axe violations)
   - [ ] Light/dark theme switching
 - [ ] Run tests: `yarn test`
-  > > > > > > > 45a6a4c (feat: vanilla skeleton component)
 - [ ] Run build: `yarn build`
 
 ### 4. Finalize

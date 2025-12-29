@@ -1,4 +1,4 @@
-export { AccessibleIcon } from './components/AccessibleIcon';
+export { AccessibleIcon, AccessibleIconVanilla } from './components/AccessibleIcon';
 export {
   AccordionContent,
   AccordionItem,
