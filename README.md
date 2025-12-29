@@ -2,7 +2,7 @@
 
 This is the React component library and design system for [Traefik Labs](https://traefik.io).
 
-Built with React, Typescript, [Stitches](https://github.com/modulz/stitches) and [Radix UI Primitives](https://radix-ui.com/primitives/docs/overview/introduction).
+Built with React, Typescript, [Stitches](https://github.com/modulz/stitches), [vanilla-extract](https://vanilla-extract.style/) (migration in progress), and [Radix UI Primitives](https://radix-ui.com/primitives/docs/overview/introduction).
 
 ## Demo (Storybook)
 
@@ -46,9 +46,9 @@ const Container = styled(Flex, {
 const MyComponent = () => <Container>{children}</Container>;
 ```
 
-#### Using Vanilla Extract Components (New - Recommended)
+#### Using Vanilla Extract Components (Migration in Progress)
 
-For better performance with static CSS, use the new Vanilla Extract components:
+For better performance with static CSS, you can use the new Vanilla Extract components (many components are available, more being migrated).
 
 1. Import the CSS file in your app's entry point:
 
@@ -57,6 +57,7 @@ import '@traefik-labs/faency/dist/style.css';
 ```
 
 2. Wrap your app with the VanillaExtractThemeProvider:
+Wrap your app with the VanillaExtractThemeProvider:
 
 ```jsx
 import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
@@ -71,11 +72,11 @@ const App = () => (
 );
 ```
 
-> **Note**: Vanilla Extract components use static CSS generated at build time, providing better performance than runtime CSS-in-JS. Components with the `Vanilla` suffix (e.g., `BadgeVanilla`, `BoxVanilla`) require the CSS import above.
+> **Note**: Vanilla Extract components use static CSS generated at build time, providing better performance than runtime CSS-in-JS. CSS is automatically included when you import components - no separate CSS import needed. Components with the `Vanilla` suffix (e.g., `BadgeVanilla`, `BoxVanilla`) are available. Not all components have Vanilla Extract versions yet - check the component documentation or use the Stitches version if a Vanilla version is not available.
 
 ## How to contribute
 
-- Make sure you have Node 18+, or if you prefer, you can work in a Docker container:
+- Make sure you have Node 20+, or if you prefer, you can work in a Docker container:
 
 ```sh
 docker run -it -v $(pwd):/usr/local/src/ -w /usr/local/src/ -p 3000:3000 node:latest bash

@@ -63,15 +63,14 @@ function App() {
 export default App;
 ```
 
-#### Using Vanilla Extract Components (New - Recommended)
+#### Using Vanilla Extract Components (Migration in Progress)
 
-For Vanilla Extract components, import the CSS file and use the `VanillaExtractThemeProvider`:
+For Vanilla Extract components, use the `VanillaExtractThemeProvider`:
 
 ```tsx
 import React from 'react';
-import '@traefik-labs/faency/dist/style.css'; // Required for Vanilla Extract components
-import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
-import { BoxVanilla, BadgeVanilla } from '@traefik-labs/faency';
+import { VanillaExtractThemeProvider } from '@traefiklabs/faency';
+import { BoxVanilla, BadgeVanilla } from '@traefiklabs/faency';
 
 function App() {
   return (
@@ -86,21 +85,28 @@ function App() {
 export default App;
 ```
 
+> **Note**: CSS is automatically included when you import Vanilla Extract components - no separate CSS import needed.
+
 ### Import Styles
 
 #### For Stitches Components (Legacy)
 
 Stitches components use runtime CSS-in-JS, so no separate CSS imports are needed. Styles are automatically injected when you use components.
 
-#### For Vanilla Extract Components (New - Recommended)
+#### For Vanilla Extract Components (Migration in Progress)
 
+<<<<<<< HEAD
 Vanilla Extract components require importing the static CSS file. Add this import to your application's entry point (e.g., `App.tsx` or `index.tsx`):
 
 ```tsx
 import '@traefik-labs/faency/dist/style.css';
 ```
 
-This CSS file contains all the styles for Vanilla Extract components (components with `Vanilla` suffix like `BadgeVanilla`, `BoxVanilla`, etc.). Without this import, these components will render as unstyled elements.
+# This CSS file contains all the styles for Vanilla Extract components (components with `Vanilla` suffix like `BadgeVanilla`, `BoxVanilla`, etc.). Without this import, these components will render as unstyled elements.
+
+Vanilla Extract components include their CSS automatically when imported. No separate CSS import is required - styles are bundled with each component module.
+
+> > > > > > > 3186cd9 (chore: fix usage docs)
 
 ---
 
