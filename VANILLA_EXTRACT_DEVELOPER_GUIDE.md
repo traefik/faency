@@ -14,12 +14,11 @@ This guide explains how the new Vanilla Extract styling system works and provide
 
 **Reference:**
 
-- [Code Examples](#code-examples)
 - [Common Patterns](#common-patterns)
 - [Troubleshooting](#troubleshooting)
 - [Migration Checklist](#migration-checklist)
 - [Best Practices](#best-practices)
-- [Future Migration Phases](#reference-future-migration-phases) - Phase 2 & 3 (not yet actionable)
+- [Future Migration Phases](#reference-future-migration-phases)
 
 ---
 
@@ -138,16 +137,14 @@ When migrating a component, follow these strict naming conventions to maintain c
 
 #### File Naming
 
-- **Styles**: `ComponentName.vanilla.css.ts` (e.g., [`Text.vanilla.css.ts`](components/Text/Text.vanilla.css.ts))
-- **Component**: `ComponentName.vanilla.tsx` (e.g., [`Text.vanilla.tsx`](components/Text/Text.vanilla.tsx))
-- **Tests**: `ComponentName.vanilla.test.tsx` (e.g., [`Text.vanilla.test.tsx`](components/Text/Text.vanilla.test.tsx))
-- **Theme (if needed)**: `ComponentName.theme.ts` + `ComponentName.theme.css.ts` (see Badge example)
+- **Styles**: `ComponentName.vanilla.css.ts`
+- **Component**: `ComponentName.vanilla.tsx`
+- **Tests**: `ComponentName.vanilla.test.tsx`
+- **Theme (if needed)**: `ComponentName.theme.ts` + `ComponentName.theme.css.ts`
 
 #### Component Naming
 
-**Reference Implementation:**
-
-See [`components/Text/Text.vanilla.tsx`](components/Text/Text.vanilla.tsx) for the complete naming pattern:
+The complete naming pattern (see [Text.vanilla.tsx](components/Text/Text.vanilla.tsx)):
 
 - Internal type: `TextComponent` (for typing the implementation)
 - Exported props type: `TextVanillaProps` (for consumers)
@@ -156,7 +153,7 @@ See [`components/Text/Text.vanilla.tsx`](components/Text/Text.vanilla.tsx) for t
 
 **Key Points:**
 
-- Use `Omit<RecipeVariants, never>` not `NonNullable<RecipeVariants>` (see Badge component)
+- Use `NonNullable<RecipeVariants>` for variant types
 - Internal implementation uses `ComponentImpl` suffix
 - Exported component name is `ComponentVanilla`
 - Exported props type is `ComponentVanillaProps`
@@ -164,21 +161,13 @@ See [`components/Text/Text.vanilla.tsx`](components/Text/Text.vanilla.tsx) for t
 
 #### Exports in index.ts
 
-**Reference:**
-
-See [`components/Text/index.ts`](components/Text/index.ts) for the export pattern:
+Export pattern to avoid naming conflicts:
 
 ```typescript
 export * from './Text'; // Stitches version
 export type { TextVanillaProps } from './Text.vanilla';
 export { TextVanilla } from './Text.vanilla';
 ```
-
-**Why explicit exports?**
-
-- Avoids naming conflicts between Stitches and vanilla-extract versions
-- Makes it clear which version is being used
-- Prevents accidental type collisions
 
 #### Recipe Naming
 
@@ -190,19 +179,11 @@ export const badgeRecipe = recipe({...});
 export const buttonRecipe = recipe({...});
 ```
 
-See [`components/Button/Button.vanilla.css.ts`](components/Button/Button.vanilla.css.ts) for examples.
-
 ### Step-by-Step Guide
 
 #### 1. Create the Vanilla Extract Styles File
 
-Create a new file `ComponentName.vanilla.css.ts` alongside your component.
-
-**Reference Implementation:**
-
-- Simple component: [`components/Box/Box.vanilla.css.ts`](components/Box/Box.vanilla.css.ts)
-- Component with variants: [`components/Button/Button.vanilla.css.ts`](components/Button/Button.vanilla.css.ts)
-- Component with recipes: [`components/Badge/Badge.vanilla.css.ts`](components/Badge/Badge.vanilla.css.ts)
+Create `ComponentName.vanilla.css.ts` alongside your component.
 
 **Key patterns:**
 
@@ -211,18 +192,11 @@ Create a new file `ComponentName.vanilla.css.ts` alongside your component.
 - Use `recipe()` for variant-based styles
 - Reference theme tokens for themeable values
 
+**Examples:** [Box.vanilla.css.ts](components/Box/Box.vanilla.css.ts) (simple), [Button.vanilla.css.ts](components/Button/Button.vanilla.css.ts) (variants), [Badge.vanilla.css.ts](components/Badge/Badge.vanilla.css.ts) (recipes)
+
 #### 2. Create the React Component
 
-Create `ComponentName.vanilla.tsx`.
-
-**Reference Implementations:**
-
-- **Simple component**: [`components/Box/Box.vanilla.tsx`](components/Box/Box.vanilla.tsx)
-- **Button with variants**: [`components/Button/Button.vanilla.tsx`](components/Button/Button.vanilla.tsx)
-- **Polymorphic component**: [`components/Badge/Badge.vanilla.tsx`](components/Badge/Badge.vanilla.tsx)
-- **Component with theme tokens**: [`components/Text/Text.vanilla.tsx`](components/Text/Text.vanilla.tsx)
-
-**Required steps:**
+Create `ComponentName.vanilla.tsx` with these required steps:
 
 1. Import `CSSProps`, `processCSSProp` from `styles/cssProps`
 2. Import `useVanillaExtractTheme` from `styles/themeContext`
@@ -232,23 +206,18 @@ Create `ComponentName.vanilla.tsx`.
 6. Merge styles with `assignInlineVars(vars)`
 7. Set `displayName` to match component name
 
+**Examples:** [Box.vanilla.tsx](components/Box/Box.vanilla.tsx) (simple), [Button.vanilla.tsx](components/Button/Button.vanilla.tsx) (variants), [Badge.vanilla.tsx](components/Badge/Badge.vanilla.tsx) (polymorphic), [Text.vanilla.tsx](components/Text/Text.vanilla.tsx) (theme tokens)
+
 #### 3. Add Comparison Story
 
-**Required:** Every migrated component MUST have a Comparison story that shows both versions side-by-side.
+**Required:** Every migrated component MUST have a Comparison story showing both versions side-by-side. Use vanilla-extract layout components (BoxVanilla, FlexVanilla, H3Vanilla) to avoid mixing systems.
 
-**IMPORTANT:** Always use vanilla-extract components in Comparison stories when they exist. This ensures consistency and avoids mixing Stitches and vanilla-extract components.
-
-**Reference Implementation:**
-
-See [`components/Text/Text.stories.tsx`](components/Text/Text.stories.tsx) - Look for the `Comparison` export which shows Stitches vs Vanilla Extract side-by-side.
-
-Add imports for vanilla-extract layout components and the migrated component:
+**Pattern:**
 
 ```tsx
-// Import vanilla layout components
 import { BoxVanilla } from '../Box/Box.vanilla';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
-import { H3Vanilla } from '../Heading'; // ✅ Use vanilla version when available
+import { H3Vanilla } from '../Heading';
 import { ComponentNameVanilla } from './ComponentName.vanilla';
 
 export const Comparison: StoryFn = () => (
@@ -256,7 +225,6 @@ export const Comparison: StoryFn = () => (
     <BoxVanilla>
       <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
       <FlexVanilla direction="column" gap={3}>
-        {/* Show all major variants grouped by type */}
         <FlexVanilla gap={2} wrap="wrap">
           <ComponentName variant="option1">Option 1</ComponentName>
           <ComponentName variant="option2">Option 2</ComponentName>
@@ -266,7 +234,6 @@ export const Comparison: StoryFn = () => (
     <BoxVanilla>
       <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
       <FlexVanilla direction="column" gap={3}>
-        {/* Mirror the exact same variants */}
         <FlexVanilla gap={2} wrap="wrap">
           <ComponentNameVanilla variant="option1">Option 1</ComponentNameVanilla>
           <ComponentNameVanilla variant="option2">Option 2</ComponentNameVanilla>
@@ -277,60 +244,9 @@ export const Comparison: StoryFn = () => (
 );
 ```
 
-**Real Example from Text component:**
+**Example:** See [Text.stories.tsx](components/Text/Text.stories.tsx) for a complete implementation with all variants.
 
-```tsx
-export const Comparison: StoryFn = () => (
-  <FlexVanilla direction="column" gap={6}>
-    <BoxVanilla>
-      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
-      <FlexVanilla direction="column" gap={3}>
-        <FlexVanilla gap={2} wrap="wrap">
-          <Text size="1">Size 1</Text>
-          <Text size="3">Size 3 (default)</Text>
-          <Text size="5">Size 5</Text>
-        </FlexVanilla>
-        <FlexVanilla gap={2} wrap="wrap">
-          <Text variant="default">Default</Text>
-          <Text variant="subtle">Subtle</Text>
-          <Text variant="red">Red</Text>
-        </FlexVanilla>
-        <FlexVanilla gap={2} wrap="wrap">
-          <Text weight="light">Light</Text>
-          <Text weight="bold">Bold</Text>
-        </FlexVanilla>
-      </FlexVanilla>
-    </BoxVanilla>
-
-    <BoxVanilla>
-      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
-      <FlexVanilla direction="column" gap={3}>
-        <FlexVanilla gap={2} wrap="wrap">
-          <TextVanilla size="1">Size 1</TextVanilla>
-          <TextVanilla size="3">Size 3 (default)</TextVanilla>
-          <TextVanilla size="5">Size 5</TextVanilla>
-        </FlexVanilla>
-        <FlexVanilla gap={2} wrap="wrap">
-          <TextVanilla variant="default">Default</TextVanilla>
-          <TextVanilla variant="subtle">Subtle</TextVanilla>
-          <TextVanilla variant="red">Red</TextVanilla>
-        </FlexVanilla>
-        <FlexVanilla gap={2} wrap="wrap">
-          <TextVanilla weight="light">Light</TextVanilla>
-          <TextVanilla weight="bold">Bold</TextVanilla>
-        </FlexVanilla>
-      </FlexVanilla>
-    </BoxVanilla>
-  </FlexVanilla>
-);
-```
-
-**Why this matters:**
-
-- Visual verification that both versions render identically
-- Easy to spot visual regressions
-- Tests light/dark theme switching for both versions
-- Documents all key variants in one place
+**Benefits:** Visual verification of parity, easy regression spotting, theme switching testing, variant documentation.
 
 #### 4. Test Theme Switching
 
@@ -350,39 +266,9 @@ After adding the Comparison story:
 
 #### 5. Create Tests for Vanilla Extract Component
 
-**REQUIRED:** Every migrated component MUST have a corresponding `.vanilla.test.tsx` file with comprehensive tests.
-
-**Reference Implementation:**
-
-See [`components/Input/Input.vanilla.test.tsx`](components/Input/Input.vanilla.test.tsx) for the gold standard testing pattern.
-
-Other examples:
-
-- [`components/Button/Button.vanilla.test.tsx`](components/Button/Button.vanilla.test.tsx)
-- [`components/Text/Text.vanilla.test.tsx`](components/Text/Text.vanilla.test.tsx)
-- [`components/Label/Label.vanilla.test.tsx`](components/Label/Label.vanilla.test.tsx)
+**REQUIRED:** Every migrated component MUST have a `.vanilla.test.tsx` file with comprehensive tests.
 
 **Required test coverage:**
-
-- Basic rendering and element types
-- Custom className support
-- All variant props (size, weight, variant, etc.)
-- Custom styling (CSS prop and style prop)
-- Style merging behavior
-- Polymorphic rendering (if applicable)
-- Ref forwarding
-- HTML attribute pass-through
-- Accessibility testing with jest-axe
-- Theme support (light/dark and different primary colors)
-
-**Important notes:**
-
-- Use `unmount()` in loops to prevent "multiple elements found" errors
-- Always wrap components in `VanillaExtractThemeProvider`
-- For Radix-based components, use the correct role (e.g., `role="radio"` for ButtonSwitch items)
-- Test files should be named `ComponentName.vanilla.test.tsx`
-
-**Test Coverage Guidelines:**
 
 - ✅ Basic rendering and element type
 - ✅ All variant props
@@ -390,27 +276,30 @@ Other examples:
 - ✅ Style prop
 - ✅ CSS prop (with token processing)
 - ✅ Style + CSS prop merging
+- ✅ Polymorphic rendering (if applicable)
 - ✅ Ref forwarding
 - ✅ HTML attribute pass-through
-- ✅ Accessibility (axe violations)
+- ✅ Accessibility (axe violations with jest-axe)
 - ✅ Light/dark theme switching
 
-**Reference:** See [Badge.vanilla.test.tsx](../components/Badge/Badge.vanilla.test.tsx) and [Skeleton.vanilla.test.tsx](../components/Skeleton/Skeleton.vanilla.test.tsx) for complete examples.
+**Important notes:**
+
+- Use `unmount()` in loops to prevent "multiple elements found" errors
+- Always wrap components in `VanillaExtractThemeProvider`
+- For Radix-based components, use the correct role (e.g., `role="radio"` for ButtonSwitch items)
+
+**Examples:** [Input.vanilla.test.tsx](components/Input/Input.vanilla.test.tsx) (gold standard), [Button.vanilla.test.tsx](components/Button/Button.vanilla.test.tsx), [Badge.vanilla.test.tsx](components/Badge/Badge.vanilla.test.tsx)
 
 #### 6. Export the Component
 
-Update the component's exports following the [Export Strategy](#export-and-build-strategy).
-
-**Reference:**
-
-See [`components/Button/index.ts`](components/Button/index.ts) for the export pattern.
+Update both the component's `index.ts` and main [index.ts](index.ts):
 
 ```tsx
 export { Button } from './Button'; // Stitches (existing)
 export { ButtonVanilla } from './Button.vanilla'; // Vanilla Extract (new)
 ```
 
-Also update the main [`index.ts`](index.ts).
+See [Export and Build Strategy](#export-and-build-strategy) for more details.
 
 #### 7. Clean Up (After Full Migration)
 
@@ -429,143 +318,76 @@ After successful migration and verification:
 
 ## Export and Build Strategy
 
-### Overview
-
-We're migrating from Stitches to Vanilla Extract in three phases, maintaining backward compatibility throughout. The build system is already configured to handle both systems simultaneously.
-
-### What Developers Need to Know
-
 **Current Phase: Side-by-Side Exports (Phase 1)**
 
-We export both versions of migrated components with clear naming conventions:
+We export both versions with clear naming conventions:
 
-- Original Stitches components keep their current names (e.g., `Box`)
-- New Vanilla Extract versions use a `*Vanilla` suffix (e.g., `BoxVanilla`)
-- Both are exported and available to consumers
+- Original Stitches: `Box`, `Button`, `Text`
+- Vanilla Extract: `BoxVanilla`, `ButtonVanilla`, `TextVanilla`
 
-This approach allows:
+**Benefits:** Zero breaking changes, gradual opt-in, easy comparison, feature parity verification.
 
-- Zero breaking changes for existing users
-- Gradual opt-in for early adopters
-- Easy visual comparison and testing in Storybook
-- Time to verify feature parity before switching
+**Trade-off:** Larger bundle size (~80KB) during transition.
 
-Trade-off: Larger bundle size (~80KB total) during the transition period.
+### Exporting a Migrated Component
 
----
+1. **Update component's index.ts:**
 
-### Developer Workflow: Exporting a Migrated Component
+   ```typescript
+   export { Button } from './Button'; // Stitches (keep)
+   export { ButtonVanilla } from './Button.vanilla'; // Vanilla Extract (add)
+   ```
 
-When you migrate a component, follow this export pattern:
+2. **Update main [index.ts](index.ts)** to export both versions
 
-#### 1. Update Component's Local Index
+3. **Add Comparison story** (see [Step 3](#3-add-comparison-story))
 
-See [`components/Button/index.ts`](components/Button/index.ts) for example:
+4. **Document in CHANGELOG.md:**
+   ```markdown
+   ### Added
 
-```typescript
-export { Button } from './Button'; // Stitches (keep existing)
-export { ButtonVanilla } from './Button.vanilla'; // Vanilla Extract (add new)
-```
+   - `ButtonVanilla`: Vanilla Extract version of Button component
+   ```
 
-#### 2. Update Main Library Index
-
-Update [`index.ts`](index.ts) to export both versions.
-
-#### 3. Add Comparison Stories
-
-See Step 3 in the migration process above.
-
-#### 4. Document the Addition
-
-Add an entry to `CHANGELOG.md` under "Added":
-
-```markdown
-### Added
-
-- `ButtonVanilla`: Vanilla Extract version of Button component
-```
-
-**Important**: No version bump needed during Phase 1 - this is backward compatible.
+**Note:** No version bump needed during Phase 1 - this is backward compatible.
 
 ---
 
 ## Migrating Component-Specific Theme Tokens
 
-Some components have their own theme tokens (e.g., `Badge.themes.ts`). Here's how to migrate them.
+**⚠️ IMPORTANT:** Preserve the exact same token names from the Stitches version to avoid breaking changes.
 
-### The New Approach
+### Approach
 
-In Vanilla Extract, component theme tokens are **co-located** with the component and merged into the global theme system while **preserving the original token names** to avoid breaking changes.
+Component theme tokens are co-located with the component and merged into the global theme system.
 
-**⚠️ IMPORTANT: Preserve Token Names**
+**Simple tokens** (no runtime color references): Create `ComponentName.theme.css.ts` - see [Badge.theme.css.ts](components/Badge/Badge.theme.css.ts)
 
-When migrating component-specific theme tokens, you **MUST preserve the exact same token names** from the Stitches version to avoid breaking changes.
+**Complex tokens** (with runtime color references): Create two files to avoid circular dependencies:
 
-### Reference Implementations
+- `ComponentName.theme.ts` (plain TypeScript) - see [Text.theme.ts](components/Text/Text.theme.ts)
+- `ComponentName.theme.css.ts` (re-export wrapper) - see [Text.theme.css.ts](components/Text/Text.theme.css.ts)
 
-**Simple theme tokens:**
+### Steps
 
-See [`components/Badge/Badge.theme.css.ts`](components/Badge/Badge.theme.css.ts) - Tokens without runtime color references.
+1. **Create component theme file(s)** (see examples above)
 
-**Complex theme tokens with runtime colors:**
+2. **Add to [styles/tokens.css.ts](styles/tokens.css.ts)** in the `colors` object (not nested)
 
-See [`components/Text/Text.theme.ts`](components/Text/Text.theme.ts) and [`components/Text/Text.theme.css.ts`](components/Text/Text.theme.css.ts) - Pattern for tokens that reference other theme colors.
+3. **Merge into [styles/themes.css.ts](styles/themes.css.ts):**
 
-### Step-by-Step Process
+   ```typescript
+   import { badgeLightTheme, badgeDarkTheme } from '../components/Badge/Badge.theme.css';
 
-#### 1. Create Component Theme File
+   const lightSemanticColors = {
+     // ... other colors ...
+     ...badgeLightTheme, // Merge component theme
+   };
+   ```
 
-**For simple tokens** (no runtime color references):
+4. **Use in component styles:** Reference tokens from `tokens.colors` in your `.vanilla.css.ts` file
 
-Create `ComponentName.theme.css.ts` - see [`components/Badge/Badge.theme.css.ts`](components/Badge/Badge.theme.css.ts)
-
-**For complex tokens** (with runtime color references):
-
-Create two files to avoid circular dependencies:
-
-- `ComponentName.theme.ts` (plain TypeScript) - see [`components/Text/Text.theme.ts`](components/Text/Text.theme.ts)
-- `ComponentName.theme.css.ts` (re-export wrapper) - see [`components/Text/Text.theme.css.ts`](components/Text/Text.theme.css.ts)
-
-#### 2. Add to Global Theme Contract
-
-Add the tokens to [`styles/tokens.css.ts`](styles/tokens.css.ts) in the `colors` object (not nested).
-
-#### 3. Merge into Global Theme Implementations
-
-See [`styles/themes.css.ts`](styles/themes.css.ts) for how component themes are merged:
-
-```typescript
-import { badgeLightTheme, badgeDarkTheme } from '../components/Badge/Badge.theme.css';
-
-const lightSemanticColors = {
-  // ... other colors ...
-  ...badgeLightTheme, // Merge component theme
-};
-```
-
-For runtime color overrides, see the Text component section in [`styles/themes.css.ts`](styles/themes.css.ts).
-
-#### 4. Use in Component Styles
-
-Reference tokens from `tokens.colors` in your component's `.vanilla.css.ts` file.
-
-See [`components/Badge/Badge.vanilla.css.ts`](components/Badge/Badge.vanilla.css.ts) for usage examples.
-
-#### 5. Clean Up
-
-After migration, delete the old `ComponentName.themes.ts` file.
-
----
-
-## Code Examples
-
-See the step-by-step migration guide above for file references. Key reference implementations:
-
-- **Simple component**: [`components/Box/Box.vanilla.tsx`](components/Box/Box.vanilla.tsx)
-- **Component with variants**: [`components/Badge/Badge.vanilla.tsx`](components/Badge/Badge.vanilla.tsx)
-- **Component with theme tokens**: [`components/Text/Text.vanilla.tsx`](components/Text/Text.vanilla.tsx)
-- **Polymorphic component**: [`components/Badge/Badge.vanilla.tsx`](components/Badge/Badge.vanilla.tsx)
-- **Component with tests**: [`components/Input/Input.vanilla.test.tsx`](components/Input/Input.vanilla.test.tsx)
+5. **Clean up:** Delete old `ComponentName.themes.ts` file
 
 ---
 
@@ -573,7 +395,7 @@ See the step-by-step migration guide above for file references. Key reference im
 
 ### Using Design Tokens
 
-Always use tokens from the theme contract for themeable values. See [`styles/tokens.css.ts`](styles/tokens.css.ts) for available tokens.
+Always use tokens from [styles/tokens.css.ts](styles/tokens.css.ts) for themeable values:
 
 ```tsx
 // ✅ Good - uses theme tokens
@@ -585,16 +407,10 @@ backgroundColor: '#ffffff',
 
 ### Migrating from `asChild` to Polymorphic `as`
 
-Replace `asChild` pattern with polymorphic `as` prop.
-
-**Reference Implementation:**
-
-See [`components/Badge/Badge.vanilla.tsx`](components/Badge/Badge.vanilla.tsx) for the complete polymorphic pattern.
-
-**Migration steps:**
+Replace `asChild` pattern with polymorphic `as` prop (see [Badge.vanilla.tsx](components/Badge/Badge.vanilla.tsx)):
 
 1. Remove `@radix-ui/react-slot` dependency
-2. Import polymorphic types from [`styles/polymorphic.ts`](styles/polymorphic.ts)
+2. Import polymorphic types from [styles/polymorphic.ts](styles/polymorphic.ts)
 3. Replace `asChild?: boolean` with `as` prop using generic type parameter
 4. Use `PolymorphicComponentProps<C, YourOwnProps>` for props type
 5. Cast implementation to `PolymorphicComponent` type
@@ -607,19 +423,13 @@ import { useVanillaExtractTheme } from '../../styles/themeContext';
 const { colors, resolvedTheme } = useVanillaExtractTheme();
 ```
 
-See any vanilla component for usage examples.
-
 ### Using Shared Text Variants (DRY Pattern)
 
-For Text-based components needing identical variant behavior, import from [`styles/textVariants.css.ts`](styles/textVariants.css.ts).
+For Text-based components needing identical variant behavior, import from [styles/textVariants.css.ts](styles/textVariants.css.ts).
 
-**Reference Implementations:**
+**Benefits:** Single source of truth, ~70% code reduction, consistency.
 
-- [`components/Text/Text.vanilla.css.ts`](components/Text/Text.vanilla.css.ts)
-- [`components/Label/Label.vanilla.css.ts`](components/Label/Label.vanilla.css.ts)
-- [`components/Blockquote/Blockquote.vanilla.css.ts`](components/Blockquote/Blockquote.vanilla.css.ts)
-
-**Benefits:** Single source of truth, ~70% code reduction, consistency
+**Examples:** [Text.vanilla.css.ts](components/Text/Text.vanilla.css.ts), [Label.vanilla.css.ts](components/Label/Label.vanilla.css.ts), [Blockquote.vanilla.css.ts](components/Blockquote/Blockquote.vanilla.css.ts)
 
 **Don't use** if component needs custom variant behavior.
 
@@ -629,11 +439,11 @@ For Text-based components needing identical variant behavior, import from [`styl
 
 ### Theme Not Applied
 
-Use theme tokens instead of hardcoded values. See [`styles/tokens.css.ts`](styles/tokens.css.ts) for available tokens.
+Use theme tokens from [styles/tokens.css.ts](styles/tokens.css.ts) instead of hardcoded values.
 
 ### CSS Prop Not Working
 
-Ensure you follow the pattern in any vanilla component (e.g., [`components/Button/Button.vanilla.tsx`](components/Button/Button.vanilla.tsx)):
+Follow the pattern in vanilla components (see [Button.vanilla.tsx](components/Button/Button.vanilla.tsx)):
 
 1. Add `CSSProps` to component interface
 2. Import and use `processCSSProp(css, colors)` from `useVanillaExtractTheme()`
@@ -642,106 +452,55 @@ Ensure you follow the pattern in any vanilla component (e.g., [`components/Butto
 
 ### TypeScript Errors
 
-#### Problem: RecipeVariants returns undefined
+#### RecipeVariants returns undefined
 
-Always wrap `RecipeVariants` with `NonNullable`. See any vanilla component for the pattern.
-
-#### Problem: Stitches components in vanilla components cause type errors
-
-=======
+Always wrap `RecipeVariants` with `NonNullable`:
 
 ```tsx
-import { RecipeVariants } from '@vanilla-extract/recipes';
-
 // ❌ Bad - may return undefined
 type MyComponentVariants = RecipeVariants<typeof myComponentRecipe>;
 
 // ✅ Good - guaranteed to have variant properties
 type MyComponentVariants = NonNullable<RecipeVariants<typeof myComponentRecipe>>;
-
-export interface MyComponentOwnProps extends CSSProps {
-  size?: MyComponentVariants['size'];
-  variant?: MyComponentVariants['variant'];
-}
 ```
 
-Without `NonNullable`, TypeScript may treat the variants as `undefined`, causing errors like "Property 'size' does not exist on type 'MyComponentVariants'".
+#### Invalid selector error for child elements
 
-#### Problem: Invalid selector error for child elements
+**Problem:** `Invalid selector: &:not(:empty) > *` - Vanilla-extract only allows `&` with pseudo-classes/elements in `style()`.
 
-**Error:** `Invalid selector: &:not(:empty) > *` or similar errors when using selectors that target child elements.
-
-**Why it happens:** Vanilla-extract has strict rules about selectors. Each style block can only target the `&` character (the element itself) along with pseudo-classes and pseudo-elements. Selectors that target child elements (like `& > *`, `& h1`, etc.) are not allowed in the `style()` or `selectors:` object.
-
-**Solution:** Use the `globalStyle()` function for selectors that target child elements:
+**Solution:** Use `globalStyle()` for child selectors:
 
 ```tsx
-// ❌ Bad - causes "Invalid selector" error
+// ❌ Bad - causes error
 const skeleton = style({
-  selectors: {
-    '&:not(:empty) > *': {
-      visibility: 'hidden',
-      display: 'block',
-    },
-  },
+  selectors: { '&:not(:empty) > *': { visibility: 'hidden' } },
 });
 
-// ✅ Good - use globalStyle for child selectors
-import { globalStyle, style } from '@vanilla-extract/css';
-
+// ✅ Good - use globalStyle
 const skeleton = style({
-  // Only self-targeting selectors here
-  selectors: {
-    '&:not(:empty)': {
-      maxWidth: 'fit-content',
-    },
-  },
+  selectors: { '&:not(:empty)': { maxWidth: 'fit-content' } },
 });
 
-// Child selectors use globalStyle
-globalStyle(`${skeleton}:not(:empty) > *`, {
-  visibility: 'hidden',
-  display: 'block',
-});
+globalStyle(`${skeleton}:not(:empty) > *`, { visibility: 'hidden' });
 ```
 
-**Key rule:** If your selector goes beyond `&` to target children, siblings, or global elements, use `globalStyle()` instead.
+**Rule:** Use `globalStyle()` for: `& > div`, `& h1`, `& + &` (children/siblings). Use `style()` for: `&:hover`, `&::before` (self-targeting).
 
-**Examples:**
+#### Mixing Stitches and vanilla-extract components
 
-- `& > div` → Use `globalStyle()`
-- `& h1` → Use `globalStyle()`
-- `& + &` → Use `globalStyle()` (sibling selector)
-- `&:hover` → OK in `style()` (self-targeting)
-- `&::before` → OK in `style()` (pseudo-element on self)
+**CRITICAL:** Never mix systems. Always use vanilla-extract versions inside vanilla components (see [TextField.vanilla.tsx](components/TextField/TextField.vanilla.tsx)).
 
-#### Problem: Stitches components used in vanilla components cause type errors
+#### Props typed as `CSSProps` require `as any` in tests
 
-**CRITICAL RULE:** Never mix Stitches and vanilla-extract components. Always use vanilla-extract versions inside vanilla components.
+**Root cause:** Should be `CSSProps['css']` not `CSSProps`. See [Textarea.vanilla.tsx](components/Textarea/Textarea.vanilla.tsx) for correct typing.
 
-See [`components/TextField/TextField.vanilla.tsx`](components/TextField/TextField.vanilla.tsx) for an example of using vanilla components.
-
-#### Problem: Props typed as `CSSProps` require `as any` in tests
-
-**Root cause:** The prop is typed as `CSSProps` but should be `CSSProps['css']`.
-
-**Reference:** See [`components/Textarea/Textarea.vanilla.tsx`](components/Textarea/Textarea.vanilla.tsx) for correct typing of additional CSS props.
-
-**Understanding CSSProps property names:**
-
-The [`styles/cssProps.ts`](styles/cssProps.ts) interface accepts both abbreviated and full property names.
-
-```tsx
-// Both work identically:
-<Component css={{ p: '$4', m: '$2' }} />              // Abbreviated
-<Component css={{ padding: '$4', margin: '$2' }} />   // Full names
-```
+**Note:** `CSSProps` accepts both abbreviated (`p`, `m`) and full names (`padding`, `margin`).
 
 ### Build or Storybook Issues
 
-- **Build errors**: Check [`vite.config.ts`](vite.config.ts) has `vanillaExtractPlugin()`
-- **Theme not switching**: Verify [`.storybook/preview.jsx`](.storybook/preview.jsx) has `VanillaExtractThemeProvider`
-- **Color mismatch**: Compare tokens used in both versions, check Comparison story
+- **Build errors**: Check [vite.config.ts](vite.config.ts) has `vanillaExtractPlugin()`
+- **Theme not switching**: Verify [.storybook/preview.jsx](.storybook/preview.jsx) has `VanillaExtractThemeProvider`
+- **Color mismatch**: Compare tokens, check Comparison story
 
 ---
 
@@ -774,7 +533,6 @@ Use this checklist for each component migration:
 - [ ] Test all variants in Storybook
 - [ ] Test light/dark theme switching
 - [ ] Verify visual parity with original component
-      <<<<<<< HEAD
 - [ ] **REQUIRED:** Create `ComponentName.vanilla.test.tsx` (see [`Input.vanilla.test.tsx`](components/Input/Input.vanilla.test.tsx))
 - [ ] Test basic rendering and element types
 - [ ] Test custom className support
@@ -786,19 +544,7 @@ Use this checklist for each component migration:
 - [ ] Test HTML attribute pass-through
 - [ ] Test accessibility with jest-axe
 - [ ] Test theme support (light/dark and different primary colors)
-- [ ] # Run tests: `yarn test` (verify all tests pass)
-- [ ] **REQUIRED:** Create `ComponentName.vanilla.test.tsx` with comprehensive tests
-  - [ ] Basic rendering and element type
-  - [ ] All variant props
-  - [ ] Custom className
-  - [ ] Style prop
-  - [ ] CSS prop (with token processing)
-  - [ ] Style + CSS prop merging
-  - [ ] Ref forwarding
-  - [ ] HTML attribute pass-through
-  - [ ] Accessibility (axe violations)
-  - [ ] Light/dark theme switching
-- [ ] Run tests: `yarn test`
+- [ ] Run tests: `yarn test` (verify all tests pass)
 - [ ] Run build: `yarn build`
 
 ### 4. Finalize
@@ -816,44 +562,30 @@ Use this checklist for each component migration:
 - Test both light and dark themes
 - Migrate one component at a time
 
-### Critical Pattern: Include All Base Styles in Recipes
+### Critical: Include All Base Styles in Recipes
 
 **⚠️ IMPORTANT:** When recipes have variants, include ALL base styles (font sizes, dimensions, etc.) in the recipe's base array, not in separate style constants.
 
-**Why:** If styles are split and components conditionally apply recipe classes, base styles will be missing when variants are used.
+**Why:** Split styles with conditional recipe classes will miss base styles when variants are used.
 
-**Reference:**
-
-See [`components/Heading/Heading.vanilla.css.ts`](components/Heading/Heading.vanilla.css.ts) for the correct pattern - all styles are included in the recipe base.
-
-**Rule:** Put ALL styling in recipe base if component has variants. Test variant combinations to verify.
+**Rule:** Put ALL styling in recipe base if component has variants (see [Heading.vanilla.css.ts](components/Heading/Heading.vanilla.css.ts)).
 
 ---
 
 ## Reference: Future Migration Phases
 
-**Note**: These phases are not currently actionable. Continue using Phase 1 (side-by-side exports).
+**Note**: Not currently actionable. Continue using Phase 1 (side-by-side exports).
 
-### Phase 2: Make Vanilla Extract Default (v2.0.0)
-
-Swap exports, deprecate Stitches versions. Breaking change for consumers.
-
-### Phase 3: Remove Stitches (v3.0.0)
-
-Delete Stitches files, remove `.vanilla` suffix from filenames. ~40% smaller bundle.
+- **Phase 2 (v2.0.0):** Make Vanilla Extract default, deprecate Stitches (breaking change)
+- **Phase 3 (v3.0.0):** Remove Stitches files, remove `.vanilla` suffix (~40% smaller bundle)
 
 ---
 
 ## Reference: Build Configuration
 
-The build system is already configured in [`vite.config.ts`](vite.config.ts) to support both Stitches and Vanilla Extract simultaneously. No action needed.
+Build system already configured in [vite.config.ts](vite.config.ts) - no action needed.
 
-**Key Settings:**
-
-- `preserveModules: true` - Maintains module structure for tree-shaking
-- Both `.tsx` and `.css.ts` files are processed
-- Outputs ES modules (ESM) and CommonJS (CJS) builds
-- Static CSS files generated at build time (not runtime)
+**Key settings:** `preserveModules: true` (tree-shaking), processes `.tsx` and `.css.ts`, outputs ESM/CJS, static CSS at build time.
 
 ---
 

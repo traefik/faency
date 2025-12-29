@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Faency is a React component library and design system for Traefik Labs, built with React, TypeScript, Stitches CSS-in-JS, and Radix UI Primitives. It provides accessible, themed components with light/dark mode support.
 
-**Migration Status**: Currently migrating from Stitches to vanilla-extract (Phase 2 complete). Most components use Stitches (`.tsx`), some have vanilla-extract versions (`.vanilla.tsx`). Prefer editing Stitches versions unless explicitly migrating. See `VANILLA_EXTRACT_MIGRATION.md` for migration status and `VANILLA_EXTRACT_DEVELOPER_GUIDE.md` for comprehensive migration instructions.
+**Migration Status**: Currently migrating from Stitches to vanilla-extract (Phase 3 in progress). Most components use Stitches (`.tsx`), some have vanilla-extract versions (`.vanilla.tsx`). Prefer editing Stitches versions unless explicitly migrating. See `VANILLA_EXTRACT_MIGRATION.md` for migration status and `VANILLA_EXTRACT_DEVELOPER_GUIDE.md` for comprehensive migration instructions.
 
 ## Development Commands
 
