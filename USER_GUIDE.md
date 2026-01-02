@@ -20,10 +20,10 @@ Install Faency via npm or yarn:
 
 ```bash
 # npm
-npm install @traefiklabs/faency
+npm install @traefik-labs/faency
 
 # yarn
-yarn add @traefiklabs/faency
+yarn add @traefik-labs/faency
 ```
 
 ### Peer Dependencies
@@ -46,8 +46,8 @@ Wrap your application with the `FaencyProvider`:
 
 ```tsx
 import React from 'react';
-import { FaencyProvider } from '@traefiklabs/faency';
-import { Button, Box, Text } from '@traefiklabs/faency';
+import { FaencyProvider } from '@traefik-labs/faency';
+import { Button, Box, Text } from '@traefik-labs/faency';
 
 function App() {
   return (
@@ -69,9 +69,9 @@ For Vanilla Extract components, import the CSS file and use the `VanillaExtractT
 
 ```tsx
 import React from 'react';
-import '@traefiklabs/faency/dist/style.css'; // Required for Vanilla Extract components
-import { VanillaExtractThemeProvider } from '@traefiklabs/faency';
-import { BoxVanilla, BadgeVanilla } from '@traefiklabs/faency';
+import '@traefik-labs/faency/dist/style.css'; // Required for Vanilla Extract components
+import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
+import { BoxVanilla, BadgeVanilla } from '@traefik-labs/faency';
 
 function App() {
   return (
@@ -97,7 +97,7 @@ Stitches components use runtime CSS-in-JS, so no separate CSS imports are needed
 Vanilla Extract components require importing the static CSS file. Add this import to your application's entry point (e.g., `App.tsx` or `index.tsx`):
 
 ```tsx
-import '@traefiklabs/faency/dist/style.css';
+import '@traefik-labs/faency/dist/style.css';
 ```
 
 This CSS file contains all the styles for Vanilla Extract components (components with `Vanilla` suffix like `BadgeVanilla`, `BoxVanilla`, etc.). Without this import, these components will render as unstyled elements.
@@ -119,7 +119,7 @@ Faency includes a powerful theming system with support for light/dark modes and 
 For more control over theming, use the new Vanilla Extract theme provider:
 
 ```tsx
-import { VanillaExtractThemeProvider } from '@traefiklabs/faency';
+import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
 
 function App() {
   return (
@@ -151,7 +151,7 @@ Faency supports 7 primary color themes:
 #### With Vanilla Extract Provider
 
 ```tsx
-import { VanillaExtractThemeProvider } from '@traefiklabs/faency';
+import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
 
 function App() {
   return (
@@ -167,7 +167,7 @@ function App() {
 Access and control the theme using the `useVanillaExtractTheme` hook:
 
 ```tsx
-import { useVanillaExtractTheme } from '@traefiklabs/faency';
+import { useVanillaExtractTheme } from '@traefik-labs/faency';
 
 function ThemeToggle() {
   const { mode, resolvedTheme, primaryColor, setMode, setPrimaryColor } = useVanillaExtractTheme();
@@ -220,10 +220,10 @@ function ThemeToggle() {
 
 ```tsx
 // Import individual components
-import { Button, Box, Text, Input, Badge } from '@traefiklabs/faency';
+import { Button, Box, Text, Input, Badge } from '@traefik-labs/faency';
 
 // Or import everything
-import * as Faency from '@traefiklabs/faency';
+import * as Faency from '@traefik-labs/faency';
 ```
 
 ### Basic Component Usage
@@ -231,7 +231,7 @@ import * as Faency from '@traefiklabs/faency';
 #### Button
 
 ```tsx
-import { Button } from '@traefiklabs/faency';
+import { Button } from '@traefik-labs/faency';
 
 <Button variant="primary" size="medium">
   Click Me
@@ -247,7 +247,7 @@ import { Button } from '@traefiklabs/faency';
 #### Box (Layout Container)
 
 ```tsx
-import { Box } from '@traefiklabs/faency';
+import { Box } from '@traefik-labs/faency';
 
 <Box css={{ p: '$4', bc: '$blue4', br: '$2' }}>Content goes here</Box>;
 ```
@@ -257,7 +257,7 @@ The Box component is a flexible container for layouts. Use it with the `css` pro
 #### Text
 
 ```tsx
-import { Text } from '@traefiklabs/faency';
+import { Text } from '@traefik-labs/faency';
 
 <Text size="4" css={{ c: '$blue11' }}>
   Styled text content
@@ -441,7 +441,7 @@ Faency is built with TypeScript and provides full type definitions.
 All component props are fully typed:
 
 ```tsx
-import { Button } from '@traefiklabs/faency';
+import { Button } from '@traefik-labs/faency';
 import type { ComponentProps } from 'react';
 
 // Get the prop types
@@ -455,7 +455,7 @@ function MyButton(props: ButtonProps) {
 ### CSS Prop Types
 
 ```tsx
-import type { CSSProps } from '@traefiklabs/faency';
+import type { CSSProps } from '@traefik-labs/faency';
 
 interface MyComponentProps extends CSSProps {
   label: string;
@@ -469,7 +469,7 @@ function MyComponent({ label, css }: MyComponentProps) {
 ### Theme Types
 
 ```tsx
-import type { PrimaryColor, ThemeMode } from '@traefiklabs/faency';
+import type { PrimaryColor, ThemeMode } from '@traefik-labs/faency';
 
 const primaryColor: PrimaryColor = 'blue';
 const themeMode: ThemeMode = 'light';
@@ -552,7 +552,7 @@ Use Box for layout composition:
 For new projects, use the Vanilla Extract components (when available) for better performance:
 
 ```tsx
-import { BoxVanilla } from '@traefiklabs/faency';
+import { BoxVanilla } from '@traefik-labs/faency';
 
 // Better performance with static CSS
 <BoxVanilla css={{ p: '$4' }}>Content</BoxVanilla>;
@@ -573,7 +573,7 @@ import {
   Button,
   Text,
   Badge,
-} from '@traefiklabs/faency';
+} from '@traefik-labs/faency';
 
 function ThemeControls() {
   const { resolvedTheme, setMode, primaryColor, setPrimaryColor } = useVanillaExtractTheme();
@@ -642,6 +642,6 @@ export default App;
 ## Additional Resources
 
 - [Component Documentation](https://storybook.traefik.io/faency) - Interactive component examples
-- [GitHub Repository](https://github.com/traefiklabs/faency) - Source code and issues
+- [GitHub Repository](https://github.com/traefik/faency) - Source code and issues
 - [Vanilla Extract Migration Guide](./VANILLA_EXTRACT_DEVELOPER_GUIDE.md) - For contributors
 - [Project Guidelines](./CLAUDE.md) - Development guidelines

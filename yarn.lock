@@ -5743,9 +5743,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@traefiklabs/faency@workspace:.":
+"@traefik-labs/faency@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@traefiklabs/faency@workspace:."
+  resolution: "@traefik-labs/faency@workspace:."
   dependencies:
     "@babel/core": "npm:^7.15.4"
     "@babel/plugin-transform-react-pure-annotations": "npm:^7.16.7"
