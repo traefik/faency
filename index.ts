@@ -16,7 +16,8 @@ export {
   Thead as AriaThead,
   Tr as AriaTr,
 } from './components/AriaTable';
-export { Avatar } from './components/Avatar';
+export type { AvatarVanillaProps } from './components/Avatar';
+export { Avatar, AvatarVanilla } from './components/Avatar';
 export type { BadgeVanillaProps } from './components/Badge';
 export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export type { BlockquoteVanillaProps } from './components/Blockquote';
