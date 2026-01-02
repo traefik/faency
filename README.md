@@ -13,11 +13,11 @@ You can find the Storybook with an example for every component in this library [
 ### How to use Faency
 
 ```sh
-npm install @traefiklabs/faency@next
+npm install @traefik-labs/faency@next
 
 # or
 
-yarn add @traefiklabs/faency@next
+yarn add @traefik-labs/faency@next
 ```
 
 #### Using Stitches Components (Current)
@@ -27,7 +27,7 @@ Wire up the FaencyProvider which will hold the context with the Theme configurat
 > The provider accepts one parameter besides the `children`, which is the `primaryColor`, that will be used to build the colors used on the Theme. This color can be one of the colors exported by the `Stitches` config, just by adding `$` as a prefix, or can be any string that represents a CSS color.
 
 ```jsx
-import { FaencyProvider } from '@traefiklabs/faency';
+import { FaencyProvider } from '@traefik-labs/faency';
 
 const App = () => <FaencyProvider primaryColor="$blue8">{/* your app */}</FaencyProvider>;
 ```
@@ -35,7 +35,7 @@ const App = () => <FaencyProvider primaryColor="$blue8">{/* your app */}</Faency
 Then you are ready to import components and use them on your project:
 
 ```jsx
-import { Flex, styled } from '@traefiklabs/faency';
+import { Flex, styled } from '@traefik-labs/faency';
 
 const Container = styled(Flex, {
   padding: '$3',
@@ -53,14 +53,14 @@ For better performance with static CSS, use the new Vanilla Extract components:
 1. Import the CSS file in your app's entry point:
 
 ```jsx
-import '@traefiklabs/faency/dist/style.css';
+import '@traefik-labs/faency/dist/style.css';
 ```
 
 2. Wrap your app with the VanillaExtractThemeProvider:
 
 ```jsx
-import { VanillaExtractThemeProvider } from '@traefiklabs/faency';
-import { BoxVanilla, BadgeVanilla } from '@traefiklabs/faency';
+import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
+import { BoxVanilla, BadgeVanilla } from '@traefik-labs/faency';
 
 const App = () => (
   <VanillaExtractThemeProvider defaultTheme="light" primaryColor="blue">
