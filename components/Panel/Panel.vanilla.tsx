@@ -1,20 +1,34 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { forwardRef } from 'react';
+import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { panelStyle } from './Panel.vanilla.css';
 
-export type PanelVanillaProps = React.ComponentProps<'div'> & CSSProps;
+export type PanelVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
+  C,
+  CSSProps
+>;
 
-export const PanelVanilla = forwardRef<HTMLDivElement, PanelVanillaProps>(
-  ({ className, css, style, ...props }, ref) => {
+type PanelVanillaComponent = PolymorphicComponent<'div', PanelVanillaProps<ElementType>>;
+
+const PanelVanillaComponentImpl = forwardRef(
+  <C extends ElementType = 'div'>(
+    { as, className, css, style, ...props }: PanelVanillaProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'div';
     const { colors } = useVanillaExtractTheme();
     const { style: cssStyles, vars } = processCSSProp(css, colors);
     const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
 
     return (
-      <div
+      <Component
         ref={ref}
         className={`${panelStyle} ${className || ''}`.trim()}
         style={mergedStyles}
@@ -24,4 +38,6 @@ export const PanelVanilla = forwardRef<HTMLDivElement, PanelVanillaProps>(
   },
 );
 
-PanelVanilla.displayName = 'PanelVanilla';
+PanelVanillaComponentImpl.displayName = 'PanelVanilla';
+
+export const PanelVanilla = PanelVanillaComponentImpl as PanelVanillaComponent;

@@ -1,62 +1,69 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
-import { forwardRef } from 'react';
+import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { cardRecipe, interactiveCardRecipe } from './Card.vanilla.css';
 
 type CardRecipeVariants = NonNullable<RecipeVariants<typeof cardRecipe>>;
 
-interface BaseCardProps extends CSSProps {
+interface CardOwnProps extends CSSProps {
   elevation?: CardRecipeVariants['elevation'];
   variant?: CardRecipeVariants['variant'];
   active?: CardRecipeVariants['active'];
+  interactive?: boolean;
 }
 
-interface CardOwnProps extends BaseCardProps, React.ComponentProps<'div'> {
-  interactive?: false;
-}
+export type CardVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
+  C,
+  CardOwnProps
+>;
 
-export type CardVanillaProps = CardOwnProps;
+type CardVanillaComponent = PolymorphicComponent<'div', CardVanillaProps<ElementType>>;
 
-interface InteractiveCardProps
-  extends BaseCardProps,
-    Omit<React.ComponentProps<'button'>, 'color'> {
-  interactive: true;
-}
-
-export type CardVanillaAllProps = CardVanillaProps | InteractiveCardProps;
-
-export const CardVanilla = forwardRef<HTMLDivElement | HTMLButtonElement, CardVanillaAllProps>(
-  ({ className, css, style, elevation, variant, active, interactive, ...props }, ref) => {
+const CardVanillaComponentImpl = forwardRef(
+  <C extends ElementType = 'div'>(
+    {
+      as,
+      className,
+      css,
+      style,
+      elevation,
+      variant,
+      active,
+      interactive,
+      ...props
+    }: CardVanillaProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || (interactive ? 'button' : 'div');
     const { colors } = useVanillaExtractTheme();
     const { style: cssStyles, vars } = processCSSProp(css, colors);
     const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
 
-    if (interactive) {
-      const recipeClass = interactiveCardRecipe({ elevation, variant, active });
-      return (
-        <button
-          ref={ref as React.RefObject<HTMLButtonElement>}
-          className={`${recipeClass} ${className || ''}`.trim()}
-          style={mergedStyles}
-          tabIndex={0}
-          {...(props as React.ComponentProps<'button'>)}
-        />
-      );
-    }
+    const recipe = interactive ? interactiveCardRecipe : cardRecipe;
+    const recipeClass = recipe({ elevation, variant, active });
 
-    const recipeClass = cardRecipe({ elevation, variant, active });
+    const additionalProps = interactive && !as ? { tabIndex: 0 } : {};
+
     return (
-      <div
-        ref={ref as React.RefObject<HTMLDivElement>}
+      <Component
+        ref={ref}
         className={`${recipeClass} ${className || ''}`.trim()}
         style={mergedStyles}
-        {...(props as React.ComponentProps<'div'>)}
+        {...additionalProps}
+        {...props}
       />
     );
   },
 );
 
-CardVanilla.displayName = 'CardVanilla';
+CardVanillaComponentImpl.displayName = 'CardVanilla';
+
+export const CardVanilla = CardVanillaComponentImpl as CardVanillaComponent;

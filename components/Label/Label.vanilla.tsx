@@ -1,9 +1,13 @@
-import * as LabelPrimitive from '@radix-ui/react-label';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
-import { forwardRef } from 'react';
+import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { labelRecipe } from './Label.vanilla.css';
 
@@ -11,13 +15,31 @@ type LabelRecipeVariants = NonNullable<RecipeVariants<typeof labelRecipe>>;
 
 interface LabelOwnProps extends LabelRecipeVariants, CSSProps {}
 
-export type LabelVanillaProps = LabelPrimitive.LabelProps & LabelOwnProps;
+export type LabelVanillaProps<C extends ElementType = 'label'> = PolymorphicComponentProps<
+  C,
+  LabelOwnProps
+>;
 
-export const LabelVanilla = forwardRef<HTMLLabelElement, LabelVanillaProps>(
-  (
-    { className, css, style, size, weight, variant, gradient, transform, noWrap, ...props },
-    ref,
+type LabelVanillaComponent = PolymorphicComponent<'label', LabelVanillaProps<ElementType>>;
+
+const LabelVanillaComponentImpl = forwardRef(
+  <C extends ElementType = 'label'>(
+    {
+      as,
+      className,
+      css,
+      style,
+      size,
+      weight,
+      variant,
+      gradient,
+      transform,
+      noWrap,
+      ...props
+    }: LabelVanillaProps<C>,
+    ref?: PolymorphicRef<C>,
   ) => {
+    const Component = as || 'label';
     const { colors } = useVanillaExtractTheme();
 
     const { style: cssStyles, vars } = processCSSProp(css, colors);
@@ -31,7 +53,7 @@ export const LabelVanilla = forwardRef<HTMLLabelElement, LabelVanillaProps>(
     const recipeClass = labelRecipe({ size, weight, variant, gradient, transform, noWrap });
 
     return (
-      <LabelPrimitive.Root
+      <Component
         ref={ref}
         className={`${recipeClass} ${className || ''}`.trim()}
         style={mergedStyles}
@@ -41,4 +63,6 @@ export const LabelVanilla = forwardRef<HTMLLabelElement, LabelVanillaProps>(
   },
 );
 
-LabelVanilla.displayName = 'LabelVanilla';
+LabelVanillaComponentImpl.displayName = 'LabelVanilla';
+
+export const LabelVanilla = LabelVanillaComponentImpl as LabelVanillaComponent;
