@@ -23,7 +23,8 @@ export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
-export { Bubble } from './components/Bubble';
+export type { BubbleVanillaProps } from './components/Bubble';
+export { Bubble, BubbleVanilla } from './components/Bubble';
 export type { ButtonVanillaProps } from './components/Button';
 export { Button, ButtonVanilla } from './components/Button';
 export {
