@@ -201,4 +201,63 @@ describe('LabelVanilla', () => {
       unmount();
     });
   });
+
+  it('should render as custom element when as prop is provided', () => {
+    const { container } = renderWithTheme(<LabelVanilla as="span">Label</LabelVanilla>);
+    const label = container.firstChild;
+
+    expect(label?.nodeName).toBe('SPAN');
+    expect(label).toHaveTextContent('Label');
+  });
+
+  it('should render as div element with as prop', () => {
+    const { container } = renderWithTheme(<LabelVanilla as="div">Label</LabelVanilla>);
+    const label = container.firstChild;
+
+    expect(label?.nodeName).toBe('DIV');
+  });
+
+  it('should render as p element with as prop', () => {
+    const { container } = renderWithTheme(<LabelVanilla as="p">Label</LabelVanilla>);
+    const label = container.firstChild;
+
+    expect(label?.nodeName).toBe('P');
+  });
+
+  it('should apply className and styles when using as prop', () => {
+    const { container } = renderWithTheme(
+      <LabelVanilla as="span" className="custom" style={{ color: 'red' }}>
+        Label
+      </LabelVanilla>,
+    );
+    const label = container.firstChild as HTMLElement;
+
+    expect(label.nodeName).toBe('SPAN');
+    expect(label.className).toContain('custom');
+    expect(label.style.color).toBe('red');
+  });
+
+  it('should forward ref correctly when using as prop', () => {
+    const ref = React.createRef<HTMLElement>();
+    renderWithTheme(
+      <LabelVanilla as="span" ref={ref}>
+        Label
+      </LabelVanilla>,
+    );
+
+    expect(ref.current).toBeInstanceOf(HTMLElement);
+    expect(ref.current?.nodeName).toBe('SPAN');
+  });
+
+  it('should apply all variant props when using as prop', () => {
+    const { container } = renderWithTheme(
+      <LabelVanilla as="div" size="5" weight="bold" variant="contrast">
+        Label
+      </LabelVanilla>,
+    );
+    const label = container.firstChild;
+
+    expect(label?.nodeName).toBe('DIV');
+    expect(label).toHaveTextContent('Label');
+  });
 });

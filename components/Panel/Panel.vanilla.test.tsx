@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
 import { PanelVanilla } from './Panel.vanilla';
@@ -106,5 +107,52 @@ describe('PanelVanilla', () => {
     );
 
     expect(container.firstChild).toBeInTheDocument();
+  });
+
+  it('should render as custom element when as prop is provided', () => {
+    const { container } = renderWithTheme(<PanelVanilla as="section">Panel</PanelVanilla>);
+    const panel = container.firstChild;
+
+    expect(panel?.nodeName).toBe('SECTION');
+    expect(panel).toHaveTextContent('Panel');
+  });
+
+  it('should render as article element with as prop', () => {
+    const { container } = renderWithTheme(<PanelVanilla as="article">Panel</PanelVanilla>);
+    const panel = container.firstChild;
+
+    expect(panel?.nodeName).toBe('ARTICLE');
+  });
+
+  it('should render as aside element with as prop', () => {
+    const { container } = renderWithTheme(<PanelVanilla as="aside">Panel</PanelVanilla>);
+    const panel = container.firstChild;
+
+    expect(panel?.nodeName).toBe('ASIDE');
+  });
+
+  it('should apply className and styles when using as prop', () => {
+    const { container } = renderWithTheme(
+      <PanelVanilla as="section" className="custom" style={{ color: 'red' }}>
+        Panel
+      </PanelVanilla>,
+    );
+    const panel = container.firstChild as HTMLElement;
+
+    expect(panel.nodeName).toBe('SECTION');
+    expect(panel.className).toContain('custom');
+    expect(panel.style.color).toBe('red');
+  });
+
+  it('should forward ref correctly when using as prop', () => {
+    const ref = React.createRef<HTMLElement>();
+    renderWithTheme(
+      <PanelVanilla as="section" ref={ref}>
+        Panel
+      </PanelVanilla>,
+    );
+
+    expect(ref.current).toBeInstanceOf(HTMLElement);
+    expect(ref.current?.nodeName).toBe('SECTION');
   });
 });
