@@ -1,10 +1,9 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { CSSProps } from '../../styles/cssProps';
+import { BoxVanilla } from '../Box/Box.vanilla';
 import { avatarFallbackRecipe, avatarImage, avatarRecipe } from './Avatar.vanilla.css';
 
 type AvatarRecipeVariants = NonNullable<RecipeVariants<typeof avatarRecipe>>;
@@ -13,7 +12,6 @@ interface AvatarOwnProps extends AvatarRecipeVariants, CSSProps {
   alt?: string;
   src?: string;
   fallback?: React.ReactNode;
-  wrapperCss?: CSSProps['css'];
 }
 
 export type AvatarVanillaProps = Omit<
@@ -25,38 +23,27 @@ export type AvatarVanillaProps = Omit<
 const AvatarVanillaComponent = forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   AvatarVanillaProps
->(({ alt, src, fallback, size, variant, shape, css, style, wrapperCss, ...props }, ref) => {
-  const { colors } = useVanillaExtractTheme();
-
-  const { style: cssStyles, vars } = processCSSProp(css, colors);
-  const { style: wrapperCssStyles, vars: wrapperVars } = processCSSProp(wrapperCss, colors);
-
-  const mergedStyles = {
-    ...cssStyles,
-    ...style,
-    ...assignInlineVars(vars),
-  };
-
-  const wrapperMergedStyles = {
-    ...wrapperCssStyles,
-    position: 'relative' as const,
-    height: 'fit-content' as const,
-    width: 'fit-content' as const,
-    ...assignInlineVars(wrapperVars),
-  };
-
+>(({ alt, src, fallback, size, variant, shape, css, style, ...props }, ref) => {
   const recipeClass = avatarRecipe({ size, variant, shape });
   const fallbackRecipeClass = avatarFallbackRecipe({ size });
 
+  // This CSS will be processed by the Box component
+  const wrapperCss = {
+    ...css,
+    position: 'relative' as const,
+    height: 'fit-content' as const,
+    width: 'fit-content' as const,
+  };
+
   return (
-    <div style={wrapperMergedStyles}>
-      <AvatarPrimitive.Root ref={ref} className={recipeClass} style={mergedStyles} {...props}>
+    <BoxVanilla css={wrapperCss} style={style}>
+      <AvatarPrimitive.Root ref={ref} className={recipeClass} {...props}>
         <AvatarPrimitive.Image className={avatarImage} alt={alt} src={src} />
         <AvatarPrimitive.Fallback className={fallbackRecipeClass}>
           {fallback}
         </AvatarPrimitive.Fallback>
       </AvatarPrimitive.Root>
-    </div>
+    </BoxVanilla>
   );
 });
 
