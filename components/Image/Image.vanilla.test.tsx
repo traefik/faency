@@ -146,4 +146,53 @@ describe('ImageVanilla', () => {
 
     expect(element.style.width).toBe('200px');
   });
+
+  it('should render as different element when using as prop', () => {
+    const { container } = renderWithTheme(<ImageVanilla as="div" aria-label="Image placeholder" />);
+    const element = container.firstChild;
+
+    expect(element?.nodeName).toBe('DIV');
+  });
+
+  it('should support polymorphic rendering with different elements', () => {
+    const elements = ['img', 'div', 'span', 'picture'] as const;
+
+    elements.forEach((element) => {
+      const { container, unmount } = renderWithTheme(
+        <ImageVanilla as={element} aria-label="Test" />,
+      );
+      const renderedElement = container.firstChild;
+
+      expect(renderedElement?.nodeName).toBe(element.toUpperCase());
+      unmount();
+    });
+  });
+
+  it('should forward ref correctly with polymorphic as prop', () => {
+    const ref = { current: null };
+    renderWithTheme(<ImageVanilla as="div" ref={ref} />);
+
+    expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+
+  it('should apply styles with polymorphic rendering', () => {
+    const { container } = renderWithTheme(
+      <ImageVanilla as="div" css={{ padding: '$4' }} aria-label="Styled div" />,
+    );
+    const element = container.firstChild as HTMLElement;
+
+    expect(element.nodeName).toBe('DIV');
+    expect(element.style.padding).toBe('20px');
+  });
+
+  it('should maintain image attributes when rendered as img with polymorphic typing', () => {
+    const { container } = renderWithTheme(
+      <ImageVanilla as="img" src="https://example.com/image.jpg" alt="Polymorphic image" />,
+    );
+    const element = container.firstChild;
+
+    expect(element?.nodeName).toBe('IMG');
+    expect(element).toHaveAttribute('src', 'https://example.com/image.jpg');
+    expect(element).toHaveAttribute('alt', 'Polymorphic image');
+  });
 });

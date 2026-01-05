@@ -157,4 +157,38 @@ describe('SkeletonVanilla', () => {
       expect(container.firstChild).toBeInTheDocument();
     });
   });
+
+  it('should render as different element when using as prop', () => {
+    const { container } = renderWithTheme(<SkeletonVanilla as="span" />);
+    const skeleton = container.firstChild;
+
+    expect(skeleton?.nodeName).toBe('SPAN');
+  });
+
+  it('should support polymorphic rendering with different elements', () => {
+    const elements = ['div', 'span', 'section', 'article'] as const;
+
+    elements.forEach((element) => {
+      const { container, unmount } = renderWithTheme(<SkeletonVanilla as={element} />);
+      const skeleton = container.firstChild;
+
+      expect(skeleton?.nodeName).toBe(element.toUpperCase());
+      unmount();
+    });
+  });
+
+  it('should forward ref correctly with polymorphic as prop', () => {
+    const ref = { current: null };
+    renderWithTheme(<SkeletonVanilla as="span" ref={ref} />);
+
+    expect(ref.current).toBeInstanceOf(HTMLSpanElement);
+  });
+
+  it('should apply variant styles with polymorphic rendering', () => {
+    const { container } = renderWithTheme(<SkeletonVanilla as="section" variant="circle" />);
+    const skeleton = container.firstChild;
+
+    expect(skeleton?.nodeName).toBe('SECTION');
+    expect(skeleton).toBeInTheDocument();
+  });
 });

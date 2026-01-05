@@ -1,14 +1,28 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { forwardRef } from 'react';
+import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+  PolymorphicRef,
+} from '../../styles/polymorphic';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { image } from './Image.vanilla.css';
 
-export interface ImageVanillaProps extends React.ImgHTMLAttributes<HTMLImageElement>, CSSProps {}
+export type ImageVanillaProps<C extends ElementType = 'img'> = PolymorphicComponentProps<
+  C,
+  CSSProps
+>;
 
-export const ImageVanilla = forwardRef<HTMLImageElement, ImageVanillaProps>(
-  ({ className, css, style, ...props }, ref) => {
+type ImageVanillaComponent = PolymorphicComponent<'img', ImageVanillaProps<ElementType>>;
+
+const ImageVanillaImpl = forwardRef(
+  <C extends ElementType = 'img'>(
+    { as, className, css, style, ...props }: ImageVanillaProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'img';
     const { colors } = useVanillaExtractTheme();
     const { style: cssStyles, vars } = processCSSProp(css, colors);
 
@@ -19,7 +33,7 @@ export const ImageVanilla = forwardRef<HTMLImageElement, ImageVanillaProps>(
     };
 
     return (
-      <img
+      <Component
         ref={ref}
         className={`${image} ${className || ''}`.trim()}
         style={mergedStyles}
@@ -29,4 +43,6 @@ export const ImageVanilla = forwardRef<HTMLImageElement, ImageVanillaProps>(
   },
 );
 
-ImageVanilla.displayName = 'ImageVanilla';
+ImageVanillaImpl.displayName = 'ImageVanilla';
+
+export const ImageVanilla = ImageVanillaImpl as ImageVanillaComponent;
