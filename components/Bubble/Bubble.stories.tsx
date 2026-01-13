@@ -4,8 +4,12 @@ import React from 'react';
 
 import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { BoxVanilla } from '../Box/Box.vanilla';
 import { Flex } from '../Flex';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H3Vanilla } from '../Heading';
 import { Bubble } from './Bubble';
+import { BubbleVanilla } from './Bubble.vanilla';
 
 type BubbleVariants = VariantProps<typeof Bubble>;
 type BubbleProps = BubbleVariants & NonNullable<unknown>;
@@ -65,5 +69,56 @@ Sizes.argTypes = {
     control: 'select',
   },
 };
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={6}>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <Flex css={{ gap: '$3', marginBottom: '$4', alignItems: 'center' }}>
+        <Bubble size="x-small" variant="red" />
+        <Bubble size="small" variant="green" />
+        <Bubble size="medium" variant="orange" />
+        <Bubble size="large" variant="blue" />
+        <Bubble size="x-large" variant="yellow" />
+      </Flex>
+      <Flex css={{ gap: '$3', marginBottom: '$4' }}>
+        <Bubble variant="red" />
+        <Bubble variant="green" />
+        <Bubble variant="orange" />
+        <Bubble variant="blue" />
+        <Bubble variant="yellow" />
+        <Bubble variant="purple" />
+        <Bubble variant="gray" />
+      </Flex>
+      <Flex css={{ gap: '$3' }}>
+        <Bubble variant="purple" noAnimation />
+        <Bubble variant="gray" noAnimation />
+      </Flex>
+    </BoxVanilla>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <FlexVanilla gap={3} css={{ marginBottom: '$4', alignItems: 'center' }}>
+        <BubbleVanilla size="x-small" variant="red" />
+        <BubbleVanilla size="small" variant="green" />
+        <BubbleVanilla size="medium" variant="orange" />
+        <BubbleVanilla size="large" variant="blue" />
+        <BubbleVanilla size="x-large" variant="yellow" />
+      </FlexVanilla>
+      <FlexVanilla gap={3} css={{ marginBottom: '$4' }}>
+        <BubbleVanilla variant="red" />
+        <BubbleVanilla variant="green" />
+        <BubbleVanilla variant="orange" />
+        <BubbleVanilla variant="blue" />
+        <BubbleVanilla variant="yellow" />
+        <BubbleVanilla variant="purple" />
+        <BubbleVanilla variant="gray" />
+      </FlexVanilla>
+      <FlexVanilla gap={3}>
+        <BubbleVanilla variant="purple" noAnimation />
+        <BubbleVanilla variant="gray" noAnimation />
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
+);
 
 export default Component;
