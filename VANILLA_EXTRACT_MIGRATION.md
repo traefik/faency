@@ -18,7 +18,7 @@ This document outlines the progressive migration strategy from Stitches to vanil
 - ✅ Storybook theme integration
 - ✅ Developer migration guide
 
-⏳ **Phase 3 Planned**: Component-by-Component Migration
+🚧 **Phase 3 In Progress**: Component-by-Component Migration
 ⏳ **Phase 4 Planned**: Remove Stitches
 
 ## Architecture Overview
@@ -88,36 +88,7 @@ styles/
 
 ## Component Migration Pattern
 
-### Before (Stitches)
-
-```tsx
-import { styled } from '../../stitches.config';
-
-export const Box = styled('div', {
-  boxSizing: 'border-box',
-});
-
-// Usage with CSS prop
-<Box css={{ px: '$4', py: '$6', bc: '$deepBlue6' }}>
-```
-
-### After (Vanilla-Extract)
-
-```tsx
-import { style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
-
-export const box = style({
-  boxSizing: 'border-box',
-});
-
-export const boxRecipe = recipe({
-  base: box,
-  variants: {
-    // Add variants as needed
-  },
-});
-```
+See [VANILLA_EXTRACT_DEVELOPER_GUIDE.md](./VANILLA_EXTRACT_DEVELOPER_GUIDE.md) for detailed migration steps and patterns.
 
 ## Key Considerations
 
@@ -152,10 +123,11 @@ export const boxRecipe = recipe({
 ## Next Steps
 
 1. ✅ **Complete Phase 2**: Coexistence confirmed working ✓
-2. **Start Phase 3**: Begin migrating simple components (Text, Flex, Grid)
+2. 🚧 **Phase 3 In Progress**: Migrating components
    - Follow the [Developer Guide](./VANILLA_EXTRACT_DEVELOPER_GUIDE.md) for migration steps
-3. **Validate approach**: Ensure migrated components work exactly like originals
-4. **Scale migration**: Use learnings to migrate more complex components
+   - Validate migrated components work exactly like originals
+3. **Continue migration**: Scale to more complex components
+4. **Phase 4**: Remove Stitches after all components migrated
 
 ## Benefits After Migration
 

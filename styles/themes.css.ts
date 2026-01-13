@@ -16,6 +16,7 @@ import {
 } from '../components/IconButton/IconButton.theme.css';
 import { inputDarkTheme, inputLightTheme } from '../components/Input/Input.theme.css';
 import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme.css';
+import { skeletonDarkTheme, skeletonLightTheme } from '../components/Skeleton/Skeleton.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
 import { textareaDarkTheme, textareaLightTheme } from '../components/Textarea/Textarea.theme.css';
 import { tokens } from './tokens.css';
@@ -260,6 +261,7 @@ const lightSemanticColors = {
   iconButtonHoverBorder: lightColors.slate9,
   iconButtonHoverBackground: lightColors.slateA3,
   iconButtonFocusBorder: lightColors.slate10,
+  ...skeletonLightTheme,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -386,6 +388,7 @@ const darkSemanticColors = {
   iconButtonHoverBorder: darkColors.deepBlue6,
   iconButtonHoverBackground: darkColors.slateA4,
   iconButtonFocusBorder: darkColors.deepBlue7,
+  ...skeletonDarkTheme,
 };
 
 export const darkThemeBlue = createTheme(tokens, {

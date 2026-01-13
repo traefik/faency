@@ -161,6 +161,9 @@ export const tokens = createThemeContract({
     buttonSwitchOffBg: null,
     buttonSwitchOffColor: null,
     buttonSwitchActiveColor: null,
+    // Component-specific tokens - Skeleton
+    skeletonBackground: null,
+    skeletonAnimation: null,
   },
   fonts: {
     rubik: null,

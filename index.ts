@@ -1,4 +1,4 @@
-export { AccessibleIcon } from './components/AccessibleIcon';
+export { AccessibleIcon, AccessibleIconVanilla } from './components/AccessibleIcon';
 export {
   AccordionContent,
   AccordionItem,
@@ -61,14 +61,15 @@ export {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './components/DropdownMenu';
-export { Elevation, elevationVariants, ElevationVanilla } from './components/Elevation';
+export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
 export { H1, H2, H3, H4, H5, H6 } from './components/Heading';
 export type { IconButtonVanillaProps } from './components/IconButton';
 export { IconButton, IconButtonVanilla } from './components/IconButton';
-export { Image } from './components/Image';
+export type { ImageVanillaProps } from './components/Image';
+export { Image, ImageVanilla } from './components/Image';
 export type { InputHandle, InputVanillaHandle, InputVanillaProps } from './components/Input';
 export { Input, InputVanilla } from './components/Input';
 export type { LabelVanillaProps } from './components/Label';
@@ -97,6 +98,7 @@ export {
   NavigationTreeItem,
 } from './components/NavigationTree';
 export { Overlay } from './components/Overlay';
+export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export type { ParagraphVanillaProps } from './components/Paragraph';
 export { Paragraph, ParagraphVanilla } from './components/Paragraph';
 export {
@@ -107,7 +109,6 @@ export {
   PopoverPortal,
   PopoverTrigger,
 } from './components/Popover';
-export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export { Radio, RadioGroup } from './components/Radio';
 export {
   RadioAccordionContent,
@@ -117,7 +118,8 @@ export {
 } from './components/RadioAccordion';
 export { Select } from './components/Select';
 export { SidePanel } from './components/SidePanel';
-export { Skeleton } from './components/Skeleton';
+export type { SkeletonVanillaProps } from './components/Skeleton';
+export { Skeleton, SkeletonVanilla } from './components/Skeleton';
 export { Switch } from './components/Switch';
 export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
