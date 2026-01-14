@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
 import { ElevationVanilla } from './Elevation.vanilla';
@@ -119,5 +120,56 @@ describe('ElevationVanilla', () => {
     );
 
     expect(container.firstChild).toBeInTheDocument();
+  });
+
+  it('should render as custom element when as prop is provided', () => {
+    const { container } = renderWithTheme(
+      <ElevationVanilla as="section">Elevation</ElevationVanilla>,
+    );
+    const elevation = container.firstChild;
+
+    expect(elevation?.nodeName).toBe('SECTION');
+    expect(elevation).toHaveTextContent('Elevation');
+  });
+
+  it('should render as article element with as prop', () => {
+    const { container } = renderWithTheme(
+      <ElevationVanilla as="article">Elevation</ElevationVanilla>,
+    );
+    const elevation = container.firstChild;
+
+    expect(elevation?.nodeName).toBe('ARTICLE');
+  });
+
+  it('should render as span element with as prop', () => {
+    const { container } = renderWithTheme(<ElevationVanilla as="span">Elevation</ElevationVanilla>);
+    const elevation = container.firstChild;
+
+    expect(elevation?.nodeName).toBe('SPAN');
+  });
+
+  it('should apply className and styles when using as prop', () => {
+    const { container } = renderWithTheme(
+      <ElevationVanilla as="section" className="custom" style={{ color: 'red' }}>
+        Elevation
+      </ElevationVanilla>,
+    );
+    const elevation = container.firstChild as HTMLElement;
+
+    expect(elevation.nodeName).toBe('SECTION');
+    expect(elevation.className).toContain('custom');
+    expect(elevation.style.color).toBe('red');
+  });
+
+  it('should forward ref correctly when using as prop', () => {
+    const ref = React.createRef<HTMLElement>();
+    renderWithTheme(
+      <ElevationVanilla as="section" ref={ref}>
+        Elevation
+      </ElevationVanilla>,
+    );
+
+    expect(ref.current).toBeInstanceOf(HTMLElement);
+    expect(ref.current?.nodeName).toBe('SECTION');
   });
 });

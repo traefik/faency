@@ -339,5 +339,101 @@ describe('ButtonSwitch Vanilla', () => {
         unmount();
       });
     });
+
+    it('should render container as custom element when as prop is provided', () => {
+      const { container } = renderWithTheme(
+        <ButtonSwitchContainerVanilla as="section" type="single">
+          <ButtonSwitchItemVanilla as="button" value="option1">
+            Option 1
+          </ButtonSwitchItemVanilla>
+        </ButtonSwitchContainerVanilla>,
+      );
+      const containerElement = container.firstChild;
+
+      expect(containerElement?.nodeName).toBe('SECTION');
+      expect(containerElement).toHaveAttribute('role', 'group');
+    });
+
+    it('should render container as nav element with as prop', () => {
+      const { container } = renderWithTheme(
+        <ButtonSwitchContainerVanilla as="nav" type="single">
+          <ButtonSwitchItemVanilla as="button" value="option1">
+            Option 1
+          </ButtonSwitchItemVanilla>
+        </ButtonSwitchContainerVanilla>,
+      );
+      const containerElement = container.firstChild;
+
+      expect(containerElement?.nodeName).toBe('NAV');
+    });
+
+    it('should apply className and styles to container when using as prop', () => {
+      const { container } = renderWithTheme(
+        <ButtonSwitchContainerVanilla
+          as="section"
+          type="single"
+          className="custom"
+          style={{ color: 'red' }}
+        >
+          <ButtonSwitchItemVanilla as="button" value="option1">
+            Option 1
+          </ButtonSwitchItemVanilla>
+        </ButtonSwitchContainerVanilla>,
+      );
+      const containerElement = container.firstChild as HTMLElement;
+
+      expect(containerElement.nodeName).toBe('SECTION');
+      expect(containerElement.className).toContain('custom');
+      expect(containerElement.style.color).toBe('red');
+    });
+
+    it('should render item as custom element when as prop is provided', () => {
+      const { container } = renderWithTheme(
+        <ButtonSwitchContainerVanilla type="single">
+          <ButtonSwitchItemVanilla as="a" value="option1" href="/test">
+            Option 1
+          </ButtonSwitchItemVanilla>
+        </ButtonSwitchContainerVanilla>,
+      );
+      const item = container.querySelector('[value="option1"]');
+
+      expect(item?.nodeName).toBe('A');
+      expect(item).toHaveAttribute('role', 'radio');
+      expect(item).toHaveAttribute('href', '/test');
+    });
+
+    it('should render item as div element with as prop', () => {
+      const { container } = renderWithTheme(
+        <ButtonSwitchContainerVanilla type="single">
+          <ButtonSwitchItemVanilla as="div" value="option1">
+            Option 1
+          </ButtonSwitchItemVanilla>
+        </ButtonSwitchContainerVanilla>,
+      );
+      const item = container.querySelector('[value="option1"]');
+
+      expect(item?.nodeName).toBe('DIV');
+      expect(item).toHaveAttribute('role', 'radio');
+    });
+
+    it('should apply className and styles to item when using as prop', () => {
+      const { container } = renderWithTheme(
+        <ButtonSwitchContainerVanilla type="single">
+          <ButtonSwitchItemVanilla
+            as="span"
+            value="option1"
+            className="custom"
+            style={{ color: 'blue' }}
+          >
+            Option 1
+          </ButtonSwitchItemVanilla>
+        </ButtonSwitchContainerVanilla>,
+      );
+      const item = container.querySelector('[value="option1"]') as HTMLElement;
+
+      expect(item.nodeName).toBe('SPAN');
+      expect(item.className).toContain('custom');
+      expect(item.style.color).toBe('blue');
+    });
   });
 });

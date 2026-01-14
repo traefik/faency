@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
 import { CardVanilla } from './Card.vanilla';
@@ -182,5 +183,68 @@ describe('CardVanilla', () => {
     );
 
     expect(container.firstChild).toBeInTheDocument();
+  });
+
+  it('should render as custom element when as prop is provided', () => {
+    const { container } = renderWithTheme(<CardVanilla as="section">Card</CardVanilla>);
+    const card = container.firstChild;
+
+    expect(card?.nodeName).toBe('SECTION');
+    expect(card).toHaveTextContent('Card');
+  });
+
+  it('should render as article element with as prop', () => {
+    const { container } = renderWithTheme(<CardVanilla as="article">Card</CardVanilla>);
+    const card = container.firstChild;
+
+    expect(card?.nodeName).toBe('ARTICLE');
+  });
+
+  it('should render as anchor element with as prop', () => {
+    const { container } = renderWithTheme(
+      <CardVanilla as="a" href="/test">
+        Card Link
+      </CardVanilla>,
+    );
+    const card = container.firstChild as HTMLAnchorElement;
+
+    expect(card.nodeName).toBe('A');
+    expect(card.href).toContain('/test');
+  });
+
+  it('should override interactive default when as prop is provided', () => {
+    const { container } = renderWithTheme(
+      <CardVanilla as="section" interactive>
+        Card
+      </CardVanilla>,
+    );
+    const card = container.firstChild;
+
+    expect(card?.nodeName).toBe('SECTION');
+  });
+
+  it('should apply className and styles when using as prop', () => {
+    const { container } = renderWithTheme(
+      <CardVanilla as="section" className="custom" style={{ color: 'red' }}>
+        Card
+      </CardVanilla>,
+    );
+    const card = container.firstChild as HTMLElement;
+
+    expect(card.nodeName).toBe('SECTION');
+    expect(card.className).toContain('custom');
+    expect(card.style.color).toBe('red');
+  });
+
+  it('should forward ref correctly when using as prop', () => {
+    const ref = React.createRef<HTMLElement>();
+    renderWithTheme(
+      <CardVanilla as="section" ref={ref}>
+        Card
+      </CardVanilla>,
+    );
+
+    expect(ref.current).toBeInstanceOf(HTMLElement);
+    expect(ref.current?.nodeName).toBe('SECTION');
   });
 });

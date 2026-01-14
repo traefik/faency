@@ -8,6 +8,7 @@ These changes will occur in **v13.0.0** when we make Vanilla Extract the default
 
 **Current Version:** v12.x (Stitches-based, side-by-side with Vanilla Extract)
 **Next Major Version:** v13.0.0 (Vanilla Extract only - complete migration with breaking changes)
+**Current Status:** In development - migrating components to Vanilla Extract
 
 ---
 
@@ -15,9 +16,7 @@ These changes will occur in **v13.0.0** when we make Vanilla Extract the default
 
 ### Polymorphic Components: `asChild` → `as` Prop
 
-**Affected Components:** Badge, Button, AriaTable
-
-**Change:** `asChild` prop replaced with polymorphic `as` prop
+**Change:** `asChild` prop replaced with polymorphic `as` prop across all applicable components
 
 **Before (v12.x with Stitches):**
 
@@ -51,16 +50,106 @@ import { Badge } from 'faency';
 
 - More ergonomic API (no wrapper element needed)
 - Better TypeScript support (element-specific props are typed correctly)
-- Consistent polymorphic pattern across all components (Box, Text, Badge, etc.)
+- Consistent polymorphic pattern across all components
 - Simpler implementation without Radix UI Slot dependency
 
 **Impact:** Medium - Common pattern for components rendered as links or buttons
 
-**Components to Track:**
+---
 
-- ✅ Badge - Migrated to polymorphic `as` pattern
-- [ ] Button - Needs migration to polymorphic `as` pattern
-- [ ] AriaTable - Needs migration to polymorphic `as` pattern
+## Components Supporting Polymorphic `as` Prop
+
+### Layout Components
+
+- ✅ **Box** - Full polymorphic support (default: `div`)
+- ✅ **Container** - Full polymorphic support (default: `div`)
+- ✅ **Flex** - Full polymorphic support (default: `div`)
+- ✅ **Grid** - Full polymorphic support (default: `div`)
+- ✅ **Panel** - Full polymorphic support (default: `div`)
+- ✅ **Elevation** - Full polymorphic support (default: `div`)
+- ✅ **Card** - Full polymorphic support with smart defaults (default: `button` when `interactive`, otherwise `div`)
+
+### Typography Components
+
+- ✅ **Text** - Full polymorphic support (default: `span`)
+- ✅ **Heading** - Full polymorphic support (default: `h1`)
+- ✅ **Paragraph** - Full polymorphic support (default: `p`)
+- ✅ **Blockquote** - Full polymorphic support (default: `blockquote`)
+- ✅ **Label** - Full polymorphic support (default: `label`)
+
+### Interactive Components
+
+- ✅ **Badge** - Full polymorphic support (default: `span`)
+- ✅ **Button** - Full polymorphic support (default: `button`)
+- ✅ **IconButton** - Full polymorphic support (default: `button`)
+- ✅ **Bubble** - Full polymorphic support (default: `div`)
+- ✅ **ButtonSwitch** (Container & Item) - Full polymorphic support with conditional rendering
+  - Container default: uses Radix `ToggleGroup.Root` when no `as` prop, otherwise renders as custom element with `role="group"`
+  - Item default: uses Radix `ToggleGroup.Item` when no `as` prop, otherwise renders as custom element with `role="radio"`
+
+---
+
+## Components NOT Supporting Polymorphic `as` Prop
+
+### Form Components
+
+These components do not support the `as` prop because the actual form elements must remain fixed for proper functionality and browser compatibility:
+
+- ❌ **Input** - Wrapper is fixed `div`, input element cannot be changed
+- ❌ **TextField** - Uses `BoxVanilla` wrapper, input element cannot be changed
+- ❌ **Textarea** - Wrapper is fixed `div`, textarea element cannot be changed
+
+### Components Not Yet Migrated
+
+- ⏳ **AriaTable** - Not yet migrated to Vanilla Extract
+- Additional components may be added as migration continues
+
+---
+
+## Special Implementation Notes
+
+### ButtonSwitch Conditional Rendering
+
+ButtonSwitch uses a special conditional rendering pattern:
+
+- **Without `as` prop:** Uses Radix UI primitives (`ToggleGroup.Root` and `ToggleGroup.Item`) for full Radix functionality
+- **With `as` prop:** Renders as custom elements with appropriate ARIA roles
+  - Container: `role="group"`
+  - Item: `role="radio"`
+
+**Important:** When using `as` prop on ButtonSwitch container, you must also use `as` prop on items to avoid Radix context errors.
+
+```tsx
+// ✅ Correct - both use `as` prop
+<ButtonSwitchContainerVanilla as="nav">
+  <ButtonSwitchItemVanilla as="a" value="1" href="/home">Home</ButtonSwitchItemVanilla>
+  <ButtonSwitchItemVanilla as="a" value="2" href="/about">About</ButtonSwitchItemVanilla>
+</ButtonSwitchContainerVanilla>
+
+// ❌ Wrong - mixing will cause Radix context errors
+<ButtonSwitchContainerVanilla as="nav">
+  <ButtonSwitchItemVanilla value="1">Home</ButtonSwitchItemVanilla> {/* Missing `as` */}
+</ButtonSwitchContainerVanilla>
+```
+
+### Card Smart Defaults
+
+Card component has intelligent default element selection:
+
+- `interactive={true}` → defaults to `<button>`
+- `interactive={false}` or not set → defaults to `<div>`
+- `as` prop always overrides the default
+
+```tsx
+// Renders as <button>
+<CardVanilla interactive>Click me</CardVanilla>
+
+// Renders as <div>
+<CardVanilla>Static content</CardVanilla>
+
+// Renders as <section> (overrides interactive default)
+<CardVanilla as="section" interactive>Custom element</CardVanilla>
+```
 
 ---
 
@@ -93,14 +182,16 @@ import { VanillaExtractThemeProvider } from 'faency';
 **Migration Guide:**
 
 1. Replace `FaencyProvider` with `VanillaExtractThemeProvider`
-2. Add `defaultTheme` prop (either "light" or "dark")
+2. Add `defaultTheme` prop (either `"light"` or `"dark"`)
 3. Optional: Add `forcedTheme` prop to override user preference
+4. Optional: Add `primaryColor` prop to set the primary color theme
 
 **Rationale:**
 
 - Vanilla Extract requires theme class application at root
 - More explicit theme control
 - Better integration with system preferences
+- Support for dynamic primary color theming
 
 **Impact:** High - Required for all users
 
@@ -117,24 +208,12 @@ import { VanillaExtractThemeProvider } from 'faency';
 ```tsx
 // Both versions support the same API
 <Badge css={{ px: '$4', py: '$6', bc: '$blue6' }} />
+
+// Also supports full property names
+<Badge css={{ padding: '$4', backgroundColor: '$blue6' }} />
 ```
 
-**Note:** This is maintained for backward compatibility.
-
----
-
-## Future Breaking Changes (TBD)
-
-### Components Not Yet Migrated
-
-The following components will be migrated and may have breaking changes:
-
-- [ ] Button - Review `as` prop implementation
-- [ ] Text - Review polymorphic implementation
-- [ ] Link - May consolidate with Button `as="a"` pattern
-- [ ] (Add more as migration progresses)
-
-**Action Required:** Document breaking changes as each component is migrated.
+**Note:** This is maintained for backward compatibility. The `css` prop continues to support token-based styling with both abbreviated and full property names.
 
 ---
 
@@ -146,55 +225,25 @@ The following components will be migrated and may have breaking changes:
 - No breaking changes
 - Users can opt-in to `*Vanilla` components
 - This allows users to test Vanilla Extract versions before migration
+- Components have `.vanilla.tsx` suffix in source
+- **Currently in this phase** - actively migrating components
 
-### Phase 2: Vanilla Extract Only (v13.0.0)
+### Phase 2: Vanilla Extract Only (v13.0.0 - Future)
 
 - **Complete switch to Vanilla Extract**
 - Remove all Stitches code and dependencies
 - Remove `.vanilla` suffix from filenames and exports
 - All components use Vanilla Extract only
 - Breaking changes documented above take effect
-- ~40% bundle size reduction vs v12.x
+- Expected bundle size reduction
 
----
+**Migration Steps (when upgrading to v13.0.0):**
 
-## Communication Plan
-
-### Before v13.0.0 Release
-
-1. **Documentation:**
-   - Update README with migration guide
-   - Create detailed migration examples
-   - Add migration codemods (if feasible)
-
-2. **Release Notes:**
-   - Comprehensive changelog
-   - Migration guide in release notes
-   - Video/blog post explaining changes (optional)
-
-### After v13.0.0 Release
-
-1. **Support Period:**
-   - Maintain v12.x branch for critical bug fixes (6 months)
-   - Community support in GitHub issues
-
-2. **Feedback Collection:**
-   - Monitor migration issues
-   - Update guide based on common problems
-
----
-
-## Questions & Considerations
-
-### Should we provide a codemod?
-
-For simple changes like `asChild` → `as`, a codemod could help users migrate automatically:
-
-```bash
-npx faency-migrate
-```
-
-**Decision:** TBD - Evaluate based on number of breaking changes
+1. Update imports: `import { Badge } from 'faency'` (remove `Vanilla` suffix)
+2. Replace `FaencyProvider` with `VanillaExtractThemeProvider`
+3. Update `asChild` usage to `as` prop pattern
+4. Test all components in your application
+5. Update TypeScript types if using component type references
 
 ---
 
@@ -207,7 +256,7 @@ npx faency-migrate
 
 #### Polymorphic Components: `asChild` → `as` Prop
 
-Components affected: Badge, Button, AriaTable
+Layout, typography, and interactive components now use polymorphic `as` prop
 
 - **Changed:** Replaced `asChild` prop with polymorphic `as` prop for better TypeScript support and ergonomics
   - Before: `<Badge asChild><a href="#">Link</a></Badge>`
@@ -222,11 +271,20 @@ Components affected: Badge, Button, AriaTable
   - After: `<VanillaExtractThemeProvider defaultTheme="light"><App /></VanillaExtractThemeProvider>`
   - See [Migration Guide](./BREAKING_CHANGES.md#provider-changes)
 
+#### Component Exports
+
+- **Changed:** Removed `.vanilla` suffix from all component exports
+  - Before: `import { BadgeVanilla } from 'faency'`
+  - After: `import { Badge } from 'faency'`
+  - All components now use Vanilla Extract by default
+
 ### Added
 
-- Polymorphic `as` prop for Badge, Button, and AriaTable components with full TypeScript support
+- Polymorphic `as` prop for layout, typography, and interactive components with full TypeScript support
 - Better performance with build-time CSS generation via Vanilla Extract
 - Improved TypeScript inference for element-specific props
+- Smart default element selection (e.g., Card defaults to button when interactive)
+- Conditional rendering pattern for Radix-based components (ButtonSwitch)
 
 ### Removed
 
@@ -235,8 +293,85 @@ Components affected: Badge, Button, AriaTable
 - Removed all `*.themes.ts` files
 - Removed `stitches.config.ts`
 - Removed `@radix-ui/react-slot` dependency (replaced with polymorphic pattern)
-- Removed `.vanilla` suffix from component exports (e.g., `BadgeVanilla` → `Badge`)
+- Removed `.vanilla` suffix from component exports
+- Removed `FaencyProvider` (replaced with `VanillaExtractThemeProvider`)
+
+### Performance
+
+- Build-time CSS generation for faster runtime performance
+- Reduced JavaScript payload with static CSS extraction
 ```
+
+---
+
+## Communication Plan
+
+### Before v13.0.0 Release
+
+1. **Documentation:**
+   - Update README with migration guide
+   - Create detailed migration examples for common patterns
+   - Document all breaking changes with before/after code samples
+   - Add migration codemods (if feasible)
+   - Create visual guide showing polymorphic component usage
+
+2. **Release Notes:**
+   - Comprehensive changelog with all breaking changes
+   - Step-by-step migration guide
+   - Common pitfalls and solutions
+
+3. **Testing:**
+   - Comprehensive test coverage for all polymorphic components
+   - Integration tests for migration paths
+   - Performance benchmarks
+
+### After v13.0.0 Release
+
+1. **Support Period:**
+   - Maintain v12.x branch for critical bug fixes
+   - Community support in GitHub issues
+   - Dedicated migration support channel
+
+2. **Feedback Collection:**
+   - Monitor migration issues and pain points
+   - Update guide based on common problems
+   - Create FAQ for frequently asked questions
+
+---
+
+## Questions & Considerations
+
+### Should we provide a codemod?
+
+For changes like `asChild` → `as` and `FaencyProvider` → `VanillaExtractThemeProvider`, a codemod could automate migration:
+
+```bash
+npx @faency/migrate
+```
+
+**Potential transformations:**
+
+1. Replace `asChild` pattern with `as` prop
+2. Update provider imports and usage
+3. Remove `Vanilla` suffix from component imports
+4. Update component type references
+
+**Decision:** TBD - To be evaluated based on migration complexity
+
+### Should we maintain a compatibility layer?
+
+A temporary compatibility shim could ease migration:
+
+```tsx
+// Compatibility mode (deprecated, to be removed in v14.0.0)
+import { Badge } from 'faency/compat';
+
+<Badge asChild>
+  <a href="#">Link</a>
+</Badge>;
+```
+
+**Decision:** TBD - Evaluate based on community feedback
 
 ---
 
@@ -248,6 +383,7 @@ This document should be updated as:
 - Breaking changes are identified
 - Migration patterns are refined
 - User feedback is received
+- Edge cases are discovered
 
-**Last Updated:** 2025-11-18
-**Status:** Draft - Will be finalized before v13.0.0 release
+**Last Updated:** 2026-01-02
+**Status:** Work in Progress - Component migration ongoing

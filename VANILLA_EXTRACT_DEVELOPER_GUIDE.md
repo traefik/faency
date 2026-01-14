@@ -343,6 +343,7 @@ We export both versions with clear naming conventions:
 3. **Add Comparison story** (see [Step 3](#3-add-comparison-story))
 
 4. **Document in CHANGELOG.md:**
+
    ```markdown
    ### Added
 
@@ -405,15 +406,44 @@ backgroundColor: tokens.colors.background,
 backgroundColor: '#ffffff',
 ```
 
-### Migrating from `asChild` to Polymorphic `as`
+### Polymorphic Components with `as` Prop
 
-Replace `asChild` pattern with polymorphic `as` prop (see [Badge.vanilla.tsx](components/Badge/Badge.vanilla.tsx)):
+**⚠️ IMPORTANT:** All vanilla-extract components should support the polymorphic `as` prop unless they have specific element requirements (like form components such as Input, TextField, Textarea).
+
+The `as` prop replaces the old Stitches `asChild` pattern and provides better TypeScript inference and a more ergonomic API.
+
+**When to support `as` prop:**
+
+- **Default:** All components should support it
+- **Exceptions:** Components with fixed element requirements for functionality or accessibility (Input, TextField, Textarea)
+
+**Reference Implementation:**
+
+See [`components/Badge/Badge.vanilla.tsx`](components/Badge/Badge.vanilla.tsx) for the complete polymorphic pattern.
+
+**Migration steps:**
 
 1. Remove `@radix-ui/react-slot` dependency
 2. Import polymorphic types from [styles/polymorphic.ts](styles/polymorphic.ts)
 3. Replace `asChild?: boolean` with `as` prop using generic type parameter
 4. Use `PolymorphicComponentProps<C, YourOwnProps>` for props type
 5. Cast implementation to `PolymorphicComponent` type
+
+**Example - Before (Stitches):**
+
+```tsx
+<Badge asChild variant="success">
+  <a href="/profile">Link Badge</a>
+</Badge>
+```
+
+**Example - After (Vanilla Extract):**
+
+```tsx
+<Badge as="a" href="/profile" variant="success">
+  Link Badge
+</Badge>
+```
 
 ### Accessing Theme in Components
 
