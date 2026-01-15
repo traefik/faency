@@ -43,7 +43,7 @@ jobs:
           git config --local user.name "traefiker"
 
       - name: Deploy
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        uses: bitovi/github-actions-storybook-to-github-pages@b75ece8f984a32b2adb322065d7a8a2cc8db2d52 # v1.0.3
         env:
           NODE_ENV: production
         with:
