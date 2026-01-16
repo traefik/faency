@@ -43,13 +43,14 @@ const Component: Meta<typeof DateTimePickerForStory> = {
 
 const DateTimePickerTemplate: StoryFn<typeof DateTimePickerForStory> = (args) => {
   const [selectedDates, onDatesChange] = useState<Date[]>([]);
+  const [minDate] = useState(() => new Date(args.minDate || Date.now()));
 
   return (
     <Flex direction="column" gap={3}>
       <DateTimePickerForStory
         {...args}
         dates={{
-          minDate: new Date(args.minDate || Date.now()),
+          minDate,
         }}
         calendar={{ mode: args.calendarMode, startDay: 1 }}
         onDatesChange={onDatesChange}
