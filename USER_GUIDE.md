@@ -95,20 +95,15 @@ Stitches components use runtime CSS-in-JS, so no separate CSS imports are needed
 
 #### For Vanilla Extract Components (Migration in Progress)
 
-<<<<<<< HEAD
 Vanilla Extract components require importing the static CSS file. Add this import to your application's entry point (e.g., `App.tsx` or `index.tsx`):
 
 ```tsx
 import '@traefik-labs/faency/dist/style.css';
 ```
 
-# This CSS file contains all the styles for Vanilla Extract components (components with `Vanilla` suffix like `BadgeVanilla`, `BoxVanilla`, etc.). Without this import, these components will render as unstyled elements.
+This CSS file contains all the styles for Vanilla Extract components (components with `Vanilla` suffix like `BadgeVanilla`, `BoxVanilla`, etc.). Without this import, these components will render as unstyled elements.
 
 Vanilla Extract components include their CSS automatically when imported. No separate CSS import is required - styles are bundled with each component module.
-
-> > > > > > > 3186cd9 (chore: fix usage docs)
-
----
 
 ## Theming
 
