@@ -4,7 +4,7 @@ import React from 'react';
 import { addons } from 'storybook/preview-api';
 import { themes } from 'storybook/theming';
 
-import { globalCss } from '../';
+import { globalCss } from '../index';
 import { FaencyProvider } from '../components/FaencyProvider';
 import { darkTheme, lightTheme } from '../stitches.config';
 import { VanillaExtractThemeProvider } from '../styles/themeContext';

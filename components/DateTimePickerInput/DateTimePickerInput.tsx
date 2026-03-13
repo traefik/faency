@@ -16,7 +16,7 @@ import {
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { DPUserConfig } from '@rehookify/datepicker';
 import { format, parse } from 'date-fns';
-import React, { MouseEventHandler, Ref, useRef, useState } from 'react';
+import React, { MouseEventHandler, Ref, useMemo, useRef, useState } from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Card } from '../Card';
@@ -119,18 +119,22 @@ export const DateTimePickerInput = React.forwardRef<
     const [selectedDates, onDatesChange] = useState<Date[]>([]);
     const [isPickerOpen, setIsPickerOpen] = useState(false);
 
+    const middleware = useMemo(
+      () => [
+        offset(10),
+        flip(),
+        shift(),
+        // arrowRef is passed to floating-ui which handles it correctly
+        arrow({ element: arrowRef }),
+      ],
+      [],
+    );
+
     const { refs, floatingStyles, context } = useFloating({
       open: isPickerOpen,
       onOpenChange: setIsPickerOpen,
       placement: pickerPlacement,
-      middleware: [
-        offset(10),
-        flip(),
-        shift(),
-        arrow({
-          element: arrowRef,
-        }),
-      ],
+      middleware,
       whileElementsMounted: autoUpdate,
     });
 
@@ -172,6 +176,7 @@ export const DateTimePickerInput = React.forwardRef<
         />
         {isPickerOpen && (
           <FloatingFocusManager context={context} initialFocus={-1} modal={false}>
+            {/* refs.setFloating is a stable callback ref from floating-ui */}
             <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
               <Card>
                 <DateTimePicker
