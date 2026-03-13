@@ -125,7 +125,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
     },
     variant: {
       primary: {
-        bc: '$primary',
+        bc: '$buttonPrimaryBg',
         c: '$buttonPrimaryText',
         '&:focus-visible': {
           boxShadow: 'inset 0 0 0 2px $colors$buttonPrimaryFocusBorder',
@@ -133,7 +133,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
         '@hover': {
           '&:hover': {
             '&::after': {
-              backgroundColor: '$primary',
+              backgroundColor: '$buttonPrimaryBg',
             },
           },
         },
@@ -151,7 +151,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
         '@hover': {
           '&:hover': {
             '&::after': {
-              backgroundColor: '$primary',
+              backgroundColor: '$buttonPrimaryBg',
             },
           },
         },
@@ -206,7 +206,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       variant: 'primary',
       ghost: 'true',
       css: {
-        color: '$primary',
+        color: '$buttonPrimaryBg',
         backgroundColor: 'transparent',
         '@hover': {
           '&:hover': {
