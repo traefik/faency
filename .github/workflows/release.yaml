@@ -8,6 +8,10 @@ on:
 env:
   SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 360  # 15 days
 
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   faency:
     name: Release
@@ -25,6 +29,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Setup safe-chain
         run: |
@@ -44,4 +49,3 @@ jobs:
         run: yarn semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
