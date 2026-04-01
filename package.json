@@ -198,7 +198,7 @@
           "preset": "conventionalcommits"
         }
       ],
-      "@semantic-release/npm",
+      ["@semantic-release/npm", { "provenance": true }],
       "@semantic-release/github"
     ]
   },
