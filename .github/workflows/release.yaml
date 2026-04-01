@@ -32,9 +32,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Setup safe-chain
-        run: |
-          npm i -g @aikidosec/safe-chain
-          safe-chain setup-ci
+        run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
 
       - name: Install dependencies
         run: yarn workspaces focus --all --production
