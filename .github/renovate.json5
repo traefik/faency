@@ -1,0 +1,56 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
+  ],
+  enabledManagers: [
+    "custom.regex",
+    "dockerfile",
+    "github-actions",
+    "npm"
+  ],
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: [
+        '/(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$/',
+        '/(^|/)action\\.ya?ml$/',
+      ],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>[a-zA-Z0-9-._]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*["\']?(?<currentValue>.+?)["\']?\\s',
+      ],
+    },
+  ],
+  hostRules: [
+    {
+      abortIgnoreStatusCodes: [404],
+      abortOnError: true,
+    },
+    // Reduce usage on GH API
+    // See https://github.com/renovatebot/renovate/discussions/19647#discussioncomment-4631597
+    {
+      concurrentRequestLimit: 1,
+      matchHost: 'api.github.com',
+      maxRequestsPerSecond: 8,
+    },
+  ],
+  labels: ["area/infrastructure", "status/2-needs-review"],
+  minimumReleaseAge: '3 days',
+  packageRules: [
+    {
+      groupName: 'all non-major dependencies',
+      groupSlug: 'all-minor-patch',
+      matchManagers: [ 'npm' ],
+      matchUpdateTypes: [ 'minor', 'patch' ],
+    },
+    // Github Actions.
+    {
+      groupName: 'GitHub actions',
+      groupSlug: 'gh-actions',
+      matchManagers: [ 'github-actions' ],
+      rangeStrategy: 'replace',
+    }
+  ],
+  semanticCommits: 'enabled',
+}
