@@ -10,6 +10,8 @@ env:
 
 permissions:
   contents: write
+  issues: write
+  pull-requests: write
   id-token: write
 
 jobs:
@@ -29,7 +31,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Setup safe-chain
         run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
