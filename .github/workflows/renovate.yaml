@@ -3,7 +3,7 @@ name: 👷 Renovate
 on:
   workflow_dispatch:
   schedule:
-    - cron: '40 9 * * 1' # Mondays at 07:40
+    - cron: '40 9 * * 1' # Mondays at 09:40
 
 env:
   CACHE_ARCHIVE: renovate_cache.tar.gz
