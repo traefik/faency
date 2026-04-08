@@ -40,7 +40,7 @@ jobs:
           sh /tmp/install-safe-chain.sh --ci
 
       - name: Install dependencies
-        run: yarn workspaces focus --all --production
+        run: yarn workspaces focus --all
 
       - name: Patch
         run: yarn patch-package
