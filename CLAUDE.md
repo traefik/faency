@@ -96,6 +96,11 @@ Components follow a consistent pattern:
 - Run tests before submitting changes
 - Test coverage is currently being developed
 
+## Dependency Policy
+
+- **Pin all versions**: All dependencies must use exact pinned versions (no `^` or `~`). This applies to both `dependencies` and `devDependencies`.
+- **14-day rule**: When updating or adding dependencies, only use versions released more than 14 days ago. Check the npm release date before pinning a version.
+
 ## Important Notes
 
 - **Patch Required**: Run `yarn patch-package` after installing dependencies to fix Stitches TypeScript 5 compatibility
