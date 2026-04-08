@@ -36,7 +36,7 @@ jobs:
         run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
 
       - name: Install dependencies
-        run: yarn workspaces focus --all --production
+        run: yarn workspaces focus --all
 
       - name: Patch
         run: yarn patch-package
