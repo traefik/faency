@@ -99,7 +99,7 @@ Components follow a consistent pattern:
 ## Dependency Policy
 
 - **Pin all versions**: All dependencies must use exact pinned versions (no `^` or `~`). This applies to both `dependencies` and `devDependencies`.
-- **14-day rule**: When updating or adding dependencies, only use versions released more than 14 days ago. Check the npm release date before pinning a version.
+- **3-day rule**: When updating or adding dependencies, only use versions released more than 3 days ago. Check the npm release date before pinning a version.
 
 ## Important Notes
 
