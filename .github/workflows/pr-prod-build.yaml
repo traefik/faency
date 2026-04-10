@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env:
-  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 360  # 15 days
+  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72  # 3 days
 
 jobs:
   faency:
@@ -26,8 +26,8 @@ jobs:
       - name: Setup safe-chain
         run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
 
-      - name: Install production dependencies
-        run: yarn workspaces focus --all --production
+      - name: Install dependencies
+        run: yarn workspaces focus --all
 
       - name: Patch
         run: yarn patch-package

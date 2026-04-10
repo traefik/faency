@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 360  # 15 days
+  SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72  # 3 days
 
 permissions:
   contents: write
@@ -36,7 +36,7 @@ jobs:
         run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
 
       - name: Install dependencies
-        run: yarn workspaces focus --all --production
+        run: yarn workspaces focus --all
 
       - name: Patch
         run: yarn patch-package
