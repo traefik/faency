@@ -1,6 +1,5 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { Slot } from '@radix-ui/react-slot';
-import merge from 'lodash.merge';
 import React, {
   Children,
   cloneElement,
@@ -14,6 +13,7 @@ import React, {
 } from 'react';
 
 import { styled, VariantProps } from '../../stitches.config';
+import { deepMerge } from '../../utils/deepMerge';
 import { Box } from '../Box';
 import type { TableVariants } from '../Table';
 import {
@@ -247,7 +247,7 @@ export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
       return (
         <>
           <FillerTd css={css} {...props} />
-          <StyledTd ref={ref} role="cell" css={merge(fullColSpanCss, css)} {...props} />
+          <StyledTd ref={ref} role="cell" css={deepMerge(fullColSpanCss, css)} {...props} />
         </>
       );
     }

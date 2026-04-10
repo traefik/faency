@@ -84,7 +84,6 @@
     "@vanilla-extract/dynamic": "^2.1.5",
     "@vanilla-extract/recipes": "^0.5.7",
     "date-fns": "^4.1.0",
-    "lodash.merge": "^4.6.2",
     "tinycolor2": "^1.4.2",
     "use-debounce": "9.0.2"
   },
@@ -109,7 +108,6 @@
     "@testing-library/react": "^13.4.0",
     "@types/jest": "30.0.0",
     "@types/jest-axe": "^3.5.3",
-    "@types/lodash.merge": "^4.6.6",
     "@types/node": "^24.10.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.0",

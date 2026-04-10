@@ -1,7 +1,7 @@
-import merge from 'lodash.merge';
 import React from 'react';
 
 import { CSS, VariantProps } from '../../stitches.config';
+import { deepMerge } from '../../utils/deepMerge';
 import { Text } from '../Text';
 
 const DEFAULT_TAG = 'p';
@@ -36,7 +36,7 @@ export const Paragraph = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, 
         ref={forwardedRef}
         size={textSize[size]}
         css={{
-          ...merge(textCss[size], props.css),
+          ...deepMerge(textCss[size], props.css),
         }}
       />
     );
