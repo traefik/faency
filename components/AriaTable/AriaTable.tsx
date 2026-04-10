@@ -12,7 +12,7 @@ import React, {
   useState,
 } from 'react';
 
-import { styled, VariantProps } from '../../stitches.config';
+import { CSS, styled, VariantProps } from '../../stitches.config';
 import { deepMerge } from '../../utils/deepMerge';
 import { Box } from '../Box';
 import type { TableVariants } from '../Table';
@@ -280,4 +280,4 @@ export const Table = forwardRef<
 ));
 
 export type AriaTableVariants = VariantProps<typeof Table>;
-export type AriaTableProps = TableVariants & NonNullable<unknown>;
+export type AriaTableProps = TableVariants & { children?: React.ReactNode; css?: CSS };
