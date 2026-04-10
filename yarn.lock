@@ -5588,7 +5588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/commit-analyzer@npm:^13.0.1":
+"@semantic-release/commit-analyzer@npm:13.0.1, @semantic-release/commit-analyzer@npm:^13.0.1":
   version: 13.0.1
   resolution: "@semantic-release/commit-analyzer@npm:13.0.1"
   dependencies:
@@ -5613,7 +5613,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/github@npm:^12.0.0, @semantic-release/github@npm:^12.0.6":
+"@semantic-release/github@npm:12.0.6, @semantic-release/github@npm:^12.0.0":
   version: 12.0.6
   resolution: "@semantic-release/github@npm:12.0.6"
   dependencies:
@@ -5640,7 +5640,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/npm@npm:^13.1.1, @semantic-release/npm@npm:^13.1.5":
+"@semantic-release/npm@npm:13.1.5, @semantic-release/npm@npm:^13.1.1":
   version: 13.1.5
   resolution: "@semantic-release/npm@npm:13.1.5"
   dependencies:
@@ -5665,7 +5665,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/release-notes-generator@npm:^14.1.0":
+"@semantic-release/release-notes-generator@npm:14.1.0, @semantic-release/release-notes-generator@npm:^14.1.0":
   version: 14.1.0
   resolution: "@semantic-release/release-notes-generator@npm:14.1.0"
   dependencies:
@@ -6080,10 +6080,10 @@ __metadata:
     "@radix-ui/react-use-layout-effect": "npm:^1.0.0"
     "@radix-ui/react-visually-hidden": "npm:^1.0.1"
     "@rehookify/datepicker": "npm:^6.6.7"
-    "@semantic-release/commit-analyzer": "npm:^13.0.1"
-    "@semantic-release/github": "npm:^12.0.6"
-    "@semantic-release/npm": "npm:^13.1.5"
-    "@semantic-release/release-notes-generator": "npm:^14.1.0"
+    "@semantic-release/commit-analyzer": "npm:13.0.1"
+    "@semantic-release/github": "npm:12.0.6"
+    "@semantic-release/npm": "npm:13.1.5"
+    "@semantic-release/release-notes-generator": "npm:14.1.0"
     "@stitches/react": "npm:1.2.8"
     "@storybook/addon-docs": "npm:10.2.10"
     "@storybook/addon-links": "npm:10.2.10"
@@ -6106,7 +6106,7 @@ __metadata:
     "@vueless/storybook-dark-mode": "npm:^10.0.3"
     babel-jest: "npm:30.3.0"
     babel-loader: "npm:8.4.1"
-    conventional-changelog-conventionalcommits: "npm:^9.2.0"
+    conventional-changelog-conventionalcommits: "npm:9.3.1"
     cross-env: "npm:^7.0.3"
     date-fns: "npm:^4.1.0"
     eslint: "npm:^9.32.0"
@@ -6130,7 +6130,7 @@ __metadata:
     prism-react-renderer: "npm:2.4.1"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
-    semantic-release: "npm:^25.0.3"
+    semantic-release: "npm:25.0.3"
     storybook: "npm:10.2.10"
     tinycolor2: "npm:^1.4.2"
     typescript: "npm:^5.8.3"
@@ -9119,7 +9119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-conventionalcommits@npm:^9.2.0":
+"conventional-changelog-conventionalcommits@npm:9.3.1":
   version: 9.3.1
   resolution: "conventional-changelog-conventionalcommits@npm:9.3.1"
   dependencies:
@@ -11662,8 +11662,8 @@ __metadata:
   linkType: hard
 
 "handlebars@npm:^4.7.7":
-  version: 4.7.8
-  resolution: "handlebars@npm:4.7.8"
+  version: 4.7.9
+  resolution: "handlebars@npm:4.7.9"
   dependencies:
     minimist: "npm:^1.2.5"
     neo-async: "npm:^2.6.2"
@@ -11675,7 +11675,7 @@ __metadata:
       optional: true
   bin:
     handlebars: bin/handlebars
-  checksum: 10c0/7aff423ea38a14bb379316f3857fe0df3c5d66119270944247f155ba1f08e07a92b340c58edaa00cfe985c21508870ee5183e0634dcb53dd405f35c93ef7f10d
+  checksum: 10c0/22f8105a7e68e81aff2662bb434edf05f757d21d850731d71cec886d69c10cd33d3c43e34b2892968ec62de8241611851d3d0674c8ef324ea3e01dc66262faa9
   languageName: node
   linkType: hard
 
@@ -17653,7 +17653,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:^25.0.3":
+"semantic-release@npm:25.0.3":
   version: 25.0.3
   resolution: "semantic-release@npm:25.0.3"
   dependencies:
