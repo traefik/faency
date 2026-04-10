@@ -25,7 +25,11 @@ jobs:
           cache: yarn
 
       - name: Setup safe-chain
-        run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
+        run: |
+          set -e
+          curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.4.7/install-safe-chain.sh -o /tmp/install-safe-chain.sh
+          echo "7934118ae7f81f69ac9e849c044b0c7009618b91859f06ec8b941258a43d98ed7d3712f9fde85304b7fcbbf723d2f0b5034e063342a675b38878e9cd2b587a04  /tmp/install-safe-chain.sh" | sha512sum -c -
+          sh /tmp/install-safe-chain.sh --ci
 
       - name: Install
         run: yarn install
