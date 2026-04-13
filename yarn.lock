@@ -5662,7 +5662,7 @@ __metadata:
     semantic-release: "npm:25.0.3"
     storybook: "npm:10.3.5"
     tinycolor2: "npm:1.6.0"
-    typescript: "npm:^5.8.3"
+    typescript: "npm:5.8.3"
     typescript-eslint: "npm:8.58.1"
     vite: "npm:8.0.8"
     vite-plugin-dts: "npm:4.5.4"
@@ -17503,7 +17503,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.8.3":
+"typescript@npm:5.8.3":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
   bin:
@@ -17523,7 +17523,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.8.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>":
   version: 5.8.3
   resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
   bin:
