@@ -2,6 +2,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 // @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import react from '@vitejs/plugin-react';
 import { createRequire } from 'module';
+// @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -37,7 +38,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         /^@vanilla-extract\//,
         'react/jsx-runtime',
