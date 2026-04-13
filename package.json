@@ -116,7 +116,7 @@
     "@vueless/storybook-dark-mode": "10.0.7",
     "babel-jest": "30.3.0",
     "conventional-changelog-conventionalcommits": "9.3.1",
-    "cross-env": "^7.0.3",
+    "cross-env": "10.1.0",
     "eslint": "9.39.4",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-jsx-a11y": "6.10.2",
