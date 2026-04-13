@@ -57,7 +57,7 @@ import '@traefik-labs/faency/dist/style.css';
 ```
 
 2. Wrap your app with the VanillaExtractThemeProvider:
-Wrap your app with the VanillaExtractThemeProvider:
+   Wrap your app with the VanillaExtractThemeProvider:
 
 ```jsx
 import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
@@ -76,7 +76,7 @@ const App = () => (
 
 ## How to contribute
 
-- Make sure you have Node 20+, or if you prefer, you can work in a Docker container:
+- Make sure you have Node 24.14.1+, or if you prefer, you can work in a Docker container:
 
 ```sh
 docker run -it -v $(pwd):/usr/local/src/ -w /usr/local/src/ -p 3000:3000 node:latest bash
