@@ -132,7 +132,7 @@
     "jest-environment-jsdom": "30.3.0",
     "lint-staged": "13.1.0",
     "np": "^8.0.4",
-    "patch-package": "^8.0.0",
+    "patch-package": "8.0.1",
     "prettier": "3.8.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
