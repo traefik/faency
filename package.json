@@ -83,10 +83,9 @@
     "@vanilla-extract/css": "1.20.1",
     "@vanilla-extract/dynamic": "2.1.5",
     "@vanilla-extract/recipes": "0.5.7",
-    "date-fns": "^4.1.0",
+    "date-fns": "4.1.0",
     "prism-react-renderer": "2.4.1",
-    "tinycolor2": "^1.4.2",
-    "use-debounce": "9.0.2"
+    "tinycolor2": "1.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.29.0",
