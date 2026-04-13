@@ -41,7 +41,7 @@
     "build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",
     "test": "jest --watch",
     "test:ci": "jest --ci --silent",
-    "prepare": "husky install",
+    "prepare": "husky",
     "pre-commit": "lint-staged"
   },
   "peerDependencies": {
@@ -128,7 +128,7 @@
     "eslint-plugin-simple-import-sort": "13.0.0",
     "eslint-plugin-storybook": "10.3.5",
     "globals": "17.4.0",
-    "husky": "^8.0.0",
+    "husky": "9.1.7",
     "jest": "30.3.0",
     "jest-axe": "10.0.0",
     "jest-environment-jsdom": "30.3.0",
