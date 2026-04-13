@@ -67,9 +67,9 @@ export const Colors = () => {
             {aliases[colorGroup.name] || colorGroup.name}
           </H2>
           {['colors', 'alphaColors'].map((type) => (
-            <>
+            <React.Fragment key={type}>
               {!!colorGroup?.[type]?.length && (
-                <FlexVanilla key={type} css={{ bc: '$contentBg', mb: '$3', gap: '$3' }}>
+                <FlexVanilla css={{ bc: '$contentBg', mb: '$3', gap: '$3' }}>
                   {colorGroup[type].map((color) => (
                     <FlexVanilla
                       key={color.token}
@@ -99,7 +99,7 @@ export const Colors = () => {
                   ))}
                 </FlexVanilla>
               )}
-            </>
+            </React.Fragment>
           ))}
         </BoxVanilla>
       ))}
