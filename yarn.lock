@@ -3036,18 +3036,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^2.1.5":
-  version: 2.3.0
-  resolution: "@mdx-js/react@npm:2.3.0"
-  dependencies:
-    "@types/mdx": "npm:^2.0.0"
-    "@types/react": "npm:>=16"
-  peerDependencies:
-    react: ">=16"
-  checksum: 10c0/6d647115703dbe258f7fe372499fa8c6fe17a053ff0f2a208111c9973a71ae738a0ed376770445d39194d217e00e1a015644b24f32c2f7cb4f57988de0649b15
-  languageName: node
-  linkType: hard
-
 "@mdx-js/react@npm:^3.0.0":
   version: 3.1.1
   resolution: "@mdx-js/react@npm:3.1.1"
@@ -5387,7 +5375,6 @@ __metadata:
     "@babel/preset-typescript": "npm:7.28.5"
     "@eslint/js": "npm:9.39.4"
     "@floating-ui/react": "npm:0.27.19"
-    "@mdx-js/react": "npm:^2.1.5"
     "@radix-ui/colors": "npm:2.1.0"
     "@radix-ui/react-accessible-icon": "npm:1.1.8"
     "@radix-ui/react-accordion": "npm:1.2.12"
@@ -5762,7 +5749,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16":
+"@types/react@npm:*":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
   dependencies:
