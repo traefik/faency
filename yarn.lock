@@ -5833,7 +5833,7 @@ __metadata:
     babel-loader: "npm:8.4.1"
     conventional-changelog-conventionalcommits: "npm:9.3.1"
     cross-env: "npm:^7.0.3"
-    date-fns: "npm:^4.1.0"
+    date-fns: "npm:4.1.0"
     eslint: "npm:^9.32.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-jsx-a11y: "npm:^6.10.2"
@@ -5857,10 +5857,9 @@ __metadata:
     react-dom: "npm:18.2.0"
     semantic-release: "npm:25.0.3"
     storybook: "npm:10.3.5"
-    tinycolor2: "npm:^1.4.2"
+    tinycolor2: "npm:1.6.0"
     typescript: "npm:^5.8.3"
     typescript-eslint: "npm:^8.38.0"
-    use-debounce: "npm:9.0.2"
     vite: "npm:7.1.11"
     vite-plugin-dts: "npm:^4.5.4"
     webpack: "npm:5.104.1"
@@ -9114,17 +9113,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10c0/b79ff32830e6b7faa009590af6ae0fb8c3fd9ffad46d930548fbb5acf473773b4712ae887e156ba91a7b3dc30591ce0f517d69fd83bd9c38650fdc03b4e0bac8
+  languageName: node
+  linkType: hard
+
 "date-fns@npm:^1.27.2":
   version: 1.30.1
   resolution: "date-fns@npm:1.30.1"
   checksum: 10c0/bad6ad7c15180121e15d61ad62a4a214c108d66f35b35f5eeb6ade837a3c29aa4444b9528a93a5374b95ba11231c142276351bf52f4d168676f9a1e17ce3726a
-  languageName: node
-  linkType: hard
-
-"date-fns@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "date-fns@npm:4.1.0"
-  checksum: 10c0/b79ff32830e6b7faa009590af6ae0fb8c3fd9ffad46d930548fbb5acf473773b4712ae887e156ba91a7b3dc30591ce0f517d69fd83bd9c38650fdc03b4e0bac8
   languageName: node
   linkType: hard
 
@@ -18804,7 +18803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinycolor2@npm:^1.4.2":
+"tinycolor2@npm:1.6.0":
   version: 1.6.0
   resolution: "tinycolor2@npm:1.6.0"
   checksum: 10c0/9aa79a36ba2c2a87cb221453465cabacd04b9e35f9694373e846fdc78b1c768110f81e581ea41440106c0f24d9a023891d0887e8075885e790ac40eb0e74a5c1
@@ -19621,15 +19620,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/f887488c6e6075cdad4962979da1714b217bcb1ee009a9e57ce9a844bcfc4c3a99e93983dfc2e5af9e0913824d24e730090ff255e902c516dcb58d2d3837e01c
-  languageName: node
-  linkType: hard
-
-"use-debounce@npm:9.0.2":
-  version: 9.0.2
-  resolution: "use-debounce@npm:9.0.2"
-  peerDependencies:
-    react: ">=16.8.0"
-  checksum: 10c0/42acc0228a104cefad00d4a134d27e10da541c6eb8502838ef15da61cf86b7d31bd8eeb2e2331dcb9c01142b322a87b9045ad8a0fdb9c8861ebde8da563211da
   languageName: node
   linkType: hard
 

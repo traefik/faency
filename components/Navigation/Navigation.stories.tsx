@@ -7,7 +7,6 @@ import {
 // @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Badge } from '../Badge';
@@ -43,7 +42,7 @@ const NavigationDrawerForStory = modifyVariantsForStory<
 
 const useNavigationSample = (initialRoute = '/') => {
   const [currentRoute, setCurrentRoute] = useState(initialRoute);
-  const navigateTo = useDebouncedCallback((route: string) => setCurrentRoute(route), 300);
+  const navigateTo = (route: string) => setCurrentRoute(route);
   const navigationHandlerProps = (route: string) => ({
     active: route === currentRoute,
     onClick: () => navigateTo(route),
