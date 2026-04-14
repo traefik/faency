@@ -39,12 +39,15 @@ export default defineConfig({
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rolldownOptions: {
-      external: [
-        /^@vanilla-extract\//,
-        'react/jsx-runtime',
-        ...Object.keys(pkg.dependencies || {}),
-        ...Object.keys(pkg.peerDependencies || {}),
-      ],
+      external: (id: string) => {
+        const externals = [
+          /^@vanilla-extract\//,
+          'react/jsx-runtime',
+          ...Object.keys(pkg.dependencies || {}),
+          ...Object.keys(pkg.peerDependencies || {}),
+        ];
+        return externals.some((dep) => id === dep || id.startsWith(dep + '/'));
+      },
       output: {
         globals: { react: 'React', 'react-dom': 'ReactDOM' },
         preserveModules: true,
