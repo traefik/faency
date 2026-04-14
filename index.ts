@@ -23,6 +23,12 @@ export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
+export type {
+  CodeBlockLanguage,
+  CodeBlockProps,
+  CodeBlockVanillaProps,
+} from './components/CodeBlock';
+export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
 export type { BubbleVanillaProps } from './components/Bubble';
 export { Bubble, BubbleVanilla } from './components/Bubble';
 export type { ButtonVanillaProps } from './components/Button';
@@ -64,7 +70,7 @@ export {
   DropdownMenuTrigger,
 } from './components/DropdownMenu';
 export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
-export { FaencyProvider } from './components/FaencyProvider';
+export { FaencyProvider, useColorScheme } from './components/FaencyProvider';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
 export { H1, H2, H3, H4, H5, H6 } from './components/Heading';
