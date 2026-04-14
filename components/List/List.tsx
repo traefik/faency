@@ -29,7 +29,9 @@ const StyledListItemButton = styled('button', Flex, {
 
   // CUSTOM
   flexGrow: 1,
+  width: '100%',
   p: '$2',
+  position: 'relative',
   '&::before': {
     borderRadius: 'inherit',
     boxSizing: 'border-box',
@@ -91,16 +93,23 @@ const StyledUl = styled('ul', {
   p: 0,
   color: '$textDefault',
 
-  '&:has(li > span > input[type="checkbox"])': {
+  '&:has(> li > span > input[type="checkbox"])': {
     m: 0,
     listStyle: 'none',
-    li: {
+    '> li': {
       marginLeft: 0,
-      span: {
+      '> span': {
         input: {
           margin: '0 3px 0 0',
         },
       },
+    },
+  },
+  // Restore left-margin indentation when a nested checkbox list is inside a li
+  'li > &:has(> li > span > input[type="checkbox"])': {
+    marginLeft: '$2',
+    '> li': {
+      marginLeft: '$2',
     },
   },
 });
@@ -125,7 +134,13 @@ export interface ListProps extends ComponentProps<typeof StyledUl>, VariantProps
 }
 export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>(
   ({ interactive, ...props }, forwardedRef) => {
-    const contextValue = useMemo(() => ({ interactive: !!interactive }), [interactive]);
+    const parentContext = useContext(ListContext);
+    const contextValue = useMemo(
+      () => ({
+        interactive: interactive !== undefined ? !!interactive : parentContext.interactive,
+      }),
+      [interactive, parentContext.interactive],
+    );
 
     return (
       <ListContext.Provider value={contextValue}>
@@ -143,7 +158,13 @@ export interface OrderedListProps
 
 export const Ol = React.forwardRef<React.ElementRef<typeof StyledOl>, OrderedListProps>(
   ({ interactive, ...props }, forwardedRef) => {
-    const contextValue = useMemo(() => ({ interactive: !!interactive }), [interactive]);
+    const parentContext = useContext(ListContext);
+    const contextValue = useMemo(
+      () => ({
+        interactive: interactive !== undefined ? !!interactive : parentContext.interactive,
+      }),
+      [interactive, parentContext.interactive],
+    );
 
     return (
       <ListContext.Provider value={contextValue}>
@@ -174,6 +195,15 @@ export interface ListItemProps
 export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemProps>(
   ({ children, controls, align, justify, direction, gap, wrap, ...props }, forwardedRef) => {
     const { interactive } = useContext(ListContext);
+
+    const childArray = React.Children.toArray(children);
+    const nestedLists = childArray.filter(
+      (child) => React.isValidElement(child) && (child.type === Ul || child.type === Ol),
+    );
+    const inlineChildren = childArray.filter(
+      (child) => !(React.isValidElement(child) && (child.type === Ul || child.type === Ol)),
+    );
+
     return (
       <StyledLi {...props} ref={forwardedRef}>
         {interactive ? (
@@ -184,7 +214,7 @@ export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemPr
             gap={gap}
             wrap={wrap}
           >
-            {children}
+            {inlineChildren}
           </StyledListItemButton>
         ) : (
           <StyledSpan
@@ -195,9 +225,10 @@ export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemPr
             wrap={wrap}
             css={{ flexGrow: 1 }}
           >
-            {children}
+            {inlineChildren}
           </StyledSpan>
         )}
+        {nestedLists}
         {!!controls && <ControlsWrapper>{controls}</ControlsWrapper>}
       </StyledLi>
     );

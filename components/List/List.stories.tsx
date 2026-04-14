@@ -18,7 +18,20 @@ const Component: Meta<typeof Ul> = {
 const Template: StoryFn<typeof Ul> = (args) => (
   <Ul {...args}>
     <Li>Dashboard</Li>
-    <Li>Profile</Li>
+    <Li>
+      Profile
+      <Ul>
+        <Li>Account</Li>
+        <Li>
+          Security
+          <Ul>
+            <Li>Two-factor auth</Li>
+            <Li>Sessions</Li>
+          </Ul>
+        </Li>
+        <Li>Notifications</Li>
+      </Ul>
+    </Li>
     <Li>Settings</Li>
     <Li>Help</Li>
   </Ul>
@@ -29,19 +42,43 @@ export const Basic: StoryFn<typeof Ul> = Template.bind({});
 export const Checkboxes: StoryFn<typeof Ul> = (args) => (
   <Ul {...args}>
     <Li>
-      <input type="checkbox" disabled />
+      <input type="checkbox" />
       Dashboard
     </Li>
     <Li>
-      <input type="checkbox" disabled />
+      <input type="checkbox" />
       Profile
+      <Ul>
+        <Li>
+          <input type="checkbox" />
+          Account
+        </Li>
+        <Li>
+          <input type="checkbox" />
+          Security
+          <Ul>
+            <Li>
+              <input type="checkbox" />
+              Two-factor auth
+            </Li>
+            <Li>
+              <input type="checkbox" />
+              Sessions
+            </Li>
+          </Ul>
+        </Li>
+        <Li>
+          <input type="checkbox" />
+          Notifications
+        </Li>
+      </Ul>
     </Li>
     <Li>
-      <input type="checkbox" disabled />
+      <input type="checkbox" />
       Settings
     </Li>
     <Li>
-      <input type="checkbox" disabled />
+      <input type="checkbox" />
       Help
     </Li>
   </Ul>
@@ -50,7 +87,20 @@ export const Checkboxes: StoryFn<typeof Ul> = (args) => (
 export const Ordered: StoryFn<typeof Ol> = (args) => (
   <Ol {...args}>
     <Li>Dashboard</Li>
-    <Li>Profile</Li>
+    <Li>
+      Profile
+      <Ol>
+        <Li>Account</Li>
+        <Li>
+          Security
+          <Ol>
+            <Li>Two-factor auth</Li>
+            <Li>Sessions</Li>
+          </Ol>
+        </Li>
+        <Li>Notifications</Li>
+      </Ol>
+    </Li>
     <Li>Settings</Li>
     <Li>Help</Li>
   </Ol>
