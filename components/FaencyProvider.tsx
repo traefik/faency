@@ -1,7 +1,6 @@
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 import React from 'react';
 
-export { useColorScheme } from './colorSchemeContext';
 import { ColorSchemeProvider } from './colorSchemeContext';
 
 interface FaencyProviderProps {

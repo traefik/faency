@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export type ColorScheme = 'light' | 'dark';
 
-export function readDocumentTheme(): ColorScheme | null {
+function readDocumentTheme(): ColorScheme | null {
   const el = document.documentElement;
   if (el.classList.contains('dark')) return 'dark';
   if (el.classList.contains('light')) return 'light';
@@ -11,7 +11,7 @@ export function readDocumentTheme(): ColorScheme | null {
   return null;
 }
 
-export const ColorSchemeContext = createContext<ColorScheme>('light');
+const ColorSchemeContext = createContext<ColorScheme>('light');
 
 export function ColorSchemeProvider({ children }: { children: React.ReactNode }) {
   const [scheme, setScheme] = useState<ColorScheme>(() => {

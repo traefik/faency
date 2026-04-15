@@ -6,7 +6,7 @@ import { CSS, styled } from '../../stitches.config';
 import { AccessibleIcon } from '../AccessibleIcon';
 import { Box } from '../Box';
 import { Button } from '../Button';
-import { useColorScheme } from '../FaencyProvider';
+import { useColorScheme } from '../colorSchemeContext';
 
 const Pre = styled('pre', {
   m: 0,
