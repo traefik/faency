@@ -26,7 +26,14 @@ export const codeContent = style({
 
 export const copyButtonWrapper = style({
   position: 'absolute',
-  top: tokens.space['2'],
   right: tokens.space['4'],
   zIndex: 1,
+});
+
+export const copyButtonWrapperTop = style({
+  top: tokens.space['2'],
+});
+
+export const copyButtonWrapperBottom = style({
+  bottom: tokens.space['2'],
 });

@@ -7,7 +7,15 @@ import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { AccessibleIcon } from '../AccessibleIcon';
 import { ButtonVanilla } from '../Button';
-import { codeContent, copyButtonWrapper, pre, preNoBorder, wrapper } from './CodeBlock.vanilla.css';
+import {
+  codeContent,
+  copyButtonWrapper,
+  copyButtonWrapperBottom,
+  copyButtonWrapperTop,
+  pre,
+  preNoBorder,
+  wrapper,
+} from './CodeBlock.vanilla.css';
 
 export interface CodeBlockVanillaProps
   extends Omit<HTMLAttributes<HTMLPreElement>, 'css'>,
@@ -17,6 +25,7 @@ export interface CodeBlockVanillaProps
   copyable?: boolean;
   copyText?: string;
   copiedText?: string;
+  copyButtonAlign?: 'top' | 'bottom';
   noBorder?: boolean;
   wrapText?: boolean;
   colorScheme?: 'light' | 'dark';
@@ -31,6 +40,7 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       copyable = false,
       copyText,
       copiedText,
+      copyButtonAlign = 'top',
       noBorder,
       wrapText = false,
       colorScheme,
@@ -72,7 +82,12 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
         }) => (
           <div className={wrapper}>
             {copyable && (
-              <div className={copyButtonWrapper}>
+              <div
+                className={[
+                  copyButtonWrapper,
+                  copyButtonAlign === 'bottom' ? copyButtonWrapperBottom : copyButtonWrapperTop,
+                ].join(' ')}
+              >
                 <ButtonVanilla
                   variant="secondary"
                   ghost
@@ -93,7 +108,12 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
               className={[pre, noBorder ? preNoBorder : '', highlightClass, className]
                 .filter(Boolean)
                 .join(' ')}
-              style={{ maxHeight, ...highlightStyle, ...mergedStyles }}
+              style={{
+                maxHeight,
+                ...highlightStyle,
+                backgroundColor: 'transparent',
+                ...mergedStyles,
+              }}
               {...props}
             >
               <div className={codeContent}>

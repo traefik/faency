@@ -3,6 +3,7 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
 import { BoxVanilla } from '../Box/Box.vanilla';
+import { CardVanilla } from '../Card/Card.vanilla';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
 import { H3Vanilla } from '../Heading';
 import { CodeBlock } from './CodeBlock';
@@ -103,14 +104,25 @@ export const Comparison: StoryFn = () => (
   </FlexVanilla>
 );
 
+export const InCard: StoryFn<typeof CodeBlockVanilla> = (args) => (
+  <CardVanilla css={{ padding: 0 }}>
+    <CodeBlockVanilla {...args} copyable noBorder />
+  </CardVanilla>
+);
+
+export const CopyButtonAlignBottom: StoryFn<typeof CodeBlockVanilla> = (args) => (
+  <CodeBlockVanilla {...args} copyable copyButtonAlign="bottom" />
+);
+
 export const Scrollable: StoryFn<typeof CodeBlockVanilla> = (args) => (
-  <CodeBlockVanilla
-    {...args}
-    copyable
-    copyText="Copy"
-    copiedText="Copied!"
-    lang="typescript"
-    code={`import React, { useState, useEffect, useCallback, useRef } from 'react';
+  <CodeBlockVanilla {...args} />
+);
+Scrollable.args = {
+  copyable: true,
+  copyText: 'Copy',
+  copiedText: 'Copied!',
+  lang: 'typescript',
+  code: `import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 interface UseFetchOptions<T> {
   initialData?: T;
@@ -194,8 +206,7 @@ const UserProfile = ({ userId }: { userId: string }) => {
   );
 };
 
-export default UserProfile;`}
-  />
-);
+export default UserProfile;`,
+};
 
 export default Component;

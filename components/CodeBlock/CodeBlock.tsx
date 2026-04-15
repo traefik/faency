@@ -26,9 +26,19 @@ const Pre = styled('pre', {
 
 const CopyButtonWrapper = styled('div', {
   position: 'absolute',
-  top: '$2',
   right: '$4',
   zIndex: 1,
+
+  variants: {
+    align: {
+      top: { top: '$2' },
+      bottom: { bottom: '$2' },
+    },
+  },
+
+  defaultVariants: {
+    align: 'top',
+  },
 });
 
 export type CodeBlockProps = {
@@ -37,6 +47,7 @@ export type CodeBlockProps = {
   copyable?: boolean;
   copyText?: string;
   copiedText?: string;
+  copyButtonAlign?: 'top' | 'bottom';
   noBorder?: boolean;
   wrapText?: boolean;
   colorScheme?: 'light' | 'dark';
@@ -52,6 +63,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       copyable = false,
       copyText,
       copiedText,
+      copyButtonAlign = 'top',
       noBorder,
       wrapText = false,
       colorScheme,
@@ -82,7 +94,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Box css={{ position: 'relative', ...css }}>
             {copyable && (
-              <CopyButtonWrapper>
+              <CopyButtonWrapper align={copyButtonAlign}>
                 <Button
                   variant="secondary"
                   ghost
@@ -101,7 +113,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
             <Pre
               ref={ref}
               className={className}
-              style={style}
+              style={{ ...style, backgroundColor: 'transparent' }}
               noBorder={noBorder}
               css={{ maxHeight }}
               {...props}
