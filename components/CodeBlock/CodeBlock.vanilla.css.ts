@@ -9,7 +9,6 @@ export const wrapper = style({
 export const pre = style({
   margin: 0,
   borderRadius: tokens.radii['2'],
-  maxHeight: 424,
   overflow: 'auto',
   border: `1px solid ${tokens.colors.deepBlue['3']}`,
   position: 'relative',

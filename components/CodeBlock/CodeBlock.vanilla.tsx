@@ -19,6 +19,8 @@ export interface CodeBlockVanillaProps
   copiedText?: string;
   noBorder?: boolean;
   wrapText?: boolean;
+  colorScheme?: 'light' | 'dark';
+  maxHeight?: number | string;
 }
 
 export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps>(
@@ -31,6 +33,8 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       copiedText,
       noBorder,
       wrapText = false,
+      colorScheme,
+      maxHeight = 424,
       css,
       style,
       className,
@@ -39,7 +43,8 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     ref,
   ) => {
     const { colors, resolvedTheme } = useVanillaExtractTheme();
-    const prismTheme = resolvedTheme === 'dark' ? themes.nightOwl : themes.nightOwlLight;
+    const effectiveScheme = colorScheme ?? resolvedTheme;
+    const prismTheme = effectiveScheme === 'dark' ? themes.nightOwl : themes.nightOwlLight;
 
     const { style: cssStyles, vars } = processCSSProp(css, colors);
     const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
@@ -47,9 +52,13 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      try {
+        await navigator.clipboard.writeText(code);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      } catch {
+        // clipboard write failed (e.g. permission denied) — leave UI unchanged
+      }
     };
 
     return (
@@ -84,7 +93,7 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
               className={[pre, noBorder ? preNoBorder : '', highlightClass, className]
                 .filter(Boolean)
                 .join(' ')}
-              style={{ ...highlightStyle, ...mergedStyles }}
+              style={{ maxHeight, ...highlightStyle, ...mergedStyles }}
               {...props}
             >
               <div className={codeContent}>

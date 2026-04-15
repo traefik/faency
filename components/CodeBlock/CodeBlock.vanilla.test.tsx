@@ -5,6 +5,7 @@ import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
 import { CodeBlockVanilla } from './CodeBlock.vanilla';
+import { preNoBorder } from './CodeBlock.vanilla.css';
 
 const CODE_SNIPPET = `const greet = (name: string) => {
   console.log(\`Hello, \${name}!\`);
@@ -133,18 +134,40 @@ describe('CodeBlockVanilla', () => {
     expect(button).toHaveTextContent('Copy');
   });
 
-  it('should render without border when noBorder is true', () => {
+  it('should apply noBorder class when noBorder is true', () => {
     const { container } = renderWithTheme(
       <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} noBorder />,
     );
-    expect(container.querySelector('pre')).toBeInTheDocument();
+    expect(container.querySelector('pre')?.className).toContain(preNoBorder);
   });
 
-  it('should apply wrapText prop', () => {
+  it('should not apply noBorder class when noBorder is false', () => {
+    const { container } = renderWithTheme(
+      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />,
+    );
+    expect(container.querySelector('pre')?.className).not.toContain(preNoBorder);
+  });
+
+  it('should apply whiteSpace: normal to lines when wrapText is true', () => {
     const { container } = renderWithTheme(
       <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} wrapText />,
     );
-    expect(container.querySelector('pre')).toBeInTheDocument();
+    const lineDivs = container.querySelectorAll('pre > div > div');
+    expect(lineDivs.length).toBeGreaterThan(0);
+    lineDivs.forEach((div) => {
+      expect((div as HTMLElement).style.whiteSpace).toBe('normal');
+    });
+  });
+
+  it('should not apply whiteSpace: normal to lines when wrapText is false', () => {
+    const { container } = renderWithTheme(
+      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />,
+    );
+    const lineDivs = container.querySelectorAll('pre > div > div');
+    expect(lineDivs.length).toBeGreaterThan(0);
+    lineDivs.forEach((div) => {
+      expect((div as HTMLElement).style.whiteSpace).toBe('');
+    });
   });
 
   it('should render different languages', () => {
@@ -195,21 +218,35 @@ describe('CodeBlockVanilla', () => {
     expect(results).toHaveNoViolations();
   }, 10000);
 
-  it('should work with light theme', () => {
-    const { container } = render(
+  it('should apply different prism theme styles for light and dark', () => {
+    const { container: lightContainer } = render(
       <VanillaExtractThemeProvider defaultTheme="light">
         <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />
       </VanillaExtractThemeProvider>,
     );
-    expect(container.querySelector('pre')).toBeInTheDocument();
-  });
-
-  it('should work with dark theme', () => {
-    const { container } = render(
+    const { container: darkContainer } = render(
       <VanillaExtractThemeProvider defaultTheme="dark">
         <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />
       </VanillaExtractThemeProvider>,
     );
-    expect(container.querySelector('pre')).toBeInTheDocument();
+    const lightStyle = lightContainer.querySelector('pre')?.getAttribute('style');
+    const darkStyle = darkContainer.querySelector('pre')?.getAttribute('style');
+    expect(lightStyle).not.toBe(darkStyle);
+  });
+
+  it('should respect colorScheme prop override regardless of context theme', () => {
+    const { container: forcedLight } = render(
+      <VanillaExtractThemeProvider defaultTheme="dark">
+        <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} colorScheme="light" />
+      </VanillaExtractThemeProvider>,
+    );
+    const { container: contextLight } = render(
+      <VanillaExtractThemeProvider defaultTheme="light">
+        <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />
+      </VanillaExtractThemeProvider>,
+    );
+    const forcedStyle = forcedLight.querySelector('pre')?.getAttribute('style');
+    const contextStyle = contextLight.querySelector('pre')?.getAttribute('style');
+    expect(forcedStyle).toBe(contextStyle);
   });
 });
