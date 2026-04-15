@@ -239,6 +239,7 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
       css: {
         backgroundColor: 'transparent',
         color: '$buttonSecondaryText',
+        boxShadow: 'none',
       },
     },
     {
