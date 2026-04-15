@@ -526,6 +526,43 @@ globalStyle(`${skeleton}:not(:empty) > *`, { visibility: 'hidden' });
 
 **Note:** `CSSProps` accepts both abbreviated (`p`, `m`) and full names (`padding`, `margin`).
 
+#### `act()` warning with async event handlers
+
+`Warning: The current testing environment is not configured to support act(...)` fires in React 18 when `setState` is called after an `await` inside an event handler and that microtask resolves _outside_ an active `act()`.
+
+**Why it's tricky:** RTL's `act` sets `IS_REACT_ACT_ENVIRONMENT = true` for its duration, then **restores** the previous value (usually `undefined`). If an async handler like `await clipboard.writeText()` → `setState()` resolves after the act exits, `IS_REACT_ACT_ENVIRONMENT` is already `false` and React warns.
+
+**Also:** `yarn test:ci` runs with `--silent` which hides `console.error` — always use `yarn test` to see real warnings.
+
+**For regular click-then-assert tests** — use `waitFor` after the click. RTL's `waitFor` unsets `IS_REACT_ACT_ENVIRONMENT` during polling, which suppresses the warning:
+
+```ts
+await userEvent.click(button);
+await waitFor(() => expect(button).toHaveTextContent('Copied!'));
+```
+
+**For fake-timer tests** (e.g. testing a timed state revert) — use `fireEvent.click` (synchronous) instead of `userEvent.click`, then drain the microtask queue with `await Promise.resolve()` inside `act`. Because `fireEvent` is synchronous, the clipboard Promise hasn't run yet when we hit the `await`, so it resolves _inside_ the act while `IS_REACT_ACT_ENVIRONMENT` is still `true`:
+
+```ts
+jest.useFakeTimers('legacy'); // NOT 'modern' — modern also fakes queueMicrotask which React 18 needs
+
+await act(async () => {
+  fireEvent.click(button);
+  await Promise.resolve(); // drains clipboard Promise microtask inside act
+});
+expect(button).toHaveTextContent('Copied!');
+
+act(() => jest.advanceTimersByTime(1500));
+expect(button).toHaveTextContent('Copy');
+```
+
+Always add `afterEach(() => jest.useRealTimers())` so fake timers don't leak — `axe` uses `setTimeout` internally and will hang if timers are still faked from a previous test.
+
+**What does NOT work:**
+
+- Setting `global.IS_REACT_ACT_ENVIRONMENT = true` in `jest.setup.js` — RTL restores the flag after each act regardless
+- `await act(async () => { await userEvent.click(button); await Promise.resolve() })` — `userEvent`'s internal async steps already process microtasks between events, so the Promise fires during the click, outside the window where the extra `Promise.resolve()` can help
+
 ### Build or Storybook Issues
 
 - **Build errors**: Check [vite.config.ts](vite.config.ts) has `vanillaExtractPlugin()`

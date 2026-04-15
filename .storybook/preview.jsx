@@ -46,6 +46,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     Object.values(vanillaThemes.dark).forEach((cls) => document.body.classList.remove(cls));
 
     document.body.classList.add(themeClass);
+    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+    document.documentElement.classList.toggle('light', initialTheme === 'light');
   }
 
   if (document.body) {
@@ -128,6 +130,8 @@ export const decorators = [
       Object.values(vanillaThemes.dark).forEach((cls) => document.body.classList.remove(cls));
 
       document.body.classList.add(themeClass);
+      document.documentElement.classList.toggle('dark', isDark);
+      document.documentElement.classList.toggle('light', !isDark);
     }, [isDark]);
 
     return (
