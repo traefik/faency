@@ -3,7 +3,7 @@
 
 // used for __tests__/testing-library.js
 // learn more: https://github.com/testing-library/jest-dom
-require('@testing-library/jest-dom/extend-expect');
+require('@testing-library/jest-dom');
 
 const { toHaveNoViolations } = require('jest-axe');
 
