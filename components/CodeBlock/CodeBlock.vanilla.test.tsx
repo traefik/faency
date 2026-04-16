@@ -106,7 +106,7 @@ describe('CodeBlockVanilla', () => {
   });
 
   it('should revert back to copy state after timeout', async () => {
-    jest.useFakeTimers('legacy');
+    jest.useFakeTimers({ legacyFakeTimers: true });
 
     renderWithTheme(
       <CodeBlockVanilla
