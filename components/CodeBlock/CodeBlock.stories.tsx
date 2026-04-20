@@ -580,7 +580,7 @@ const HORIZONTAL_SCROLL_ARGS = {
   lang: 'bash',
   maxHeight: 'none',
   code: `docker run --rm -it --name traefik-dev -p 80:80 -p 443:443 -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/traefik.yml:/etc/traefik/traefik.yml -e TRAEFIK_LOG_LEVEL=DEBUG traefik:v3.0
-curl -X POST "https://api.example.com/v1/users" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U" -H "Content-Type: application/json" -d '{"name":"Alice","email":"alice@example.com","role":"admin"}'
+curl -X POST "https://api.example.com/v1/users" -H "Authorization: Bearer thisisaverylongauthbearerplaceholderusedfortestingpurposes" -H "Content-Type: application/json" -d '{"name":"Alice","email":"alice@example.com","role":"admin"}'
 kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v3.0/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml --server-side --force-conflicts`,
 } as const;
 
