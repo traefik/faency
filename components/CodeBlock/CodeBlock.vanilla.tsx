@@ -16,17 +16,17 @@ import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { AccessibleIcon } from '../AccessibleIcon';
 import { ButtonVanilla } from '../Button';
-import { CopyButtonAlign } from './CodeBlock';
 import {
   codeContent,
   codeContentBottomPadding,
   copyButtonWrapperBottomLeft,
   copyButtonWrapperBottomRight,
   copyButtonWrapperTop,
+  copyButtonWrapperTopLeft,
   pre,
   preNoBorder,
 } from './CodeBlock.vanilla.css';
-import type { CodeBlockLanguage } from './index';
+import type { CodeBlockCopyButtonAlign, CodeBlockLanguage } from './index';
 
 export interface CodeBlockVanillaProps
   extends Omit<HTMLAttributes<HTMLPreElement>, 'css'>,
@@ -36,9 +36,8 @@ export interface CodeBlockVanillaProps
   copyable?: boolean;
   copyText?: string;
   copiedText?: string;
-  copyButtonAlign?: CopyButtonAlign;
+  copyButtonAlign?: CodeBlockCopyButtonAlign;
   onCopy?: () => void;
-  copyButtonBgColor?: string;
   noBorder?: boolean;
   wrapText?: boolean;
   colorScheme?: 'light' | 'dark';
@@ -55,7 +54,6 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       copiedText,
       copyButtonAlign = 'top right',
       onCopy,
-      copyButtonBgColor,
       noBorder,
       wrapText = false,
       colorScheme,
@@ -100,12 +98,12 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       const wrapper = buttonWrapperRef.current;
       if (!pre || !wrapper) return;
 
-      const isLeft = copyButtonAlign.includes('left');
+      const isLeftAlign = copyButtonAlign.includes('left');
       const isBottomAlign = copyButtonAlign.includes('bottom');
       const borderH = noBorder ? 0 : 2;
 
       const update = () => {
-        if (!isLeft) {
+        if (!isLeftAlign) {
           const vScrollbar = Math.max(0, pre.offsetWidth - pre.clientWidth - borderH);
           wrapper.style.right = `${16 + vScrollbar}px`;
         }
@@ -133,11 +131,14 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     };
 
     const isBottom = copyButtonAlign.includes('bottom');
+    const isLeft = copyButtonAlign.includes('left');
     const buttonPositionClass = isBottom
-      ? copyButtonAlign.includes('left')
+      ? isLeft
         ? copyButtonWrapperBottomLeft
         : copyButtonWrapperBottomRight
-      : copyButtonWrapperTop;
+      : isLeft
+        ? copyButtonWrapperTopLeft
+        : copyButtonWrapperTop;
 
     const copyButton = copyable ? (
       <ButtonVanilla
@@ -146,7 +147,12 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
         size="small"
         type="button"
         onClick={handleCopy}
-        css={{ color: '$hiContrast', gap: '$1', backgroundColor: copyButtonBgColor }}
+        css={{
+          color: '$hiContrast',
+          gap: '$1',
+          backgroundColor: '$codeBlockCopyButtonBg',
+          height: '32px',
+        }}
       >
         <AccessibleIcon label={copied ? 'Copied' : 'Copy'}>
           {copied ? <CheckIcon /> : <CopyIcon />}
@@ -159,7 +165,7 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       <Highlight
         theme={prismTheme}
         code={code}
-        language={(lang != null && Prism.languages[lang] != null ? lang : 'text') as Language}
+        language={(Prism.languages[lang] != null ? lang : 'text') as Language}
       >
         {({
           className: highlightClass,

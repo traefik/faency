@@ -16,7 +16,7 @@ import { AccessibleIcon } from '../AccessibleIcon';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { useColorScheme } from '../colorSchemeContext';
-import type { CodeBlockLanguage } from './index';
+import type { CodeBlockCopyButtonAlign, CodeBlockLanguage } from './index';
 
 const Pre = styled('pre', {
   m: 0,
@@ -39,6 +39,7 @@ const CopyButtonWrapper = styled('div', {
   variants: {
     position: {
       top: { top: '$2', right: '$3' },
+      topLeft: { top: '$2', left: '$3' },
       bottomRight: { bottom: '$2', right: '$3' },
       bottomLeft: { bottom: '$2', left: '$3' },
     },
@@ -49,17 +50,14 @@ const CopyButtonWrapper = styled('div', {
   },
 });
 
-export type CopyButtonAlign = 'top' | 'top right' | 'bottom' | 'bottom right' | 'bottom left';
-
 export type CodeBlockProps = {
   lang?: CodeBlockLanguage;
   code: string;
   copyable?: boolean;
   copyText?: string;
   copiedText?: string;
-  copyButtonAlign?: CopyButtonAlign;
+  copyButtonAlign?: CodeBlockCopyButtonAlign;
   onCopy?: () => void;
-  copyButtonBgColor?: string;
   noBorder?: boolean;
   wrapText?: boolean;
   colorScheme?: 'light' | 'dark';
@@ -77,7 +75,6 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       copiedText,
       copyButtonAlign = 'top right',
       onCopy,
-      copyButtonBgColor,
       noBorder,
       wrapText = false,
       colorScheme,
@@ -94,11 +91,14 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
     const prismTheme = resolvedScheme === 'dark' ? themes.nightOwl : themes.nightOwlLight;
 
     const isBottom = copyButtonAlign.includes('bottom');
+    const isLeft = copyButtonAlign.includes('left');
     const buttonPosition = isBottom
-      ? copyButtonAlign.includes('left')
+      ? isLeft
         ? 'bottomLeft'
         : 'bottomRight'
-      : 'top';
+      : isLeft
+        ? 'topLeft'
+        : 'top';
 
     const [copied, setCopied] = useState(false);
 
@@ -122,8 +122,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       const wrapper = buttonWrapperRef.current;
       if (!pre || !wrapper) return;
 
-      const isLeft = copyButtonAlign.includes('left');
-      const isBottomAlign = copyButtonAlign.includes('bottom');
+      const isBottomAlign = isBottom;
       const borderH = noBorder ? 0 : 2;
 
       const update = () => {
@@ -141,7 +140,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       const observer = new ResizeObserver(update);
       observer.observe(pre);
       return () => observer.disconnect();
-    }, [copyable, copyButtonAlign, noBorder]);
+    }, [copyable, isBottom, isLeft, noBorder]);
 
     const handleCopy = async () => {
       try {
@@ -161,7 +160,12 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
         size="small"
         type="button"
         onClick={handleCopy}
-        css={{ color: '$hiContrast', gap: '$1', backgroundColor: copyButtonBgColor }}
+        css={{
+          color: '$hiContrast',
+          gap: '$1',
+          backgroundColor: '$codeBlockCopyButtonBg',
+          height: '32px',
+        }}
       >
         <AccessibleIcon label={copied ? 'Copied' : 'Copy'}>
           {copied ? <CheckIcon /> : <CopyIcon />}
@@ -174,7 +178,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       <Highlight
         theme={prismTheme}
         code={code}
-        language={(lang != null && Prism.languages[lang] != null ? lang : 'text') as Language}
+        language={(Prism.languages[lang] != null ? lang : 'text') as Language}
       >
         {({
           className: highlightClass,

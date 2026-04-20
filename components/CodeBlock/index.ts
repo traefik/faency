@@ -1,5 +1,13 @@
 import type { Language } from 'prism-react-renderer';
 
+export type CodeBlockCopyButtonAlign =
+  | 'top'
+  | 'top right'
+  | 'top left'
+  | 'bottom'
+  | 'bottom right'
+  | 'bottom left';
+
 export type CodeBlockLanguage =
   | Language
   | 'bash'

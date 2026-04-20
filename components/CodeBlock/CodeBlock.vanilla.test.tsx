@@ -11,6 +11,7 @@ import {
   copyButtonWrapperBottomLeft,
   copyButtonWrapperBottomRight,
   copyButtonWrapperTop,
+  copyButtonWrapperTopLeft,
   preNoBorder,
 } from './CodeBlock.vanilla.css';
 
@@ -187,6 +188,7 @@ describe('CodeBlockVanilla', () => {
     const cases = [
       { align: 'top', expectedClass: copyButtonWrapperTop },
       { align: 'top right', expectedClass: copyButtonWrapperTop },
+      { align: 'top left', expectedClass: copyButtonWrapperTopLeft },
       { align: 'bottom', expectedClass: copyButtonWrapperBottomRight },
       { align: 'bottom right', expectedClass: copyButtonWrapperBottomRight },
       { align: 'bottom left', expectedClass: copyButtonWrapperBottomLeft },
@@ -224,18 +226,6 @@ describe('CodeBlockVanilla', () => {
     );
     const contentDiv2 = container2.querySelector(`.${codeContent}`);
     expect(contentDiv2?.className).not.toContain(codeContentBottomPadding);
-  });
-
-  it('should render without errors when copyButtonBgColor is provided', () => {
-    const { container } = renderWithTheme(
-      <CodeBlockVanilla
-        lang="typescript"
-        code={CODE_SNIPPET}
-        copyable
-        copyButtonBgColor="rgb(255, 0, 0)"
-      />,
-    );
-    expect(container.querySelector('pre')).toBeInTheDocument();
   });
 
   it('should render different languages', () => {

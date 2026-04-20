@@ -10,6 +10,7 @@ import { Theme as ButtonTheme } from './components/Button/Button.themes';
 import { Theme as ButtonSwitchTheme } from './components/ButtonSwitch/ButtonSwitch.themes';
 import { Theme as CardTheme } from './components/Card/Card.themes';
 import { Theme as CheckboxTheme } from './components/Checkbox/Checkbox.themes';
+import { Theme as CodeBlockTheme } from './components/CodeBlock/CodeBlock.themes';
 import { Theme as DialogTheme } from './components/Dialog/Dialog.themes';
 import { Theme as HeadingTheme } from './components/Heading/Heading.themes';
 import { Theme as IconButtonTheme } from './components/IconButton/IconButton.themes';
@@ -60,6 +61,7 @@ const stitches = createStitches({
       ...SwitchTheme.getLight(defaultPrimaryColor),
       ...CardTheme.getLight(defaultPrimaryColor),
       ...CheckboxTheme.getLight(defaultPrimaryColor),
+      ...CodeBlockTheme.getLight(),
       ...LinkTheme.getLight(defaultPrimaryColor),
       ...ListTheme.getLight(defaultPrimaryColor),
       ...RadioTheme.getLight(defaultPrimaryColor),
@@ -247,6 +249,7 @@ export const darkTheme = (primary: PrimaryColor, name = 'dark') => {
       ...SwitchTheme.getDark(darkPrimaryColor),
       ...CardTheme.getDark(darkPrimaryColor),
       ...CheckboxTheme.getDark(darkPrimaryColor),
+      ...CodeBlockTheme.getDark(),
       ...LinkTheme.getDark(darkPrimaryColor),
       ...ListTheme.getDark(darkPrimaryColor),
       ...RadioTheme.getDark(darkPrimaryColor),
@@ -279,6 +282,7 @@ export const lightTheme = (primary: PrimaryColor, name = 'light') => {
       ...SwitchTheme.getLight(lightPrimaryColor),
       ...CardTheme.getLight(lightPrimaryColor),
       ...CheckboxTheme.getLight(lightPrimaryColor),
+      ...CodeBlockTheme.getLight(),
       ...LinkTheme.getLight(lightPrimaryColor),
       ...ListTheme.getLight(lightPrimaryColor),
       ...RadioTheme.getLight(lightPrimaryColor),

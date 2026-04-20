@@ -30,6 +30,13 @@ export const copyButtonWrapperTop = style({
   right: tokens.space['3'],
 });
 
+export const copyButtonWrapperTopLeft = style({
+  position: 'absolute',
+  zIndex: 1,
+  top: tokens.space['2'],
+  left: tokens.space['3'],
+});
+
 export const copyButtonWrapperBottomRight = style({
   position: 'absolute',
   zIndex: 1,
