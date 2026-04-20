@@ -75,13 +75,14 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     const containerStyles = {
       position: 'relative' as const,
       ...cssStyles,
-      ...style,
       ...assignInlineVars(vars),
     };
 
     const [copied, setCopied] = useState(false);
 
-    const preRef = useRef<HTMLPreElement>(null);
+    const preRef = useRef<HTMLPreElement | null>(
+      null,
+    ) as React.MutableRefObject<HTMLPreElement | null>;
     const buttonWrapperRef = useRef<HTMLDivElement>(null);
 
     const setPreRef = useCallback(
@@ -167,16 +168,17 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
           getLineProps,
           getTokenProps,
         }) => (
-          <div style={containerStyles} className={className}>
+          <div style={containerStyles}>
             <pre
               ref={setPreRef}
-              className={[pre, noBorder ? preNoBorder : '', highlightClass]
+              className={[pre, noBorder ? preNoBorder : '', highlightClass, className]
                 .filter(Boolean)
                 .join(' ')}
               style={{
                 maxHeight,
                 ...highlightStyle,
                 backgroundColor: 'inherit',
+                ...style,
               }}
               {...props}
             >

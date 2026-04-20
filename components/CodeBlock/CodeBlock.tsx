@@ -2,7 +2,14 @@ import './prism-extend';
 
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { Highlight, Language, Prism, themes } from 'prism-react-renderer';
-import React, { ComponentProps, forwardRef, useState } from 'react';
+import React, {
+  ComponentProps,
+  forwardRef,
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { CSS, styled } from '../../stitches.config';
 import { AccessibleIcon } from '../AccessibleIcon';
@@ -16,7 +23,6 @@ const Pre = styled('pre', {
   borderRadius: '$2',
   overflow: 'auto',
   border: '1px solid $colors$deepBlue3',
-  position: 'relative',
   fontSize: '$2',
   lineHeight: 1.6,
 
@@ -77,6 +83,8 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       colorScheme,
       maxHeight = 424,
       css,
+      style,
+      className,
       ...props
     },
     ref,
@@ -93,6 +101,47 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       : 'top';
 
     const [copied, setCopied] = useState(false);
+
+    const preRef = useRef<HTMLPreElement | null>(
+      null,
+    ) as React.MutableRefObject<HTMLPreElement | null>;
+    const buttonWrapperRef = useRef<HTMLDivElement>(null);
+
+    const setPreRef = useCallback(
+      (node: HTMLPreElement | null) => {
+        preRef.current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLPreElement | null>).current = node;
+      },
+      [ref],
+    );
+
+    useLayoutEffect(() => {
+      if (!copyable) return;
+      const pre = preRef.current;
+      const wrapper = buttonWrapperRef.current;
+      if (!pre || !wrapper) return;
+
+      const isLeft = copyButtonAlign.includes('left');
+      const isBottomAlign = copyButtonAlign.includes('bottom');
+      const borderH = noBorder ? 0 : 2;
+
+      const update = () => {
+        if (!isLeft) {
+          const vScrollbar = Math.max(0, pre.offsetWidth - pre.clientWidth - borderH);
+          wrapper.style.right = `${16 + vScrollbar}px`;
+        }
+        if (isBottomAlign) {
+          const hScrollbar = Math.max(0, pre.offsetHeight - pre.clientHeight - borderH);
+          wrapper.style.bottom = `${8 + hScrollbar}px`;
+        }
+      };
+
+      update();
+      const observer = new ResizeObserver(update);
+      observer.observe(pre);
+      return () => observer.disconnect();
+    }, [copyable, copyButtonAlign, noBorder]);
 
     const handleCopy = async () => {
       try {
@@ -127,14 +176,19 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
         code={code}
         language={(lang != null && Prism.languages[lang] != null ? lang : 'text') as Language}
       >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        {({
+          className: highlightClass,
+          style: highlightStyle,
+          tokens,
+          getLineProps,
+          getTokenProps,
+        }) => (
           <Box css={{ position: 'relative', ...css }}>
             <Pre
-              ref={ref}
-              className={className}
-              style={{ ...style, backgroundColor: 'inherit' }}
+              ref={setPreRef}
+              className={[highlightClass, className].filter(Boolean).join(' ')}
+              style={{ maxHeight, ...highlightStyle, backgroundColor: 'inherit', ...style }}
               noBorder={noBorder}
-              css={{ maxHeight }}
               {...props}
             >
               <Box css={{ p: '$4', ...(copyable && isBottom ? { pb: '$7' } : {}) }}>
@@ -154,7 +208,9 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
               </Box>
             </Pre>
             {copyButton && (
-              <CopyButtonWrapper position={buttonPosition}>{copyButton}</CopyButtonWrapper>
+              <CopyButtonWrapper ref={buttonWrapperRef} position={buttonPosition}>
+                {copyButton}
+              </CopyButtonWrapper>
             )}
           </Box>
         )}
