@@ -1,7 +1,16 @@
+import './prism-extend';
+
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { Highlight, Language, themes } from 'prism-react-renderer';
-import React, { forwardRef, HTMLAttributes, useState } from 'react';
+import { Highlight, Language, Prism, themes } from 'prism-react-renderer';
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
@@ -9,23 +18,26 @@ import { AccessibleIcon } from '../AccessibleIcon';
 import { ButtonVanilla } from '../Button';
 import {
   codeContent,
-  copyButtonWrapper,
-  copyButtonWrapperBottom,
+  codeContentBottomPadding,
+  copyButtonWrapperBottomLeft,
+  copyButtonWrapperBottomRight,
   copyButtonWrapperTop,
+  copyButtonWrapperTopLeft,
   pre,
   preNoBorder,
-  wrapper,
 } from './CodeBlock.vanilla.css';
+import type { CodeBlockCopyButtonAlign, CodeBlockLanguage } from './index';
 
 export interface CodeBlockVanillaProps
   extends Omit<HTMLAttributes<HTMLPreElement>, 'css'>,
     CSSProps {
-  lang: Language;
+  lang?: CodeBlockLanguage;
   code: string;
   copyable?: boolean;
   copyText?: string;
   copiedText?: string;
-  copyButtonAlign?: 'top' | 'bottom';
+  copyButtonAlign?: CodeBlockCopyButtonAlign;
+  onCopy?: () => void;
   noBorder?: boolean;
   wrapText?: boolean;
   colorScheme?: 'light' | 'dark';
@@ -35,12 +47,13 @@ export interface CodeBlockVanillaProps
 export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps>(
   (
     {
-      lang,
+      lang = 'text',
       code,
       copyable = false,
       copyText,
       copiedText,
-      copyButtonAlign = 'top',
+      copyButtonAlign = 'top right',
+      onCopy,
       noBorder,
       wrapText = false,
       colorScheme,
@@ -57,22 +70,103 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     const prismTheme = effectiveScheme === 'dark' ? themes.nightOwl : themes.nightOwlLight;
 
     const { style: cssStyles, vars } = processCSSProp(css, colors);
-    const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
+    const containerStyles = {
+      position: 'relative' as const,
+      ...cssStyles,
+      ...assignInlineVars(vars),
+    };
 
     const [copied, setCopied] = useState(false);
+
+    const preRef = useRef<HTMLPreElement | null>(
+      null,
+    ) as React.MutableRefObject<HTMLPreElement | null>;
+    const buttonWrapperRef = useRef<HTMLDivElement>(null);
+
+    const setPreRef = useCallback(
+      (node: HTMLPreElement | null) => {
+        preRef.current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLPreElement | null>).current = node;
+      },
+      [ref],
+    );
+
+    useLayoutEffect(() => {
+      if (!copyable) return;
+      const pre = preRef.current;
+      const wrapper = buttonWrapperRef.current;
+      if (!pre || !wrapper) return;
+
+      const isLeftAlign = copyButtonAlign.includes('left');
+      const isBottomAlign = copyButtonAlign.includes('bottom');
+      const borderH = noBorder ? 0 : 2;
+
+      const update = () => {
+        if (!isLeftAlign) {
+          const vScrollbar = Math.max(0, pre.offsetWidth - pre.clientWidth - borderH);
+          wrapper.style.right = `${16 + vScrollbar}px`;
+        }
+        if (isBottomAlign) {
+          const hScrollbar = Math.max(0, pre.offsetHeight - pre.clientHeight - borderH);
+          wrapper.style.bottom = `${8 + hScrollbar}px`;
+        }
+      };
+
+      update();
+      const observer = new ResizeObserver(update);
+      observer.observe(pre);
+      return () => observer.disconnect();
+    }, [copyable, copyButtonAlign, noBorder]);
 
     const handleCopy = async () => {
       try {
         await navigator.clipboard.writeText(code);
         setCopied(true);
+        onCopy?.();
         setTimeout(() => setCopied(false), 1500);
       } catch {
         // clipboard write failed (e.g. permission denied) — leave UI unchanged
       }
     };
 
+    const isBottom = copyButtonAlign.includes('bottom');
+    const isLeft = copyButtonAlign.includes('left');
+    const buttonPositionClass = isBottom
+      ? isLeft
+        ? copyButtonWrapperBottomLeft
+        : copyButtonWrapperBottomRight
+      : isLeft
+        ? copyButtonWrapperTopLeft
+        : copyButtonWrapperTop;
+
+    const copyButton = copyable ? (
+      <ButtonVanilla
+        variant="secondary"
+        ghost
+        size="small"
+        type="button"
+        onClick={handleCopy}
+        css={{
+          color: '$hiContrast',
+          gap: '$1',
+          backgroundColor: '$codeBlockCopyButtonBg',
+          height: '32px',
+        }}
+      >
+        <AccessibleIcon label={copied ? 'Copied' : 'Copy'}>
+          {copied ? <CheckIcon /> : <CopyIcon />}
+        </AccessibleIcon>
+        {copied ? copiedText : copyText}
+      </ButtonVanilla>
+    ) : null;
+
     return (
-      <Highlight theme={prismTheme} code={code} language={lang}>
+      <Highlight
+        theme={prismTheme}
+        code={code}
+        language={(Prism.languages[lang] != null ? lang : 'text') as Language}
+      >
         {({
           className: highlightClass,
           style: highlightStyle,
@@ -80,48 +174,32 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
           getLineProps,
           getTokenProps,
         }) => (
-          <div className={wrapper}>
-            {copyable && (
-              <div
-                className={[
-                  copyButtonWrapper,
-                  copyButtonAlign === 'bottom' ? copyButtonWrapperBottom : copyButtonWrapperTop,
-                ].join(' ')}
-              >
-                <ButtonVanilla
-                  variant="secondary"
-                  ghost
-                  size="small"
-                  type="button"
-                  onClick={handleCopy}
-                  css={{ color: '$hiContrast', gap: '$1' }}
-                >
-                  <AccessibleIcon label={copied ? 'Copied' : 'Copy'}>
-                    {copied ? <CheckIcon /> : <CopyIcon />}
-                  </AccessibleIcon>
-                  {copied ? copiedText : copyText}
-                </ButtonVanilla>
-              </div>
-            )}
+          <div style={containerStyles}>
             <pre
-              ref={ref}
+              ref={setPreRef}
               className={[pre, noBorder ? preNoBorder : '', highlightClass, className]
                 .filter(Boolean)
                 .join(' ')}
               style={{
                 maxHeight,
                 ...highlightStyle,
-                backgroundColor: 'transparent',
-                ...mergedStyles,
+                backgroundColor: 'inherit',
+                ...style,
               }}
               {...props}
             >
-              <div className={codeContent}>
+              <div
+                className={[codeContent, copyable && isBottom ? codeContentBottomPadding : '']
+                  .filter(Boolean)
+                  .join(' ')}
+              >
                 {tokens.map((line, i) => (
                   <div
                     key={i}
                     {...getLineProps({ line })}
-                    style={wrapText ? { whiteSpace: 'normal' } : undefined}
+                    style={
+                      wrapText ? { whiteSpace: 'pre-wrap', wordBreak: 'break-all' } : undefined
+                    }
                   >
                     {line.map((token, key) => (
                       <span key={key} {...getTokenProps({ token })} />
@@ -130,6 +208,11 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
                 ))}
               </div>
             </pre>
+            {copyButton && (
+              <div ref={buttonWrapperRef} className={buttonPositionClass}>
+                {copyButton}
+              </div>
+            )}
           </div>
         )}
       </Highlight>

@@ -9,6 +9,10 @@ import {
   buttonSwitchLightTheme,
 } from '../components/ButtonSwitch/ButtonSwitch.theme.css';
 import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme.css';
+import {
+  codeBlockDarkTheme,
+  codeBlockLightTheme,
+} from '../components/CodeBlock/CodeBlock.theme.css';
 import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
 import {
   iconButtonDarkTheme,
@@ -243,6 +247,7 @@ const lightSemanticColors = {
   ring: '#3b82f6',
   ...badgeLightTheme,
   ...cardLightTheme,
+  ...codeBlockLightTheme,
   ...panelLightTheme,
   ...textLightTheme,
   textInvalid: lightColors.red9,
@@ -368,6 +373,7 @@ const darkSemanticColors = {
   ring: '#60a5fa',
   ...badgeDarkTheme,
   ...cardDarkTheme,
+  ...codeBlockDarkTheme,
   ...panelDarkTheme,
   ...textDarkTheme,
   textInvalid: darkColors.red9,

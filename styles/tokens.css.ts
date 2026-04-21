@@ -101,6 +101,9 @@ export const tokens = createThemeContract({
     cardActiveBorder: null,
     innerCardBgColor: null,
 
+    // Component-specific tokens - CodeBlock
+    codeBlockCopyButtonBg: null,
+
     // Component-specific tokens - Text
     textSubtle: null,
     textDefault: null,
@@ -161,6 +164,7 @@ export const tokens = createThemeContract({
     buttonSwitchOffBg: null,
     buttonSwitchOffColor: null,
     buttonSwitchActiveColor: null,
+
     // Component-specific tokens - Skeleton
     skeletonBackground: null,
     skeletonAnimation: null,

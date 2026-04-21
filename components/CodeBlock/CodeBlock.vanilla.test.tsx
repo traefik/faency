@@ -5,7 +5,15 @@ import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
 import { CodeBlockVanilla } from './CodeBlock.vanilla';
-import { preNoBorder } from './CodeBlock.vanilla.css';
+import {
+  codeContent,
+  codeContentBottomPadding,
+  copyButtonWrapperBottomLeft,
+  copyButtonWrapperBottomRight,
+  copyButtonWrapperTop,
+  copyButtonWrapperTopLeft,
+  preNoBorder,
+} from './CodeBlock.vanilla.css';
 
 const CODE_SNIPPET = `const greet = (name: string) => {
   console.log(\`Hello, \${name}!\`);
@@ -22,6 +30,12 @@ describe('CodeBlockVanilla', () => {
       configurable: true,
       writable: true,
     });
+
+    global.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
@@ -51,13 +65,17 @@ describe('CodeBlockVanilla', () => {
     expect(container.querySelector('pre')?.className).toContain('custom-class');
   });
 
-  it('should not render copy button when copyable is false', () => {
-    renderWithTheme(<CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />);
+  it('should render copy button only when copyable is true', () => {
+    const { rerender } = renderWithTheme(
+      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />,
+    );
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
-  });
 
-  it('should render copy button when copyable is true', () => {
-    renderWithTheme(<CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} copyable />);
+    rerender(
+      <VanillaExtractThemeProvider>
+        <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} copyable />
+      </VanillaExtractThemeProvider>,
+    );
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
@@ -73,7 +91,7 @@ describe('CodeBlockVanilla', () => {
     expect(button.textContent).toBe('Copy');
   });
 
-  it('should show copyText when provided', () => {
+  it('should show copyText and copiedText correctly', () => {
     renderWithTheme(
       <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} copyable copyText="Copy" />,
     );
@@ -88,24 +106,7 @@ describe('CodeBlockVanilla', () => {
     });
   });
 
-  it('should show copiedText after clicking copy', async () => {
-    renderWithTheme(
-      <CodeBlockVanilla
-        lang="typescript"
-        code={CODE_SNIPPET}
-        copyable
-        copyText="Copy"
-        copiedText="Copied!"
-      />,
-    );
-    const button = screen.getByRole('button');
-    expect(button).toHaveTextContent('Copy');
-
-    await userEvent.click(button);
-    await waitFor(() => expect(button).toHaveTextContent('Copied!'));
-  });
-
-  it('should revert back to copy state after timeout', async () => {
+  it('should show copiedText after clicking copy, then revert after timeout', async () => {
     jest.useFakeTimers('legacy');
 
     renderWithTheme(
@@ -118,6 +119,7 @@ describe('CodeBlockVanilla', () => {
       />,
     );
     const button = screen.getByRole('button');
+    expect(button).toHaveTextContent('Copy');
 
     // fireEvent.click is synchronous, so the clipboard Promise microtask hasn't
     // fired yet when we hit `await Promise.resolve()` — that drains it while
@@ -134,40 +136,96 @@ describe('CodeBlockVanilla', () => {
     expect(button).toHaveTextContent('Copy');
   });
 
-  it('should apply noBorder class when noBorder is true', () => {
-    const { container } = renderWithTheme(
+  it('should call onCopy callback after clicking copy', async () => {
+    const onCopy = jest.fn();
+    renderWithTheme(
+      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} copyable onCopy={onCopy} />,
+    );
+    await userEvent.click(screen.getByRole('button'));
+    await waitFor(() => expect(onCopy).toHaveBeenCalledTimes(1));
+  });
+
+  it('should apply noBorder class conditionally', () => {
+    const { container: withBorder } = renderWithTheme(
+      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />,
+    );
+    expect(withBorder.querySelector('pre')?.className).not.toContain(preNoBorder);
+
+    const { container: withoutBorder } = renderWithTheme(
       <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} noBorder />,
     );
-    expect(container.querySelector('pre')?.className).toContain(preNoBorder);
+    expect(withoutBorder.querySelector('pre')?.className).toContain(preNoBorder);
   });
 
-  it('should not apply noBorder class when noBorder is false', () => {
-    const { container } = renderWithTheme(
+  it('should apply wrapText styles to lines conditionally', () => {
+    const { container: noWrap } = renderWithTheme(
       <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />,
     );
-    expect(container.querySelector('pre')?.className).not.toContain(preNoBorder);
-  });
-
-  it('should apply whiteSpace: normal to lines when wrapText is true', () => {
-    const { container } = renderWithTheme(
-      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} wrapText />,
-    );
-    const lineDivs = container.querySelectorAll('pre > div > div');
-    expect(lineDivs.length).toBeGreaterThan(0);
-    lineDivs.forEach((div) => {
-      expect((div as HTMLElement).style.whiteSpace).toBe('normal');
-    });
-  });
-
-  it('should not apply whiteSpace: normal to lines when wrapText is false', () => {
-    const { container } = renderWithTheme(
-      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />,
-    );
-    const lineDivs = container.querySelectorAll('pre > div > div');
-    expect(lineDivs.length).toBeGreaterThan(0);
-    lineDivs.forEach((div) => {
+    noWrap.querySelectorAll('pre > div > div').forEach((div) => {
       expect((div as HTMLElement).style.whiteSpace).toBe('');
     });
+
+    const { container: wrap } = renderWithTheme(
+      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} wrapText />,
+    );
+    const lineDivs = wrap.querySelectorAll('pre > div > div');
+    expect(lineDivs.length).toBeGreaterThan(0);
+    lineDivs.forEach((div) => {
+      expect((div as HTMLElement).style.whiteSpace).toBe('pre-wrap');
+      expect((div as HTMLElement).style.wordBreak).toBe('break-all');
+    });
+  });
+
+  it('should place copy button at top right by default', () => {
+    const { container } = renderWithTheme(
+      <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} copyable />,
+    );
+    const wrapperDiv = container.querySelector(`.${copyButtonWrapperTop}`);
+    expect(wrapperDiv).toBeInTheDocument();
+  });
+
+  it('should support all copyButtonAlign combinations', () => {
+    const cases = [
+      { align: 'top', expectedClass: copyButtonWrapperTop },
+      { align: 'top right', expectedClass: copyButtonWrapperTop },
+      { align: 'top left', expectedClass: copyButtonWrapperTopLeft },
+      { align: 'bottom', expectedClass: copyButtonWrapperBottomRight },
+      { align: 'bottom right', expectedClass: copyButtonWrapperBottomRight },
+      { align: 'bottom left', expectedClass: copyButtonWrapperBottomLeft },
+    ] as const;
+
+    cases.forEach(({ align, expectedClass }) => {
+      const { container, unmount } = renderWithTheme(
+        <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} copyable copyButtonAlign={align} />,
+      );
+      expect(container.querySelector(`.${expectedClass}`)).toBeInTheDocument();
+      unmount();
+    });
+  });
+
+  it('should add bottom padding to code content when copyable and button is at the bottom', () => {
+    const { container, unmount } = renderWithTheme(
+      <CodeBlockVanilla
+        lang="typescript"
+        code={CODE_SNIPPET}
+        copyable
+        copyButtonAlign="bottom left"
+      />,
+    );
+    const contentDiv = container.querySelector(`.${codeContent}`);
+    expect(contentDiv?.className).toContain(codeContentBottomPadding);
+    unmount();
+
+    const { container: container2 } = renderWithTheme(
+      <CodeBlockVanilla
+        lang="typescript"
+        code={CODE_SNIPPET}
+        copyable
+        copyButtonAlign="top right"
+      />,
+    );
+    const contentDiv2 = container2.querySelector(`.${codeContent}`);
+    expect(contentDiv2?.className).not.toContain(codeContentBottomPadding);
   });
 
   it('should render different languages', () => {

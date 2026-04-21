@@ -5915,6 +5915,7 @@ __metadata:
     "@types/jest-axe": "npm:^3.5.3"
     "@types/lodash.merge": "npm:^4.6.6"
     "@types/node": "npm:^24.10.1"
+    "@types/prismjs": "npm:1.26.6"
     "@types/react": "npm:18.2.0"
     "@types/react-dom": "npm:18.2.0"
     "@types/tinycolor2": "npm:^1.4.3"
@@ -5947,6 +5948,7 @@ __metadata:
     patch-package: "npm:^8.0.0"
     prettier: "npm:^3.6.2"
     prism-react-renderer: "npm:2.4.1"
+    prismjs: "npm:1.30.0"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     semantic-release: "npm:^25.0.3"
@@ -6257,7 +6259,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prismjs@npm:^1.26.0":
+"@types/prismjs@npm:1.26.6, @types/prismjs@npm:^1.26.0":
   version: 1.26.6
   resolution: "@types/prismjs@npm:1.26.6"
   checksum: 10c0/152a27500cb32b114edfb77f9d0dccd03bebc84828d1e92abacaf212b22d3ccdde041ce421dd58b6ec8461bbec7cd76ed5ee773cae4be7ca36a6dd4ddcf0f9e7
@@ -16292,6 +16294,13 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
   checksum: 10c0/ebbe8feb975224344bbdd046b3a937d121592dbe4b8f22ba0be31f5af37b9a8219f441138ef6cab1c5b96f2aa6b529015200959f7e5e85b60ca69c81d35edcd4
+  languageName: node
+  linkType: hard
+
+"prismjs@npm:1.30.0":
+  version: 1.30.0
+  resolution: "prismjs@npm:1.30.0"
+  checksum: 10c0/f56205bfd58ef71ccfcbcb691fd0eb84adc96c6ff21b0b69fc6fdcf02be42d6ef972ba4aed60466310de3d67733f6a746f89f2fb79c00bf217406d465b3e8f23
   languageName: node
   linkType: hard
 
