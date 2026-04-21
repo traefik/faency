@@ -23,6 +23,10 @@ export const codeContentBottomPadding = style({
   paddingBottom: tokens.space['7'],
 });
 
+export const codeContentTopPadding = style({
+  paddingTop: tokens.space['7'],
+});
+
 export const copyButtonWrapperTop = style({
   position: 'absolute',
   zIndex: 1,
