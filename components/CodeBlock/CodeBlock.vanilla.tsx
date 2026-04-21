@@ -19,6 +19,7 @@ import { ButtonVanilla } from '../Button';
 import {
   codeContent,
   codeContentBottomPadding,
+  codeContentTopPadding,
   copyButtonWrapperBottomLeft,
   copyButtonWrapperBottomRight,
   copyButtonWrapperTop,
@@ -69,6 +70,9 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     const effectiveScheme = colorScheme ?? resolvedTheme;
     const prismTheme = effectiveScheme === 'dark' ? themes.nightOwl : themes.nightOwlLight;
 
+    const isBottom = copyButtonAlign.includes('bottom');
+    const isLeft = copyButtonAlign.includes('left');
+
     const { style: cssStyles, vars } = processCSSProp(css, colors);
     const containerStyles = {
       position: 'relative' as const,
@@ -98,16 +102,14 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       const wrapper = buttonWrapperRef.current;
       if (!pre || !wrapper) return;
 
-      const isLeftAlign = copyButtonAlign.includes('left');
-      const isBottomAlign = copyButtonAlign.includes('bottom');
       const borderH = noBorder ? 0 : 2;
 
       const update = () => {
-        if (!isLeftAlign) {
+        if (!isLeft) {
           const vScrollbar = Math.max(0, pre.offsetWidth - pre.clientWidth - borderH);
           wrapper.style.right = `${16 + vScrollbar}px`;
         }
-        if (isBottomAlign) {
+        if (isBottom) {
           const hScrollbar = Math.max(0, pre.offsetHeight - pre.clientHeight - borderH);
           wrapper.style.bottom = `${8 + hScrollbar}px`;
         }
@@ -117,7 +119,7 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       const observer = new ResizeObserver(update);
       observer.observe(pre);
       return () => observer.disconnect();
-    }, [copyable, copyButtonAlign, noBorder]);
+    }, [copyable, isBottom, isLeft, noBorder]);
 
     const handleCopy = async () => {
       try {
@@ -130,8 +132,6 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       }
     };
 
-    const isBottom = copyButtonAlign.includes('bottom');
-    const isLeft = copyButtonAlign.includes('left');
     const buttonPositionClass = isBottom
       ? isLeft
         ? copyButtonWrapperBottomLeft
@@ -189,7 +189,11 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
               {...props}
             >
               <div
-                className={[codeContent, copyable && isBottom ? codeContentBottomPadding : '']
+                className={[
+                  codeContent,
+                  copyable && isLeft && isBottom ? codeContentBottomPadding : '',
+                  copyable && isLeft && !isBottom ? codeContentTopPadding : '',
+                ]
                   .filter(Boolean)
                   .join(' ')}
               >

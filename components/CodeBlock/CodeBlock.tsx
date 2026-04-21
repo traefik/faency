@@ -195,7 +195,13 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
               noBorder={noBorder}
               {...props}
             >
-              <Box css={{ p: '$4', ...(copyable && isBottom ? { pb: '$7' } : {}) }}>
+              <Box
+                css={{
+                  p: '$4',
+                  ...(copyable && isLeft && isBottom ? { pb: '$7' } : {}),
+                  ...(copyable && isLeft && !isBottom ? { pt: '$7' } : {}),
+                }}
+              >
                 {tokens.map((line, i) => (
                   <div
                     key={i}
