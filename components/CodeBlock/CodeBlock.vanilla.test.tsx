@@ -107,7 +107,7 @@ describe('CodeBlockVanilla', () => {
   });
 
   it('should show copiedText after clicking copy, then revert after timeout', async () => {
-    jest.useFakeTimers('legacy');
+    jest.useFakeTimers({ legacyFakeTimers: true });
 
     renderWithTheme(
       <CodeBlockVanilla

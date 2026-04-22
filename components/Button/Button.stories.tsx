@@ -3,14 +3,18 @@ import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
+import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { BoxVanilla } from '../Box/Box.vanilla';
 import { Flex } from '../Flex';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
 import { H3 } from '../Heading';
 import { UnstyledLink } from '../Link';
 import { Text } from '../Text';
-import { ButtonForStory } from './Button';
+import { Button, ButtonProps, ButtonVariants } from './Button';
 import { ButtonVanilla } from './Button.vanilla';
+
+const BaseButton = (props: ButtonProps): JSX.Element => <Button {...props} />;
+const ButtonForStory = modifyVariantsForStory<ButtonVariants, ButtonProps>(BaseButton);
 
 const Component: Meta<typeof ButtonForStory> = {
   title: 'Components/Button',

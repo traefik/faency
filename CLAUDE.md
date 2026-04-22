@@ -104,7 +104,7 @@ Components follow a consistent pattern:
 ## Important Notes
 
 - **Patch Required**: Run `yarn patch-package` after installing dependencies to fix Stitches TypeScript 5 compatibility
-- **Node Version**: Requires Node.js 20+
+- **Node Version**: Requires Node.js 24.14.1+
 - **Conventional Commits**: Follow conventional commit format for semantic releases
 - **Accessibility**: All components must be accessible and support keyboard navigation
 - **Storybook**: Every component requires comprehensive stories showing all variants

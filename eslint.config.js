@@ -1,7 +1,6 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import storybook from 'eslint-plugin-storybook';
 
-import { fixupPluginRules } from '@eslint/compat';
 import pluginJs from '@eslint/js';
 import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
@@ -22,13 +21,14 @@ export default [
       'jsx-a11y': eslintPluginJsxA11y,
       prettier: eslintPluginPrettier,
       react: eslintPluginReact,
-      'react-hooks': fixupPluginRules(eslintPluginReactHooks),
+      'react-hooks': eslintPluginReactHooks,
       'simple-import-sort': eslintPluginSimpleImportSort,
     },
   },
   {
     rules: {
-      ...eslintPluginReactHooks.configs.recommended.rules,
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-explicit-any': 'off',

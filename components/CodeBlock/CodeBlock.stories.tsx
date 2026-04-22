@@ -2,7 +2,6 @@
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
-import { tokens } from '../../styles/tokens.css';
 import { BoxVanilla } from '../Box/Box.vanilla';
 import { CardVanilla } from '../Card/Card.vanilla';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
@@ -41,12 +40,7 @@ export const CopyButtonAlign: StoryFn<typeof CodeBlockVanilla> = (args) => (
 
 export const InCard: StoryFn<typeof CodeBlockVanilla> = (args) => (
   <CardVanilla css={{ padding: 0 }}>
-    <CodeBlockVanilla
-      {...args}
-      copyable
-      noBorder
-      copyButtonBgColor={tokens.colors.cardBackground}
-    />
+    <CodeBlockVanilla {...args} copyable noBorder />
   </CardVanilla>
 );
 

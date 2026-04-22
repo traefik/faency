@@ -2,7 +2,6 @@ import { Slot } from '@radix-ui/react-slot';
 import React, { ComponentProps, useMemo } from 'react';
 
 import { CSS, keyframes, styled, VariantProps } from '../../stitches.config';
-import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 
 export const BUTTON_BASE_STYLES = {
   appearance: 'none',
@@ -313,6 +312,3 @@ export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, Bu
     );
   },
 );
-
-const BaseButton = (props: ButtonProps): JSX.Element => <Button {...props} />;
-export const ButtonForStory = modifyVariantsForStory<ButtonVariants, ButtonProps>(BaseButton);
