@@ -50,6 +50,13 @@
       groupSlug: 'gh-actions',
       matchManagers: [ 'github-actions' ],
       rangeStrategy: 'replace',
+    },
+    // @stitches/react is no longer maintained and won't support newer TypeScript versions.
+    // Keep TypeScript pinned until we complete the vanilla-extract migration and drop Stitches entirely.
+    {
+      matchManagers: [ 'npm' ],
+      matchPackageNames: [ 'typescript' ],
+      enabled: false,
     }
   ],
   semanticCommits: 'enabled',
