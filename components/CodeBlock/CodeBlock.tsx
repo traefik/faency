@@ -1,7 +1,5 @@
-import './prism-extend';
-
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
-import { Highlight, Language, Prism, themes } from 'prism-react-renderer';
+import { Highlight, Language, themes } from 'prism-react-renderer';
 import React, {
   ComponentProps,
   forwardRef,
@@ -17,6 +15,7 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 import { useColorScheme } from '../colorSchemeContext';
 import type { CodeBlockCopyButtonAlign, CodeBlockLanguage } from './index';
+import { Prism } from './prism-extend';
 
 const Pre = styled('pre', {
   m: 0,
