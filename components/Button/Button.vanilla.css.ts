@@ -101,7 +101,7 @@ export const buttonRecipe = recipe({
   variants: {
     size: {
       small: {
-        borderRadius: tokens.radii['3'],
+        borderRadius: tokens.radii.button,
         height: tokens.sizes['5'],
         paddingLeft: tokens.space['2'],
         paddingRight: tokens.space['2'],
@@ -109,7 +109,7 @@ export const buttonRecipe = recipe({
         lineHeight: tokens.sizes['5'],
       },
       medium: {
-        borderRadius: tokens.radii['3'],
+        borderRadius: tokens.radii.button,
         height: tokens.sizes['6'],
         paddingLeft: tokens.space['3'],
         paddingRight: tokens.space['3'],
@@ -117,7 +117,7 @@ export const buttonRecipe = recipe({
         lineHeight: tokens.sizes['6'],
       },
       large: {
-        borderRadius: tokens.radii['3'],
+        borderRadius: tokens.radii.button,
         height: tokens.sizes['7'],
         paddingLeft: tokens.space['3'],
         paddingRight: tokens.space['3'],

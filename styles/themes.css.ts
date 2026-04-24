@@ -86,6 +86,7 @@ const baseThemeValues = {
     '4': '12px',
     round: '50%',
     pill: '9999px',
+    button: '8px',
   },
   zIndices: {
     '1': '100',

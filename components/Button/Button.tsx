@@ -101,21 +101,21 @@ export const StyledButton = styled('button', BUTTON_BASE_STYLES, {
   variants: {
     size: {
       small: {
-        borderRadius: '$3',
+        borderRadius: '$button',
         height: '$5',
         px: '$2',
         fontSize: '$1',
         lineHeight: '$sizes$5',
       },
       medium: {
-        borderRadius: '$3',
+        borderRadius: '$button',
         height: '$6',
         px: '$3',
         fontSize: '$3',
         lineHeight: '$sizes$6',
       },
       large: {
-        borderRadius: '$3',
+        borderRadius: '$button',
         height: '$7',
         px: '$3',
         fontSize: '$3',
