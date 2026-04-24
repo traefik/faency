@@ -1,8 +1,6 @@
-import './prism-extend';
-
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { Highlight, Language, Prism, themes } from 'prism-react-renderer';
+import { Highlight, Language, themes } from 'prism-react-renderer';
 import React, {
   forwardRef,
   HTMLAttributes,
@@ -28,10 +26,10 @@ import {
   preNoBorder,
 } from './CodeBlock.vanilla.css';
 import type { CodeBlockCopyButtonAlign, CodeBlockLanguage } from './index';
+import { Prism } from './prism-extend';
 
 export interface CodeBlockVanillaProps
-  extends Omit<HTMLAttributes<HTMLPreElement>, 'css'>,
-    CSSProps {
+  extends Omit<HTMLAttributes<HTMLPreElement>, 'css'>, CSSProps {
   lang?: CodeBlockLanguage;
   code: string;
   copyable?: boolean;
