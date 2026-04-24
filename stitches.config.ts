@@ -120,7 +120,7 @@ const stitches = createStitches({
       12: '38px',
     },
     fontWeights: { light: 300, regular: 400, medium: 500, semiBold: 600, bold: 700 },
-    radii: { 1: '4px', 2: '6px', 3: '8px', 4: '12px', round: '50%', pill: '9999px' },
+    radii: { 1: '4px', 2: '6px', 3: '8px', 4: '12px', round: '50%', pill: '9999px', button: '8px' },
     zIndices: { 1: '100', 2: '200', 3: '300', 4: '400', max: '999' },
   },
   media: {

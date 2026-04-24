@@ -224,6 +224,7 @@ export const tokens = createThemeContract({
     '4': null,
     round: null,
     pill: null,
+    button: null,
   },
   zIndices: {
     '1': null,

@@ -100,6 +100,7 @@ function getRadiiValue(key: string): string {
     '4': '12px',
     round: '50%',
     pill: '9999px',
+    button: '8px',
   };
   return radiiMap[key] || '0px';
 }
