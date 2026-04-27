@@ -57,6 +57,13 @@
       matchManagers: [ 'npm' ],
       matchPackageNames: [ 'typescript' ],
       enabled: false,
+    },
+    // @types/react 18.3+ introduces breaking type changes incompatible with @stitches/react.
+    // Keep pinned at 18.2.x until the vanilla-extract migration is complete and Stitches is dropped.
+    {
+      matchManagers: [ 'npm' ],
+      matchPackageNames: [ '@types/react', '@types/react-dom' ],
+      enabled: false,
     }
   ],
   semanticCommits: 'enabled',
