@@ -114,6 +114,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     if (!asChild) {
+      // eslint-disable-next-line @eslint-react/no-children-to-array
       const arrayChildren = Children.toArray(children);
       const hasColSpanChildren = arrayChildren.some((child) => {
         if (!isValidElement(child)) {
@@ -160,6 +161,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
 
     const renderedChildren = useMemo(() => {
       if (asChild) {
+        // eslint-disable-next-line @eslint-react/no-clone-element
         return cloneElement(
           children as any,
           {
