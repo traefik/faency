@@ -154,7 +154,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
             </Box>
           </Td>
         ) : null,
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line @eslint-react/exhaustive-deps
       [isCollapsed],
     );
 
