@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CSS } from '../../stitches.config';
 import { NavigationDrawer, NavigationDrawerProps } from '../Navigation';
+import { NavigationTreeContext, useNavigationTree } from './NavigationTreeContext';
 
 export interface NavigationTreeDrawerProps {
   children: React.ReactNode;
@@ -14,15 +15,13 @@ export const NavigationTreeDrawer = ({
   fullWidth = false,
   ...props
 }: NavigationTreeDrawerProps & NavigationDrawerProps) => {
-  const renderChildren = React.Children.map(children, (child) => {
-    return React.cloneElement(child as React.ReactElement, {
-      fullWidth,
-    });
-  });
+  const parentCtx = useNavigationTree();
 
   return (
-    <NavigationDrawer fullWidth={fullWidth} {...props}>
-      {renderChildren}
-    </NavigationDrawer>
+    <NavigationTreeContext.Provider value={{ ...parentCtx, fullWidth }}>
+      <NavigationDrawer fullWidth={fullWidth} {...props}>
+        {children}
+      </NavigationDrawer>
+    </NavigationTreeContext.Provider>
   );
 };
