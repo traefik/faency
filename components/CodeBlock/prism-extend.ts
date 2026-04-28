@@ -3,21 +3,21 @@
 // components below can use it as their global Prism reference.
 import { Prism } from 'prism-react-renderer';
 import prismjs from 'prismjs';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-csharp';
-import 'prismjs/components/prism-docker';
-import 'prismjs/components/prism-hcl';
-import 'prismjs/components/prism-http';
-import 'prismjs/components/prism-ini';
-import 'prismjs/components/prism-java';
-import 'prismjs/components/prism-markup-templating';
-import 'prismjs/components/prism-php';
-import 'prismjs/components/prism-powershell';
-import 'prismjs/components/prism-protobuf';
-import 'prismjs/components/prism-ruby';
-import 'prismjs/components/prism-scala';
-import 'prismjs/components/prism-shell-session';
-import 'prismjs/components/prism-toml';
+import 'prismjs/components/prism-bash.js';
+import 'prismjs/components/prism-csharp.js';
+import 'prismjs/components/prism-docker.js';
+import 'prismjs/components/prism-hcl.js';
+import 'prismjs/components/prism-http.js';
+import 'prismjs/components/prism-ini.js';
+import 'prismjs/components/prism-java.js';
+import 'prismjs/components/prism-markup-templating.js';
+import 'prismjs/components/prism-php.js';
+import 'prismjs/components/prism-powershell.js';
+import 'prismjs/components/prism-protobuf.js';
+import 'prismjs/components/prism-ruby.js';
+import 'prismjs/components/prism-scala.js';
+import 'prismjs/components/prism-shell-session.js';
+import 'prismjs/components/prism-toml.js';
 
 // Copy newly registered grammars from prismjs into prism-react-renderer's Prism.
 // Language component IIFEs register on prismjs's window.Prism, not on PrismRR.
