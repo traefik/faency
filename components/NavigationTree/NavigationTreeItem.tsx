@@ -6,6 +6,7 @@ import { Flex } from '../Flex';
 import { NavigationItem, NavigationItemProps } from '../Navigation';
 import { Text } from '../Text';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
+import { useNavigationTree } from './NavigationTreeContext';
 
 export interface NavigationTreeItemProps {
   label: string | ReactNode;
@@ -13,12 +14,9 @@ export interface NavigationTreeItemProps {
   children?: React.ReactNode;
   defaultExpanded?: boolean;
   onClick?: () => void;
-  defaultExpandIcon?: React.ReactNode;
-  defaultCollapseIcon?: React.ReactNode;
   customExpandIcon?: React.ReactNode;
   customCollapseIcon?: React.ReactNode;
   nestedChildrenLevel?: number;
-  fullWidth?: boolean;
 }
 
 export const NavigationTreeItem = ({
@@ -27,16 +25,14 @@ export const NavigationTreeItem = ({
   children,
   onClick,
   defaultExpanded = false,
-  defaultCollapseIcon,
-  defaultExpandIcon,
   customCollapseIcon,
   customExpandIcon,
   nestedChildrenLevel = 1,
-  fullWidth = false,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
+  const { defaultCollapseIcon, defaultExpandIcon, fullWidth } = useNavigationTree();
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const isExpandable = useMemo(() => React.Children.count(children) > 0, [children]);
+  const isExpandable = useMemo(() => !!children, [children]);
   const hasStartAdornment = useMemo(() => !!props.startAdornment, [props.startAdornment]);
   const usedStartAdornment = useMemo(
     () =>
