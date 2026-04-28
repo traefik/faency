@@ -116,7 +116,7 @@ export const DateTimePickerInput = React.forwardRef<
     const arrowRef = useRef(null);
 
     const [inputValue, setInputValue] = useState<string>('');
-    const [selectedDates, onDatesChange] = useState<Date[]>([]);
+    const [selectedDates, setSelectedDates] = useState<Date[]>([]);
     const [isPickerOpen, setIsPickerOpen] = useState(false);
 
     const middleware = useMemo(
@@ -159,7 +159,7 @@ export const DateTimePickerInput = React.forwardRef<
               const newDates = (value as string)
                 .split(',')
                 .map((d) => parse(d.trim(), formatStr, new Date()));
-              onDatesChange(newDates);
+              setSelectedDates(newDates);
               if (onChange) onChange(newDates);
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (err) {
@@ -183,7 +183,7 @@ export const DateTimePickerInput = React.forwardRef<
                   {...pickerProps}
                   css={pickerCSS}
                   onDatesChange={(d) => {
-                    onDatesChange(d);
+                    setSelectedDates(d);
                     setInputValue(d.map((date) => format(date, formatStr)).join(', '));
                     if (onChange) onChange(d);
                   }}

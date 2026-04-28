@@ -72,6 +72,7 @@ export const Transform: StoryFn<typeof TextForStory> = ({ ...args }) => (
     </TextForStory>
     {VARIANT_PARENTS.map((color) => (
       <Flex
+        key={color}
         direction="column"
         align="center"
         justify="center"
@@ -137,6 +138,7 @@ export const Size: StoryFn<typeof TextForStory> = ({ ...args }) => (
     </TextForStory>
     {SIZE_PARENTS.map((fontSize) => (
       <Flex
+        key={fontSize}
         css={{
           fontSize,
           border: '1px dashed $hiContrast',

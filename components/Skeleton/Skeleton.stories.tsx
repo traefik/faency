@@ -90,7 +90,7 @@ export const Typographies: StoryFn<typeof SkeletonForStory> = () => (
     </H6>
 
     {TEXT_SIZES.map((size) => (
-      <FaencyText size={size}>
+      <FaencyText key={size} size={size}>
         <Skeleton variant="text" />
       </FaencyText>
     ))}
@@ -102,7 +102,7 @@ const AVATAR_SIZES = ['1', '2', '3', '4', '5', '6'] as const;
 export const Avatars: StoryFn<typeof SkeletonForStory> = () => (
   <Flex gap="3" align="center">
     {AVATAR_SIZES.map((size) => (
-      <Flex gap="3" align="center" direction="column">
+      <Flex key={size} gap="3" align="center" direction="column">
         <Skeleton variant="circle">
           <Avatar size={size} />
         </Skeleton>
@@ -187,15 +187,15 @@ export const Customs: StoryFn<typeof SkeletonForStory> = () => (
       <Flex direction="column" gap={2} css={{ flex: 1 }}>
         {Array(10)
           .fill(0)
-          .map(() => (
-            <Skeleton variant="text" />
+          .map((_, i) => (
+            <Skeleton key={i} variant="text" />
           ))}
       </Flex>
       <Flex direction="column" gap={2} css={{ flex: 1 }}>
         {Array(10)
           .fill(0)
-          .map(() => (
-            <Skeleton variant="text" />
+          .map((_, i) => (
+            <Skeleton key={i} variant="text" />
           ))}
       </Flex>
     </Flex>
