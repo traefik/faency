@@ -74,7 +74,7 @@ export const Interactive: StoryFn<typeof BadgeForStory> = (args) => (
   <Flex css={{ gap: '$3' }}>
     <Badge {...args}>Default</Badge>
     {COLORS.map((color) => (
-      <Badge {...args} variant={color}>
+      <Badge key={color} {...args} variant={color}>
         {color}
       </Badge>
     ))}

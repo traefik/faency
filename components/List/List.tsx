@@ -151,8 +151,7 @@ export const Ul = React.forwardRef<React.ElementRef<typeof StyledUl>, ListProps>
 );
 
 export interface OrderedListProps
-  extends ComponentProps<typeof StyledOl>,
-    VariantProps<typeof StyledOl> {
+  extends ComponentProps<typeof StyledOl>, VariantProps<typeof StyledOl> {
   interactive?: boolean;
 }
 
@@ -187,7 +186,8 @@ const ControlsWrapper = styled('div', {
 });
 
 export interface ListItemProps
-  extends ComponentProps<typeof StyledLi>,
+  extends
+    ComponentProps<typeof StyledLi>,
     VariantProps<typeof StyledLi>,
     VariantProps<typeof Flex> {
   controls?: ReactNode;
@@ -196,6 +196,7 @@ export const Li = React.forwardRef<React.ElementRef<typeof StyledLi>, ListItemPr
   ({ children, controls, align, justify, direction, gap, wrap, ...props }, forwardedRef) => {
     const { interactive } = useContext(ListContext);
 
+    // eslint-disable-next-line @eslint-react/no-children-to-array
     const childArray = React.Children.toArray(children);
     const nestedLists = childArray.filter(
       (child) => React.isValidElement(child) && (child.type === Ul || child.type === Ol),
