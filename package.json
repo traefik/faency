@@ -23,7 +23,10 @@
   "files": [
     "dist"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "**/prism-extend.*",
+    "**/*.css"
+  ],
   "types": "dist/index.d.ts",
   "homepage": "https://traefik.github.io/faency/",
   "repository": "https://github.com/traefik/faency",
