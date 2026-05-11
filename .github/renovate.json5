@@ -51,6 +51,14 @@
       matchManagers: [ 'github-actions' ],
       rangeStrategy: 'replace',
     },
+    // @radix-ui/colors v3 ships color scales as hex values instead of hsl(),
+    // which breaks our theming utilities that parse/manipulate HSL channels.
+    // Keep pinned at 2.x until we migrate our color handling to support the new format.
+    {
+      matchManagers: [ 'npm' ],
+      matchPackageNames: [ '@radix-ui/colors' ],
+      allowedVersions: '<3.0.0',
+    },
     // @stitches/react is no longer maintained and won't support newer TypeScript versions.
     // Keep TypeScript pinned until we complete the vanilla-extract migration and drop Stitches entirely.
     {
