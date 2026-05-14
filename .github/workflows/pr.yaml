@@ -6,6 +6,9 @@ on:
 env:
   SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72  # 3 days
 
+permissions:
+  contents: read
+
 jobs:
   faency:
     name: Test, lint and build
