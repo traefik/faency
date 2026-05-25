@@ -145,7 +145,7 @@
     "typescript": "5.8.3",
     "typescript-eslint": "8.59.4",
     "vite": "8.0.12",
-    "vite-plugin-dts": "4.5.4"
+    "vite-plugin-dts": "5.0.1"
   },
   "resolutions": {
     "js-yaml@4.1.0": "4.1.1"
