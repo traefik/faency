@@ -73,6 +73,13 @@
       matchPackageNames: [ '@types/react', '@types/react-dom' ],
       enabled: false,
     },
+    // React 19 is not yet supported across all consumers of Faency. Keep pinned at 18.x
+    // until downstream projects are ready to upgrade.
+    {
+      matchManagers: [ 'npm' ],
+      matchPackageNames: [ 'react', 'react-dom' ],
+      allowedVersions: '<19.0.0',
+    },
     // vite-plugin-dts v5 splits its implementation into a separate `unplugin-dts` package
     // and exposes its types exclusively via package.json `exports` subpaths, which require
     // TypeScript's `moduleResolution: "node16" | "nodenext" | "bundler"`. Our tsconfig still
