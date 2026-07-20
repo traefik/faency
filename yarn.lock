@@ -6358,7 +6358,7 @@ __metadata:
     eslint-plugin-prettier: "npm:5.5.6"
     eslint-plugin-react: "npm:7.37.5"
     eslint-plugin-react-hooks: "npm:7.1.1"
-    eslint-plugin-simple-import-sort: "npm:13.0.0"
+    eslint-plugin-simple-import-sort: "npm:14.0.0"
     eslint-plugin-storybook: "npm:10.5.2"
     globals: "npm:17.7.0"
     husky: "npm:9.1.7"
@@ -10117,12 +10117,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-simple-import-sort@npm:13.0.0":
-  version: 13.0.0
-  resolution: "eslint-plugin-simple-import-sort@npm:13.0.0"
+"eslint-plugin-simple-import-sort@npm:14.0.0":
+  version: 14.0.0
+  resolution: "eslint-plugin-simple-import-sort@npm:14.0.0"
   peerDependencies:
     eslint: ">=5.0.0"
-  checksum: 10c0/f561f3483c1c18dfa2705326d38d62c62d4aeb5947ed6d1f028299c5dc668586b5ef144926e68fe187b3a937ee0159738dcbca8c286fe56f489de52fd8f9e678
+  checksum: 10c0/eee9d53a071ff59f3b3612b189af906859e841cab64296241999042d2a28d1b133cd21cbd9ffd79fe73e4cbe3b8eed3910f7fe484e1c4619bd9836f4edb77ca4
   languageName: node
   linkType: hard
 
