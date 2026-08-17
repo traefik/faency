@@ -6383,7 +6383,7 @@ __metadata:
     globals: "npm:17.7.0"
     husky: "npm:9.1.7"
     jest: "npm:30.4.2"
-    jest-axe: "npm:10.0.0"
+    jest-axe: "npm:11.0.0"
     jest-environment-jsdom: "npm:30.4.1"
     lint-staged: "npm:17.0.8"
     np: "npm:11.2.2"
@@ -7972,10 +7972,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.10.2":
-  version: 4.10.2
-  resolution: "axe-core@npm:4.10.2"
-  checksum: 10c0/0e20169077de96946a547fce0df39d9aeebe0077f9d3eeff4896518b96fde857f80b98f0d4279274a7178791744dd5a54bb4f322de45b4f561ffa2586ff9a09d
+"axe-core@npm:4.12.1":
+  version: 4.12.1
+  resolution: "axe-core@npm:4.12.1"
+  checksum: 10c0/03438bd98cef38ad57554feea0d8de21705001db2655c27e0c33ff55e16dd7d6f49c28fb420dc93f7532e68ff363c0953056a5836e6f47068f193eb1765c7db7
   languageName: node
   linkType: hard
 
@@ -12500,15 +12500,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-axe@npm:10.0.0":
-  version: 10.0.0
-  resolution: "jest-axe@npm:10.0.0"
+"jest-axe@npm:11.0.0":
+  version: 11.0.0
+  resolution: "jest-axe@npm:11.0.0"
   dependencies:
-    axe-core: "npm:4.10.2"
+    axe-core: "npm:4.12.1"
     chalk: "npm:4.1.2"
-    jest-matcher-utils: "npm:29.2.2"
+    jest-matcher-utils: "npm:30.4.1"
     lodash.merge: "npm:4.6.2"
-  checksum: 10c0/0c79e4a09e120224e903542591bfadfaa2574132c73639d3c9aa2371a720799929b2f2d13a12367f2642192dd0c66daec184ea9a134c8b20061216cea6801439
+  checksum: 10c0/3ac9da84ad487fca6e5f79760faa98ce09358279023b0ccf15e5a01b350d3a6d4cac4537f833fbd39809a775d1573000277c21e4d166606d8d4289df9c7ecf16
   languageName: node
   linkType: hard
 
@@ -12642,7 +12642,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^29.2.1, jest-diff@npm:^29.7.0":
+"jest-diff@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest-diff@npm:29.7.0"
   dependencies:
@@ -12707,7 +12707,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-get-type@npm:^29.2.0, jest-get-type@npm:^29.6.3":
+"jest-get-type@npm:^29.6.3":
   version: 29.6.3
   resolution: "jest-get-type@npm:29.6.3"
   checksum: 10c0/552e7a97a983d3c2d4e412a44eb7de0430ff773dd99f7500962c268d6dfbfa431d7d08f919c9d960530e5f7f78eb47f267ad9b318265e5092b3ff9ede0db7c2b
@@ -12743,18 +12743,6 @@ __metadata:
     "@jest/get-type": "npm:30.1.0"
     pretty-format: "npm:30.4.1"
   checksum: 10c0/57256ac08f12186e3ed1687126b8d75a12de9c4ffa959ff41322e9ba5f93e3ed8af91dc36bc4d59f77cef6d4008bcf5a3e646cdd950743898576aec8dbae6778
-  languageName: node
-  linkType: hard
-
-"jest-matcher-utils@npm:29.2.2":
-  version: 29.2.2
-  resolution: "jest-matcher-utils@npm:29.2.2"
-  dependencies:
-    chalk: "npm:^4.0.0"
-    jest-diff: "npm:^29.2.1"
-    jest-get-type: "npm:^29.2.0"
-    pretty-format: "npm:^29.2.1"
-  checksum: 10c0/a554e683bcd18cc11e1e018597771051e88cb3bf79cdbb5896f7550bd4c787e473ba4727336db2049fea6149e21546c8f1cde4b78a76eb595199cfeaba6450b1
   languageName: node
   linkType: hard
 
@@ -16009,7 +15997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^29.0.0, pretty-format@npm:^29.2.1, pretty-format@npm:^29.7.0":
+"pretty-format@npm:^29.0.0, pretty-format@npm:^29.7.0":
   version: 29.7.0
   resolution: "pretty-format@npm:29.7.0"
   dependencies:
