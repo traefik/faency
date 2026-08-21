@@ -7025,7 +7025,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/css@npm:1.21.2, @vanilla-extract/css@npm:^1.20.1":
+"@vanilla-extract/css@npm:1.21.2":
   version: 1.21.2
   resolution: "@vanilla-extract/css@npm:1.21.2"
   dependencies:
@@ -7041,6 +7041,25 @@ __metadata:
     modern-ahocorasick: "npm:^1.0.0"
     picocolors: "npm:^1.0.0"
   checksum: 10c0/f504b423a413058996d49fa424b04fa25fb580335a83a0bde732b05cd93c40cd31e29b2c7b9fc8daeaa75efa110b86ef5aa01844849a8deb8d5194047af42d13
+  languageName: node
+  linkType: hard
+
+"@vanilla-extract/css@npm:^1.20.1":
+  version: 1.20.1
+  resolution: "@vanilla-extract/css@npm:1.20.1"
+  dependencies:
+    "@emotion/hash": "npm:^0.9.0"
+    "@vanilla-extract/private": "npm:^1.0.9"
+    css-what: "npm:^6.1.0"
+    csstype: "npm:^3.2.3"
+    dedent: "npm:^1.5.3"
+    deep-object-diff: "npm:^1.1.9"
+    deepmerge: "npm:^4.2.2"
+    lru-cache: "npm:^10.4.3"
+    media-query-parser: "npm:^2.0.2"
+    modern-ahocorasick: "npm:^1.0.0"
+    picocolors: "npm:^1.0.0"
+  checksum: 10c0/f8e47a453ca7eda190847bb4f153605386021792b1e355ebd667ea1e504741c9618d3bf212a5c4cacfc0925072ec3e872f8576dc0dc214dd1d5b6ad7130199da
   languageName: node
   linkType: hard
 
@@ -12505,13 +12524,13 @@ __metadata:
   linkType: hard
 
 "js-yaml@npm:^4.1.0":
-  version: 4.3.2
-  resolution: "js-yaml@npm:4.3.2"
+  version: 4.3.0
+  resolution: "js-yaml@npm:4.3.0"
   dependencies:
     argparse: "npm:^2.0.1"
   bin:
     js-yaml: bin/js-yaml.js
-  checksum: 10c0/dedd34c2e8fef1d504687f1bc94ed0ee1311a1f78770fa2800352c6d59c635ccf555009d74e9afe529ae62199da2b1ccef30e53dc84dcd8d2d8187c22574bc97
+  checksum: 10c0/058b30473d6915ca5b4feb11e2f7d4d97242f98d00a798ed48dd90b46b7c640398afe9128c5db22c5300f8c6528fe2a174b9a93f351a70ebc28c6203938d8bff
   languageName: node
   linkType: hard
 
