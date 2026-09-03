@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { CSS } from '../../stitches.config';
 import { NavigationContainer, NavigationContainerProps } from '../Navigation';
@@ -20,8 +20,13 @@ export const NavigationTreeContainer = ({
   fullWidth = false,
   ...props
 }: NavigationTreeProps & NavigationContainerProps) => {
+  const contextValue = useMemo(
+    () => ({ defaultCollapseIcon, defaultExpandIcon, fullWidth }),
+    [defaultCollapseIcon, defaultExpandIcon, fullWidth],
+  );
+
   return (
-    <NavigationTreeContext.Provider value={{ defaultCollapseIcon, defaultExpandIcon, fullWidth }}>
+    <NavigationTreeContext.Provider value={contextValue}>
       <NavigationContainer {...props}>{children}</NavigationContainer>
     </NavigationTreeContext.Provider>
   );
