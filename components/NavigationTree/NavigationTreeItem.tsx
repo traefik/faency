@@ -14,9 +14,12 @@ export interface NavigationTreeItemProps {
   children?: React.ReactNode;
   defaultExpanded?: boolean;
   onClick?: () => void;
+  defaultExpandIcon?: React.ReactNode;
+  defaultCollapseIcon?: React.ReactNode;
   customExpandIcon?: React.ReactNode;
   customCollapseIcon?: React.ReactNode;
   nestedChildrenLevel?: number;
+  fullWidth?: boolean;
 }
 
 export const NavigationTreeItem = ({
@@ -25,12 +28,18 @@ export const NavigationTreeItem = ({
   children,
   onClick,
   defaultExpanded = false,
+  defaultCollapseIcon: defaultCollapseIconProp,
+  defaultExpandIcon: defaultExpandIconProp,
   customCollapseIcon,
   customExpandIcon,
   nestedChildrenLevel = 1,
+  fullWidth: fullWidthProp,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
-  const { defaultCollapseIcon, defaultExpandIcon, fullWidth } = useNavigationTree();
+  const navigationTreeContext = useNavigationTree();
+  const defaultCollapseIcon = defaultCollapseIconProp ?? navigationTreeContext.defaultCollapseIcon;
+  const defaultExpandIcon = defaultExpandIconProp ?? navigationTreeContext.defaultExpandIcon;
+  const fullWidth = fullWidthProp ?? navigationTreeContext.fullWidth;
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const isExpandable = useMemo(() => !!children, [children]);
   const hasStartAdornment = useMemo(() => !!props.startAdornment, [props.startAdornment]);
