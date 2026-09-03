@@ -1,8 +1,9 @@
 import { ChevronDownIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { CSS } from '../../stitches.config';
 import { NavigationContainer, NavigationContainerProps } from '../Navigation';
+import { NavigationTreeContext } from './NavigationTreeContext';
 
 export interface NavigationTreeProps {
   children: React.ReactNode;
@@ -19,13 +20,14 @@ export const NavigationTreeContainer = ({
   fullWidth = false,
   ...props
 }: NavigationTreeProps & NavigationContainerProps) => {
-  const renderChildren = React.Children.map(children, (child) => {
-    return React.cloneElement(child as React.ReactElement, {
-      defaultCollapseIcon,
-      defaultExpandIcon,
-      fullWidth,
-    });
-  });
+  const contextValue = useMemo(
+    () => ({ defaultCollapseIcon, defaultExpandIcon, fullWidth }),
+    [defaultCollapseIcon, defaultExpandIcon, fullWidth],
+  );
 
-  return <NavigationContainer {...props}>{renderChildren}</NavigationContainer>;
+  return (
+    <NavigationTreeContext.Provider value={contextValue}>
+      <NavigationContainer {...props}>{children}</NavigationContainer>
+    </NavigationTreeContext.Provider>
+  );
 };
