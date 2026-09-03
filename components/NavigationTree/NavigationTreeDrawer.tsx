@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { CSS } from '../../stitches.config';
 import { NavigationDrawer, NavigationDrawerProps } from '../Navigation';
@@ -16,9 +16,13 @@ export const NavigationTreeDrawer = ({
   ...props
 }: NavigationTreeDrawerProps & NavigationDrawerProps) => {
   const parentCtx = useNavigationTree();
+  const contextValue = useMemo(
+    () => ({ ...parentCtx, fullWidth }),
+    [parentCtx, fullWidth],
+  );
 
   return (
-    <NavigationTreeContext.Provider value={{ ...parentCtx, fullWidth }}>
+    <NavigationTreeContext.Provider value={contextValue}>
       <NavigationDrawer fullWidth={fullWidth} {...props}>
         {children}
       </NavigationDrawer>

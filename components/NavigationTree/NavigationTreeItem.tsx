@@ -41,7 +41,11 @@ export const NavigationTreeItem = ({
   const defaultExpandIcon = defaultExpandIconProp ?? navigationTreeContext.defaultExpandIcon;
   const fullWidth = fullWidthProp ?? navigationTreeContext.fullWidth;
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const isExpandable = useMemo(() => !!children, [children]);
+  const isExpandable = useMemo(
+    // eslint-disable-next-line @eslint-react/no-children-to-array
+    () => React.Children.toArray(children).length > 0,
+    [children],
+  );
   const hasStartAdornment = useMemo(() => !!props.startAdornment, [props.startAdornment]);
   const usedStartAdornment = useMemo(
     () =>
