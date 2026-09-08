@@ -6,6 +6,7 @@ import { Flex } from '../Flex';
 import { NavigationItem, NavigationItemProps } from '../Navigation';
 import { Text } from '../Text';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
+import { useNavigationTree } from './NavigationTreeContext';
 
 export interface NavigationTreeItemProps {
   label: string | ReactNode;
@@ -27,16 +28,24 @@ export const NavigationTreeItem = ({
   children,
   onClick,
   defaultExpanded = false,
-  defaultCollapseIcon,
-  defaultExpandIcon,
+  defaultCollapseIcon: defaultCollapseIconProp,
+  defaultExpandIcon: defaultExpandIconProp,
   customCollapseIcon,
   customExpandIcon,
   nestedChildrenLevel = 1,
-  fullWidth = false,
+  fullWidth: fullWidthProp,
   ...props
 }: NavigationTreeItemProps & NavigationItemProps) => {
+  const navigationTreeContext = useNavigationTree();
+  const defaultCollapseIcon = defaultCollapseIconProp ?? navigationTreeContext.defaultCollapseIcon;
+  const defaultExpandIcon = defaultExpandIconProp ?? navigationTreeContext.defaultExpandIcon;
+  const fullWidth = fullWidthProp ?? navigationTreeContext.fullWidth;
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const isExpandable = useMemo(() => React.Children.count(children) > 0, [children]);
+  const isExpandable = useMemo(
+    // eslint-disable-next-line @eslint-react/no-children-to-array
+    () => React.Children.toArray(children).length > 0,
+    [children],
+  );
   const hasStartAdornment = useMemo(() => !!props.startAdornment, [props.startAdornment]);
   const usedStartAdornment = useMemo(
     () =>
@@ -70,7 +79,7 @@ export const NavigationTreeItem = ({
         },
       },
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line @eslint-react/exhaustive-deps
   }, [isExpandable, nestedChildrenLevel]);
 
   const focusStyle = useMemo(() => {

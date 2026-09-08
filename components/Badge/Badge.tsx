@@ -146,7 +146,7 @@ export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>
         return asChild ? StyledButtonBadgeSlot : StyledButtonBadge;
       }
       return asChild ? StyledSpanBadgeSlot : StyledSpanBadge;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line @eslint-react/exhaustive-deps
     }, [asChild]);
 
     return <Component {...props} ref={forwardedRef} />;

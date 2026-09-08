@@ -39,6 +39,9 @@ function createHeadingComponent<C extends ElementType>(
   type HeadingComponent = PolymorphicComponent<C, HeadingProps<ElementType>>;
 
   const HeadingImpl = forwardRef(
+    // Safe: factory is called once at module load (e.g. `export const H1 = createHeading(...)`),
+    // not inside a render, so HeadingImpl gets a stable reference; no remount on re-render.
+    // eslint-disable-next-line @eslint-react/component-hook-factories
     <E extends ElementType = C>(
       { as, className, css, style, transform, ...props }: HeadingProps<E>,
       ref?: PolymorphicRef<E>,
