@@ -19,6 +19,11 @@ import 'prismjs/components/prism-scala.js';
 import 'prismjs/components/prism-shell-session.js';
 import 'prismjs/components/prism-toml.js';
 
+// In the browser, prismjs schedules highlightAll() for the next frame on load, which would rewrite
+// every code[class*="language-"] element on the consumer's page. It reads `manual` in that callback,
+// so setting it synchronously here is enough.
+prismjs.manual = true;
+
 // Copy newly registered grammars from prismjs into prism-react-renderer's Prism.
 // Language component IIFEs register on prismjs's window.Prism, not on PrismRR.
 for (const [key, value] of Object.entries(prismjs.languages)) {
