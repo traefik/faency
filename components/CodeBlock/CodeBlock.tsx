@@ -14,7 +14,11 @@ import { AccessibleIcon } from '../AccessibleIcon';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { useColorScheme } from '../colorSchemeContext';
-import type { CodeBlockCopyButtonAlign, CodeBlockLanguage } from './index';
+import type {
+  CodeBlockCopyButtonAlign,
+  CodeBlockCopyErrorHandler,
+  CodeBlockLanguage,
+} from './index';
 import { Prism } from './prism-extend';
 
 const Pre = styled('pre', {
@@ -57,6 +61,7 @@ export type CodeBlockProps = {
   copiedText?: string;
   copyButtonAlign?: CodeBlockCopyButtonAlign;
   onCopy?: () => void;
+  onCopyError?: CodeBlockCopyErrorHandler;
   noBorder?: boolean;
   wrapText?: boolean;
   colorScheme?: 'light' | 'dark';
@@ -74,6 +79,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       copiedText,
       copyButtonAlign = 'top right',
       onCopy,
+      onCopyError,
       noBorder,
       wrapText = false,
       colorScheme,
@@ -143,12 +149,17 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
 
     const handleCopy = async () => {
       try {
-        await navigator.clipboard.writeText(code);
+        try {
+          await navigator.clipboard.writeText(code);
+        } catch (error) {
+          // clipboard write failed (e.g. permission denied) — leave UI unchanged unless a fallback handled it
+          if ((await onCopyError?.(error, code)) !== true) return;
+        }
         setCopied(true);
         onCopy?.();
         setTimeout(() => setCopied(false), 1500);
       } catch {
-        // clipboard write failed (e.g. permission denied) — leave UI unchanged
+        // onCopyError or onCopy threw — leave UI unchanged
       }
     };
 

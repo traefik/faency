@@ -57,6 +57,53 @@ export const WrapText: StoryFn<typeof CodeBlockVanilla> = (args) => (
   />
 );
 
+export const CopyErrorFallback: StoryFn<typeof CodeBlockVanilla> = (args) => {
+  const [log, setLog] = React.useState<string[]>([]);
+
+  return (
+    <BoxVanilla>
+      <CodeBlockVanilla
+        {...args}
+        onCopyError={async (error, code) => {
+          // Simulates a fallback, e.g. asking the parent page to copy when embedded in an iframe.
+          setLog((entries) => [
+            ...entries,
+            `Clipboard write failed (${error instanceof Error ? error.message : String(error)}), fallback copied ${code.length} characters`,
+          ]);
+          return true;
+        }}
+        onCopy={() => setLog((entries) => [...entries, 'onCopy called'])}
+      />
+      <BoxVanilla as="ul" css={{ marginTop: '16px', fontSize: '13px' }}>
+        {log.map((entry, i) => (
+          <li key={i}>{entry}</li>
+        ))}
+      </BoxVanilla>
+    </BoxVanilla>
+  );
+};
+
+CopyErrorFallback.decorators = [
+  (Story) => {
+    // Force the clipboard write to fail, as it does in an iframe without the clipboard-write permission.
+    React.useLayoutEffect(() => {
+      const original = Object.getOwnPropertyDescriptor(navigator, 'clipboard');
+      Object.defineProperty(navigator, 'clipboard', {
+        value: {
+          writeText: () =>
+            Promise.reject(new DOMException('Write permission denied.', 'NotAllowedError')),
+        },
+        configurable: true,
+      });
+      return () => {
+        if (original) Object.defineProperty(navigator, 'clipboard', original);
+        else delete (navigator as { clipboard?: Clipboard }).clipboard;
+      };
+    }, []);
+    return <Story />;
+  },
+];
+
 const LANGUAGE_EXAMPLES: Array<{ lang?: string; label: string; code: string }> = [
   {
     label: 'No Language (fallback to text)',
