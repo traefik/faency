@@ -25,7 +25,11 @@ import {
   pre,
   preNoBorder,
 } from './CodeBlock.vanilla.css';
-import type { CodeBlockCopyButtonAlign, CodeBlockLanguage } from './index';
+import type {
+  CodeBlockCopyButtonAlign,
+  CodeBlockCopyErrorHandler,
+  CodeBlockLanguage,
+} from './index';
 import { Prism } from './prism-extend';
 
 export interface CodeBlockVanillaProps
@@ -37,6 +41,7 @@ export interface CodeBlockVanillaProps
   copiedText?: string;
   copyButtonAlign?: CodeBlockCopyButtonAlign;
   onCopy?: () => void;
+  onCopyError?: CodeBlockCopyErrorHandler;
   noBorder?: boolean;
   wrapText?: boolean;
   colorScheme?: 'light' | 'dark';
@@ -53,6 +58,7 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       copiedText,
       copyButtonAlign = 'top right',
       onCopy,
+      onCopyError,
       noBorder,
       wrapText = false,
       colorScheme,
@@ -121,12 +127,17 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
 
     const handleCopy = async () => {
       try {
-        await navigator.clipboard.writeText(code);
+        try {
+          await navigator.clipboard.writeText(code);
+        } catch (error) {
+          // clipboard write failed (e.g. permission denied) — leave UI unchanged unless a fallback handled it
+          if ((await onCopyError?.(error, code)) !== true) return;
+        }
         setCopied(true);
         onCopy?.();
         setTimeout(() => setCopied(false), 1500);
       } catch {
-        // clipboard write failed (e.g. permission denied) — leave UI unchanged
+        // onCopyError or onCopy threw — leave UI unchanged
       }
     };
 
