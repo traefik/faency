@@ -23,7 +23,8 @@ Faency is a React component library and design system for Traefik Labs, built wi
 
 ### Release
 
-- `yarn release` - Build and publish using semantic-release
+Releases are automated. `.github/workflows/release.yaml` runs `yarn semantic-release`
+on every push to `master`; there is no local release command.
 
 ## Architecture
 
