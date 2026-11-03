@@ -145,6 +145,117 @@ describe('CodeBlockVanilla', () => {
     await waitFor(() => expect(onCopy).toHaveBeenCalledTimes(1));
   });
 
+  describe('onCopyError', () => {
+    const clipboardError = new Error('Write permission denied');
+
+    beforeEach(() => {
+      (navigator.clipboard.writeText as jest.Mock).mockRejectedValue(clipboardError);
+    });
+
+    it('should call onCopyError with the error and the code when the clipboard write fails', async () => {
+      const onCopyError = jest.fn();
+      renderWithTheme(
+        <CodeBlockVanilla
+          lang="typescript"
+          code={CODE_SNIPPET}
+          copyable
+          onCopyError={onCopyError}
+        />,
+      );
+      await userEvent.click(screen.getByRole('button'));
+      await waitFor(() => expect(onCopyError).toHaveBeenCalledWith(clipboardError, CODE_SNIPPET));
+    });
+
+    it('should show the copied state and call onCopy when onCopyError returns true', async () => {
+      const onCopy = jest.fn();
+      renderWithTheme(
+        <CodeBlockVanilla
+          lang="typescript"
+          code={CODE_SNIPPET}
+          copyable
+          copyText="Copy"
+          copiedText="Copied!"
+          onCopy={onCopy}
+          onCopyError={() => true}
+        />,
+      );
+      const button = screen.getByRole('button');
+      await userEvent.click(button);
+      await waitFor(() => expect(button).toHaveTextContent('Copied!'));
+      expect(onCopy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should show the copied state when onCopyError resolves to true', async () => {
+      const onCopy = jest.fn();
+      renderWithTheme(
+        <CodeBlockVanilla
+          lang="typescript"
+          code={CODE_SNIPPET}
+          copyable
+          copyText="Copy"
+          copiedText="Copied!"
+          onCopy={onCopy}
+          onCopyError={() => Promise.resolve(true)}
+        />,
+      );
+      const button = screen.getByRole('button');
+      await userEvent.click(button);
+      await waitFor(() => expect(button).toHaveTextContent('Copied!'));
+      expect(onCopy).toHaveBeenCalledTimes(1);
+    });
+
+    it.each([
+      ['returns false', () => false],
+      ['returns nothing', () => undefined],
+      [
+        'throws',
+        () => {
+          throw new Error('fallback failed');
+        },
+      ],
+    ])('should leave the UI unchanged when onCopyError %s', async (_, handler) => {
+      const onCopy = jest.fn();
+      const onCopyError = jest.fn(handler);
+      renderWithTheme(
+        <CodeBlockVanilla
+          lang="typescript"
+          code={CODE_SNIPPET}
+          copyable
+          copyText="Copy"
+          copiedText="Copied!"
+          onCopy={onCopy}
+          onCopyError={onCopyError}
+        />,
+      );
+      const button = screen.getByRole('button');
+      await userEvent.click(button);
+      await waitFor(() => expect(onCopyError).toHaveBeenCalledTimes(1));
+      expect(button).toHaveTextContent('Copy');
+      expect(button).not.toHaveTextContent('Copied!');
+      expect(onCopy).not.toHaveBeenCalled();
+    });
+
+    it('should leave the UI unchanged without onCopyError', async () => {
+      const onCopy = jest.fn();
+      renderWithTheme(
+        <CodeBlockVanilla
+          lang="typescript"
+          code={CODE_SNIPPET}
+          copyable
+          copyText="Copy"
+          copiedText="Copied!"
+          onCopy={onCopy}
+        />,
+      );
+      const button = screen.getByRole('button');
+      await userEvent.click(button);
+      await waitFor(() => expect(navigator.clipboard.writeText).toHaveBeenCalled());
+      expect(button).toHaveTextContent('Copy');
+      expect(button).not.toHaveTextContent('Copied!');
+      expect(onCopy).not.toHaveBeenCalled();
+    });
+  });
+
   it('should apply noBorder class conditionally', () => {
     const { container: withBorder } = renderWithTheme(
       <CodeBlockVanilla lang="typescript" code={CODE_SNIPPET} />,

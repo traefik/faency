@@ -24,6 +24,7 @@ export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
 export type {
+  CodeBlockCopyErrorHandler,
   CodeBlockLanguage,
   CodeBlockProps,
   CodeBlockVanillaProps,
