@@ -167,15 +167,11 @@ export const TextFieldVanilla = React.forwardRef<
       setInnerType((prevInnerType) => (prevInnerType === 'password' ? undefined : 'password'));
     }, [setInnerType]);
 
-    const EndAdornmentWrapper = React.useMemo(
-      () => (hasAdornmentGroup ? AdornmentGroup : React.Fragment),
-      [hasAdornmentGroup],
-    );
+    const EndAdornmentWrapper = hasAdornmentGroup ? AdornmentGroup : React.Fragment;
 
-    const PasswordVisibilityToggleIcon = React.useMemo(
-      () => (isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon),
-      [isPasswordVisible],
-    );
+    const PasswordVisibilityToggleIcon = isPasswordVisible
+      ? StyledEyeClosedIcon
+      : StyledEyeOpenIcon;
 
     const passwordAction = React.useMemo(
       () => (isPasswordVisible ? 'Hide password' : 'Show password'),

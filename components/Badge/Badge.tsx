@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import React, { ComponentProps, useMemo } from 'react';
+import React, { ComponentProps } from 'react';
 
 import { styled, VariantProps } from '../../stitches.config';
 import { COLORS } from './Badge.vanilla';
@@ -141,13 +141,13 @@ type BadgeProps = ComponentProps<typeof StyledButtonBadge> &
 
 export const Badge = React.forwardRef<React.ElementRef<typeof StyledButtonBadge>, BadgeProps>(
   ({ interactive, asChild, ...props }, forwardedRef) => {
-    const Component = useMemo(() => {
-      if (interactive) {
-        return asChild ? StyledButtonBadgeSlot : StyledButtonBadge;
-      }
-      return asChild ? StyledSpanBadgeSlot : StyledSpanBadge;
-      // eslint-disable-next-line @eslint-react/exhaustive-deps
-    }, [asChild]);
+    const Component = interactive
+      ? asChild
+        ? StyledButtonBadgeSlot
+        : StyledButtonBadge
+      : asChild
+        ? StyledSpanBadgeSlot
+        : StyledSpanBadge;
 
     return <Component {...props} ref={forwardedRef} />;
   },
