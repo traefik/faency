@@ -8,20 +8,23 @@ on:
 env:
   SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72  # 3 days
 
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  id-token: write
+permissions: {}
 
 jobs:
   faency:
     name: Release
     if: github.repository == 'traefik/faency'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: enable corepack
         run: corepack enable
