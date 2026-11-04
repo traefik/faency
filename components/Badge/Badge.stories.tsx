@@ -22,8 +22,8 @@ const Component: Meta<typeof BadgeForStory> = {
   title: 'Components/Badge',
   component: BadgeForStory,
   argTypes: {
-    size: { control: 'inline-radio' },
-    variant: { control: 'select' },
+    size: { control: 'inline-radio', options: ['small', 'large'] },
+    variant: { control: 'select', options: COLORS },
     borderless: { control: 'boolean' },
   },
 };

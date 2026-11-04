@@ -67,6 +67,7 @@ Sizes.argTypes = {
   },
   variant: {
     control: 'select',
+    options: ['red', 'green', 'orange', 'blue', 'yellow', 'purple', 'gray'],
   },
 };
 
