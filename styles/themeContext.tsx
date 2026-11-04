@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { darkColors, lightColors } from '../colors';
+import { useIsomorphicLayoutEffect } from '../utils/useIsomorphicLayoutEffect';
 import { PrimaryColor, themes } from './themes.css';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
@@ -121,8 +122,8 @@ export function VanillaExtractThemeProvider({
     ...semanticColors,
   };
 
-  // Use useLayoutEffect to apply theme class synchronously before paint
-  useLayoutEffect(() => {
+  // Apply the theme class synchronously before paint
+  useIsomorphicLayoutEffect(() => {
     const themeClass = themes[resolvedTheme][appliedPrimaryColor];
 
     Object.values(themes.light).forEach((cls) => document.body.classList.remove(cls));

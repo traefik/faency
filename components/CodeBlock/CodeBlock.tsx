@@ -1,15 +1,9 @@
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { Highlight, Language, themes } from 'prism-react-renderer';
-import React, {
-  ComponentProps,
-  forwardRef,
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ComponentProps, forwardRef, useCallback, useRef, useState } from 'react';
 
 import { CSS, styled } from '../../stitches.config';
+import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
 import { AccessibleIcon } from '../AccessibleIcon';
 import { Box } from '../Box';
 import { Button } from '../Button';
@@ -121,7 +115,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
       [ref],
     );
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (!copyable) return;
       const pre = preRef.current;
       const wrapper = buttonWrapperRef.current;

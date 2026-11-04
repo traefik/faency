@@ -1,17 +1,11 @@
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { Highlight, Language, themes } from 'prism-react-renderer';
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { forwardRef, HTMLAttributes, useCallback, useRef, useState } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
 import { AccessibleIcon } from '../AccessibleIcon';
 import { ButtonVanilla } from '../Button';
 import {
@@ -100,7 +94,7 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
       [ref],
     );
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (!copyable) return;
       const pre = preRef.current;
       const wrapper = buttonWrapperRef.current;
