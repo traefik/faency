@@ -9,38 +9,41 @@ const { toHaveNoViolations } = require('jest-axe');
 
 expect.extend(toHaveNoViolations);
 
-window.ResizeObserver = class ResizeObserver {
-  constructor(cb) {
-    this.cb = cb;
-  }
-  observe() {
-    this.cb([{ borderBoxSize: { inlineSize: 0, blockSize: 0 } }]);
-  }
-  unobserve() {
-    // do nothing
-  }
-};
-
-window.DOMRect = {
-  fromRect: () => ({
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    width: 0,
-    height: 0,
-  }),
-};
-
-window.matchMedia =
-  window.matchMedia ||
-  function () {
-    return {
-      matches: false,
-      addListener: function () {},
-      removeListener: function () {},
-      addEventListener: function () {},
-      removeEventListener: function () {},
-      dispatchEvent: function () {},
-    };
+// Server-rendering tests run in the node environment, without a window.
+if (typeof window !== 'undefined') {
+  window.ResizeObserver = class ResizeObserver {
+    constructor(cb) {
+      this.cb = cb;
+    }
+    observe() {
+      this.cb([{ borderBoxSize: { inlineSize: 0, blockSize: 0 } }]);
+    }
+    unobserve() {
+      // do nothing
+    }
   };
+
+  window.DOMRect = {
+    fromRect: () => ({
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      width: 0,
+      height: 0,
+    }),
+  };
+
+  window.matchMedia =
+    window.matchMedia ||
+    function () {
+      return {
+        matches: false,
+        addListener: function () {},
+        removeListener: function () {},
+        addEventListener: function () {},
+        removeEventListener: function () {},
+        dispatchEvent: function () {},
+      };
+    };
+}
