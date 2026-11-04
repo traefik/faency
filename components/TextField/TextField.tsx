@@ -77,7 +77,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
       css,
       ...props
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     const inputRef = React.useRef<InputHandle | null>(null);
     React.useImperativeHandle(forwardedRef, () => inputRef.current as InputHandle);
@@ -119,17 +119,17 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
 
     const typeOrInnerType = React.useMemo(
       () => (isPasswordType ? innerType : type),
-      [isPasswordType, type, innerType]
+      [isPasswordType, type, innerType],
     );
 
     const hasInnerAdornment = React.useMemo(
       () => clearable || isPasswordType || invalid,
-      [clearable, isPasswordType, invalid]
+      [clearable, isPasswordType, invalid],
     );
 
     const hasAdornmentGroup = React.useMemo(
       () => (clearable && invalid) || (clearable && isPasswordType) || (invalid && isPasswordType),
-      [clearable, invalid, isPasswordType]
+      [clearable, invalid, isPasswordType],
     );
 
     const clearDisabled = React.useMemo(() => readOnly || disabled, [readOnly, disabled]);
@@ -148,7 +148,7 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
         }
         setInputHasFocus(true);
       },
-      [onFocus, setInputHasFocus]
+      [onFocus, setInputHasFocus],
     );
 
     const handleBlur = React.useCallback(
@@ -158,26 +158,22 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
         }
         setInputHasFocus(false);
       },
-      [onBlur, setInputHasFocus]
+      [onBlur, setInputHasFocus],
     );
 
     const togglePasswordVisibility = React.useCallback(() => {
       setInnerType((prevInnerType) => (prevInnerType === 'password' ? undefined : 'password'));
     }, [setInnerType]);
 
-    const EndAdornmentWrapper = React.useMemo(
-      () => (hasAdornmentGroup ? AdornmentGroup : React.Fragment),
-      [hasAdornmentGroup]
-    );
+    const EndAdornmentWrapper = hasAdornmentGroup ? AdornmentGroup : React.Fragment;
 
-    const PasswordVisibilityToggleIcon = React.useMemo(
-      () => (isPasswordVisible ? StyledEyeClosedIcon : StyledEyeOpenIcon),
-      [isPasswordVisible]
-    );
+    const PasswordVisibilityToggleIcon = isPasswordVisible
+      ? StyledEyeClosedIcon
+      : StyledEyeOpenIcon;
 
     const passwordAction = React.useMemo(
       () => (isPasswordVisible ? 'Hide password' : 'Show password'),
-      [isPasswordVisible]
+      [isPasswordVisible],
     );
 
     return (
@@ -216,5 +212,5 @@ export const TextField = React.forwardRef<React.ElementRef<typeof Input>, TextFi
         />
       </Box>
     );
-  }
+  },
 );

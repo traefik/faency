@@ -37,7 +37,6 @@ export default [
     files: ['**/*.test.tsx', '**/*.test.ts'],
     rules: {
       '@eslint-react/no-create-ref': 'off',
-      '@eslint-react/component-hook-factories': 'off',
     },
   },
   ...storybook.configs['flat/recommended'],

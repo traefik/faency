@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import React, { ComponentProps, useMemo } from 'react';
+import React, { ComponentProps } from 'react';
 
 import { CSS, keyframes, styled, VariantProps } from '../../stitches.config';
 
@@ -304,7 +304,7 @@ export type ButtonProps = ComponentProps<typeof StyledButton> &
 
 export const Button = React.forwardRef<React.ElementRef<typeof StyledButton>, ButtonProps>(
   ({ children, asChild, ...props }, forwardedRef) => {
-    const Component = useMemo(() => (asChild ? StyledButtonSlot : StyledButton), [asChild]);
+    const Component = asChild ? StyledButtonSlot : StyledButton;
     return (
       <Component ref={forwardedRef} {...props}>
         {children}
