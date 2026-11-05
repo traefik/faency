@@ -39,6 +39,7 @@ const styledInputBase = style({
     },
     '&:-webkit-autofill, &:autofill': {
       boxShadow: `inset 0 0 0 1px ${tokens.colors.inputBorder}, inset 0 0 0 100px ${tokens.colors.inputBg}`,
+      WebkitTextFillColor: tokens.colors.hiContrast,
     },
     '&:-webkit-autofill::first-line, &:autofill::first-line': {
       fontFamily: tokens.fonts.rubik,
@@ -46,6 +47,9 @@ const styledInputBase = style({
     },
     '&:focus-visible': {
       boxShadow: `inset 0 0 0 2px ${tokens.colors.inputFocusBorder}, ${FOCUS_SHADOW}`,
+    },
+    '&:-webkit-autofill:focus-visible, &:autofill:focus-visible': {
+      boxShadow: `inset 0 0 0 2px ${tokens.colors.inputFocusBorder}, inset 0 0 0 100px ${tokens.colors.inputBg}, ${FOCUS_SHADOW}`,
     },
     '&::placeholder': {
       color: tokens.colors.inputPlaceholder,
@@ -119,8 +123,14 @@ export const styledInputRecipe = recipe({
       invalid: {
         boxShadow: `inset 0 0 0 1px ${tokens.colors.inputInvalidBorder}`,
         selectors: {
+          '&:-webkit-autofill, &:autofill': {
+            boxShadow: `inset 0 0 0 1px ${tokens.colors.inputInvalidBorder}, inset 0 0 0 100px ${tokens.colors.inputBg}`,
+          },
           '&:focus-visible': {
             boxShadow: `inset 0 0 0 2px ${tokens.colors.inputInvalidBorder}, ${FOCUS_SHADOW}`,
+          },
+          '&:-webkit-autofill:focus-visible, &:autofill:focus-visible': {
+            boxShadow: `inset 0 0 0 2px ${tokens.colors.inputInvalidBorder}, inset 0 0 0 100px ${tokens.colors.inputBg}, ${FOCUS_SHADOW}`,
           },
         },
       },
@@ -264,6 +274,7 @@ const inputWrapperBase = style({
   lineHeight: 0,
 
   position: 'relative',
+  isolation: 'isolate',
   backgroundColor: tokens.colors.inputBg,
   color: tokens.colors.inputPlaceholder,
 
@@ -402,6 +413,7 @@ export const adornmentWrapperRecipe = recipe({
     variant: {
       start: {
         left: '0',
+        zIndex: 1,
       },
       end: {
         right: '0',

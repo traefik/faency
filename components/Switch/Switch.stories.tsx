@@ -2,8 +2,10 @@
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
+import { FIELD_STORY_ARG_TYPES, FieldStoryArgs } from '../../utils/fieldStoryArgs';
 import ignoreArgType from '../../utils/ignoreArgType';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Field } from '../Field';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
 import { Switch, SwitchProps, SwitchVariants } from './Switch';
@@ -130,5 +132,22 @@ LabelAndTitle.args = {
   disabled: false,
 };
 ignoreArgType('id', LabelAndTitle);
+
+export const WithField: StoryFn<React.ComponentProps<typeof SwitchForStory> & FieldStoryArgs> = ({
+  label,
+  description,
+  error,
+  ...args
+}) => (
+  <Field label={label} description={description} error={error} labelPosition="end">
+    <SwitchForStory {...args} />
+  </Field>
+);
+WithField.args = {
+  label: 'Notifications',
+  description: 'Use Field to give the switch a label, a description and an error.',
+  error: 'Turn on the notifications.',
+};
+WithField.argTypes = FIELD_STORY_ARG_TYPES;
 
 export default Component;

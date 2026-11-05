@@ -17,6 +17,7 @@ export namespace Theme {
     checkboxDisabledBg: Property.Color;
     checkboxDisabledBorder: Property.Color;
     checkboxIndicatorDisabledBg: Property.Color;
+    checkboxInvalidBorder: Property.Color;
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;
@@ -34,6 +35,7 @@ export namespace Theme {
     checkboxDisabledBg: '$deepBlue3',
     checkboxDisabledBorder: '$deepBlue5',
     checkboxIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
+    checkboxInvalidBorder: '$red9',
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -49,5 +51,6 @@ export namespace Theme {
     checkboxDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
     checkboxDisabledBorder: 'transparent',
     checkboxIndicatorDisabledBg: '$deepBlue1',
+    checkboxInvalidBorder: '$red9',
   });
 }

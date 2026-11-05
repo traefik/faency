@@ -27,7 +27,20 @@ const TextFieldForStory = modifyVariantsForStory<
 const Component: Meta<typeof TextFieldForStory> = {
   title: 'Components/TextField',
   component: TextFieldForStory,
-  argTypes: { onClick: { action: 'clicked' } },
+  argTypes: {
+    onClick: { action: 'clicked' },
+    label: { control: 'text' },
+    description: { control: 'text' },
+    error: { control: 'text' },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Use `label`, `description` and `error` to connect them to the control, so that screen readers read them on focus. See Field.',
+      },
+    },
+  },
 };
 
 const Template: StoryFn<typeof TextFieldForStory> = (args) => <TextFieldForStory {...args} />;
@@ -74,6 +87,15 @@ ignoreArgType('id', Basic);
 export const PasswordType: StoryFn<typeof TextFieldForStory> = Template.bind({});
 PasswordType.args = { type: 'password', id: 'passwordtype', label: 'password' };
 ignoreArgType('id', PasswordType);
+
+export const WithDescriptionAndError: StoryFn<typeof TextFieldForStory> = Template.bind({});
+WithDescriptionAndError.args = {
+  label: 'Username',
+  description: 'Lowercase letters, digits and dashes only.',
+  error: 'The username is required.',
+  clearable: true,
+  defaultValue: 'My Name',
+};
 
 export const Clearable: StoryFn<typeof TextFieldForStory> = Basic.bind({});
 Clearable.args = { id: 'clearable', clearable: true };
@@ -126,39 +148,6 @@ export const ReadOnlyCopy: StoryFn<typeof TextFieldForStory> = (args) => {
     </Flex>
   );
 };
-
-export const Display: StoryFn<typeof TextFieldForStory> = ({ id, ...args }) => (
-  <Flex direction="column" gap={2}>
-    <TextFieldForStory
-      id={`${id}-disabled`}
-      label="disabled"
-      placeholder="placeholder"
-      value="disabled"
-      disabled
-      {...args}
-    />
-    <TextFieldForStory
-      id={`${id}-readOnly`}
-      label="readOnly"
-      placeholder="placeholder"
-      value="readOnly"
-      readOnly
-      {...args}
-    />
-  </Flex>
-);
-
-Display.args = {
-  id: 'display',
-};
-ignoreArgType('id', Display);
-
-export const DisplayClearable: StoryFn<typeof TextFieldForStory> = Display.bind({});
-DisplayClearable.args = {
-  id: 'displayclearable',
-  clearable: true,
-};
-ignoreArgType('id', DisplayClearable);
 
 export const LabelComponent: StoryFn<typeof TextFieldForStory> = ({ id, ...args }) => (
   <Flex direction="column" gap={2}>

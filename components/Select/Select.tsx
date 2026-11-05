@@ -2,7 +2,9 @@ import { CaretSortIcon } from '@radix-ui/react-icons';
 import React from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
+import { useColorScheme } from '../colorSchemeContext';
 import { elevationVariants } from '../Elevation';
+import { useFieldControl } from '../Field/FieldContext';
 
 // CONSTANTS
 const FOCUS_SHADOW = elevationVariants[1].boxShadow; // apply elevation $1 when focus
@@ -91,6 +93,20 @@ const SelectWrapper = styled('div', {
   fontWeight: '$regular',
   height: '$5',
   flexShrink: 0,
+
+  [`& ${StyledSelect}:-webkit-autofill, & ${StyledSelect}:autofill`]: {
+    boxShadow: 'inset 0 0 0 1px $colors$selectBorder, inset 0 0 0 100px $colors$selectBg',
+    WebkitTextFillColor: '$colors$hiContrast',
+  },
+
+  [`& ${StyledSelect}:-webkit-autofill:has(option[value=""]:checked)`]: {
+    colorScheme: 'light !important',
+    WebkitTextFillColor: 'black',
+  },
+
+  [`& ${StyledSelect}:-webkit-autofill:focus-visible, & ${StyledSelect}:autofill:focus-visible`]: {
+    boxShadow: `inset 0 0 0 2px $colors$selectFocusBorder, inset 0 0 0 100px $colors$selectBg, ${FOCUS_SHADOW}`,
+  },
 
   '&::before': {
     boxSizing: 'border-box',
@@ -218,6 +234,10 @@ const SelectWrapper = styled('div', {
     state: {
       invalid: {
         boxShadow: 'inset 0 0 0 1px $colors$selectInvalidBorder',
+        [`& ${StyledSelect}:-webkit-autofill, & ${StyledSelect}:autofill`]: {
+          boxShadow:
+            'inset 0 0 0 1px $colors$selectInvalidBorder, inset 0 0 0 100px $colors$selectBg',
+        },
         '&:focus-visible': {
           boxShadow: `inset 0 0 0 2px $colors$selectInvalidBorder, ${FOCUS_SHADOW}`,
         },
@@ -237,20 +257,52 @@ export type SelectProps = Omit<React.ComponentProps<typeof StyledSelect>, 'size'
   SelectVariants & { css?: CSS };
 
 export const Select = React.forwardRef<React.ElementRef<typeof StyledSelect>, SelectProps>(
-  ({ css, size, state, variant, cursor, ...props }, forwardedRef) => {
+  (
+    {
+      css,
+      size,
+      state,
+      variant,
+      cursor,
+      id,
+      disabled,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+      style,
+      ...props
+    },
+    forwardedRef,
+  ) => {
+    const colorScheme = useColorScheme();
+    const control = useFieldControl({
+      id,
+      disabled,
+      invalid: state === 'invalid',
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+    });
+
     return (
       <SelectWrapper
         css={css}
         size={size}
-        state={state}
+        state={control.invalid ? 'invalid' : state}
         variant={variant}
-        disabled={props.disabled}
+        disabled={control.disabled}
       >
-        <StyledSelect ref={forwardedRef} {...props} />
-        <StyledCaretSortIcon size={size} cursor={cursor} />
+        <StyledSelect
+          ref={forwardedRef}
+          id={control.id}
+          disabled={control.disabled}
+          aria-describedby={control['aria-describedby']}
+          aria-invalid={control['aria-invalid']}
+          style={{ colorScheme, ...style }}
+          {...props}
+        />
+        <StyledCaretSortIcon size={size} cursor={cursor} aria-hidden />
       </SelectWrapper>
     );
-  }
+  },
 );
 
 Select.toString = () => `.${SelectWrapper.className}`;

@@ -73,6 +73,13 @@ export {
 export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
 export { useColorScheme } from './components/colorSchemeContext';
+export type {
+  FieldControlOptions,
+  FieldLabelProps,
+  FieldProps,
+  FieldVanillaProps,
+} from './components/Field';
+export { Field, FieldVanilla, useFieldControl } from './components/Field';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
 export { H1, H2, H3, H4, H5, H6 } from './components/Heading';

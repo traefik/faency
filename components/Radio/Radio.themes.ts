@@ -11,6 +11,7 @@ export namespace Theme {
     radioDisabledBg: Property.Color;
     radioDisabledBorder: Property.Color;
     radioIndicatorDisabledBg: Property.Color;
+    radioInvalidBorder: Property.Color;
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;
@@ -24,6 +25,7 @@ export namespace Theme {
     radioDisabledBg: '$deepBlue3',
     radioDisabledBorder: '$deepBlue5',
     radioIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
+    radioInvalidBorder: '$red9',
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -35,5 +37,6 @@ export namespace Theme {
     radioDisabledBg: '$deepBlue3',
     radioDisabledBorder: '$deepBlue4',
     radioIndicatorDisabledBg: tinycolor(primaryColor.value).setAlpha(0.6).toHslString(),
+    radioInvalidBorder: '$red9',
   });
 }
