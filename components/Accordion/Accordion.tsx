@@ -144,26 +144,33 @@ export type AccordionTriggerProps = React.ComponentProps<typeof StyledAccordionT
     children: React.ReactNode;
     customIcon?: React.ReactNode;
     noIcon?: boolean;
+    headingLevel?: 1 | 2 | 3 | 4 | 5 | 6 | 'none';
   };
 export const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof StyledAccordionTrigger>,
   AccordionTriggerProps
->(({ children, noIcon = false, customIcon, ...props }, forwardedRef) => (
-  <StyledAccordionHeader>
-    <StyledAccordionTrigger ref={forwardedRef} {...props}>
-      {!noIcon ? (
-        customIcon ? (
-          <Box css={{ mr: '$2', c: '$accordionText' }} aria-hidden>
-            {customIcon}
-          </Box>
-        ) : (
-          <StyledAccordionChevron aria-hidden />
-        )
-      ) : null}
-      <Box css={{ ml: noIcon ? '$5' : 0, width: '100%' }}>{children}</Box>
-    </StyledAccordionTrigger>
-  </StyledAccordionHeader>
-));
+>(({ children, noIcon = false, customIcon, headingLevel = 3, ...props }, forwardedRef) => {
+  const Heading = headingLevel === 'none' ? 'div' : (`h${headingLevel}` as const);
+
+  return (
+    <StyledAccordionHeader asChild>
+      <Heading>
+        <StyledAccordionTrigger ref={forwardedRef} {...props}>
+          {!noIcon ? (
+            customIcon ? (
+              <Box css={{ mr: '$2', c: '$accordionText' }} aria-hidden>
+                {customIcon}
+              </Box>
+            ) : (
+              <StyledAccordionChevron aria-hidden />
+            )
+          ) : null}
+          <Box css={{ ml: noIcon ? '$5' : 0, width: '100%' }}>{children}</Box>
+        </StyledAccordionTrigger>
+      </Heading>
+    </StyledAccordionHeader>
+  );
+});
 
 export type AccordionContentProps = VariantProps<typeof StyledAccordionContent> &
   Pick<VariantProps<typeof StyledAccordionContentWrapper>, 'size'> & {
