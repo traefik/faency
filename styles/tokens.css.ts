@@ -1,6 +1,5 @@
 import { createThemeContract } from '@vanilla-extract/css';
 
-// Helper to create a 12-step color scale
 const colorScale = () => ({
   '1': null,
   '2': null,
@@ -16,7 +15,6 @@ const colorScale = () => ({
   '12': null,
 });
 
-// Helper to create a color scale with alpha variants
 const colorScaleWithAlpha = () => ({
   ...colorScale(),
   A1: null,
@@ -58,7 +56,7 @@ export const tokens = createThemeContract({
     destructiveForeground: null,
     ring: null,
 
-    // Custom color scales (Primary color options)
+    // Primary color scales
     neon: colorScaleWithAlpha(),
     blue: colorScaleWithAlpha(),
     orange: colorScaleWithAlpha(),
@@ -89,11 +87,10 @@ export const tokens = createThemeContract({
     '16dp': null,
     '24dp': null,
 
-    // Component-specific tokens - Badge
+    // Component tokens
     badgeInteractiveBackgroundHover: null,
     badgeInteractiveBackgroundActive: null,
 
-    // Component-specific tokens - Card
     cardBackground: null,
     cardHoverBackground: null,
     cardHoverBorder: null,
@@ -101,22 +98,18 @@ export const tokens = createThemeContract({
     cardActiveBorder: null,
     innerCardBgColor: null,
 
-    // Component-specific tokens - CodeBlock
     codeBlockCopyButtonBg: null,
 
-    // Component-specific tokens - Text
     textSubtle: null,
     textDefault: null,
     textContrast: null,
     textInvalid: null,
     textRed: null,
 
-    // Component-specific tokens - Heading
     headingDefault: null,
 
-    // Component-specific tokens - Panel
     panelShadowLight: null,
-    // Component-specific tokens - Input
+
     inputBg: null,
     inputBorder: null,
     inputFocusBg: null,
@@ -127,7 +120,6 @@ export const tokens = createThemeContract({
     inputDisabledText: null,
     inputInvalidBorder: null,
 
-    // Component-specific tokens - Textarea
     textareaBg: null,
     textareaBorder: null,
     textareaFocusBg: null,
@@ -138,7 +130,6 @@ export const tokens = createThemeContract({
     textareaDisabledText: null,
     textareaInvalidBorder: null,
 
-    // Component-specific tokens - Button
     buttonPrimaryText: null,
     buttonPrimaryFocusBorder: null,
     buttonPrimaryFocusBg: null,
@@ -152,22 +143,21 @@ export const tokens = createThemeContract({
     buttonRedHoverText: null,
     buttonRedFocusBg: null,
 
-    // Component-specific tokens - IconButton
     iconButtonBackground: null,
     iconButtonHoverBorder: null,
     iconButtonHoverBackground: null,
     iconButtonFocusBorder: null,
 
-    // Component-specific tokens - ButtonSwitch
     buttonSwitchContainerBg: null,
     buttonSwitchActiveBg: null,
     buttonSwitchOffBg: null,
     buttonSwitchOffColor: null,
     buttonSwitchActiveColor: null,
 
-    // Component-specific tokens - Skeleton
     skeletonBackground: null,
     skeletonAnimation: null,
+
+    toastBorder: null,
   },
   fonts: {
     rubik: null,

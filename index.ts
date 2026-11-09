@@ -23,13 +23,6 @@ export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
-export type {
-  CodeBlockCopyErrorHandler,
-  CodeBlockLanguage,
-  CodeBlockProps,
-  CodeBlockVanillaProps,
-} from './components/CodeBlock';
-export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
 export type { BubbleVanillaProps } from './components/Bubble';
 export { Bubble, BubbleVanilla } from './components/Bubble';
 export type { ButtonVanillaProps } from './components/Button';
@@ -42,6 +35,14 @@ export {
 } from './components/ButtonSwitch';
 export { Card, CardVanilla } from './components/Card';
 export { Checkbox } from './components/Checkbox';
+export type {
+  CodeBlockCopyErrorHandler,
+  CodeBlockLanguage,
+  CodeBlockProps,
+  CodeBlockVanillaProps,
+} from './components/CodeBlock';
+export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
+export { useColorScheme } from './components/colorSchemeContext';
 export { Container, ContainerVanilla } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
 export { DateTimePickerInput } from './components/DateTimePickerInput';
@@ -72,7 +73,6 @@ export {
 } from './components/DropdownMenu';
 export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
-export { useColorScheme } from './components/colorSchemeContext';
 export type {
   FieldControlOptions,
   FieldLabelProps,
@@ -147,6 +147,24 @@ export type { TextareaVanillaProps } from './components/Textarea';
 export { Textarea, TextareaVanilla } from './components/Textarea';
 export type { TextFieldVanillaProps } from './components/TextField';
 export { TextField, TextFieldVanilla } from './components/TextField';
+export type {
+  ToastActionVanillaProps,
+  ToastDescriptionVanillaProps,
+  ToastOptions,
+  ToastPosition,
+  ToastProviderVanillaProps,
+  ToastTitleVanillaProps,
+  ToastVanillaProps,
+  ToastVariant,
+} from './components/Toast';
+export {
+  ToastActionVanilla,
+  ToastDescriptionVanilla,
+  ToastProviderVanilla,
+  ToastTitleVanilla,
+  ToastVanilla,
+  useToast,
+} from './components/Toast';
 export { Tooltip, TooltipContent, TooltipRoot, TooltipTrigger } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';

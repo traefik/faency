@@ -23,6 +23,7 @@ import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme
 import { skeletonDarkTheme, skeletonLightTheme } from '../components/Skeleton/Skeleton.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
 import { textareaDarkTheme, textareaLightTheme } from '../components/Textarea/Textarea.theme.css';
+import { toastDarkTheme, toastLightTheme } from '../components/Toast/Toast.theme.css';
 import { tokens } from './tokens.css';
 
 // Type for primary colors
@@ -268,6 +269,7 @@ const lightSemanticColors = {
   iconButtonHoverBackground: lightColors.slateA3,
   iconButtonFocusBorder: lightColors.slate10,
   ...skeletonLightTheme,
+  ...toastLightTheme,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -396,6 +398,7 @@ const darkSemanticColors = {
   iconButtonHoverBackground: darkColors.slateA4,
   iconButtonFocusBorder: darkColors.deepBlue7,
   ...skeletonDarkTheme,
+  ...toastDarkTheme,
 };
 
 export const darkThemeBlue = createTheme(tokens, {
