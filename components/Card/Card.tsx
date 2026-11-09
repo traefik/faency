@@ -82,10 +82,12 @@ const StyledInteractiveCard = styled('button', StyledCard, {
 
 export type CardVariantProps = ComponentProps<typeof StyledCard> &
   VariantProps<typeof StyledCard> & {
+    as?: React.ElementType;
     interactive?: false;
   };
 export type InteractiveCardProps = VariantProps<typeof StyledInteractiveCard> &
   ComponentProps<typeof StyledInteractiveCard> & {
+    as?: React.ElementType;
     interactive: true;
   };
 export type CardProps = CardVariantProps | InteractiveCardProps;
