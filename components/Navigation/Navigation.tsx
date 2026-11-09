@@ -201,7 +201,11 @@ type NavigationItemLinkProps = NavigationItemBaseProps &
 export type NavigationItemProps = NavigationItemButtonProps | NavigationItemLinkProps;
 
 const NavigationItemWrapper = (props: NavigationItemProps): JSX.Element =>
-  props.as === 'a' ? <StyledLink {...props} /> : <StyledButton type="button" {...props} />;
+  props.as === 'a' ? (
+    <StyledLink aria-current={props.active ? 'page' : undefined} {...props} />
+  ) : (
+    <StyledButton type="button" {...props} />
+  );
 
 export const NavigationItem = ({
   startAdornment,
