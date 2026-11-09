@@ -36,6 +36,12 @@ export const Skeleton = styled('div', {
     top: 0,
   },
 
+  '@motion': {
+    '&::after': {
+      animation: 'none',
+    },
+  },
+
   variants: {
     variant: {
       square: {

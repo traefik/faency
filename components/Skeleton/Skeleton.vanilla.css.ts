@@ -1,6 +1,7 @@
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { breakpoints } from '../../styles/breakpoints.css';
 import { tokens } from '../../styles/tokens.css';
 
 const pulse = keyframes({
@@ -36,6 +37,14 @@ const skeletonBase = style({
     position: 'absolute',
     right: 0,
     top: 0,
+  },
+});
+
+globalStyle(`${skeletonBase}::after`, {
+  '@media': {
+    [breakpoints.motion]: {
+      animation: 'none',
+    },
   },
 });
 
