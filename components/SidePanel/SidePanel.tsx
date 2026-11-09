@@ -101,8 +101,7 @@ const StyledCloseButton = styled(DialogPrimitive.Close, {
 });
 
 interface SidePanelCloseButtonProps
-  extends VariantProps<typeof IconButton>,
-    ComponentProps<typeof IconButton> {}
+  extends VariantProps<typeof IconButton>, ComponentProps<typeof IconButton> {}
 
 const SidePanelCloseIconButton = React.forwardRef<
   React.ElementRef<typeof IconButton>,
@@ -110,7 +109,7 @@ const SidePanelCloseIconButton = React.forwardRef<
 >((props, forwardedRef) => (
   <StyledCloseButton asChild>
     <IconButton ref={forwardedRef} css={{ color: '$hiContrast' }} {...props}>
-      <Cross1Icon />
+      <Cross1Icon aria-hidden />
     </IconButton>
   </StyledCloseButton>
 ));
@@ -123,6 +122,7 @@ type SidePanelProps = SidePanelContentPrimitiveProps &
     description?: string;
     noOverlay?: boolean;
     noCloseIcon?: boolean;
+    closeLabel?: string;
     open?: boolean;
     defaultOpen?: boolean;
     onOpenChange(open: boolean): void;
@@ -134,6 +134,7 @@ export const SidePanel = React.forwardRef<React.ElementRef<typeof StyledContent>
       description,
       noOverlay = false,
       noCloseIcon = false,
+      closeLabel = 'Close',
       children,
       onOpenChange,
       open = false,
@@ -152,7 +153,7 @@ export const SidePanel = React.forwardRef<React.ElementRef<typeof StyledContent>
             </VisuallyHidden>
           ) : null}
           {children}
-          {!noCloseIcon && <SidePanelCloseIconButton />}
+          {!noCloseIcon && <SidePanelCloseIconButton aria-label={closeLabel} />}
         </StyledContent>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>
