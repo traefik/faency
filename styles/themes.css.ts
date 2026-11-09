@@ -13,6 +13,7 @@ import {
   codeBlockDarkTheme,
   codeBlockLightTheme,
 } from '../components/CodeBlock/CodeBlock.theme.css';
+import { comboboxDarkTheme, comboboxLightTheme } from '../components/Combobox/Combobox.theme.css';
 import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
 import {
   iconButtonDarkTheme,
@@ -274,6 +275,7 @@ const lightSemanticColors = {
   iconButtonFocusBorder: lightColors.slate10,
   ...skeletonLightTheme,
   ...segmentedControlLightTheme,
+  ...comboboxLightTheme,
   ...toastLightTheme,
 };
 
@@ -404,6 +406,7 @@ const darkSemanticColors = {
   iconButtonFocusBorder: darkColors.deepBlue7,
   ...skeletonDarkTheme,
   ...segmentedControlDarkTheme,
+  ...comboboxDarkTheme,
   ...toastDarkTheme,
 };
 

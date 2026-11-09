@@ -43,6 +43,8 @@ export type {
 } from './components/CodeBlock';
 export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
 export { useColorScheme } from './components/colorSchemeContext';
+export type { ComboboxVanillaProps } from './components/Combobox';
+export { ComboboxVanilla } from './components/Combobox';
 export { Container, ContainerVanilla } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
 export { DateTimePickerInput } from './components/DateTimePickerInput';

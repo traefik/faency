@@ -162,6 +162,9 @@ export const tokens = createThemeContract({
     segmentedControlActiveBg: null,
     segmentedControlActiveText: null,
 
+    comboboxContentBorder: null,
+    comboboxOptionHighlightBg: null,
+
     toastBorder: null,
   },
   fonts: {
