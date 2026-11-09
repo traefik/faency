@@ -157,6 +157,11 @@ export const tokens = createThemeContract({
     skeletonBackground: null,
     skeletonAnimation: null,
 
+    segmentedControlBorder: null,
+    segmentedControlHoverBg: null,
+    segmentedControlActiveBg: null,
+    segmentedControlActiveText: null,
+
     toastBorder: null,
   },
   fonts: {
