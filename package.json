@@ -142,13 +142,6 @@
     "vite": "8.3.6",
     "vite-plugin-dts": "4.5.4"
   },
-  "resolutions": {
-    "@typescript-eslint/tsconfig-utils": "8.72.1",
-    "@typescript-eslint/types": "8.72.1",
-    "bundle-name": "4.1.1",
-    "magic-string@^1.1.0": "1.4.5",
-    "postcss": "8.5.32"
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
