@@ -135,11 +135,11 @@ export const toastIconRecipe = recipe({
 
   variants: {
     variant: {
-      gray: { color: tokens.colors.textSubtle },
-      info: { color: tokens.colors.blue['9'] },
-      success: { color: tokens.colors.green['9'] },
-      warning: { color: tokens.colors.orange['9'] },
-      error: { color: tokens.colors.red['9'] },
+      gray: { color: tokens.colors.toneNeutralText },
+      info: { color: tokens.colors.toneInfoSolid },
+      success: { color: tokens.colors.toneSuccessSolid },
+      warning: { color: tokens.colors.toneWarningSolid },
+      error: { color: tokens.colors.toneDangerSolid },
     },
   },
 

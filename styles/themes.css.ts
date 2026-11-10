@@ -227,6 +227,56 @@ function getButtonSwitchDarkColors(primaryColorName: string) {
   };
 }
 
+function createToneColors(colors: typeof lightColors | typeof darkColors) {
+  return {
+    toneSuccessSolid: colors.green9,
+    toneSuccessText: colors.green11,
+    toneSuccessSurface: colors.green3,
+    toneSuccessBorder: colors.green7,
+    toneWarningSolid: colors.orange9,
+    toneWarningText: colors.orange11,
+    toneWarningSurface: colors.orange3,
+    toneWarningBorder: colors.orange7,
+    toneDangerSolid: colors.red9,
+    toneDangerText: colors.red11,
+    toneDangerSurface: colors.red3,
+    toneDangerBorder: colors.red7,
+    toneInfoSolid: colors.blue9,
+    toneInfoText: colors.blue11,
+    toneInfoSurface: colors.blue3,
+    toneInfoBorder: colors.blue7,
+    toneNeutralSolid: colors.gray9,
+    toneNeutralText: tokens.colors.textSubtle,
+    toneNeutralSurface: colors.gray3,
+    toneNeutralBorder: colors.gray7,
+  };
+}
+
+const chartStatusColors = {
+  chartStatusGood: '#0ca30c',
+  chartStatusWarning: '#fab219',
+  chartStatusSerious: '#ec835a',
+  chartStatusCritical: '#d03b3b',
+};
+
+const chartLightColors = {
+  chartSeries1: '#2a78d6',
+  chartSeries2: '#eb6834',
+  chartSeries3: '#1baf7a',
+  ...chartStatusColors,
+  chartGrid: '#e1e0d9',
+  chartAxis: '#898781',
+};
+
+const chartDarkColors = {
+  chartSeries1: '#3987e5',
+  chartSeries2: '#d95926',
+  chartSeries3: '#199e70',
+  ...chartStatusColors,
+  chartGrid: '#2c2c2a',
+  chartAxis: '#898781',
+};
+
 // ============================================================================
 // LIGHT THEMES
 // ============================================================================
@@ -277,6 +327,8 @@ const lightSemanticColors = {
   ...segmentedControlLightTheme,
   ...comboboxLightTheme,
   ...toastLightTheme,
+  ...createToneColors(lightColors),
+  ...chartLightColors,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -408,6 +460,8 @@ const darkSemanticColors = {
   ...segmentedControlDarkTheme,
   ...comboboxDarkTheme,
   ...toastDarkTheme,
+  ...createToneColors(darkColors),
+  ...chartDarkColors,
 };
 
 export const darkThemeBlue = createTheme(tokens, {

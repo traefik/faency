@@ -61,6 +61,72 @@ const interactiveBadge = style([
   },
 ]);
 
+const colorVariants = {
+  gray: {
+    backgroundColor: tokens.colors.toneNeutralSurface,
+    color: tokens.colors.toneNeutralText,
+    border: `1px solid ${tokens.colors.toneNeutralBorder}`,
+  },
+  red: {
+    backgroundColor: tokens.colors.toneDangerSurface,
+    color: tokens.colors.toneDangerText,
+    border: `1px solid ${tokens.colors.toneDangerBorder}`,
+  },
+  blue: {
+    backgroundColor: tokens.colors.toneInfoSurface,
+    color: tokens.colors.toneInfoText,
+    border: `1px solid ${tokens.colors.toneInfoBorder}`,
+  },
+  green: {
+    backgroundColor: tokens.colors.toneSuccessSurface,
+    color: tokens.colors.toneSuccessText,
+    border: `1px solid ${tokens.colors.toneSuccessBorder}`,
+  },
+  neon: {
+    backgroundColor: tokens.colors.neon['3'],
+    color: tokens.colors.neon['11'],
+    border: `1px solid ${tokens.colors.neon['7']}`,
+  },
+  orange: {
+    backgroundColor: tokens.colors.toneWarningSurface,
+    color: tokens.colors.toneWarningText,
+    border: `1px solid ${tokens.colors.toneWarningBorder}`,
+  },
+  purple: {
+    backgroundColor: tokens.colors.purple['3'],
+    color: tokens.colors.purple['11'],
+    border: `1px solid ${tokens.colors.purple['7']}`,
+  },
+};
+
+const alphaBgVariants = [
+  {
+    variants: { alphaBg: true, variant: 'gray' },
+    style: { backgroundColor: tokens.colors.gray.A3 },
+  },
+  { variants: { alphaBg: true, variant: 'red' }, style: { backgroundColor: tokens.colors.red.A3 } },
+  {
+    variants: { alphaBg: true, variant: 'blue' },
+    style: { backgroundColor: tokens.colors.blue.A3 },
+  },
+  {
+    variants: { alphaBg: true, variant: 'green' },
+    style: { backgroundColor: tokens.colors.green.A3 },
+  },
+  {
+    variants: { alphaBg: true, variant: 'neon' },
+    style: { backgroundColor: tokens.colors.neon.A3 },
+  },
+  {
+    variants: { alphaBg: true, variant: 'orange' },
+    style: { backgroundColor: tokens.colors.orange.A3 },
+  },
+  {
+    variants: { alphaBg: true, variant: 'purple' },
+    style: { backgroundColor: tokens.colors.purple.A3 },
+  },
+] as const;
+
 export const badgeRecipe = recipe({
   base: baseBadge,
 
@@ -79,43 +145,7 @@ export const badgeRecipe = recipe({
         fontSize: tokens.fontSizes['3'],
       },
     },
-    variant: {
-      gray: {
-        backgroundColor: tokens.colors.gray['6'],
-        color: tokens.colors.gray['10'],
-        border: `1px solid ${tokens.colors.gray['10']}`,
-      },
-      red: {
-        backgroundColor: tokens.colors.red['6'],
-        color: tokens.colors.red['10'],
-        border: `1px solid ${tokens.colors.red['10']}`,
-      },
-      blue: {
-        backgroundColor: tokens.colors.blue['6'],
-        color: tokens.colors.blue['10'],
-        border: `1px solid ${tokens.colors.blue['10']}`,
-      },
-      green: {
-        backgroundColor: tokens.colors.green['6'],
-        color: tokens.colors.green['10'],
-        border: `1px solid ${tokens.colors.green['10']}`,
-      },
-      neon: {
-        backgroundColor: tokens.colors.neon['6'],
-        color: tokens.colors.neon['10'],
-        border: `1px solid ${tokens.colors.neon['10']}`,
-      },
-      orange: {
-        backgroundColor: tokens.colors.orange['6'],
-        color: tokens.colors.orange['10'],
-        border: `1px solid ${tokens.colors.orange['10']}`,
-      },
-      purple: {
-        backgroundColor: tokens.colors.purple['6'],
-        color: tokens.colors.purple['10'],
-        border: `1px solid ${tokens.colors.purple['10']}`,
-      },
-    },
+    variant: colorVariants,
     alphaBg: {
       true: {},
     },
@@ -126,36 +156,7 @@ export const badgeRecipe = recipe({
     },
   },
 
-  compoundVariants: [
-    {
-      variants: { alphaBg: true, variant: 'gray' },
-      style: { backgroundColor: tokens.colors.gray.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'red' },
-      style: { backgroundColor: tokens.colors.red.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'blue' },
-      style: { backgroundColor: tokens.colors.blue.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'green' },
-      style: { backgroundColor: tokens.colors.green.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'neon' },
-      style: { backgroundColor: tokens.colors.neon.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'orange' },
-      style: { backgroundColor: tokens.colors.orange.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'purple' },
-      style: { backgroundColor: tokens.colors.purple.A6 },
-    },
-  ],
+  compoundVariants: [...alphaBgVariants],
 
   defaultVariants: {
     size: 'small',
@@ -182,43 +183,7 @@ export const interactiveBadgeRecipe = recipe({
         fontSize: tokens.fontSizes['3'],
       },
     },
-    variant: {
-      gray: {
-        backgroundColor: tokens.colors.gray['6'],
-        color: tokens.colors.gray['10'],
-        border: `1px solid ${tokens.colors.gray['10']}`,
-      },
-      red: {
-        backgroundColor: tokens.colors.red['6'],
-        color: tokens.colors.red['10'],
-        border: `1px solid ${tokens.colors.red['10']}`,
-      },
-      blue: {
-        backgroundColor: tokens.colors.blue['6'],
-        color: tokens.colors.blue['10'],
-        border: `1px solid ${tokens.colors.blue['10']}`,
-      },
-      green: {
-        backgroundColor: tokens.colors.green['6'],
-        color: tokens.colors.green['10'],
-        border: `1px solid ${tokens.colors.green['10']}`,
-      },
-      neon: {
-        backgroundColor: tokens.colors.neon['6'],
-        color: tokens.colors.neon['10'],
-        border: `1px solid ${tokens.colors.neon['10']}`,
-      },
-      orange: {
-        backgroundColor: tokens.colors.orange['6'],
-        color: tokens.colors.orange['10'],
-        border: `1px solid ${tokens.colors.orange['10']}`,
-      },
-      purple: {
-        backgroundColor: tokens.colors.purple['6'],
-        color: tokens.colors.purple['10'],
-        border: `1px solid ${tokens.colors.purple['10']}`,
-      },
-    },
+    variant: colorVariants,
     alphaBg: {
       true: {},
     },
@@ -229,36 +194,7 @@ export const interactiveBadgeRecipe = recipe({
     },
   },
 
-  compoundVariants: [
-    {
-      variants: { alphaBg: true, variant: 'gray' },
-      style: { backgroundColor: tokens.colors.gray.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'red' },
-      style: { backgroundColor: tokens.colors.red.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'blue' },
-      style: { backgroundColor: tokens.colors.blue.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'green' },
-      style: { backgroundColor: tokens.colors.green.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'neon' },
-      style: { backgroundColor: tokens.colors.neon.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'orange' },
-      style: { backgroundColor: tokens.colors.orange.A6 },
-    },
-    {
-      variants: { alphaBg: true, variant: 'purple' },
-      style: { backgroundColor: tokens.colors.purple.A6 },
-    },
-  ],
+  compoundVariants: [...alphaBgVariants],
 
   defaultVariants: {
     size: 'small',

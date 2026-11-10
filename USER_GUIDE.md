@@ -415,6 +415,33 @@ $muted; // Muted background
 $mutedForeground; // Muted text color
 ```
 
+#### Tone and Chart Tokens (Vanilla Extract)
+
+Tone tokens color status UI. Each tone (`Success`, `Warning`, `Danger`, `Info`, `Neutral`) has four tokens:
+
+```tsx
+$toneSuccessSolid; // Dots, bars, icons
+$toneSuccessText; // Colored text
+$toneSuccessSurface; // Tinted background
+$toneSuccessBorder; // Border of the tinted surface
+```
+
+Chart tokens are for theming a chart library; Faency ships no charts:
+
+```tsx
+$chartSeries1;
+$chartSeries2;
+$chartSeries3; // Series palette
+$chartStatusGood;
+$chartStatusWarning;
+$chartStatusSerious;
+$chartStatusCritical;
+$chartGrid;
+$chartAxis;
+```
+
+They exist only in the vanilla extract themes. Use them in a vanilla component's `css` prop (`css={{ c: '$toneDangerText' }}`) or through `vanillaTokens.colors.toneDangerText`.
+
 ### Using Color Tokens in CSS Prop
 
 ```tsx
