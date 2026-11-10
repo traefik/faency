@@ -127,6 +127,21 @@ export const StyledTr = styled('tr', rowLinkRowStyles, {
   ],
 });
 
+const ExpandButton = styled('button', {
+  all: 'unset',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '$1',
+  cursor: 'pointer',
+  '&:focus-visible': {
+    outlineWidth: '2px',
+    outlineStyle: 'solid',
+    outlineColor: '$focusOutline',
+    outlineOffset: '2px',
+  },
+});
+
 const AnimatedTr = ({
   collapsedContentColSpan,
   isOpen,
@@ -235,15 +250,21 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                     color: '$tableActiveText',
                   },
                 }}
-                onClick={() => setIsCollapsed(!isCollapsed)}
               >
-                <ChevronRightIcon
-                  style={{
-                    cursor: 'pointer',
-                    transition: 'transform 0.2s ease-out',
-                    transform: isCollapsed ? 'rotate(90deg)' : 'initial',
-                  }}
-                />
+                <ExpandButton
+                  type="button"
+                  aria-label="Expand row"
+                  aria-expanded={isCollapsed}
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                >
+                  <ChevronRightIcon
+                    aria-hidden
+                    style={{
+                      transition: 'transform 0.2s ease-out',
+                      transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                    }}
+                  />
+                </ExpandButton>
               </Flex>
             </Td>
           )}
