@@ -37,6 +37,14 @@ describe.each([
       expect(button).toHaveAttribute('aria-expanded', 'false');
     });
 
+    it('should point aria-controls to the row content', () => {
+      renderRow();
+
+      const button = screen.getByRole('button', { name: 'Expand row' });
+      const content = document.getElementById(button.getAttribute('aria-controls') ?? '');
+      expect(content).toHaveTextContent('More about api-1');
+    });
+
     it('should not open the row link when the row is expanded', async () => {
       renderRow({ href: '#api-1' });
 

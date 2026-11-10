@@ -9,6 +9,8 @@ describe('Skeleton', () => {
     render(<Skeleton />);
 
     const css = getCssText().replace(/\s+/g, '');
-    expect(css).toMatch(/@media\(prefers-reduced-motion\)\{\.c-[\w-]+::after\{animation:none;?\}/);
+    expect(css).toMatch(
+      /@media\(prefers-reduced-motion\)\{\.c-[\w-]+::after\{animation:none;opacity:0;?\}/,
+    );
   });
 });

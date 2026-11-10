@@ -8,6 +8,7 @@ import React, {
   forwardRef,
   isValidElement,
   ReactNode,
+  useId,
   useMemo,
   useState,
 } from 'react';
@@ -27,6 +28,7 @@ import {
   Th as TableTh,
   Thead as TableThead,
 } from '../Table';
+import { ExpandButton } from '../Table/ExpandButton';
 
 export const Caption = styled('div', TableCaption, {
   display: 'table-caption',
@@ -53,36 +55,30 @@ const StyledTr = styled('div', TableTr, {
 });
 const StyledTrSlot = styled(Slot, StyledTr);
 
-const ExpandButton = styled('button', {
-  all: 'unset',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '$1',
-  cursor: 'pointer',
-  '&:focus-visible': {
-    outlineWidth: '2px',
-    outlineStyle: 'solid',
-    outlineColor: '$focusOutline',
-    outlineOffset: '2px',
-  },
-});
-
-const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: ReactNode }) => {
+const AnimatedContainer = ({
+  id,
+  isOpen,
+  children,
+}: {
+  id: string;
+  isOpen: boolean;
+  children: ReactNode;
+}) => {
   const appliedStyle = useMemo(
     () =>
       isOpen
         ? {
-            transition: 'all 0.2s ease-out',
+            transition: 'all 0.2s ease-out, visibility 0s',
             paddingBottom: 0,
             paddingTop: 0,
             border: 'none',
           }
         : {
-            transition: 'all 0.2s ease-out',
+            transition: 'all 0.2s ease-out, visibility 0s 0.2s',
             padding: '0px 16px',
             pointerEvents: 'none',
             border: 'none',
+            visibility: 'hidden',
           },
     [isOpen],
   );
@@ -106,6 +102,7 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
 
   return (
     <StyledTr
+      id={id}
       css={isOpen ? { '&:not(:last-child)': { borderBottom: '1px solid $tableRowBorder' } } : {}}
     >
       <Td css={appliedStyle} fullColSpan>
@@ -136,6 +133,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
       href,
       linkAs,
       linkCell,
+      linkProps,
       interactive,
       ...props
     },
@@ -146,6 +144,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
     }
     const Component = asChild ? StyledTrSlot : StyledTr;
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const contentId = useId();
 
     if (!asChild) {
       // eslint-disable-next-line @eslint-react/no-children-to-array
@@ -179,25 +178,37 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
                 e.preventDefault();
               }}
             >
-              <ExpandButton
-                type="button"
-                aria-label="Expand row"
-                aria-expanded={isCollapsed}
-                onClick={() => setIsCollapsed(!isCollapsed)}
-              >
+              {asChild ? (
                 <ChevronRightIcon
-                  aria-hidden
+                  onClick={() => setIsCollapsed(!isCollapsed)}
                   style={{
+                    cursor: 'pointer',
                     transition: 'transform 0.2s ease-out',
                     transform: isCollapsed ? 'rotate(90deg)' : 'initial',
                   }}
                 />
-              </ExpandButton>
+              ) : (
+                <ExpandButton
+                  type="button"
+                  aria-label="Expand row"
+                  aria-expanded={isCollapsed}
+                  aria-controls={contentId}
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                >
+                  <ChevronRightIcon
+                    aria-hidden
+                    style={{
+                      transition: 'transform 0.2s ease-out',
+                      transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                    }}
+                  />
+                </ExpandButton>
+              )}
             </Box>
           </Td>
         ) : null,
       // eslint-disable-next-line @eslint-react/exhaustive-deps
-      [isCollapsed],
+      [isCollapsed, asChild],
     );
 
     const renderedChildren = useMemo(() => {
@@ -217,10 +228,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
       return (
         <>
           {TdEl}
-          {withRowLink(children, { href, linkAs, linkCell })}
+          {withRowLink(children, { href, linkAs, linkCell, linkProps }, Td)}
         </>
       );
-    }, [asChild, TdEl, children, href, linkAs, linkCell]);
+    }, [asChild, TdEl, children, href, linkAs, linkCell, linkProps]);
 
     return (
       <>
@@ -243,7 +254,9 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
           {renderedChildren}
         </Component>
         {!!collapsedContent && (
-          <AnimatedContainer isOpen={isCollapsed}>{collapsedContent}</AnimatedContainer>
+          <AnimatedContainer id={contentId} isOpen={isCollapsed}>
+            {collapsedContent}
+          </AnimatedContainer>
         )}
       </>
     );

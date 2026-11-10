@@ -39,6 +39,7 @@ export const Skeleton = styled('div', {
   '@motion': {
     '&::after': {
       animation: 'none',
+      opacity: 0,
     },
   },
 

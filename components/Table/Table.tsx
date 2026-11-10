@@ -1,5 +1,13 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import React, { ComponentProps, ElementRef, forwardRef, ReactNode, useMemo, useState } from 'react';
+import React, {
+  ComponentProps,
+  ElementRef,
+  forwardRef,
+  ReactNode,
+  useId,
+  useMemo,
+  useState,
+} from 'react';
 
 import { styled, VariantProps } from '../../stitches.config';
 import { Box } from '../Box';
@@ -8,6 +16,7 @@ import { Flex } from '../Flex';
 import { Label } from '../Label';
 import { rowLinkRowStyles, RowLinkShortcutProps, withRowLink } from '../RowLink';
 import { Text } from '../Text';
+import { ExpandButton } from './ExpandButton';
 
 export const Caption = styled('caption', Text, {
   display: 'table-caption',
@@ -127,26 +136,13 @@ export const StyledTr = styled('tr', rowLinkRowStyles, {
   ],
 });
 
-const ExpandButton = styled('button', {
-  all: 'unset',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '$1',
-  cursor: 'pointer',
-  '&:focus-visible': {
-    outlineWidth: '2px',
-    outlineStyle: 'solid',
-    outlineColor: '$focusOutline',
-    outlineOffset: '2px',
-  },
-});
-
 const AnimatedTr = ({
+  id,
   collapsedContentColSpan,
   isOpen,
   children,
 }: {
+  id: string;
   collapsedContentColSpan: number;
   isOpen: boolean;
   children: ReactNode;
@@ -154,9 +150,10 @@ const AnimatedTr = ({
   const appliedStyle = useMemo(
     () =>
       isOpen
-        ? { transition: 'padding 0.2s ease-out' }
+        ? { transition: 'padding 0.2s ease-out, visibility 0s' }
         : {
-            transition: 'padding 0.2s ease-out',
+            transition: 'padding 0.2s ease-out, visibility 0s 0.2s',
+            visibility: 'hidden',
             lineHeight: 0,
             fontSize: 0,
             padding: '0px 16px',
@@ -179,7 +176,7 @@ const AnimatedTr = ({
 
   return (
     <Tr>
-      <Td colSpan={collapsedContentColSpan} css={appliedStyle}>
+      <Td id={id} colSpan={collapsedContentColSpan} css={appliedStyle}>
         <Box css={containerStyle}>{children}</Box>
       </Td>
     </Tr>
@@ -206,12 +203,14 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       href,
       linkAs,
       linkCell,
+      linkProps,
       interactive,
       ...props
     },
     ref,
   ) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const contentId = useId();
 
     return (
       <>
@@ -253,8 +252,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
               >
                 <ExpandButton
                   type="button"
+                  css={{ width: '100%', height: '100%' }}
                   aria-label="Expand row"
                   aria-expanded={isCollapsed}
+                  aria-controls={contentId}
                   onClick={() => setIsCollapsed(!isCollapsed)}
                 >
                   <ChevronRightIcon
@@ -268,10 +269,14 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
               </Flex>
             </Td>
           )}
-          {withRowLink(children, { href, linkAs, linkCell })}
+          {withRowLink(children, { href, linkAs, linkCell, linkProps }, Td)}
         </StyledTr>
         {!!collapsedContent && (
-          <AnimatedTr isOpen={isCollapsed} collapsedContentColSpan={collapsedContentColSpan}>
+          <AnimatedTr
+            id={contentId}
+            isOpen={isCollapsed}
+            collapsedContentColSpan={collapsedContentColSpan}
+          >
             {collapsedContent}
           </AnimatedTr>
         )}

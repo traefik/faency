@@ -44,6 +44,7 @@ globalStyle(`${skeletonBase}::after`, {
   '@media': {
     [breakpoints.motion]: {
       animation: 'none',
+      opacity: 0,
     },
   },
 });

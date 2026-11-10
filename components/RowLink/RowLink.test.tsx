@@ -2,13 +2,14 @@ import { render, screen, within } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
 
+import { styled } from '../../stitches.config';
 import { Table as AriaTable, Tbody as AriaTbody, Td as AriaTd, Tr as AriaTr } from '../AriaTable';
 import { Table, Tbody, Td, Tr } from '../Table';
-import { RowLink } from './RowLink';
+import { resetRowLinkWarnings, RowLink } from './RowLink';
 
 const RouterLink = React.forwardRef<
   HTMLAnchorElement,
-  { href: string; children?: React.ReactNode }
+  { href: string; children?: React.ReactNode } & Record<string, unknown>
 >(({ href, children, ...props }, ref) => (
   <a ref={ref} href={href} data-router-link="" {...props}>
     {children}
@@ -122,6 +123,130 @@ describe.each([
     const { container } = renderRow({ href: '/apis/api-1' });
 
     expect(await axe(container)).toHaveNoViolations();
+  });
+});
+
+describe('Tr with href and a child that is not a Td', () => {
+  const NameCell = ({ name }: { name: string }) => <AriaTd>{name}</AriaTd>;
+
+  beforeEach(() => {
+    resetRowLinkWarnings();
+    jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+  });
+  afterEach(() => jest.restoreAllMocks());
+
+  it('should warn and add no link for a custom cell component', () => {
+    render(
+      <AriaTable aria-label="APIs">
+        <AriaTbody>
+          <AriaTr href="/apis/api-1">
+            <NameCell name="api-1" />
+            <AriaTd>Published</AriaTd>
+          </AriaTr>
+        </AriaTbody>
+      </AriaTable>,
+    );
+
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: 'api-1' })).toBeInTheDocument();
+    expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('is not a Td'));
+  });
+
+  it('should warn only once for the same problem', () => {
+    const renderRow = () => (
+      <AriaTable aria-label="APIs">
+        <AriaTbody>
+          <AriaTr href="/apis/api-1">
+            <NameCell name="api-1" />
+          </AriaTr>
+        </AriaTbody>
+      </AriaTable>
+    );
+    const { rerender } = render(renderRow());
+    rerender(renderRow());
+
+    expect(console.warn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should warn and not put the cells of a Fragment in the link', () => {
+    render(
+      <AriaTable aria-label="APIs">
+        <AriaTbody>
+          <AriaTr href="/apis/api-1">
+            <>
+              <AriaTd>api-1</AriaTd>
+              <AriaTd>Published</AriaTd>
+            </>
+          </AriaTr>
+        </AriaTbody>
+      </AriaTable>,
+    );
+
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    expect(screen.getAllByRole('cell')).toHaveLength(2);
+    expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('is not a Td'));
+  });
+});
+
+describe.each([
+  ['AriaTable', AriaTable, AriaTbody, AriaTr, AriaTd],
+  ['Table', Table, Tbody, Tr, Td],
+] as const)(
+  '%s Tr with href and other cells',
+  (_, TableComponent, TbodyComponent, TrComponent, TdComponent) => {
+    it('should put a styled Td in the row link', () => {
+      const NameTd = styled(TdComponent, { fontWeight: '$semiBold' });
+      render(
+        <TableComponent aria-label="APIs">
+          <TbodyComponent>
+            <TrComponent href="/apis/api-1">
+              <NameTd>api-1</NameTd>
+            </TrComponent>
+          </TbodyComponent>
+        </TableComponent>,
+      );
+
+      expect(screen.getByRole('link', { name: 'api-1' })).toHaveAttribute('href', '/apis/api-1');
+    });
+
+    it('should pass linkProps to the link component', () => {
+      render(
+        <TableComponent aria-label="APIs">
+          <TbodyComponent>
+            <TrComponent
+              href="/apis/api-1"
+              linkAs={RouterLink}
+              linkProps={{ 'data-return-to': '/apis' }}
+            >
+              <TdComponent>api-1</TdComponent>
+            </TrComponent>
+          </TbodyComponent>
+        </TableComponent>,
+      );
+
+      const link = screen.getByRole('link', { name: 'api-1' });
+      expect(link).toHaveAttribute('data-return-to', '/apis');
+      expect(link).toHaveAttribute('href', '/apis/api-1');
+    });
+  },
+);
+
+describe('AriaTable Tr with asChild and collapsedContent', () => {
+  it('should not put a button in the row link', () => {
+    render(
+      <AriaTable aria-label="APIs">
+        <AriaTbody>
+          <AriaTr asChild collapsedContent="More about api-1">
+            <a href="/apis/api-1">
+              <AriaTd>api-1</AriaTd>
+              <AriaTd>Published</AriaTd>
+            </a>
+          </AriaTr>
+        </AriaTbody>
+      </AriaTable>,
+    );
+
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 });
 
