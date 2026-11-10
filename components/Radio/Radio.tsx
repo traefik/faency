@@ -2,8 +2,43 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import React from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
+import { useFieldControl } from '../Field/FieldContext';
 
-export const RadioGroup = styled(RadioGroupPrimitive.Root, {
+const RadioGroupRoot = React.forwardRef<HTMLDivElement, RadioGroupPrimitive.RadioGroupProps>(
+  (
+    {
+      id,
+      disabled,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+      'aria-labelledby': ariaLabelledBy,
+      ...props
+    },
+    forwardedRef,
+  ) => {
+    const control = useFieldControl({
+      id,
+      disabled,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+      labelable: false,
+    });
+
+    return (
+      <RadioGroupPrimitive.Root
+        {...props}
+        id={control.id}
+        disabled={control.disabled}
+        aria-labelledby={ariaLabelledBy ?? control.labelId}
+        aria-describedby={control['aria-describedby']}
+        aria-invalid={control['aria-invalid']}
+        ref={forwardedRef}
+      />
+    );
+  },
+);
+
+export const RadioGroup = styled(RadioGroupRoot, {
   display: 'flex',
 });
 
@@ -56,6 +91,9 @@ export const RADIO_BASE_STYLES = {
   },
 };
 const StyledRadio = styled(RadioGroupPrimitive.Item, RADIO_BASE_STYLES, {
+  '[role="radiogroup"][aria-invalid="true"] &:not(:focus-visible)': {
+    boxShadow: 'inset 0 0 0 1px $colors$radioInvalidBorder',
+  },
   '@hover': {
     '&:hover': {
       cursor: 'pointer',
@@ -119,5 +157,5 @@ export const Radio = React.forwardRef<React.ElementRef<typeof StyledRadio>, Radi
     <StyledRadio {...props} ref={forwardedRef}>
       <StyledIndicator />
     </StyledRadio>
-  )
+  ),
 );

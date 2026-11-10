@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
+import { useFieldControl } from '../Field/FieldContext';
 
 // CONSTANTS
 const FOCUS_SHADOW = elevationVariants[1].boxShadow; // apply elevation $1 when focus
@@ -37,6 +38,7 @@ const StyledInput = styled('input', {
 
   '&:-webkit-autofill,&:autofill': {
     boxShadow: 'inset 0 0 0 1px $colors$inputBorder, inset 0 0 0 100px $colors$inputBg',
+    WebkitTextFillColor: '$colors$hiContrast',
   },
 
   '&:-webkit-autofill::first-line,&:autofill::first-line': {
@@ -46,6 +48,10 @@ const StyledInput = styled('input', {
 
   '&:focus-visible': {
     boxShadow: `inset 0 0 0 2px $colors$inputFocusBorder, ${FOCUS_SHADOW}`,
+  },
+
+  '&:-webkit-autofill:focus-visible,&:autofill:focus-visible': {
+    boxShadow: `inset 0 0 0 2px $colors$inputFocusBorder, inset 0 0 0 100px $colors$inputBg, ${FOCUS_SHADOW}`,
   },
 
   '&::placeholder': {
@@ -112,8 +118,15 @@ const StyledInput = styled('input', {
     state: {
       invalid: {
         boxShadow: 'inset 0 0 0 1px $colors$inputInvalidBorder',
+        '&:-webkit-autofill,&:autofill': {
+          boxShadow:
+            'inset 0 0 0 1px $colors$inputInvalidBorder, inset 0 0 0 100px $colors$inputBg',
+        },
         '&:focus-visible': {
           boxShadow: `inset 0 0 0 2px $colors$inputInvalidBorder, ${FOCUS_SHADOW}`,
+        },
+        '&:-webkit-autofill:focus-visible,&:autofill:focus-visible': {
+          boxShadow: `inset 0 0 0 2px $colors$inputInvalidBorder, inset 0 0 0 100px $colors$inputBg, ${FOCUS_SHADOW}`,
         },
       },
     },
@@ -221,6 +234,7 @@ const InputWrapper = styled('div', {
   lineHeight: 0,
 
   position: 'relative',
+  isolation: 'isolate',
   backgroundColor: '$inputBg',
   color: '$inputPlaceholder',
 
@@ -351,6 +365,8 @@ const AdornmentWrapper = styled('div', {
 
 const AdornmentWrapperStart = styled(AdornmentWrapper, {
   left: 0,
+  zIndex: 1,
+  pointerEvents: 'none',
 });
 
 const AdornmentWrapperEnd = styled(AdornmentWrapper, {
@@ -372,29 +388,47 @@ export interface InputHandle extends HTMLInputElement {
 }
 
 export const Input = React.forwardRef<InputHandle, InputProps>(
-  ({ size, startAdornment, endAdornment, css, ...props }, forwardedRef) => {
+  (
+    {
+      size,
+      startAdornment,
+      endAdornment,
+      css,
+      state,
+      id,
+      disabled,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+      ...props
+    },
+    forwardedRef,
+  ) => {
     const inputRef = React.useRef<InputHandle>(null);
+    const control = useFieldControl({
+      id,
+      disabled,
+      invalid: state === 'invalid',
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+    });
+    const resolvedState = control.invalid ? 'invalid' : state;
 
-    React.useImperativeHandle(
-      forwardedRef,
-      () => {
-        const { current } = inputRef;
-        if (current) {
-          current.clear = () => {
-            current.value = '';
-          };
-        }
-        return current as InputHandle;
-      },
-      [inputRef]
-    );
+    React.useImperativeHandle(forwardedRef, () => {
+      const { current } = inputRef;
+      if (current) {
+        current.clear = () => {
+          current.value = '';
+        };
+      }
+      return current as InputHandle;
+    }, [inputRef]);
 
     const hasStartAdornment = React.useMemo(() => Boolean(startAdornment), [startAdornment]);
 
     const hasEndAdornment = React.useMemo(() => Boolean(endAdornment), [endAdornment]);
 
     return (
-      <InputWrapper css={css} disabled={props.disabled} state={props.state}>
+      <InputWrapper css={css} disabled={control.disabled} state={resolvedState}>
         {hasStartAdornment && (
           <AdornmentWrapperStart size={size}>{startAdornment}</AdornmentWrapperStart>
         )}
@@ -404,10 +438,15 @@ export const Input = React.forwardRef<InputHandle, InputProps>(
           startAdornment={hasStartAdornment}
           endAdornment={hasEndAdornment}
           size={size}
+          state={resolvedState}
+          id={control.id}
+          disabled={control.disabled}
+          aria-describedby={control['aria-describedby']}
+          aria-invalid={control['aria-invalid']}
           {...props}
         />
         {hasEndAdornment && <AdornmentWrapperEnd size={size}>{endAdornment}</AdornmentWrapperEnd>}
       </InputWrapper>
     );
-  }
+  },
 );

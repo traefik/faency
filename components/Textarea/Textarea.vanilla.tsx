@@ -4,6 +4,8 @@ import React from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { FieldVanilla } from '../Field/Field.vanilla';
+import { FieldLabelProps, useFieldControl } from '../Field/FieldContext';
 import { LabelVanilla } from '../Label';
 import {
   adornmentWrapperEnd,
@@ -19,6 +21,9 @@ export interface TextareaVanillaOwnProps extends CSSProps {
   cursor?: StyledTextareaRecipeVariants['cursor'];
   resize?: StyledTextareaRecipeVariants['resize'];
   label?: string;
+  description?: React.ReactNode;
+  error?: React.ReactNode;
+  announceError?: boolean;
   endAdornment?: React.ReactNode;
   rootCss?: CSSProps['css'];
 }
@@ -26,16 +31,17 @@ export interface TextareaVanillaOwnProps extends CSSProps {
 export type TextareaVanillaProps = Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> &
   TextareaVanillaOwnProps;
 
-export const TextareaVanilla = React.forwardRef<HTMLTextAreaElement, TextareaVanillaProps>(
+type TextareaVanillaControlProps = Omit<
+  TextareaVanillaProps,
+  'label' | 'description' | 'error' | 'announceError' | 'rootCss'
+>;
+
+const TextareaVanillaControl = React.forwardRef<HTMLTextAreaElement, TextareaVanillaControlProps>(
   (
     {
       state,
       disabled,
-      onFocus,
-      onBlur,
-      label,
       id,
-      rootCss,
       css,
       endAdornment,
       variant,
@@ -43,85 +49,80 @@ export const TextareaVanilla = React.forwardRef<HTMLTextAreaElement, TextareaVan
       resize,
       className,
       style,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
       ...props
     },
     forwardedRef,
   ) => {
-    const [hasFocus, setHasFocus] = React.useState(false);
     const { colors } = useVanillaExtractTheme();
-
-    const invalid = React.useMemo(() => state === 'invalid', [state]);
-    const hasEndAdornment = React.useMemo(() => Boolean(endAdornment), [endAdornment]);
-
-    const labelVariant = React.useMemo(() => {
-      if (disabled) {
-        return 'subtle';
-      }
-      if (invalid) {
-        return 'invalid';
-      }
-      if (hasFocus) {
-        return 'contrast';
-      }
-      return 'default';
-    }, [invalid, disabled, hasFocus]);
-
-    const handleFocus = React.useCallback(
-      (e: React.FocusEvent<HTMLTextAreaElement>) => {
-        if (onFocus) {
-          onFocus(e);
-        }
-        setHasFocus(true);
-      },
-      [onFocus, setHasFocus],
-    );
-
-    const handleBlur = React.useCallback(
-      (e: React.FocusEvent<HTMLTextAreaElement>) => {
-        if (onBlur) {
-          onBlur(e);
-        }
-        setHasFocus(false);
-      },
-      [onBlur, setHasFocus],
-    );
-
-    const { style: rootCssStyles, vars: rootVars } = processCSSProp(rootCss, colors);
-    const rootMergedStyles = { ...rootCssStyles, ...assignInlineVars(rootVars) };
+    const control = useFieldControl({
+      id,
+      disabled,
+      invalid: state === 'invalid',
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+    });
+    const resolvedState = control.invalid ? 'invalid' : state;
+    const hasEndAdornment = Boolean(endAdornment);
 
     const { style: cssStyles, vars } = processCSSProp(css, colors);
     const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
 
-    const textareaWrapperClass = textareaWrapperRecipe({ state, disabled });
+    const textareaWrapperClass = textareaWrapperRecipe({
+      state: resolvedState,
+      disabled: control.disabled,
+    });
     const styledTextareaClass = styledTextareaRecipe({
       variant,
-      state,
+      state: resolvedState,
       cursor,
       resize,
       endAdornment: hasEndAdornment,
     });
 
     return (
-      <div style={rootMergedStyles}>
-        {label && (
-          <LabelVanilla variant={labelVariant} htmlFor={id} css={{ display: 'block' }}>
-            {label}
-          </LabelVanilla>
-        )}
-        <div className={textareaWrapperClass}>
-          <textarea
-            id={id}
-            ref={forwardedRef}
-            className={`${styledTextareaClass} ${className || ''}`.trim()}
-            style={mergedStyles}
-            disabled={disabled}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            {...props}
-          />
-          {hasEndAdornment && <div className={adornmentWrapperEnd}>{endAdornment}</div>}
-        </div>
+      <div className={textareaWrapperClass}>
+        <textarea
+          id={control.id}
+          disabled={control.disabled}
+          ref={forwardedRef}
+          className={`${styledTextareaClass} ${className || ''}`.trim()}
+          style={mergedStyles}
+          aria-describedby={control['aria-describedby']}
+          aria-invalid={control['aria-invalid']}
+          {...props}
+        />
+        {hasEndAdornment && <div className={adornmentWrapperEnd}>{endAdornment}</div>}
       </div>
+    );
+  },
+);
+
+TextareaVanillaControl.displayName = 'TextareaVanillaControl';
+
+export const TextareaVanilla = React.forwardRef<HTMLTextAreaElement, TextareaVanillaProps>(
+  ({ label, description, error, announceError, id, rootCss, state, ...props }, forwardedRef) => {
+    return (
+      <FieldVanilla
+        id={id}
+        label={
+          label &&
+          ((labelProps: FieldLabelProps) => (
+            <LabelVanilla {...labelProps} css={{ display: 'block' }}>
+              {label}
+            </LabelVanilla>
+          ))
+        }
+        description={description}
+        error={error}
+        announceError={announceError}
+        invalid={state === 'invalid'}
+        disabled={props.disabled}
+        css={rootCss}
+      >
+        <TextareaVanillaControl ref={forwardedRef} id={id} state={state} {...props} />
+      </FieldVanilla>
     );
   },
 );

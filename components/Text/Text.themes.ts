@@ -18,7 +18,7 @@ export namespace Theme {
     textSubtle: tinycolor('black').setAlpha(0.51).toHslString(),
     textDefault: tinycolor('black').setAlpha(0.74).toHslString(),
     textContrast: 'black',
-    textInvalid: '$red9',
+    textInvalid: '$red11',
     textRed: '$red10',
   });
 
@@ -26,7 +26,7 @@ export namespace Theme {
     textSubtle: tinycolor('white').setAlpha(0.51).toHslString(),
     textDefault: tinycolor('white').setAlpha(0.74).toHslString(),
     textContrast: 'white',
-    textInvalid: '$red9',
+    textInvalid: '$red11',
     textRed: '$red10',
   });
 }

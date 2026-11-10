@@ -21,6 +21,9 @@ if (typeof window !== 'undefined') {
     unobserve() {
       // do nothing
     }
+    disconnect() {
+      // do nothing
+    }
   };
 
   window.DOMRect = {

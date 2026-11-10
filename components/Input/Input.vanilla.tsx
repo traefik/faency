@@ -4,6 +4,7 @@ import React from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useFieldControl } from '../Field/FieldContext';
 import { adornmentWrapperRecipe, inputWrapperRecipe, styledInputRecipe } from './Input.vanilla.css';
 
 type StyledInputRecipeVariants = NonNullable<RecipeVariants<typeof styledInputRecipe>>;
@@ -26,10 +27,33 @@ export interface InputVanillaHandle extends HTMLInputElement {
 
 export const InputVanilla = React.forwardRef<InputVanillaHandle, InputVanillaProps>(
   (
-    { size, startAdornment, endAdornment, css, variant, state, cursor, className, style, ...props },
+    {
+      size,
+      startAdornment,
+      endAdornment,
+      css,
+      variant,
+      state,
+      cursor,
+      className,
+      style,
+      id,
+      disabled,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+      ...props
+    },
     forwardedRef,
   ) => {
     const inputRef = React.useRef<InputVanillaHandle>(null);
+    const control = useFieldControl({
+      id,
+      disabled,
+      invalid: state === 'invalid',
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+    });
+    const resolvedState = control.invalid ? 'invalid' : state;
     const { colors } = useVanillaExtractTheme();
     const { style: cssStyles, vars } = processCSSProp(css, colors);
     const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
@@ -48,15 +72,15 @@ export const InputVanilla = React.forwardRef<InputVanillaHandle, InputVanillaPro
     const hasEndAdornment = React.useMemo(() => Boolean(endAdornment), [endAdornment]);
 
     const inputWrapperClass = inputWrapperRecipe({
-      disabled: props.disabled,
-      state,
+      disabled: control.disabled,
+      state: resolvedState,
       size,
     });
 
     const styledInputClass = styledInputRecipe({
       size,
       variant,
-      state,
+      state: resolvedState,
       cursor,
       startAdornment: hasStartAdornment,
       endAdornment: hasEndAdornment,
@@ -76,7 +100,15 @@ export const InputVanilla = React.forwardRef<InputVanillaHandle, InputVanillaPro
       <div className={`${inputWrapperClass} ${className || ''}`.trim()} style={mergedStyles}>
         {hasStartAdornment && <div className={adornmentWrapperStartClass}>{startAdornment}</div>}
 
-        <input ref={inputRef} className={styledInputClass} {...props} />
+        <input
+          ref={inputRef}
+          className={styledInputClass}
+          id={control.id}
+          disabled={control.disabled}
+          aria-describedby={control['aria-describedby']}
+          aria-invalid={control['aria-invalid']}
+          {...props}
+        />
 
         {hasEndAdornment && <div className={adornmentWrapperEndClass}>{endAdornment}</div>}
       </div>

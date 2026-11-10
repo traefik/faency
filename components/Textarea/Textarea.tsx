@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
-import { Box } from '../Box';
 import { elevationVariants } from '../Elevation';
+import { Field } from '../Field/Field';
+import { FieldLabelProps, useFieldControl } from '../Field/FieldContext';
 import { Label } from '../Label';
 
 // CONSTANTS
@@ -33,6 +34,7 @@ const StyledTextarea = styled('textarea', {
 
   '&:-webkit-autofill,&:autofill': {
     boxShadow: 'inset 0 0 0 1px $colors$textareaBorder, inset 0 0 0 100px $colors$textareaBg',
+    WebkitTextFillColor: '$colors$hiContrast',
   },
 
   '&:-webkit-autofill::first-line,&:autofill::first-line': {
@@ -42,6 +44,10 @@ const StyledTextarea = styled('textarea', {
 
   '&:focus-visible': {
     boxShadow: `inset 0 0 0 2px $colors$textareaFocusBorder, ${FOCUS_SHADOW}`,
+  },
+
+  '&:-webkit-autofill:focus-visible,&:autofill:focus-visible': {
+    boxShadow: `inset 0 0 0 2px $colors$textareaFocusBorder, inset 0 0 0 100px $colors$textareaBg, ${FOCUS_SHADOW}`,
   },
 
   '&::placeholder': {
@@ -73,8 +79,15 @@ const StyledTextarea = styled('textarea', {
     state: {
       invalid: {
         boxShadow: 'inset 0 0 0 1px $colors$textareaInvalidBorder',
+        '&:-webkit-autofill,&:autofill': {
+          boxShadow:
+            'inset 0 0 0 1px $colors$textareaInvalidBorder, inset 0 0 0 100px $colors$textareaBg',
+        },
         '&:focus-visible': {
           boxShadow: `inset 0 0 0 2px $colors$textareaInvalidBorder, ${FOCUS_SHADOW}`,
+        },
+        '&:-webkit-autofill:focus-visible,&:autofill:focus-visible': {
+          boxShadow: `inset 0 0 0 2px $colors$textareaInvalidBorder, inset 0 0 0 100px $colors$textareaBg, ${FOCUS_SHADOW}`,
         },
         '@hover': {
           '&:hover': {
@@ -232,83 +245,97 @@ const AdornmentWrapperEnd = styled('div', {
   justifyContent: 'center',
 });
 
-export interface TextareaVariants
-  extends Omit<VariantProps<typeof StyledTextarea>, 'endAdornment'> {}
+export interface TextareaVariants extends Omit<
+  VariantProps<typeof StyledTextarea>,
+  'endAdornment'
+> {}
 
 export interface TextareaProps
-  extends TextareaVariants,
-    Omit<React.ComponentProps<typeof StyledTextarea>, 'endAdornment'> {
+  extends TextareaVariants, Omit<React.ComponentProps<typeof StyledTextarea>, 'endAdornment'> {
   label?: string;
+  description?: React.ReactNode;
+  error?: React.ReactNode;
+  announceError?: boolean;
   endAdornment?: React.ReactNode;
   rootCss?: CSS;
 }
 
-export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>, TextareaProps>(
+type TextareaControlProps = Omit<
+  TextareaProps,
+  'label' | 'description' | 'error' | 'announceError' | 'rootCss'
+>;
+
+const TextareaControl = React.forwardRef<
+  React.ElementRef<typeof StyledTextarea>,
+  TextareaControlProps
+>(
   (
-    { state, disabled, onFocus, onBlur, label, id, rootCss, css, endAdornment, ...props },
-    forwardedRef
+    {
+      state,
+      disabled,
+      id,
+      css,
+      endAdornment,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+      ...props
+    },
+    forwardedRef,
   ) => {
-    const [hasFocus, setHasFocus] = React.useState(false);
-
-    const invalid = React.useMemo(() => state === 'invalid', [state]);
-
-    const hasEndAdornment = React.useMemo(() => Boolean(endAdornment), [endAdornment]);
-
-    const labelVariant = React.useMemo(() => {
-      if (disabled) {
-        return 'subtle';
-      }
-      if (invalid) {
-        return 'invalid';
-      }
-      if (hasFocus) {
-        return 'contrast';
-      }
-      return 'default';
-    }, [invalid, disabled, hasFocus]);
-
-    const handleFocus = React.useCallback(
-      (e: React.FocusEvent<HTMLTextAreaElement>) => {
-        if (onFocus) {
-          onFocus(e);
-        }
-        setHasFocus(true);
-      },
-      [onFocus, setHasFocus]
-    );
-
-    const handleBlur = React.useCallback(
-      (e: React.FocusEvent<HTMLTextAreaElement>) => {
-        if (onBlur) {
-          onBlur(e);
-        }
-        setHasFocus(false);
-      },
-      [onBlur, setHasFocus]
-    );
+    const control = useFieldControl({
+      id,
+      disabled,
+      invalid: state === 'invalid',
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+    });
+    const resolvedState = control.invalid ? 'invalid' : state;
+    const hasEndAdornment = Boolean(endAdornment);
 
     return (
-      <Box css={rootCss}>
-        {label && (
-          <Label variant={labelVariant} htmlFor={id} css={{ display: 'block' }}>
-            {label}
-          </Label>
-        )}
-        <TextareaWrapper state={state} disabled={disabled}>
-          <StyledTextarea
-            id={id}
-            ref={forwardedRef}
-            css={css}
-            disabled={disabled}
-            state={state}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            endAdornment={hasEndAdornment}
-            {...props}
-          />
-          {hasEndAdornment && <AdornmentWrapperEnd>{endAdornment}</AdornmentWrapperEnd>}
-        </TextareaWrapper>
-      </Box>
+      <TextareaWrapper state={resolvedState} disabled={control.disabled}>
+        <StyledTextarea
+          id={control.id}
+          ref={forwardedRef}
+          css={css}
+          disabled={control.disabled}
+          state={resolvedState}
+          endAdornment={hasEndAdornment}
+          aria-describedby={control['aria-describedby']}
+          aria-invalid={control['aria-invalid']}
+          {...props}
+        />
+        {hasEndAdornment && <AdornmentWrapperEnd>{endAdornment}</AdornmentWrapperEnd>}
+      </TextareaWrapper>
     );
-  }
+  },
+);
+
+export const Textarea = React.forwardRef<React.ElementRef<typeof StyledTextarea>, TextareaProps>(
+  (
+    { label, description, error, announceError, id, rootCss, state, disabled, ...props },
+    forwardedRef,
+  ) => {
+    return (
+      <Field
+        id={id}
+        label={
+          label &&
+          ((labelProps: FieldLabelProps) => (
+            <Label {...labelProps} css={{ display: 'block' }}>
+              {label}
+            </Label>
+          ))
+        }
+        description={description}
+        error={error}
+        announceError={announceError}
+        invalid={state === 'invalid'}
+        disabled={disabled}
+        css={rootCss}
+      >
+        <TextareaControl ref={forwardedRef} id={id} state={state} disabled={disabled} {...props} />
+      </Field>
+    );
+  },
 );

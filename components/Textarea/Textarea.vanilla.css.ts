@@ -33,6 +33,7 @@ const styledTextareaBase = style({
   selectors: {
     '&:-webkit-autofill, &:autofill': {
       boxShadow: `inset 0 0 0 1px ${tokens.colors.textareaBorder}, inset 0 0 0 100px ${tokens.colors.textareaBg}`,
+      WebkitTextFillColor: tokens.colors.hiContrast,
     },
     '&:-webkit-autofill::first-line, &:autofill::first-line': {
       fontFamily: tokens.fonts.rubik,
@@ -40,6 +41,9 @@ const styledTextareaBase = style({
     },
     '&:focus-visible': {
       boxShadow: `inset 0 0 0 2px ${tokens.colors.textareaFocusBorder}, ${FOCUS_SHADOW}`,
+    },
+    '&:-webkit-autofill:focus-visible, &:autofill:focus-visible': {
+      boxShadow: `inset 0 0 0 2px ${tokens.colors.textareaFocusBorder}, inset 0 0 0 100px ${tokens.colors.textareaBg}, ${FOCUS_SHADOW}`,
     },
     '&::placeholder': {
       color: tokens.colors.textareaPlaceholder,
@@ -76,8 +80,14 @@ export const styledTextareaRecipe = recipe({
       invalid: {
         boxShadow: `inset 0 0 0 1px ${tokens.colors.textareaInvalidBorder}`,
         selectors: {
+          '&:-webkit-autofill, &:autofill': {
+            boxShadow: `inset 0 0 0 1px ${tokens.colors.textareaInvalidBorder}, inset 0 0 0 100px ${tokens.colors.textareaBg}`,
+          },
           '&:focus-visible': {
             boxShadow: `inset 0 0 0 2px ${tokens.colors.textareaInvalidBorder}, ${FOCUS_SHADOW}`,
+          },
+          '&:-webkit-autofill:focus-visible, &:autofill:focus-visible': {
+            boxShadow: `inset 0 0 0 2px ${tokens.colors.textareaInvalidBorder}, inset 0 0 0 100px ${tokens.colors.textareaBg}, ${FOCUS_SHADOW}`,
           },
         },
         '@media': {

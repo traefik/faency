@@ -4,9 +4,11 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
 import { styled } from '../../stitches.config';
+import { FIELD_STORY_ARG_TYPES, FieldStoryArgs } from '../../utils/fieldStoryArgs';
 import ignoreArgType from '../../utils/ignoreArgType';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Box } from '../Box';
+import { Field } from '../Field';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
 import { Text } from '../Text';
@@ -31,6 +33,14 @@ const Component: Meta<typeof InputForStory> = {
   title: 'Components/Input',
   component: InputForStory,
   argTypes: { onClick: { action: 'clicked' } },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Icons in `startAdornment` and `endAdornment` are decorative: give them `aria-hidden`. An adornment that does an action must be a `button` with an `aria-label`, as in the TextField clear and password buttons.',
+      },
+    },
+  },
 };
 
 export const Basic: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
@@ -59,8 +69,8 @@ export const Basic: StoryFn<typeof InputForStory> = ({ id, ...args }) => (
       <Label htmlFor={`${id}-adornments`}>Adornments</Label>
       <InputForStory
         id={`${id}-adornments`}
-        startAdornment={<MagnifyingGlassIcon />}
-        endAdornment={<StyledEyeOpenIcon />}
+        startAdornment={<MagnifyingGlassIcon aria-hidden />}
+        endAdornment={<StyledEyeOpenIcon aria-hidden />}
         {...args}
       />
     </Box>
@@ -148,8 +158,8 @@ export const Ghost: StoryFn<typeof InputForStory> = (args) => (
       <Label htmlFor="ghost-adornments">Adornments</Label>
       <InputForStory
         id="ghost-adornments"
-        startAdornment={<MagnifyingGlassIcon />}
-        endAdornment={<StyledEyeOpenIcon />}
+        startAdornment={<MagnifyingGlassIcon aria-hidden />}
+        endAdornment={<StyledEyeOpenIcon aria-hidden />}
         {...args}
       />
     </Box>
@@ -160,22 +170,22 @@ Ghost.args = { defaultValue: 'value', variant: 'ghost' };
 export const Adornments: StoryFn<typeof InputForStory> = Basic.bind({});
 Adornments.args = {
   id: 'adornments',
-  startAdornment: <MagnifyingGlassIcon />,
-  endAdornment: <StyledEyeOpenIcon />,
+  startAdornment: <MagnifyingGlassIcon aria-hidden />,
+  endAdornment: <StyledEyeOpenIcon aria-hidden />,
 };
 Adornments.argTypes = {
   startAdornment: {
     options: ['search', 'eye'],
     mapping: {
-      search: <MagnifyingGlassIcon />,
-      eye: <StyledEyeOpenIcon />,
+      search: <MagnifyingGlassIcon aria-hidden />,
+      eye: <StyledEyeOpenIcon aria-hidden />,
     },
   },
   endAdornment: {
     options: ['search', 'eye'],
     mapping: {
-      search: <MagnifyingGlassIcon />,
-      eye: <StyledEyeOpenIcon />,
+      search: <MagnifyingGlassIcon aria-hidden />,
+      eye: <StyledEyeOpenIcon aria-hidden />,
     },
   },
 };
@@ -239,8 +249,8 @@ export const Autofill: StoryFn<typeof InputForStory> = (args) => (
           id="autofill-adornments"
           name="ship-country"
           autoComplete="shipping country"
-          startAdornment={<MagnifyingGlassIcon />}
-          endAdornment={<StyledEyeOpenIcon />}
+          startAdornment={<MagnifyingGlassIcon aria-hidden />}
+          endAdornment={<StyledEyeOpenIcon aria-hidden />}
           {...args}
         />
       </Box>
@@ -289,8 +299,8 @@ export const Comparison: StoryFn = () => {
           <Label htmlFor="stitches-adornments">Adornments</Label>
           <Input
             id="stitches-adornments"
-            startAdornment={<MagnifyingGlassIcon />}
-            endAdornment={<StyledEyeOpenIcon />}
+            startAdornment={<MagnifyingGlassIcon aria-hidden />}
+            endAdornment={<StyledEyeOpenIcon aria-hidden />}
             placeholder="With adornments"
           />
         </Box>
@@ -334,8 +344,8 @@ export const Comparison: StoryFn = () => {
           <Label htmlFor="vanilla-adornments">Adornments</Label>
           <InputVanilla
             id="vanilla-adornments"
-            startAdornment={<MagnifyingGlassIcon />}
-            endAdornment={<StyledEyeOpenIcon />}
+            startAdornment={<MagnifyingGlassIcon aria-hidden />}
+            endAdornment={<StyledEyeOpenIcon aria-hidden />}
             placeholder="With adornments"
           />
         </Box>
@@ -343,5 +353,22 @@ export const Comparison: StoryFn = () => {
     </Flex>
   );
 };
+
+export const WithField: StoryFn<React.ComponentProps<typeof InputForStory> & FieldStoryArgs> = ({
+  label,
+  description,
+  error,
+  ...args
+}) => (
+  <Field label={label} description={description} error={error}>
+    <InputForStory placeholder="my-gateway" {...args} />
+  </Field>
+);
+WithField.args = {
+  label: 'Name',
+  description: 'Use Field to give the input a label, a description and an error.',
+  error: 'The name is required.',
+};
+WithField.argTypes = FIELD_STORY_ARG_TYPES;
 
 export default Component;

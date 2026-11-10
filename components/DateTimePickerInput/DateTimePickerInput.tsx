@@ -148,7 +148,7 @@ export const DateTimePickerInput = React.forwardRef<
     return (
       <StyledWrapper ref={fowardedRef}>
         <Input
-          startAdornment={<CalendarIcon />}
+          startAdornment={<CalendarIcon aria-hidden />}
           {...getReferenceProps()}
           {...inputProps}
           css={{ '& input::-webkit-calendar-picker-indicator': { display: 'none' }, ...inputCSS }}
