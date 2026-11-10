@@ -45,14 +45,14 @@ describe('TextFieldVanilla', () => {
     const { rerender } = renderWithTheme(
       <TextFieldVanilla label="Test" id="test-input" state="invalid" />,
     );
-    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByLabelText('Test')).toHaveAttribute('aria-invalid', 'true');
 
     rerender(
       <VanillaExtractThemeProvider>
         <TextFieldVanilla label="Test" id="test-input" />
       </VanillaExtractThemeProvider>,
     );
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Test')).not.toHaveAttribute('aria-invalid');
   });
 
   it('should render clearable icon when clearable prop is true and not disabled', () => {
@@ -105,10 +105,12 @@ describe('TextFieldVanilla', () => {
     expect(input.type).toBe('password');
   });
 
-  it('should show invalid icon when state is invalid', () => {
-    renderWithTheme(<TextFieldVanilla label="Test" id="test-input" state="invalid" />);
-    expect(screen.getByRole('alert')).toBeInTheDocument();
-    expect(screen.getByLabelText('Invalid')).toBeInTheDocument();
+  it('should show a hidden invalid icon when state is invalid', () => {
+    const { container } = renderWithTheme(
+      <TextFieldVanilla label="Test" id="test-input" state="invalid" />,
+    );
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(container.querySelector('svg[aria-hidden="true"]')).toBeInTheDocument();
   });
 
   it('should update label variant on focus', () => {
@@ -181,8 +183,8 @@ describe('TextFieldVanilla', () => {
   it('should combine clearable with invalid state', () => {
     renderWithTheme(<TextFieldVanilla label="Test" id="test-input" state="invalid" clearable />);
 
-    expect(screen.getByLabelText('Invalid')).toBeInTheDocument();
-    expect(screen.getByLabelText('Clear')).toBeInTheDocument();
+    expect(screen.getByLabelText('Test')).toHaveAttribute('aria-invalid', 'true');
+    expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
   });
 
   it('should have no accessibility violations', async () => {
@@ -214,5 +216,41 @@ describe('TextFieldVanilla', () => {
     );
 
     expect(container.firstChild).toBeInTheDocument();
+  });
+
+  it('should link the label to the input without an id', () => {
+    renderWithTheme(<TextFieldVanilla label="Name" />);
+    expect(screen.getByRole('textbox', { name: 'Name' })).toBeInTheDocument();
+  });
+
+  it('should render the description and the error', () => {
+    renderWithTheme(
+      <TextFieldVanilla
+        label="Name"
+        description="Lowercase letters only"
+        error="Name is required"
+      />,
+    );
+
+    const input = screen.getByRole('textbox', { name: 'Name' });
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toHaveAccessibleDescription('Name is required Lowercase letters only');
+  });
+
+  it('should render the clear and password controls as buttons', () => {
+    renderWithTheme(<TextFieldVanilla label="Password" type="password" clearable />);
+
+    expect(screen.getByRole('button', { name: 'Show password' })).toHaveAttribute('type', 'button');
+    expect(screen.getByRole('button', { name: 'Clear' })).toHaveAttribute('type', 'button');
+  });
+
+  it('should focus the input after a clear', () => {
+    renderWithTheme(<TextFieldVanilla label="Name" clearable defaultValue="traefik" />);
+
+    const input = screen.getByRole('textbox', { name: 'Name' }) as HTMLInputElement;
+    fireEvent.click(screen.getByRole('button', { name: 'Clear' }));
+
+    expect(input.value).toBe('');
+    expect(input).toHaveFocus();
   });
 });

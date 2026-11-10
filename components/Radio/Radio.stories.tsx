@@ -3,7 +3,11 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
 import { VariantProps } from '../../stitches.config';
+import { FIELD_STORY_ARG_TYPES, FieldStoryArgs } from '../../utils/fieldStoryArgs';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Field } from '../Field';
+import { Flex } from '../Flex';
+import { Label } from '../Label';
 import { Radio, RadioGroup, RadioProps, RadioVariants } from './Radio';
 
 const BaseRadio = (props: RadioProps): JSX.Element => <Radio {...props} />;
@@ -46,5 +50,39 @@ Disabled.args = {
   disabled: true,
   size: 2,
 };
+
+const RadioOptions = ({ disabled }: { disabled?: boolean }) => {
+  const id = React.useId();
+
+  return (
+    <RadioGroup css={{ gap: '$3' }} disabled={disabled}>
+      {['Small', 'Large'].map((option) => (
+        <Flex key={option} align="center" gap={1}>
+          <Radio value={option.toLowerCase()} id={`${id}-${option}`} />
+          <Label htmlFor={`${id}-${option}`} variant={disabled ? 'subtle' : 'default'}>
+            {option}
+          </Label>
+        </Flex>
+      ))}
+    </RadioGroup>
+  );
+};
+
+export const WithField: StoryFn<React.ComponentProps<typeof RadioForStory> & FieldStoryArgs> = ({
+  label,
+  description,
+  error,
+  disabled,
+}) => (
+  <Field label={label} description={description} error={error} disabled={disabled}>
+    <RadioOptions disabled={disabled} />
+  </Field>
+);
+WithField.args = {
+  label: 'Size',
+  description: 'Use Field to give the radio group a label, a description and an error.',
+  error: 'Select a size.',
+};
+WithField.argTypes = FIELD_STORY_ARG_TYPES;
 
 export default Component;

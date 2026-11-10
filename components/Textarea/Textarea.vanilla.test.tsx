@@ -9,6 +9,14 @@ describe('TextareaVanilla', () => {
     return render(<VanillaExtractThemeProvider>{ui}</VanillaExtractThemeProvider>);
   };
 
+  it('should keep a plain root without a label', () => {
+    renderWithTheme(<TextareaVanilla aria-label="Notes" rootCss={{ mt: '$2' }} />);
+
+    const root = screen.getByRole('textbox', { name: 'Notes' }).parentElement?.parentElement;
+    expect(root).not.toHaveAttribute('class');
+    expect(root).toHaveStyle({ marginTop: '8px' });
+  });
+
   it('should render as textarea element', () => {
     const { container } = renderWithTheme(<TextareaVanilla placeholder="Test textarea" />);
     const textarea = container.querySelector('textarea');
@@ -217,5 +225,29 @@ describe('TextareaVanilla', () => {
     );
 
     expect(container.firstChild).toBeInTheDocument();
+  });
+
+  it('should link the label to the textarea without an id', () => {
+    renderWithTheme(<TextareaVanilla label="Notes" />);
+    expect(screen.getByRole('textbox', { name: 'Notes' })).toBeInTheDocument();
+  });
+
+  it('should set aria-invalid when state is invalid', () => {
+    renderWithTheme(<TextareaVanilla label="Notes" state="invalid" />);
+    expect(screen.getByRole('textbox', { name: 'Notes' })).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('should render the description and the error', () => {
+    renderWithTheme(
+      <TextareaVanilla
+        label="Notes"
+        description="Markdown is supported"
+        error="Notes are required"
+      />,
+    );
+
+    const textarea = screen.getByRole('textbox', { name: 'Notes' });
+    expect(textarea).toHaveAttribute('aria-invalid', 'true');
+    expect(textarea).toHaveAccessibleDescription('Notes are required Markdown is supported');
   });
 });

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { elevationVariants } from '../Elevation';
+import { useFieldControl } from '../Field/FieldContext';
 
 // CONSTANTS
 const THUMB_DIAMETER = 14; // @FIXME: shouldn't this size be part of theme ?
@@ -74,6 +75,10 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     backgroundColor: '$switchActiveBackground',
   },
 
+  '&[aria-invalid="true"]:not(:focus)': {
+    boxShadow: 'inset 0 0 0 1px $colors$switchInvalidBorder',
+  },
+
   variants: {
     size: {
       '1': {
@@ -106,9 +111,28 @@ type SwitchPrimitiveProps = Omit<React.ComponentProps<typeof SwitchPrimitive.Roo
 export type SwitchProps = SwitchPrimitiveProps & SwitchVariants & { css?: CSS };
 
 export const Switch = React.forwardRef<React.ElementRef<typeof StyledSwitch>, SwitchProps>(
-  (props, forwardedRef) => (
-    <StyledSwitch {...props} ref={forwardedRef}>
-      <StyledThumb />
-    </StyledSwitch>
-  )
+  (
+    { id, disabled, 'aria-describedby': ariaDescribedBy, 'aria-invalid': ariaInvalid, ...props },
+    forwardedRef,
+  ) => {
+    const control = useFieldControl({
+      id,
+      disabled,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+    });
+
+    return (
+      <StyledSwitch
+        {...props}
+        id={control.id}
+        disabled={control.disabled}
+        aria-describedby={control['aria-describedby']}
+        aria-invalid={control['aria-invalid']}
+        ref={forwardedRef}
+      >
+        <StyledThumb />
+      </StyledSwitch>
+    );
+  },
 );

@@ -2,7 +2,9 @@
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
+import { FIELD_STORY_ARG_TYPES, FieldStoryArgs } from '../../utils/fieldStoryArgs';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { Field } from '../Field';
 import { Checkbox, CheckboxProps, CheckboxVariants } from './Checkbox';
 
 const BaseCheckbox = (props: CheckboxProps): JSX.Element => <Checkbox {...props} />;
@@ -36,5 +38,22 @@ Disabled.args = {
   checked: true,
   size: 'large',
 };
+
+export const WithField: StoryFn<React.ComponentProps<typeof CheckboxForStory> & FieldStoryArgs> = ({
+  label,
+  description,
+  error,
+  ...args
+}) => (
+  <Field label={label} description={description} error={error} labelPosition="end">
+    <CheckboxForStory {...args} />
+  </Field>
+);
+WithField.args = {
+  label: 'Accept the terms',
+  description: 'Use Field to give the checkbox a label, a description and an error.',
+  error: 'You must accept the terms.',
+};
+WithField.argTypes = FIELD_STORY_ARG_TYPES;
 
 export default Component;

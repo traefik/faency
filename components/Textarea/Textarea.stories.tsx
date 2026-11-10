@@ -19,6 +19,18 @@ const TextareaForStory = modifyVariantsForStory<TextareaVariants, TextareaProps>
 const Component: Meta<typeof TextareaForStory> = {
   title: 'Components/Textarea',
   component: TextareaForStory,
+  argTypes: {
+    description: { control: 'text' },
+    error: { control: 'text' },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Use `label`, `description` and `error` to connect them to the control, so that screen readers read them on focus. See Field.',
+      },
+    },
+  },
 };
 
 const Template: StoryFn<typeof TextareaForStory> = (args) => (
@@ -71,6 +83,13 @@ Invalid.args = {
   state: 'invalid',
 };
 ignoreArgType('id', Invalid);
+
+export const WithDescriptionAndError: StoryFn<typeof TextareaForStory> = Template.bind({});
+WithDescriptionAndError.args = {
+  label: 'Notes',
+  description: 'Markdown is supported.',
+  error: 'The notes are required.',
+};
 
 export const Disabled: StoryFn<typeof TextareaForStory> = Template.bind({});
 Disabled.args = {

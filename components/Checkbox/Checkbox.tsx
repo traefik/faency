@@ -3,6 +3,7 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import React from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
+import { useFieldControl } from '../Field/FieldContext';
 
 const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
   alignItems: 'center',
@@ -60,6 +61,10 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
     },
   },
 
+  '&[aria-invalid="true"][data-state=unchecked]:not(:focus)': {
+    boxShadow: 'inset 0 0 0 1px $colors$checkboxInvalidBorder',
+  },
+
   '&:focus': {
     outline: 'none',
     boxShadow: 'inset 0 0 0 1px $colors$checkboxFocusBorder',
@@ -104,13 +109,30 @@ export type CheckboxVariants = VariantProps<typeof StyledCheckbox>;
 export type CheckboxProps = CheckboxPrimitiveProps & CheckboxVariants & { css?: CSS };
 
 export const Checkbox = React.forwardRef<React.ElementRef<typeof StyledCheckbox>, CheckboxProps>(
-  (props, forwardedRef) => {
+  (
+    { id, disabled, 'aria-describedby': ariaDescribedBy, 'aria-invalid': ariaInvalid, ...props },
+    forwardedRef,
+  ) => {
+    const control = useFieldControl({
+      id,
+      disabled,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+    });
+
     return (
-      <StyledCheckbox {...props} ref={forwardedRef}>
+      <StyledCheckbox
+        {...props}
+        id={control.id}
+        disabled={control.disabled}
+        aria-describedby={control['aria-describedby']}
+        aria-invalid={control['aria-invalid']}
+        ref={forwardedRef}
+      >
         <StyledIndicator>
-          <CheckIcon height={40} width={40} />
+          <CheckIcon height={40} width={40} aria-hidden />
         </StyledIndicator>
       </StyledCheckbox>
     );
-  }
+  },
 );

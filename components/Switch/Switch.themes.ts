@@ -9,6 +9,7 @@ export namespace Theme {
     switchActiveBackground: Property.Color;
     switchFocusBorder: Property.Color;
     switchThumb: Property.Color;
+    switchInvalidBorder: Property.Color;
   };
 
   type Factory = (primaryColor: ColorInfo) => Colors;
@@ -18,6 +19,7 @@ export namespace Theme {
     switchActiveBackground: '$primary',
     switchFocusBorder: primaryColor.helpers.pickScale(8),
     switchThumb: tinycolor('white').setAlpha(0.87).toHslString(),
+    switchInvalidBorder: '$red9',
   });
 
   export const getDark: Factory = (primaryColor) => ({
@@ -25,5 +27,6 @@ export namespace Theme {
     switchActiveBackground: '$primary',
     switchFocusBorder: primaryColor.helpers.pickScale(11),
     switchThumb: tinycolor('black').setAlpha(0.87).toHslString(),
+    switchInvalidBorder: '$red9',
   });
 }
