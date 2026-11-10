@@ -15,6 +15,7 @@ import React, {
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { deepMerge } from '../../utils/deepMerge';
 import { Box } from '../Box';
+import { RowLinkShortcutProps, withRowLink } from '../RowLink';
 import type { TableVariants } from '../Table';
 import {
   Caption as TableCaption,
@@ -106,10 +107,28 @@ export type AriaTrProps = ComponentProps<typeof StyledTr> &
     emptyFirstColumn?: boolean;
     tableHead?: boolean;
     children?: React.ReactNode;
-  };
+  } & RowLinkShortcutProps;
 
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
-  ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, css, ...props }, ref) => {
+  (
+    {
+      asChild,
+      children,
+      collapsedContent,
+      emptyFirstColumn,
+      tableHead,
+      css,
+      href,
+      linkAs,
+      linkCell,
+      interactive,
+      ...props
+    },
+    ref,
+  ) => {
+    if (asChild && href !== undefined) {
+      throw new Error('Tr cannot use href with asChild. Use RowLink in a cell instead.');
+    }
     const Component = asChild ? StyledTrSlot : StyledTr;
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -139,6 +158,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
         ) : collapsedContent ? (
           <Td key="chevron-td">
             <Box
+              css={{ position: 'relative', zIndex: 1 }}
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -176,10 +196,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
       return (
         <>
           {TdEl}
-          {children}
+          {withRowLink(children, { href, linkAs, linkCell })}
         </>
       );
-    }, [asChild, TdEl, children]);
+    }, [asChild, TdEl, children, href, linkAs, linkCell]);
 
     return (
       <>
@@ -196,6 +216,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
                 }
               : { ...css }
           }
+          interactive={interactive ?? (href !== undefined || undefined)}
           {...props}
         >
           {renderedChildren}

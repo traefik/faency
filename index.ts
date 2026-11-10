@@ -126,6 +126,8 @@ export {
   RadioAccordionRoot,
   RadioAccordionTrigger,
 } from './components/RadioAccordion';
+export type { RowLinkProps } from './components/RowLink';
+export { RowLink } from './components/RowLink';
 export { Select } from './components/Select';
 export { SidePanel } from './components/SidePanel';
 export type { SkeletonVanillaProps } from './components/Skeleton';

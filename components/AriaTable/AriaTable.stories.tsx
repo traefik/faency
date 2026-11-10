@@ -7,8 +7,10 @@ import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { Image } from '../Image';
-import { UnstyledLink } from '../Link';
+import { Link } from '../Link';
+import { RowLink } from '../RowLink';
 import { Text } from '../Text';
+import { VisuallyHidden } from '../VisuallyHidden';
 import {
   AriaTableProps,
   AriaTableVariants,
@@ -230,58 +232,71 @@ Interactive.args = {
 };
 
 export const Links: StoryFn<any> = (args) => (
-  <Table hasCollapsibleChildren aria-label="Empty" aria-describedby="empty-table-caption" {...args}>
-    <Caption id="empty-table-caption">Table with empty data</Caption>
+  <Table hasCollapsibleChildren aria-label="Subscriptions" {...args}>
     <Thead>
       <Tr emptyFirstColumn tableHead>
-        <Th>first name</Th>
-        <Th>last name</Th>
+        <Th>Application</Th>
+        <Th>Subscription</Th>
         <Th>Status</Th>
-        <Th>Role</Th>
+        <Th>Actions</Th>
       </Tr>
     </Thead>
     <Tbody>
       <Tr
-        interactive
-        asChild
-        collapsedContent={
-          <Flex>
-            <Text>Additional description for this row.</Text>
-          </Flex>
-        }
+        href="#sub-41"
+        linkCell={1}
+        collapsedContent={<Text>Additional description for this row.</Text>}
       >
-        <UnstyledLink href="https://traefik.io" target="_blank">
-          <Td>Johnny</Td>
-          <Td>Depp</Td>
-          <Td>
-            <Badge variant="green">Connected</Badge>
-          </Td>
-          <Td>Developer</Td>
-        </UnstyledLink>
+        <Td>
+          <Link href="#app-1">app-1</Link>
+        </Td>
+        <Td>sub-41</Td>
+        <Td>
+          <Badge variant="green">Active</Badge>
+        </Td>
+        <Td />
       </Tr>
-      <Tr emptyFirstColumn interactive asChild>
-        <UnstyledLink href="https://traefik.io" target="_blank">
-          <Td>John</Td>
-          <Td>Doe</Td>
-          <Td>
-            <Badge variant="green">Connected</Badge>
-          </Td>
-          <Td>Admin</Td>
-        </UnstyledLink>
+      <Tr emptyFirstColumn interactive>
+        <Td>
+          <Link href="#app-2">app-2</Link>
+        </Td>
+        <Td>
+          <RowLink href="#sub-42">sub-42</RowLink>
+        </Td>
+        <Td>
+          <Badge variant="green">Active</Badge>
+        </Td>
+        <Td />
       </Tr>
-      <Tr interactive asChild collapsedContent={<VerticalAlignment />}>
-        <UnstyledLink href="https://traefik.io" target="_blank">
-          <Td>Natalie</Td>
-          <Td>Portman</Td>
-          <Td>
-            <Badge variant="red">Offline</Badge>
-          </Td>
-          <Td>Developer</Td>
-        </UnstyledLink>
+      <Tr emptyFirstColumn interactive>
+        <Td>
+          <Link href="#app-3">app-3</Link>
+        </Td>
+        <Td>
+          <RowLink href="#sub-43">
+            <VisuallyHidden>Open subscription sub-43</VisuallyHidden>
+          </RowLink>
+        </Td>
+        <Td>
+          <Badge variant="orange">Pending</Badge>
+        </Td>
+        <Td>
+          <Button size="small" variant="secondary">
+            Approve
+          </Button>
+        </Td>
       </Tr>
     </Tbody>
   </Table>
 );
+Links.parameters = {
+  docs: {
+    description: {
+      story:
+        'A click anywhere on a row opens its link, and links, buttons and inputs in the row keep their own click and tab stop. Use `href` on `Tr` to put the content of the first cell, or of the cell at `linkCell`, in the row link (first row). Use `linkAs` to render a router link, for example `linkAs={NextLink}`. To choose the cell yourself, put a `RowLink` in it (second row), and use `asChild` on it for a router link. When no cell has a good name for the link, put a `VisuallyHidden` label in the `RowLink` (third row). Do not use `<Tr asChild><a>`: the `a` gets `role="row"`, so screen readers do not read it as a link.',
+    },
+  },
+};
 
 export const Columns: StoryFn<any> = ({ transform, ...args }) => (
   <Flex direction="column" gap="4">

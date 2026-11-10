@@ -6,6 +6,7 @@ import { Box } from '../Box';
 import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
+import { rowLinkRowStyles, RowLinkShortcutProps, withRowLink } from '../RowLink';
 import { Text } from '../Text';
 
 export const Caption = styled('caption', Text, {
@@ -87,7 +88,7 @@ export const Td = styled('td', {
   },
 });
 
-export const StyledTr = styled('tr', {
+export const StyledTr = styled('tr', rowLinkRowStyles, {
   verticalAlign: 'inherit',
   '&:hover': {
     color: '$tableHoverText',
@@ -176,7 +177,7 @@ export type TrProps = ComponentProps<typeof StyledTr> &
     emptyFirstColumn?: boolean;
     tableHead?: boolean;
     collapsedContentColSpan?: number;
-  };
+  } & RowLinkShortcutProps;
 
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
   (
@@ -187,6 +188,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       tableHead = false,
       collapsedContentColSpan = 1,
       css,
+      href,
+      linkAs,
+      linkCell,
+      interactive,
       ...props
     },
     ref,
@@ -207,6 +212,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                 }
               : { ...css }
           }
+          interactive={interactive ?? (href !== undefined || undefined)}
           {...props}
         >
           {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
@@ -222,6 +228,8 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                 align="center"
                 justify="center"
                 css={{
+                  position: 'relative',
+                  zIndex: 1,
                   height: '40px',
                   '&:hover': {
                     color: '$tableActiveText',
@@ -239,7 +247,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
               </Flex>
             </Td>
           )}
-          {children}
+          {withRowLink(children, { href, linkAs, linkCell })}
         </StyledTr>
         {!!collapsedContent && (
           <AnimatedTr isOpen={isCollapsed} collapsedContentColSpan={collapsedContentColSpan}>
