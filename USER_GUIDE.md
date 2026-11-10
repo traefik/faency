@@ -440,7 +440,7 @@ $chartGrid;
 $chartAxis;
 ```
 
-They exist only in the vanilla extract themes. Use them in a vanilla component's `css` prop (`css={{ c: '$toneDangerText' }}`) or through `vanillaTokens.colors.toneDangerText`.
+They exist only in the vanilla extract themes. Read them through `vanillaTokens`, e.g. `css={{ c: vanillaTokens.colors.toneDangerText }}`; the `$` shorthand in the `css` prop doesn't resolve them (it only knows palette colors such as `$blue9`).
 
 ### Using Color Tokens in CSS Prop
 

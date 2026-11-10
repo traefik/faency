@@ -167,6 +167,8 @@ export const tokens = createThemeContract({
 
     toastBorder: null,
 
+    meterTrackBg: null,
+
     // Semantic tones
     toneSuccessSolid: null,
     toneSuccessText: null,

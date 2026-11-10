@@ -327,6 +327,7 @@ const lightSemanticColors = {
   ...segmentedControlLightTheme,
   ...comboboxLightTheme,
   ...toastLightTheme,
+  meterTrackBg: lightColors.grayA3,
   ...createToneColors(lightColors),
   ...chartLightColors,
 };
@@ -460,6 +461,7 @@ const darkSemanticColors = {
   ...segmentedControlDarkTheme,
   ...comboboxDarkTheme,
   ...toastDarkTheme,
+  meterTrackBg: darkColors.grayA3,
   ...createToneColors(darkColors),
   ...chartDarkColors,
 };
