@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { resolveColor } from '../../styles/resolveColor';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import {
   caption,
@@ -35,14 +36,6 @@ export type MeterVanillaProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'chil
     valueLabel?: string;
     size?: 'small' | 'medium' | 'large';
   };
-
-const resolveColor = (color: string, colors: Record<string, string>) => {
-  if (!color.startsWith('$')) return color;
-  const name = color.slice(1);
-  const token = (colorTokens as Record<string, unknown>)?.[name];
-  if (typeof token === 'string') return token;
-  return colors[name] ?? color;
-};
 
 // TODO: replace the native `title` on segments with TooltipVanilla once it exists.
 export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
@@ -119,7 +112,8 @@ export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
               title={s.label}
               style={{
                 width: `${widths[i]}%`,
-                backgroundColor: s.color && resolveColor(s.color, colors as Record<string, string>),
+                backgroundColor:
+                  s.color && resolveColor(s.color, colors as Record<string, string>, colorTokens),
               }}
             />
           ))}

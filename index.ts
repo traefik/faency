@@ -152,6 +152,8 @@ export { Select } from './components/Select';
 export { SidePanel } from './components/SidePanel';
 export type { SkeletonVanillaProps } from './components/Skeleton';
 export { Skeleton, SkeletonVanilla } from './components/Skeleton';
+export type { SpinnerVanillaProps } from './components/Spinner';
+export { SpinnerVanilla } from './components/Spinner';
 export { Switch } from './components/Switch';
 export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
