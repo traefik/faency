@@ -154,6 +154,17 @@ export type { SkeletonVanillaProps } from './components/Skeleton';
 export { Skeleton, SkeletonVanilla } from './components/Skeleton';
 export type { SpinnerVanillaProps } from './components/Spinner';
 export { SpinnerVanilla } from './components/Spinner';
+export type {
+  SplitLayoutAsideVanillaProps,
+  SplitLayoutMainVanillaProps,
+  SplitLayoutVanillaProps,
+  SplitLayoutWidth,
+} from './components/SplitLayout';
+export {
+  SplitLayoutAsideVanilla,
+  SplitLayoutMainVanilla,
+  SplitLayoutVanilla,
+} from './components/SplitLayout';
 export { Switch } from './components/Switch';
 export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
