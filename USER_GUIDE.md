@@ -431,6 +431,62 @@ $mutedForeground; // Muted text color
 </Text>
 ```
 
+### Using and Overriding Vanilla Extract Tokens in Your App
+
+`vanillaTokens` holds every vanilla extract token as a CSS variable reference, such as `vanillaTokens.colors.primary`, which is `var(--…)`. The variable names are generated at build time, so always go through `vanillaTokens` and never write a name by hand.
+
+Use a token anywhere a CSS value is accepted, including the SVG of a chart library:
+
+```tsx
+import { vanillaTokens } from '@traefik-labs/faency';
+
+<path fill={vanillaTokens.colors.primary} />;
+```
+
+To override a token, set its variable on `<body>`, where `VanillaExtractThemeProvider` puts the theme class. Setting it lower in the tree also works, but popups render at the end of `<body>` and would miss it.
+
+With vanilla extract in your app, add one `globalStyle` rule per mode holding all your overrides. `vanillaThemes.<mode>.<primaryColor>` is the theme class for that mode and primary color, such as `vanillaThemes.light.blue` for light mode with the blue primary color; use the primary color your app sets on `VanillaExtractThemeProvider`.
+
+```ts
+// app.css.ts
+import { globalStyle } from '@vanilla-extract/css';
+import { vanillaThemes, vanillaTokens } from '@traefik-labs/faency';
+
+globalStyle(`body.${vanillaThemes.light.blue}`, {
+  vars: {
+    [vanillaTokens.colors.buttonRedBg]: '#b42318',
+    [vanillaTokens.colors.cardBackground]: '#f8f9fb',
+    [vanillaTokens.colors.textSubtle]: 'hsla(210, 40%, 20%, 0.62)',
+  },
+});
+globalStyle(`body.${vanillaThemes.dark.blue}`, {
+  vars: {
+    [vanillaTokens.colors.buttonRedBg]: '#f97066',
+    [vanillaTokens.colors.cardBackground]: 'hsl(210, 55%, 12%)',
+    [vanillaTokens.colors.textSubtle]: 'hsla(210, 40%, 90%, 0.62)',
+  },
+});
+```
+
+Without it, set the variable at runtime with `assignInlineVars` from `@vanilla-extract/dynamic`:
+
+```tsx
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { useVanillaExtractTheme, vanillaTokens } from '@traefik-labs/faency';
+
+const useTokenOverrides = () => {
+  const { resolvedTheme } = useVanillaExtractTheme();
+
+  useLayoutEffect(() => {
+    const vars = assignInlineVars({
+      [vanillaTokens.colors.buttonRedBg]: resolvedTheme === 'dark' ? '#f97066' : '#b42318',
+    });
+    Object.entries(vars).forEach(([name, value]) => document.body.style.setProperty(name, value));
+    return () => Object.keys(vars).forEach((name) => document.body.style.removeProperty(name));
+  }, [resolvedTheme]);
+};
+```
+
 ---
 
 ## TypeScript Support

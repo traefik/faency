@@ -204,3 +204,4 @@ export {
   lightTheme as vanillaLightTheme,
   themes as vanillaThemes,
 } from './styles/themes.css';
+export { tokens as vanillaTokens } from './styles/tokens.css';
