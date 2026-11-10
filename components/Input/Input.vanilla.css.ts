@@ -414,6 +414,7 @@ export const adornmentWrapperRecipe = recipe({
       start: {
         left: '0',
         zIndex: 1,
+        pointerEvents: 'none',
       },
       end: {
         right: '0',

@@ -366,6 +366,7 @@ const AdornmentWrapper = styled('div', {
 const AdornmentWrapperStart = styled(AdornmentWrapper, {
   left: 0,
   zIndex: 1,
+  pointerEvents: 'none',
 });
 
 const AdornmentWrapperEnd = styled(AdornmentWrapper, {
