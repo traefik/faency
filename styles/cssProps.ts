@@ -1,3 +1,4 @@
+import { resolveColor } from './resolveColor';
 import { FlexAlign, FlexJustify, SizeToken, SpacingToken } from './types';
 
 export interface CSSProps {
@@ -173,16 +174,7 @@ function applyColor(
   value: string,
   colors?: Record<string, any>,
 ): void {
-  if (typeof value === 'string' && value.startsWith('$')) {
-    const colorToken = value.slice(1);
-    if (colors && colorToken in colors) {
-      (style as any)[property] = colors[colorToken];
-    } else {
-      (style as any)[property] = value;
-    }
-  } else {
-    (style as any)[property] = value;
-  }
+  (style as any)[property] = typeof value === 'string' ? resolveColor(value, colors) : value;
 }
 
 function applySize(
@@ -408,14 +400,8 @@ export function processCSSProp(
             break;
           }
 
-          // Try color tokens
-          if (colors && tokenValue in colors) {
-            (style as any)[key] = colors[tokenValue];
-            break;
-          }
-
-          // If no token matches, pass through as-is
-          (style as any)[key] = value;
+          // Colors, or the value as is when nothing matches.
+          (style as any)[key] = resolveColor(value, colors);
         } else {
           (style as any)[key] = value;
         }

@@ -23,13 +23,6 @@ export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
 export { Box, BoxVanilla } from './components/Box';
-export type {
-  CodeBlockCopyErrorHandler,
-  CodeBlockLanguage,
-  CodeBlockProps,
-  CodeBlockVanillaProps,
-} from './components/CodeBlock';
-export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
 export type { BubbleVanillaProps } from './components/Bubble';
 export { Bubble, BubbleVanilla } from './components/Bubble';
 export type { ButtonVanillaProps } from './components/Button';
@@ -42,6 +35,16 @@ export {
 } from './components/ButtonSwitch';
 export { Card, CardVanilla } from './components/Card';
 export { Checkbox } from './components/Checkbox';
+export type {
+  CodeBlockCopyErrorHandler,
+  CodeBlockLanguage,
+  CodeBlockProps,
+  CodeBlockVanillaProps,
+} from './components/CodeBlock';
+export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
+export { useColorScheme } from './components/colorSchemeContext';
+export type { ComboboxVanillaProps } from './components/Combobox';
+export { ComboboxVanilla } from './components/Combobox';
 export { Container, ContainerVanilla } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
 export { DateTimePickerInput } from './components/DateTimePickerInput';
@@ -72,7 +75,6 @@ export {
 } from './components/DropdownMenu';
 export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
-export { useColorScheme } from './components/colorSchemeContext';
 export type {
   FieldControlOptions,
   FieldLabelProps,
@@ -93,6 +95,8 @@ export type { LabelVanillaProps } from './components/Label';
 export { Label, LabelVanilla } from './components/Label';
 export { Link } from './components/Link';
 export { Li, Ol, Ul } from './components/List';
+export type { MeterSegmentVanilla, MeterVanillaProps } from './components/Meter';
+export { MeterVanilla } from './components/Meter';
 export {
   NavigationContainer,
   NavigationDrawer,
@@ -135,10 +139,32 @@ export {
 } from './components/RadioAccordion';
 export type { RowLinkProps } from './components/RowLink';
 export { RowLink, rowLinkRowStyles, rowLinkTableStyles } from './components/RowLink';
+export type {
+  SegmentedControlItemVanillaProps,
+  SegmentedControlSize,
+  SegmentedControlVanillaProps,
+} from './components/SegmentedControl';
+export {
+  SegmentedControlItemVanilla,
+  SegmentedControlVanilla,
+} from './components/SegmentedControl';
 export { Select } from './components/Select';
 export { SidePanel } from './components/SidePanel';
 export type { SkeletonVanillaProps } from './components/Skeleton';
 export { Skeleton, SkeletonVanilla } from './components/Skeleton';
+export type { SpinnerVanillaProps } from './components/Spinner';
+export { SpinnerVanilla } from './components/Spinner';
+export type {
+  SplitLayoutAsideVanillaProps,
+  SplitLayoutMainVanillaProps,
+  SplitLayoutVanillaProps,
+  SplitLayoutWidth,
+} from './components/SplitLayout';
+export {
+  SplitLayoutAsideVanilla,
+  SplitLayoutMainVanilla,
+  SplitLayoutVanilla,
+} from './components/SplitLayout';
 export { Switch } from './components/Switch';
 export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
@@ -147,6 +173,24 @@ export type { TextareaVanillaProps } from './components/Textarea';
 export { Textarea, TextareaVanilla } from './components/Textarea';
 export type { TextFieldVanillaProps } from './components/TextField';
 export { TextField, TextFieldVanilla } from './components/TextField';
+export type {
+  ToastActionVanillaProps,
+  ToastDescriptionVanillaProps,
+  ToastOptions,
+  ToastPosition,
+  ToastProviderVanillaProps,
+  ToastTitleVanillaProps,
+  ToastVanillaProps,
+  ToastVariant,
+} from './components/Toast';
+export {
+  ToastActionVanilla,
+  ToastDescriptionVanilla,
+  ToastProviderVanilla,
+  ToastTitleVanilla,
+  ToastVanilla,
+  useToast,
+} from './components/Toast';
 export { Tooltip, TooltipContent, TooltipRoot, TooltipTrigger } from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
@@ -175,3 +219,4 @@ export {
   lightTheme as vanillaLightTheme,
   themes as vanillaThemes,
 } from './styles/themes.css';
+export { tokens as vanillaTokens } from './styles/tokens.css';
