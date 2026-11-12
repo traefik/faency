@@ -28,6 +28,17 @@ const rowLinkStyles = {
     outlineColor: '$focusOutline',
     outlineOffset: '-2px',
   },
+
+  [`&[${ROW_LINK_ATTRIBUTE}="click"]::after`]: {
+    content: 'none',
+  },
+
+  [`&[${ROW_LINK_ATTRIBUTE}="click"]:focus-visible`]: {
+    outlineWidth: '2px',
+    outlineStyle: 'solid',
+    outlineColor: '$focusOutline',
+    outlineOffset: '2px',
+  },
 };
 
 const StyledRowLink = styled('a', rowLinkStyles);
@@ -55,6 +66,11 @@ export const rowLinkRowStyles = {
 export type RowLinkProps = React.ComponentProps<typeof StyledRowLink> & {
   asChild?: boolean;
   css?: CSS;
+  /**
+   * With `false`, the link does not cover the row. The row opens it on a click instead, so the text of the
+   * row keeps its hover, for example a tooltip, and can be selected.
+   */
+  overlay?: boolean;
 };
 
 /**
@@ -62,10 +78,16 @@ export type RowLinkProps = React.ComponentProps<typeof StyledRowLink> & {
  * Other links and buttons in the row stay above it.
  */
 export const RowLink = React.forwardRef<HTMLAnchorElement, RowLinkProps>(
-  ({ asChild, ...props }, forwardedRef) => {
+  ({ asChild, overlay = true, ...props }, forwardedRef) => {
     const Component = asChild ? StyledRowLinkSlot : StyledRowLink;
 
-    return <Component ref={forwardedRef} {...{ [ROW_LINK_ATTRIBUTE]: '' }} {...props} />;
+    return (
+      <Component
+        ref={forwardedRef}
+        {...{ [ROW_LINK_ATTRIBUTE]: overlay ? '' : 'click' }}
+        {...props}
+      />
+    );
   },
 );
 
@@ -82,6 +104,8 @@ export type RowLinkShortcutProps = {
   linkProps?: Record<string, unknown>;
   /** The index of the cell that holds the link, among the direct children of the row. */
   linkCell?: number;
+  /** With `false`, the link does not cover the row: see `overlay` on `RowLink`. */
+  linkOverlay?: boolean;
 };
 
 type StitchesType = { className?: string; [STITCHES_INTERNAL]?: { type?: unknown } };
@@ -118,7 +142,7 @@ const warnOnce = (message: string) => {
 /** Puts the content of the `cellType` cell at `linkCell` in a `RowLink` to `href`. */
 export const withRowLink = (
   children: ReactNode,
-  { href, linkAs: LinkComponent = 'a', linkCell = 0, linkProps }: RowLinkShortcutProps,
+  { href, linkAs: LinkComponent = 'a', linkCell = 0, linkProps, linkOverlay }: RowLinkShortcutProps,
   cellType: ElementType,
 ) => {
   if (href === undefined) {
@@ -141,7 +165,7 @@ export const withRowLink = (
     return cloneElement(
       child,
       undefined,
-      <RowLink asChild>
+      <RowLink asChild overlay={linkOverlay}>
         <LinkComponent {...linkProps} href={href}>
           {child.props.children}
         </LinkComponent>
@@ -156,4 +180,39 @@ export const withRowLink = (
   }
 
   return mapped;
+};
+
+const ROW_CLICK_CONTROLS =
+  'a, button, input, select, textarea, label, summary, [role="button"], [role="link"], [role="checkbox"], [role="switch"], [role="menuitem"], [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+
+/** Opens the `RowLink` without overlay of the row on a click or a middle click outside its controls. */
+export const openRowLink = <T extends HTMLElement>(event: React.MouseEvent<T>) => {
+  const isAuxClick = event.type === 'auxclick';
+  if (event.defaultPrevented || (isAuxClick && event.button !== 1)) {
+    return;
+  }
+  const row = event.currentTarget;
+  const target = event.target;
+  // A portal, such as a row menu, sends its clicks to the row through React, but it is not in the row.
+  if (!(target instanceof Element) || !row.contains(target)) {
+    return;
+  }
+  const control = target.closest(ROW_CLICK_CONTROLS);
+  if (control && row.contains(control)) {
+    return;
+  }
+  const link = row.querySelector<HTMLAnchorElement>(`[${ROW_LINK_ATTRIBUTE}="click"]`);
+  if (!link) {
+    return;
+  }
+  // A drag that selects text in the row is not a click on the row.
+  const selection = window.getSelection();
+  if (selection && !selection.isCollapsed && row.contains(selection.anchorNode)) {
+    return;
+  }
+  if (isAuxClick || event.metaKey || event.ctrlKey || event.shiftKey) {
+    window.open(link.href, '_blank', 'noopener,noreferrer');
+    return;
+  }
+  link.click();
 };

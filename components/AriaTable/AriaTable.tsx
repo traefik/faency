@@ -16,7 +16,12 @@ import React, {
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { deepMerge } from '../../utils/deepMerge';
 import { Box } from '../Box';
-import { ROW_LINK_CONTROL_Z_INDEX, RowLinkShortcutProps, withRowLink } from '../RowLink';
+import {
+  openRowLink,
+  ROW_LINK_CONTROL_Z_INDEX,
+  RowLinkShortcutProps,
+  withRowLink,
+} from '../RowLink';
 import type { TableVariants } from '../Table';
 import {
   Caption as TableCaption,
@@ -136,7 +141,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
       linkAs,
       linkCell,
       linkProps,
+      linkOverlay,
       interactive,
+      onClick,
+      onAuxClick,
       ...props
     },
     ref,
@@ -230,10 +238,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
       return (
         <>
           {TdEl}
-          {withRowLink(children, { href, linkAs, linkCell, linkProps }, Td)}
+          {withRowLink(children, { href, linkAs, linkCell, linkProps, linkOverlay }, Td)}
         </>
       );
-    }, [asChild, TdEl, children, href, linkAs, linkCell, linkProps]);
+    }, [asChild, TdEl, children, href, linkAs, linkCell, linkProps, linkOverlay]);
 
     return (
       <>
@@ -251,6 +259,14 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
               : { ...css }
           }
           interactive={interactive ?? (href !== undefined || undefined)}
+          onClick={(event) => {
+            onClick?.(event);
+            openRowLink(event);
+          }}
+          onAuxClick={(event) => {
+            onAuxClick?.(event);
+            openRowLink(event);
+          }}
           {...props}
         >
           {renderedChildren}

@@ -1,6 +1,7 @@
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 import { styled } from '../../stitches.config';
 import { Table as AriaTable, Tbody as AriaTbody, Td as AriaTd, Tr as AriaTr } from '../AriaTable';
@@ -267,3 +268,90 @@ describe('AriaTable Tr with href and asChild', () => {
     jest.restoreAllMocks();
   });
 });
+
+describe.each([
+  ['AriaTable', AriaTable, AriaTbody, AriaTr, AriaTd],
+  ['Table', Table, Tbody, Tr, Td],
+] as const)(
+  '%s Tr with a row link without overlay',
+  (_, TableComponent, TbodyComponent, TrComponent, TdComponent) => {
+    const onLinkClick = jest.fn((event: React.MouseEvent) => event.preventDefault());
+    let open: jest.SpyInstance;
+
+    const Menu = () => createPortal(<span>Delete</span>, document.body);
+
+    const renderRow = () =>
+      render(
+        <TableComponent aria-label="APIs">
+          <TbodyComponent>
+            <TrComponent
+              href="/apis/api-1"
+              linkOverlay={false}
+              linkProps={{ onClick: onLinkClick }}
+            >
+              <TdComponent>api-1</TdComponent>
+              <TdComponent>Published</TdComponent>
+              <TdComponent>
+                <button type="button">Actions</button>
+                <Menu />
+              </TdComponent>
+            </TrComponent>
+          </TbodyComponent>
+        </TableComponent>,
+      );
+
+    beforeEach(() => {
+      onLinkClick.mockClear();
+      open = jest.spyOn(window, 'open').mockImplementation(() => null);
+    });
+
+    afterEach(() => open.mockRestore());
+
+    it('should keep the link in its cell, without the overlay', () => {
+      renderRow();
+
+      expect(screen.getByRole('link', { name: 'api-1' })).toHaveAttribute('data-row-link', 'click');
+    });
+
+    it('should open the link on a click anywhere in the row', () => {
+      renderRow();
+
+      fireEvent.click(screen.getByText('Published'));
+
+      expect(onLinkClick).toHaveBeenCalledTimes(1);
+      expect(open).not.toHaveBeenCalled();
+    });
+
+    it('should open the link in a new tab on a middle click or a modifier click', () => {
+      renderRow();
+      const cell = screen.getByText('Published');
+
+      fireEvent(cell, new MouseEvent('auxclick', { bubbles: true, button: 1 }));
+      fireEvent.click(cell, { ctrlKey: true });
+      fireEvent.click(cell, { metaKey: true });
+      fireEvent.click(cell, { shiftKey: true });
+
+      expect(open).toHaveBeenCalledTimes(4);
+      expect(open).toHaveBeenCalledWith(
+        expect.stringMatching(/\/apis\/api-1$/),
+        '_blank',
+        'noopener,noreferrer',
+      );
+      expect(onLinkClick).not.toHaveBeenCalled();
+    });
+
+    it('should leave the clicks on a control or from a portal to them', () => {
+      renderRow();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Actions' }));
+      fireEvent.click(screen.getByText('Delete'));
+      fireEvent(
+        screen.getByText('Published'),
+        new MouseEvent('auxclick', { bubbles: true, button: 2 }),
+      );
+
+      expect(onLinkClick).not.toHaveBeenCalled();
+      expect(open).not.toHaveBeenCalled();
+    });
+  },
+);

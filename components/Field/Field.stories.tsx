@@ -20,6 +20,7 @@ const Component: Meta<typeof Field> = {
   component: Field,
   argTypes: {
     label: { control: 'text' },
+    hint: { control: 'text' },
     description: { control: 'text' },
     error: { control: 'text' },
   },
@@ -33,13 +34,16 @@ Without \`Field\`, a \`Label\` next to an \`Input\` looks correct but is not con
 
 - **When to use it:** around \`Input\`, \`Select\`, \`Checkbox\`, \`Switch\`, \`RadioGroup\`, or a custom control that uses \`useFieldControl\`. \`TextField\` and \`Textarea\` already have \`label\`, \`description\`, \`error\` and \`announceError\` props that use \`Field\` inside, so you do not need to wrap them. If a wrapper of your app does it, put \`label\`, \`description\` and \`error\` on the \`Field\`, not on them: otherwise they make their own Field, and the label of the outer Field is no longer connected to the control.
 - **Custom control:** spread what \`useFieldControl\` returns on the control. When the control is not an \`input\`, \`select\`, \`textarea\` or \`button\`, pass \`labelable: false\` and set \`aria-labelledby={labelId}\`, so that the control gets its name from the label. See the CustomControlWithHook story.
-- **One control per Field:** the label of a \`Field\` connects to one control. Do not put two controls in one \`Field\`.
+- **One control per Field:** the label of a \`Field\` connects to one control. A second control logs a warning in development. For a field of more than one control, for example a host and a path, use \`group\`: the \`Field\` becomes a group named by its label and described by its hint, description and error. Give each control its own name, and its own error with an inner \`Field\`. See the Group story.
 - **\`id\`:** the control keeps its own \`id\`. When it has none, it gets the \`id\` of the \`Field\`, or a generated id when the \`Field\` has a label.
 - **\`error\`:** marks the control as invalid and gives the error text. The error is read when the control gets focus.
 - **\`announceError\`:** for errors that show or change while the user types, for example with Formik and Yup. The screen reader reads the error with the field name ("Name: The name is required.") about one second after the error stops changing, so that the echo of the typed text does not hide it. Off by default.
 - **\`disabled\`:** disables the control and gives the label the disabled style. \`Field\` styles only its own label: give other labels inside the control, such as the labels of radio options, the disabled style yourself.
 - **\`label\` as a function:** it gets \`htmlFor\`, \`id\` and \`variant\`. Render \`htmlFor\` and \`id\` on the label, so that the control has its name and \`announceError\` can read the field name.
-- **\`labelPosition\`:** \`top\` (default) puts the label above the control. \`end\` puts it after the control, for a \`Checkbox\` or a \`Switch\`.
+- **\`labelPosition\`:** \`top\` (default) puts the label above the control. \`end\` puts it after the control, for a \`Checkbox\` or a \`Switch\`. \`start\` puts the label and the hint in a column before the control, for a form of rows; the control goes under the label when the space is short. See the LabelStart story.
+- **\`hint\`:** what the field is for, under the label. The control is described by it, after the error and the description.
+- **\`messageSize\`:** the text size of the hint, the description and the error (\`0\` by default). A \`Field\` inside another \`Field\`, for example the error of one control of a group, takes the size of the outer one.
+- **The label without a control:** the label points to a control only when one is in the \`Field\`, or when the \`Field\` has an \`id\`.
 `,
       },
     },
@@ -111,6 +115,53 @@ Disabled.args = {
   disabled: true,
 };
 Disabled.argTypes = STATE_ARG_TYPES;
+
+export const LabelStart: StoryFn<typeof Field> = (args) => (
+  <Flex direction="column" gap={4} css={{ maxWidth: 720 }}>
+    <Field {...args} label="Name" hint="Names the route and its middlewares.">
+      <Input placeholder="my-route" />
+    </Field>
+    <Field
+      {...args}
+      label="Entry point"
+      hint="Where clients connect."
+      description="The entry point needs TLS."
+      error={args.error}
+    >
+      <Select>
+        <option>web</option>
+        <option>websecure</option>
+      </Select>
+    </Field>
+  </Flex>
+);
+LabelStart.args = { labelPosition: 'start', messageSize: '2' };
+
+export const Group: StoryFn<typeof Field> = (args) => {
+  const [host, setHost] = React.useState('');
+  return (
+    <Field
+      {...args}
+      label="Endpoint"
+      hint="The address clients call."
+      description="Leave both empty to match every request."
+      group
+    >
+      <Flex gap={2} align="start">
+        <Field error={/[A-Z]/.test(host) ? 'Use lowercase letters only.' : undefined}>
+          <Input
+            aria-label="Host"
+            placeholder="Any host"
+            value={host}
+            onChange={(event) => setHost(event.target.value)}
+          />
+        </Field>
+        <Input aria-label="Path" placeholder="/v1" />
+      </Flex>
+    </Field>
+  );
+};
+Group.args = { labelPosition: 'start', messageSize: '2' };
 
 export const AnnounceError: StoryFn<typeof Field> = () => {
   const [value, setValue] = React.useState('');

@@ -11,7 +11,7 @@ import { Switch } from '../Switch';
 import { Textarea } from '../Textarea';
 import { TextField } from '../TextField';
 import { Field } from './Field';
-import { useFieldControl } from './FieldContext';
+import { resetFieldWarnings, useFieldControl } from './FieldContext';
 
 describe('Field', () => {
   it('should link the label to the control without an id', () => {
@@ -489,5 +489,127 @@ describe('Field', () => {
 
     expect(screen.getByRole('textbox', { name: 'Name' })).toBeDisabled();
     expect(screen.queryByRole('button', { name: 'Clear' })).not.toBeInTheDocument();
+  });
+
+  it('should put the label and the hint before the control with labelPosition start', () => {
+    const { container } = render(
+      <Field
+        label="Name"
+        hint="Names the route."
+        description="Lowercase letters only"
+        labelPosition="start"
+      >
+        <Input />
+      </Field>,
+    );
+
+    const input = screen.getByRole('textbox', { name: 'Name' });
+    expect(input).toHaveAccessibleDescription('Lowercase letters only Names the route.');
+    expect(container.textContent).toBe('NameNames the route.Lowercase letters only');
+    expect(screen.getByText('Names the route.').compareDocumentPosition(input)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+  });
+
+  it('should give the hint, the description and the error the message size', () => {
+    render(
+      <Field label="Name" hint="Hint" description="Help" error="Error" messageSize="2">
+        <Input />
+      </Field>,
+    );
+
+    for (const text of ['Hint', 'Help', 'Error']) {
+      expect(screen.getByText(text).className).toMatch(/size-2/);
+    }
+  });
+
+  it('should not point the label to a control that is not there', () => {
+    render(
+      <>
+        <Field label="File">
+          <span>manifests/route.yaml</span>
+        </Field>
+        <Field id="path" label="Path">
+          <span>/v1</span>
+        </Field>
+      </>,
+    );
+
+    expect(screen.getByText('File')).not.toHaveAttribute('for');
+    expect(screen.getByText('Path')).toHaveAttribute('for', 'path');
+  });
+
+  describe('with more than one control', () => {
+    let warn: jest.SpyInstance;
+
+    beforeEach(() => {
+      resetFieldWarnings();
+      warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    afterEach(() => warn.mockRestore());
+
+    it('should warn that the label points to one control only', () => {
+      render(
+        <Field label="Endpoint">
+          <Input aria-label="Host" />
+          <Input aria-label="Path" />
+        </Field>,
+      );
+
+      expect(warn).toHaveBeenCalledTimes(1);
+      expect(warn.mock.calls[0][0]).toMatch(/more than one control/);
+    });
+
+    it('should name and describe the group, and give each control its own error with group', () => {
+      render(
+        <Field
+          label="Endpoint"
+          hint="The address clients call."
+          error="Use a host or a path."
+          group
+        >
+          <Field error="Use a host name.">
+            <Input aria-label="Host" />
+          </Field>
+          <Input aria-label="Path" />
+        </Field>,
+      );
+
+      const group = screen.getByRole('group', { name: 'Endpoint' });
+      expect(group).toHaveAccessibleDescription('Use a host or a path. The address clients call.');
+      expect(screen.getByText('Endpoint')).not.toHaveAttribute('for');
+      const host = screen.getByRole('textbox', { name: 'Host' });
+      expect(host).toHaveAttribute('aria-invalid', 'true');
+      expect(host).toHaveAccessibleDescription('Use a host name.');
+      const path = screen.getByRole('textbox', { name: 'Path' });
+      expect(path).not.toHaveAttribute('aria-invalid');
+      expect(path).not.toHaveAttribute('aria-describedby');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it('should give an inner Field the message size of the group', () => {
+      render(
+        <Field label="Endpoint" description="Leave both empty." messageSize="2" group>
+          <Field error="Use a host name.">
+            <Input aria-label="Host" />
+          </Field>
+        </Field>,
+      );
+
+      expect(screen.getByText('Use a host name.').className).toMatch(/size-2/);
+    });
+
+    it('should disable every control of a disabled group', () => {
+      render(
+        <Field label="Endpoint" group disabled>
+          <Input aria-label="Host" />
+          <Input aria-label="Path" />
+        </Field>,
+      );
+
+      expect(screen.getByRole('textbox', { name: 'Host' })).toBeDisabled();
+      expect(screen.getByRole('textbox', { name: 'Path' })).toBeDisabled();
+    });
   });
 });

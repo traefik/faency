@@ -15,6 +15,7 @@ import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
 import {
+  openRowLink,
   ROW_LINK_CONTROL_Z_INDEX,
   rowLinkRowStyles,
   RowLinkShortcutProps,
@@ -212,7 +213,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
       linkAs,
       linkCell,
       linkProps,
+      linkOverlay,
       interactive,
+      onClick,
+      onAuxClick,
       ...props
     },
     ref,
@@ -235,6 +239,14 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
               : { ...css }
           }
           interactive={interactive ?? (href !== undefined || undefined)}
+          onClick={(event) => {
+            onClick?.(event);
+            openRowLink(event);
+          }}
+          onAuxClick={(event) => {
+            onAuxClick?.(event);
+            openRowLink(event);
+          }}
           {...props}
         >
           {emptyFirstColumn ? tableHead ? <Th css={{ width: 24 }} /> : <Td /> : null}
@@ -277,7 +289,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
               </Flex>
             </Td>
           )}
-          {withRowLink(children, { href, linkAs, linkCell, linkProps }, Td)}
+          {withRowLink(children, { href, linkAs, linkCell, linkProps, linkOverlay }, Td)}
         </StyledTr>
         {!!collapsedContent && (
           <AnimatedTr
