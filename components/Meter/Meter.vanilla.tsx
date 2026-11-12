@@ -8,7 +8,6 @@ import {
   caption,
   captionLabel,
   captionValue,
-  colorTokens,
   root,
   segment,
   trackRecipe,
@@ -112,8 +111,7 @@ export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
               title={s.label}
               style={{
                 width: `${widths[i]}%`,
-                backgroundColor:
-                  s.color && resolveColor(s.color, colors as Record<string, string>, colorTokens),
+                backgroundColor: s.color && resolveColor(s.color, colors),
               }}
             />
           ))}

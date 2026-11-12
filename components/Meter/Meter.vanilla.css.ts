@@ -3,8 +3,6 @@ import { recipe } from '@vanilla-extract/recipes';
 
 import { tokens } from '../../styles/tokens.css';
 
-export const colorTokens = tokens.colors;
-
 export const root = style({
   display: 'flex',
   flexDirection: 'column',

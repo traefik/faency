@@ -1,15 +1,20 @@
+import { tokens } from './tokens.css';
+
 /**
- * Resolves `$name` against vanilla tokens first, then theme colors; any other value is returned as is.
- * `tokenColors` is passed in because `.css.ts` modules are mocked in Jest.
+ * Resolves `$name` to the vanilla token (a CSS variable, so overrides apply), then to the theme color.
+ * Anything else, or an unknown name, is returned as is.
  */
-export const resolveColor = (
-  color: string,
-  colors: Record<string, string>,
-  tokenColors?: unknown,
-): string => {
-  if (!color.startsWith('$')) return color;
-  const name = color.slice(1);
-  const token = (tokenColors as Record<string, unknown> | undefined)?.[name];
+export const resolveColor = (value: string, colors?: Record<string, unknown>): string => {
+  if (!value.startsWith('$')) return value;
+
+  const name = value.slice(1);
+  const tokenColors: unknown = tokens.colors;
+  const token =
+    typeof tokenColors === 'object' && tokenColors !== null
+      ? (tokenColors as Record<string, unknown>)[name]
+      : undefined;
   if (typeof token === 'string') return token;
-  return colors[name] ?? color;
+
+  const color = colors?.[name];
+  return typeof color === 'string' ? color : value;
 };

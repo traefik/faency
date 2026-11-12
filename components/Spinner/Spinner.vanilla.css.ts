@@ -4,8 +4,6 @@ import { recipe } from '@vanilla-extract/recipes';
 import { breakpoints } from '../../styles/breakpoints.css';
 import { tokens } from '../../styles/tokens.css';
 
-export const colorTokens = tokens.colors;
-
 const spin = keyframes({
   to: { transform: 'rotate(360deg)' },
 });

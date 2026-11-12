@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { resolveColor } from '../../styles/resolveColor';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
-import { colorTokens, hiddenLabel, spinnerRecipe, svg, track } from './Spinner.vanilla.css';
+import { hiddenLabel, spinnerRecipe, svg, track } from './Spinner.vanilla.css';
 
 export type SpinnerVanillaProps = Omit<
   React.HTMLAttributes<HTMLSpanElement>,
@@ -22,9 +22,7 @@ export const SpinnerVanilla = forwardRef<HTMLSpanElement, SpinnerVanillaProps>(
   ({ size, color, label = 'Loading', className, css, style, ...props }, ref) => {
     const { colors } = useVanillaExtractTheme();
     const { style: cssStyles, vars } = processCSSProp(css, colors);
-    const colorStyle = color
-      ? { color: resolveColor(color, colors as Record<string, string>, colorTokens) }
-      : undefined;
+    const colorStyle = color ? { color: resolveColor(color, colors) } : undefined;
 
     return (
       <span
