@@ -8,6 +8,7 @@ import React, {
   forwardRef,
   isValidElement,
   ReactNode,
+  useId,
   useMemo,
   useState,
 } from 'react';
@@ -15,6 +16,7 @@ import React, {
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { deepMerge } from '../../utils/deepMerge';
 import { Box } from '../Box';
+import { ROW_LINK_CONTROL_Z_INDEX, RowLinkShortcutProps, withRowLink } from '../RowLink';
 import type { TableVariants } from '../Table';
 import {
   Caption as TableCaption,
@@ -26,6 +28,7 @@ import {
   Th as TableTh,
   Thead as TableThead,
 } from '../Table';
+import { ExpandButton } from '../Table/ExpandButton';
 
 export const Caption = styled('div', TableCaption, {
   display: 'table-caption',
@@ -52,21 +55,30 @@ const StyledTr = styled('div', TableTr, {
 });
 const StyledTrSlot = styled(Slot, StyledTr);
 
-const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: ReactNode }) => {
+const AnimatedContainer = ({
+  id,
+  isOpen,
+  children,
+}: {
+  id: string;
+  isOpen: boolean;
+  children: ReactNode;
+}) => {
   const appliedStyle = useMemo(
     () =>
       isOpen
         ? {
-            transition: 'all 0.2s ease-out',
+            transition: 'all 0.2s ease-out, visibility 0s',
             paddingBottom: 0,
             paddingTop: 0,
             border: 'none',
           }
         : {
-            transition: 'all 0.2s ease-out',
+            transition: 'all 0.2s ease-out, visibility 0s 0.2s',
             padding: '0px 16px',
             pointerEvents: 'none',
             border: 'none',
+            visibility: 'hidden',
           },
     [isOpen],
   );
@@ -90,6 +102,7 @@ const AnimatedContainer = ({ isOpen, children }: { isOpen: boolean; children: Re
 
   return (
     <StyledTr
+      id={id}
       css={isOpen ? { '&:not(:last-child)': { borderBottom: '1px solid $tableRowBorder' } } : {}}
     >
       <Td css={appliedStyle} fullColSpan>
@@ -103,15 +116,37 @@ export type AriaTrProps = ComponentProps<typeof StyledTr> &
   VariantProps<typeof StyledTr> & {
     asChild?: boolean;
     collapsedContent?: React.ReactNode;
+    expandLabel?: string;
     emptyFirstColumn?: boolean;
     tableHead?: boolean;
     children?: React.ReactNode;
-  };
+  } & RowLinkShortcutProps;
 
 export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
-  ({ asChild, children, collapsedContent, emptyFirstColumn, tableHead, css, ...props }, ref) => {
+  (
+    {
+      asChild,
+      children,
+      collapsedContent,
+      expandLabel = 'Expand row',
+      emptyFirstColumn,
+      tableHead,
+      css,
+      href,
+      linkAs,
+      linkCell,
+      linkProps,
+      interactive,
+      ...props
+    },
+    ref,
+  ) => {
+    if (asChild && href !== undefined) {
+      throw new Error('Tr cannot use href with asChild. Use RowLink in a cell instead.');
+    }
     const Component = asChild ? StyledTrSlot : StyledTr;
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const contentId = useId();
 
     if (!asChild) {
       // eslint-disable-next-line @eslint-react/no-children-to-array
@@ -139,24 +174,43 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
         ) : collapsedContent ? (
           <Td key="chevron-td">
             <Box
+              css={{ position: 'relative', zIndex: ROW_LINK_CONTROL_Z_INDEX }}
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
               }}
             >
-              <ChevronRightIcon
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                style={{
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s ease-out',
-                  transform: isCollapsed ? 'rotate(90deg)' : 'initial',
-                }}
-              />
+              {asChild ? (
+                <ChevronRightIcon
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                  style={{
+                    cursor: 'pointer',
+                    transition: 'transform 0.2s ease-out',
+                    transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                  }}
+                />
+              ) : (
+                <ExpandButton
+                  type="button"
+                  aria-label={expandLabel}
+                  aria-expanded={isCollapsed}
+                  aria-controls={contentId}
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                >
+                  <ChevronRightIcon
+                    aria-hidden
+                    style={{
+                      transition: 'transform 0.2s ease-out',
+                      transform: isCollapsed ? 'rotate(90deg)' : 'initial',
+                    }}
+                  />
+                </ExpandButton>
+              )}
             </Box>
           </Td>
         ) : null,
       // eslint-disable-next-line @eslint-react/exhaustive-deps
-      [isCollapsed],
+      [isCollapsed, asChild, expandLabel],
     );
 
     const renderedChildren = useMemo(() => {
@@ -176,10 +230,10 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
       return (
         <>
           {TdEl}
-          {children}
+          {withRowLink(children, { href, linkAs, linkCell, linkProps }, Td)}
         </>
       );
-    }, [asChild, TdEl, children]);
+    }, [asChild, TdEl, children, href, linkAs, linkCell, linkProps]);
 
     return (
       <>
@@ -196,12 +250,15 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
                 }
               : { ...css }
           }
+          interactive={interactive ?? (href !== undefined || undefined)}
           {...props}
         >
           {renderedChildren}
         </Component>
         {!!collapsedContent && (
-          <AnimatedContainer isOpen={isCollapsed}>{collapsedContent}</AnimatedContainer>
+          <AnimatedContainer id={contentId} isOpen={isCollapsed}>
+            {collapsedContent}
+          </AnimatedContainer>
         )}
       </>
     );

@@ -8,6 +8,8 @@ import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { H1 } from '../Heading';
+import { Link } from '../Link';
+import { RowLink } from '../RowLink';
 import { Text } from '../Text';
 import { VisuallyHidden } from '../VisuallyHidden';
 import {
@@ -280,6 +282,74 @@ Interactive.argTypes = {
     options: ['1', '2', '3', '4', '5'],
   },
 };
+export const Links: StoryFn<any> = (args) => (
+  <TableForStory aria-label="Subscriptions" {...args}>
+    <Thead>
+      <Tr emptyFirstColumn tableHead>
+        <Th>Application</Th>
+        <Th>Subscription</Th>
+        <Th>Status</Th>
+        <Th>Actions</Th>
+      </Tr>
+    </Thead>
+    <Tbody>
+      <Tr
+        href="#sub-41"
+        linkCell={1}
+        collapsedContent={<Text>Additional description for this row.</Text>}
+        collapsedContentColSpan={5}
+      >
+        <Td>
+          <Link href="#app-1">app-1</Link>
+        </Td>
+        <Td>sub-41</Td>
+        <Td>
+          <Badge variant="green">Active</Badge>
+        </Td>
+        <Td />
+      </Tr>
+      <Tr emptyFirstColumn interactive>
+        <Td>
+          <Link href="#app-2">app-2</Link>
+        </Td>
+        <Td>
+          <RowLink href="#sub-42">sub-42</RowLink>
+        </Td>
+        <Td>
+          <Badge variant="green">Active</Badge>
+        </Td>
+        <Td />
+      </Tr>
+      <Tr emptyFirstColumn interactive>
+        <Td>
+          <Link href="#app-3">app-3</Link>
+        </Td>
+        <Td>
+          <RowLink href="#sub-43">
+            <VisuallyHidden>Open subscription sub-43</VisuallyHidden>
+          </RowLink>
+        </Td>
+        <Td>
+          <Badge variant="orange">Pending</Badge>
+        </Td>
+        <Td>
+          <Button size="small" variant="secondary">
+            Approve
+          </Button>
+        </Td>
+      </Tr>
+    </Tbody>
+  </TableForStory>
+);
+Links.parameters = {
+  docs: {
+    description: {
+      story:
+        'A click anywhere on a row opens its link, and links, buttons and inputs in the row keep their own click and tab stop. Use `href` on `Tr` to put the content of the first cell, or of the cell at `linkCell`, in the row link (first row). That cell must be a `Td`, or a `styled(Td)`. Use `linkAs` to render a router link, for example `linkAs={NextLink}`, and `linkProps` for its other props. The `linkAs` component must pass its props and ref to its `a`, and must be defined outside render. To choose the cell yourself, put a `RowLink` in it (second row), and use `asChild` on it for a router link. When no cell has a good name for the link, put a `VisuallyHidden` label in the `RowLink` (third row). Do not use `<Tr asChild><a>`: the `a` gets `role="row"`, so screen readers do not read it as a link. To use `RowLink` in your own row and table, spread `rowLinkRowStyles` in the row styles and `rowLinkTableStyles` in the table styles. Without Stitches, give the row `position: relative`, the links, buttons, form fields and elements with `tabindex` in it `position: relative` and `z-index: 2`, and the table `isolation: isolate`. A sticky header in a table with row links needs a `z-index` of 3 or more to stay above them.',
+    },
+  },
+};
+
 export const WithFooter: StoryFn<any> = (args) => (
   <TableForStory {...args}>
     <Thead>

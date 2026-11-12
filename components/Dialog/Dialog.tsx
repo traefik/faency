@@ -64,30 +64,29 @@ const StyledCloseButton = styled(DialogPrimitive.Close, {
 });
 
 interface DialogCloseButtonProps
-  extends VariantProps<typeof IconButton>,
-    ComponentProps<typeof IconButton> {}
+  extends VariantProps<typeof IconButton>, ComponentProps<typeof IconButton> {}
 export const DialogCloseIconButton = React.forwardRef<
   React.ElementRef<typeof IconButton>,
   DialogCloseButtonProps
 >((props, forwardedRef) => (
   <StyledCloseButton asChild>
-    <IconButton ref={forwardedRef} css={{ color: '$hiContrast' }} {...props}>
-      <Cross1Icon />
+    <IconButton ref={forwardedRef} css={{ color: '$hiContrast' }} aria-label="Close" {...props}>
+      <Cross1Icon aria-hidden />
     </IconButton>
   </StyledCloseButton>
 ));
 
 type DialogContentPrimitiveProps = React.ComponentProps<typeof DialogPrimitive.Content>;
 type DialogContentProps = DialogContentPrimitiveProps &
-  VariantProps<typeof StyledContent> & { css?: CSS };
+  VariantProps<typeof StyledContent> & { css?: CSS; closeLabel?: string };
 
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof StyledContent>,
   DialogContentProps
->(({ children, ...props }, forwardedRef) => (
+>(({ children, closeLabel = 'Close', ...props }, forwardedRef) => (
   <StyledContent {...props} ref={forwardedRef}>
     {children}
-    <DialogCloseIconButton />
+    <DialogCloseIconButton aria-label={closeLabel} />
   </StyledContent>
 ));
 
