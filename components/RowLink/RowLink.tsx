@@ -182,8 +182,9 @@ export const withRowLink = (
   return mapped;
 };
 
-// A new tab opens only a web page, never a script URL such as javascript: or data:.
-const OPENABLE_PROTOCOLS = ['http:', 'https:'];
+// Only a web page opens in a new tab, never a script URL such as javascript: or data:.
+// Other links, such as tel: or mailto:, open as on a plain click.
+const NEW_TAB_PROTOCOLS = ['http:', 'https:'];
 
 const ROW_CLICK_CONTROLS =
   'a, button, input, select, textarea, label, summary, [role="button"], [role="link"], [role="checkbox"], [role="switch"], [role="menuitem"], [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
@@ -213,10 +214,9 @@ export const openRowLink = <T extends HTMLElement>(event: React.MouseEvent<T>) =
   if (selection && !selection.isCollapsed && row.contains(selection.anchorNode)) {
     return;
   }
-  if (isAuxClick || event.metaKey || event.ctrlKey || event.shiftKey) {
-    if (OPENABLE_PROTOCOLS.includes(new URL(link.href, window.location.href).protocol)) {
-      window.open(link.href, '_blank', 'noopener,noreferrer');
-    }
+  const newTab = isAuxClick || event.metaKey || event.ctrlKey || event.shiftKey;
+  if (newTab && NEW_TAB_PROTOCOLS.includes(new URL(link.href, window.location.href).protocol)) {
+    window.open(link.href, '_blank', 'noopener,noreferrer');
     return;
   }
   link.click();

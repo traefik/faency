@@ -340,22 +340,26 @@ describe.each([
       expect(onLinkClick).not.toHaveBeenCalled();
     });
 
-    it('should open only a web page in a new tab', () => {
-      render(
-        <TableComponent aria-label="APIs">
-          <TbodyComponent>
-            <TrComponent href="data:text/html,api-1" linkOverlay={false}>
-              <TdComponent>api-1</TdComponent>
-              <TdComponent>Published</TdComponent>
-            </TrComponent>
-          </TbodyComponent>
-        </TableComponent>,
-      );
+    it.each(['tel:+33123456789', 'mailto:team@example.com', 'data:text/html,api-1'])(
+      'should open %s as on a plain click, not in a new tab',
+      (href) => {
+        render(
+          <TableComponent aria-label="Contacts">
+            <TbodyComponent>
+              <TrComponent href={href} linkOverlay={false} linkProps={{ onClick: onLinkClick }}>
+                <TdComponent>api-1</TdComponent>
+                <TdComponent>Published</TdComponent>
+              </TrComponent>
+            </TbodyComponent>
+          </TableComponent>,
+        );
 
-      fireEvent.click(screen.getByText('Published'), { ctrlKey: true });
+        fireEvent.click(screen.getByText('Published'), { ctrlKey: true });
 
-      expect(open).not.toHaveBeenCalled();
-    });
+        expect(open).not.toHaveBeenCalled();
+        expect(onLinkClick).toHaveBeenCalledTimes(1);
+      },
+    );
 
     it('should leave the clicks on a control or from a portal to them', () => {
       renderRow();
