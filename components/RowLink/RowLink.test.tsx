@@ -340,6 +340,23 @@ describe.each([
       expect(onLinkClick).not.toHaveBeenCalled();
     });
 
+    it('should open only a web page in a new tab', () => {
+      render(
+        <TableComponent aria-label="APIs">
+          <TbodyComponent>
+            <TrComponent href="data:text/html,api-1" linkOverlay={false}>
+              <TdComponent>api-1</TdComponent>
+              <TdComponent>Published</TdComponent>
+            </TrComponent>
+          </TbodyComponent>
+        </TableComponent>,
+      );
+
+      fireEvent.click(screen.getByText('Published'), { ctrlKey: true });
+
+      expect(open).not.toHaveBeenCalled();
+    });
+
     it('should leave the clicks on a control or from a portal to them', () => {
       renderRow();
 

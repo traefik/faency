@@ -182,6 +182,9 @@ export const withRowLink = (
   return mapped;
 };
 
+// A new tab opens only a web page, never a script URL such as javascript: or data:.
+const OPENABLE_PROTOCOLS = ['http:', 'https:'];
+
 const ROW_CLICK_CONTROLS =
   'a, button, input, select, textarea, label, summary, [role="button"], [role="link"], [role="checkbox"], [role="switch"], [role="menuitem"], [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
 
@@ -211,7 +214,9 @@ export const openRowLink = <T extends HTMLElement>(event: React.MouseEvent<T>) =
     return;
   }
   if (isAuxClick || event.metaKey || event.ctrlKey || event.shiftKey) {
-    window.open(link.href, '_blank', 'noopener,noreferrer');
+    if (OPENABLE_PROTOCOLS.includes(new URL(link.href, window.location.href).protocol)) {
+      window.open(link.href, '_blank', 'noopener,noreferrer');
+    }
     return;
   }
   link.click();
