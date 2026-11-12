@@ -215,7 +215,7 @@ export const ComboboxVanilla = forwardRef<InputVanillaHandle, ComboboxVanillaPro
               >
                 {shown.map((suggestion, index) => (
                   <li
-                    key={suggestion}
+                    key={optionId(index)}
                     id={optionId(index)}
                     role="option"
                     aria-selected={index === active}

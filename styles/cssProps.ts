@@ -1,3 +1,4 @@
+import { tokens } from './tokens.css';
 import { FlexAlign, FlexJustify, SizeToken, SpacingToken } from './types';
 
 export interface CSSProps {
@@ -167,6 +168,15 @@ function applyRadii(
   }
 }
 
+// Palette colors first, then vanilla-only tokens; the object check covers Jest's mocked `.css.ts`.
+function resolveColorToken(name: string, colors?: Record<string, any>): string | undefined {
+  if (colors && name in colors) return colors[name];
+  const tokenColors: unknown = tokens.colors;
+  if (typeof tokenColors !== 'object' || tokenColors === null) return undefined;
+  const token = (tokenColors as Record<string, unknown>)[name];
+  return typeof token === 'string' ? token : undefined;
+}
+
 function applyColor(
   style: React.CSSProperties,
   property: keyof React.CSSProperties,
@@ -174,12 +184,7 @@ function applyColor(
   colors?: Record<string, any>,
 ): void {
   if (typeof value === 'string' && value.startsWith('$')) {
-    const colorToken = value.slice(1);
-    if (colors && colorToken in colors) {
-      (style as any)[property] = colors[colorToken];
-    } else {
-      (style as any)[property] = value;
-    }
+    (style as any)[property] = resolveColorToken(value.slice(1), colors) ?? value;
   } else {
     (style as any)[property] = value;
   }
@@ -408,9 +413,9 @@ export function processCSSProp(
             break;
           }
 
-          // Try color tokens
-          if (colors && tokenValue in colors) {
-            (style as any)[key] = colors[tokenValue];
+          const colorValue = resolveColorToken(tokenValue, colors);
+          if (colorValue !== undefined) {
+            (style as any)[key] = colorValue;
             break;
           }
 

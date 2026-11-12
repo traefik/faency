@@ -16,6 +16,7 @@ import { CSSProps, processCSSProp } from '../../styles/cssProps';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import type { Gap } from '../../styles/types';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { HANDLE_WIDTH } from './SplitLayout.constants';
 import { aside, handle, handleLine, main, root } from './SplitLayout.vanilla.css';
 
 /** Pixels, or a share of the layout such as `'25%'`. */
@@ -116,7 +117,7 @@ export const SplitLayoutVanilla = forwardRef<HTMLDivElement, SplitLayoutVanillaP
       setLayoutWidth(el.clientWidth);
       const observer = new ResizeObserver(() => setLayoutWidth(el.clientWidth));
       observer.observe(el);
-      return () => observer.unobserve(el);
+      return () => observer.disconnect();
     }, []);
 
     return (
@@ -211,7 +212,7 @@ export const SplitLayoutAsideVanilla = forwardRef<HTMLDivElement, SplitLayoutAsi
     const min = Math.round(toPx(minWidth, layoutWidth));
     // The aside's own minimum wins when both minimums don't fit.
     const max = measured
-      ? Math.round(Math.max(layoutWidth - toPx(mainMinWidth, layoutWidth), min))
+      ? Math.round(Math.max(layoutWidth - HANDLE_WIDTH - toPx(mainMinWidth, layoutWidth), min))
       : null;
     const clamp = (w: number) => Math.round(Math.min(Math.max(w, min), max ?? Infinity));
 
@@ -251,7 +252,8 @@ export const SplitLayoutAsideVanilla = forwardRef<HTMLDivElement, SplitLayoutAsi
           window.removeEventListener('pointercancel', onUp);
           document.body.style.userSelect = '';
           document.body.style.cursor = '';
-          persist(last);
+          // A click without a drag must not replace a defaultFraction with a fixed width.
+          if (last !== from) persist(last);
         };
 
         document.body.style.userSelect = 'none';

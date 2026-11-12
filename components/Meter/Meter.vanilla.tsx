@@ -75,7 +75,7 @@ export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
       items.length === 1
         ? {
             role: 'meter',
-            'aria-valuenow': values[0],
+            'aria-valuenow': Math.min(values[0], total),
             'aria-valuemin': 0,
             'aria-valuemax': total,
             'aria-valuetext': valueLabel ?? items[0].label,

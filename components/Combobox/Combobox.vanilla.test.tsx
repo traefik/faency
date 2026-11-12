@@ -75,6 +75,17 @@ describe('ComboboxVanilla', () => {
     expect(optionNames()).toEqual(SERVICES);
   });
 
+  it('lists duplicate suggestions without key warnings', async () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    renderWithTheme(<Services suggestions={['whoami', 'whoami']} />);
+
+    await userEvent.click(screen.getByRole('combobox'));
+
+    expect(optionNames()).toEqual(['whoami', 'whoami']);
+    expect(consoleError).not.toHaveBeenCalled();
+    consoleError.mockRestore();
+  });
+
   it('does not open on focus when openOnFocus is false', async () => {
     renderWithTheme(<Services openOnFocus={false} />);
 

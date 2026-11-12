@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 import { breakpoints } from '../../styles/breakpoints.css';
 import { tokens } from '../../styles/tokens.css';
+import { HANDLE_WIDTH } from './SplitLayout.constants';
 
 export const root = style({
   display: 'flex',
@@ -28,7 +29,7 @@ export const aside = style({
 export const handle = style({
   flexShrink: 0,
   alignSelf: 'stretch',
-  width: 33,
+  width: HANDLE_WIDTH,
   display: 'flex',
   justifyContent: 'center',
   cursor: 'col-resize',

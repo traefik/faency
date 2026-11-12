@@ -57,6 +57,7 @@ describe('MeterVanilla', () => {
         <MeterVanilla value={150} aria-label="Usage" />,
       );
       expect(segmentWidths(container)).toEqual(['100%']);
+      expect(screen.getByRole('meter')).toHaveAttribute('aria-valuenow', '100');
       unmount();
 
       const negative = renderWithTheme(<MeterVanilla value={-5} aria-label="Usage" />);

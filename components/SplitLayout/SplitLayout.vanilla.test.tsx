@@ -98,19 +98,19 @@ describe('SplitLayoutVanilla', () => {
 
     expect(asideWidth()).toBe('250px');
     expect(separator()).toHaveAttribute('aria-valuemin', '250');
-    expect(separator()).toHaveAttribute('aria-valuemax', '750');
+    expect(separator()).toHaveAttribute('aria-valuemax', '717');
   });
 
   it('takes minWidth on each pane, in px or %', () => {
     mockLayoutWidth(1000);
     const { unmount } = renderSplit({ main: { minWidth: 600 }, aside: { minWidth: '10%' } });
     expect(separator()).toHaveAttribute('aria-valuemin', '100');
-    expect(separator()).toHaveAttribute('aria-valuemax', '400');
+    expect(separator()).toHaveAttribute('aria-valuemax', '367');
     unmount();
 
     renderSplit({ main: { minWidth: '50%' }, aside: { minWidth: 340, defaultWidth: 100 } });
     expect(asideWidth()).toBe('340px');
-    expect(separator()).toHaveAttribute('aria-valuemax', '500');
+    expect(separator()).toHaveAttribute('aria-valuemax', '467');
   });
 
   it("lets the aside's minWidth win when both minimums don't fit", () => {
@@ -136,7 +136,7 @@ describe('SplitLayoutVanilla', () => {
     expect(asideWidth()).toBe('250px');
 
     fireEvent.keyDown(separator(), { key: 'End' });
-    expect(asideWidth()).toBe('750px');
+    expect(asideWidth()).toBe('717px');
   });
 
   it('resizes by dragging, then restores the page cursor', () => {
@@ -176,6 +176,24 @@ describe('SplitLayoutVanilla', () => {
     expect(asideWidth()).toBe('426px');
   });
 
+  it('does not save the width on a click without a drag', () => {
+    mockLayoutWidth(1000);
+    renderSplit({ aside: { storageKey: 'files', defaultFraction: 0.3 } });
+
+    pointer(separator(), 'pointerdown', 500);
+    pointer(window, 'pointerup', 500);
+
+    expect(window.localStorage.getItem('split:files')).toBeNull();
+  });
+
+  it('leaves room for the handle when computing the max width', () => {
+    mockLayoutWidth(1000);
+    renderSplit({ main: { minWidth: 400 } });
+
+    fireEvent.keyDown(separator(), { key: 'End' });
+    expect(asideWidth()).toBe('567px');
+  });
+
   it('does not touch storage without a storageKey', () => {
     renderSplit();
     fireEvent.keyDown(separator(), { key: 'ArrowLeft' });
@@ -188,7 +206,7 @@ describe('SplitLayoutVanilla', () => {
     renderSplit({ aside: { storageKey: 'files', defaultFraction: 0.3 } });
 
     fireEvent.keyDown(separator(), { key: 'End' });
-    expect(asideWidth()).toBe('750px');
+    expect(asideWidth()).toBe('717px');
 
     fireEvent.doubleClick(separator());
     expect(asideWidth()).toBe('300px');
