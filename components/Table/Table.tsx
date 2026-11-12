@@ -14,7 +14,13 @@ import { Box } from '../Box';
 import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
-import { rowLinkRowStyles, RowLinkShortcutProps, withRowLink } from '../RowLink';
+import {
+  ROW_LINK_CONTROL_Z_INDEX,
+  rowLinkRowStyles,
+  RowLinkShortcutProps,
+  rowLinkTableStyles,
+  withRowLink,
+} from '../RowLink';
 import { Text } from '../Text';
 import { ExpandButton } from './ExpandButton';
 
@@ -186,6 +192,7 @@ export type TrProps = ComponentProps<typeof StyledTr> &
   VariantProps<typeof StyledTr> & {
     children: React.ReactNode;
     collapsedContent?: React.ReactNode;
+    expandLabel?: string;
     emptyFirstColumn?: boolean;
     tableHead?: boolean;
     collapsedContentColSpan?: number;
@@ -196,6 +203,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
     {
       children,
       collapsedContent,
+      expandLabel = 'Expand row',
       emptyFirstColumn = false,
       tableHead = false,
       collapsedContentColSpan = 1,
@@ -243,7 +251,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                 justify="center"
                 css={{
                   position: 'relative',
-                  zIndex: 1,
+                  zIndex: ROW_LINK_CONTROL_Z_INDEX,
                   height: '40px',
                   '&:hover': {
                     color: '$tableActiveText',
@@ -253,7 +261,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
                 <ExpandButton
                   type="button"
                   css={{ width: '100%', height: '100%' }}
-                  aria-label="Expand row"
+                  aria-label={expandLabel}
                   aria-expanded={isCollapsed}
                   aria-controls={contentId}
                   onClick={() => setIsCollapsed(!isCollapsed)}
@@ -330,7 +338,7 @@ export const Thead = styled('thead', {
   },
 });
 
-export const Table = styled('table', {
+export const Table = styled('table', rowLinkTableStyles, {
   width: '100%',
   tableLayout: 'fixed',
   boxSizing: 'border-box',

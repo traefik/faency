@@ -6,6 +6,10 @@ import { CSS, styled } from '../../stitches.config';
 const ROW_LINK_ATTRIBUTE = 'data-row-link';
 const STITCHES_INTERNAL = Symbol.for('sxs.internal');
 
+const ROW_LINK_Z_INDEX = 1;
+export const ROW_LINK_CONTROL_Z_INDEX = 2;
+const ROW_LINK_CONTROLS = `:where(a, button, input, select, textarea, [tabindex]):where(:not([${ROW_LINK_ATTRIBUTE}]))`;
+
 const rowLinkStyles = {
   color: 'inherit',
   textDecoration: 'none',
@@ -15,6 +19,7 @@ const rowLinkStyles = {
     content: '""',
     position: 'absolute',
     inset: 0,
+    zIndex: ROW_LINK_Z_INDEX,
   },
 
   '&:focus-visible::after': {
@@ -28,17 +33,23 @@ const rowLinkStyles = {
 const StyledRowLink = styled('a', rowLinkStyles);
 const StyledRowLinkSlot = styled(Slot, rowLinkStyles);
 
+/** Styles for a table that can hold a `RowLink`. */
+export const rowLinkTableStyles = {
+  [`&:has([${ROW_LINK_ATTRIBUTE}])`]: {
+    isolation: 'isolate',
+  },
+};
+
 /** Styles for a table row that can hold a `RowLink`. */
 export const rowLinkRowStyles = {
   [`&:has([${ROW_LINK_ATTRIBUTE}])`]: {
     position: 'relative',
   },
-  // :where() keeps this at zero specificity, so a control that sets its own position keeps it.
-  [`:where(&:has([${ROW_LINK_ATTRIBUTE}])) :where(a, button, input, select, textarea, [tabindex]):where(:not([${ROW_LINK_ATTRIBUTE}]))`]:
-    {
-      position: 'relative',
-      zIndex: 1,
-    },
+  // Not at zero specificity, so that it wins over the `all: unset` of controls such as Checkbox.
+  [`&:has([${ROW_LINK_ATTRIBUTE}]) ${ROW_LINK_CONTROLS}`]: {
+    position: 'relative',
+    zIndex: ROW_LINK_CONTROL_Z_INDEX,
+  },
 };
 
 export type RowLinkProps = React.ComponentProps<typeof StyledRowLink> & {

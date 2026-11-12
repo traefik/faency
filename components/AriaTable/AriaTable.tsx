@@ -16,7 +16,7 @@ import React, {
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { deepMerge } from '../../utils/deepMerge';
 import { Box } from '../Box';
-import { RowLinkShortcutProps, withRowLink } from '../RowLink';
+import { ROW_LINK_CONTROL_Z_INDEX, RowLinkShortcutProps, withRowLink } from '../RowLink';
 import type { TableVariants } from '../Table';
 import {
   Caption as TableCaption,
@@ -116,6 +116,7 @@ export type AriaTrProps = ComponentProps<typeof StyledTr> &
   VariantProps<typeof StyledTr> & {
     asChild?: boolean;
     collapsedContent?: React.ReactNode;
+    expandLabel?: string;
     emptyFirstColumn?: boolean;
     tableHead?: boolean;
     children?: React.ReactNode;
@@ -127,6 +128,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
       asChild,
       children,
       collapsedContent,
+      expandLabel = 'Expand row',
       emptyFirstColumn,
       tableHead,
       css,
@@ -172,7 +174,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
         ) : collapsedContent ? (
           <Td key="chevron-td">
             <Box
-              css={{ position: 'relative', zIndex: 1 }}
+              css={{ position: 'relative', zIndex: ROW_LINK_CONTROL_Z_INDEX }}
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -190,7 +192,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
               ) : (
                 <ExpandButton
                   type="button"
-                  aria-label="Expand row"
+                  aria-label={expandLabel}
                   aria-expanded={isCollapsed}
                   aria-controls={contentId}
                   onClick={() => setIsCollapsed(!isCollapsed)}
@@ -208,7 +210,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
           </Td>
         ) : null,
       // eslint-disable-next-line @eslint-react/exhaustive-deps
-      [isCollapsed, asChild],
+      [isCollapsed, asChild, expandLabel],
     );
 
     const renderedChildren = useMemo(() => {

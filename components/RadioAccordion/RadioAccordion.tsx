@@ -13,7 +13,8 @@ import {
 import { INDICATOR_BASE_STYLES, RADIO_BASE_STYLES } from '../Radio';
 
 export interface RadioAccordionRootProps
-  extends Omit<AccordionSingleProps, 'type' | 'collapsible'>,
+  extends
+    Omit<AccordionSingleProps, 'type' | 'collapsible'>,
     Omit<VariantProps<typeof AccordionRoot>, 'type' | 'collapsible'> {
   css?: CSS; // could not skipped
 }
@@ -23,8 +24,7 @@ export const RadioAccordionRoot: (props: RadioAccordionRootProps) => JSX.Element
 );
 
 export interface RadioAccordionItemProps
-  extends ComponentProps<typeof AccordionItem>,
-    VariantProps<typeof AccordionItem> {}
+  extends ComponentProps<typeof AccordionItem>, VariantProps<typeof AccordionItem> {}
 export const RadioAccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionItem>,
   RadioAccordionItemProps
@@ -62,19 +62,26 @@ const StyledRadioAccordionTrigger = styled(StyledAccordionTrigger, {
   },
 });
 
-export interface RadioAccordionTriggerProps extends AccordionTriggerProps {}
+export interface RadioAccordionTriggerProps extends Omit<
+  AccordionTriggerProps,
+  'customIcon' | 'noIcon'
+> {}
 export const RadioAccordionTrigger = React.forwardRef<
   React.ElementRef<typeof StyledRadioAccordionTrigger>,
   RadioAccordionTriggerProps
->(({ children, ...props }, ref) => {
+>(({ children, headingLevel = 3, ...props }, ref) => {
+  const Heading = headingLevel === 'none' ? 'div' : (`h${headingLevel}` as const);
+
   return (
-    <StyledAccordionHeader>
-      <StyledRadioAccordionTrigger ref={ref} {...props}>
-        <StyledRadio>
-          <StyledIndicator />
-        </StyledRadio>
-        {children}
-      </StyledRadioAccordionTrigger>
+    <StyledAccordionHeader asChild>
+      <Heading>
+        <StyledRadioAccordionTrigger ref={ref} {...props}>
+          <StyledRadio>
+            <StyledIndicator />
+          </StyledRadio>
+          {children}
+        </StyledRadioAccordionTrigger>
+      </Heading>
     </StyledAccordionHeader>
   );
 });

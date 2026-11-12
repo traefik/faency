@@ -60,5 +60,11 @@ describe.each([
       );
       expect(onLinkClick).not.toHaveBeenCalled();
     });
+
+    it('should name the expand button with expandLabel', () => {
+      renderRow({ expandLabel: 'Show details of api-1' });
+
+      expect(screen.getByRole('button', { name: 'Show details of api-1' })).toBeInTheDocument();
+    });
   },
 );
