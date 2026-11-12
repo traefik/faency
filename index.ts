@@ -166,7 +166,32 @@ export {
   SplitLayoutVanilla,
 } from './components/SplitLayout';
 export { Switch } from './components/Switch';
-export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';
+export type {
+  CaptionVanillaProps,
+  TableSectionVanillaProps,
+  TableVanillaProps,
+  TdVanillaProps,
+  ThVanillaProps,
+  TrVanillaProps,
+} from './components/Table';
+export {
+  Caption,
+  CaptionVanilla,
+  Table,
+  TableVanilla,
+  Tbody,
+  TbodyVanilla,
+  Td,
+  TdVanilla,
+  Tfoot,
+  TfootVanilla,
+  Th,
+  Thead,
+  TheadVanilla,
+  ThVanilla,
+  Tr,
+  TrVanilla,
+} from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
 export { Text } from './components/Text';
 export type { TextareaVanillaProps } from './components/Textarea';

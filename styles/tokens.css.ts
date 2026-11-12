@@ -201,6 +201,19 @@ export const tokens = createThemeContract({
     chartStatusCritical: null,
     chartGrid: null,
     chartAxis: null,
+
+    // Table
+    tableText: null,
+    tableSubtleText: null,
+    tableHoverBackground: null,
+    tableActiveText: null,
+    tableActiveHoverText: null,
+    tableHeaderLayerBackground: null,
+    tableFooterLayerBackground: null,
+    tableHeaderText: null,
+    tableFooterText: null,
+    tableHoverText: null,
+    tableRowBorder: null,
   },
   fonts: {
     rubik: null,
