@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { warnOnce } from '../../utils/warnOnce';
+
 type MessageSize = '0' | '1' | '2' | '3';
 
 type FieldControlState = { id?: string; disabled: boolean; invalid: boolean; labelable: boolean };
@@ -65,21 +67,6 @@ const hasContent = (node: React.ReactNode) =>
 
 const noop = () => {};
 
-const warnedMessages = new Set<string>();
-
-/** Clears the warnings that were already logged. For tests only. */
-export const resetFieldWarnings = () => warnedMessages.clear();
-
-const warnOnce = (message: string) => {
-  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production') {
-    return;
-  }
-  if (!warnedMessages.has(message)) {
-    warnedMessages.add(message);
-    console.warn(message);
-  }
-};
-
 const MULTIPLE_CONTROLS_WARNING =
   'Field: more than one control is in this Field, and its label points to one of them only. Use group, or one Field per control.';
 
@@ -102,6 +89,7 @@ export const useFieldRoot = ({
   const hasDescription = hasContent(description);
   const hasError = hasContent(error);
   const isInvalid = Boolean(invalid) || hasError;
+  const isDisabled = Boolean(disabled) || Boolean(outerContext?.disabled);
 
   const [control, setControl] = React.useState<FieldControlState | null>(null);
   const controlsRef = React.useRef(new Map<string, FieldControlState>());
@@ -140,7 +128,7 @@ export const useFieldRoot = ({
   const onBlur = React.useCallback(() => setHasFocus(false), []);
 
   const labelVariant: FieldLabelVariant = React.useMemo(() => {
-    if (disabled || control?.disabled) {
+    if (isDisabled || control?.disabled) {
       return 'subtle';
     }
     if (isInvalid || control?.invalid) {
@@ -150,7 +138,7 @@ export const useFieldRoot = ({
       return 'contrast';
     }
     return 'default';
-  }, [disabled, isInvalid, hasFocus, control?.disabled, control?.invalid]);
+  }, [isDisabled, isInvalid, hasFocus, control?.disabled, control?.invalid]);
 
   const ownContext: FieldContextValue = React.useMemo(
     () => ({
@@ -161,7 +149,7 @@ export const useFieldRoot = ({
       hintId: hasHint ? `${generatedId}-hint` : undefined,
       messageSize: resolvedMessageSize,
       invalid: isInvalid,
-      disabled: Boolean(disabled),
+      disabled: isDisabled,
       registerControl,
     }),
     [
@@ -173,7 +161,7 @@ export const useFieldRoot = ({
       hasHint,
       resolvedMessageSize,
       isInvalid,
-      disabled,
+      isDisabled,
       registerControl,
     ],
   );
@@ -183,10 +171,10 @@ export const useFieldRoot = ({
     () => ({
       messageSize: resolvedMessageSize,
       invalid: false,
-      disabled: Boolean(disabled),
+      disabled: isDisabled,
       registerControl: noop,
     }),
-    [resolvedMessageSize, disabled],
+    [resolvedMessageSize, isDisabled],
   );
 
   const groupProps = group

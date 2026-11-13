@@ -2,6 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
 
+import { resetWarnings } from '../../utils/warnOnce';
 import { Checkbox } from '../Checkbox';
 import { FaencyProvider } from '../FaencyProvider';
 import { Input } from '../Input';
@@ -11,7 +12,7 @@ import { Switch } from '../Switch';
 import { Textarea } from '../Textarea';
 import { TextField } from '../TextField';
 import { Field } from './Field';
-import { resetFieldWarnings, useFieldControl } from './FieldContext';
+import { useFieldControl } from './FieldContext';
 
 describe('Field', () => {
   it('should link the label to the control without an id', () => {
@@ -543,7 +544,7 @@ describe('Field', () => {
     let warn: jest.SpyInstance;
 
     beforeEach(() => {
-      resetFieldWarnings();
+      resetWarnings();
       warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     });
 
@@ -611,5 +612,31 @@ describe('Field', () => {
       expect(screen.getByRole('textbox', { name: 'Host' })).toBeDisabled();
       expect(screen.getByRole('textbox', { name: 'Path' })).toBeDisabled();
     });
+
+    it('should disable a control of a disabled group that is in an inner Field', () => {
+      render(
+        <Field label="Endpoint" group disabled>
+          <Field error="Use a host name.">
+            <Input aria-label="Host" />
+          </Field>
+          <Input aria-label="Path" />
+        </Field>,
+      );
+
+      expect(screen.getByRole('textbox', { name: 'Host' })).toBeDisabled();
+      expect(screen.getByRole('textbox', { name: 'Path' })).toBeDisabled();
+    });
+  });
+
+  it('should disable a control of an inner Field when the outer Field is disabled', () => {
+    render(
+      <Field label="Name" disabled>
+        <Field error="Use a host name.">
+          <Input />
+        </Field>
+      </Field>,
+    );
+
+    expect(screen.getByRole('textbox')).toBeDisabled();
   });
 });

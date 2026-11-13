@@ -2,6 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import React, { Children, cloneElement, ElementType, isValidElement, ReactNode } from 'react';
 
 import { CSS, styled } from '../../stitches.config';
+import { warnOnce } from '../../utils/warnOnce';
 
 const ROW_LINK_ATTRIBUTE = 'data-row-link';
 const STITCHES_INTERNAL = Symbol.for('sxs.internal');
@@ -122,21 +123,6 @@ const isCellType = (type: unknown, cellType: ElementType) => {
   const { className, [STITCHES_INTERNAL]: internal } = type as StitchesType;
   const cellClassName = (cellType as StitchesType).className;
   return internal?.type === cellType || (!!cellClassName && className === cellClassName);
-};
-
-const warnedMessages = new Set<string>();
-
-/** Clears the warnings that were already logged. For tests only. */
-export const resetRowLinkWarnings = () => warnedMessages.clear();
-
-const warnOnce = (message: string) => {
-  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production') {
-    return;
-  }
-  if (!warnedMessages.has(message)) {
-    warnedMessages.add(message);
-    console.warn(message);
-  }
 };
 
 /** Puts the content of the `cellType` cell at `linkCell` in a `RowLink` to `href`. */

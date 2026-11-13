@@ -4,9 +4,10 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 
 import { styled } from '../../stitches.config';
+import { resetWarnings } from '../../utils/warnOnce';
 import { Table as AriaTable, Tbody as AriaTbody, Td as AriaTd, Tr as AriaTr } from '../AriaTable';
 import { Table, Tbody, Td, Tr } from '../Table';
-import { resetRowLinkWarnings, RowLink } from './RowLink';
+import { RowLink } from './RowLink';
 
 const RouterLink = React.forwardRef<
   HTMLAnchorElement,
@@ -131,7 +132,7 @@ describe('Tr with href and a child that is not a Td', () => {
   const NameCell = ({ name }: { name: string }) => <AriaTd>{name}</AriaTd>;
 
   beforeEach(() => {
-    resetRowLinkWarnings();
+    resetWarnings();
     jest.spyOn(console, 'warn').mockImplementation(() => undefined);
   });
   afterEach(() => jest.restoreAllMocks());
