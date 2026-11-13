@@ -94,7 +94,8 @@ export { Input, InputVanilla } from './components/Input';
 export type { LabelVanillaProps } from './components/Label';
 export { Label, LabelVanilla } from './components/Label';
 export { Link } from './components/Link';
-export { Li, Ol, Ul } from './components/List';
+export type { LiVanillaProps, OlVanillaProps, UlVanillaProps } from './components/List';
+export { Li, LiVanilla, Ol, OlVanilla, Ul, UlVanilla } from './components/List';
 export type { MeterSegmentVanilla, MeterVanillaProps } from './components/Meter';
 export { MeterVanilla } from './components/Meter';
 export {
