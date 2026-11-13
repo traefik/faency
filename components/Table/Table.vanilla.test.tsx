@@ -410,7 +410,7 @@ describe('TableVanilla', () => {
 
         await userEvent.click(screen.getByText('Published'));
 
-        expect(onRowClick).toHaveBeenCalled();
+        expect(onRowClick).toHaveBeenCalledTimes(1);
         expect(onLinkClick).toHaveBeenCalledTimes(1);
       });
 

@@ -12,7 +12,7 @@ import { mapRowLink, RowLinkShortcutProps } from './RowLink.utils';
 
 export { ROW_LINK_CONTROL_Z_INDEX };
 export type { RowLinkShortcutProps } from './RowLink.utils';
-export { openRowLink } from './RowLink.utils';
+export { handleRowClick, openRowLink } from './RowLink.utils';
 
 const rowLinkStyles = {
   color: 'inherit',

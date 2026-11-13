@@ -12,7 +12,12 @@ import React, {
 
 import { CSSProps } from '../../styles/cssProps';
 import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
-import { mapRowLink, openRowLink, RowLinkShortcutProps } from '../RowLink/RowLink.utils';
+import {
+  handleRowClick,
+  mapRowLink,
+  openRowLink,
+  RowLinkShortcutProps,
+} from '../RowLink/RowLink.utils';
 import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
 import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
 import { ExpandToggleVanilla, stopEvent } from '../Table/ExpandToggle.vanilla';
@@ -316,10 +321,7 @@ export const AriaTrVanilla = forwardRef<HTMLDivElement, AriaTrVanillaProps>(
           )}
           data-collapsed={collapsible && !isOpen ? '' : undefined}
           style={inlineStyle}
-          onClick={(event) => {
-            onClick?.(event);
-            openRowLink(event);
-          }}
+          onClick={(event) => handleRowClick(event, onClick)}
           onAuxClick={(event) => {
             onAuxClick?.(event);
             openRowLink(event);

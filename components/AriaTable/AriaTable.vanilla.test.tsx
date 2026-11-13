@@ -448,8 +448,9 @@ describe('AriaTableVanilla', () => {
       });
 
       it('opens a link without overlay on a click on the row', async () => {
+        const onRowClick = jest.fn();
         inTbody(
-          <AriaTrVanilla href="#api-1" linkOverlay={false}>
+          <AriaTrVanilla href="#api-1" linkOverlay={false} onClick={onRowClick}>
             <AriaTdVanilla>api-1</AriaTdVanilla>
             <AriaTdVanilla>Published</AriaTdVanilla>
           </AriaTrVanilla>,
@@ -463,6 +464,7 @@ describe('AriaTableVanilla', () => {
 
         await userEvent.click(screen.getByText('Published'));
 
+        expect(onRowClick).toHaveBeenCalledTimes(1);
         expect(onLinkClick).toHaveBeenCalledTimes(1);
       });
 

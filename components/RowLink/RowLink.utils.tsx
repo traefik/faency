@@ -87,6 +87,8 @@ const NEW_TAB_PROTOCOLS = ['http:', 'https:'];
 const ROW_CLICK_CONTROLS =
   'a, button, input, select, textarea, label, summary, [role="button"], [role="link"], [role="checkbox"], [role="switch"], [role="menuitem"], [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
 
+let replayedLink: HTMLAnchorElement | null = null;
+
 /** Opens the `RowLink` without overlay of the row on a click or a middle click outside its controls. */
 export const openRowLink = <T extends HTMLElement>(event: React.MouseEvent<T>) => {
   const isAuxClick = event.type === 'auxclick';
@@ -117,5 +119,26 @@ export const openRowLink = <T extends HTMLElement>(event: React.MouseEvent<T>) =
     window.open(link.href, '_blank', 'noopener,noreferrer');
     return;
   }
-  link.click();
+  // The click bubbles back to the row, which skips it in `handleRowClick`.
+  replayedLink = link;
+  try {
+    link.click();
+  } finally {
+    replayedLink = null;
+  }
+};
+
+/**
+ * Calls the row's `onClick`, then opens its `RowLink` without overlay. It skips the click that
+ * `openRowLink` sends to the link, so `onClick` runs once per click on the row.
+ */
+export const handleRowClick = <T extends HTMLElement>(
+  event: React.MouseEvent<T>,
+  onClick?: React.MouseEventHandler<T>,
+) => {
+  if (replayedLink && event.target === replayedLink) {
+    return;
+  }
+  onClick?.(event);
+  openRowLink(event);
 };

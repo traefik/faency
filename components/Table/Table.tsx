@@ -15,6 +15,7 @@ import { elevationVariants } from '../Elevation';
 import { Flex } from '../Flex';
 import { Label } from '../Label';
 import {
+  handleRowClick,
   openRowLink,
   ROW_LINK_CONTROL_Z_INDEX,
   rowLinkRowStyles,
@@ -239,10 +240,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, TrProps>(
               : { ...css }
           }
           interactive={interactive ?? (href !== undefined || undefined)}
-          onClick={(event) => {
-            onClick?.(event);
-            openRowLink(event);
-          }}
+          onClick={(event) => handleRowClick(event, onClick)}
           onAuxClick={(event) => {
             onAuxClick?.(event);
             openRowLink(event);
