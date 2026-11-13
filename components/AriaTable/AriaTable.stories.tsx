@@ -10,6 +10,7 @@ import { Image } from '../Image';
 import { Link } from '../Link';
 import { RowLink } from '../RowLink';
 import { Text } from '../Text';
+import { Tooltip } from '../Tooltip';
 import { VisuallyHidden } from '../VisuallyHidden';
 import {
   AriaTableProps,
@@ -286,6 +287,18 @@ export const Links: StoryFn<any> = (args) => (
           </Button>
         </Td>
       </Tr>
+      <Tr emptyFirstColumn href="#sub-44" linkCell={1} linkOverlay={false}>
+        <Td>
+          <Link href="#app-4">app-4</Link>
+        </Td>
+        <Td>sub-44</Td>
+        <Td>
+          <Tooltip content="Renewed on 2026-11-01">
+            <Text>Renewed</Text>
+          </Tooltip>
+        </Td>
+        <Td />
+      </Tr>
     </Tbody>
   </Table>
 );
@@ -293,7 +306,7 @@ Links.parameters = {
   docs: {
     description: {
       story:
-        'A click anywhere on a row opens its link, and links, buttons and inputs in the row keep their own click and tab stop. Use `href` on `Tr` to put the content of the first cell, or of the cell at `linkCell`, in the row link (first row). That cell must be a `Td`, or a `styled(Td)`. Use `linkAs` to render a router link, for example `linkAs={NextLink}`, and `linkProps` for its other props. The `linkAs` component must pass its props and ref to its `a`, and must be defined outside render. To choose the cell yourself, put a `RowLink` in it (second row), and use `asChild` on it for a router link. When no cell has a good name for the link, put a `VisuallyHidden` label in the `RowLink` (third row). Do not use `<Tr asChild><a>`: the `a` gets `role="row"`, so screen readers do not read it as a link. A sticky header in a table with row links needs a `z-index` of 3 or more to stay above them.',
+        'A click anywhere on a row opens its link, and links, buttons and inputs in the row keep their own click and tab stop. Use `href` on `Tr` to put the content of the first cell, or of the cell at `linkCell`, in the row link (first row). That cell must be a `Td`, or a `styled(Td)`. Use `linkAs` to render a router link, for example `linkAs={NextLink}`, and `linkProps` for its other props. The `linkAs` component must pass its props and ref to its `a`, and must be defined outside render. To choose the cell yourself, put a `RowLink` in it (second row), and use `asChild` on it for a router link. When no cell has a good name for the link, put a `VisuallyHidden` label in the `RowLink` (third row). Do not use `<Tr asChild><a>`: the `a` gets `role="row"`, so screen readers do not read it as a link. A sticky header in a table with row links needs a `z-index` of 3 or more to stay above them. When the text of a row has a hover of its own, for example a tooltip, use `linkOverlay={false}` on `Tr`, or `overlay={false}` on `RowLink` (fourth row): the link stays in its cell, and a click anywhere else on the row opens it. A middle click, or a click with Cmd, Ctrl or Shift, opens it in a new tab. Clicks on the controls of the row, and from a portal such as a row menu, do not open it.',
     },
   },
 };

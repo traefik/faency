@@ -1,5 +1,9 @@
 import React from 'react';
 
+import { warnOnce } from '../../utils/warnOnce';
+
+type MessageSize = '0' | '1' | '2' | '3';
+
 type FieldControlState = { id?: string; disabled: boolean; invalid: boolean; labelable: boolean };
 
 export type FieldContextValue = {
@@ -7,9 +11,11 @@ export type FieldContextValue = {
   labelId?: string;
   descriptionId?: string;
   errorId?: string;
+  hintId?: string;
+  messageSize: MessageSize;
   invalid: boolean;
   disabled: boolean;
-  registerControl: (state: FieldControlState | null) => void;
+  registerControl: (key: string, state: FieldControlState | null) => void;
 };
 
 export const FieldContext = React.createContext<FieldContextValue | null>(null);
@@ -37,35 +43,67 @@ export type FieldLabelProps = {
 export type FieldBaseProps = {
   id?: string;
   label?: React.ReactNode | ((props: FieldLabelProps) => React.ReactNode);
+  /** Text under the label, for what the field is for. */
+  hint?: React.ReactNode;
   description?: React.ReactNode;
   error?: React.ReactNode;
   invalid?: boolean;
   disabled?: boolean;
   announceError?: boolean;
-  labelPosition?: 'top' | 'end';
+  /** `start` puts the label and the hint in a column before the control, and wraps under it when space is short. */
+  labelPosition?: 'top' | 'start' | 'end';
+  /** The text size of the hint, the description and the error. A Field inside another Field takes its size. */
+  messageSize?: MessageSize;
+  /**
+   * For a field of more than one control: the field becomes a group named by the label and described by
+   * the hint, the description and the error. Give each control its own name, and its own error with an inner Field.
+   */
+  group?: boolean;
   children?: React.ReactNode;
 };
 
 const hasContent = (node: React.ReactNode) =>
   node !== undefined && node !== null && node !== false && node !== '';
 
+const noop = () => {};
+
+const MULTIPLE_CONTROLS_WARNING =
+  'Field: more than one control is in this Field, and its label points to one of them only. Use group, or one Field per control.';
+
 export const useFieldRoot = ({
   id,
   label,
+  hint,
   description,
   error,
   invalid,
   disabled,
+  messageSize,
+  group = false,
 }: FieldBaseProps) => {
   const outerContext = useFieldContext();
   const generatedId = React.useId();
   const hasLabel = typeof label === 'function' || hasContent(label);
+  const hasHint = hasContent(hint);
+  const resolvedMessageSize = messageSize ?? outerContext?.messageSize ?? '0';
   const hasDescription = hasContent(description);
   const hasError = hasContent(error);
   const isInvalid = Boolean(invalid) || hasError;
+  const isDisabled = Boolean(disabled) || Boolean(outerContext?.disabled);
 
   const [control, setControl] = React.useState<FieldControlState | null>(null);
-  const registerControl = React.useCallback((next: FieldControlState | null) => {
+  const controlsRef = React.useRef(new Map<string, FieldControlState>());
+  const registerControl = React.useCallback((key: string, state: FieldControlState | null) => {
+    const controls = controlsRef.current;
+    if (state) {
+      controls.set(key, state);
+    } else {
+      controls.delete(key);
+    }
+    if (controls.size > 1) {
+      warnOnce(MULTIPLE_CONTROLS_WARNING);
+    }
+    const next = controls.values().next().value ?? null;
     setControl((prev) =>
       prev?.id === next?.id &&
       prev?.disabled === next?.disabled &&
@@ -76,14 +114,21 @@ export const useFieldRoot = ({
     );
   }, []);
   const controlId = control?.id ?? id ?? (hasLabel ? `${generatedId}-control` : undefined);
-  const labelFor = control?.labelable === false ? undefined : controlId;
+  // The label points to a control only once one is there, so it never points to a missing id.
+  const labelFor = group
+    ? undefined
+    : control
+      ? control.labelable === false
+        ? undefined
+        : controlId
+      : id;
 
   const [hasFocus, setHasFocus] = React.useState(false);
   const onFocus = React.useCallback(() => setHasFocus(true), []);
   const onBlur = React.useCallback(() => setHasFocus(false), []);
 
   const labelVariant: FieldLabelVariant = React.useMemo(() => {
-    if (disabled || control?.disabled) {
+    if (isDisabled || control?.disabled) {
       return 'subtle';
     }
     if (isInvalid || control?.invalid) {
@@ -93,7 +138,7 @@ export const useFieldRoot = ({
       return 'contrast';
     }
     return 'default';
-  }, [disabled, isInvalid, hasFocus, control?.disabled, control?.invalid]);
+  }, [isDisabled, isInvalid, hasFocus, control?.disabled, control?.invalid]);
 
   const ownContext: FieldContextValue = React.useMemo(
     () => ({
@@ -101,8 +146,10 @@ export const useFieldRoot = ({
       labelId: hasLabel ? `${generatedId}-label` : undefined,
       descriptionId: hasDescription ? `${generatedId}-description` : undefined,
       errorId: hasError ? `${generatedId}-error` : undefined,
+      hintId: hasHint ? `${generatedId}-hint` : undefined,
+      messageSize: resolvedMessageSize,
       invalid: isInvalid,
-      disabled: Boolean(disabled),
+      disabled: isDisabled,
       registerControl,
     }),
     [
@@ -111,17 +158,57 @@ export const useFieldRoot = ({
       hasLabel,
       hasDescription,
       hasError,
+      hasHint,
+      resolvedMessageSize,
       isInvalid,
-      disabled,
+      isDisabled,
       registerControl,
     ],
   );
 
-  // A Field with no label, description or error inside another Field keeps the outer one.
-  const context =
-    outerContext && !hasLabel && !hasDescription && !hasError ? outerContext : ownContext;
+  // The controls of a group get only its disabled state: the group itself carries the name and the messages.
+  const groupContext: FieldContextValue = React.useMemo(
+    () => ({
+      messageSize: resolvedMessageSize,
+      invalid: false,
+      disabled: isDisabled,
+      registerControl: noop,
+    }),
+    [resolvedMessageSize, isDisabled],
+  );
 
-  return { context, labelFor, labelVariant, hasLabel, hasDescription, hasError, onFocus, onBlur };
+  const groupProps = group
+    ? {
+        role: 'group',
+        'aria-labelledby': ownContext.labelId,
+        'aria-describedby':
+          [ownContext.errorId, ownContext.descriptionId, ownContext.hintId]
+            .filter(Boolean)
+            .join(' ') || undefined,
+      }
+    : {};
+
+  // A Field with no label, hint, description or error inside another Field keeps the outer one.
+  const context = group
+    ? groupContext
+    : outerContext && !hasLabel && !hasHint && !hasDescription && !hasError
+      ? outerContext
+      : ownContext;
+
+  return {
+    context,
+    ids: ownContext,
+    groupProps,
+    messageSize: resolvedMessageSize,
+    labelFor,
+    labelVariant,
+    hasLabel,
+    hasHint,
+    hasDescription,
+    hasError,
+    onFocus,
+    onBlur,
+  };
 };
 
 /**
@@ -138,6 +225,7 @@ export const useFieldControl = ({
   labelable = true,
 }: FieldControlOptions) => {
   const field = useFieldContext();
+  const registrationId = React.useId();
   const ownInvalid = Boolean(invalid || ariaInvalid === true || ariaInvalid === 'true');
   const isInvalid = ownInvalid || Boolean(field?.invalid);
   const registerControl = field?.registerControl;
@@ -146,11 +234,17 @@ export const useFieldControl = ({
     if (!registerControl) {
       return undefined;
     }
-    registerControl({ id, disabled: Boolean(disabled), invalid: ownInvalid, labelable });
-    return () => registerControl(null);
-  }, [registerControl, id, disabled, ownInvalid, labelable]);
+    registerControl(registrationId, {
+      id,
+      disabled: Boolean(disabled),
+      invalid: ownInvalid,
+      labelable,
+    });
+    return () => registerControl(registrationId, null);
+  }, [registerControl, registrationId, id, disabled, ownInvalid, labelable]);
   const describedByIds =
-    [field?.errorId, field?.descriptionId, describedBy].filter(Boolean).join(' ') || undefined;
+    [field?.errorId, field?.descriptionId, field?.hintId, describedBy].filter(Boolean).join(' ') ||
+    undefined;
 
   return {
     id: id ?? field?.controlId,

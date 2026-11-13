@@ -128,4 +128,32 @@ describe('FieldVanilla', () => {
 
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('should put the label and the hint before the control with labelPosition start', () => {
+    renderWithTheme(
+      <FieldVanilla label="Name" hint="Names the route." labelPosition="start">
+        <InputVanilla />
+      </FieldVanilla>,
+    );
+
+    const input = screen.getByRole('textbox', { name: 'Name' });
+    expect(input).toHaveAccessibleDescription('Names the route.');
+    expect(screen.getByText('Names the route.').compareDocumentPosition(input)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+  });
+
+  it('should name and describe the group with group', () => {
+    renderWithTheme(
+      <FieldVanilla label="Endpoint" error="Use a host or a path." group>
+        <InputVanilla aria-label="Host" />
+        <InputVanilla aria-label="Path" />
+      </FieldVanilla>,
+    );
+
+    expect(screen.getByRole('group', { name: 'Endpoint' })).toHaveAccessibleDescription(
+      'Use a host or a path.',
+    );
+    expect(screen.getByRole('textbox', { name: 'Host' })).not.toHaveAttribute('aria-invalid');
+  });
 });
