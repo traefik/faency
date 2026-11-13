@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React from 'react';
@@ -193,11 +193,11 @@ describe('AriaTableVanilla', () => {
   });
 
   describe('AriaTdVanilla with fullColSpan', () => {
-    it('renders one cell, after a hidden filler that keeps the row height', () => {
+    it('renders its content once, after an empty hidden filler', () => {
       inTbody(
         <AriaTrVanilla>
-          <AriaTdVanilla fullColSpan id="total" aria-colspan={2}>
-            Total
+          <AriaTdVanilla fullColSpan id="total" aria-colspan={2} data-testid="total">
+            <input aria-label="Total" />
           </AriaTdVanilla>
         </AriaTrVanilla>,
       );
@@ -205,11 +205,45 @@ describe('AriaTableVanilla', () => {
       const [filler, cell] = Array.from(row.children);
 
       expect(screen.getAllByRole('cell')).toEqual([cell]);
+      expect(screen.getByTestId('total')).toBe(cell);
+      expect(screen.getAllByLabelText('Total')).toHaveLength(1);
       expect(cell).toHaveAttribute('id', 'total');
       expect(cell).toHaveAttribute('data-full-col-span');
       expect(filler).toHaveAttribute('aria-hidden', 'true');
-      expect(filler).not.toHaveAttribute('id');
-      expect(filler).toHaveTextContent('Total');
+      expect(filler).toBeEmptyDOMElement();
+      expect(filler.attributes).toHaveLength(3);
+    });
+
+    it('makes the filler as tall as the cell, and follows its size', () => {
+      let resize: () => void = () => {};
+      const { ResizeObserver } = window;
+      window.ResizeObserver = class {
+        constructor(callback: () => void) {
+          resize = callback;
+        }
+        observe() {}
+        unobserve() {}
+        disconnect() {}
+      } as unknown as typeof window.ResizeObserver;
+      let cellHeight = 48;
+      const offsetHeight = jest
+        .spyOn(HTMLElement.prototype, 'offsetHeight', 'get')
+        .mockImplementation(() => cellHeight);
+
+      inTbody(
+        <AriaTrVanilla>
+          <AriaTdVanilla fullColSpan>Total</AriaTdVanilla>
+        </AriaTrVanilla>,
+      );
+      const [filler] = Array.from(screen.getByRole('row').children) as HTMLElement[];
+      expect(filler.style.height).toBe('48px');
+
+      cellHeight = 96;
+      act(() => resize());
+      expect(filler.style.height).toBe('96px');
+
+      offsetHeight.mockRestore();
+      window.ResizeObserver = ResizeObserver;
     });
 
     it('throws when the row has other cells', () => {
@@ -270,6 +304,7 @@ describe('AriaTableVanilla', () => {
       expect(contentCell).toHaveAttribute('data-full-col-span');
       expect(contentCell).toHaveAttribute('data-closed');
       expect(contentCell).toHaveTextContent('Details');
+      expect(screen.getAllByText('Details')).toHaveLength(1);
     });
 
     it('opens and closes the content from the expand button without clicking the row', () => {
@@ -460,6 +495,64 @@ describe('AriaTableVanilla', () => {
 
         expect(await axe(container)).toHaveNoViolations();
       });
+    });
+  });
+
+  describe('AriaThVanilla sorting', () => {
+    const renderHeader = (props: React.ComponentProps<typeof AriaThVanilla>) =>
+      renderWithTheme(
+        <AriaTableVanilla aria-label="Users">
+          <AriaTheadVanilla>
+            <AriaTrVanilla>
+              <AriaThVanilla {...props}>Name</AriaThVanilla>
+            </AriaTrVanilla>
+          </AriaTheadVanilla>
+        </AriaTableVanilla>,
+      );
+
+    it('renders no button without onSort', () => {
+      renderHeader({});
+
+      expect(screen.queryByRole('button')).not.toBeInTheDocument();
+      expect(screen.getByRole('columnheader')).not.toHaveAttribute('aria-sort');
+    });
+
+    it('puts the content in a sort button with onSort', () => {
+      renderHeader({ onSort: jest.fn() });
+
+      expect(screen.getByRole('button', { name: 'Name' })).toBeInTheDocument();
+      expect(screen.getByRole('columnheader')).not.toHaveAttribute('aria-sort');
+    });
+
+    it('sets aria-sort only on the sorted column', () => {
+      (
+        [
+          ['asc', 'ascending'],
+          ['desc', 'descending'],
+        ] as const
+      ).forEach(([sort, ariaSort]) => {
+        const { unmount } = renderHeader({ sort, onSort: jest.fn() });
+        expect(screen.getByRole('columnheader')).toHaveAttribute('aria-sort', ariaSort);
+        unmount();
+      });
+    });
+
+    it('calls onSort on click, Enter and Space', async () => {
+      const onSort = jest.fn();
+      renderHeader({ onSort });
+      const button = screen.getByRole('button', { name: 'Name' });
+
+      await userEvent.click(button);
+      await userEvent.keyboard('{Enter}');
+      await userEvent.keyboard(' ');
+
+      expect(onSort).toHaveBeenCalledTimes(3);
+    });
+
+    it('has no accessibility violations', async () => {
+      const { container } = renderHeader({ sort: 'asc', onSort: jest.fn() });
+
+      expect(await axe(container)).toHaveNoViolations();
     });
   });
 

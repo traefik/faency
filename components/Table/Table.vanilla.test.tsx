@@ -446,6 +446,64 @@ describe('TableVanilla', () => {
     });
   });
 
+  describe('ThVanilla sorting', () => {
+    const renderHeader = (props: React.ComponentProps<typeof ThVanilla>) =>
+      renderWithTheme(
+        <TableVanilla>
+          <TheadVanilla>
+            <TrVanilla>
+              <ThVanilla {...props}>Name</ThVanilla>
+            </TrVanilla>
+          </TheadVanilla>
+        </TableVanilla>,
+      );
+
+    it('renders no button without onSort', () => {
+      renderHeader({});
+
+      expect(screen.queryByRole('button')).not.toBeInTheDocument();
+      expect(screen.getByRole('columnheader')).not.toHaveAttribute('aria-sort');
+    });
+
+    it('puts the content in a sort button with onSort', () => {
+      renderHeader({ onSort: jest.fn() });
+
+      expect(screen.getByRole('button', { name: 'Name' })).toBeInTheDocument();
+      expect(screen.getByRole('columnheader')).not.toHaveAttribute('aria-sort');
+    });
+
+    it('sets aria-sort only on the sorted column', () => {
+      (
+        [
+          ['asc', 'ascending'],
+          ['desc', 'descending'],
+        ] as const
+      ).forEach(([sort, ariaSort]) => {
+        const { unmount } = renderHeader({ sort, onSort: jest.fn() });
+        expect(screen.getByRole('columnheader')).toHaveAttribute('aria-sort', ariaSort);
+        unmount();
+      });
+    });
+
+    it('calls onSort on click, Enter and Space', async () => {
+      const onSort = jest.fn();
+      renderHeader({ onSort });
+      const button = screen.getByRole('button', { name: 'Name' });
+
+      await userEvent.click(button);
+      await userEvent.keyboard('{Enter}');
+      await userEvent.keyboard(' ');
+
+      expect(onSort).toHaveBeenCalledTimes(3);
+    });
+
+    it('has no accessibility violations', async () => {
+      const { container } = renderHeader({ sort: 'asc', onSort: jest.fn() });
+
+      expect(await axe(container)).toHaveNoViolations();
+    });
+  });
+
   it('works in light and dark themes', () => {
     (['light', 'dark'] as const).forEach((theme) => {
       const { unmount } = render(

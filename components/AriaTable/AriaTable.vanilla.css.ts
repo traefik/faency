@@ -23,14 +23,12 @@ export const ariaTr = style({
 
 export const ariaCell = style({ display: 'table-cell' });
 
-// A hidden copy of the full-width cell keeps the row height, as a div table has no colspan.
 export const fillerCell = style({ visibility: 'hidden' });
 
 export const fullColSpanCell = style({
   position: 'absolute',
   left: 0,
   width: '100%',
-  height: '100%',
 });
 
 export const collapsedRow = style({

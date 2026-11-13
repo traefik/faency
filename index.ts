@@ -185,14 +185,19 @@ export { Switch } from './components/Switch';
 export type {
   CaptionVanillaProps,
   TableSectionVanillaProps,
+  TableSortDirection,
+  TableSortProps,
+  TableSortValue,
   TableVanillaProps,
   TdVanillaProps,
   ThVanillaProps,
   TrVanillaProps,
+  UseTableSortOptions,
 } from './components/Table';
 export {
   Caption,
   CaptionVanilla,
+  sortRows,
   Table,
   TableVanilla,
   Tbody,
@@ -207,6 +212,7 @@ export {
   ThVanilla,
   Tr,
   TrVanilla,
+  useTableSort,
 } from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
 export { Text } from './components/Text';

@@ -1,11 +1,22 @@
 import { RecipeVariants } from '@vanilla-extract/recipes';
-import React, { Children, forwardRef, isValidElement, ReactNode, useId, useState } from 'react';
+import React, {
+  Children,
+  forwardRef,
+  isValidElement,
+  ReactNode,
+  useCallback,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 
 import { CSSProps } from '../../styles/cssProps';
+import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
 import { mapRowLink, openRowLink, RowLinkShortcutProps } from '../RowLink/RowLink.utils';
 import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
 import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
 import { ExpandToggleVanilla, stopEvent } from '../Table/ExpandToggle.vanilla';
+import { ARIA_SORT, SortButtonVanilla } from '../Table/SortButton.vanilla';
 import { cx, useInlineStyle } from '../Table/Table.utils';
 import {
   captionRecipe,
@@ -19,6 +30,7 @@ import {
   toggleCell,
   trRecipe,
 } from '../Table/Table.vanilla.css';
+import { TableSortProps } from '../Table/useTableSort';
 import { FULL_COL_SPAN_ATTRIBUTE } from './AriaTable.constants';
 import {
   ariaCell,
@@ -115,16 +127,33 @@ export const AriaTfootVanilla = section(cx(tfoot, ariaTfoot), 'AriaTfootVanilla'
 
 export type AriaThVanillaProps = React.HTMLAttributes<HTMLSpanElement> &
   CSSProps &
-  ThRecipeVariants;
+  ThRecipeVariants &
+  TableSortProps;
 
 export const AriaThVanilla = forwardRef<HTMLSpanElement, AriaThVanillaProps>(
   (
-    { size, weight, variant, gradient, transform, noWrap, align, className, css, style, ...props },
+    {
+      size,
+      weight,
+      variant,
+      gradient,
+      transform,
+      noWrap,
+      align,
+      sort,
+      onSort,
+      className,
+      css,
+      style,
+      children,
+      ...props
+    },
     ref,
   ) => (
     <span
       ref={ref}
       role="columnheader"
+      aria-sort={sort && ARIA_SORT[sort]}
       className={cx(
         thRecipe({ size, weight, variant, gradient, transform, noWrap, align }),
         ariaCell,
@@ -132,7 +161,15 @@ export const AriaThVanilla = forwardRef<HTMLSpanElement, AriaThVanillaProps>(
       )}
       style={useInlineStyle(css, style)}
       {...props}
-    />
+    >
+      {onSort ? (
+        <SortButtonVanilla sort={sort} onSort={onSort}>
+          {children}
+        </SortButtonVanilla>
+      ) : (
+        children
+      )}
+    </span>
   ),
 );
 
@@ -145,43 +182,65 @@ export type AriaTdVanillaProps = React.HTMLAttributes<HTMLSpanElement> &
     fullColSpan?: boolean;
   };
 
-export const AriaTdVanilla = forwardRef<HTMLSpanElement, AriaTdVanillaProps>(
-  ({ fullColSpan = false, subtle, align, id, className, css, style, children, ...props }, ref) => {
-    const cellClassName = cx(tdRecipe({ subtle, align }), ariaCell, className);
-    const inlineStyle = useInlineStyle(css, style);
+// The cell is taken out of the row to span it, so an empty filler as tall as the cell holds the row open.
+const FullColSpanCell = forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
+  ({ className, ...props }, forwardedRef) => {
+    const cellRef = useRef<HTMLSpanElement | null>(null);
+    const [height, setHeight] = useState(0);
 
-    if (!fullColSpan) {
-      return (
-        <span
-          ref={ref}
-          role="cell"
-          id={id}
-          className={cellClassName}
-          style={inlineStyle}
-          {...props}
-        >
-          {children}
-        </span>
-      );
-    }
+    useIsomorphicLayoutEffect(() => {
+      const cell = cellRef.current;
+      if (!cell || typeof ResizeObserver === 'undefined') {
+        return undefined;
+      }
+      const update = () => setHeight(cell.offsetHeight);
+      update();
+      const observer = new ResizeObserver(update);
+      observer.observe(cell);
+      return () => observer.disconnect();
+    }, []);
+
+    const setRefs = useCallback(
+      (node: HTMLSpanElement | null) => {
+        cellRef.current = node;
+        if (typeof forwardedRef === 'function') {
+          forwardedRef(node);
+        } else if (forwardedRef) {
+          forwardedRef.current = node;
+        }
+      },
+      [forwardedRef],
+    );
 
     return (
       <>
-        <span {...props} aria-hidden className={cx(cellClassName, fillerCell)} style={inlineStyle}>
-          {children}
-        </span>
+        <span aria-hidden className={cx(ariaCell, fillerCell)} style={{ height }} />
         <span
-          ref={ref}
+          ref={setRefs}
           role="cell"
-          id={id}
           {...{ [FULL_COL_SPAN_ATTRIBUTE]: '' }}
-          className={cx(cellClassName, fullColSpanCell)}
-          style={inlineStyle}
+          className={cx(className, fullColSpanCell)}
           {...props}
-        >
-          {children}
-        </span>
+        />
       </>
+    );
+  },
+);
+
+FullColSpanCell.displayName = 'FullColSpanCell';
+
+export const AriaTdVanilla = forwardRef<HTMLSpanElement, AriaTdVanillaProps>(
+  ({ fullColSpan = false, subtle, align, className, css, style, ...props }, ref) => {
+    const Cell = fullColSpan ? FullColSpanCell : 'span';
+
+    return (
+      <Cell
+        ref={ref}
+        role="cell"
+        className={cx(tdRecipe({ subtle, align }), ariaCell, className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      />
     );
   },
 );

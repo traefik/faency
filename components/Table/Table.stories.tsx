@@ -1,6 +1,6 @@
 // @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { Meta, StoryFn } from '@storybook/react-vite';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { VerticalAlignment as AriaTableStory } from '../AriaTable/AriaTable.stories';
@@ -37,6 +37,7 @@ import {
   ThVanilla,
   TrVanilla,
 } from './Table.vanilla';
+import { sortRows, useTableSort } from './useTableSort';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
@@ -978,6 +979,59 @@ Comparison.argTypes = {
   elevation: {
     control: 'inline-radio',
     options: ['0', '1', '2', '3', '4', '5'],
+  },
+};
+
+const sortableRows = [
+  { name: 'gpt-4o', provider: 'OpenAI', requests: 1240 },
+  { name: 'claude-sonnet', provider: 'Anthropic', requests: 3180 },
+  { name: 'mistral-large', provider: 'Mistral', requests: 410 },
+  { name: 'gemini-pro', provider: 'Google', requests: 980 },
+];
+type SortableColumn = keyof (typeof sortableRows)[number];
+const getSortableValue = (row: (typeof sortableRows)[number], key: SortableColumn) => row[key];
+
+export const Sortable: StoryFn<any> = () => {
+  const { key, direction, sortProps } = useTableSort<SortableColumn>({
+    key: 'requests',
+    direction: 'desc',
+  });
+  const sorted = useMemo(
+    () => sortRows(sortableRows, getSortableValue, key, direction),
+    [key, direction],
+  );
+
+  return (
+    <TableVanilla>
+      <CaptionVanilla>Requests by model</CaptionVanilla>
+      <TheadVanilla>
+        <TrVanilla>
+          <ThVanilla {...sortProps('name')}>Model</ThVanilla>
+          <ThVanilla>Provider</ThVanilla>
+          <ThVanilla {...sortProps('requests')} align="end">
+            Requests
+          </ThVanilla>
+        </TrVanilla>
+      </TheadVanilla>
+      <TbodyVanilla>
+        {sorted.map((row) => (
+          <TrVanilla key={row.name}>
+            <TdVanilla>{row.name}</TdVanilla>
+            <TdVanilla subtle>{row.provider}</TdVanilla>
+            <TdVanilla align="end">{row.requests}</TdVanilla>
+          </TrVanilla>
+        ))}
+      </TbodyVanilla>
+    </TableVanilla>
+  );
+};
+
+Sortable.parameters = {
+  docs: {
+    description: {
+      story:
+        'A header with `onSort` puts its content in a sort button, and `sort` shows the direction and sets `aria-sort`. `useTableSort` keeps the sorted column and direction and gives each header its `sort` and `onSort`: clicking the sorted column flips the direction, and clicking another column sorts it in `newColumnDirection` (`desc` by default). It does not sort the rows: here `sortRows` sorts them in the browser. For data sorted by the API, send `key` and `direction` in the request and render the rows as they come.',
+    },
   },
 };
 

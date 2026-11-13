@@ -17,3 +17,10 @@ export {
   ThVanilla,
   TrVanilla,
 } from './Table.vanilla';
+export type {
+  TableSortDirection,
+  TableSortProps,
+  TableSortValue,
+  UseTableSortOptions,
+} from './useTableSort';
+export { sortRows, useTableSort } from './useTableSort';

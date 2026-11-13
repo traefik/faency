@@ -6,6 +6,7 @@ import { mapRowLink, openRowLink, RowLinkShortcutProps } from '../RowLink/RowLin
 import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
 import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
 import { ExpandToggleVanilla, stopEvent } from './ExpandToggle.vanilla';
+import { ARIA_SORT, SortButtonVanilla } from './SortButton.vanilla';
 import { cx, useInlineStyle } from './Table.utils';
 import {
   captionRecipe,
@@ -21,6 +22,7 @@ import {
   toggleCell,
   trRecipe,
 } from './Table.vanilla.css';
+import { TableSortProps } from './useTableSort';
 
 type TableRecipeVariants = NonNullable<RecipeVariants<typeof tableRecipe>>;
 type CaptionRecipeVariants = NonNullable<RecipeVariants<typeof captionRecipe>>;
@@ -91,22 +93,47 @@ export const TfootVanilla = section('tfoot', tfoot, 'TfootVanilla');
 
 export type ThVanillaProps = Omit<React.ThHTMLAttributes<HTMLTableCellElement>, 'align'> &
   CSSProps &
-  ThRecipeVariants;
+  ThRecipeVariants &
+  TableSortProps;
 
 export const ThVanilla = forwardRef<HTMLTableCellElement, ThVanillaProps>(
   (
-    { size, weight, variant, gradient, transform, noWrap, align, className, css, style, ...props },
+    {
+      size,
+      weight,
+      variant,
+      gradient,
+      transform,
+      noWrap,
+      align,
+      sort,
+      onSort,
+      className,
+      css,
+      style,
+      children,
+      ...props
+    },
     ref,
   ) => (
     <th
       ref={ref}
+      aria-sort={sort && ARIA_SORT[sort]}
       className={cx(
         thRecipe({ size, weight, variant, gradient, transform, noWrap, align }),
         className,
       )}
       style={useInlineStyle(css, style)}
       {...props}
-    />
+    >
+      {onSort ? (
+        <SortButtonVanilla sort={sort} onSort={onSort}>
+          {children}
+        </SortButtonVanilla>
+      ) : (
+        children
+      )}
+    </th>
   ),
 );
 

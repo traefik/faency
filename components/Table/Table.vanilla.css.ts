@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import {
@@ -201,6 +201,42 @@ export const thRecipe = recipe({
     variant: 'subtle',
     transform: 'capitalize',
     align: 'start',
+  },
+});
+
+export const sortButton = style({
+  all: 'unset',
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: tokens.space['2'],
+  borderRadius: tokens.radii['1'],
+  cursor: 'pointer',
+  selectors: {
+    '&:hover': {
+      color: tokens.colors.hiContrast,
+    },
+    '&:focus-visible': {
+      outlineWidth: '2px',
+      outlineStyle: 'solid',
+      outlineColor: tokens.colors.focusOutline,
+      outlineOffset: '2px',
+    },
+  },
+});
+
+export const sortIcon = style({
+  flexShrink: 0,
+});
+
+globalStyle(`${sortIcon} > path`, {
+  opacity: 0.4,
+});
+
+export const sortIconActive = style({
+  selectors: {
+    [`${sortIcon} > &`]: {
+      opacity: 1,
+    },
   },
 });
 
