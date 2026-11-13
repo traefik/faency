@@ -194,16 +194,17 @@ describe('TableVanilla', () => {
   });
 
   describe('TrVanilla', () => {
-    it('adds an empty first cell, as a header cell with tableHead', () => {
-      const { unmount } = inTbody(
+    it('adds an empty first cell', () => {
+      inTbody(
         <TrVanilla emptyFirstColumn>
           <TdVanilla>John</TdVanilla>
         </TrVanilla>,
       );
       expect(screen.getAllByRole('cell')).toHaveLength(2);
       expect(screen.getAllByRole('cell')[0]).toBeEmptyDOMElement();
-      unmount();
+    });
 
+    it('keeps the empty first cell of a header row a data cell, as that column has no header', () => {
       renderWithTheme(
         <TableVanilla>
           <TheadVanilla>
@@ -213,8 +214,37 @@ describe('TableVanilla', () => {
           </TheadVanilla>
         </TableVanilla>,
       );
-      expect(screen.getAllByRole('columnheader')).toHaveLength(2);
-      expect(screen.getAllByRole('columnheader')[0]).toBeEmptyDOMElement();
+      const [emptyCell] = screen.getAllByRole('cell');
+
+      expect(screen.getAllByRole('columnheader')).toHaveLength(1);
+      expect(emptyCell.tagName).toBe('TD');
+      expect(emptyCell).toBeEmptyDOMElement();
+    });
+
+    it('has no accessibility violations with collapsible rows and an empty header cell', async () => {
+      const { container } = renderWithTheme(
+        <TableVanilla>
+          <CaptionVanilla>Users</CaptionVanilla>
+          <TheadVanilla>
+            <TrVanilla emptyFirstColumn tableHead>
+              <ThVanilla>Name</ThVanilla>
+              <ThVanilla>Role</ThVanilla>
+              <ThVanilla>Status</ThVanilla>
+            </TrVanilla>
+          </TheadVanilla>
+          <TbodyVanilla>
+            {['John', 'Jane', 'Jim'].map((name) => (
+              <TrVanilla key={name} collapsedContent={`About ${name}`} collapsedContentColSpan={4}>
+                <TdVanilla>{name}</TdVanilla>
+                <TdVanilla>Developer</TdVanilla>
+                <TdVanilla>Active</TdVanilla>
+              </TrVanilla>
+            ))}
+          </TbodyVanilla>
+        </TableVanilla>,
+      );
+
+      expect(await axe(container)).toHaveNoViolations();
     });
 
     it('renders collapsible content closed, in a row spanning collapsedContentColSpan', () => {

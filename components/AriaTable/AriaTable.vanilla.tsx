@@ -209,7 +209,7 @@ export type AriaTrVanillaProps = React.HTMLAttributes<HTMLDivElement> &
     expandLabel?: string;
     /** Adds an empty first cell, to line up with rows that have an expand button. */
     emptyFirstColumn?: boolean;
-    /** Makes the empty first cell a header cell, for a row in `AriaTheadVanilla`. */
+    /** Styles the empty first cell as a header, for a row in `AriaTheadVanilla`. */
     tableHead?: boolean;
   };
 
@@ -268,7 +268,11 @@ export const AriaTrVanilla = forwardRef<HTMLDivElement, AriaTrVanillaProps>(
           {...props}
         >
           {emptyFirstColumn &&
-            (tableHead ? <AriaThVanilla className={emptyHeaderCell} /> : <AriaTdVanilla />)}
+            (tableHead ? (
+              <span role="cell" className={cx(thRecipe(), ariaCell, emptyHeaderCell)} />
+            ) : (
+              <AriaTdVanilla />
+            ))}
           {collapsible && (
             <AriaTdVanilla className={toggleCell} onClick={stopEvent}>
               <ExpandToggleVanilla

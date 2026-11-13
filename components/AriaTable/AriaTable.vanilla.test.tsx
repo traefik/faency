@@ -229,16 +229,17 @@ describe('AriaTableVanilla', () => {
   });
 
   describe('AriaTrVanilla', () => {
-    it('adds an empty first cell, as a header cell with tableHead', () => {
-      const { unmount } = inTbody(
+    it('adds an empty first cell', () => {
+      inTbody(
         <AriaTrVanilla emptyFirstColumn>
           <AriaTdVanilla>John</AriaTdVanilla>
         </AriaTrVanilla>,
       );
       expect(screen.getAllByRole('cell')).toHaveLength(2);
       expect(screen.getAllByRole('cell')[0]).toBeEmptyDOMElement();
-      unmount();
+    });
 
+    it('keeps the empty first cell of a header row a data cell, as that column has no header', () => {
       renderWithTheme(
         <AriaTableVanilla aria-label="Users">
           <AriaTheadVanilla>
@@ -248,8 +249,9 @@ describe('AriaTableVanilla', () => {
           </AriaTheadVanilla>
         </AriaTableVanilla>,
       );
-      expect(screen.getAllByRole('columnheader')).toHaveLength(2);
-      expect(screen.getAllByRole('columnheader')[0]).toBeEmptyDOMElement();
+
+      expect(screen.getAllByRole('columnheader')).toHaveLength(1);
+      expect(screen.getByRole('cell')).toBeEmptyDOMElement();
     });
 
     it('renders collapsible content closed, in a full-width cell of its own row', () => {
@@ -487,13 +489,24 @@ describe('AriaTableVanilla', () => {
     );
   });
 
-  it('has no accessibility violations, with a collapsible row', async () => {
+  it('has no accessibility violations with collapsible rows and an empty header cell', async () => {
     const { container } = renderWithTheme(
       <AriaTableVanilla aria-label="Users" hasCollapsibleChildren>
-        <AriaTbodyVanilla>
-          <AriaTrVanilla collapsedContent="Details">
-            <AriaTdVanilla>John</AriaTdVanilla>
+        <AriaTheadVanilla>
+          <AriaTrVanilla emptyFirstColumn tableHead>
+            <AriaThVanilla>Name</AriaThVanilla>
+            <AriaThVanilla>Role</AriaThVanilla>
+            <AriaThVanilla>Status</AriaThVanilla>
           </AriaTrVanilla>
+        </AriaTheadVanilla>
+        <AriaTbodyVanilla>
+          {['John', 'Jane', 'Jim'].map((name) => (
+            <AriaTrVanilla key={name} collapsedContent={`About ${name}`}>
+              <AriaTdVanilla>{name}</AriaTdVanilla>
+              <AriaTdVanilla>Developer</AriaTdVanilla>
+              <AriaTdVanilla>Active</AriaTdVanilla>
+            </AriaTrVanilla>
+          ))}
         </AriaTbodyVanilla>
       </AriaTableVanilla>,
     );

@@ -141,7 +141,7 @@ export type TrVanillaProps = React.HTMLAttributes<HTMLTableRowElement> &
     expandLabel?: string;
     /** Adds an empty first cell, to line up with rows that have an expand button. */
     emptyFirstColumn?: boolean;
-    /** Makes the empty first cell a header cell, for a row in `TheadVanilla`. */
+    /** Styles the empty first cell as a header, for a row in `TheadVanilla`. */
     tableHead?: boolean;
   };
 
@@ -197,7 +197,7 @@ export const TrVanilla = forwardRef<HTMLTableRowElement, TrVanillaProps>(
           {...props}
         >
           {emptyFirstColumn &&
-            (tableHead ? <ThVanilla className={emptyHeaderCell} /> : <TdVanilla />)}
+            (tableHead ? <td className={cx(thRecipe(), emptyHeaderCell)} /> : <TdVanilla />)}
           {collapsible && (
             <TdVanilla className={toggleCell} onClick={stopEvent}>
               <ExpandToggleVanilla
