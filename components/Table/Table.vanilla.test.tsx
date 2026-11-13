@@ -4,6 +4,7 @@ import { axe } from 'jest-axe';
 import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { resetWarnings } from '../../utils/warnOnce';
 import {
   CaptionVanilla,
   TableVanilla,
@@ -412,6 +413,21 @@ describe('TableVanilla', () => {
 
         expect(onRowClick).toHaveBeenCalledTimes(1);
         expect(onLinkClick).toHaveBeenCalledTimes(1);
+      });
+
+      it('warns with the vanilla names when the cell at linkCell is not a TdVanilla', () => {
+        resetWarnings();
+        const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        inTbody(
+          <TrVanilla href="/apis/api-1">
+            <ThVanilla>api-1</ThVanilla>
+          </TrVanilla>,
+        );
+
+        expect(warn).toHaveBeenCalledWith(
+          'TrVanilla: the child at linkCell 0 is not a TdVanilla, so the row has no link. Use a TdVanilla for that cell.',
+        );
+        warn.mockRestore();
       });
 
       it('renders no link without href', () => {

@@ -36,12 +36,16 @@ const isCellType = (type: unknown, cellType: ElementType) => {
   return internal?.type === cellType || (!!cellClassName && className === cellClassName);
 };
 
+/** The component names in the warning. Without them, it names the Stitches `Tr` and `Td`, and suggests `RowLink`. */
+type RowLinkNames = { row: string; cell: string };
+
 /** Puts the content of the `cellType` cell at `linkCell` in a `RowLinkComponent` to `href`. */
 export const mapRowLink = (
   children: ReactNode,
   { href, linkAs: LinkComponent = 'a', linkCell = 0, linkProps, linkOverlay }: RowLinkShortcutProps,
   cellType: ElementType,
   RowLinkComponent: ElementType,
+  names?: RowLinkNames,
 ) => {
   if (href === undefined) {
     return children;
@@ -72,8 +76,13 @@ export const mapRowLink = (
   });
 
   if (!linked) {
+    const { row, cell } = names ?? { row: 'Tr', cell: 'Td' };
+    const aCell = `${/^[aeiou]/i.test(cell) ? 'an' : 'a'} ${cell}`;
+    const fix = names
+      ? `Use ${aCell} for that cell.`
+      : `Use ${aCell} for that cell, or put a RowLink in it.`;
     warnOnce(
-      `Tr: the child at linkCell ${linkCell} is not a Td, so the row has no link. Use a Td for that cell, or put a RowLink in it.`,
+      `${row}: the child at linkCell ${linkCell} is not ${aCell}, so the row has no link. ${fix}`,
     );
   }
 

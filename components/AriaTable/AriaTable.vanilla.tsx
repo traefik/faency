@@ -351,6 +351,7 @@ export const AriaTrVanilla = forwardRef<HTMLDivElement, AriaTrVanillaProps>(
             { href, linkAs, linkCell, linkProps, linkOverlay },
             AriaTdVanilla,
             RowLinkVanilla,
+            { row: 'AriaTrVanilla', cell: 'AriaTdVanilla' },
           )}
         </div>
         {collapsible && (

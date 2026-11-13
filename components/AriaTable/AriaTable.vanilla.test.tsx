@@ -4,6 +4,7 @@ import { axe } from 'jest-axe';
 import React from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { resetWarnings } from '../../utils/warnOnce';
 import {
   AriaCaptionVanilla,
   AriaTableVanilla,
@@ -472,6 +473,21 @@ describe('AriaTableVanilla', () => {
 
         expect(onRowClick).toHaveBeenCalledTimes(1);
         expect(onLinkClick).toHaveBeenCalledTimes(1);
+      });
+
+      it('warns with the vanilla names when the cell at linkCell is not an AriaTdVanilla', () => {
+        resetWarnings();
+        const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        inTbody(
+          <AriaTrVanilla href="/apis/api-1">
+            <AriaThVanilla>api-1</AriaThVanilla>
+          </AriaTrVanilla>,
+        );
+
+        expect(warn).toHaveBeenCalledWith(
+          'AriaTrVanilla: the child at linkCell 0 is not an AriaTdVanilla, so the row has no link. Use an AriaTdVanilla for that cell.',
+        );
+        warn.mockRestore();
       });
 
       it('renders no link without href', () => {

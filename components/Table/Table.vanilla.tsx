@@ -242,6 +242,7 @@ export const TrVanilla = forwardRef<HTMLTableRowElement, TrVanillaProps>(
             { href, linkAs, linkCell, linkProps, linkOverlay },
             TdVanilla,
             RowLinkVanilla,
+            { row: 'TrVanilla', cell: 'TdVanilla' },
           )}
         </tr>
         {collapsible && (
