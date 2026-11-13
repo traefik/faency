@@ -169,6 +169,10 @@ export const tokens = createThemeContract({
 
     meterTrackBg: null,
 
+    listItemHoverBg: null,
+    listItemActiveBg: null,
+    listItemFocusBorder: null,
+
     // Semantic tones
     toneSuccessSolid: null,
     toneSuccessText: null,
