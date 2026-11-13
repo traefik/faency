@@ -26,6 +26,12 @@ import {
   segmentedControlLightTheme,
 } from '../components/SegmentedControl/SegmentedControl.theme.css';
 import { skeletonDarkTheme, skeletonLightTheme } from '../components/Skeleton/Skeleton.theme.css';
+import {
+  getTableDarkColors,
+  getTableLightColors,
+  tableDarkTheme,
+  tableLightTheme,
+} from '../components/Table/Table.theme.css';
 import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
 import { textareaDarkTheme, textareaLightTheme } from '../components/Textarea/Textarea.theme.css';
 import { toastDarkTheme, toastLightTheme } from '../components/Toast/Toast.theme.css';
@@ -330,6 +336,7 @@ const lightSemanticColors = {
   meterTrackBg: lightColors.grayA3,
   ...createToneColors(lightColors),
   ...chartLightColors,
+  ...tableLightTheme,
 };
 
 export const lightThemeBlue = createTheme(tokens, {
@@ -338,6 +345,7 @@ export const lightThemeBlue = createTheme(tokens, {
     ...lightSemanticColors,
     ...getButtonLightColors('blue'),
     ...getButtonSwitchLightColors('blue'),
+    ...getTableLightColors(lightColors.blue9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -349,6 +357,7 @@ export const lightThemeNeon = createTheme(tokens, {
     ...lightSemanticColors,
     ...getButtonLightColors('neon'),
     ...getButtonSwitchLightColors('neon'),
+    ...getTableLightColors(lightColors.neon9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -360,6 +369,7 @@ export const lightThemeOrange = createTheme(tokens, {
     ...lightSemanticColors,
     ...getButtonLightColors('orange'),
     ...getButtonSwitchLightColors('orange'),
+    ...getTableLightColors(lightColors.orange9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -371,6 +381,7 @@ export const lightThemeRed = createTheme(tokens, {
     ...lightSemanticColors,
     ...getButtonLightColors('red'),
     ...getButtonSwitchLightColors('red'),
+    ...getTableLightColors(lightColors.red9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -382,6 +393,7 @@ export const lightThemeGreen = createTheme(tokens, {
     ...lightSemanticColors,
     ...getButtonLightColors('green'),
     ...getButtonSwitchLightColors('green'),
+    ...getTableLightColors(lightColors.green9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -393,6 +405,7 @@ export const lightThemeDeepBlue = createTheme(tokens, {
     ...lightSemanticColors,
     ...getButtonLightColors('deepBlue'),
     ...getButtonSwitchLightColors('deepBlue'),
+    ...getTableLightColors(lightColors.deepBlue9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -404,6 +417,7 @@ export const lightThemeGrayBlue = createTheme(tokens, {
     ...lightSemanticColors,
     ...getButtonLightColors('grayBlue'),
     ...getButtonSwitchLightColors('grayBlue'),
+    ...getTableLightColors(lightColors.grayBlue9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -464,6 +478,7 @@ const darkSemanticColors = {
   meterTrackBg: darkColors.grayA3,
   ...createToneColors(darkColors),
   ...chartDarkColors,
+  ...tableDarkTheme,
 };
 
 export const darkThemeBlue = createTheme(tokens, {
@@ -472,6 +487,7 @@ export const darkThemeBlue = createTheme(tokens, {
     ...darkSemanticColors,
     ...getButtonDarkColors('blue'),
     ...getButtonSwitchDarkColors('blue'),
+    ...getTableDarkColors(darkColors.blue9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -483,6 +499,7 @@ export const darkThemeNeon = createTheme(tokens, {
     ...darkSemanticColors,
     ...getButtonDarkColors('neon'),
     ...getButtonSwitchDarkColors('neon'),
+    ...getTableDarkColors(darkColors.neon9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -494,6 +511,7 @@ export const darkThemeOrange = createTheme(tokens, {
     ...darkSemanticColors,
     ...getButtonDarkColors('orange'),
     ...getButtonSwitchDarkColors('orange'),
+    ...getTableDarkColors(darkColors.orange9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -505,6 +523,7 @@ export const darkThemeRed = createTheme(tokens, {
     ...darkSemanticColors,
     ...getButtonDarkColors('red'),
     ...getButtonSwitchDarkColors('red'),
+    ...getTableDarkColors(darkColors.red9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -516,6 +535,7 @@ export const darkThemeGreen = createTheme(tokens, {
     ...darkSemanticColors,
     ...getButtonDarkColors('green'),
     ...getButtonSwitchDarkColors('green'),
+    ...getTableDarkColors(darkColors.green9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -527,6 +547,7 @@ export const darkThemeDeepBlue = createTheme(tokens, {
     ...darkSemanticColors,
     ...getButtonDarkColors('deepBlue'),
     ...getButtonSwitchDarkColors('deepBlue'),
+    ...getTableDarkColors(darkColors.deepBlue9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -538,6 +559,7 @@ export const darkThemeGrayBlue = createTheme(tokens, {
     ...darkSemanticColors,
     ...getButtonDarkColors('grayBlue'),
     ...getButtonSwitchDarkColors('grayBlue'),
+    ...getTableDarkColors(darkColors.grayBlue9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,

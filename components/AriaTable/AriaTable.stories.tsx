@@ -1,15 +1,19 @@
 // @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { Meta, StoryFn } from '@storybook/react-vite';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Badge } from '../Badge';
+import { Badge, BadgeVanilla } from '../Badge';
+import { BoxVanilla } from '../Box';
 import { Button } from '../Button';
-import { Flex } from '../Flex';
+import { Flex, FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
 import { Image } from '../Image';
 import { Link } from '../Link';
 import { RowLink } from '../RowLink';
+import { sortRows, useTableSort } from '../Table/useTableSort';
 import { Text } from '../Text';
+import { TextVanilla } from '../Text/Text.vanilla';
 import { Tooltip } from '../Tooltip';
 import { VisuallyHidden } from '../VisuallyHidden';
 import {
@@ -24,6 +28,16 @@ import {
   Thead,
   Tr,
 } from './AriaTable';
+import {
+  AriaCaptionVanilla,
+  AriaTableVanilla,
+  AriaTbodyVanilla,
+  AriaTdVanilla,
+  AriaTfootVanilla,
+  AriaTheadVanilla,
+  AriaThVanilla,
+  AriaTrVanilla,
+} from './AriaTable.vanilla';
 
 const BaseTable = (props: AriaTableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<AriaTableVariants, AriaTableProps>(BaseTable);
@@ -617,6 +631,191 @@ export const CollapsibleRow: StoryFn<any> = (args) => {
 
 CollapsibleRow.args = {
   interactive: true,
+};
+
+const comparisonRows = [
+  { first: 'John', last: 'Doe', status: 'green', label: 'Connected', role: 'Developer' },
+  { first: 'Johnny', last: 'Depp', status: 'orange', label: 'AFK', role: 'Actor' },
+  { first: 'Luke', last: 'Skywalker', status: 'red', label: 'Disconnected', role: 'Star wars' },
+] as const;
+
+export const Comparison: StoryFn<any> = ({ elevation }) => {
+  const [selectedRow, setSelectedRow] = useState(1);
+  const vanillaElevation = Number(elevation) as 0 | 1 | 2 | 3 | 4 | 5;
+
+  return (
+    <FlexVanilla direction="column" gap={6}>
+      <BoxVanilla>
+        <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+        <Table hasCollapsibleChildren elevation={elevation} aria-labelledby="stitches-caption">
+          <Caption id="stitches-caption">Team</Caption>
+          <Thead>
+            <Tr emptyFirstColumn tableHead>
+              <Th>first name</Th>
+              <Th>last name</Th>
+              <Th>Status</Th>
+              <Th align="end">Role</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {comparisonRows.map((row, i) => (
+              <Tr
+                key={row.first}
+                interactive
+                active={selectedRow === i}
+                onClick={() => setSelectedRow(i)}
+                href={i === 2 ? '#luke-skywalker' : undefined}
+                emptyFirstColumn={i !== 1}
+                collapsedContent={
+                  i === 1 ? <Text>Additional details about this row.</Text> : undefined
+                }
+              >
+                <Td>{row.first}</Td>
+                <Td>{row.last}</Td>
+                <Td>
+                  <Badge variant={row.status}>{row.label}</Badge>
+                </Td>
+                <Td subtle align="end">
+                  {row.role}
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+          <Tfoot>
+            <Tr>
+              <Td fullColSpan aria-colspan={5}>
+                3 members
+              </Td>
+            </Tr>
+          </Tfoot>
+        </Table>
+      </BoxVanilla>
+      <BoxVanilla>
+        <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+        <AriaTableVanilla
+          hasCollapsibleChildren
+          elevation={vanillaElevation}
+          aria-labelledby="vanilla-caption"
+        >
+          <AriaCaptionVanilla id="vanilla-caption">Team</AriaCaptionVanilla>
+          <AriaTheadVanilla>
+            <AriaTrVanilla emptyFirstColumn tableHead>
+              <AriaThVanilla>first name</AriaThVanilla>
+              <AriaThVanilla>last name</AriaThVanilla>
+              <AriaThVanilla>Status</AriaThVanilla>
+              <AriaThVanilla align="end">Role</AriaThVanilla>
+            </AriaTrVanilla>
+          </AriaTheadVanilla>
+          <AriaTbodyVanilla>
+            {comparisonRows.map((row, i) => (
+              <AriaTrVanilla
+                key={row.first}
+                interactive
+                active={selectedRow === i}
+                onClick={() => setSelectedRow(i)}
+                href={i === 2 ? '#luke-skywalker' : undefined}
+                emptyFirstColumn={i !== 1}
+                collapsedContent={
+                  i === 1 ? (
+                    <TextVanilla>Additional details about this row.</TextVanilla>
+                  ) : undefined
+                }
+              >
+                <AriaTdVanilla>{row.first}</AriaTdVanilla>
+                <AriaTdVanilla>{row.last}</AriaTdVanilla>
+                <AriaTdVanilla>
+                  <BadgeVanilla variant={row.status}>{row.label}</BadgeVanilla>
+                </AriaTdVanilla>
+                <AriaTdVanilla subtle align="end">
+                  {row.role}
+                </AriaTdVanilla>
+              </AriaTrVanilla>
+            ))}
+          </AriaTbodyVanilla>
+          <AriaTfootVanilla>
+            <AriaTrVanilla>
+              <AriaTdVanilla fullColSpan aria-colspan={5}>
+                3 members
+              </AriaTdVanilla>
+            </AriaTrVanilla>
+          </AriaTfootVanilla>
+        </AriaTableVanilla>
+      </BoxVanilla>
+    </FlexVanilla>
+  );
+};
+
+Comparison.args = {
+  elevation: '1',
+};
+
+Comparison.argTypes = {
+  elevation: {
+    control: 'inline-radio',
+    options: ['0', '1', '2', '3', '4', '5'],
+  },
+};
+
+const sortableRows = [
+  { name: 'gpt-4o', provider: 'OpenAI', requests: 1240 },
+  { name: 'claude-sonnet', provider: 'Anthropic', requests: 3180 },
+  { name: 'mistral-large', provider: 'Mistral', requests: 410 },
+  { name: 'gemini-pro', provider: 'Google', requests: 980 },
+];
+type SortableColumn = keyof (typeof sortableRows)[number];
+const getSortableValue = (row: (typeof sortableRows)[number], key: SortableColumn) => row[key];
+
+export const Sortable: StoryFn<any> = () => {
+  const { key, direction, sortProps } = useTableSort<SortableColumn>({
+    key: 'requests',
+    direction: 'desc',
+  });
+  const sorted = useMemo(
+    () => sortRows(sortableRows, getSortableValue, key, direction),
+    [key, direction],
+  );
+
+  return (
+    <AriaTableVanilla aria-labelledby="sortable-caption">
+      <AriaCaptionVanilla id="sortable-caption">Requests by model</AriaCaptionVanilla>
+      <AriaTheadVanilla>
+        <AriaTrVanilla>
+          <AriaThVanilla {...sortProps('name')}>Model</AriaThVanilla>
+          <AriaThVanilla>Provider</AriaThVanilla>
+          <AriaThVanilla {...sortProps('requests')} align="end">
+            Requests
+          </AriaThVanilla>
+        </AriaTrVanilla>
+      </AriaTheadVanilla>
+      <AriaTbodyVanilla>
+        {sorted.map((row) => (
+          <AriaTrVanilla key={row.name}>
+            <AriaTdVanilla>{row.name}</AriaTdVanilla>
+            <AriaTdVanilla subtle>{row.provider}</AriaTdVanilla>
+            <AriaTdVanilla align="end">{row.requests}</AriaTdVanilla>
+          </AriaTrVanilla>
+        ))}
+      </AriaTbodyVanilla>
+    </AriaTableVanilla>
+  );
+};
+
+Sortable.parameters = {
+  docs: {
+    description: {
+      story:
+        'A header with `onSort` puts its content in a sort button, and `sort` shows the direction and sets `aria-sort`. `useTableSort` keeps the sorted column and direction and gives each header its `sort` and `onSort`. It does not sort the rows: here `sortRows` sorts them in the browser. For data sorted by the API, send `key` and `direction` in the request and render the rows as they come. See the Table `Sortable` story for more.',
+    },
+  },
+};
+
+Comparison.parameters = {
+  docs: {
+    description: {
+      story:
+        'The same table built with the Stitches parts and with the vanilla-extract parts (`AriaTableVanilla`, `AriaTrVanilla`, …). The last row links to `#luke-skywalker` with `href`, and the footer uses a `fullColSpan` cell. They should look identical, except for the badges: `BadgeVanilla` uses the semantic tone tokens, while the Stitches `Badge` uses the raw color scales.',
+    },
+  },
 };
 
 export default Component;

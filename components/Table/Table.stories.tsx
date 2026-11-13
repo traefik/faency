@@ -1,16 +1,18 @@
 // @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { Meta, StoryFn } from '@storybook/react-vite';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { VerticalAlignment as AriaTableStory } from '../AriaTable/AriaTable.stories';
-import { Badge } from '../Badge';
+import { Badge, BadgeVanilla } from '../Badge';
+import { BoxVanilla } from '../Box';
 import { Button } from '../Button';
-import { Flex } from '../Flex';
-import { H1 } from '../Heading';
+import { Flex, FlexVanilla } from '../Flex';
+import { H1, H3Vanilla } from '../Heading';
 import { Link } from '../Link';
 import { RowLink } from '../RowLink';
 import { Text } from '../Text';
+import { TextVanilla } from '../Text/Text.vanilla';
 import { Tooltip } from '../Tooltip';
 import { VisuallyHidden } from '../VisuallyHidden';
 import {
@@ -25,6 +27,17 @@ import {
   Thead,
   Tr,
 } from './Table';
+import {
+  CaptionVanilla,
+  TableVanilla,
+  TbodyVanilla,
+  TdVanilla,
+  TfootVanilla,
+  TheadVanilla,
+  ThVanilla,
+  TrVanilla,
+} from './Table.vanilla';
+import { sortRows, useTableSort } from './useTableSort';
 
 const BaseTable = (props: TableProps): JSX.Element => <Table {...props} />;
 const TableForStory = modifyVariantsForStory<TableVariants, TableProps>(BaseTable);
@@ -850,6 +863,185 @@ export const NestedCollapsibleRow: StoryFn<any> = ({ interactive, ...args }) => 
 NestedCollapsibleRow.args = {
   interactive: true,
   elevation: '1',
+};
+
+const comparisonRows = [
+  { first: 'John', last: 'Doe', status: 'green', label: 'Connected', role: 'Developer' },
+  { first: 'Johnny', last: 'Depp', status: 'orange', label: 'AFK', role: 'Actor' },
+  { first: 'Luke', last: 'Skywalker', status: 'red', label: 'Disconnected', role: 'Star wars' },
+] as const;
+
+export const Comparison: StoryFn<any> = ({ elevation }) => {
+  const [selectedRow, setSelectedRow] = useState(1);
+  const vanillaElevation = Number(elevation) as 0 | 1 | 2 | 3 | 4 | 5;
+
+  return (
+    <FlexVanilla direction="column" gap={6}>
+      <BoxVanilla>
+        <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+        <Table elevation={elevation}>
+          <Caption>Team</Caption>
+          <Thead>
+            <Tr emptyFirstColumn tableHead>
+              <Th>first name</Th>
+              <Th>last name</Th>
+              <Th>Status</Th>
+              <Th align="end">Role</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {comparisonRows.map((row, i) => (
+              <Tr
+                key={row.first}
+                interactive
+                active={selectedRow === i}
+                onClick={() => setSelectedRow(i)}
+                href={i === 2 ? '#luke-skywalker' : undefined}
+                emptyFirstColumn={i !== 1}
+                collapsedContent={
+                  i === 1 ? <Text>Additional details about this row.</Text> : undefined
+                }
+                collapsedContentColSpan={5}
+              >
+                <Td>{row.first}</Td>
+                <Td>{row.last}</Td>
+                <Td>
+                  <Badge variant={row.status}>{row.label}</Badge>
+                </Td>
+                <Td subtle align="end">
+                  {row.role}
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+          <Tfoot>
+            <Tr>
+              <Td colSpan={5}>3 members</Td>
+            </Tr>
+          </Tfoot>
+        </Table>
+      </BoxVanilla>
+      <BoxVanilla>
+        <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+        <TableVanilla elevation={vanillaElevation}>
+          <CaptionVanilla>Team</CaptionVanilla>
+          <TheadVanilla>
+            <TrVanilla emptyFirstColumn tableHead>
+              <ThVanilla>first name</ThVanilla>
+              <ThVanilla>last name</ThVanilla>
+              <ThVanilla>Status</ThVanilla>
+              <ThVanilla align="end">Role</ThVanilla>
+            </TrVanilla>
+          </TheadVanilla>
+          <TbodyVanilla>
+            {comparisonRows.map((row, i) => (
+              <TrVanilla
+                key={row.first}
+                interactive
+                active={selectedRow === i}
+                onClick={() => setSelectedRow(i)}
+                href={i === 2 ? '#luke-skywalker' : undefined}
+                emptyFirstColumn={i !== 1}
+                collapsedContent={
+                  i === 1 ? (
+                    <TextVanilla>Additional details about this row.</TextVanilla>
+                  ) : undefined
+                }
+                collapsedContentColSpan={5}
+              >
+                <TdVanilla>{row.first}</TdVanilla>
+                <TdVanilla>{row.last}</TdVanilla>
+                <TdVanilla>
+                  <BadgeVanilla variant={row.status}>{row.label}</BadgeVanilla>
+                </TdVanilla>
+                <TdVanilla subtle align="end">
+                  {row.role}
+                </TdVanilla>
+              </TrVanilla>
+            ))}
+          </TbodyVanilla>
+          <TfootVanilla>
+            <TrVanilla>
+              <TdVanilla colSpan={5}>3 members</TdVanilla>
+            </TrVanilla>
+          </TfootVanilla>
+        </TableVanilla>
+      </BoxVanilla>
+    </FlexVanilla>
+  );
+};
+
+Comparison.args = {
+  elevation: '1',
+};
+
+Comparison.argTypes = {
+  elevation: {
+    control: 'inline-radio',
+    options: ['0', '1', '2', '3', '4', '5'],
+  },
+};
+
+const sortableRows = [
+  { name: 'gpt-4o', provider: 'OpenAI', requests: 1240 },
+  { name: 'claude-sonnet', provider: 'Anthropic', requests: 3180 },
+  { name: 'mistral-large', provider: 'Mistral', requests: 410 },
+  { name: 'gemini-pro', provider: 'Google', requests: 980 },
+];
+type SortableColumn = keyof (typeof sortableRows)[number];
+const getSortableValue = (row: (typeof sortableRows)[number], key: SortableColumn) => row[key];
+
+export const Sortable: StoryFn<any> = () => {
+  const { key, direction, sortProps } = useTableSort<SortableColumn>({
+    key: 'requests',
+    direction: 'desc',
+  });
+  const sorted = useMemo(
+    () => sortRows(sortableRows, getSortableValue, key, direction),
+    [key, direction],
+  );
+
+  return (
+    <TableVanilla>
+      <CaptionVanilla>Requests by model</CaptionVanilla>
+      <TheadVanilla>
+        <TrVanilla>
+          <ThVanilla {...sortProps('name')}>Model</ThVanilla>
+          <ThVanilla>Provider</ThVanilla>
+          <ThVanilla {...sortProps('requests')} align="end">
+            Requests
+          </ThVanilla>
+        </TrVanilla>
+      </TheadVanilla>
+      <TbodyVanilla>
+        {sorted.map((row) => (
+          <TrVanilla key={row.name}>
+            <TdVanilla>{row.name}</TdVanilla>
+            <TdVanilla subtle>{row.provider}</TdVanilla>
+            <TdVanilla align="end">{row.requests}</TdVanilla>
+          </TrVanilla>
+        ))}
+      </TbodyVanilla>
+    </TableVanilla>
+  );
+};
+
+Sortable.parameters = {
+  docs: {
+    description: {
+      story:
+        'A header with `onSort` puts its content in a sort button, and `sort` shows the direction and sets `aria-sort`. `useTableSort` keeps the sorted column and direction and gives each header its `sort` and `onSort`: clicking the sorted column flips the direction, and clicking another column sorts it in `newColumnDirection` (`desc` by default). It does not sort the rows: here `sortRows` sorts them in the browser. For data sorted by the API, send `key` and `direction` in the request and render the rows as they come.',
+    },
+  },
+};
+
+Comparison.parameters = {
+  docs: {
+    description: {
+      story:
+        'The same table built with the Stitches parts and with the vanilla-extract parts (`TableVanilla`, `TrVanilla`, …). The last row links to `#luke-skywalker` with `href`. They should look identical, except for the badges: `BadgeVanilla` uses the semantic tone tokens, while the Stitches `Badge` uses the raw color scales.',
+    },
+  },
 };
 
 export default Component;
