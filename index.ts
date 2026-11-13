@@ -6,15 +6,31 @@ export {
   AccordionTrigger,
 } from './components/Accordion';
 export { Alert } from './components/Alert';
+export type {
+  AriaCaptionVanillaProps,
+  AriaTableSectionVanillaProps,
+  AriaTableVanillaProps,
+  AriaTdVanillaProps,
+  AriaThVanillaProps,
+  AriaTrVanillaProps,
+} from './components/AriaTable';
 export {
   Caption as AriaCaption,
+  AriaCaptionVanilla,
   Table as AriaTable,
+  AriaTableVanilla,
   Tbody as AriaTbody,
+  AriaTbodyVanilla,
   Td as AriaTd,
+  AriaTdVanilla,
   Tfoot as AriaTfoot,
+  AriaTfootVanilla,
   Th as AriaTh,
   Thead as AriaThead,
+  AriaTheadVanilla,
+  AriaThVanilla,
   Tr as AriaTr,
+  AriaTrVanilla,
 } from './components/AriaTable';
 export type { AvatarVanillaProps } from './components/Avatar';
 export { Avatar, AvatarVanilla } from './components/Avatar';

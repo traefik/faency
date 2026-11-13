@@ -1,4 +1,3 @@
-import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
@@ -6,21 +5,19 @@ import { CSSProps } from '../../styles/cssProps';
 import { mapRowLink, openRowLink, RowLinkShortcutProps } from '../RowLink/RowLink.utils';
 import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
 import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
+import { ExpandToggleVanilla, stopEvent } from './ExpandToggle.vanilla';
 import { cx, useInlineStyle } from './Table.utils';
 import {
   captionRecipe,
-  chevron,
   collapsedCell,
   collapsedContent as collapsedContentClass,
   emptyHeaderCell,
-  expandButton,
   tableRecipe,
   tbody,
   tdRecipe,
   tfoot,
   thead,
   thRecipe,
-  toggle,
   toggleCell,
   trRecipe,
 } from './Table.vanilla.css';
@@ -132,11 +129,6 @@ export const TdVanilla = forwardRef<HTMLTableCellElement, TdVanillaProps>(
 
 TdVanilla.displayName = 'TdVanilla';
 
-const stopEvent = (e: React.MouseEvent) => {
-  e.stopPropagation();
-  e.preventDefault();
-};
-
 export type TrVanillaProps = React.HTMLAttributes<HTMLTableRowElement> &
   CSSProps &
   TrRecipeVariants &
@@ -208,18 +200,12 @@ export const TrVanilla = forwardRef<HTMLTableRowElement, TrVanillaProps>(
             (tableHead ? <ThVanilla className={emptyHeaderCell} /> : <TdVanilla />)}
           {collapsible && (
             <TdVanilla className={toggleCell} onClick={stopEvent}>
-              <div className={toggle}>
-                <button
-                  type="button"
-                  className={expandButton}
-                  aria-label={expandLabel}
-                  aria-expanded={isOpen}
-                  aria-controls={contentId}
-                  onClick={() => setIsOpen((open) => !open)}
-                >
-                  <ChevronRightIcon aria-hidden className={chevron} />
-                </button>
-              </div>
+              <ExpandToggleVanilla
+                label={expandLabel}
+                isOpen={isOpen}
+                controls={contentId}
+                onToggle={() => setIsOpen((open) => !open)}
+              />
             </TdVanilla>
           )}
           {mapRowLink(
