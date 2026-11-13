@@ -252,14 +252,16 @@ export const AriaTdVanilla = forwardRef<HTMLSpanElement, AriaTdVanillaProps>(
 
 AriaTdVanilla.displayName = 'AriaTdVanilla';
 
-const assertFullColSpanAlone = (children: ReactNode) => {
+const assertFullColSpanAlone = (children: ReactNode, addedCells: number) => {
   // eslint-disable-next-line @eslint-react/no-children-to-array
   const cells = Children.toArray(children);
   const hasFullColSpan = cells.some(
     (child) => isValidElement<AriaTdVanillaProps>(child) && !!child.props.fullColSpan,
   );
-  if (hasFullColSpan && cells.length > 1) {
-    throw new Error('AriaTrVanilla: a fullColSpan AriaTdVanilla must be the only cell of its row.');
+  if (hasFullColSpan && cells.length + addedCells > 1) {
+    throw new Error(
+      'AriaTrVanilla: a fullColSpan AriaTdVanilla must be the only cell of its row, without emptyFirstColumn or collapsedContent.',
+    );
   }
 };
 
@@ -306,7 +308,7 @@ export const AriaTrVanilla = forwardRef<HTMLDivElement, AriaTrVanillaProps>(
     const inlineStyle = useInlineStyle(css, style);
     const collapsible = !!collapsedContent;
 
-    assertFullColSpanAlone(children);
+    assertFullColSpanAlone(children, Number(emptyFirstColumn) + Number(collapsible));
 
     return (
       <>

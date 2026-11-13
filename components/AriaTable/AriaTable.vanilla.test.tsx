@@ -246,17 +246,23 @@ describe('AriaTableVanilla', () => {
       window.ResizeObserver = ResizeObserver;
     });
 
-    it('throws when the row has other cells', () => {
+    it('throws when the row has other cells, including the ones the row adds', () => {
       jest.spyOn(console, 'error').mockImplementation(() => {});
 
-      expect(() =>
-        inTbody(
-          <AriaTrVanilla>
-            <AriaTdVanilla fullColSpan>Total</AriaTdVanilla>
-            <AriaTdVanilla>Other</AriaTdVanilla>
-          </AriaTrVanilla>,
-        ),
-      ).toThrow('must be the only cell of its row');
+      [
+        <AriaTrVanilla key="cells">
+          <AriaTdVanilla fullColSpan>Total</AriaTdVanilla>
+          <AriaTdVanilla>Other</AriaTdVanilla>
+        </AriaTrVanilla>,
+        <AriaTrVanilla key="empty" emptyFirstColumn>
+          <AriaTdVanilla fullColSpan>Total</AriaTdVanilla>
+        </AriaTrVanilla>,
+        <AriaTrVanilla key="toggle" collapsedContent="Details">
+          <AriaTdVanilla fullColSpan>Total</AriaTdVanilla>
+        </AriaTrVanilla>,
+      ].forEach((row) => {
+        expect(() => inTbody(row)).toThrow('must be the only cell of its row');
+      });
 
       jest.restoreAllMocks();
     });
