@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -28,12 +29,7 @@ const PanelVanillaComponentImpl = forwardRef(
     const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
 
     return (
-      <Component
-        ref={ref}
-        className={`${panelStyle} ${className || ''}`.trim()}
-        style={mergedStyles}
-        {...props}
-      />
+      <Component ref={ref} className={cx(panelStyle, className)} style={mergedStyles} {...props} />
     );
   },
 );

@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -31,14 +32,7 @@ const BoxVanillaComponent = forwardRef(
       ...assignInlineVars(vars),
     };
 
-    return (
-      <Component
-        ref={ref}
-        className={`${box} ${className || ''}`.trim()}
-        style={mergedStyles}
-        {...props}
-      />
-    );
+    return <Component ref={ref} className={cx(box, className)} style={mergedStyles} {...props} />;
   },
 );
 

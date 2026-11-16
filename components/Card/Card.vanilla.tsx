@@ -3,6 +3,7 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -55,7 +56,7 @@ const CardVanillaComponentImpl = forwardRef(
     return (
       <Component
         ref={ref}
-        className={`${recipeClass} ${className || ''}`.trim()}
+        className={cx(recipeClass, className)}
         style={mergedStyles}
         {...additionalProps}
         {...props}

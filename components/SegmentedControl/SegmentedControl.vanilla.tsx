@@ -3,6 +3,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ComponentPropsWithoutRef, createContext, forwardRef, useContext } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import {
   segmentedControlItemRecipe,
@@ -11,9 +12,6 @@ import {
 } from './SegmentedControl.vanilla.css';
 
 export type { SegmentedControlSize };
-
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames.filter(Boolean).join(' ');
 
 const useCssProp = (css: CSSProps['css'], style?: React.CSSProperties) => {
   const { colors } = useVanillaExtractTheme();
@@ -38,7 +36,7 @@ export const SegmentedControlVanilla = forwardRef<HTMLDivElement, SegmentedContr
       <RadioGroupPrimitive.Root
         ref={ref}
         orientation="horizontal"
-        className={joinClassNames(segmentedControlRecipe({ fullWidth }), className)}
+        className={cx(segmentedControlRecipe({ fullWidth }), className)}
         style={useCssProp(css, style)}
         {...props}
       >
@@ -62,7 +60,7 @@ export const SegmentedControlItemVanilla = forwardRef<
   return (
     <RadioGroupPrimitive.Item
       ref={ref}
-      className={joinClassNames(segmentedControlItemRecipe({ size, fullWidth }), className)}
+      className={cx(segmentedControlItemRecipe({ size, fullWidth }), className)}
       style={useCssProp(css, style)}
       {...props}
     />

@@ -4,6 +4,7 @@ import { Highlight, Language, themes } from 'prism-react-renderer';
 import React, { forwardRef, HTMLAttributes, useCallback, useRef, useState } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
 import { AccessibleIcon } from '../AccessibleIcon';
@@ -180,9 +181,7 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
           <div style={containerStyles}>
             <pre
               ref={setPreRef}
-              className={[pre, noBorder ? preNoBorder : '', highlightClass, className]
-                .filter(Boolean)
-                .join(' ')}
+              className={cx(pre, noBorder && preNoBorder, highlightClass, className)}
               style={{
                 maxHeight,
                 ...highlightStyle,
@@ -192,13 +191,11 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
               {...props}
             >
               <div
-                className={[
+                className={cx(
                   codeContent,
-                  copyable && isLeft && isBottom ? codeContentBottomPadding : '',
-                  copyable && isLeft && !isBottom ? codeContentTopPadding : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
+                  copyable && isLeft && isBottom && codeContentBottomPadding,
+                  copyable && isLeft && !isBottom && codeContentTopPadding,
+                )}
               >
                 {tokens.map((line, i) => (
                   <div

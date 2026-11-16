@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { resolveColor } from '../../styles/resolveColor';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { hiddenLabel, spinnerRecipe, svg, track } from './Spinner.vanilla.css';
@@ -28,7 +29,7 @@ export const SpinnerVanilla = forwardRef<HTMLSpanElement, SpinnerVanillaProps>(
       <span
         ref={ref}
         role="status"
-        className={`${spinnerRecipe({ size })} ${className || ''}`.trim()}
+        className={cx(spinnerRecipe({ size }), className)}
         style={{ ...colorStyle, ...cssStyles, ...style, ...assignInlineVars(vars) }}
         {...props}
       >

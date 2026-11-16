@@ -6,15 +6,31 @@ export {
   AccordionTrigger,
 } from './components/Accordion';
 export { Alert } from './components/Alert';
+export type {
+  AriaCaptionVanillaProps,
+  AriaTableSectionVanillaProps,
+  AriaTableVanillaProps,
+  AriaTdVanillaProps,
+  AriaThVanillaProps,
+  AriaTrVanillaProps,
+} from './components/AriaTable';
 export {
   Caption as AriaCaption,
+  AriaCaptionVanilla,
   Table as AriaTable,
+  AriaTableVanilla,
   Tbody as AriaTbody,
+  AriaTbodyVanilla,
   Td as AriaTd,
+  AriaTdVanilla,
   Tfoot as AriaTfoot,
+  AriaTfootVanilla,
   Th as AriaTh,
   Thead as AriaThead,
+  AriaTheadVanilla,
+  AriaThVanilla,
   Tr as AriaTr,
+  AriaTrVanilla,
 } from './components/AriaTable';
 export type { AvatarVanillaProps } from './components/Avatar';
 export { Avatar, AvatarVanilla } from './components/Avatar';
@@ -166,7 +182,38 @@ export {
   SplitLayoutVanilla,
 } from './components/SplitLayout';
 export { Switch } from './components/Switch';
-export { Caption, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from './components/Table';
+export type {
+  CaptionVanillaProps,
+  TableSectionVanillaProps,
+  TableSortDirection,
+  TableSortProps,
+  TableSortValue,
+  TableVanillaProps,
+  TdVanillaProps,
+  ThVanillaProps,
+  TrVanillaProps,
+  UseTableSortOptions,
+} from './components/Table';
+export {
+  Caption,
+  CaptionVanilla,
+  sortRows,
+  Table,
+  TableVanilla,
+  Tbody,
+  TbodyVanilla,
+  Td,
+  TdVanilla,
+  Tfoot,
+  TfootVanilla,
+  Th,
+  Thead,
+  TheadVanilla,
+  ThVanilla,
+  Tr,
+  TrVanilla,
+  useTableSort,
+} from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
 export { Text } from './components/Text';
 export type { TextareaVanillaProps } from './components/Textarea';

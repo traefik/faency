@@ -323,6 +323,33 @@ describe.each([
       expect(open).not.toHaveBeenCalled();
     });
 
+    it('should call the onClick of the row once per click', () => {
+      const onRowClick = jest.fn();
+      render(
+        <TableComponent aria-label="APIs">
+          <TbodyComponent>
+            <TrComponent
+              href="/apis/api-1"
+              linkOverlay={false}
+              linkProps={{ onClick: onLinkClick }}
+              onClick={onRowClick}
+            >
+              <TdComponent>api-1</TdComponent>
+              <TdComponent>Published</TdComponent>
+            </TrComponent>
+          </TbodyComponent>
+        </TableComponent>,
+      );
+
+      fireEvent.click(screen.getByText('Published'));
+      expect(onRowClick).toHaveBeenCalledTimes(1);
+      expect(onLinkClick).toHaveBeenCalledTimes(1);
+
+      fireEvent.click(screen.getByRole('link', { name: 'api-1' }));
+      expect(onRowClick).toHaveBeenCalledTimes(2);
+      expect(onLinkClick).toHaveBeenCalledTimes(2);
+    });
+
     it('should open the link in a new tab on a middle click or a modifier click', () => {
       renderRow();
       const cell = screen.getByText('Published');

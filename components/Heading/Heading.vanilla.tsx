@@ -3,6 +3,7 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -53,10 +54,7 @@ function createHeadingComponent<C extends ElementType>(
         ...assignInlineVars(vars),
       };
 
-      const recipeClass = recipe({ transform });
-      const combinedClassName = transform
-        ? `${recipeClass} ${className || ''}`.trim()
-        : `${baseStyle} ${className || ''}`.trim();
+      const combinedClassName = cx(transform ? recipe({ transform }) : baseStyle, className);
 
       return <Component ref={ref} className={combinedClassName} style={mergedStyles} {...props} />;
     },

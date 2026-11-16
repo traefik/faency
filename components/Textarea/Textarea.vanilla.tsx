@@ -3,6 +3,7 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { FieldVanilla } from '../Field/Field.vanilla';
 import { FieldLabelProps, useFieldControl } from '../Field/FieldContext';
@@ -87,7 +88,7 @@ const TextareaVanillaControl = React.forwardRef<HTMLTextAreaElement, TextareaVan
           id={control.id}
           disabled={control.disabled}
           ref={forwardedRef}
-          className={`${styledTextareaClass} ${className || ''}`.trim()}
+          className={cx(styledTextareaClass, className)}
           style={mergedStyles}
           aria-describedby={control['aria-describedby']}
           aria-invalid={control['aria-invalid']}

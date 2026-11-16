@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -32,14 +33,7 @@ const ImageVanillaImpl = forwardRef(
       ...assignInlineVars(vars),
     };
 
-    return (
-      <Component
-        ref={ref}
-        className={`${image} ${className || ''}`.trim()}
-        style={mergedStyles}
-        {...props}
-      />
-    );
+    return <Component ref={ref} className={cx(image, className)} style={mergedStyles} {...props} />;
   },
 );
 

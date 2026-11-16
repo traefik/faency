@@ -3,6 +3,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -52,7 +53,7 @@ const ButtonSwitchContainerVanillaImpl = forwardRef(
       return (
         <Component
           ref={ref}
-          className={`${buttonSwitchContainer} ${className || ''}`.trim()}
+          className={cx(buttonSwitchContainer, className)}
           style={mergedStyles}
           role="group"
           {...props}
@@ -65,7 +66,7 @@ const ButtonSwitchContainerVanillaImpl = forwardRef(
     return (
       <ToggleGroupPrimitive.Root
         ref={ref as any}
-        className={`${buttonSwitchContainer} ${className || ''}`.trim()}
+        className={cx(buttonSwitchContainer, className)}
         style={mergedStyles}
         {...(props as any)}
       >
@@ -114,7 +115,7 @@ const ButtonSwitchItemVanillaImpl = forwardRef(
       return (
         <Component
           ref={ref}
-          className={`${buttonSwitchItem} ${className || ''}`.trim()}
+          className={cx(buttonSwitchItem, className)}
           style={mergedStyles}
           role="radio"
           {...props}
@@ -127,7 +128,7 @@ const ButtonSwitchItemVanillaImpl = forwardRef(
     return (
       <ToggleGroupPrimitive.Item
         ref={ref as any}
-        className={`${buttonSwitchItem} ${className || ''}`.trim()}
+        className={cx(buttonSwitchItem, className)}
         style={mergedStyles}
         {...(props as any)}
       >

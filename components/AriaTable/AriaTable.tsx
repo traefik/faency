@@ -17,6 +17,7 @@ import { CSS, styled, VariantProps } from '../../stitches.config';
 import { deepMerge } from '../../utils/deepMerge';
 import { Box } from '../Box';
 import {
+  handleRowClick,
   openRowLink,
   ROW_LINK_CONTROL_Z_INDEX,
   RowLinkShortcutProps,
@@ -259,10 +260,7 @@ export const Tr = forwardRef<ElementRef<typeof StyledTr>, AriaTrProps>(
               : { ...css }
           }
           interactive={interactive ?? (href !== undefined || undefined)}
-          onClick={(event) => {
-            onClick?.(event);
-            openRowLink(event);
-          }}
+          onClick={(event) => handleRowClick(event, onClick)}
           onAuxClick={(event) => {
             onAuxClick?.(event);
             openRowLink(event);
