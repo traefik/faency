@@ -1,6 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
+import { cx } from '../../styles/cx';
 import { ROW_LINK_ATTRIBUTE } from './RowLink.constants';
 import { rowLink } from './RowLink.vanilla.css';
 
@@ -18,7 +19,7 @@ export const RowLinkVanilla = forwardRef<HTMLAnchorElement, RowLinkVanillaProps>
       <Component
         ref={ref}
         {...{ [ROW_LINK_ATTRIBUTE]: overlay ? '' : 'click' }}
-        className={className ? `${rowLink} ${className}` : rowLink}
+        className={cx(rowLink, className)}
         {...props}
       />
     );

@@ -2,6 +2,8 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
 import { CSSProps } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import {
   handleRowClick,
   mapRowLink,
@@ -12,7 +14,6 @@ import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
 import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
 import { ExpandToggleVanilla, stopEvent } from './ExpandToggle.vanilla';
 import { ARIA_SORT, SortButtonVanilla } from './SortButton.vanilla';
-import { cx, useInlineStyle } from './Table.utils';
 import {
   captionRecipe,
   collapsedCell,

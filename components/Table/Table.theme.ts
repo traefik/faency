@@ -1,4 +1,3 @@
-// Plain TypeScript, no vanilla-extract, mirroring Table.themes.ts (Stitches).
 import tinycolor from 'tinycolor2';
 
 export const tableLightTheme = {

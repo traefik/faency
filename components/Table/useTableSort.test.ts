@@ -6,7 +6,9 @@ type Column = 'name' | 'requests';
 
 describe('useTableSort', () => {
   it('starts with the given key and direction', () => {
-    const { result } = renderHook(() => useTableSort<Column>({ key: 'name', direction: 'asc' }));
+    const { result } = renderHook(() =>
+      useTableSort<Column>({ initialKey: 'name', initialDirection: 'asc' }),
+    );
 
     expect(result.current.key).toBe('name');
     expect(result.current.direction).toBe('asc');
@@ -16,41 +18,58 @@ describe('useTableSort', () => {
 
   it('starts in newColumnDirection without a direction', () => {
     const { result } = renderHook(() =>
-      useTableSort<Column>({ key: 'name', newColumnDirection: 'asc' }),
+      useTableSort<Column>({ initialKey: 'name', newColumnDirection: 'desc' }),
     );
 
-    expect(result.current.direction).toBe('asc');
+    expect(result.current.direction).toBe('desc');
   });
 
   it('flips the direction of the sorted column', () => {
-    const { result } = renderHook(() => useTableSort<Column>({ key: 'requests' }));
-    expect(result.current.direction).toBe('desc');
-
-    act(() => result.current.sortProps('requests').onSort?.());
+    const { result } = renderHook(() => useTableSort<Column>({ initialKey: 'requests' }));
     expect(result.current.direction).toBe('asc');
 
     act(() => result.current.sortProps('requests').onSort?.());
     expect(result.current.direction).toBe('desc');
+
+    act(() => result.current.sortProps('requests').onSort?.());
+    expect(result.current.direction).toBe('asc');
   });
 
   it('sorts another column in newColumnDirection', () => {
     const { result } = renderHook(() =>
-      useTableSort<Column>({ key: 'requests', direction: 'desc', newColumnDirection: 'asc' }),
+      useTableSort<Column>({
+        initialKey: 'requests',
+        initialDirection: 'asc',
+        newColumnDirection: 'desc',
+      }),
     );
 
     act(() => result.current.sortProps('name').onSort?.());
 
     expect(result.current.key).toBe('name');
-    expect(result.current.direction).toBe('asc');
+    expect(result.current.direction).toBe('desc');
     expect(result.current.sortProps('requests').sort).toBeUndefined();
   });
 
-  it('sorts another column desc by default', () => {
-    const { result } = renderHook(() => useTableSort<Column>({ key: 'name', direction: 'asc' }));
+  it('sorts another column asc by default', () => {
+    const { result } = renderHook(() =>
+      useTableSort<Column>({ initialKey: 'requests', initialDirection: 'desc' }),
+    );
 
-    act(() => result.current.sortProps('requests').onSort?.());
+    act(() => result.current.sortProps('name').onSort?.());
 
-    expect(result.current.direction).toBe('desc');
+    expect(result.current.direction).toBe('asc');
+  });
+
+  it('ignores later changes to the initial options', () => {
+    const { result, rerender } = renderHook(
+      ({ initialKey }: { initialKey: Column }) => useTableSort<Column>({ initialKey }),
+      { initialProps: { initialKey: 'name' } },
+    );
+
+    rerender({ initialKey: 'requests' });
+
+    expect(result.current.key).toBe('name');
   });
 });
 
@@ -75,6 +94,29 @@ describe('sortRows', () => {
       'delta',
       'beta',
       'Alpha',
+    ]);
+  });
+
+  it('compares digit runs in strings as numbers', () => {
+    const items = [{ name: 'item10' }, { name: 'item2' }, { name: 'item1' }];
+    const getName = (row: (typeof items)[number]) => row.name;
+
+    expect(sortRows(items, getName, 'name', 'asc').map((row) => row.name)).toEqual([
+      'item1',
+      'item2',
+      'item10',
+    ]);
+  });
+
+  it('ignores case, keeping the order of strings that differ only by case', () => {
+    const items = [{ name: 'b' }, { name: 'A' }, { name: 'B' }, { name: 'a' }];
+    const getName = (row: (typeof items)[number]) => row.name;
+
+    expect(sortRows(items, getName, 'name', 'asc').map((row) => row.name)).toEqual([
+      'A',
+      'a',
+      'b',
+      'B',
     ]);
   });
 

@@ -10,8 +10,10 @@ export type TableSortProps = {
 };
 
 export type UseTableSortOptions<K extends string> = {
-  key: K;
-  direction?: TableSortDirection;
+  /** The column sorted on the first render. Later changes are ignored. */
+  initialKey: K;
+  /** The direction on the first render, `newColumnDirection` by default. Later changes are ignored. */
+  initialDirection?: TableSortDirection;
   /** The direction a column is sorted in when it is clicked while another one is sorted. */
   newColumnDirection?: TableSortDirection;
 };
@@ -21,9 +23,9 @@ export type UseTableSortOptions<K extends string> = {
  * It does not sort: pass `key` and `direction` to `sortRows`, or to the API.
  */
 export const useTableSort = <K extends string>({
-  key: initialKey,
-  direction: initialDirection,
-  newColumnDirection = 'desc',
+  initialKey,
+  initialDirection,
+  newColumnDirection = 'asc',
 }: UseTableSortOptions<K>) => {
   const [state, setState] = useState({
     key: initialKey,
@@ -51,6 +53,8 @@ export type TableSortValue = string | number | null | undefined;
 const isEmpty = (value: TableSortValue) =>
   value === null || value === undefined || value === '' || Number.isNaN(value);
 
+const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+
 const compareValues = (a: TableSortValue, b: TableSortValue) => {
   if (typeof a === 'number' && typeof b === 'number') {
     return a - b;
@@ -61,11 +65,12 @@ const compareValues = (a: TableSortValue, b: TableSortValue) => {
   if (typeof b === 'number') {
     return 1;
   }
-  return String(a).localeCompare(String(b));
+  return collator.compare(String(a), String(b));
 };
 
 /**
- * Returns a sorted copy of `rows`: numbers by value, then strings in locale order.
+ * Returns a sorted copy of `rows`: numbers by value, then strings in locale order,
+ * ignoring case and comparing digit runs as numbers ("item2" before "item10").
  * Empty values (`null`, `undefined`, `''`, `NaN`) go last in both directions. Ties keep their order.
  */
 export const sortRows = <T, K extends string>(

@@ -767,8 +767,8 @@ const getSortableValue = (row: (typeof sortableRows)[number], key: SortableColum
 
 export const Sortable: StoryFn<any> = () => {
   const { key, direction, sortProps } = useTableSort<SortableColumn>({
-    key: 'requests',
-    direction: 'desc',
+    initialKey: 'requests',
+    initialDirection: 'desc',
   });
   const sorted = useMemo(
     () => sortRows(sortableRows, getSortableValue, key, direction),

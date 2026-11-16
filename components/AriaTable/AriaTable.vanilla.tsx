@@ -11,6 +11,8 @@ import React, {
 } from 'react';
 
 import { CSSProps } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
 import {
   handleRowClick,
@@ -22,7 +24,6 @@ import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
 import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
 import { ExpandToggleVanilla, stopEvent } from '../Table/ExpandToggle.vanilla';
 import { ARIA_SORT, SortButtonVanilla } from '../Table/SortButton.vanilla';
-import { cx, useInlineStyle } from '../Table/Table.utils';
 import {
   captionRecipe,
   emptyHeaderCell,

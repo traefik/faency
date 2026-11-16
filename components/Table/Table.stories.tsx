@@ -993,8 +993,8 @@ const getSortableValue = (row: (typeof sortableRows)[number], key: SortableColum
 
 export const Sortable: StoryFn<any> = () => {
   const { key, direction, sortProps } = useTableSort<SortableColumn>({
-    key: 'requests',
-    direction: 'desc',
+    initialKey: 'requests',
+    initialDirection: 'desc',
   });
   const sorted = useMemo(
     () => sortRows(sortableRows, getSortableValue, key, direction),
@@ -1030,7 +1030,7 @@ Sortable.parameters = {
   docs: {
     description: {
       story:
-        'A header with `onSort` puts its content in a sort button, and `sort` shows the direction and sets `aria-sort`. `useTableSort` keeps the sorted column and direction and gives each header its `sort` and `onSort`: clicking the sorted column flips the direction, and clicking another column sorts it in `newColumnDirection` (`desc` by default). It does not sort the rows: here `sortRows` sorts them in the browser. For data sorted by the API, send `key` and `direction` in the request and render the rows as they come.',
+        'A header with `onSort` puts its content in a sort button, and `sort` shows the direction and sets `aria-sort`. `useTableSort` keeps the sorted column and direction and gives each header its `sort` and `onSort`: clicking the sorted column flips the direction, and clicking another column sorts it in `newColumnDirection` (`asc` by default). `initialKey` and `initialDirection` are only read on the first render: to reset the sort from outside, for example from URL params that load later, give the component that calls `useTableSort` a new React `key`. It does not sort the rows: here `sortRows` sorts them in the browser, with numbers in strings compared by value ("item2" before "item10") and case ignored. For data sorted by the API, send `key` and `direction` in the request and render the rows as they come.',
     },
   },
 };
