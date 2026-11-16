@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { resolveColor } from '../../styles/resolveColor';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import {
@@ -92,7 +93,7 @@ export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
     return (
       <div
         ref={ref}
-        className={`${root} ${className || ''}`.trim()}
+        className={cx(root, className)}
         style={{ ...cssStyles, ...style, ...assignInlineVars(vars) }}
         {...props}
       >

@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ElementType } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -65,12 +66,7 @@ export const GridVanillaComponent = React.forwardRef(
     const recipeClass = gridRecipe({ align, justify, flow, gap, gapX, gapY });
 
     return (
-      <Component
-        ref={ref}
-        className={`${recipeClass} ${className || ''}`.trim()}
-        style={mergedStyles}
-        {...props}
-      />
+      <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />
     );
   },
 );

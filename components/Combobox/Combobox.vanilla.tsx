@@ -3,6 +3,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { forwardRef, useEffect, useId, useRef, useState } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '../Input/Input.vanilla';
 import {
@@ -12,9 +13,6 @@ import {
   comboboxListbox,
   comboboxOptionRecipe,
 } from './Combobox.vanilla.css';
-
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames.filter(Boolean).join(' ');
 
 const defaultFilter = (suggestion: string, query: string) =>
   suggestion.toLowerCase().includes(query.toLowerCase());
@@ -147,7 +145,7 @@ export const ComboboxVanilla = forwardRef<InputVanillaHandle, ComboboxVanillaPro
         <PopoverPrimitive.Anchor asChild>
           <div
             ref={anchorRef}
-            className={joinClassNames(comboboxAnchor, className)}
+            className={cx(comboboxAnchor, className)}
             style={{ ...cssStyles, ...style, ...assignInlineVars(vars) }}
           >
             <InputVanilla

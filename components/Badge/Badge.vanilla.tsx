@@ -3,6 +3,7 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -58,12 +59,7 @@ const BadgeVanillaComponentImpl = forwardRef(
     const recipeClass = recipe({ size, variant, alphaBg, borderless });
 
     return (
-      <Component
-        ref={ref}
-        className={`${recipeClass} ${className || ''}`.trim()}
-        style={mergedStyles}
-        {...props}
-      />
+      <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />
     );
   },
 );

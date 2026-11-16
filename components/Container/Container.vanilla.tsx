@@ -2,6 +2,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ElementType } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -41,12 +42,7 @@ export const ContainerVanillaComponent = React.forwardRef(
     const recipeClass = containerRecipe({ size, noGutter });
 
     return (
-      <Component
-        ref={ref}
-        className={`${recipeClass} ${className || ''}`.trim()}
-        style={mergedStyles}
-        {...props}
-      />
+      <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />
     );
   },
 );

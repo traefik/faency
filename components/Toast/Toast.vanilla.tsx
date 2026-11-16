@@ -10,6 +10,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { ButtonVanilla } from '../Button/Button.vanilla';
 import { IconButtonVanilla } from '../IconButton/IconButton.vanilla';
@@ -33,9 +34,6 @@ const DEFAULT_ICONS: Record<ToastVariant, ReactNode> = {
   warning: <ExclamationTriangleIcon />,
   error: <CrossCircledIcon />,
 };
-
-const joinClassNames = (...classNames: (string | undefined)[]) =>
-  classNames.filter(Boolean).join(' ');
 
 const useCssProp = (css: CSSProps['css'], style?: React.CSSProperties) => {
   const { colors } = useVanillaExtractTheme();
@@ -73,7 +71,7 @@ export const ToastVanilla = forwardRef<HTMLLIElement, ToastVanillaProps>(
       <ToastPrimitive.Root
         ref={ref}
         type={type ?? (variant === 'error' ? 'foreground' : 'background')}
-        className={joinClassNames(toastRoot, className)}
+        className={cx(toastRoot, className)}
         style={mergedStyles}
         {...props}
       >
@@ -102,7 +100,7 @@ export const ToastTitleVanilla = forwardRef<HTMLDivElement, ToastTitleVanillaPro
   ({ className, css, style, ...props }, ref) => (
     <ToastPrimitive.Title
       ref={ref}
-      className={joinClassNames(toastTitle, className)}
+      className={cx(toastTitle, className)}
       style={useCssProp(css, style)}
       {...props}
     />
@@ -118,7 +116,7 @@ export const ToastDescriptionVanilla = forwardRef<HTMLDivElement, ToastDescripti
   ({ className, css, style, ...props }, ref) => (
     <ToastPrimitive.Description
       ref={ref}
-      className={joinClassNames(toastDescription, className)}
+      className={cx(toastDescription, className)}
       style={useCssProp(css, style)}
       {...props}
     />
@@ -138,7 +136,7 @@ export const ToastActionVanilla = forwardRef<HTMLButtonElement, ToastActionVanil
         variant="secondary"
         size="small"
         css={css}
-        className={joinClassNames(toastAction, className)}
+        className={cx(toastAction, className)}
         {...props}
       />
     </ToastPrimitive.Action>

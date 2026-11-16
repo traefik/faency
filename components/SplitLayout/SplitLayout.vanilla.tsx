@@ -13,6 +13,7 @@ import React, {
 } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import type { Gap } from '../../styles/types';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
@@ -124,7 +125,7 @@ export const SplitLayoutVanilla = forwardRef<HTMLDivElement, SplitLayoutVanillaP
       <SplitContext.Provider value={{ stacked, layoutWidth, mainMinWidth, setMainMinWidth }}>
         <div
           ref={setRefs}
-          className={`${root} ${className || ''}`.trim()}
+          className={cx(root, className)}
           data-stacked={stacked ? '' : undefined}
           style={{ ...cssStyles, ...style, ...assignInlineVars(vars) }}
           {...props}
@@ -162,7 +163,7 @@ export const SplitLayoutMainVanilla = forwardRef<HTMLDivElement, SplitLayoutMain
       <FlexVanilla
         ref={ref}
         direction="column"
-        className={`${main} ${className || ''}`.trim()}
+        className={cx(main, className)}
         css={{ ...stickyCss(stacked, stickyTop), ...css }}
         {...props}
       />
@@ -310,7 +311,7 @@ export const SplitLayoutAsideVanilla = forwardRef<HTMLDivElement, SplitLayoutAsi
           ref={ref}
           id={paneId}
           direction="column"
-          className={`${aside} ${className || ''}`.trim()}
+          className={cx(aside, className)}
           css={{ ...(stacked ? {} : { width }), ...stickyCss(stacked, stickyTop), ...css }}
           {...props}
         />

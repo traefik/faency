@@ -3,6 +3,7 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import { useFieldControl } from '../Field/FieldContext';
 import { adornmentWrapperRecipe, inputWrapperRecipe, styledInputRecipe } from './Input.vanilla.css';
@@ -97,7 +98,7 @@ export const InputVanilla = React.forwardRef<InputVanillaHandle, InputVanillaPro
     });
 
     return (
-      <div className={`${inputWrapperClass} ${className || ''}`.trim()} style={mergedStyles}>
+      <div className={cx(inputWrapperClass, className)} style={mergedStyles}>
         {hasStartAdornment && <div className={adornmentWrapperStartClass}>{startAdornment}</div>}
 
         <input
