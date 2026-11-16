@@ -5,10 +5,14 @@ import React, {
   createContext,
   CSSProperties,
   forwardRef,
+  Fragment,
   isValidElement,
   ReactNode,
+  useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
 } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
@@ -20,6 +24,7 @@ import type {
   FlexJustifySimplified,
   Gap,
 } from '../../styles/types';
+import { warnOnce } from '../../utils/warnOnce';
 import { flexRecipe } from '../Flex/Flex.vanilla.css';
 import { controlsWrapper, itemButton, itemText, liRecipe, ol, ul } from './List.vanilla.css';
 
@@ -94,8 +99,34 @@ export type LiVanillaProps = React.LiHTMLAttributes<HTMLLIElement> &
     wrap?: 'wrap' | 'noWrap' | 'wrapReverse';
   };
 
-const isNestedList = (child: ReactNode) =>
-  isValidElement(child) && (child.type === UlVanilla || child.type === OlVanilla);
+const NESTED_LIST_WARNING =
+  'LiVanilla: a nested list is rendered inside the item content, so it ends up in its button or span. ' +
+  'Make UlVanilla or OlVanilla a direct child of LiVanilla, and wrap only its items in your component.';
+
+// Looks into fragments, but not into components: what they render is unknown at this point.
+const splitNestedLists = (children: ReactNode) => {
+  const content: ReactNode[] = [];
+  const nestedLists: ReactNode[] = [];
+
+  // eslint-disable-next-line @eslint-react/no-children-to-array
+  Children.toArray(children).forEach((child) => {
+    if (!isValidElement<{ children?: ReactNode }>(child)) {
+      content.push(child);
+    } else if (child.type === UlVanilla || child.type === OlVanilla) {
+      nestedLists.push(child);
+    } else if (child.type === Fragment) {
+      const inner = splitNestedLists(child.props.children);
+      content.push(<Fragment key={child.key}>{inner.content}</Fragment>);
+      if (inner.nestedLists.length) {
+        nestedLists.push(<Fragment key={child.key}>{inner.nestedLists}</Fragment>);
+      }
+    } else {
+      content.push(child);
+    }
+  });
+
+  return { content, nestedLists };
+};
 
 export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
   (
@@ -118,11 +149,19 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
   ) => {
     const { interactive } = useContext(ListVanillaContext);
     const inlineStyle = useInlineStyle(css, style);
+    const { content, nestedLists } = splitNestedLists(children);
 
-    // eslint-disable-next-line @eslint-react/no-children-to-array
-    const childArray = Children.toArray(children);
-    const nestedLists = childArray.filter(isNestedList);
-    const content = childArray.filter((child) => !isNestedList(child));
+    const contentRef = useRef<HTMLElement | null>(null);
+    const setContentRef = useCallback((node: HTMLElement | null) => {
+      contentRef.current = node;
+    }, []);
+
+    // A list rendered by a wrapper component can't be detected before render.
+    useEffect(() => {
+      if (contentRef.current?.querySelector('ul, ol')) {
+        warnOnce(NESTED_LIST_WARNING);
+      }
+    });
 
     return (
       <li
@@ -133,6 +172,7 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
       >
         {interactive ? (
           <button
+            ref={setContentRef}
             type="button"
             disabled={disabled}
             className={cx(flexRecipe({ align, justify, direction, gap, wrap }), itemButton)}
@@ -141,6 +181,7 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
           </button>
         ) : (
           <span
+            ref={setContentRef}
             className={cx(
               flexRecipe({ align: align ?? 'center', justify, direction, gap: gap ?? 1, wrap }),
               itemText,

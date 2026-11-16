@@ -172,6 +172,47 @@ Controls.args = {
   interactive: true,
 };
 
+const SettingsItems = () => (
+  <>
+    <LiVanilla>General</LiVanilla>
+    <LiVanilla>Billing</LiVanilla>
+  </>
+);
+
+/**
+ * Nested lists must be direct children of `LiVanilla`, or in a fragment. A component that renders
+ * the whole `UlVanilla` puts it inside the item's button and logs a warning, so wrap only its items.
+ */
+export const NestedListsVanilla: StoryFn<typeof UlVanilla> = (args) => (
+  <UlVanilla {...args}>
+    <LiVanilla>
+      Profile
+      <UlVanilla>
+        <LiVanilla>Account</LiVanilla>
+        <LiVanilla>Security</LiVanilla>
+      </UlVanilla>
+    </LiVanilla>
+    <LiVanilla>
+      Notifications
+      <>
+        <UlVanilla>
+          <LiVanilla>Email</LiVanilla>
+          <LiVanilla>Push</LiVanilla>
+        </UlVanilla>
+      </>
+    </LiVanilla>
+    <LiVanilla>
+      Settings
+      <UlVanilla>
+        <SettingsItems />
+      </UlVanilla>
+    </LiVanilla>
+  </UlVanilla>
+);
+NestedListsVanilla.args = {
+  interactive: true,
+};
+
 const users = [
   { id: '100', name: 'John Doe', email: 'john.doe@john.doe' },
   { id: '42', name: 'Jane Doe', email: 'jane.doe@jane.doe' },

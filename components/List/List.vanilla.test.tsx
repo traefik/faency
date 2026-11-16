@@ -4,6 +4,7 @@ import { axe } from 'jest-axe';
 import React, { createRef } from 'react';
 
 import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { resetWarnings } from '../../utils/warnOnce';
 import { LiVanilla, OlVanilla, UlVanilla } from './List.vanilla';
 
 const renderWithTheme = (ui: React.ReactElement) =>
@@ -128,6 +129,81 @@ describe('LiVanilla', () => {
     const nested = screen.getByTestId('nested');
     expect(nested.parentElement).toBe(screen.getByTestId('li'));
     expect(screen.getByRole('button', { name: 'Profile' })).not.toContainElement(nested);
+  });
+
+  it('should render a nested list in a fragment outside the button', () => {
+    renderWithTheme(
+      <UlVanilla interactive>
+        <LiVanilla data-testid="li">
+          Profile
+          <>
+            <UlVanilla data-testid="nested">
+              <LiVanilla>Account</LiVanilla>
+            </UlVanilla>
+          </>
+        </LiVanilla>
+      </UlVanilla>,
+    );
+
+    const nested = screen.getByTestId('nested');
+    expect(nested.parentElement).toBe(screen.getByTestId('li'));
+    expect(screen.getByRole('button', { name: 'Profile' })).not.toContainElement(nested);
+  });
+
+  describe('nested list warning', () => {
+    beforeEach(() => {
+      resetWarnings();
+      jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+    });
+
+    afterEach(() => jest.restoreAllMocks());
+
+    it('should warn when a component renders a nested list inside the item content', () => {
+      // React also reports the button nested in a button.
+      jest.spyOn(console, 'error').mockImplementation(() => undefined);
+      const SubMenu = () => (
+        <UlVanilla>
+          <LiVanilla>Account</LiVanilla>
+        </UlVanilla>
+      );
+      renderWithTheme(
+        <UlVanilla interactive>
+          <LiVanilla>
+            Profile
+            <SubMenu />
+          </LiVanilla>
+        </UlVanilla>,
+      );
+
+      expect(console.warn).toHaveBeenCalledTimes(1);
+      expect(console.warn).toHaveBeenCalledWith(
+        expect.stringContaining('Make UlVanilla or OlVanilla a direct child of LiVanilla'),
+      );
+    });
+
+    it('should not warn for nested lists that are direct children or in a fragment', () => {
+      const SubMenuItems = () => <LiVanilla>Account</LiVanilla>;
+      renderWithTheme(
+        <UlVanilla interactive>
+          <LiVanilla>
+            Profile
+            <UlVanilla>
+              <SubMenuItems />
+            </UlVanilla>
+          </LiVanilla>
+          <LiVanilla>
+            Settings
+            <>
+              <OlVanilla>
+                <LiVanilla>General</LiVanilla>
+              </OlVanilla>
+            </>
+          </LiVanilla>
+        </UlVanilla>,
+      );
+
+      expect(console.warn).not.toHaveBeenCalled();
+    });
   });
 
   it('should render controls outside the button', () => {
