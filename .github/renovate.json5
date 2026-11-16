@@ -90,7 +90,17 @@
       matchManagers: [ 'npm' ],
       matchPackageNames: [ 'vite-plugin-dts' ],
       allowedVersions: '<5.0.0',
-    }
+    },
+    // Renovate bumps the safe-chain version but not its checksum.
+    {
+      matchDepNames: [ '@aikidosec/safe-chain' ],
+      prBodyNotes: [ '[Release notes](https://github.com/AikidoSec/safe-chain/releases/tag/{{newVersion}})' ],
+      postUpgradeTasks: {
+        commands: [ './.github/scripts/pin-safe-chain.sh' ],
+        fileFilters: [ '.github/actions/setup-safe-chain/action.yml' ],
+        executionMode: 'branch',
+      },
+    },
   ],
   semanticCommits: 'enabled',
 }
