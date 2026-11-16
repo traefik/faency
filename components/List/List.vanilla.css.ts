@@ -108,29 +108,29 @@ export const itemButton = style([
     selectors: {
       '&::before': itemLayer,
       '&::after': itemLayer,
+      // No pointer-events: none, or clicks would fall through to the <li> and fire its onClick.
       '&:disabled': {
-        pointerEvents: 'none',
         opacity: 0.5,
       },
       '&:focus, &:focus-visible': {
         boxShadow: `inset 0 0 0 2px ${tokens.colors.listItemFocusBorder}`,
       },
-      '&:active::before': {
+      '&:enabled:active::before': {
         backgroundColor: tokens.colors.listItemActiveBg,
       },
-      '&:active::after': primaryTint,
+      '&:enabled:active::after': primaryTint,
     },
 
     '@media': {
       '(any-hover: hover)': {
         selectors: {
-          '&:hover': {
+          '&:enabled:hover': {
             cursor: 'pointer',
           },
-          '&:hover::before': {
+          '&:enabled:hover::before': {
             backgroundColor: tokens.colors.listItemHoverBg,
           },
-          '&:hover::after': primaryTint,
+          '&:enabled:hover::after': primaryTint,
         },
       },
     },

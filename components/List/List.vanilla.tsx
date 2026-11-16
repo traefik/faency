@@ -12,6 +12,7 @@ import React, {
 } from 'react';
 
 import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
 import { useVanillaExtractTheme } from '../../styles/themeContext';
 import type {
   FlexAlignSimplified,
@@ -23,8 +24,6 @@ import { flexRecipe } from '../Flex/Flex.vanilla.css';
 import { controlsWrapper, itemButton, itemText, liRecipe, ol, ul } from './List.vanilla.css';
 
 const ListVanillaContext = createContext({ interactive: false });
-
-const cx = (...classNames: (string | undefined)[]) => classNames.filter(Boolean).join(' ');
 
 const useInlineStyle = (css: CSSProps['css'], style?: CSSProperties) => {
   const { colors } = useVanillaExtractTheme();
@@ -86,6 +85,8 @@ export type LiVanillaProps = React.LiHTMLAttributes<HTMLLIElement> &
   LiRecipeVariants & {
     /** Shown on the right of the item, outside its button. */
     controls?: ReactNode;
+    /** Disables the item's button. Only applies in an interactive list. */
+    disabled?: boolean;
     align?: FlexAlignSimplified;
     justify?: FlexJustifySimplified;
     direction?: FlexDirection;
@@ -100,6 +101,7 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
   (
     {
       controls,
+      disabled,
       elevation,
       align,
       justify,
@@ -132,6 +134,7 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
         {interactive ? (
           <button
             type="button"
+            disabled={disabled}
             className={cx(flexRecipe({ align, justify, direction, gap, wrap }), itemButton)}
           >
             {content}

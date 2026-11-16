@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React, { createRef } from 'react';
 
@@ -162,6 +163,58 @@ describe('LiVanilla', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Dashboard' }));
 
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call the onClick of the item on Enter and Space on its button', async () => {
+    const user = userEvent.setup();
+    const onClick = jest.fn();
+    renderWithTheme(
+      <UlVanilla interactive>
+        <LiVanilla onClick={onClick}>Dashboard</LiVanilla>
+      </UlVanilla>,
+    );
+
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Dashboard' })).toHaveFocus();
+
+    await user.keyboard('{Enter}');
+    expect(onClick).toHaveBeenCalledTimes(1);
+
+    await user.keyboard(' ');
+    expect(onClick).toHaveBeenCalledTimes(2);
+  });
+
+  it('should disable the button of an interactive item', async () => {
+    const user = userEvent.setup();
+    const onClick = jest.fn();
+    renderWithTheme(
+      <UlVanilla interactive>
+        <LiVanilla disabled onClick={onClick}>
+          Dashboard
+        </LiVanilla>
+      </UlVanilla>,
+    );
+
+    const button = screen.getByRole('button', { name: 'Dashboard' });
+    expect(button).toBeDisabled();
+
+    await user.click(button);
+    await user.tab();
+
+    expect(button).not.toHaveFocus();
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it('should not set disabled on the li', () => {
+    renderWithTheme(
+      <UlVanilla>
+        <LiVanilla data-testid="li" disabled>
+          Item
+        </LiVanilla>
+      </UlVanilla>,
+    );
+
+    expect(screen.getByTestId('li')).not.toHaveAttribute('disabled');
   });
 
   it('should accept the elevation and flex variants', () => {
