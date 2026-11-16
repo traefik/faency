@@ -27,6 +27,7 @@ import {
   segmentedControlDarkTheme,
   segmentedControlLightTheme,
 } from '@/components/SegmentedControl/SegmentedControl.theme.css';
+import { selectDarkTheme, selectLightTheme } from '@/components/Select/Select.theme.css';
 import { skeletonDarkTheme, skeletonLightTheme } from '@/components/Skeleton/Skeleton.theme.css';
 import {
   getTableDarkColors,
@@ -333,6 +334,7 @@ const lightSemanticColors = {
   ...headingLightTheme,
   ...iconButtonLightTheme,
   ...inputLightTheme,
+  ...selectLightTheme,
   ...textareaLightTheme,
   ...buttonLightTheme,
   buttonPrimaryText: 'white',
@@ -481,6 +483,7 @@ const darkSemanticColors = {
   ...headingDarkTheme,
   ...iconButtonDarkTheme,
   ...inputDarkTheme,
+  ...selectDarkTheme,
   ...textareaDarkTheme,
   ...buttonDarkTheme,
   buttonPrimaryText: darkColors.deepBlue2,

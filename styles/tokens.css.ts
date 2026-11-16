@@ -120,6 +120,16 @@ export const tokens = createThemeContract({
     inputDisabledText: null,
     inputInvalidBorder: null,
 
+    selectBg: null,
+    selectBorder: null,
+    selectFocusBg: null,
+    selectFocusBorder: null,
+    selectHoverBg: null,
+    selectText: null,
+    selectPlaceholder: null,
+    selectDisabledText: null,
+    selectInvalidBorder: null,
+
     textareaBg: null,
     textareaBorder: null,
     textareaFocusBg: null,

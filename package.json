@@ -78,6 +78,7 @@
     "@radix-ui/react-portal": "1.2.0",
     "@radix-ui/react-progress": "1.2.1",
     "@radix-ui/react-radio-group": "1.5.1",
+    "@radix-ui/react-select": "2.4.1",
     "@radix-ui/react-separator": "1.2.0",
     "@radix-ui/react-slider": "1.6.1",
     "@radix-ui/react-slot": "1.5.0",
