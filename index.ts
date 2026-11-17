@@ -216,7 +216,8 @@ export {
   useTableSort,
 } from './components/Table';
 export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
-export { Text } from './components/Text';
+export type { TextVanillaProps } from './components/Text';
+export { Text, TextVanilla } from './components/Text';
 export type { TextareaVanillaProps } from './components/Textarea';
 export { Textarea, TextareaVanilla } from './components/Textarea';
 export type { TextFieldVanillaProps } from './components/TextField';
