@@ -29,7 +29,19 @@ export default [
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-namespace': 'off',
-      'simple-import-sort/imports': 'error',
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            ['^\\u0000'],
+            ['^@?\\w'],
+            // Shared dirs before components keeps the previous import order, which sets the CSS output order.
+            ['^@/(colors|styles|utils)(/|$)'],
+            ['^@/components(/|$)'],
+            ['^\\.'],
+          ],
+        },
+      ],
       'simple-import-sort/exports': 'error',
     },
   },

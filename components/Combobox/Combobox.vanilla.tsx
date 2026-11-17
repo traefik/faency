@@ -1,10 +1,12 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import React, { forwardRef, useEffect, useId, useRef, useState } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '../Input/Input.vanilla';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '@/components/Input/Input.vanilla';
+
 import {
   comboboxAnchor,
   comboboxContent,

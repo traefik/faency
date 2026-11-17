@@ -2,7 +2,8 @@ import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
 import { LabelVanilla } from './Label.vanilla';
 
 describe('LabelVanilla', () => {

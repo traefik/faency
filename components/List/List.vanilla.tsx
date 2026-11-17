@@ -13,17 +13,19 @@ import React, {
   useRef,
 } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import type {
   FlexAlignSimplified,
   FlexDirection,
   FlexJustifySimplified,
   Gap,
-} from '../../styles/types';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { warnOnce } from '../../utils/warnOnce';
-import { flexRecipe } from '../Flex/Flex.vanilla.css';
+} from '@/styles/types';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+import { warnOnce } from '@/utils/warnOnce';
+
+import { flexRecipe } from '@/components/Flex/Flex.vanilla.css';
+
 import { controlsWrapper, itemButton, itemText, liRecipe, ol, ul } from './List.vanilla.css';
 
 const ListVanillaContext = createContext({ interactive: false });

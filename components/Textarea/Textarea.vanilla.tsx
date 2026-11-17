@@ -1,12 +1,14 @@
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { FieldVanilla } from '../Field/Field.vanilla';
-import { FieldLabelProps, useFieldControl } from '../Field/FieldContext';
-import { LabelVanilla } from '../Label';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { FieldVanilla } from '@/components/Field/Field.vanilla';
+import { FieldLabelProps, useFieldControl } from '@/components/Field/FieldContext';
+import { LabelVanilla } from '@/components/Label';
+
 import {
   adornmentWrapperEnd,
   styledTextareaRecipe,

@@ -2,7 +2,8 @@ import { act, fireEvent, render, screen, waitFor, within } from '@testing-librar
 import { axe } from 'jest-axe';
 import React, { createRef, useEffect } from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
 import {
   ToastActionVanilla,
   ToastDescriptionVanilla,

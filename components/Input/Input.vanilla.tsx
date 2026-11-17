@@ -1,10 +1,12 @@
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { useFieldControl } from '../Field/FieldContext';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { useFieldControl } from '@/components/Field/FieldContext';
+
 import { adornmentWrapperRecipe, inputWrapperRecipe, styledInputRecipe } from './Input.vanilla.css';
 
 type StyledInputRecipeVariants = NonNullable<RecipeVariants<typeof styledInputRecipe>>;

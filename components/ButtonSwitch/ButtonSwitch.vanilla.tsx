@@ -1,14 +1,15 @@
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+} from '@/styles/polymorphic';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { buttonSwitchContainer, buttonSwitchItem } from './ButtonSwitch.vanilla.css';
 
 // Container Component

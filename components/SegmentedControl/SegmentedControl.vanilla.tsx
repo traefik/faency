@@ -1,9 +1,10 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import React, { ComponentPropsWithoutRef, createContext, forwardRef, useContext } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import {
   segmentedControlItemRecipe,
   segmentedControlRecipe,

@@ -11,11 +11,13 @@ import React, {
   useSyncExternalStore,
 } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import type { Gap } from '../../styles/types';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import type { Gap } from '@/styles/types';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { FlexVanilla } from '@/components/Flex/Flex.vanilla';
+
 import { HANDLE_WIDTH } from './SplitLayout.constants';
 import { aside, handle, handleLine, main, root } from './SplitLayout.vanilla.css';
 

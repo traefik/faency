@@ -1,10 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { resolveColor } from '../../styles/resolveColor';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { resolveColor } from '@/styles/resolveColor';
+import { useVanillaExtractTheme } from '@/styles/themeContext';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { hiddenLabel, spinnerRecipe, svg, track } from './Spinner.vanilla.css';
 
 export type SpinnerVanillaProps = Omit<

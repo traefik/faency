@@ -2,8 +2,10 @@ import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { BoxVanilla } from '../Box/Box.vanilla';
+import { CSSProps } from '@/styles/cssProps';
+
+import { BoxVanilla } from '@/components/Box/Box.vanilla';
+
 import { avatarFallbackRecipe, avatarImage, avatarRecipe } from './Avatar.vanilla.css';
 
 type AvatarRecipeVariants = NonNullable<RecipeVariants<typeof avatarRecipe>>;

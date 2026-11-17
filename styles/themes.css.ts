@@ -1,41 +1,43 @@
 import { createTheme } from '@vanilla-extract/css';
 import tinycolor from 'tinycolor2';
 
-import { darkColors, lightColors } from '../colors';
-import { badgeDarkTheme, badgeLightTheme } from '../components/Badge/Badge.theme.css';
-import { buttonDarkTheme, buttonLightTheme } from '../components/Button/Button.theme.css';
+import { darkColors, lightColors } from '@/colors';
+
+import { badgeDarkTheme, badgeLightTheme } from '@/components/Badge/Badge.theme.css';
+import { buttonDarkTheme, buttonLightTheme } from '@/components/Button/Button.theme.css';
 import {
   buttonSwitchDarkTheme,
   buttonSwitchLightTheme,
-} from '../components/ButtonSwitch/ButtonSwitch.theme.css';
-import { cardDarkTheme, cardLightTheme } from '../components/Card/Card.theme.css';
+} from '@/components/ButtonSwitch/ButtonSwitch.theme.css';
+import { cardDarkTheme, cardLightTheme } from '@/components/Card/Card.theme.css';
 import {
   codeBlockDarkTheme,
   codeBlockLightTheme,
-} from '../components/CodeBlock/CodeBlock.theme.css';
-import { comboboxDarkTheme, comboboxLightTheme } from '../components/Combobox/Combobox.theme.css';
-import { headingDarkTheme, headingLightTheme } from '../components/Heading/Heading.theme.css';
+} from '@/components/CodeBlock/CodeBlock.theme.css';
+import { comboboxDarkTheme, comboboxLightTheme } from '@/components/Combobox/Combobox.theme.css';
+import { headingDarkTheme, headingLightTheme } from '@/components/Heading/Heading.theme.css';
 import {
   iconButtonDarkTheme,
   iconButtonLightTheme,
-} from '../components/IconButton/IconButton.theme.css';
-import { inputDarkTheme, inputLightTheme } from '../components/Input/Input.theme.css';
-import { listDarkTheme, listLightTheme } from '../components/List/List.theme.css';
-import { panelDarkTheme, panelLightTheme } from '../components/Panel/Panel.theme.css';
+} from '@/components/IconButton/IconButton.theme.css';
+import { inputDarkTheme, inputLightTheme } from '@/components/Input/Input.theme.css';
+import { listDarkTheme, listLightTheme } from '@/components/List/List.theme.css';
+import { panelDarkTheme, panelLightTheme } from '@/components/Panel/Panel.theme.css';
 import {
   segmentedControlDarkTheme,
   segmentedControlLightTheme,
-} from '../components/SegmentedControl/SegmentedControl.theme.css';
-import { skeletonDarkTheme, skeletonLightTheme } from '../components/Skeleton/Skeleton.theme.css';
+} from '@/components/SegmentedControl/SegmentedControl.theme.css';
+import { skeletonDarkTheme, skeletonLightTheme } from '@/components/Skeleton/Skeleton.theme.css';
 import {
   getTableDarkColors,
   getTableLightColors,
   tableDarkTheme,
   tableLightTheme,
-} from '../components/Table/Table.theme.css';
-import { textDarkTheme, textLightTheme } from '../components/Text/Text.theme.css';
-import { textareaDarkTheme, textareaLightTheme } from '../components/Textarea/Textarea.theme.css';
-import { toastDarkTheme, toastLightTheme } from '../components/Toast/Toast.theme.css';
+} from '@/components/Table/Table.theme.css';
+import { textDarkTheme, textLightTheme } from '@/components/Text/Text.theme.css';
+import { textareaDarkTheme, textareaLightTheme } from '@/components/Textarea/Textarea.theme.css';
+import { toastDarkTheme, toastLightTheme } from '@/components/Toast/Toast.theme.css';
+
 import { tokens } from './tokens.css';
 
 // Type for primary colors

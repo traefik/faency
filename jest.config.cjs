@@ -9,6 +9,7 @@ module.exports = {
     '\\.(js|jsx|tsx?)$': 'babel-jest',
   },
   moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
     '^(\\.{1,2}/.*)\\.css$': '$1.css.ts',
   },
 };

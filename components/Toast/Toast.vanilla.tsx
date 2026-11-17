@@ -8,11 +8,13 @@ import {
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import React, { ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { ButtonVanilla } from '../Button/Button.vanilla';
-import { IconButtonVanilla } from '../IconButton/IconButton.vanilla';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { ButtonVanilla } from '@/components/Button/Button.vanilla';
+import { IconButtonVanilla } from '@/components/IconButton/IconButton.vanilla';
+
 import {
   toastAction,
   toastClose,

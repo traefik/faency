@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { tokens } from '../../styles/tokens.css';
+import { tokens } from '@/styles/tokens.css';
 
 // Base button styles (matching BUTTON_BASE_STYLES from Button component)
 const baseIconButton = style({

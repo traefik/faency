@@ -1,8 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-import { FaencyProvider } from '../FaencyProvider';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
+import { FaencyProvider } from '@/components/FaencyProvider';
+
 import { TextFieldVanilla } from './TextField.vanilla';
 
 describe('TextFieldVanilla', () => {

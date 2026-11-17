@@ -1,13 +1,14 @@
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+} from '@/styles/polymorphic';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { image } from './Image.vanilla.css';
 
 export type ImageVanillaProps<C extends ElementType = 'img'> = PolymorphicComponentProps<

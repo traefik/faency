@@ -8,10 +8,11 @@ import {
   sizeVariants,
   transformVariants,
   weightVariants,
-} from '../../styles/textVariants.css';
-import { tokens } from '../../styles/tokens.css';
-import { elevationVariants } from '../Elevation/Elevation.vanilla.css';
-import { ROW_LINK_CONTROL_Z_INDEX } from '../RowLink/RowLink.constants';
+} from '@/styles/textVariants.css';
+import { tokens } from '@/styles/tokens.css';
+
+import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
+import { ROW_LINK_CONTROL_Z_INDEX } from '@/components/RowLink/RowLink.constants';
 
 const rowBorder = `1px solid ${tokens.colors.tableRowBorder}`;
 

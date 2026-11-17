@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { tokens } from '../../styles/tokens.css';
+import { tokens } from '@/styles/tokens.css';
 
 export const buttonSwitchContainer = style({
   display: 'inline-flex',

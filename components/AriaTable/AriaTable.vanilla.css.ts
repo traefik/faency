@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
-import { tokens } from '../../styles/tokens.css';
+import { tokens } from '@/styles/tokens.css';
+
 import { FULL_COL_SPAN_ATTRIBUTE } from './AriaTable.constants';
 
 export const ariaTable = style({ display: 'table' });

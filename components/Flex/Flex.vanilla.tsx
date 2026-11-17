@@ -1,19 +1,20 @@
 import React, { ElementType } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
+} from '@/styles/polymorphic';
 import type {
   FlexAlignSimplified,
   FlexDirection,
   FlexJustifySimplified,
   Gap,
-} from '../../styles/types';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+} from '@/styles/types';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { flexRecipe } from './Flex.vanilla.css';
 
 interface FlexOwnProps extends CSSProps {

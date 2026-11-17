@@ -1,7 +1,7 @@
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { breakpoints } from '../../styles/breakpoints.css';
-import { tokens } from '../../styles/tokens.css';
+import { breakpoints } from '@/styles/breakpoints.css';
+import { tokens } from '@/styles/tokens.css';
 
 export const segmentedControlRecipe = recipe({
   base: {

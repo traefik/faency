@@ -1,7 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
-import { cx } from '../../styles/cx';
+import { cx } from '@/styles/cx';
+
 import { ROW_LINK_ATTRIBUTE } from './RowLink.constants';
 import { rowLink } from './RowLink.vanilla.css';
 

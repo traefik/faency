@@ -2,7 +2,8 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
 import {
   SplitLayoutAsideVanilla,
   SplitLayoutAsideVanillaProps,

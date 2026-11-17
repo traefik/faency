@@ -8,8 +8,8 @@ import {
   sizeVariants,
   transformVariants,
   weightVariants,
-} from '../../styles/textVariants.css';
-import { tokens } from '../../styles/tokens.css';
+} from '@/styles/textVariants.css';
+import { tokens } from '@/styles/tokens.css';
 
 // Base blockquote styles (inherits from Text component with blockquote-specific overrides)
 const blockquoteBase = style({

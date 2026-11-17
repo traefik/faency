@@ -2,13 +2,15 @@ import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { Highlight, Language, themes } from 'prism-react-renderer';
 import React, { forwardRef, HTMLAttributes, useCallback, useRef, useState } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
-import { AccessibleIcon } from '../AccessibleIcon';
-import { ButtonVanilla } from '../Button';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useVanillaExtractTheme } from '@/styles/themeContext';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
+
+import { AccessibleIcon } from '@/components/AccessibleIcon';
+import { ButtonVanilla } from '@/components/Button';
+
 import {
   codeContent,
   codeContentBottomPadding,

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { BoxVanilla } from '../Box';
-import { LabelVanilla } from '../Label';
-import { TextVanilla } from '../Text';
-import { VisuallyHidden } from '../VisuallyHidden';
+import { CSSProps } from '@/styles/cssProps';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { BoxVanilla } from '@/components/Box';
+import { LabelVanilla } from '@/components/Label';
+import { TextVanilla } from '@/components/Text';
+import { VisuallyHidden } from '@/components/VisuallyHidden';
+
 import { endLabelRow, startControl, startLabel, startRow } from './Field.vanilla.css';
 import { FieldBaseProps, FieldContext, useAnnouncedError, useFieldRoot } from './FieldContext';
 

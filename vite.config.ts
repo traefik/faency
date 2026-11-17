@@ -10,6 +10,9 @@ const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
 
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: true,
+  },
   optimizeDeps: {
     exclude: ['@vanilla-extract/recipes/createRuntimeFn'],
   },

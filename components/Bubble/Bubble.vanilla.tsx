@@ -1,14 +1,15 @@
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+} from '@/styles/polymorphic';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { bubbleRecipe } from './Bubble.vanilla.css';
 
 type BubbleRecipeVariants = NonNullable<RecipeVariants<typeof bubbleRecipe>>;

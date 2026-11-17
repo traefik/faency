@@ -10,20 +10,21 @@ import React, {
   useState,
 } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
+
 import {
   handleRowClick,
   mapRowLink,
   openRowLink,
   RowLinkShortcutProps,
-} from '../RowLink/RowLink.utils';
-import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
-import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
-import { ExpandToggleVanilla, stopEvent } from '../Table/ExpandToggle.vanilla';
-import { ARIA_SORT, SortButtonVanilla } from '../Table/SortButton.vanilla';
+} from '@/components/RowLink/RowLink.utils';
+import { RowLinkVanilla } from '@/components/RowLink/RowLink.vanilla';
+import { rowLinkRow, rowLinkTable } from '@/components/RowLink/RowLink.vanilla.css';
+import { ExpandToggleVanilla, stopEvent } from '@/components/Table/ExpandToggle.vanilla';
+import { ARIA_SORT, SortButtonVanilla } from '@/components/Table/SortButton.vanilla';
 import {
   captionRecipe,
   emptyHeaderCell,
@@ -35,8 +36,9 @@ import {
   thRecipe,
   toggleCell,
   trRecipe,
-} from '../Table/Table.vanilla.css';
-import { TableSortProps } from '../Table/useTableSort';
+} from '@/components/Table/Table.vanilla.css';
+import { TableSortProps } from '@/components/Table/useTableSort';
+
 import { FULL_COL_SPAN_ATTRIBUTE } from './AriaTable.constants';
 import {
   ariaCell,
