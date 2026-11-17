@@ -162,7 +162,7 @@ The complete naming pattern (see [Text.vanilla.tsx](components/Text/Text.vanilla
 
 **Key Points:**
 
-- Use `NonNullable<RecipeVariants>` for variant types
+- Use `RecipeVariantProps<typeof recipe>` for variant types and `toVariantKey()` for numeric variants (see [Variant props missing or not type-checked](#variant-props-missing-or-not-type-checked))
 - Internal implementation uses `ComponentImpl` suffix
 - Exported component name is `ComponentVanilla`
 - Exported props type is `ComponentVanillaProps`
@@ -489,17 +489,27 @@ Follow the pattern in vanilla components (see [Button.vanilla.tsx](components/Bu
 
 ### TypeScript Errors
 
-#### RecipeVariants returns undefined
+#### Variant props missing or not type-checked
 
-Always wrap `RecipeVariants` with `NonNullable`:
+Type variant props with `RecipeVariantProps` from [styles/recipeVariants.ts](styles/recipeVariants.ts), not `RecipeVariants` from `@vanilla-extract/recipes`:
 
 ```tsx
-// ❌ Bad - may return undefined
+// ❌ Bad - includes undefined; `Omit<…, never>` or `extends` then silently drops every variant prop
 type MyComponentVariants = RecipeVariants<typeof myComponentRecipe>;
+interface MyComponentOwnProps extends Omit<MyComponentVariants, never>, CSSProps {}
 
-// ✅ Good - guaranteed to have variant properties
-type MyComponentVariants = NonNullable<RecipeVariants<typeof myComponentRecipe>>;
+// ✅ Good - numeric keys ('1', '2', ...) also accept numbers, e.g. size={2}
+type MyComponentVariants = RecipeVariantProps<typeof myComponentRecipe>;
+interface MyComponentOwnProps extends MyComponentVariants, CSSProps {}
 ```
+
+When a variant has numeric keys, pass it through `toVariantKey` before calling the recipe. Recipes match compound variants with `===`, so `2` would not match `'2'`:
+
+```tsx
+const recipeClass = myComponentRecipe({ size: toVariantKey(size), variant });
+```
+
+Because of the loose polymorphic typing, a broken variant type does not cause errors; check that an invalid value like `variant="nope"` is rejected.
 
 #### Invalid selector error for child elements
 
