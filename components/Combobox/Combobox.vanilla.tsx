@@ -1,10 +1,9 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { forwardRef, useEffect, useId, useRef, useState } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '../Input/Input.vanilla';
 import {
   comboboxAnchor,
@@ -54,8 +53,7 @@ export const ComboboxVanilla = forwardRef<InputVanillaHandle, ComboboxVanillaPro
     },
     ref,
   ) => {
-    const { colors } = useVanillaExtractTheme();
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
+    const inlineStyle = useInlineStyle(css, style);
 
     const autoId = useId();
     const id = idProp ?? autoId;
@@ -143,11 +141,7 @@ export const ComboboxVanilla = forwardRef<InputVanillaHandle, ComboboxVanillaPro
     return (
       <PopoverPrimitive.Root open={popupOpen} onOpenChange={(next) => !next && close()}>
         <PopoverPrimitive.Anchor asChild>
-          <div
-            ref={anchorRef}
-            className={cx(comboboxAnchor, className)}
-            style={{ ...cssStyles, ...style, ...assignInlineVars(vars) }}
-          >
+          <div ref={anchorRef} className={cx(comboboxAnchor, className)} style={inlineStyle}>
             <InputVanilla
               ref={ref}
               id={id}

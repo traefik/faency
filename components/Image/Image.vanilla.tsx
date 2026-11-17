@@ -1,14 +1,13 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '../../styles/polymorphic';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { image } from './Image.vanilla.css';
 
 export type ImageVanillaProps<C extends ElementType = 'img'> = PolymorphicComponentProps<
@@ -24,14 +23,7 @@ const ImageVanillaImpl = forwardRef(
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'img';
-    const { colors } = useVanillaExtractTheme();
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
-    const mergedStyles = {
-      ...cssStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, style);
 
     return <Component ref={ref} className={cx(image, className)} style={mergedStyles} {...props} />;
   },

@@ -148,12 +148,12 @@ interface MyComponentProps {
 }
 
 // Usage in component
-const { style: rootCssStyles, vars: rootVars } = processCSSProp(rootCss, colors);
+const rootStyle = useInlineStyle(rootCss);
 ```
 
 **When to use each:**
 
-- `css?: CSSProps['css']` - For props that pass directly to `processCSSProp()`
+- `css?: CSSProps['css']` - For props that pass directly to `useInlineStyle()`
 - `extends CSSProps` - For components that have a `css` prop on the interface
 
 **Property Name Flexibility:**

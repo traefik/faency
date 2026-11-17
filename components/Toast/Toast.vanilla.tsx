@@ -6,12 +6,11 @@ import {
   InfoCircledIcon,
 } from '@radix-ui/react-icons';
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { ButtonVanilla } from '../Button/Button.vanilla';
 import { IconButtonVanilla } from '../IconButton/IconButton.vanilla';
 import {
@@ -33,12 +32,6 @@ const DEFAULT_ICONS: Record<ToastVariant, ReactNode> = {
   success: <CheckCircledIcon />,
   warning: <ExclamationTriangleIcon />,
   error: <CrossCircledIcon />,
-};
-
-const useCssProp = (css: CSSProps['css'], style?: React.CSSProperties) => {
-  const { colors } = useVanillaExtractTheme();
-  const { style: cssStyles, vars } = processCSSProp(css, colors);
-  return { ...cssStyles, ...style, ...assignInlineVars(vars) };
 };
 
 export interface ToastVanillaProps
@@ -64,7 +57,7 @@ export const ToastVanilla = forwardRef<HTMLLIElement, ToastVanillaProps>(
     },
     ref,
   ) => {
-    const mergedStyles = useCssProp(css, style);
+    const mergedStyles = useInlineStyle(css, style);
     const resolvedIcon = icon === undefined ? DEFAULT_ICONS[variant] : icon;
 
     return (
@@ -101,7 +94,7 @@ export const ToastTitleVanilla = forwardRef<HTMLDivElement, ToastTitleVanillaPro
     <ToastPrimitive.Title
       ref={ref}
       className={cx(toastTitle, className)}
-      style={useCssProp(css, style)}
+      style={useInlineStyle(css, style)}
       {...props}
     />
   ),
@@ -117,7 +110,7 @@ export const ToastDescriptionVanilla = forwardRef<HTMLDivElement, ToastDescripti
     <ToastPrimitive.Description
       ref={ref}
       className={cx(toastDescription, className)}
-      style={useCssProp(css, style)}
+      style={useInlineStyle(css, style)}
       {...props}
     />
   ),

@@ -1,8 +1,7 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { CSSProps } from '../../styles/cssProps';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { BoxVanilla } from '../Box';
 import { LabelVanilla } from '../Label';
 import { TextVanilla } from '../Text';
@@ -51,8 +50,7 @@ export const FieldVanilla = ({
     hasError ? ids.errorId : undefined,
     ids.labelId,
   );
-  const { colors } = useVanillaExtractTheme();
-  const { style: rootStyle, vars: rootVars } = processCSSProp(css, colors);
+  const rootStyle = useInlineStyle(css);
 
   const labelNode = React.useMemo(() => {
     if (!hasLabel || !ids.labelId) {
@@ -110,7 +108,7 @@ export const FieldVanilla = ({
     <FieldContext.Provider value={context}>
       <div
         className={labelPosition === 'start' ? startRow : undefined}
-        style={{ ...rootStyle, ...assignInlineVars(rootVars) }}
+        style={rootStyle}
         onFocus={onFocus}
         onBlur={onBlur}
         {...groupProps}

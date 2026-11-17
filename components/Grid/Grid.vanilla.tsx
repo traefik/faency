@@ -1,15 +1,14 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ElementType } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '../../styles/polymorphic';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
 import type { Gap, GridAlign, GridFlow, GridJustify } from '../../styles/types';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { gridRecipe } from './Grid.vanilla.css';
 
 interface GridOwnProps extends CSSProps {
@@ -45,10 +44,6 @@ export const GridVanillaComponent = React.forwardRef(
   ) => {
     const Component = as || 'div';
 
-    const { colors } = useVanillaExtractTheme();
-
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
     const dynamicStyles: React.CSSProperties = {};
 
     // To support any value on the columns props
@@ -56,12 +51,7 @@ export const GridVanillaComponent = React.forwardRef(
       dynamicStyles.gridTemplateColumns = `repeat(${columns}, 1fr)`;
     }
 
-    const mergedStyles = {
-      ...cssStyles,
-      ...dynamicStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, { ...dynamicStyles, ...style });
 
     const recipeClass = gridRecipe({ align, justify, flow, gap, gapX, gapY });
 

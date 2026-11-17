@@ -1,4 +1,3 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, {
   createContext,
   forwardRef,
@@ -12,10 +11,10 @@ import React, {
   useSyncExternalStore,
 } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
 import type { Gap } from '../../styles/types';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
 import { HANDLE_WIDTH } from './SplitLayout.constants';
 import { aside, handle, handleLine, main, root } from './SplitLayout.vanilla.css';
@@ -95,8 +94,7 @@ export type SplitLayoutVanillaProps = React.HTMLAttributes<HTMLDivElement> &
 
 export const SplitLayoutVanilla = forwardRef<HTMLDivElement, SplitLayoutVanillaProps>(
   ({ breakpoint = 1024, className, css, style, children, ...props }, ref) => {
-    const { colors } = useVanillaExtractTheme();
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
+    const inlineStyle = useInlineStyle(css, style);
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const setRefs = useCallback(
@@ -127,7 +125,7 @@ export const SplitLayoutVanilla = forwardRef<HTMLDivElement, SplitLayoutVanillaP
           ref={setRefs}
           className={cx(root, className)}
           data-stacked={stacked ? '' : undefined}
-          style={{ ...cssStyles, ...style, ...assignInlineVars(vars) }}
+          style={inlineStyle}
           {...props}
         >
           {children}

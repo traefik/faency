@@ -1,15 +1,14 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '../../styles/polymorphic';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { iconButtonRecipe } from './IconButton.vanilla.css';
 
 type IconButtonRecipeVariants = RecipeVariants<typeof iconButtonRecipe>;
@@ -33,15 +32,7 @@ const IconButtonVanillaComponentImpl = forwardRef(
   ) => {
     const Component = as || 'button';
 
-    const { colors } = useVanillaExtractTheme();
-
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
-    const mergedStyles = {
-      ...cssStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, style);
 
     const recipeClass = iconButtonRecipe({ size, variant });
 

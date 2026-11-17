@@ -1,10 +1,9 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ComponentPropsWithoutRef, createContext, forwardRef, useContext } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import {
   segmentedControlItemRecipe,
   segmentedControlRecipe,
@@ -12,12 +11,6 @@ import {
 } from './SegmentedControl.vanilla.css';
 
 export type { SegmentedControlSize };
-
-const useCssProp = (css: CSSProps['css'], style?: React.CSSProperties) => {
-  const { colors } = useVanillaExtractTheme();
-  const { style: cssStyles, vars } = processCSSProp(css, colors);
-  return { ...cssStyles, ...style, ...assignInlineVars(vars) };
-};
 
 const SegmentedControlContext = createContext<{
   size: SegmentedControlSize;
@@ -37,7 +30,7 @@ export const SegmentedControlVanilla = forwardRef<HTMLDivElement, SegmentedContr
         ref={ref}
         orientation="horizontal"
         className={cx(segmentedControlRecipe({ fullWidth }), className)}
-        style={useCssProp(css, style)}
+        style={useInlineStyle(css, style)}
         {...props}
       >
         {children}
@@ -61,7 +54,7 @@ export const SegmentedControlItemVanilla = forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cx(segmentedControlItemRecipe({ size, fullWidth }), className)}
-      style={useCssProp(css, style)}
+      style={useInlineStyle(css, style)}
       {...props}
     />
   );

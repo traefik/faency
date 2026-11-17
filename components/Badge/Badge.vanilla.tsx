@@ -1,15 +1,14 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '../../styles/polymorphic';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { badgeRecipe, interactiveBadgeRecipe } from './Badge.vanilla.css';
 
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
@@ -45,15 +44,7 @@ const BadgeVanillaComponentImpl = forwardRef(
   ) => {
     const Component = as || (interactive ? 'button' : 'span');
 
-    const { colors } = useVanillaExtractTheme();
-
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
-    const mergedStyles = {
-      ...cssStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, style);
 
     const recipe = interactive ? interactiveBadgeRecipe : badgeRecipe;
     const recipeClass = recipe({ size, variant, alphaBg, borderless });

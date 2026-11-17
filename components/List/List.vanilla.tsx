@@ -1,9 +1,7 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, {
   Children,
   createContext,
-  CSSProperties,
   forwardRef,
   Fragment,
   isValidElement,
@@ -15,26 +13,20 @@ import React, {
   useRef,
 } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
+import { CSSProps } from '../../styles/cssProps';
 import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
 import type {
   FlexAlignSimplified,
   FlexDirection,
   FlexJustifySimplified,
   Gap,
 } from '../../styles/types';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { warnOnce } from '../../utils/warnOnce';
 import { flexRecipe } from '../Flex/Flex.vanilla.css';
 import { controlsWrapper, itemButton, itemText, liRecipe, ol, ul } from './List.vanilla.css';
 
 const ListVanillaContext = createContext({ interactive: false });
-
-const useInlineStyle = (css: CSSProps['css'], style?: CSSProperties) => {
-  const { colors } = useVanillaExtractTheme();
-  const { style: cssStyles, vars } = processCSSProp(css, colors);
-  return { ...cssStyles, ...style, ...assignInlineVars(vars) };
-};
 
 const useListContextValue = (interactive?: boolean) => {
   const parent = useContext(ListVanillaContext);
