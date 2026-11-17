@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, {
   Children,
   forwardRef,
@@ -12,6 +11,7 @@ import React, {
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
+import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
 
@@ -55,11 +55,11 @@ import {
   fullColSpanCell,
 } from './AriaTable.vanilla.css';
 
-type TableRecipeVariants = NonNullable<RecipeVariants<typeof tableRecipe>>;
-type CaptionRecipeVariants = NonNullable<RecipeVariants<typeof captionRecipe>>;
-type TrRecipeVariants = NonNullable<RecipeVariants<typeof trRecipe>>;
-type ThRecipeVariants = NonNullable<RecipeVariants<typeof thRecipe>>;
-type TdRecipeVariants = NonNullable<RecipeVariants<typeof tdRecipe>>;
+type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
+type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
+type TrRecipeVariants = RecipeVariantProps<typeof trRecipe>;
+type ThRecipeVariants = RecipeVariantProps<typeof thRecipe>;
+type TdRecipeVariants = RecipeVariantProps<typeof tdRecipe>;
 
 export type AriaTableVanillaProps = React.HTMLAttributes<HTMLDivElement> &
   CSSProps &
@@ -100,7 +100,7 @@ export const AriaCaptionVanilla = forwardRef<HTMLDivElement, AriaCaptionVanillaP
     <div
       ref={ref}
       className={cx(
-        captionRecipe({ size, weight, variant, gradient, transform, noWrap }),
+        captionRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap }),
         className,
       )}
       style={useInlineStyle(css, style)}
@@ -163,7 +163,7 @@ export const AriaThVanilla = forwardRef<HTMLSpanElement, AriaThVanillaProps>(
       role="columnheader"
       aria-sort={sort && ARIA_SORT[sort]}
       className={cx(
-        thRecipe({ size, weight, variant, gradient, transform, noWrap, align }),
+        thRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap, align }),
         ariaCell,
         className,
       )}

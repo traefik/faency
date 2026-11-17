@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,13 +7,14 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { badgeRecipe, interactiveBadgeRecipe } from './Badge.vanilla.css';
 
 export const COLORS = ['gray', 'red', 'blue', 'green', 'neon', 'orange', 'purple'] as const;
 
-type BadgeRecipeVariants = RecipeVariants<typeof badgeRecipe>;
+type BadgeRecipeVariants = RecipeVariantProps<typeof badgeRecipe>;
 
 interface BadgeOwnProps extends Omit<BadgeRecipeVariants, 'color'>, CSSProps {
   interactive?: boolean;

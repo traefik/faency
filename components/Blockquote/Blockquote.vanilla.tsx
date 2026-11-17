@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,13 +7,14 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { blockquoteRecipe } from './Blockquote.vanilla.css';
 
-type BlockquoteRecipeVariants = RecipeVariants<typeof blockquoteRecipe>;
+type BlockquoteRecipeVariants = RecipeVariantProps<typeof blockquoteRecipe>;
 
-interface BlockquoteOwnProps extends Omit<BlockquoteRecipeVariants, never>, CSSProps {}
+interface BlockquoteOwnProps extends BlockquoteRecipeVariants, CSSProps {}
 
 export type BlockquoteVanillaProps<C extends ElementType = 'blockquote'> =
   PolymorphicComponentProps<C, BlockquoteOwnProps>;
@@ -41,7 +41,7 @@ const BlockquoteVanillaComponentImpl = forwardRef(
     const Component = (as || 'blockquote') as ElementType;
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = blockquoteRecipe({ size, weight, variant, gradient, transform, noWrap });
+    const recipeClass = blockquoteRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap });
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

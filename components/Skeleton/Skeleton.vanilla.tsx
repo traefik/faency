@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,11 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { skeletonRecipe } from './Skeleton.vanilla.css';
 
-type SkeletonRecipeVariants = NonNullable<RecipeVariants<typeof skeletonRecipe>>;
+type SkeletonRecipeVariants = RecipeVariantProps<typeof skeletonRecipe>;
 
 interface SkeletonVanillaOwnProps extends SkeletonRecipeVariants, CSSProps {}
 

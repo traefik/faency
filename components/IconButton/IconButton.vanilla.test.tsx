@@ -37,7 +37,7 @@ describe('IconButtonVanilla', () => {
   });
 
   it('should apply size prop', () => {
-    const sizes = ['small', 'medium', 'large'] as const;
+    const sizes = ['1', '2', '3', '4'] as const;
 
     sizes.forEach((size) => {
       const { getByRole, unmount } = renderWithTheme(
@@ -51,7 +51,7 @@ describe('IconButtonVanilla', () => {
   });
 
   it('should apply variant prop', () => {
-    const variants = ['contrast', 'gray', 'soft'] as const;
+    const variants = ['default', 'primary', 'red', 'green', 'orange', 'contrast'] as const;
 
     variants.forEach((variant) => {
       const { getByRole, unmount } = renderWithTheme(
@@ -66,7 +66,7 @@ describe('IconButtonVanilla', () => {
 
   it('should combine multiple variant props', () => {
     const { getByRole } = renderWithTheme(
-      <IconButtonVanilla size="large" variant="contrast">
+      <IconButtonVanilla size="3" variant="contrast">
         <TestIcon />
       </IconButtonVanilla>,
     );

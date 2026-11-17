@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,13 +7,14 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { buttonRecipe } from './Button.vanilla.css';
 
-type ButtonRecipeVariants = RecipeVariants<typeof buttonRecipe>;
+type ButtonRecipeVariants = RecipeVariantProps<typeof buttonRecipe>;
 
-interface ButtonOwnProps extends Omit<ButtonRecipeVariants, never>, CSSProps {}
+interface ButtonOwnProps extends ButtonRecipeVariants, CSSProps {}
 
 export type ButtonVanillaProps<C extends ElementType = 'button'> = PolymorphicComponentProps<
   C,

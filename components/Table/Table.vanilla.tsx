@@ -1,8 +1,8 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
+import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -32,11 +32,11 @@ import {
 } from './Table.vanilla.css';
 import { TableSortProps } from './useTableSort';
 
-type TableRecipeVariants = NonNullable<RecipeVariants<typeof tableRecipe>>;
-type CaptionRecipeVariants = NonNullable<RecipeVariants<typeof captionRecipe>>;
-type TrRecipeVariants = NonNullable<RecipeVariants<typeof trRecipe>>;
-type ThRecipeVariants = NonNullable<RecipeVariants<typeof thRecipe>>;
-type TdRecipeVariants = NonNullable<RecipeVariants<typeof tdRecipe>>;
+type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
+type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
+type TrRecipeVariants = RecipeVariantProps<typeof trRecipe>;
+type ThRecipeVariants = RecipeVariantProps<typeof thRecipe>;
+type TdRecipeVariants = RecipeVariantProps<typeof tdRecipe>;
 
 export type TableVanillaProps = React.TableHTMLAttributes<HTMLTableElement> &
   CSSProps &
@@ -67,7 +67,7 @@ export const CaptionVanilla = forwardRef<HTMLTableCaptionElement, CaptionVanilla
     <caption
       ref={ref}
       className={cx(
-        captionRecipe({ size, weight, variant, gradient, transform, noWrap }),
+        captionRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap }),
         className,
       )}
       style={useInlineStyle(css, style)}
@@ -128,7 +128,7 @@ export const ThVanilla = forwardRef<HTMLTableCellElement, ThVanillaProps>(
       ref={ref}
       aria-sort={sort && ARIA_SORT[sort]}
       className={cx(
-        thRecipe({ size, weight, variant, gradient, transform, noWrap, align }),
+        thRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap, align }),
         className,
       )}
       style={useInlineStyle(css, style)}

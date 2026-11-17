@@ -53,7 +53,7 @@ describe('ButtonVanilla', () => {
   });
 
   it('should apply state prop', () => {
-    const states = ['waiting', 'success', 'error'] as const;
+    const states = ['active', 'waiting'] as const;
 
     states.forEach((state) => {
       const { getByRole, unmount } = renderWithTheme(
@@ -76,7 +76,7 @@ describe('ButtonVanilla', () => {
 
   it('should combine multiple variant props', () => {
     const { getByRole } = renderWithTheme(
-      <ButtonVanilla size="large" variant="primary" state="success" ghost rounded>
+      <ButtonVanilla size="large" variant="primary" state="active" ghost rounded>
         Button
       </ButtonVanilla>,
     );

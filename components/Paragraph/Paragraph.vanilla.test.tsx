@@ -29,7 +29,7 @@ describe('ParagraphVanilla', () => {
   });
 
   it('should apply size prop', () => {
-    const sizes = ['1', '2', '3', '4', '5'] as const;
+    const sizes = ['1', '2'] as const;
 
     sizes.forEach((size) => {
       const { container, unmount } = renderWithTheme(

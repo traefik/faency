@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,11 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { elevationRecipe } from './Elevation.vanilla.css';
 
-type ElevationRecipeVariants = NonNullable<RecipeVariants<typeof elevationRecipe>>;
+type ElevationRecipeVariants = RecipeVariantProps<typeof elevationRecipe>;
 
 interface ElevationOwnProps extends CSSProps {
   variant?: ElevationRecipeVariants['variant'];

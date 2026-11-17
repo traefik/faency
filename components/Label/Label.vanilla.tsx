@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,11 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { labelRecipe } from './Label.vanilla.css';
 
-type LabelRecipeVariants = NonNullable<RecipeVariants<typeof labelRecipe>>;
+type LabelRecipeVariants = RecipeVariantProps<typeof labelRecipe>;
 
 interface LabelOwnProps extends LabelRecipeVariants, CSSProps {}
 
@@ -43,7 +43,7 @@ const LabelVanillaComponentImpl = forwardRef(
     const Component = as || 'label';
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = labelRecipe({ size, weight, variant, gradient, transform, noWrap });
+    const recipeClass = labelRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap });
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

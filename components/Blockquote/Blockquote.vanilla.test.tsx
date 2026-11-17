@@ -53,7 +53,7 @@ describe('BlockquoteVanilla', () => {
   });
 
   it('should apply variant prop', () => {
-    const variants = ['gray', 'contrast'] as const;
+    const variants = ['subtle', 'contrast'] as const;
 
     variants.forEach((variant) => {
       const { container, unmount } = renderWithTheme(
@@ -70,7 +70,7 @@ describe('BlockquoteVanilla', () => {
   });
 
   it('should apply transform prop', () => {
-    const transforms = ['uppercase', 'lowercase', 'capitalize'] as const;
+    const transforms = ['uppercase', 'capitalize', 'capitalizeWords'] as const;
 
     transforms.forEach((transform) => {
       const { container, unmount } = renderWithTheme(

@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,11 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { cardRecipe, interactiveCardRecipe } from './Card.vanilla.css';
 
-type CardRecipeVariants = NonNullable<RecipeVariants<typeof cardRecipe>>;
+type CardRecipeVariants = RecipeVariantProps<typeof cardRecipe>;
 
 interface CardOwnProps extends CSSProps {
   elevation?: CardRecipeVariants['elevation'];

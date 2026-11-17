@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,13 +7,14 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { iconButtonRecipe } from './IconButton.vanilla.css';
 
-type IconButtonRecipeVariants = RecipeVariants<typeof iconButtonRecipe>;
+type IconButtonRecipeVariants = RecipeVariantProps<typeof iconButtonRecipe>;
 
-interface IconButtonOwnProps extends Omit<IconButtonRecipeVariants, never>, CSSProps {}
+interface IconButtonOwnProps extends IconButtonRecipeVariants, CSSProps {}
 
 export type IconButtonVanillaProps<C extends ElementType = 'button'> = PolymorphicComponentProps<
   C,
@@ -35,7 +35,7 @@ const IconButtonVanillaComponentImpl = forwardRef(
 
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = iconButtonRecipe({ size, variant });
+    const recipeClass = iconButtonRecipe({ size: toVariantKey(size), variant });
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

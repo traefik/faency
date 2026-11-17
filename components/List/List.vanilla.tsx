@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, {
   Children,
   createContext,
@@ -15,6 +14,7 @@ import React, {
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import type {
   FlexAlignSimplified,
   FlexDirection,
@@ -77,7 +77,7 @@ export const OlVanilla = forwardRef<HTMLOListElement, OlVanillaProps>(
 
 OlVanilla.displayName = 'OlVanilla';
 
-type LiRecipeVariants = NonNullable<RecipeVariants<typeof liRecipe>>;
+type LiRecipeVariants = RecipeVariantProps<typeof liRecipe>;
 
 export type LiVanillaProps = React.LiHTMLAttributes<HTMLLIElement> &
   CSSProps &
