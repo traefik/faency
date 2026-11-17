@@ -105,7 +105,7 @@ Components follow a consistent pattern:
 ## Important Notes
 
 - **Patch Required**: Run `yarn patch-package` after installing dependencies to fix Stitches TypeScript 5 compatibility
-- **Node Version**: Requires Node.js 24.14.1+
+- **Node Version**: Use the version in `.nvmrc`, kept up to date by Renovate. `engines.node` in `package.json` is the minimum for apps that install Faency and is raised by hand
 - **Conventional Commits**: Follow conventional commit format for semantic releases
 - **Accessibility**: All components must be accessible and support keyboard navigation
 - **Storybook**: Every component requires comprehensive stories showing all variants

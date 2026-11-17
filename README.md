@@ -76,10 +76,16 @@ const App = () => (
 
 ## How to contribute
 
-- Make sure you have Node 24.14.1+, or if you prefer, you can work in a Docker container:
+- Make sure you have the Node version in `.nvmrc` (`nvm use`), or if you prefer, you can work in a Docker container:
 
 ```sh
-docker run -it -v $(pwd):/usr/local/src/ -w /usr/local/src/ -p 3000:3000 node:latest bash
+docker run -it --rm -v $(pwd):/usr/local/src/ -v faency-node-modules:/usr/local/src/node_modules -w /usr/local/src/ -p 6006:6006 -p 24678:24678 node:$(sed 's/^v//' .nvmrc) bash
+```
+
+- Enable Corepack, so `yarn` runs the Yarn version set in `package.json`
+
+```sh
+corepack enable
 ```
 
 - Install the project dependencies
@@ -102,7 +108,9 @@ yarn patch-package
 yarn storybook
 ```
 
-At this point, Storybook should automatically open up in your browser and you can start coding, it has hot reload so it will automatically re-render whenever a change is detected on the code.
+Storybook opens in your browser and hot reloads whenever the code changes.
+
+In the Docker container, run `yarn storybook --host 0.0.0.0` instead. Nothing opens by itself there, so open http://localhost:6006 on your machine.
 
 ### Writing stories
 

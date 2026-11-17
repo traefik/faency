@@ -8,7 +8,8 @@
     "custom.regex",
     "dockerfile",
     "github-actions",
-    "npm"
+    "npm",
+    "nvm"
   ],
   customManagers: [
     {
@@ -43,6 +44,25 @@
       groupSlug: 'all-minor-patch',
       matchManagers: [ 'npm' ],
       matchUpdateTypes: [ 'minor', 'patch' ],
+    },
+    // Node.js: .nvmrc tracks the latest Node used to develop and release Faency.
+    {
+      groupName: 'Node.js',
+      groupSlug: 'nodejs',
+      matchManagers: [ 'nvm' ],
+    },
+    // @types/node follows the Node major in .nvmrc. Raise this cap in the same PR as a major Node upgrade.
+    {
+      matchManagers: [ 'npm' ],
+      matchPackageNames: [ '@types/node' ],
+      allowedVersions: '<25.0.0',
+    },
+    // engines.node is the minimum Node for apps that install Faency, so it is raised by hand,
+    // only when Faency needs a newer Node, not every time .nvmrc moves.
+    {
+      matchManagers: [ 'npm' ],
+      matchDepTypes: [ 'engines' ],
+      enabled: false,
     },
     // Github Actions.
     {
