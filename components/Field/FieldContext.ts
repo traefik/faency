@@ -264,7 +264,7 @@ const ANNOUNCE_DELAY = 1000;
  */
 export const useAnnouncedError = (enabled: boolean, errorId?: string, labelId?: string) => {
   const [announcedError, setAnnouncedError] = React.useState<string | null>(null);
-  const lastTextRef = React.useRef<string | null | undefined>(undefined);
+  const lastTextRef = React.useRef<string | null | undefined>(null);
   const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
 
   // Compares the rendered text, so that a new JSX error with the same text does not restart the delay.
