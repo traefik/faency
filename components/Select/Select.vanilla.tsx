@@ -1,11 +1,11 @@
 import { CaretSortIcon, CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { CSSProps } from '../../styles/cssProps';
+import { cx } from '../../styles/cx';
+import { useInlineStyle } from '../../styles/useInlineStyle';
 import { useFieldControl } from '../Field/FieldContext';
 import {
   selectContent,
@@ -26,14 +26,6 @@ type SelectTriggerVariants = NonNullable<RecipeVariants<typeof selectTriggerReci
 type SelectSize = NonNullable<SelectTriggerVariants['size']>;
 
 const SelectSizeContext = React.createContext<SelectSize>('medium');
-
-const cx = (...classNames: (string | undefined)[]) => classNames.filter(Boolean).join(' ');
-
-const useInlineStyle = (css: CSSProps['css'], style?: React.CSSProperties) => {
-  const { colors } = useVanillaExtractTheme();
-  const { style: cssStyles, vars } = processCSSProp(css, colors);
-  return { ...cssStyles, ...style, ...assignInlineVars(vars) };
-};
 
 type SelectRootProps = Omit<
   SelectPrimitive.SelectProps,

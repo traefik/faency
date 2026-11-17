@@ -262,6 +262,18 @@ function getSwitchDarkFocusColors(primaryColorName: string) {
   };
 }
 
+function getSelectLightFocusColors(primaryColorName: string) {
+  return {
+    selectFocusBorder: lightColors[`${primaryColorName}8`],
+  };
+}
+
+function getSelectDarkFocusColors(primaryColorName: string) {
+  return {
+    selectFocusBorder: darkColors[`${primaryColorName}11`],
+  };
+}
+
 function createToneColors(colors: typeof lightColors | typeof darkColors) {
   return {
     toneSuccessSolid: colors.green9,
@@ -382,6 +394,7 @@ export const lightThemeBlue = createTheme(tokens, {
     ...getTableLightColors(lightColors.blue9),
     ...getListLightFocusColors('blue'),
     ...getSwitchLightFocusColors('blue'),
+    ...getSelectLightFocusColors('blue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -396,6 +409,7 @@ export const lightThemeNeon = createTheme(tokens, {
     ...getTableLightColors(lightColors.neon9),
     ...getListLightFocusColors('neon'),
     ...getSwitchLightFocusColors('neon'),
+    ...getSelectLightFocusColors('neon'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -410,6 +424,7 @@ export const lightThemeOrange = createTheme(tokens, {
     ...getTableLightColors(lightColors.orange9),
     ...getListLightFocusColors('orange'),
     ...getSwitchLightFocusColors('orange'),
+    ...getSelectLightFocusColors('orange'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -424,6 +439,7 @@ export const lightThemeRed = createTheme(tokens, {
     ...getTableLightColors(lightColors.red9),
     ...getListLightFocusColors('red'),
     ...getSwitchLightFocusColors('red'),
+    ...getSelectLightFocusColors('red'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -438,6 +454,7 @@ export const lightThemeGreen = createTheme(tokens, {
     ...getTableLightColors(lightColors.green9),
     ...getListLightFocusColors('green'),
     ...getSwitchLightFocusColors('green'),
+    ...getSelectLightFocusColors('green'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -452,6 +469,7 @@ export const lightThemeDeepBlue = createTheme(tokens, {
     ...getTableLightColors(lightColors.deepBlue9),
     ...getListLightFocusColors('deepBlue'),
     ...getSwitchLightFocusColors('deepBlue'),
+    ...getSelectLightFocusColors('deepBlue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -466,6 +484,7 @@ export const lightThemeGrayBlue = createTheme(tokens, {
     ...getTableLightColors(lightColors.grayBlue9),
     ...getListLightFocusColors('grayBlue'),
     ...getSwitchLightFocusColors('grayBlue'),
+    ...getSelectLightFocusColors('grayBlue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -543,6 +562,7 @@ export const darkThemeBlue = createTheme(tokens, {
     ...getTableDarkColors(darkColors.blue9),
     ...getListDarkFocusColors('blue'),
     ...getSwitchDarkFocusColors('blue'),
+    ...getSelectDarkFocusColors('blue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -557,6 +577,7 @@ export const darkThemeNeon = createTheme(tokens, {
     ...getTableDarkColors(darkColors.neon9),
     ...getListDarkFocusColors('neon'),
     ...getSwitchDarkFocusColors('neon'),
+    ...getSelectDarkFocusColors('neon'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -571,6 +592,7 @@ export const darkThemeOrange = createTheme(tokens, {
     ...getTableDarkColors(darkColors.orange9),
     ...getListDarkFocusColors('orange'),
     ...getSwitchDarkFocusColors('orange'),
+    ...getSelectDarkFocusColors('orange'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -585,6 +607,7 @@ export const darkThemeRed = createTheme(tokens, {
     ...getTableDarkColors(darkColors.red9),
     ...getListDarkFocusColors('red'),
     ...getSwitchDarkFocusColors('red'),
+    ...getSelectDarkFocusColors('red'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -599,6 +622,7 @@ export const darkThemeGreen = createTheme(tokens, {
     ...getTableDarkColors(darkColors.green9),
     ...getListDarkFocusColors('green'),
     ...getSwitchDarkFocusColors('green'),
+    ...getSelectDarkFocusColors('green'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -613,6 +637,7 @@ export const darkThemeDeepBlue = createTheme(tokens, {
     ...getTableDarkColors(darkColors.deepBlue9),
     ...getListDarkFocusColors('deepBlue'),
     ...getSwitchDarkFocusColors('deepBlue'),
+    ...getSelectDarkFocusColors('deepBlue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -627,6 +652,7 @@ export const darkThemeGrayBlue = createTheme(tokens, {
     ...getTableDarkColors(darkColors.grayBlue9),
     ...getListDarkFocusColors('grayBlue'),
     ...getSwitchDarkFocusColors('grayBlue'),
+    ...getSelectDarkFocusColors('grayBlue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,

@@ -68,6 +68,7 @@ import { Badge } from 'faency';
 | Ref            | the `<select>` element                       | the trigger `<button>`                                                                        |
 | Several values | `multiple`                                   | not supported                                                                                 |
 | On mobile      | the native picker of the device              | the Faency list                                                                               |
+| `cursor` prop  | accepted, but has no visible effect          | removed                                                                                       |
 
 `name`, `required`, `disabled`, `value` and `defaultValue` work the same, and the select still submits its value with a form.
 

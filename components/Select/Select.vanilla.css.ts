@@ -125,6 +125,11 @@ export const selectTriggerRecipe = recipe({
     state: {
       invalid: {
         boxShadow: `inset 0 0 0 1px ${tokens.colors.selectInvalidBorder}`,
+        selectors: {
+          '&:focus-visible': {
+            boxShadow: `inset 0 0 0 2px ${tokens.colors.selectInvalidBorder}, ${FOCUS_SHADOW}`,
+          },
+        },
       },
     },
   },
@@ -149,7 +154,6 @@ export const selectIcon = style({
 });
 
 export const selectContent = style({
-  // Radix copies it to the positioned wrapper, so the list stays above positioned page content.
   zIndex: tokens.zIndices.max,
   boxSizing: 'border-box',
   width: 'var(--radix-select-trigger-width)',

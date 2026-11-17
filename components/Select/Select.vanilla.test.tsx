@@ -94,13 +94,40 @@ describe('SelectVanilla', () => {
     });
   });
 
-  it('should merge the className and apply css and style on the trigger', () => {
-    renderWithTheme(<Types className="custom" css={{ p: '$2' }} style={{ opacity: 0.5 }} />);
+  it('should merge a custom className on the trigger', () => {
+    renderWithTheme(<Types className="custom" />);
+
+    expect(screen.getByRole('combobox')).toHaveClass('custom');
+  });
+
+  it('should apply custom styles via style prop', () => {
+    renderWithTheme(<Types style={{ backgroundColor: 'red', padding: '10px' }} />);
 
     const trigger = screen.getByRole('combobox');
-    expect(trigger).toHaveClass('custom');
-    expect(trigger).toHaveStyle({ opacity: '0.5' });
-    expect(trigger.style.padding).not.toBe('');
+    expect(trigger.style.backgroundColor).toBe('red');
+    expect(trigger.style.padding).toBe('10px');
+  });
+
+  it('should apply CSS prop styles', () => {
+    renderWithTheme(<Types css={{ padding: '$4', margin: '$2' }} />);
+
+    const trigger = screen.getByRole('combobox');
+    expect(trigger.style.padding).toBe('20px');
+    expect(trigger.style.margin).toBe('8px');
+  });
+
+  it('should merge style and css props correctly', () => {
+    renderWithTheme(
+      <Types
+        css={{ padding: '$4', margin: '$2' }}
+        style={{ backgroundColor: 'blue', padding: '30px' }}
+      />,
+    );
+
+    const trigger = screen.getByRole('combobox');
+    expect(trigger.style.backgroundColor).toBe('blue');
+    expect(trigger.style.padding).toBe('30px');
+    expect(trigger.style.margin).toBe('8px');
   });
 
   it('should forward its ref to the trigger', () => {
