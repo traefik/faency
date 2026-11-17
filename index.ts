@@ -217,7 +217,8 @@ export {
   SplitLayoutMainVanilla,
   SplitLayoutVanilla,
 } from './components/SplitLayout';
-export { Switch } from './components/Switch';
+export type { SwitchVanillaProps } from './components/Switch';
+export { Switch, SwitchVanilla } from './components/Switch';
 export type {
   CaptionVanillaProps,
   TableSectionVanillaProps,

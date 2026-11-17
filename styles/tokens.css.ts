@@ -183,6 +183,12 @@ export const tokens = createThemeContract({
     listItemActiveBg: null,
     listItemFocusBorder: null,
 
+    switchBackground: null,
+    switchActiveBackground: null,
+    switchFocusBorder: null,
+    switchThumb: null,
+    switchInvalidBorder: null,
+
     // Semantic tones
     toneSuccessSolid: null,
     toneSuccessText: null,
