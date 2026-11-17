@@ -3,6 +3,10 @@ import tinycolor from 'tinycolor2';
 
 import { darkColors, lightColors } from '@/colors';
 
+import {
+  accordionDarkTheme,
+  accordionLightTheme,
+} from '@/components/Accordion/Accordion.theme.css';
 import { badgeDarkTheme, badgeLightTheme } from '@/components/Badge/Badge.theme.css';
 import { buttonDarkTheme, buttonLightTheme } from '@/components/Button/Button.theme.css';
 import {
@@ -10,6 +14,12 @@ import {
   buttonSwitchLightTheme,
 } from '@/components/ButtonSwitch/ButtonSwitch.theme.css';
 import { cardDarkTheme, cardLightTheme } from '@/components/Card/Card.theme.css';
+import {
+  checkboxDarkTheme,
+  checkboxLightTheme,
+  getCheckboxDarkColors,
+  getCheckboxLightColors,
+} from '@/components/Checkbox/Checkbox.theme.css';
 import {
   codeBlockDarkTheme,
   codeBlockLightTheme,
@@ -23,6 +33,11 @@ import {
 import { inputDarkTheme, inputLightTheme } from '@/components/Input/Input.theme.css';
 import { listDarkTheme, listLightTheme } from '@/components/List/List.theme.css';
 import { panelDarkTheme, panelLightTheme } from '@/components/Panel/Panel.theme.css';
+import {
+  getRadioColors,
+  radioDarkTheme,
+  radioLightTheme,
+} from '@/components/Radio/Radio.theme.css';
 import {
   segmentedControlDarkTheme,
   segmentedControlLightTheme,
@@ -391,6 +406,9 @@ const lightSemanticColors = {
   ...switchLightTheme,
   switchActiveBackground: tokens.colors.primary,
   switchInvalidBorder: lightColors.red9,
+  ...checkboxLightTheme,
+  ...radioLightTheme,
+  ...accordionLightTheme,
   meterTrackBg: lightColors.grayA3,
   ...createToneColors(lightColors),
   ...chartLightColors,
@@ -408,6 +426,8 @@ export const lightThemeBlue = createTheme(tokens, {
     ...getSwitchLightFocusColors('blue'),
     ...getInputLightFocusColors('blue'),
     ...getSelectLightFocusColors('blue'),
+    ...getCheckboxLightColors(lightColors.blue9),
+    ...getRadioColors(lightColors.blue9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -424,6 +444,8 @@ export const lightThemeNeon = createTheme(tokens, {
     ...getSwitchLightFocusColors('neon'),
     ...getInputLightFocusColors('neon'),
     ...getSelectLightFocusColors('neon'),
+    ...getCheckboxLightColors(lightColors.neon9),
+    ...getRadioColors(lightColors.neon9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -440,6 +462,8 @@ export const lightThemeOrange = createTheme(tokens, {
     ...getSwitchLightFocusColors('orange'),
     ...getInputLightFocusColors('orange'),
     ...getSelectLightFocusColors('orange'),
+    ...getCheckboxLightColors(lightColors.orange9),
+    ...getRadioColors(lightColors.orange9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -456,6 +480,8 @@ export const lightThemeRed = createTheme(tokens, {
     ...getSwitchLightFocusColors('red'),
     ...getInputLightFocusColors('red'),
     ...getSelectLightFocusColors('red'),
+    ...getCheckboxLightColors(lightColors.red9),
+    ...getRadioColors(lightColors.red9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -472,6 +498,8 @@ export const lightThemeGreen = createTheme(tokens, {
     ...getSwitchLightFocusColors('green'),
     ...getInputLightFocusColors('green'),
     ...getSelectLightFocusColors('green'),
+    ...getCheckboxLightColors(lightColors.green9),
+    ...getRadioColors(lightColors.green9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -488,6 +516,8 @@ export const lightThemeDeepBlue = createTheme(tokens, {
     ...getSwitchLightFocusColors('deepBlue'),
     ...getInputLightFocusColors('deepBlue'),
     ...getSelectLightFocusColors('deepBlue'),
+    ...getCheckboxLightColors(lightColors.deepBlue9),
+    ...getRadioColors(lightColors.deepBlue9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -504,6 +534,8 @@ export const lightThemeGrayBlue = createTheme(tokens, {
     ...getSwitchLightFocusColors('grayBlue'),
     ...getInputLightFocusColors('grayBlue'),
     ...getSelectLightFocusColors('grayBlue'),
+    ...getCheckboxLightColors(lightColors.grayBlue9),
+    ...getRadioColors(lightColors.grayBlue9),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -566,6 +598,9 @@ const darkSemanticColors = {
   ...switchDarkTheme,
   switchActiveBackground: tokens.colors.primary,
   switchInvalidBorder: darkColors.red9,
+  ...checkboxDarkTheme,
+  ...radioDarkTheme,
+  ...accordionDarkTheme,
   meterTrackBg: darkColors.grayA3,
   ...createToneColors(darkColors),
   ...chartDarkColors,
@@ -583,6 +618,8 @@ export const darkThemeBlue = createTheme(tokens, {
     ...getSwitchDarkFocusColors('blue'),
     ...getInputDarkFocusColors('blue'),
     ...getSelectDarkFocusColors('blue'),
+    ...getCheckboxDarkColors(darkColors.blue9),
+    ...getRadioColors(darkColors.blue9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -599,6 +636,8 @@ export const darkThemeNeon = createTheme(tokens, {
     ...getSwitchDarkFocusColors('neon'),
     ...getInputDarkFocusColors('neon'),
     ...getSelectDarkFocusColors('neon'),
+    ...getCheckboxDarkColors(darkColors.neon9),
+    ...getRadioColors(darkColors.neon9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -615,6 +654,8 @@ export const darkThemeOrange = createTheme(tokens, {
     ...getSwitchDarkFocusColors('orange'),
     ...getInputDarkFocusColors('orange'),
     ...getSelectDarkFocusColors('orange'),
+    ...getCheckboxDarkColors(darkColors.orange9),
+    ...getRadioColors(darkColors.orange9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -631,6 +672,8 @@ export const darkThemeRed = createTheme(tokens, {
     ...getSwitchDarkFocusColors('red'),
     ...getInputDarkFocusColors('red'),
     ...getSelectDarkFocusColors('red'),
+    ...getCheckboxDarkColors(darkColors.red9),
+    ...getRadioColors(darkColors.red9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -647,6 +690,8 @@ export const darkThemeGreen = createTheme(tokens, {
     ...getSwitchDarkFocusColors('green'),
     ...getInputDarkFocusColors('green'),
     ...getSelectDarkFocusColors('green'),
+    ...getCheckboxDarkColors(darkColors.green9),
+    ...getRadioColors(darkColors.green9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -663,6 +708,8 @@ export const darkThemeDeepBlue = createTheme(tokens, {
     ...getSwitchDarkFocusColors('deepBlue'),
     ...getInputDarkFocusColors('deepBlue'),
     ...getSelectDarkFocusColors('deepBlue'),
+    ...getCheckboxDarkColors(darkColors.deepBlue9),
+    ...getRadioColors(darkColors.deepBlue9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -679,6 +726,8 @@ export const darkThemeGrayBlue = createTheme(tokens, {
     ...getSwitchDarkFocusColors('grayBlue'),
     ...getInputDarkFocusColors('grayBlue'),
     ...getSelectDarkFocusColors('grayBlue'),
+    ...getCheckboxDarkColors(darkColors.grayBlue9),
+    ...getRadioColors(darkColors.grayBlue9),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,

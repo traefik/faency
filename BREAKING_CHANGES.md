@@ -167,6 +167,32 @@ import { Badge } from 'faency';
 
 ---
 
+### Checkbox: Indeterminate State, Focus Ring and Disabled Icon
+
+**Change:** `CheckboxVanilla` styles the indeterminate state and changes when its focus ring shows and how a disabled checked box looks.
+
+|                                 | Stitches `Checkbox`                    | Vanilla Extract `CheckboxVanilla`         |
+| ------------------------------- | -------------------------------------- | ----------------------------------------- |
+| `checked="indeterminate"`       | no box, shows a check mark             | filled like checked, shows a dash         |
+| Focus ring                      | on any focus, including mouse clicks   | on keyboard focus only, also when checked |
+| Invalid border on a focused box | hidden by the focus ring after a click | stays visible after a click               |
+| Disabled checked icon (light)   | white, nearly invisible                | grey                                      |
+
+**Migration Guide:**
+
+1. No code change is needed
+2. Where an app styled the indeterminate state itself, for example with a dash icon or a `css` prop on `[data-state=indeterminate]`, remove that styling
+
+**Rationale:**
+
+- The indeterminate state is part of the Radix Checkbox API, but the Stitches version rendered it as a checked box with no border
+- Matches the keyboard-only focus ring of `Switch` and `Radio`
+- A disabled checked box should still show that it is checked
+
+**Impact:** Low - Visual only, the API is unchanged
+
+---
+
 ## Components Supporting Polymorphic `as` Prop
 
 ### Layout Components
@@ -388,6 +414,13 @@ Layout, typography, and interactive components now use polymorphic `as` prop
 - **Changed:** `Switch` has no outer margin; size `1` had `8px`
   - Migration: add `css={{ m: '$2' }}` or space it from the parent layout
   - See [Migration Guide](./BREAKING_CHANGES.md#switch-spacing-and-focus-ring)
+
+#### Checkbox
+
+- **Changed:** `checked="indeterminate"` shows a dash on a filled box; it used to show a check mark with no box
+- **Changed:** The focus ring shows on keyboard focus only, and a disabled checked box draws a grey check
+  - No code change needed; remove any custom styling of the indeterminate state
+  - See [Migration Guide](./BREAKING_CHANGES.md#checkbox-indeterminate-state-focus-ring-and-disabled-icon)
 
 #### Theme Provider
 

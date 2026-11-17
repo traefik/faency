@@ -5,10 +5,14 @@ import React from 'react';
 import { VariantProps } from '../../stitches.config';
 import { FIELD_STORY_ARG_TYPES, FieldStoryArgs } from '../../utils/fieldStoryArgs';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
+import { BoxVanilla } from '../Box/Box.vanilla';
 import { Field } from '../Field';
-import { Flex } from '../Flex';
+import { Flex, FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
 import { Label } from '../Label';
+import { TextVanilla } from '../Text';
 import { Radio, RadioGroup, RadioProps, RadioVariants } from './Radio';
+import { RadioGroupVanilla, RadioVanilla } from './Radio.vanilla';
 
 const BaseRadio = (props: RadioProps): JSX.Element => <Radio {...props} />;
 const RadioForStory = modifyVariantsForStory<RadioVariants, RadioProps>(BaseRadio);
@@ -84,5 +88,58 @@ WithField.args = {
   error: 'Select a size.',
 };
 WithField.argTypes = FIELD_STORY_ARG_TYPES;
+
+const COMPARISON_STATES = [
+  { label: 'Size 1 (default)', size: '1' },
+  { label: 'Size 2', size: '2' },
+  { label: 'Invalid (aria-invalid on the group)', size: '2', invalid: true },
+  { label: 'Disabled', size: '2', disabled: true },
+] as const;
+
+const COLUMN_WIDTH = 160;
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={4}>
+    <TextVanilla size="1" variant="subtle">
+      Each group has a checked radio (left) and an unchecked one (right).
+    </TextVanilla>
+    <FlexVanilla gap={4}>
+      <BoxVanilla css={{ width: 240 }} />
+      <H3Vanilla css={{ width: COLUMN_WIDTH }}>Stitches</H3Vanilla>
+      <H3Vanilla css={{ width: COLUMN_WIDTH }}>Vanilla Extract</H3Vanilla>
+    </FlexVanilla>
+    {COMPARISON_STATES.map((state) => (
+      <FlexVanilla key={state.label} gap={4} align="center">
+        <TextVanilla size="1" variant="subtle" css={{ width: 240 }}>
+          {state.label}
+        </TextVanilla>
+        <BoxVanilla css={{ width: COLUMN_WIDTH }}>
+          <RadioGroup
+            defaultValue="1"
+            css={{ gap: '$5' }}
+            aria-label={`Stitches ${state.label}`}
+            aria-invalid={'invalid' in state || undefined}
+            disabled={'disabled' in state}
+          >
+            <Radio value="1" size={state.size} aria-label="Checked" />
+            <Radio value="2" size={state.size} aria-label="Unchecked" />
+          </RadioGroup>
+        </BoxVanilla>
+        <BoxVanilla css={{ width: COLUMN_WIDTH }}>
+          <RadioGroupVanilla
+            defaultValue="1"
+            css={{ gap: '$5' }}
+            aria-label={`Vanilla ${state.label}`}
+            aria-invalid={'invalid' in state || undefined}
+            disabled={'disabled' in state}
+          >
+            <RadioVanilla value="1" size={state.size} aria-label="Checked" />
+            <RadioVanilla value="2" size={state.size} aria-label="Unchecked" />
+          </RadioGroupVanilla>
+        </BoxVanilla>
+      </FlexVanilla>
+    ))}
+  </FlexVanilla>
+);
 
 export default Component;
