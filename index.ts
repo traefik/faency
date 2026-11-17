@@ -100,7 +100,28 @@ export type {
 export { Field, FieldVanilla, useFieldControl } from './components/Field';
 export { Flex, FlexVanilla } from './components/Flex';
 export { Grid, GridVanilla } from './components/Grid';
-export { H1, H2, H3, H4, H5, H6 } from './components/Heading';
+export type {
+  H1VanillaProps,
+  H2VanillaProps,
+  H3VanillaProps,
+  H4VanillaProps,
+  H5VanillaProps,
+  H6VanillaProps,
+} from './components/Heading';
+export {
+  H1,
+  H1Vanilla,
+  H2,
+  H2Vanilla,
+  H3,
+  H3Vanilla,
+  H4,
+  H4Vanilla,
+  H5,
+  H5Vanilla,
+  H6,
+  H6Vanilla,
+} from './components/Heading';
 export type { IconButtonVanillaProps } from './components/IconButton';
 export { IconButton, IconButtonVanilla } from './components/IconButton';
 export type { ImageVanillaProps } from './components/Image';
