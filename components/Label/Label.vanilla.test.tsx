@@ -261,4 +261,12 @@ describe('LabelVanilla', () => {
     expect(label?.nodeName).toBe('DIV');
     expect(label).toHaveTextContent('Label');
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(<LabelVanilla size={2}>Label</LabelVanilla>);
+    const { container: string } = renderWithTheme(<LabelVanilla size="2">Label</LabelVanilla>);
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

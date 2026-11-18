@@ -193,4 +193,16 @@ describe('BlockquoteVanilla', () => {
       unmount();
     });
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <BlockquoteVanilla size={2}>Quote</BlockquoteVanilla>,
+    );
+    const { container: string } = renderWithTheme(
+      <BlockquoteVanilla size="2">Quote</BlockquoteVanilla>,
+    );
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

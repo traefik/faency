@@ -7,10 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { iconButtonRecipe } from './IconButton.vanilla.css';
+
+const iconButtonClass = withVariantKeys(iconButtonRecipe);
 
 type IconButtonRecipeVariants = RecipeVariantProps<typeof iconButtonRecipe>;
 
@@ -35,7 +37,7 @@ const IconButtonVanillaComponentImpl = forwardRef(
 
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = iconButtonRecipe({ size: toVariantKey(size), variant });
+    const recipeClass = iconButtonClass({ size, variant });
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

@@ -11,7 +11,7 @@ import React, {
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
 
@@ -54,6 +54,9 @@ import {
   fillerCell,
   fullColSpanCell,
 } from './AriaTable.vanilla.css';
+
+const captionClass = withVariantKeys(captionRecipe);
+const thClass = withVariantKeys(thRecipe);
 
 type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
 type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
@@ -100,7 +103,7 @@ export const AriaCaptionVanilla = forwardRef<HTMLDivElement, AriaCaptionVanillaP
     <div
       ref={ref}
       className={cx(
-        captionRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap }),
+        captionClass({ size, weight, variant, gradient, transform, noWrap }),
         className,
       )}
       style={useInlineStyle(css, style)}
@@ -163,7 +166,7 @@ export const AriaThVanilla = forwardRef<HTMLSpanElement, AriaThVanillaProps>(
       role="columnheader"
       aria-sort={sort && ARIA_SORT[sort]}
       className={cx(
-        thRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap, align }),
+        thClass({ size, weight, variant, gradient, transform, noWrap, align }),
         ariaCell,
         className,
       )}
@@ -335,7 +338,7 @@ export const AriaTrVanilla = forwardRef<HTMLDivElement, AriaTrVanillaProps>(
         >
           {emptyFirstColumn &&
             (tableHead ? (
-              <span role="cell" className={cx(thRecipe(), ariaCell, emptyHeaderCell)} />
+              <span role="cell" className={cx(thClass(), ariaCell, emptyHeaderCell)} />
             ) : (
               <AriaTdVanilla />
             ))}

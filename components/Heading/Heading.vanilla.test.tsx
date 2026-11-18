@@ -122,7 +122,9 @@ describe('Heading Vanilla Components', () => {
     });
 
     it('should apply transform prop', () => {
-      const { container } = renderWithTheme(<H3Vanilla transform="capitalizeWords">Heading</H3Vanilla>);
+      const { container } = renderWithTheme(
+        <H3Vanilla transform="capitalizeWords">Heading</H3Vanilla>,
+      );
       expect(container.querySelector('h3')).toBeInTheDocument();
     });
 

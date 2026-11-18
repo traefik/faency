@@ -7,10 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { paragraphRecipe } from './Paragraph.vanilla.css';
+
+const paragraphClass = withVariantKeys(paragraphRecipe);
 
 type ParagraphRecipeVariants = RecipeVariantProps<typeof paragraphRecipe>;
 
@@ -32,7 +34,7 @@ const ParagraphVanillaComponentImpl = forwardRef(
 
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = paragraphRecipe({ size: toVariantKey(size) });
+    const recipeClass = paragraphClass({ size });
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

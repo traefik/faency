@@ -162,7 +162,7 @@ The complete naming pattern (see [Text.vanilla.tsx](components/Text/Text.vanilla
 
 **Key Points:**
 
-- Use `RecipeVariantProps<typeof recipe>` for variant types and `toVariantKey()` for numeric variants (see [Variant props missing or not type-checked](#variant-props-missing-or-not-type-checked))
+- Use `RecipeVariantProps<typeof recipe>` for variant types and wrap recipes with numeric keys in `withVariantKeys()` (see [Variant props missing or not type-checked](#variant-props-missing-or-not-type-checked))
 - Internal implementation uses `ComponentImpl` suffix
 - Exported component name is `ComponentVanilla`
 - Exported props type is `ComponentVanillaProps`
@@ -503,13 +503,15 @@ type MyComponentVariants = RecipeVariantProps<typeof myComponentRecipe>;
 interface MyComponentOwnProps extends MyComponentVariants, CSSProps {}
 ```
 
-When a variant has numeric keys, pass it through `toVariantKey` before calling the recipe. Recipes match compound variants with `===`, so `2` would not match `'2'`:
+When a variant has numeric keys, wrap the recipe once with `withVariantKeys` and call the wrapper. It turns numbers into their string keys, since recipes match compound variants with `===` and `2` would not match `'2'`. Calling the raw recipe with a number is a type error, which `yarn typecheck` reports:
 
 ```tsx
-const recipeClass = myComponentRecipe({ size: toVariantKey(size), variant });
+const myComponentClass = withVariantKeys(myComponentRecipe);
+
+const recipeClass = myComponentClass({ size, variant });
 ```
 
-Because of the loose polymorphic typing, a broken variant type does not cause errors; check that an invalid value like `variant="nope"` is rejected.
+Because of the loose polymorphic typing, a broken variant type does not cause errors. Add a valid line and an invalid `@ts-expect-error` line (e.g. `variant="nope"`) for each new component to [styles/componentVariantProps.test.tsx](styles/componentVariantProps.test.tsx), which `yarn typecheck` checks in CI.
 
 #### Invalid selector error for child elements
 

@@ -1,12 +1,23 @@
+type RecipeFn = (options?: any) => string;
+
 type NumericKey<T> = T extends `${infer N extends number}` ? N : never;
 
-// Numeric-string variant keys ('1', '2', ...) also accept numbers, as Stitches variants did.
-export type RecipeVariantProps<R extends (options?: any) => string> = {
+export type RecipeVariantProps<R extends RecipeFn> = {
   [K in keyof NonNullable<Parameters<R>[0]>]:
     NonNullable<Parameters<R>[0]>[K] | NumericKey<NonNullable<Parameters<R>[0]>[K]>;
 };
 
-// Recipes match compound variants with ===, so numbers must be passed as their string keys.
-export const toVariantKey = <T>(value: T) =>
-  (typeof value === 'number' ? String(value) : value) as
-    Exclude<T, number> | `${Extract<T, number>}`;
+// Compound variants match with ===, so 2 must become '2'.
+export const withVariantKeys =
+  <R extends RecipeFn>(recipe: R) =>
+  (options?: RecipeVariantProps<R>): string => {
+    let normalized: Record<string, unknown> | undefined;
+    for (const key in options) {
+      const value = options[key];
+      if (typeof value === 'number') {
+        if (!normalized) normalized = { ...options };
+        normalized[key] = String(value);
+      }
+    }
+    return recipe(normalized ?? options);
+  };

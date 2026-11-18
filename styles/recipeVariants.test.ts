@@ -1,4 +1,4 @@
-import { RecipeVariantProps, toVariantKey } from './recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from './recipeVariants';
 
 type Recipe = (options?: { size?: '1' | '2'; tone?: 'neutral'; flat?: boolean }) => string;
 type Props = RecipeVariantProps<Recipe>;
@@ -15,15 +15,26 @@ describe('RecipeVariantProps', () => {
   });
 });
 
-describe('toVariantKey', () => {
-  it('turns numbers into their string key', () => {
-    expect(toVariantKey(2)).toBe('2');
-    expect(toVariantKey(0)).toBe('0');
+type RecipeOptions = { size?: '1' | '2'; flat?: boolean };
+
+describe('withVariantKeys', () => {
+  it('passes numeric variants to the recipe as string keys', () => {
+    const recipe = jest.fn<string, [RecipeOptions?]>(() => 'class');
+    const wrapped = withVariantKeys(recipe);
+
+    expect(wrapped({ size: 2, flat: true })).toBe('class');
+    expect(recipe).toHaveBeenLastCalledWith({ size: '2', flat: true });
   });
 
-  it('returns other values as is', () => {
-    expect(toVariantKey('2')).toBe('2');
-    expect(toVariantKey(true)).toBe(true);
-    expect(toVariantKey(undefined)).toBeUndefined();
+  it('passes options through untouched when no value is a number', () => {
+    const recipe = jest.fn<string, [RecipeOptions?]>(() => 'class');
+    const wrapped = withVariantKeys(recipe);
+    const options = { size: '1' as const, flat: false };
+
+    wrapped(options);
+    expect(recipe.mock.lastCall?.[0]).toBe(options);
+
+    wrapped();
+    expect(recipe).toHaveBeenLastCalledWith(undefined);
   });
 });

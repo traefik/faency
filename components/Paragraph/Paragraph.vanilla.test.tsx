@@ -147,4 +147,16 @@ describe('ParagraphVanilla', () => {
       unmount();
     });
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <ParagraphVanilla size={2}>Text</ParagraphVanilla>,
+    );
+    const { container: string } = renderWithTheme(
+      <ParagraphVanilla size="2">Text</ParagraphVanilla>,
+    );
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

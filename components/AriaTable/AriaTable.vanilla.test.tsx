@@ -637,4 +637,34 @@ describe('AriaTableVanilla', () => {
 
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <AriaTableVanilla aria-labelledby="caption">
+        <AriaCaptionVanilla id="caption" size={2}>
+          Users
+        </AriaCaptionVanilla>
+        <AriaTheadVanilla>
+          <div role="row">
+            <AriaThVanilla size={2}>Name</AriaThVanilla>
+          </div>
+        </AriaTheadVanilla>
+      </AriaTableVanilla>,
+    );
+    const { container: string } = renderWithTheme(
+      <AriaTableVanilla aria-labelledby="caption">
+        <AriaCaptionVanilla id="caption" size="2">
+          Users
+        </AriaCaptionVanilla>
+        <AriaTheadVanilla>
+          <div role="row">
+            <AriaThVanilla size="2">Name</AriaThVanilla>
+          </div>
+        </AriaTheadVanilla>
+      </AriaTableVanilla>,
+    );
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

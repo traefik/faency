@@ -18,6 +18,7 @@ Faency is a React component library and design system for Traefik Labs, built wi
 - `yarn build` - Build the library for production
 - `yarn lint` - Lint TypeScript/React files in components and styles directories
 - `yarn lint:fix` - Auto-fix linting issues
+- `yarn typecheck` - Type-check the whole project with `tsc` (also runs in CI)
 - `yarn test` - Run Jest tests in watch mode
 - `yarn test:ci` - Run tests in CI mode (silent, non-watch)
 
@@ -194,6 +195,7 @@ This works because:
 - HTML attribute pass-through
 - Accessibility testing with jest-axe
 - Theme support (light/dark and different primary colors)
+- Variant prop types: a valid and an invalid (`@ts-expect-error`) line in `styles/componentVariantProps.test.tsx`
 
 **Testing Pattern:**
 

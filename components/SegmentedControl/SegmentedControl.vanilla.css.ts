@@ -1,6 +1,7 @@
-import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
+import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { tokens } from '@/styles/tokens.css';
 
 export const segmentedControlRecipe = recipe({
@@ -104,5 +105,5 @@ export const segmentedControlItemRecipe = recipe({
 });
 
 export type SegmentedControlSize = NonNullable<
-  NonNullable<RecipeVariants<typeof segmentedControlItemRecipe>>['size']
+  RecipeVariantProps<typeof segmentedControlItemRecipe>['size']
 >;

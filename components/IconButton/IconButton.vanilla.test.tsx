@@ -224,4 +224,14 @@ describe('IconButtonVanilla', () => {
       unmount();
     });
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <IconButtonVanilla size={2} aria-label="Icon" />,
+    );
+    const { container: string } = renderWithTheme(<IconButtonVanilla size="2" aria-label="Icon" />);
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

@@ -1,7 +1,8 @@
 import { createVar, keyframes, style } from '@vanilla-extract/css';
-import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
+import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { tokens } from '@/styles/tokens.css';
 
 const enterX = createVar();
@@ -68,9 +69,7 @@ export const toastViewportRecipe = recipe({
   },
 });
 
-export type ToastPosition = NonNullable<
-  NonNullable<RecipeVariants<typeof toastViewportRecipe>>['position']
->;
+export type ToastPosition = NonNullable<RecipeVariantProps<typeof toastViewportRecipe>['position']>;
 
 export const toastRoot = style({
   boxSizing: 'border-box',
@@ -148,9 +147,7 @@ export const toastIconRecipe = recipe({
   },
 });
 
-export type ToastVariant = NonNullable<
-  NonNullable<RecipeVariants<typeof toastIconRecipe>>['variant']
->;
+export type ToastVariant = NonNullable<RecipeVariantProps<typeof toastIconRecipe>['variant']>;
 
 export const toastContent = style({
   display: 'flex',

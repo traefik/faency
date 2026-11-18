@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, toVariantKey } from '@/styles/recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -31,6 +31,9 @@ import {
   trRecipe,
 } from './Table.vanilla.css';
 import { TableSortProps } from './useTableSort';
+
+const captionClass = withVariantKeys(captionRecipe);
+const thClass = withVariantKeys(thRecipe);
 
 type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
 type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
@@ -67,7 +70,7 @@ export const CaptionVanilla = forwardRef<HTMLTableCaptionElement, CaptionVanilla
     <caption
       ref={ref}
       className={cx(
-        captionRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap }),
+        captionClass({ size, weight, variant, gradient, transform, noWrap }),
         className,
       )}
       style={useInlineStyle(css, style)}
@@ -128,7 +131,7 @@ export const ThVanilla = forwardRef<HTMLTableCellElement, ThVanillaProps>(
       ref={ref}
       aria-sort={sort && ARIA_SORT[sort]}
       className={cx(
-        thRecipe({ size: toVariantKey(size), weight, variant, gradient, transform, noWrap, align }),
+        thClass({ size, weight, variant, gradient, transform, noWrap, align }),
         className,
       )}
       style={useInlineStyle(css, style)}
@@ -229,7 +232,7 @@ export const TrVanilla = forwardRef<HTMLTableRowElement, TrVanillaProps>(
           {...props}
         >
           {emptyFirstColumn &&
-            (tableHead ? <td className={cx(thRecipe(), emptyHeaderCell)} /> : <TdVanilla />)}
+            (tableHead ? <td className={cx(thClass(), emptyHeaderCell)} /> : <TdVanilla />)}
           {collapsible && (
             <TdVanilla className={toggleCell} onClick={stopEvent}>
               <ExpandToggleVanilla

@@ -184,4 +184,12 @@ describe('TextVanilla', () => {
       unmount();
     });
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(<TextVanilla size={2}>Text</TextVanilla>);
+    const { container: string } = renderWithTheme(<TextVanilla size="2">Text</TextVanilla>);
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

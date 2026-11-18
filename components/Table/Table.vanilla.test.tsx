@@ -552,4 +552,30 @@ describe('TableVanilla', () => {
 
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <TableVanilla>
+        <CaptionVanilla size={2}>Users</CaptionVanilla>
+        <TheadVanilla>
+          <tr>
+            <ThVanilla size={2}>Name</ThVanilla>
+          </tr>
+        </TheadVanilla>
+      </TableVanilla>,
+    );
+    const { container: string } = renderWithTheme(
+      <TableVanilla>
+        <CaptionVanilla size="2">Users</CaptionVanilla>
+        <TheadVanilla>
+          <tr>
+            <ThVanilla size="2">Name</ThVanilla>
+          </tr>
+        </TheadVanilla>
+      </TableVanilla>,
+    );
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });
