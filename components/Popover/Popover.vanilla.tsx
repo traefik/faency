@@ -1,5 +1,4 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -9,9 +8,13 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { popoverArrowRecipe, popoverContentRecipe } from './Popover.vanilla.css';
+
+const popoverContentClass = withVariantKeys(popoverContentRecipe);
+const popoverArrowClass = withVariantKeys(popoverArrowRecipe);
 
 export const PopoverVanilla = PopoverPrimitive.Root;
 export const PopoverPortalVanilla = PopoverPrimitive.Portal;
@@ -118,7 +121,7 @@ PopoverAnchorVanillaComponentImpl.displayName = 'PopoverAnchorVanilla';
 export const PopoverAnchorVanilla =
   PopoverAnchorVanillaComponentImpl as PopoverAnchorVanillaComponent;
 
-type PopoverContentVariants = NonNullable<RecipeVariants<typeof popoverContentRecipe>>;
+type PopoverContentVariants = RecipeVariantProps<typeof popoverContentRecipe>;
 
 export type PopoverContentVanillaProps = Omit<PopoverPrimitive.PopoverContentProps, 'asChild'> &
   CSSProps &
@@ -136,14 +139,14 @@ export const PopoverContentVanilla = forwardRef<HTMLDivElement, PopoverContentVa
       <PopoverPrimitive.Content
         ref={ref}
         sideOffset={0}
-        className={cx(popoverContentRecipe({ elevation }), className)}
+        className={cx(popoverContentClass({ elevation }), className)}
         style={contentStyle}
         {...props}
       >
         {children}
         {!hideArrow && (
           <PopoverPrimitive.Arrow
-            className={popoverArrowRecipe({ elevation })}
+            className={popoverArrowClass({ elevation })}
             style={arrowStyle}
             width={11}
             height={5}

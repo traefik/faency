@@ -14,6 +14,7 @@ import { ButtonVanilla } from '@/components/Button/Button.vanilla';
 import { CardVanilla } from '@/components/Card/Card.vanilla';
 import { CheckboxVanilla } from '@/components/Checkbox/Checkbox.vanilla';
 import { ContainerVanilla } from '@/components/Container/Container.vanilla';
+import { DropdownMenuContentVanilla } from '@/components/DropdownMenu/DropdownMenu.vanilla';
 import { ElevationVanilla } from '@/components/Elevation/Elevation.vanilla';
 import { H1Vanilla } from '@/components/Heading/Heading.vanilla';
 import { IconButtonVanilla } from '@/components/IconButton/IconButton.vanilla';
@@ -21,6 +22,7 @@ import { InputVanilla } from '@/components/Input/Input.vanilla';
 import { LabelVanilla } from '@/components/Label/Label.vanilla';
 import { LiVanilla } from '@/components/List/List.vanilla';
 import { ParagraphVanilla } from '@/components/Paragraph/Paragraph.vanilla';
+import { PopoverContentVanilla } from '@/components/Popover/Popover.vanilla';
 import { RadioVanilla } from '@/components/Radio/Radio.vanilla';
 import {
   RadioAccordionRootVanilla,
@@ -64,9 +66,11 @@ describe('component variant props', () => {
       <AccordionContentVanilla key="accordion-content" size="medium" />,
       <RadioAccordionRootVanilla key="radio-accordion" elevation={2} />,
       <RadioAccordionTriggerVanilla key="radio-accordion-trigger" size="large" />,
+      <DropdownMenuContentVanilla key="dropdown-menu-content" elevation={2} />,
+      <PopoverContentVanilla key="popover-content" elevation={2} />,
     ];
 
-    expect(elements).toHaveLength(27);
+    expect(elements).toHaveLength(29);
   });
 
   it('reject invalid variants', () => {
@@ -131,8 +135,12 @@ describe('component variant props', () => {
       <AccordionTriggerVanilla key="accordion-trigger" size="huge" />,
       // @ts-expect-error unknown size
       <RadioAccordionTriggerVanilla key="radio-accordion-trigger" size="huge" />,
+      // @ts-expect-error elevation outside the recipe keys
+      <DropdownMenuContentVanilla key="dropdown-menu-content" elevation={9} />,
+      // @ts-expect-error elevation outside the recipe keys
+      <PopoverContentVanilla key="popover-content" elevation={9} />,
     ];
 
-    expect(elements).toHaveLength(30);
+    expect(elements).toHaveLength(32);
   });
 });
