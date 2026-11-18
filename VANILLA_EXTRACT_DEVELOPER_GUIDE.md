@@ -31,12 +31,18 @@ The Vanilla Extract system consists of several key parts:
 ```text
 styles/
 ├── tokens.css.ts          # Theme contract (design token definitions)
-├── themes.css.ts          # Light/dark theme implementations
-├── themeContext.tsx       # React context for theme switching
+├── themes.css.ts          # Light/dark theme implementations (one class per theme × primary color)
+├── themeContext.tsx       # VanillaExtractThemeProvider and useVanillaExtractTheme
 ├── cssProps.ts            # CSS prop processor (Stitches-like API)
+├── useInlineStyle.ts      # Hook that turns `css` + `style` into the inline style object
+├── cx.ts                  # Class name joiner
+├── resolveColor.ts        # Resolves `$token` color strings to vanilla tokens
+├── breakpoints.css.ts     # Media queries matching the Stitches breakpoints
 ├── polymorphic.ts         # Reusable polymorphic component types
+├── types.ts               # Shared prop types (spacing, size tokens, …)
 ├── textVariants.css.ts    # Shared text variant definitions (DRY)
-└── utils.css.ts           # Utility functions and recipes
+├── utils.css.ts           # Utility recipes
+└── index.ts               # Barrel for the files above
 ```
 
 ### How It Works
@@ -50,20 +56,21 @@ styles/
 
 ### Theming System
 
-The theme system is integrated with Storybook at the global level in [`.storybook/preview.jsx`](.storybook/preview.jsx):
+The theme system is integrated with Storybook at the global level in [`.storybook/preview.jsx`](.storybook/preview.jsx), which wraps every story in both providers (simplified):
 
 ```jsx
-<VanillaExtractThemeProvider forcedTheme={isDark ? 'dark' : 'light'}>
+<VanillaExtractThemeProvider forcedTheme={isDark ? 'dark' : 'light'} primaryColor="blue">
   <FaencyProvider>{/* All stories render here */}</FaencyProvider>
 </VanillaExtractThemeProvider>
 ```
 
 **Key Points:**
 
-- `VanillaExtractThemeProvider` automatically applies theme classes to `document.body`
-- Storybook's dark mode toggle controls the theme globally
-- Individual stories don't need to wrap components in theme providers
-- The provider exposes theme colors via context: `useVanillaExtractTheme()`
+- `VanillaExtractThemeProvider` applies the theme class for the resolved theme and primary color to `document.body`
+- Props: `defaultTheme` (`'light' | 'dark' | 'system'`, default `'system'`), `forcedTheme`, `primaryColor` (default `'blue'`)
+- Every vanilla component needs it: `useInlineStyle` calls `useVanillaExtractTheme()`, which throws outside the provider
+- `FaencyProvider` is still needed alongside it (Radix Tooltip provider and color scheme context)
+- Storybook's dark mode toggle controls the theme globally; individual stories don't need their own providers
 
 ---
 
@@ -140,6 +147,10 @@ return <Component className={cx(recipeClass, className)} style={mergedStyles} {.
 
 ## Migration Process
 
+### New Components
+
+New components are built in vanilla-extract only, with no Stitches version (e.g. Toast, Combobox, Meter, Spinner, SegmentedControl, SplitLayout). They follow the same file naming, `Vanilla` export suffix, test and token rules below, so every component gets renamed together when Stitches is removed. They skip the Comparison story, since there is nothing to compare against.
+
 ### Naming Conventions and File Structure
 
 When migrating a component, follow these strict naming conventions to maintain consistency:
@@ -170,7 +181,7 @@ The complete naming pattern (see [Text.vanilla.tsx](components/Text/Text.vanilla
 
 #### Exports in index.ts
 
-Export pattern to avoid naming conflicts:
+Export pattern in the component's `index.ts`, to avoid naming conflicts:
 
 ```typescript
 export * from './Text'; // Stitches version
@@ -178,7 +189,11 @@ export type { TextVanillaProps } from './Text.vanilla';
 export { TextVanilla } from './Text.vanilla';
 ```
 
+The root [index.ts](index.ts) uses explicit named exports (no `export *`), so each new component, part and props type must also be added there.
+
 **Re-exported Radix parts.** Parts re-exported unwrapped (e.g. `export const PopoverVanilla = PopoverPrimitive.Root`) don't get a `…VanillaProps` alias; consumers can use `React.ComponentProps<typeof PopoverVanilla>`. Add a `…VanillaProps` type once the part is wrapped (e.g. gains `css`, `className` or extra behavior).
+
+**Radix parts that render an element** (triggers, items, anchors) take the polymorphic `as` prop instead of exposing `asChild`; internally they pass `asChild` to the Radix primitive and render the `as` element inside it, so the Radix behavior lands on that element. See [Popover.vanilla.tsx](components/Popover/Popover.vanilla.tsx) and [DropdownMenu.vanilla.tsx](components/DropdownMenu/DropdownMenu.vanilla.tsx). Parts that don't take `as` omit `asChild` from their props.
 
 #### Recipe Naming
 
@@ -220,7 +235,7 @@ Create `ComponentName.vanilla.tsx` with these required steps:
 
 #### 3. Add Comparison Story
 
-**Required:** Every migrated component MUST have a Comparison story showing both versions side-by-side. Use vanilla-extract layout components (BoxVanilla, FlexVanilla, H3Vanilla) to avoid mixing systems.
+**Required:** Every migrated component that has a Stitches version MUST have a Comparison story showing both versions side-by-side. Use vanilla-extract layout components (BoxVanilla, FlexVanilla, H3Vanilla) to avoid mixing systems.
 
 **Pattern:**
 
@@ -311,12 +326,12 @@ export { ButtonVanilla } from './Button.vanilla'; // Vanilla Extract (new)
 
 See [Export and Build Strategy](#export-and-build-strategy) for more details.
 
-#### 7. Clean Up (After Full Migration)
+#### 7. Clean Up (Next Major Release Only)
 
-After successful migration and verification:
+Not part of a component migration: the Stitches files stay until Stitches is removed in the next major release (see [Future Migration Phases](#reference-future-migration-phases)). At that point:
 
 1. Remove old component files: `Button.tsx`
-2. Remove theme files: `Button.themes.ts` (no longer needed)
+2. Remove Stitches theme files: `Button.themes.ts`
 3. Rename files to remove `.vanilla` suffix:
    - `Button.vanilla.css.ts` → `Button.css.ts`
    - `Button.vanilla.tsx` → `Button.tsx`
@@ -328,7 +343,7 @@ After successful migration and verification:
 
 ## Export and Build Strategy
 
-**Current Phase: Side-by-Side Exports (Phase 1)**
+**Current Phase: Side-by-Side Exports**
 
 We export both versions with clear naming conventions:
 
@@ -337,7 +352,7 @@ We export both versions with clear naming conventions:
 
 **Benefits:** Zero breaking changes, gradual opt-in, easy comparison, feature parity verification.
 
-**Trade-off:** Larger bundle size (~80KB) during transition.
+**Trade-off:** Larger bundle size during the transition, since both systems ship.
 
 ### Exporting a Migrated Component
 
@@ -352,15 +367,7 @@ We export both versions with clear naming conventions:
 
 3. **Add Comparison story** (see [Step 3](#3-add-comparison-story))
 
-4. **Document in CHANGELOG.md:**
-
-   ```markdown
-   ### Added
-
-   - `ButtonVanilla`: Vanilla Extract version of Button component
-   ```
-
-**Note:** No version bump needed during Phase 1 - this is backward compatible.
+4. **Use a `feat:` commit** (e.g. `feat: vanilla popover`). There is no CHANGELOG.md: semantic-release builds the release notes and picks the version from conventional commits on `master`, so a new `*Vanilla` export ships as a minor release.
 
 ---
 
@@ -370,18 +377,18 @@ We export both versions with clear naming conventions:
 
 ### Approach
 
-Component theme tokens are co-located with the component and merged into the global theme system.
+Component theme tokens are co-located with the component and merged into the global theme system. Every component uses two files, to avoid circular dependencies:
 
-**Simple tokens** (no runtime color references): Create `ComponentName.theme.css.ts` - see [Badge.theme.css.ts](components/Badge/Badge.theme.css.ts)
+- `ComponentName.theme.ts` (plain TypeScript, the source of truth) - see [Text.theme.ts](components/Text/Text.theme.ts)
+- `ComponentName.theme.css.ts` (re-export wrapper imported by `themes.css.ts`) - see [Text.theme.css.ts](components/Text/Text.theme.css.ts)
 
-**Complex tokens** (with runtime color references): Create two files to avoid circular dependencies:
+Keeping the values in a plain `.ts` file also lets [colors/index.ts](colors/index.ts) import them for Stitches without pulling in vanilla-extract (e.g. Badge, Card, Input, Panel, Textarea).
 
-- `ComponentName.theme.ts` (plain TypeScript) - see [Text.theme.ts](components/Text/Text.theme.ts)
-- `ComponentName.theme.css.ts` (re-export wrapper) - see [Text.theme.css.ts](components/Text/Text.theme.css.ts)
+Values that depend on other runtime colors (e.g. `textInvalid` using the red scale) are set directly in [styles/themes.css.ts](styles/themes.css.ts) instead.
 
 ### Steps
 
-1. **Create component theme file(s)** (see examples above)
+1. **Create the component theme files** (see examples above)
 
 2. **Add to [styles/tokens.css.ts](styles/tokens.css.ts)** in the `colors` object (not nested)
 
@@ -398,7 +405,7 @@ Component theme tokens are co-located with the component and merged into the glo
 
 4. **Use in component styles:** Reference tokens from `tokens.colors` in your `.vanilla.css.ts` file
 
-5. **Clean up:** Delete old `ComponentName.themes.ts` file
+Keep the Stitches `ComponentName.themes.ts` file: the Stitches component still uses it until Stitches is removed.
 
 ---
 
@@ -539,7 +546,7 @@ globalStyle(`${skeleton}:not(:empty) > *`, { visibility: 'hidden' });
 
 #### Mixing Stitches and vanilla-extract components
 
-**CRITICAL:** Never mix systems. Always use vanilla-extract versions inside vanilla components (see [TextField.vanilla.tsx](components/TextField/TextField.vanilla.tsx)).
+**CRITICAL:** Never mix systems. Always use vanilla-extract versions inside vanilla components (see [TextField.vanilla.tsx](components/TextField/TextField.vanilla.tsx), which builds on `FieldVanilla` and `InputVanilla`). When no vanilla version exists yet, use plain HTML elements. Known exception: TextField still uses the Stitches `Tooltip`, which has no vanilla version yet.
 
 #### Props typed as `CSSProps` require `as any` in tests
 
@@ -565,7 +572,7 @@ await waitFor(() => expect(button).toHaveTextContent('Copied!'));
 **For fake-timer tests** (e.g. testing a timed state revert) — use `fireEvent.click` (synchronous) instead of `userEvent.click`, then drain the microtask queue with `await Promise.resolve()` inside `act`. Because `fireEvent` is synchronous, the clipboard Promise hasn't run yet when we hit the `await`, so it resolves _inside_ the act while `IS_REACT_ACT_ENVIRONMENT` is still `true`:
 
 ```ts
-jest.useFakeTimers('legacy'); // NOT 'modern' — modern also fakes queueMicrotask which React 18 needs
+jest.useFakeTimers({ legacyFakeTimers: true }); // modern timers also fake queueMicrotask, which React 18 needs
 
 await act(async () => {
   fireEvent.click(button);
@@ -611,12 +618,12 @@ Use this checklist for each component migration:
 (See [Export Strategy](#export-and-build-strategy))
 
 - [ ] Update component's `index.ts` to export both versions (see [`components/Button/index.ts`](components/Button/index.ts))
-- [ ] Update main [`index.ts`](index.ts) to export both versions
-- [ ] Document in CHANGELOG under "Added"
+- [ ] Update main [`index.ts`](index.ts) to export both versions (and every props type)
+- [ ] Use a `feat:` conventional commit (release notes are generated by semantic-release)
 
 ### 3. Testing & Verification
 
-- [ ] Add comparison stories in Storybook (see [`Text.stories.tsx`](components/Text/Text.stories.tsx))
+- [ ] Add comparison stories in Storybook when a Stitches version exists (see [`Text.stories.tsx`](components/Text/Text.stories.tsx))
 - [ ] Test all variants in Storybook
 - [ ] Test light/dark theme switching
 - [ ] Verify visual parity with original component
@@ -636,7 +643,7 @@ Use this checklist for each component migration:
 
 ### 4. Finalize
 
-- [ ] Commit changes (no version bump needed in Phase 1)
+- [ ] Add any change a consumer will need when the vanilla version replaces the Stitches one to [BREAKING_CHANGES.md](BREAKING_CHANGES.md)
 
 ---
 
@@ -661,11 +668,10 @@ Use this checklist for each component migration:
 
 ## Reference: Future Migration Phases
 
-**Note**: Not currently actionable. Continue using Phase 1 (side-by-side exports).
+**Note**: Not currently actionable. Continue with side-by-side exports.
 
-- **Phase 2 (v2.0.0):** Make Vanilla Extract default, deprecate Stitches (breaking change)
+- **Next major (v14.0.0 at the time of writing):** Remove Stitches files, remove the `.vanilla` file suffix and the `Vanilla` export suffix. See [BREAKING_CHANGES.md](BREAKING_CHANGES.md).
   - `Select` becomes the Radix-based `SelectVanilla`, whose API differs from the native one. See [Breaking Changes](./BREAKING_CHANGES.md#select-native-select--radix-select).
-- **Phase 3 (v3.0.0):** Remove Stitches files, remove `.vanilla` suffix (~40% smaller bundle)
 
 ---
 
@@ -683,6 +689,7 @@ Build system already configured in [vite.config.ts](vite.config.ts) - no action 
 - [Vanilla Extract Recipes](https://vanilla-extract.style/documentation/packages/recipes/)
 - [Vanilla Extract Dynamic API](https://vanilla-extract.style/documentation/packages/dynamic/)
 - [Migration Status](./VANILLA_EXTRACT_MIGRATION.md)
+- [Breaking Changes](./BREAKING_CHANGES.md)
 - [Project Guidelines](./CLAUDE.md)
 
 ---

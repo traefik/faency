@@ -131,6 +131,7 @@ describe('FlexVanilla', () => {
         'start',
         'center',
         'end',
+        'between',
         'space-evenly',
         'space-between',
         'space-around',
