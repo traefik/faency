@@ -178,6 +178,8 @@ export type { TextVanillaProps } from './Text.vanilla';
 export { TextVanilla } from './Text.vanilla';
 ```
 
+**Re-exported Radix parts.** Parts re-exported unwrapped (e.g. `export const PopoverVanilla = PopoverPrimitive.Root`) don't get a `…VanillaProps` alias; consumers can use `React.ComponentProps<typeof PopoverVanilla>`. Add a `…VanillaProps` type once the part is wrapped (e.g. gains `css`, `className` or extra behavior).
+
 #### Recipe Naming
 
 Use camelCase + "Recipe" suffix in `.vanilla.css.ts` files:
