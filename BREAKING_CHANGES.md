@@ -133,6 +133,38 @@ import { Badge } from 'faency';
 
 **Impact:** Medium - Every `Select` needs its options and change handler rewritten
 
+### Switch: Spacing and Focus Ring
+
+**Change:** `SwitchVanilla` drops the outer margin of the Stitches `Switch` and fixes two styling inconsistencies.
+
+|                   | Stitches `Switch`                     | Vanilla Extract `SwitchVanilla` |
+| ----------------- | ------------------------------------- | ------------------------------- |
+| Outer margin      | `8px` (`$2`) at size `1`, none at `2` | none at any size                |
+| Large thumb inset | `2px`                                 | `3px`, scaled like the size     |
+| Focus ring        | on any focus, including mouse clicks  | on keyboard focus only          |
+
+**Before (v12.x with Stitches):**
+
+```tsx
+<Switch />
+```
+
+**After (v13.x with Vanilla Extract):**
+
+```tsx
+<Switch css={{ m: '$2' }} />
+```
+
+**Migration Guide:**
+
+1. Where a size `1` switch relied on its built-in margin, add `css={{ m: '$2' }}` or space it from its parent layout, e.g. a `Flex` with `gap`
+
+**Rationale:**
+
+- Components should not add space outside their own box, and the margin applied to one size only
+
+**Impact:** Low - Layouts with a default-size switch get 8px tighter around it
+
 ---
 
 ## Components Supporting Polymorphic `as` Prop
@@ -350,6 +382,12 @@ Layout, typography, and interactive components now use polymorphic `as` prop
   - After: `<Select onValueChange={(value) => …}><SelectItem value="http">HTTP</SelectItem></Select>`
   - `multiple` is no longer supported
   - See [Migration Guide](./BREAKING_CHANGES.md#select-native-select--radix-select)
+
+#### Switch
+
+- **Changed:** `Switch` has no outer margin; size `1` had `8px`
+  - Migration: add `css={{ m: '$2' }}` or space it from the parent layout
+  - See [Migration Guide](./BREAKING_CHANGES.md#switch-spacing-and-focus-ring)
 
 #### Theme Provider
 

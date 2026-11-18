@@ -31,12 +31,12 @@ const SelectSizeContext = React.createContext<SelectSize>('medium');
 
 type SelectRootProps = Omit<
   SelectPrimitive.SelectProps,
-  'children' | 'dir' | 'autoComplete' | 'onValueChange'
+  'children' | 'autoComplete' | 'onValueChange'
 >;
 
 export type SelectVanillaProps = Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
-  keyof SelectRootProps | 'children' | 'type'
+  keyof SelectRootProps | 'children' | 'type' | 'onChange'
 > &
   SelectRootProps &
   CSSProps & {
@@ -63,6 +63,7 @@ export const SelectVanilla = React.forwardRef<HTMLButtonElement, SelectVanillaPr
       required,
       autoComplete,
       disabled,
+      dir,
       placeholder,
       size = 'medium',
       variant,
@@ -72,12 +73,14 @@ export const SelectVanilla = React.forwardRef<HTMLButtonElement, SelectVanillaPr
       className,
       style,
       children,
+      onBlur,
       'aria-describedby': ariaDescribedBy,
       'aria-invalid': ariaInvalid,
       ...props
     },
     forwardedRef,
   ) => {
+    const contentRef = React.useRef<HTMLDivElement>(null);
     const control = useFieldControl({
       id,
       disabled,
@@ -101,6 +104,7 @@ export const SelectVanilla = React.forwardRef<HTMLButtonElement, SelectVanillaPr
           required={required}
           autoComplete={autoComplete}
           disabled={control.disabled}
+          dir={dir}
         >
           <SelectPrimitive.Trigger
             ref={forwardedRef}
@@ -116,6 +120,10 @@ export const SelectVanilla = React.forwardRef<HTMLButtonElement, SelectVanillaPr
               className,
             )}
             style={inlineStyle}
+            onBlur={(event) => {
+              // Focus moving into the open list is not leaving the field.
+              if (!contentRef.current?.contains(event.relatedTarget)) onBlur?.(event);
+            }}
             {...props}
           >
             {/* Radix drops the className of Value. */}
@@ -128,6 +136,7 @@ export const SelectVanilla = React.forwardRef<HTMLButtonElement, SelectVanillaPr
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal>
             <SelectPrimitive.Content
+              ref={contentRef}
               className={selectContent}
               position="popper"
               sideOffset={4}

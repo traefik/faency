@@ -229,6 +229,38 @@ describe('SelectVanilla', () => {
     expect(within(listbox).getByTestId('separator')).toBeInTheDocument();
   });
 
+  it('should not take the native onChange, which would never fire', () => {
+    // @ts-expect-error use onValueChange instead
+    const element = <Types onChange={() => {}} />;
+
+    expect(element).toBeDefined();
+  });
+
+  it('should not call onBlur when focus moves into the open list', async () => {
+    const onBlur = jest.fn();
+    renderWithTheme(<Types onBlur={onBlur} />);
+
+    screen.getByRole('combobox').focus();
+    await userEvent.keyboard('{Enter}');
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    expect(onBlur).not.toHaveBeenCalled();
+
+    await userEvent.keyboard('{Enter}');
+    expect(screen.getByRole('combobox')).toHaveFocus();
+    expect(onBlur).not.toHaveBeenCalled();
+
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
+  });
+
+  it('should apply its direction to the trigger and the list', async () => {
+    renderWithTheme(<Types dir="rtl" />);
+
+    expect(screen.getByRole('combobox')).toHaveAttribute('dir', 'rtl');
+    const listbox = await open();
+    expect(listbox.closest('[dir="rtl"]')).not.toBeNull();
+  });
+
   it('should be disabled', () => {
     renderWithTheme(<Types disabled />);
 

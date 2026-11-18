@@ -122,7 +122,6 @@ export const tokens = createThemeContract({
 
     selectBg: null,
     selectBorder: null,
-    selectFocusBg: null,
     selectFocusBorder: null,
     selectHoverBg: null,
     selectText: null,
