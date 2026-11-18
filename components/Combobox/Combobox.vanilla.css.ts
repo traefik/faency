@@ -8,6 +8,7 @@ export const comboboxAnchor = style({
 });
 
 export const comboboxContent = style({
+  zIndex: tokens.zIndices.max,
   boxSizing: 'border-box',
   width: 'var(--radix-popover-trigger-width)',
   maxHeight: 'min(240px, var(--radix-popover-content-available-height))',

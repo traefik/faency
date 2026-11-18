@@ -15,7 +15,9 @@ import { InputVanilla } from '@/components/Input/Input.vanilla';
 import { LabelVanilla } from '@/components/Label/Label.vanilla';
 import { LiVanilla } from '@/components/List/List.vanilla';
 import { ParagraphVanilla } from '@/components/Paragraph/Paragraph.vanilla';
+import { SelectVanilla } from '@/components/Select/Select.vanilla';
 import { SkeletonVanilla } from '@/components/Skeleton/Skeleton.vanilla';
+import { SwitchVanilla } from '@/components/Switch/Switch.vanilla';
 import { CaptionVanilla, ThVanilla } from '@/components/Table/Table.vanilla';
 import { TextVanilla } from '@/components/Text/Text.vanilla';
 import { TextareaVanilla } from '@/components/Textarea/Textarea.vanilla';
@@ -42,9 +44,11 @@ describe('component variant props', () => {
       <InputVanilla key="input" size="small" variant="ghost" />,
       <TextareaVanilla key="textarea" variant="ghost" resize="vertical" />,
       <LiVanilla key="li" elevation={2} />,
+      <SelectVanilla key="select" size="small" variant="ghost" state="invalid" />,
+      <SwitchVanilla key="switch" size={2} />,
     ];
 
-    expect(elements).toHaveLength(18);
+    expect(elements).toHaveLength(20);
   });
 
   it('reject invalid variants', () => {
@@ -95,8 +99,12 @@ describe('component variant props', () => {
       <TextareaVanilla key="textarea" resize="diagonal" />,
       // @ts-expect-error elevation outside the recipe keys
       <LiVanilla key="li" elevation={9} />,
+      // @ts-expect-error unknown size
+      <SelectVanilla key="select" size="huge" />,
+      // @ts-expect-error size outside the recipe keys
+      <SwitchVanilla key="switch" size={9} />,
     ];
 
-    expect(elements).toHaveLength(23);
+    expect(elements).toHaveLength(25);
   });
 });

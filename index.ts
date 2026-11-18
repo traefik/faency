@@ -186,7 +186,21 @@ export {
   SegmentedControlItemVanilla,
   SegmentedControlVanilla,
 } from './components/SegmentedControl';
-export { Select } from './components/Select';
+export type {
+  SelectGroupVanillaProps,
+  SelectItemVanillaProps,
+  SelectLabelVanillaProps,
+  SelectSeparatorVanillaProps,
+  SelectVanillaProps,
+} from './components/Select';
+export {
+  Select,
+  SelectGroupVanilla,
+  SelectItemVanilla,
+  SelectLabelVanilla,
+  SelectSeparatorVanilla,
+  SelectVanilla,
+} from './components/Select';
 export { SidePanel } from './components/SidePanel';
 export type { SkeletonVanillaProps } from './components/Skeleton';
 export { Skeleton, SkeletonVanilla } from './components/Skeleton';
@@ -203,7 +217,8 @@ export {
   SplitLayoutMainVanilla,
   SplitLayoutVanilla,
 } from './components/SplitLayout';
-export { Switch } from './components/Switch';
+export type { SwitchVanillaProps } from './components/Switch';
+export { Switch, SwitchVanilla } from './components/Switch';
 export type {
   CaptionVanillaProps,
   TableSectionVanillaProps,

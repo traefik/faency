@@ -55,6 +55,116 @@ import { Badge } from 'faency';
 
 **Impact:** Medium - Common pattern for components rendered as links or buttons
 
+### Select: Native `<select>` → Radix Select
+
+**Change:** `Select` wraps the native `<select>`. `SelectVanilla` is a custom select built on [Radix Select](https://www.radix-ui.com/primitives/docs/components/select), with its own API.
+
+|                | Stitches `Select`                            | Vanilla Extract `SelectVanilla`                                                               |
+| -------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Options        | `<option>` children                          | `SelectItemVanilla` children                                                                  |
+| Option groups  | `<optgroup label="…">`                       | `SelectGroupVanilla` with a `SelectLabelVanilla`, and `SelectSeparatorVanilla` between groups |
+| Change handler | `onChange(event)`, read `event.target.value` | `onValueChange(value)`                                                                        |
+| Placeholder    | an `<option value="">`                       | the `placeholder` prop                                                                        |
+| Ref            | the `<select>` element                       | the trigger `<button>`                                                                        |
+| Several values | `multiple`                                   | not supported                                                                                 |
+| On mobile      | the native picker of the device              | the Faency list                                                                               |
+| `cursor` prop  | accepted, but has no visible effect          | removed                                                                                       |
+
+`name`, `required`, `disabled`, `value` and `defaultValue` work the same, and the select still submits its value with a form.
+
+**Before (v12.x with Stitches):**
+
+```tsx
+<Select value={type} onChange={(event) => setType(event.target.value)}>
+  <option value="">Pick a type</option>
+  <optgroup label="Layer 7">
+    <option value="http">HTTP</option>
+  </optgroup>
+  <option value="tcp">TCP</option>
+</Select>
+```
+
+**After (v13.x with Vanilla Extract):**
+
+```tsx
+<Select value={type} onValueChange={setType} placeholder="Pick a type">
+  <SelectGroup>
+    <SelectLabel>Layer 7</SelectLabel>
+    <SelectItem value="http" description="Routes by host, path and headers">
+      HTTP
+    </SelectItem>
+  </SelectGroup>
+  <SelectSeparator />
+  <SelectItem value="tcp">TCP</SelectItem>
+</Select>
+```
+
+**Migration Guide:**
+
+1. Replace each `<option>` with a `SelectItem`, and each `<optgroup>` with a `SelectGroup` holding a `SelectLabel`
+2. Replace `onChange` with `onValueChange`, which receives the value instead of an event
+3. Replace the empty `<option value="">` with the `placeholder` prop. An item's value can't be an empty string; set the value to `''` to show the placeholder again
+4. Keep using the native select where you need `multiple`
+5. With react-hook-form, `register` relies on the native change event and the `<select>` ref, so use a `Controller` instead:
+
+```tsx
+<Controller
+  name="type"
+  control={control}
+  render={({ field }) => (
+    <Select
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onValueChange={field.onChange}
+      onBlur={field.onBlur}
+    >
+      …
+    </Select>
+  )}
+/>
+```
+
+**Rationale:**
+
+- The open list matches the Faency styles in every browser
+- Items can hold rich content, such as badges and descriptions
+- Consistent with the other Radix-based components
+
+**Impact:** Medium - Every `Select` needs its options and change handler rewritten
+
+### Switch: Spacing and Focus Ring
+
+**Change:** `SwitchVanilla` drops the outer margin of the Stitches `Switch` and fixes two styling inconsistencies.
+
+|                   | Stitches `Switch`                     | Vanilla Extract `SwitchVanilla` |
+| ----------------- | ------------------------------------- | ------------------------------- |
+| Outer margin      | `8px` (`$2`) at size `1`, none at `2` | none at any size                |
+| Large thumb inset | `2px`                                 | `3px`, scaled like the size     |
+| Focus ring        | on any focus, including mouse clicks  | on keyboard focus only          |
+
+**Before (v12.x with Stitches):**
+
+```tsx
+<Switch />
+```
+
+**After (v13.x with Vanilla Extract):**
+
+```tsx
+<Switch css={{ m: '$2' }} />
+```
+
+**Migration Guide:**
+
+1. Where a size `1` switch relied on its built-in margin, add `css={{ m: '$2' }}` or space it from its parent layout, e.g. a `Flex` with `gap`
+
+**Rationale:**
+
+- Components should not add space outside their own box, and the margin applied to one size only
+
+**Impact:** Low - Layouts with a default-size switch get 8px tighter around it
+
 ---
 
 ## Components Supporting Polymorphic `as` Prop
@@ -242,8 +352,9 @@ import { VanillaExtractThemeProvider } from 'faency';
 1. Update imports: `import { Badge } from 'faency'` (remove `Vanilla` suffix)
 2. Replace `FaencyProvider` with `VanillaExtractThemeProvider`
 3. Update `asChild` usage to `as` prop pattern
-4. Test all components in your application
-5. Update TypeScript types if using component type references
+4. Rewrite `Select` options and change handlers for the Radix-based `Select`
+5. Test all components in your application
+6. Update TypeScript types if using component type references
 
 ---
 
@@ -263,6 +374,20 @@ Layout, typography, and interactive components now use polymorphic `as` prop
   - After: `<Badge as="a" href="#">Link</Badge>`
   - Migration: Replace `asChild` with `as="elementType"`, move child element props to component, remove wrapper element
   - See [Migration Guide](./BREAKING_CHANGES.md#polymorphic-components-aschild--as-prop)
+
+#### Select
+
+- **Changed:** `Select` is built on Radix Select instead of the native `<select>`
+  - Before: `<Select onChange={(event) => …}><option value="http">HTTP</option></Select>`
+  - After: `<Select onValueChange={(value) => …}><SelectItem value="http">HTTP</SelectItem></Select>`
+  - `multiple` is no longer supported
+  - See [Migration Guide](./BREAKING_CHANGES.md#select-native-select--radix-select)
+
+#### Switch
+
+- **Changed:** `Switch` has no outer margin; size `1` had `8px`
+  - Migration: add `css={{ m: '$2' }}` or space it from the parent layout
+  - See [Migration Guide](./BREAKING_CHANGES.md#switch-spacing-and-focus-ring)
 
 #### Theme Provider
 

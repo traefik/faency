@@ -120,6 +120,15 @@ export const tokens = createThemeContract({
     inputDisabledText: null,
     inputInvalidBorder: null,
 
+    selectBg: null,
+    selectBorder: null,
+    selectFocusBorder: null,
+    selectHoverBg: null,
+    selectText: null,
+    selectPlaceholder: null,
+    selectDisabledText: null,
+    selectInvalidBorder: null,
+
     textareaBg: null,
     textareaBorder: null,
     textareaFocusBg: null,
@@ -172,6 +181,12 @@ export const tokens = createThemeContract({
     listItemHoverBg: null,
     listItemActiveBg: null,
     listItemFocusBorder: null,
+
+    switchBackground: null,
+    switchActiveBackground: null,
+    switchFocusBorder: null,
+    switchThumb: null,
+    switchInvalidBorder: null,
 
     // Semantic tones
     toneSuccessSolid: null,

@@ -11,6 +11,7 @@ Welcome to Faency! This guide will help you integrate Faency into your React app
 - [Styling Components](#styling-components)
 - [TypeScript Support](#typescript-support)
 - [Best Practices](#best-practices)
+- [Differences from the Stitches Components](#differences-from-the-stitches-components)
 
 ---
 
@@ -641,6 +642,12 @@ import { BoxVanilla } from '@traefik-labs/faency';
 
 ---
 
+## Differences from the Stitches Components
+
+Most Vanilla Extract components keep the API of their Stitches version, but a few differ. In future major versions the Vanilla Extract components become the default and lose their `Vanilla` suffix, so these differences become breaking changes. See [Breaking Changes](./BREAKING_CHANGES.md) for each one and how to update your code.
+
+---
+
 ## Example: Complete Application
 
 Here's a complete example showing theme integration:
@@ -724,5 +731,6 @@ export default App;
 
 - [Component Documentation](https://storybook.traefik.io/faency) - Interactive component examples
 - [GitHub Repository](https://github.com/traefik/faency) - Source code and issues
+- [Breaking Changes](./BREAKING_CHANGES.md) - API differences between the Stitches and Vanilla Extract components
 - [Vanilla Extract Migration Guide](./VANILLA_EXTRACT_DEVELOPER_GUIDE.md) - For contributors
 - [Project Guidelines](./CLAUDE.md) - Development guidelines

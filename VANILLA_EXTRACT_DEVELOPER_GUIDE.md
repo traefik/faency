@@ -662,6 +662,7 @@ Use this checklist for each component migration:
 **Note**: Not currently actionable. Continue using Phase 1 (side-by-side exports).
 
 - **Phase 2 (v2.0.0):** Make Vanilla Extract default, deprecate Stitches (breaking change)
+  - `Select` becomes the Radix-based `SelectVanilla`, whose API differs from the native one. See [Breaking Changes](./BREAKING_CHANGES.md#select-native-select--radix-select).
 - **Phase 3 (v3.0.0):** Remove Stitches files, remove `.vanilla` suffix (~40% smaller bundle)
 
 ---

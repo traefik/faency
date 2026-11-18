@@ -27,7 +27,9 @@ import {
   segmentedControlDarkTheme,
   segmentedControlLightTheme,
 } from '@/components/SegmentedControl/SegmentedControl.theme.css';
+import { selectDarkTheme, selectLightTheme } from '@/components/Select/Select.theme.css';
 import { skeletonDarkTheme, skeletonLightTheme } from '@/components/Skeleton/Skeleton.theme.css';
+import { switchDarkTheme, switchLightTheme } from '@/components/Switch/Switch.theme.css';
 import {
   getTableDarkColors,
   getTableLightColors,
@@ -248,6 +250,42 @@ function getListDarkFocusColors(primaryColorName: string) {
   };
 }
 
+function getSwitchLightFocusColors(primaryColorName: string) {
+  return {
+    switchFocusBorder: lightColors[`${primaryColorName}8`],
+  };
+}
+
+function getSwitchDarkFocusColors(primaryColorName: string) {
+  return {
+    switchFocusBorder: darkColors[`${primaryColorName}11`],
+  };
+}
+
+function getInputLightFocusColors(primaryColorName: string) {
+  return {
+    inputFocusBorder: lightColors[`${primaryColorName}8`],
+  };
+}
+
+function getInputDarkFocusColors(primaryColorName: string) {
+  return {
+    inputFocusBorder: darkColors[`${primaryColorName}11`],
+  };
+}
+
+function getSelectLightFocusColors(primaryColorName: string) {
+  return {
+    selectFocusBorder: lightColors[`${primaryColorName}8`],
+  };
+}
+
+function getSelectDarkFocusColors(primaryColorName: string) {
+  return {
+    selectFocusBorder: darkColors[`${primaryColorName}11`],
+  };
+}
+
 function createToneColors(colors: typeof lightColors | typeof darkColors) {
   return {
     toneSuccessSolid: colors.green9,
@@ -333,6 +371,7 @@ const lightSemanticColors = {
   ...headingLightTheme,
   ...iconButtonLightTheme,
   ...inputLightTheme,
+  ...selectLightTheme,
   ...textareaLightTheme,
   ...buttonLightTheme,
   buttonPrimaryText: 'white',
@@ -349,6 +388,9 @@ const lightSemanticColors = {
   ...comboboxLightTheme,
   ...toastLightTheme,
   ...listLightTheme,
+  ...switchLightTheme,
+  switchActiveBackground: tokens.colors.primary,
+  switchInvalidBorder: lightColors.red9,
   meterTrackBg: lightColors.grayA3,
   ...createToneColors(lightColors),
   ...chartLightColors,
@@ -363,6 +405,9 @@ export const lightThemeBlue = createTheme(tokens, {
     ...getButtonSwitchLightColors('blue'),
     ...getTableLightColors(lightColors.blue9),
     ...getListLightFocusColors('blue'),
+    ...getSwitchLightFocusColors('blue'),
+    ...getInputLightFocusColors('blue'),
+    ...getSelectLightFocusColors('blue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -376,6 +421,9 @@ export const lightThemeNeon = createTheme(tokens, {
     ...getButtonSwitchLightColors('neon'),
     ...getTableLightColors(lightColors.neon9),
     ...getListLightFocusColors('neon'),
+    ...getSwitchLightFocusColors('neon'),
+    ...getInputLightFocusColors('neon'),
+    ...getSelectLightFocusColors('neon'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -389,6 +437,9 @@ export const lightThemeOrange = createTheme(tokens, {
     ...getButtonSwitchLightColors('orange'),
     ...getTableLightColors(lightColors.orange9),
     ...getListLightFocusColors('orange'),
+    ...getSwitchLightFocusColors('orange'),
+    ...getInputLightFocusColors('orange'),
+    ...getSelectLightFocusColors('orange'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -402,6 +453,9 @@ export const lightThemeRed = createTheme(tokens, {
     ...getButtonSwitchLightColors('red'),
     ...getTableLightColors(lightColors.red9),
     ...getListLightFocusColors('red'),
+    ...getSwitchLightFocusColors('red'),
+    ...getInputLightFocusColors('red'),
+    ...getSelectLightFocusColors('red'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -415,6 +469,9 @@ export const lightThemeGreen = createTheme(tokens, {
     ...getButtonSwitchLightColors('green'),
     ...getTableLightColors(lightColors.green9),
     ...getListLightFocusColors('green'),
+    ...getSwitchLightFocusColors('green'),
+    ...getInputLightFocusColors('green'),
+    ...getSelectLightFocusColors('green'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -428,6 +485,9 @@ export const lightThemeDeepBlue = createTheme(tokens, {
     ...getButtonSwitchLightColors('deepBlue'),
     ...getTableLightColors(lightColors.deepBlue9),
     ...getListLightFocusColors('deepBlue'),
+    ...getSwitchLightFocusColors('deepBlue'),
+    ...getInputLightFocusColors('deepBlue'),
+    ...getSelectLightFocusColors('deepBlue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -441,6 +501,9 @@ export const lightThemeGrayBlue = createTheme(tokens, {
     ...getButtonSwitchLightColors('grayBlue'),
     ...getTableLightColors(lightColors.grayBlue9),
     ...getListLightFocusColors('grayBlue'),
+    ...getSwitchLightFocusColors('grayBlue'),
+    ...getInputLightFocusColors('grayBlue'),
+    ...getSelectLightFocusColors('grayBlue'),
     ...createBaseColors(lightColors),
   },
   ...baseThemeValues,
@@ -481,6 +544,7 @@ const darkSemanticColors = {
   ...headingDarkTheme,
   ...iconButtonDarkTheme,
   ...inputDarkTheme,
+  ...selectDarkTheme,
   ...textareaDarkTheme,
   ...buttonDarkTheme,
   buttonPrimaryText: darkColors.deepBlue2,
@@ -499,6 +563,9 @@ const darkSemanticColors = {
   ...comboboxDarkTheme,
   ...toastDarkTheme,
   ...listDarkTheme,
+  ...switchDarkTheme,
+  switchActiveBackground: tokens.colors.primary,
+  switchInvalidBorder: darkColors.red9,
   meterTrackBg: darkColors.grayA3,
   ...createToneColors(darkColors),
   ...chartDarkColors,
@@ -513,6 +580,9 @@ export const darkThemeBlue = createTheme(tokens, {
     ...getButtonSwitchDarkColors('blue'),
     ...getTableDarkColors(darkColors.blue9),
     ...getListDarkFocusColors('blue'),
+    ...getSwitchDarkFocusColors('blue'),
+    ...getInputDarkFocusColors('blue'),
+    ...getSelectDarkFocusColors('blue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -526,6 +596,9 @@ export const darkThemeNeon = createTheme(tokens, {
     ...getButtonSwitchDarkColors('neon'),
     ...getTableDarkColors(darkColors.neon9),
     ...getListDarkFocusColors('neon'),
+    ...getSwitchDarkFocusColors('neon'),
+    ...getInputDarkFocusColors('neon'),
+    ...getSelectDarkFocusColors('neon'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -539,6 +612,9 @@ export const darkThemeOrange = createTheme(tokens, {
     ...getButtonSwitchDarkColors('orange'),
     ...getTableDarkColors(darkColors.orange9),
     ...getListDarkFocusColors('orange'),
+    ...getSwitchDarkFocusColors('orange'),
+    ...getInputDarkFocusColors('orange'),
+    ...getSelectDarkFocusColors('orange'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -552,6 +628,9 @@ export const darkThemeRed = createTheme(tokens, {
     ...getButtonSwitchDarkColors('red'),
     ...getTableDarkColors(darkColors.red9),
     ...getListDarkFocusColors('red'),
+    ...getSwitchDarkFocusColors('red'),
+    ...getInputDarkFocusColors('red'),
+    ...getSelectDarkFocusColors('red'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -565,6 +644,9 @@ export const darkThemeGreen = createTheme(tokens, {
     ...getButtonSwitchDarkColors('green'),
     ...getTableDarkColors(darkColors.green9),
     ...getListDarkFocusColors('green'),
+    ...getSwitchDarkFocusColors('green'),
+    ...getInputDarkFocusColors('green'),
+    ...getSelectDarkFocusColors('green'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -578,6 +660,9 @@ export const darkThemeDeepBlue = createTheme(tokens, {
     ...getButtonSwitchDarkColors('deepBlue'),
     ...getTableDarkColors(darkColors.deepBlue9),
     ...getListDarkFocusColors('deepBlue'),
+    ...getSwitchDarkFocusColors('deepBlue'),
+    ...getInputDarkFocusColors('deepBlue'),
+    ...getSelectDarkFocusColors('deepBlue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
@@ -591,6 +676,9 @@ export const darkThemeGrayBlue = createTheme(tokens, {
     ...getButtonSwitchDarkColors('grayBlue'),
     ...getTableDarkColors(darkColors.grayBlue9),
     ...getListDarkFocusColors('grayBlue'),
+    ...getSwitchDarkFocusColors('grayBlue'),
+    ...getInputDarkFocusColors('grayBlue'),
+    ...getSelectDarkFocusColors('grayBlue'),
     ...createBaseColors(darkColors),
   },
   ...baseThemeValues,
