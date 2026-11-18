@@ -49,8 +49,8 @@ export interface CSSProps {
     pe?: 'auto' | 'none' | 'all';
     us?: 'none' | 'auto' | 'text' | 'contain' | 'all';
 
-    fontSize?: string;
-    fontWeight?: string;
+    fontSize?: string | number;
+    fontWeight?: string | number;
     lh?: string | number;
 
     [key: string]: any;
@@ -106,34 +106,39 @@ function getRadiiValue(key: string): string {
   return radiiMap[key] || '0px';
 }
 
-function getFontSizeValue(key: string): string {
-  const fontSizeMap: Record<string, string> = {
-    '0': '11px',
-    '1': '12px',
-    '2': '13px',
-    '3': '14px',
-    '4': '16px',
-    '5': '18px',
-    '6': '20px',
-    '7': '22px',
-    '8': '24px',
-    '9': '26px',
-    '10': '28px',
-    '11': '32px',
-    '12': '38px',
-  };
-  return fontSizeMap[key] || '16px';
-}
+const fontSizeMap: Record<string, string> = {
+  '0': '11px',
+  '1': '12px',
+  '2': '13px',
+  '3': '14px',
+  '4': '16px',
+  '5': '18px',
+  '6': '20px',
+  '7': '22px',
+  '8': '24px',
+  '9': '26px',
+  '10': '28px',
+  '11': '32px',
+  '12': '38px',
+};
 
-function getFontWeightValue(key: string): string {
-  const fontWeightMap: Record<string, string> = {
-    light: '300',
-    regular: '400',
-    medium: '500',
-    semiBold: '600',
-    bold: '700',
-  };
-  return fontWeightMap[key] || '400';
+const fontWeightMap: Record<string, string> = {
+  light: '300',
+  regular: '400',
+  medium: '500',
+  semiBold: '600',
+  bold: '700',
+};
+
+// Accepts `$token` and, for backward compatibility, the bare token name; anything else is kept as is.
+function applyFontToken(
+  style: React.CSSProperties,
+  property: 'fontSize' | 'fontWeight',
+  value: string | number,
+  map: Record<string, string>,
+): void {
+  const key = typeof value === 'string' ? processToken(value) : undefined;
+  (style as any)[property] = (key !== undefined && map[key]) || value;
 }
 
 function applySpacing(
@@ -327,20 +332,10 @@ export function processCSSProp(
         break;
 
       case 'fontSize':
-        if (typeof value === 'string') {
-          const fontSizeValue = getFontSizeValue(value);
-          if (fontSizeValue !== '16px') {
-            style.fontSize = fontSizeValue;
-          }
-        }
+        applyFontToken(style, 'fontSize', value, fontSizeMap);
         break;
       case 'fontWeight':
-        if (typeof value === 'string') {
-          const fontWeightValue = getFontWeightValue(value);
-          if (fontWeightValue !== '400') {
-            style.fontWeight = fontWeightValue;
-          }
-        }
+        applyFontToken(style, 'fontWeight', value, fontWeightMap);
         break;
       case 'lh':
         style.lineHeight = value;
