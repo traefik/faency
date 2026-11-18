@@ -382,3 +382,18 @@ describe('LiVanilla', () => {
     });
   });
 });
+
+describe('LiVanilla numeric variants', () => {
+  it('should pass a numeric elevation and gap to the recipes as their string keys', () => {
+    const { container } = renderWithTheme(
+      <UlVanilla interactive>
+        <LiVanilla elevation={2} gap={2}>
+          Item
+        </LiVanilla>
+      </UlVanilla>,
+    );
+
+    expect(container.innerHTML).toContain('elevation-string-2');
+    expect(container.innerHTML).toContain('gap-string-2');
+  });
+});

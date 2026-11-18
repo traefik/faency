@@ -58,15 +58,16 @@ export const collapsedCell = style({
   },
 });
 
+// Padding sits here, not on the cell, so the filler's ResizeObserver sees it animate.
 export const collapsedContent = style({
   boxSizing: 'border-box',
   transition: 'all 0.2s ease-out',
-  padding: `${tokens.space['3']} ${tokens.space['3']} 0`,
+  padding: `${tokens.space['5']} 0`,
   selectors: {
     [`${collapsedCell}[data-closed] > &`]: {
       height: 0,
       overflow: 'hidden',
-      padding: `0 ${tokens.space['3']}`,
+      padding: 0,
     },
   },
 });

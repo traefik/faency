@@ -12,6 +12,7 @@ export const withVariantKeys =
   <R extends RecipeFn>(recipe: R) =>
   (options?: RecipeVariantProps<R>): string => {
     let normalized: Record<string, unknown> | undefined;
+
     for (const key in options) {
       const value = options[key];
       if (typeof value === 'number') {
@@ -19,5 +20,6 @@ export const withVariantKeys =
         normalized[key] = String(value);
       }
     }
+
     return recipe(normalized ?? options);
   };

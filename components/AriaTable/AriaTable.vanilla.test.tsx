@@ -667,4 +667,10 @@ describe('AriaTableVanilla', () => {
     expect(numeric.innerHTML).toContain('size-string-2');
     expect(numeric.innerHTML).toBe(string.innerHTML);
   });
+
+  it('should pass a numeric elevation to the recipe as its string key', () => {
+    const { container } = renderWithTheme(<AriaTableVanilla elevation={2} aria-label="Users" />);
+
+    expect(container.innerHTML).toContain('elevation-string-2');
+  });
 });

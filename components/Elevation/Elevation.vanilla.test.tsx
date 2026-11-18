@@ -173,4 +173,10 @@ describe('ElevationVanilla', () => {
     expect(ref.current).toBeInstanceOf(HTMLElement);
     expect(ref.current?.nodeName).toBe('SECTION');
   });
+
+  it('should pass a numeric variant to the recipe as its string key', () => {
+    const { container } = renderWithTheme(<ElevationVanilla variant={2}>Content</ElevationVanilla>);
+
+    expect(container.innerHTML).toContain('variant-string-2');
+  });
 });

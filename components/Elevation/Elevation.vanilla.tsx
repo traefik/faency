@@ -7,10 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { elevationRecipe } from './Elevation.vanilla.css';
+
+const elevationClass = withVariantKeys(elevationRecipe);
 
 type ElevationRecipeVariants = RecipeVariantProps<typeof elevationRecipe>;
 
@@ -32,7 +34,7 @@ const ElevationVanillaComponentImpl = forwardRef(
   ) => {
     const Component = as || 'div';
     const mergedStyles = useInlineStyle(css, style);
-    const recipeClass = elevationRecipe({ variant });
+    const recipeClass = elevationClass({ variant });
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

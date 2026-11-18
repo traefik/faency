@@ -33,6 +33,7 @@ import {
 import { TableSortProps } from './useTableSort';
 
 const captionClass = withVariantKeys(captionRecipe);
+const tableClass = withVariantKeys(tableRecipe);
 const thClass = withVariantKeys(thRecipe);
 
 type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
@@ -49,7 +50,7 @@ export const TableVanilla = forwardRef<HTMLTableElement, TableVanillaProps>(
   ({ elevation, className, css, style, ...props }, ref) => (
     <table
       ref={ref}
-      className={cx(tableRecipe({ elevation }), rowLinkTable, className)}
+      className={cx(tableClass({ elevation }), rowLinkTable, className)}
       style={useInlineStyle(css, style)}
       {...props}
     />

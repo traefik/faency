@@ -244,4 +244,16 @@ describe('GridVanilla', () => {
       expect(container.textContent).toContain('Item 3');
     });
   });
+
+  it('should pass numeric gaps to the recipe as their string keys', () => {
+    const { container } = renderWithTheme(
+      <GridVanilla gap={2} gapX={2} gapY={2}>
+        Content
+      </GridVanilla>,
+    );
+
+    expect(container.innerHTML).toContain('gap-string-2');
+    expect(container.innerHTML).toContain('gapX-string-2');
+    expect(container.innerHTML).toContain('gapY-string-2');
+  });
 });

@@ -14,7 +14,7 @@ import React, {
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import type {
   FlexAlignSimplified,
   FlexDirection,
@@ -27,6 +27,9 @@ import { warnOnce } from '@/utils/warnOnce';
 import { flexRecipe } from '@/components/Flex/Flex.vanilla.css';
 
 import { controlsWrapper, itemButton, itemText, liRecipe, ol, ul } from './List.vanilla.css';
+
+const flexClass = withVariantKeys(flexRecipe);
+const liClass = withVariantKeys(liRecipe);
 
 const ListVanillaContext = createContext({ interactive: false });
 
@@ -160,7 +163,7 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
     return (
       <li
         ref={ref}
-        className={cx(liRecipe({ elevation }), className)}
+        className={cx(liClass({ elevation }), className)}
         style={inlineStyle}
         {...props}
       >
@@ -169,7 +172,7 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
             ref={setContentRef}
             type="button"
             disabled={disabled}
-            className={cx(flexRecipe({ align, justify, direction, gap, wrap }), itemButton)}
+            className={cx(flexClass({ align, justify, direction, gap, wrap }), itemButton)}
           >
             {content}
           </button>
@@ -177,7 +180,7 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
           <span
             ref={setContentRef}
             className={cx(
-              flexRecipe({ align: align ?? 'center', justify, direction, gap: gap ?? 1, wrap }),
+              flexClass({ align: align ?? 'center', justify, direction, gap: gap ?? 1, wrap }),
               itemText,
             )}
           >

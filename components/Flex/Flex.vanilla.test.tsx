@@ -157,4 +157,10 @@ describe('FlexVanilla', () => {
       });
     });
   });
+
+  it('should pass a numeric gap to the recipe as its string key', () => {
+    const { container } = renderWithTheme(<FlexVanilla gap={2}>Content</FlexVanilla>);
+
+    expect(container.innerHTML).toContain('gap-string-2');
+  });
 });

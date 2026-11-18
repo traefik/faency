@@ -56,6 +56,7 @@ import {
 } from './AriaTable.vanilla.css';
 
 const captionClass = withVariantKeys(captionRecipe);
+const tableClass = withVariantKeys(tableRecipe);
 const thClass = withVariantKeys(thRecipe);
 
 type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
@@ -77,7 +78,7 @@ export const AriaTableVanilla = forwardRef<HTMLDivElement, AriaTableVanillaProps
       ref={ref}
       role="table"
       className={cx(
-        tableRecipe({ elevation }),
+        tableClass({ elevation }),
         ariaTable,
         hasCollapsibleChildren && collapsibleTable,
         rowLinkTable,
