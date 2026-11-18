@@ -25,8 +25,11 @@ interface GridOwnProps extends CSSProps {
   gapY?: Gap;
 }
 
-export type GridProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, GridOwnProps>;
-type GridComponent = PolymorphicComponent<'div', GridProps<ElementType>>;
+export type GridVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
+  C,
+  GridOwnProps
+>;
+type GridComponent = PolymorphicComponent<'div', GridVanillaProps<ElementType>>;
 
 export const GridVanillaComponent = React.forwardRef(
   <C extends ElementType = 'div'>(
@@ -43,14 +46,13 @@ export const GridVanillaComponent = React.forwardRef(
       gapX,
       gapY,
       ...props
-    }: GridProps<C>,
+    }: GridVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'div';
 
     const dynamicStyles: React.CSSProperties = {};
 
-    // To support any value on the columns props
     if (columns !== undefined) {
       dynamicStyles.gridTemplateColumns = `repeat(${columns}, 1fr)`;
     }

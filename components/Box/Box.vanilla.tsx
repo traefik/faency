@@ -11,13 +11,13 @@ import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { box } from './Box.vanilla.css';
 
-export type BoxProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
+export type BoxVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
 
-type BoxComponent = PolymorphicComponent<'div', BoxProps<ElementType>>;
+type BoxComponent = PolymorphicComponent<'div', BoxVanillaProps<ElementType>>;
 
 const BoxVanillaComponent = forwardRef(
   <C extends ElementType = 'div'>(
-    { as, className, css, style, ...props }: BoxProps<C>,
+    { as, className, css, style, ...props }: BoxVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'div';

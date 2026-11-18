@@ -50,6 +50,7 @@ export type { BadgeVanillaProps } from './components/Badge';
 export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
+export type { BoxVanillaProps } from './components/Box';
 export { Box, BoxVanilla } from './components/Box';
 export type { BubbleVanillaProps } from './components/Bubble';
 export { Bubble, BubbleVanilla } from './components/Bubble';
@@ -74,6 +75,7 @@ export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
 export { useColorScheme } from './components/colorSchemeContext';
 export type { ComboboxVanillaProps } from './components/Combobox';
 export { ComboboxVanilla } from './components/Combobox';
+export type { ContainerVanillaProps } from './components/Container';
 export { Container, ContainerVanilla } from './components/Container';
 export { DateTimePicker } from './components/DateTimePicker';
 export { DateTimePickerInput } from './components/DateTimePickerInput';
@@ -133,7 +135,9 @@ export type {
   FieldVanillaProps,
 } from './components/Field';
 export { Field, FieldVanilla, useFieldControl } from './components/Field';
+export type { FlexVanillaProps } from './components/Flex';
 export { Flex, FlexVanilla } from './components/Flex';
+export type { GridVanillaProps } from './components/Grid';
 export { Grid, GridVanilla } from './components/Grid';
 export type {
   H1VanillaProps,
