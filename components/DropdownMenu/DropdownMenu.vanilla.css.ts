@@ -1,9 +1,10 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { tokens } from '../../styles/tokens.css';
-import { elevationVariants } from '../Elevation/Elevation.vanilla.css';
-import { panelStyle } from '../Panel/Panel.vanilla.css';
+import { tokens } from '@/styles/tokens.css';
+
+import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
+import { panelStyle } from '@/components/Panel/Panel.vanilla.css';
 
 const baseItem = {
   display: 'flex',
