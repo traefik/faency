@@ -3,14 +3,15 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { ElementType, forwardRef } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+} from '@/styles/polymorphic';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import {
   dropdownMenuContentRecipe,
   dropdownMenuItem,
