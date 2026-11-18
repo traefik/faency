@@ -199,6 +199,9 @@ import { Badge } from 'faency';
 - ✅ **DropdownMenuTrigger** - Full polymorphic support (default: `button`), keeps the Radix trigger behavior on the `as` element
 - ✅ **DropdownMenuItem** - Full polymorphic support (default: `div`), keeps the Radix menu item behavior on the `as` element
   - The other DropdownMenu parts take neither `as` nor `asChild`
+- ✅ **PopoverTrigger** / **PopoverClose** - Full polymorphic support (default: `button`), keeps the Radix behavior on the `as` element
+- ✅ **PopoverAnchor** - Full polymorphic support (default: `div`)
+  - `PopoverContent` takes neither `as` nor `asChild`
 
 ---
 

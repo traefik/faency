@@ -182,13 +182,25 @@ export { Overlay } from './components/Overlay';
 export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export type { ParagraphVanillaProps } from './components/Paragraph';
 export { Paragraph, ParagraphVanilla } from './components/Paragraph';
+export type {
+  PopoverAnchorVanillaProps,
+  PopoverCloseVanillaProps,
+  PopoverContentVanillaProps,
+  PopoverTriggerVanillaProps,
+} from './components/Popover';
 export {
   Popover,
   PopoverAnchor,
+  PopoverAnchorVanilla,
   PopoverClose,
+  PopoverCloseVanilla,
   PopoverContent,
+  PopoverContentVanilla,
   PopoverPortal,
+  PopoverPortalVanilla,
   PopoverTrigger,
+  PopoverTriggerVanilla,
+  PopoverVanilla,
 } from './components/Popover';
 export { Radio, RadioGroup } from './components/Radio';
 export {
