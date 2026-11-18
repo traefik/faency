@@ -46,6 +46,28 @@ export default [
     },
   },
   {
+    files: [
+      'components/**/*.vanilla.{ts,tsx}',
+      'components/**/*.vanilla.test.tsx',
+      'components/**/*.css.ts',
+      'components/**/*.theme.ts',
+      'styles/**/*.{ts,tsx}',
+    ],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['../*'],
+              message: 'Use a prefixed absolute import (`@/components/...`, `@/styles/...`).',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ['**/*.test.tsx', '**/*.test.ts'],
     rules: {
       '@eslint-react/no-create-ref': 'off',

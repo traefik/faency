@@ -74,7 +74,8 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     const isBottom = copyButtonAlign.includes('bottom');
     const isLeft = copyButtonAlign.includes('left');
 
-    const containerStyles = { position: 'relative' as const, ...useInlineStyle(css) };
+    const inlineStyle = useInlineStyle(css);
+    const containerStyles = { position: 'relative' as const, ...inlineStyle };
 
     const [copied, setCopied] = useState(false);
 

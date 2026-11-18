@@ -104,9 +104,9 @@ See any vanilla-extract component for the complete implementation pattern:
 **Required imports:**
 
 ```tsx
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
 
 // In the component, after destructuring `className`, `css` and `style`:
 const mergedStyles = useInlineStyle(css, style);
@@ -386,7 +386,7 @@ Component theme tokens are co-located with the component and merged into the glo
 3. **Merge into [styles/themes.css.ts](styles/themes.css.ts):**
 
    ```typescript
-   import { badgeLightTheme, badgeDarkTheme } from '../components/Badge/Badge.theme.css';
+   import { badgeLightTheme, badgeDarkTheme } from '@/components/Badge/Badge.theme.css';
 
    const lightSemanticColors = {
      // ... other colors ...
@@ -456,7 +456,7 @@ See [`components/Badge/Badge.vanilla.tsx`](components/Badge/Badge.vanilla.tsx) f
 ### Accessing Theme in Components
 
 ```tsx
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useVanillaExtractTheme } from '@/styles/themeContext';
 
 const { colors, resolvedTheme } = useVanillaExtractTheme();
 ```
