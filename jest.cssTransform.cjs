@@ -2,7 +2,21 @@
 // This transformer prevents vanilla-extract from executing during tests
 // by returning a mock module that exports a Proxy
 
+const crypto = require('crypto');
+const fs = require('fs');
+
+const transformerHash = crypto.createHash('sha1').update(fs.readFileSync(__filename)).digest('hex');
+
 module.exports = {
+  getCacheKey(sourceText, sourcePath) {
+    return crypto
+      .createHash('sha1')
+      .update(transformerHash)
+      .update(sourcePath)
+      .update(sourceText)
+      .digest('hex');
+  },
+
   process(_sourceText, sourcePath) {
     // Normalize path separators for cross-platform compatibility
     const normalizedPath = sourcePath.replace(/\\/g, '/');
@@ -62,10 +76,15 @@ module.exports = {
     return {
       code: `
         // Mock vanilla-extract styles and recipes
-        const mockRecipe = (options) => {
-          // Return a mock class name for recipes
-          return 'mock-recipe-class';
-        };
+        // Includes the value's type so size={2} and size="2" give different classes.
+        const mockRecipe = (options) =>
+          ['mock-recipe-class']
+            .concat(
+              Object.entries(options || {})
+                .filter(([, value]) => value !== undefined)
+                .map(([key, value]) => key + '-' + typeof value + '-' + value),
+            )
+            .join(' ');
 
         module.exports = new Proxy({}, {
           get: (target, prop) => {

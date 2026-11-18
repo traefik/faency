@@ -1,6 +1,7 @@
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 // @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import react from '@vitejs/plugin-react';
+import { writeFileSync } from 'fs';
 import { createRequire } from 'module';
 // @ts-expect-error - cannot use "moduleResolution": "bundler" yet.
 import { defineConfig } from 'vite';
@@ -32,6 +33,14 @@ export default defineConfig({
         '**/*.test.ts',
         'stories/**',
       ],
+      afterBuild: (emittedFiles) => {
+        // CJS consumers resolve the entry's types from index.d.cts.
+        const [entryTypes] = Array.from(emittedFiles.keys())
+          .filter((path) => path.endsWith('/index.d.ts'))
+          .sort((a, b) => a.split('/').length - b.split('/').length);
+        if (!entryTypes) throw new Error('index.d.ts was not emitted; cannot write index.d.cts');
+        writeFileSync(entryTypes.replace(/\.d\.ts$/, '.d.cts'), emittedFiles.get(entryTypes)!);
+      },
     }),
   ],
   build: {
@@ -40,6 +49,7 @@ export default defineConfig({
       name: 'Faency',
       formats: ['es', 'cjs'],
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
+      cssFileName: 'faency',
     },
     rolldownOptions: {
       external: (id: string) => {

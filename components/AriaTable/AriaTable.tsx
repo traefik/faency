@@ -8,13 +8,16 @@ import React, {
   forwardRef,
   isValidElement,
   ReactNode,
+  useCallback,
   useId,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { deepMerge } from '../../utils/deepMerge';
+import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
 import { Box } from '../Box';
 import {
   handleRowClick,
@@ -35,6 +38,7 @@ import {
   Thead as TableThead,
 } from '../Table';
 import { ExpandButton } from '../Table/ExpandButton';
+import { FULL_COL_SPAN_ATTRIBUTE } from './AriaTable.constants';
 
 export const Caption = styled('div', TableCaption, {
   display: 'table-caption',
@@ -58,6 +62,10 @@ export const Tfoot = forwardRef<
 
 const StyledTr = styled('div', TableTr, {
   display: 'table-row',
+  // Places the full-width cell against its own row.
+  [`&:has(> [${FULL_COL_SPAN_ATTRIBUTE}])`]: {
+    position: 'relative',
+  },
 });
 const StyledTrSlot = styled(Slot, StyledTr);
 
@@ -94,14 +102,13 @@ const AnimatedContainer = ({
       isOpen
         ? {
             transition: 'all 0.2s ease-out',
-            padding: '16px',
-            paddingBottom: 0,
+            padding: '$5 0',
           }
         : {
             transition: 'all 0.2s ease-out',
             height: 0,
             overflow: 'hidden',
-            padding: '0px 16px',
+            padding: 0,
           },
     [isOpen],
   );
@@ -293,39 +300,77 @@ const StyledTd = styled('span', TableTd, {
   display: 'table-cell',
 });
 
-const FillerTd = styled(StyledTd, {
+const FillerTd = styled('span', {
+  display: 'table-cell',
   visibility: 'hidden',
 });
+
+const fullColSpanCss = {
+  position: 'absolute',
+  left: 0,
+  width: '100%',
+};
+
 export type TdProps = ComponentProps<typeof StyledTd> &
   VariantProps<typeof StyledTd> &
   VariantProps<typeof TableTd> & {
     fullColSpan?: boolean;
   };
 
-export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
-  ({ fullColSpan, css, ...props }, ref) => {
-    const fullColSpanCss = useMemo(
-      () =>
-        fullColSpan
-          ? {
-              position: 'absolute',
-              left: 0,
-              width: '100%',
-              height: '100%',
-            }
-          : {},
-      [fullColSpan],
+// The cell is taken out of the row to span it, so an empty filler as tall as the cell holds the row open.
+const FullColSpanTd = forwardRef<ElementRef<typeof StyledTd>, Omit<TdProps, 'fullColSpan'>>(
+  ({ css, ...props }, forwardedRef) => {
+    const cellRef = useRef<HTMLSpanElement | null>(null);
+    const [height, setHeight] = useState(0);
+
+    useIsomorphicLayoutEffect(() => {
+      const cell = cellRef.current;
+      if (!cell || typeof ResizeObserver === 'undefined') {
+        return undefined;
+      }
+      const update = () => setHeight(cell.offsetHeight);
+      update();
+      const observer = new ResizeObserver(update);
+      observer.observe(cell);
+      return () => observer.disconnect();
+    }, []);
+
+    const setRefs = useCallback(
+      (node: HTMLSpanElement | null) => {
+        cellRef.current = node;
+        if (typeof forwardedRef === 'function') {
+          forwardedRef(node);
+        } else if (forwardedRef) {
+          forwardedRef.current = node;
+        }
+      },
+      [forwardedRef],
     );
-    if (fullColSpan) {
-      return (
-        <>
-          <FillerTd css={css} {...props} />
-          <StyledTd ref={ref} role="cell" css={deepMerge(fullColSpanCss, css)} {...props} />
-        </>
-      );
-    }
-    return <StyledTd ref={ref} role="cell" css={css} {...props} />;
+
+    return (
+      <>
+        <FillerTd aria-hidden style={{ height }} />
+        <StyledTd
+          ref={setRefs}
+          role="cell"
+          {...{ [FULL_COL_SPAN_ATTRIBUTE]: '' }}
+          css={deepMerge(fullColSpanCss, css)}
+          {...props}
+        />
+      </>
+    );
   },
+);
+
+FullColSpanTd.displayName = 'FullColSpanTd';
+
+export const Td = forwardRef<ElementRef<typeof StyledTd>, TdProps>(
+  ({ fullColSpan, ...props }, ref) =>
+    fullColSpan ? (
+      <FullColSpanTd ref={ref} {...props} />
+    ) : (
+      <StyledTd ref={ref} role="cell" {...props} />
+    ),
 );
 
 const StyledThead = styled('div', TableThead, {

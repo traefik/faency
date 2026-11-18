@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,6 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -25,9 +25,9 @@ import {
   h6Style,
 } from './Heading.vanilla.css';
 
-type HeadingRecipeVariants = RecipeVariants<typeof h1Recipe>;
+type HeadingRecipeVariants = RecipeVariantProps<typeof h1Recipe>;
 
-interface HeadingOwnProps extends Omit<HeadingRecipeVariants, never>, CSSProps {}
+interface HeadingOwnProps extends HeadingRecipeVariants, CSSProps {}
 
 type HeadingProps<C extends ElementType> = PolymorphicComponentProps<C, HeadingOwnProps>;
 

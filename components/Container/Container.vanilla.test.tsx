@@ -129,4 +129,16 @@ describe('ContainerVanilla', () => {
       expect(container.firstChild).toBeInTheDocument();
     });
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <ContainerVanilla size={2}>Content</ContainerVanilla>,
+    );
+    const { container: string } = renderWithTheme(
+      <ContainerVanilla size="2">Content</ContainerVanilla>,
+    );
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

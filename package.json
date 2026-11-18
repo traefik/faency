@@ -11,14 +11,23 @@
     "radix-ui",
     "a11y"
   ],
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "type": "module",
   "modulesDir": "dist",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./style.css": "./dist/faency.css",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist"
@@ -38,6 +47,7 @@
     "build": "vite build",
     "lint": "eslint \"./components/**/*.{ts,tsx}\" \"./styles/**/*.{ts,tsx}\"",
     "lint:fix": "eslint --fix \"./components/**/*.{ts,tsx}\" \"./styles/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006 -h localhost",
     "storybook-docs": "storybook dev --docs",
     "build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",

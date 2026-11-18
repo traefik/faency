@@ -1,8 +1,8 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { FieldVanilla } from '@/components/Field/Field.vanilla';
@@ -15,7 +15,7 @@ import {
   textareaWrapperRecipe,
 } from './Textarea.vanilla.css';
 
-type StyledTextareaRecipeVariants = NonNullable<RecipeVariants<typeof styledTextareaRecipe>>;
+type StyledTextareaRecipeVariants = RecipeVariantProps<typeof styledTextareaRecipe>;
 
 export interface TextareaVanillaOwnProps extends CSSProps {
   variant?: StyledTextareaRecipeVariants['variant'];

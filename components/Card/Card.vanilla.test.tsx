@@ -248,4 +248,20 @@ describe('CardVanilla', () => {
     expect(ref.current).toBeInstanceOf(HTMLElement);
     expect(ref.current?.nodeName).toBe('SECTION');
   });
+
+  it('should pass a numeric elevation to the recipe as its string key', () => {
+    const { container } = renderWithTheme(<CardVanilla elevation={2}>Content</CardVanilla>);
+
+    expect(container.innerHTML).toContain('elevation-string-2');
+  });
+
+  it('should pass a numeric elevation to the interactive recipe as its string key', () => {
+    const { container } = renderWithTheme(
+      <CardVanilla interactive elevation={2}>
+        Content
+      </CardVanilla>,
+    );
+
+    expect(container.innerHTML).toContain('elevation-string-2');
+  });
 });

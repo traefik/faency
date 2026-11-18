@@ -1,15 +1,15 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { useFieldControl } from '@/components/Field/FieldContext';
 
 import { adornmentWrapperRecipe, inputWrapperRecipe, styledInputRecipe } from './Input.vanilla.css';
 
-type StyledInputRecipeVariants = NonNullable<RecipeVariants<typeof styledInputRecipe>>;
+type StyledInputRecipeVariants = RecipeVariantProps<typeof styledInputRecipe>;
 
 export interface InputVanillaOwnProps extends CSSProps {
   size?: StyledInputRecipeVariants['size'];

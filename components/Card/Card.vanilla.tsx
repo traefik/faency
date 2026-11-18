@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,11 +7,15 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { cardRecipe, interactiveCardRecipe } from './Card.vanilla.css';
 
-type CardRecipeVariants = NonNullable<RecipeVariants<typeof cardRecipe>>;
+const cardClass = withVariantKeys(cardRecipe);
+const interactiveCardClass = withVariantKeys(interactiveCardRecipe);
+
+type CardRecipeVariants = RecipeVariantProps<typeof cardRecipe>;
 
 interface CardOwnProps extends CSSProps {
   elevation?: CardRecipeVariants['elevation'];
@@ -46,7 +49,7 @@ const CardVanillaComponentImpl = forwardRef(
     const Component = as || (interactive ? 'button' : 'div');
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipe = interactive ? interactiveCardRecipe : cardRecipe;
+    const recipe = interactive ? interactiveCardClass : cardClass;
     const recipeClass = recipe({ elevation, variant, active });
 
     const additionalProps = interactive && !as ? { tabIndex: 0 } : {};

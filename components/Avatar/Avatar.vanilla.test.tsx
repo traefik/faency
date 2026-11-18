@@ -210,4 +210,12 @@ describe('AvatarVanilla', () => {
     expect(fallback).toBeInTheDocument();
     expect(fallback).toHaveTextContent('Custom');
   });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(<AvatarVanilla size={2} fallback="AB" />);
+    const { container: string } = renderWithTheme(<AvatarVanilla size="2" fallback="AB" />);
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
+  });
 });

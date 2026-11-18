@@ -1,14 +1,17 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 
 import { BoxVanilla } from '@/components/Box/Box.vanilla';
 
 import { avatarFallbackRecipe, avatarImage, avatarRecipe } from './Avatar.vanilla.css';
 
-type AvatarRecipeVariants = NonNullable<RecipeVariants<typeof avatarRecipe>>;
+const avatarClass = withVariantKeys(avatarRecipe);
+const avatarFallbackClass = withVariantKeys(avatarFallbackRecipe);
+
+type AvatarRecipeVariants = RecipeVariantProps<typeof avatarRecipe>;
 
 interface AvatarOwnProps extends AvatarRecipeVariants, CSSProps {
   alt?: string;
@@ -26,8 +29,8 @@ const AvatarVanillaComponent = forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   AvatarVanillaProps
 >(({ alt, src, fallback, size, variant, shape, css, style, ...props }, ref) => {
-  const recipeClass = avatarRecipe({ size, variant, shape });
-  const fallbackRecipeClass = avatarFallbackRecipe({ size });
+  const recipeClass = avatarClass({ size, variant, shape });
+  const fallbackRecipeClass = avatarFallbackClass({ size });
 
   // This CSS will be processed by the Box component
   const wrapperCss = {

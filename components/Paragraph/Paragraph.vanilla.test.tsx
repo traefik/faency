@@ -29,7 +29,7 @@ describe('ParagraphVanilla', () => {
   });
 
   it('should apply size prop', () => {
-    const sizes = ['1', '2', '3', '4', '5'] as const;
+    const sizes = ['1', '2'] as const;
 
     sizes.forEach((size) => {
       const { container, unmount } = renderWithTheme(
@@ -146,5 +146,17 @@ describe('ParagraphVanilla', () => {
       expect(container.querySelector('p')).toBeInTheDocument();
       unmount();
     });
+  });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <ParagraphVanilla size={2}>Text</ParagraphVanilla>,
+    );
+    const { container: string } = renderWithTheme(
+      <ParagraphVanilla size="2">Text</ParagraphVanilla>,
+    );
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
   });
 });

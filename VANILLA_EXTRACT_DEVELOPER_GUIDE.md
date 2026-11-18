@@ -162,7 +162,7 @@ The complete naming pattern (see [Text.vanilla.tsx](components/Text/Text.vanilla
 
 **Key Points:**
 
-- Use `NonNullable<RecipeVariants>` for variant types
+- Use `RecipeVariantProps<typeof recipe>` for variant types and wrap recipes with numeric keys in `withVariantKeys()` (see [Variant props missing or not type-checked](#variant-props-missing-or-not-type-checked))
 - Internal implementation uses `ComponentImpl` suffix
 - Exported component name is `ComponentVanilla`
 - Exported props type is `ComponentVanillaProps`
@@ -489,17 +489,29 @@ Follow the pattern in vanilla components (see [Button.vanilla.tsx](components/Bu
 
 ### TypeScript Errors
 
-#### RecipeVariants returns undefined
+#### Variant props missing or not type-checked
 
-Always wrap `RecipeVariants` with `NonNullable`:
+Type variant props with `RecipeVariantProps` from [styles/recipeVariants.ts](styles/recipeVariants.ts), not `RecipeVariants` from `@vanilla-extract/recipes`:
 
 ```tsx
-// ❌ Bad - may return undefined
+// ❌ Bad - includes undefined; `Omit<…, never>` or `extends` then silently drops every variant prop
 type MyComponentVariants = RecipeVariants<typeof myComponentRecipe>;
+interface MyComponentOwnProps extends Omit<MyComponentVariants, never>, CSSProps {}
 
-// ✅ Good - guaranteed to have variant properties
-type MyComponentVariants = NonNullable<RecipeVariants<typeof myComponentRecipe>>;
+// ✅ Good - numeric keys ('1', '2', ...) also accept numbers, e.g. size={2}
+type MyComponentVariants = RecipeVariantProps<typeof myComponentRecipe>;
+interface MyComponentOwnProps extends MyComponentVariants, CSSProps {}
 ```
+
+When a variant has numeric keys, wrap the recipe once with `withVariantKeys` and call the wrapper. It turns numbers into their string keys, since recipes match compound variants with `===` and `2` would not match `'2'`. Calling the raw recipe with a number is a type error, which `yarn typecheck` reports:
+
+```tsx
+const myComponentClass = withVariantKeys(myComponentRecipe);
+
+const recipeClass = myComponentClass({ size, variant });
+```
+
+Because of the loose polymorphic typing, a broken variant type does not cause errors. Add a valid line and an invalid `@ts-expect-error` line (e.g. `variant="nope"`) for each new component to [styles/componentVariantProps.test.tsx](styles/componentVariantProps.test.tsx), which `yarn typecheck` checks in CI.
 
 #### Invalid selector error for child elements
 

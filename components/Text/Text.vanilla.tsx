@@ -1,4 +1,3 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -8,13 +7,16 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { textRecipe } from './Text.vanilla.css';
 
-type TextRecipeVariants = RecipeVariants<typeof textRecipe>;
+const textClass = withVariantKeys(textRecipe);
 
-interface TextOwnProps extends Omit<TextRecipeVariants, never>, CSSProps {}
+type TextRecipeVariants = RecipeVariantProps<typeof textRecipe>;
+
+interface TextOwnProps extends TextRecipeVariants, CSSProps {}
 
 export type TextVanillaProps<C extends ElementType = 'span'> = PolymorphicComponentProps<
   C,
@@ -44,7 +46,7 @@ const TextVanillaComponentImpl = forwardRef(
 
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = textRecipe({ size, weight, variant, gradient, transform, noWrap });
+    const recipeClass = textClass({ size, weight, variant, gradient, transform, noWrap });
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

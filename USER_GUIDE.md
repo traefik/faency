@@ -69,8 +69,9 @@ For Vanilla Extract components, use the `VanillaExtractThemeProvider`:
 
 ```tsx
 import React from 'react';
-import { VanillaExtractThemeProvider } from '@traefiklabs/faency';
-import { BoxVanilla, BadgeVanilla } from '@traefiklabs/faency';
+import '@traefik-labs/faency/style.css';
+import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
+import { BoxVanilla, BadgeVanilla } from '@traefik-labs/faency';
 
 function App() {
   return (
@@ -85,8 +86,6 @@ function App() {
 export default App;
 ```
 
-> **Note**: CSS is automatically included when you import Vanilla Extract components - no separate CSS import needed.
-
 ### Import Styles
 
 #### For Stitches Components (Legacy)
@@ -98,12 +97,10 @@ Stitches components use runtime CSS-in-JS, so no separate CSS imports are needed
 Vanilla Extract components require importing the static CSS file. Add this import to your application's entry point (e.g., `App.tsx` or `index.tsx`):
 
 ```tsx
-import '@traefik-labs/faency/dist/style.css';
+import '@traefik-labs/faency/style.css';
 ```
 
 This CSS file contains all the styles for Vanilla Extract components (components with `Vanilla` suffix like `BadgeVanilla`, `BoxVanilla`, etc.). Without this import, these components will render as unstyled elements.
-
-Vanilla Extract components include their CSS automatically when imported. No separate CSS import is required - styles are bundled with each component module.
 
 ## Theming
 

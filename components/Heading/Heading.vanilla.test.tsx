@@ -35,7 +35,7 @@ describe('Heading Vanilla Components', () => {
     });
 
     it('should apply transform prop', () => {
-      const transforms = ['uppercase', 'lowercase', 'capitalize'] as const;
+      const transforms = ['uppercase', 'capitalize', 'capitalizeWords'] as const;
 
       transforms.forEach((transform) => {
         const { container, unmount } = renderWithTheme(
@@ -122,7 +122,9 @@ describe('Heading Vanilla Components', () => {
     });
 
     it('should apply transform prop', () => {
-      const { container } = renderWithTheme(<H3Vanilla transform="lowercase">Heading</H3Vanilla>);
+      const { container } = renderWithTheme(
+        <H3Vanilla transform="capitalizeWords">Heading</H3Vanilla>,
+      );
       expect(container.querySelector('h3')).toBeInTheDocument();
     });
 

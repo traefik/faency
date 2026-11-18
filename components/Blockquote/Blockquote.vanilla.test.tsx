@@ -53,7 +53,7 @@ describe('BlockquoteVanilla', () => {
   });
 
   it('should apply variant prop', () => {
-    const variants = ['gray', 'contrast'] as const;
+    const variants = ['subtle', 'contrast'] as const;
 
     variants.forEach((variant) => {
       const { container, unmount } = renderWithTheme(
@@ -70,7 +70,7 @@ describe('BlockquoteVanilla', () => {
   });
 
   it('should apply transform prop', () => {
-    const transforms = ['uppercase', 'lowercase', 'capitalize'] as const;
+    const transforms = ['uppercase', 'capitalize', 'capitalizeWords'] as const;
 
     transforms.forEach((transform) => {
       const { container, unmount } = renderWithTheme(
@@ -192,5 +192,17 @@ describe('BlockquoteVanilla', () => {
       expect(container.querySelector('blockquote')).toBeInTheDocument();
       unmount();
     });
+  });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(
+      <BlockquoteVanilla size={2}>Quote</BlockquoteVanilla>,
+    );
+    const { container: string } = renderWithTheme(
+      <BlockquoteVanilla size="2">Quote</BlockquoteVanilla>,
+    );
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
   });
 });

@@ -53,11 +53,10 @@ For better performance with static CSS, you can use the new Vanilla Extract comp
 1. Import the CSS file in your app's entry point:
 
 ```jsx
-import '@traefik-labs/faency/dist/style.css';
+import '@traefik-labs/faency/style.css';
 ```
 
 2. Wrap your app with the VanillaExtractThemeProvider:
-   Wrap your app with the VanillaExtractThemeProvider:
 
 ```jsx
 import { VanillaExtractThemeProvider } from '@traefik-labs/faency';

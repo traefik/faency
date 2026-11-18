@@ -49,7 +49,7 @@ describe('TextVanilla', () => {
   });
 
   it('should apply variant prop', () => {
-    const variants = ['gray', 'contrast'] as const;
+    const variants = ['subtle', 'contrast'] as const;
 
     variants.forEach((variant) => {
       const { container, unmount } = renderWithTheme(
@@ -66,7 +66,7 @@ describe('TextVanilla', () => {
   });
 
   it('should apply transform prop', () => {
-    const transforms = ['uppercase', 'lowercase', 'capitalize'] as const;
+    const transforms = ['uppercase', 'capitalize', 'capitalizeWords'] as const;
 
     transforms.forEach((transform) => {
       const { container, unmount } = renderWithTheme(
@@ -183,5 +183,13 @@ describe('TextVanilla', () => {
       expect(container.querySelector('span')).toBeInTheDocument();
       unmount();
     });
+  });
+
+  it('should treat a numeric size like its string key', () => {
+    const { container: numeric } = renderWithTheme(<TextVanilla size={2}>Text</TextVanilla>);
+    const { container: string } = renderWithTheme(<TextVanilla size="2">Text</TextVanilla>);
+
+    expect(numeric.innerHTML).toContain('size-string-2');
+    expect(numeric.innerHTML).toBe(string.innerHTML);
   });
 });

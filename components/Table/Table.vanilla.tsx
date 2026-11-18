@@ -1,8 +1,8 @@
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -32,11 +32,15 @@ import {
 } from './Table.vanilla.css';
 import { TableSortProps } from './useTableSort';
 
-type TableRecipeVariants = NonNullable<RecipeVariants<typeof tableRecipe>>;
-type CaptionRecipeVariants = NonNullable<RecipeVariants<typeof captionRecipe>>;
-type TrRecipeVariants = NonNullable<RecipeVariants<typeof trRecipe>>;
-type ThRecipeVariants = NonNullable<RecipeVariants<typeof thRecipe>>;
-type TdRecipeVariants = NonNullable<RecipeVariants<typeof tdRecipe>>;
+const captionClass = withVariantKeys(captionRecipe);
+const tableClass = withVariantKeys(tableRecipe);
+const thClass = withVariantKeys(thRecipe);
+
+type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
+type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
+type TrRecipeVariants = RecipeVariantProps<typeof trRecipe>;
+type ThRecipeVariants = RecipeVariantProps<typeof thRecipe>;
+type TdRecipeVariants = RecipeVariantProps<typeof tdRecipe>;
 
 export type TableVanillaProps = React.TableHTMLAttributes<HTMLTableElement> &
   CSSProps &
@@ -46,7 +50,7 @@ export const TableVanilla = forwardRef<HTMLTableElement, TableVanillaProps>(
   ({ elevation, className, css, style, ...props }, ref) => (
     <table
       ref={ref}
-      className={cx(tableRecipe({ elevation }), rowLinkTable, className)}
+      className={cx(tableClass({ elevation }), rowLinkTable, className)}
       style={useInlineStyle(css, style)}
       {...props}
     />
@@ -67,7 +71,7 @@ export const CaptionVanilla = forwardRef<HTMLTableCaptionElement, CaptionVanilla
     <caption
       ref={ref}
       className={cx(
-        captionRecipe({ size, weight, variant, gradient, transform, noWrap }),
+        captionClass({ size, weight, variant, gradient, transform, noWrap }),
         className,
       )}
       style={useInlineStyle(css, style)}
@@ -128,7 +132,7 @@ export const ThVanilla = forwardRef<HTMLTableCellElement, ThVanillaProps>(
       ref={ref}
       aria-sort={sort && ARIA_SORT[sort]}
       className={cx(
-        thRecipe({ size, weight, variant, gradient, transform, noWrap, align }),
+        thClass({ size, weight, variant, gradient, transform, noWrap, align }),
         className,
       )}
       style={useInlineStyle(css, style)}
@@ -229,7 +233,7 @@ export const TrVanilla = forwardRef<HTMLTableRowElement, TrVanillaProps>(
           {...props}
         >
           {emptyFirstColumn &&
-            (tableHead ? <td className={cx(thRecipe(), emptyHeaderCell)} /> : <TdVanilla />)}
+            (tableHead ? <td className={cx(thClass(), emptyHeaderCell)} /> : <TdVanilla />)}
           {collapsible && (
             <TdVanilla className={toggleCell} onClick={stopEvent}>
               <ExpandToggleVanilla
