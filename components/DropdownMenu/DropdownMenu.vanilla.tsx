@@ -1,6 +1,5 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
@@ -10,6 +9,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -21,6 +21,8 @@ import {
   dropdownMenuRadioIndicator,
   dropdownMenuSeparator,
 } from './DropdownMenu.vanilla.css';
+
+const dropdownMenuContentClass = withVariantKeys(dropdownMenuContentRecipe);
 
 export const DropdownMenuVanilla = DropdownMenuPrimitive.Root;
 export const DropdownMenuPortalVanilla = DropdownMenuPrimitive.Portal;
@@ -58,7 +60,7 @@ DropdownMenuTriggerVanillaComponentImpl.displayName = 'DropdownMenuTriggerVanill
 export const DropdownMenuTriggerVanilla =
   DropdownMenuTriggerVanillaComponentImpl as DropdownMenuTriggerVanillaComponent;
 
-type DropdownMenuContentVariants = NonNullable<RecipeVariants<typeof dropdownMenuContentRecipe>>;
+type DropdownMenuContentVariants = RecipeVariantProps<typeof dropdownMenuContentRecipe>;
 
 export type DropdownMenuContentVanillaProps = Omit<
   DropdownMenuPrimitive.DropdownMenuContentProps,
@@ -73,7 +75,7 @@ export const DropdownMenuContentVanilla = forwardRef<
 >(({ elevation, className, css, style, ...props }, ref) => (
   <DropdownMenuPrimitive.Content
     ref={ref}
-    className={cx(dropdownMenuContentRecipe({ elevation }), className)}
+    className={cx(dropdownMenuContentClass({ elevation }), className)}
     style={useInlineStyle(css, style)}
     {...props}
   />
