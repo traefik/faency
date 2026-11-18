@@ -75,19 +75,24 @@ describe('AvatarVanilla', () => {
     expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('should render with custom className', () => {
-    const { container } = renderWithTheme(<AvatarVanilla className="custom-avatar" />);
-    const wrapper = container.firstChild;
-    const avatarRoot = wrapper?.firstChild as HTMLElement;
+  it('should render with custom className and keep the recipe classes', () => {
+    const { container: plain } = renderWithTheme(<AvatarVanilla />);
+    const recipeClass = (plain.firstChild?.firstChild as HTMLElement).className;
 
-    expect(avatarRoot.className).toContain('custom-avatar');
+    const { container } = renderWithTheme(<AvatarVanilla className="custom-avatar" />);
+    const avatarRoot = container.firstChild?.firstChild as HTMLElement;
+
+    expect(recipeClass).not.toBe('');
+    expect(avatarRoot.className).toBe(`${recipeClass} custom-avatar`);
   });
 
-  it('should apply custom styles via style prop', () => {
+  it('should apply the style prop to the avatar, not the wrapper', () => {
     const { container } = renderWithTheme(<AvatarVanilla style={{ border: '2px solid red' }} />);
     const wrapper = container.firstChild as HTMLElement;
+    const avatarRoot = wrapper.firstChild as HTMLElement;
 
-    expect(wrapper.style.border).toBe('2px solid red');
+    expect(avatarRoot.style.border).toBe('2px solid red');
+    expect(wrapper.style.border).toBe('');
   });
 
   it('should apply CSS prop styles', () => {
@@ -98,7 +103,7 @@ describe('AvatarVanilla', () => {
     expect(wrapper.style.margin).toBe('8px');
   });
 
-  it('should merge style and css props correctly', () => {
+  it('should apply css to the wrapper and style to the avatar', () => {
     const { container } = renderWithTheme(
       <AvatarVanilla
         css={{ padding: '$4', margin: '$2' }}
@@ -106,10 +111,12 @@ describe('AvatarVanilla', () => {
       />,
     );
     const wrapper = container.firstChild as HTMLElement;
+    const avatarRoot = wrapper.firstChild as HTMLElement;
 
-    expect(wrapper.style.border).toBe('1px solid blue');
-    expect(wrapper.style.padding).toBe('30px');
+    expect(wrapper.style.padding).toBe('20px');
     expect(wrapper.style.margin).toBe('8px');
+    expect(avatarRoot.style.border).toBe('1px solid blue');
+    expect(avatarRoot.style.padding).toBe('30px');
   });
 
   it('should apply wrapper styles including custom css', () => {
@@ -120,7 +127,6 @@ describe('AvatarVanilla', () => {
     expect(wrapper).toBeInTheDocument();
     expect(avatarRoot).toBeInTheDocument();
 
-    // Custom padding from css prop should be applied to wrapper
     expect(wrapper.style.padding).toBe('20px');
     const styleAttr = wrapper.getAttribute('style');
     expect(styleAttr).toContain('position');
