@@ -89,18 +89,40 @@ export {
   DialogTrigger,
   StyledContent,
 } from './components/Dialog';
+export type {
+  DropdownMenuCheckboxItemVanillaProps,
+  DropdownMenuContentVanillaProps,
+  DropdownMenuGroupVanillaProps,
+  DropdownMenuItemVanillaProps,
+  DropdownMenuLabelVanillaProps,
+  DropdownMenuRadioGroupVanillaProps,
+  DropdownMenuRadioItemVanillaProps,
+  DropdownMenuSeparatorVanillaProps,
+  DropdownMenuTriggerVanillaProps,
+} from './components/DropdownMenu';
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
+  DropdownMenuCheckboxItemVanilla,
   DropdownMenuContent,
+  DropdownMenuContentVanilla,
   DropdownMenuGroup,
+  DropdownMenuGroupVanilla,
   DropdownMenuItem,
+  DropdownMenuItemVanilla,
   DropdownMenuLabel,
+  DropdownMenuLabelVanilla,
   DropdownMenuPortal,
+  DropdownMenuPortalVanilla,
   DropdownMenuRadioGroup,
+  DropdownMenuRadioGroupVanilla,
   DropdownMenuRadioItem,
+  DropdownMenuRadioItemVanilla,
   DropdownMenuSeparator,
+  DropdownMenuSeparatorVanilla,
   DropdownMenuTrigger,
+  DropdownMenuTriggerVanilla,
+  DropdownMenuVanilla,
 } from './components/DropdownMenu';
 export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
