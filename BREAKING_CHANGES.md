@@ -196,6 +196,9 @@ import { Badge } from 'faency';
 - ✅ **ButtonSwitch** (Container & Item) - Full polymorphic support with conditional rendering
   - Container default: uses Radix `ToggleGroup.Root` when no `as` prop, otherwise renders as custom element with `role="group"`
   - Item default: uses Radix `ToggleGroup.Item` when no `as` prop, otherwise renders as custom element with `role="radio"`
+- ✅ **DropdownMenuTrigger** - Full polymorphic support (default: `button`), keeps the Radix trigger behavior on the `as` element
+- ✅ **DropdownMenuItem** - Full polymorphic support (default: `div`), keeps the Radix menu item behavior on the `as` element
+  - The other DropdownMenu parts take neither `as` nor `asChild`
 
 ---
 
