@@ -3,8 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React, { createRef } from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-import { FieldVanilla } from '../Field/Field.vanilla';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
+import { FieldVanilla } from '@/components/Field/Field.vanilla';
+
 import { SwitchVanilla } from './Switch.vanilla';
 
 const renderWithTheme = (ui: React.ReactElement) =>

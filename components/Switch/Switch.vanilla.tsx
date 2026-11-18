@@ -1,19 +1,23 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { useFieldControl } from '../Field/FieldContext';
+} from '@/styles/polymorphic';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { useFieldControl } from '@/components/Field/FieldContext';
+
 import { switchRecipe, switchThumb } from './Switch.vanilla.css';
 
-type SwitchRecipeVariants = NonNullable<RecipeVariants<typeof switchRecipe>>;
+const switchClass = withVariantKeys(switchRecipe);
+
+type SwitchRecipeVariants = RecipeVariantProps<typeof switchRecipe>;
 
 interface SwitchVanillaOwnProps extends SwitchRecipeVariants, CSSProps {
   checked?: boolean;
@@ -56,7 +60,7 @@ const SwitchVanillaComponentImpl = forwardRef(
     ref?: PolymorphicRef<C>,
   ) => {
     const mergedStyles = useInlineStyle(css, style);
-    const recipeClass = switchRecipe({ size });
+    const recipeClass = switchClass({ size });
 
     const control = useFieldControl({
       id,

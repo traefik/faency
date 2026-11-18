@@ -1,9 +1,10 @@
 import { createVar, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { breakpoints } from '../../styles/breakpoints.css';
-import { tokens } from '../../styles/tokens.css';
-import { elevationVariants } from '../Elevation/Elevation.vanilla.css';
+import { breakpoints } from '@/styles/breakpoints.css';
+import { tokens } from '@/styles/tokens.css';
+
+import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
 
 const THUMB_DIAMETER = 14;
 const THUMB_GAP = 2;

@@ -1,4 +1,4 @@
-import { inputDarkTheme, inputLightTheme } from '../Input/Input.theme';
+import { inputDarkTheme, inputLightTheme } from '@/components/Input/Input.theme';
 
 const fromInputTheme = (input: typeof inputLightTheme) => ({
   selectBg: input.inputBg,

@@ -1,8 +1,8 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { breakpoints } from '../../styles/breakpoints.css';
-import { tokens } from '../../styles/tokens.css';
+import { breakpoints } from '@/styles/breakpoints.css';
+import { tokens } from '@/styles/tokens.css';
 
 const FOCUS_SHADOW =
   '0 1px 5px 0 hsla(0, 0%, 0%, 0.2), 0 3px 1px -2px hsla(0, 0%, 0%, 0.12), 0 2px 2px 0 hsla(0, 0%, 0%, 0.14)';

@@ -1,12 +1,14 @@
 import { CaretSortIcon, CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
-import { useFieldControl } from '../Field/FieldContext';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { useFieldControl } from '@/components/Field/FieldContext';
+
 import {
   selectContent,
   selectIcon,
@@ -22,7 +24,7 @@ import {
   selectViewport,
 } from './Select.vanilla.css';
 
-type SelectTriggerVariants = NonNullable<RecipeVariants<typeof selectTriggerRecipe>>;
+type SelectTriggerVariants = RecipeVariantProps<typeof selectTriggerRecipe>;
 type SelectSize = NonNullable<SelectTriggerVariants['size']>;
 
 const SelectSizeContext = React.createContext<SelectSize>('medium');
