@@ -1,14 +1,16 @@
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { Highlight, Language, themes } from 'prism-react-renderer';
 import React, { forwardRef, HTMLAttributes, useCallback, useRef, useState } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
-import { useIsomorphicLayoutEffect } from '../../utils/useIsomorphicLayoutEffect';
-import { AccessibleIcon } from '../AccessibleIcon';
-import { ButtonVanilla } from '../Button';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useVanillaExtractTheme } from '@/styles/themeContext';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
+
+import { AccessibleIcon } from '@/components/AccessibleIcon';
+import { ButtonVanilla } from '@/components/Button';
+
 import {
   codeContent,
   codeContentBottomPadding,
@@ -65,19 +67,15 @@ export const CodeBlockVanilla = forwardRef<HTMLPreElement, CodeBlockVanillaProps
     },
     ref,
   ) => {
-    const { colors, resolvedTheme } = useVanillaExtractTheme();
+    const { resolvedTheme } = useVanillaExtractTheme();
     const effectiveScheme = colorScheme ?? resolvedTheme;
     const prismTheme = effectiveScheme === 'dark' ? themes.nightOwl : themes.nightOwlLight;
 
     const isBottom = copyButtonAlign.includes('bottom');
     const isLeft = copyButtonAlign.includes('left');
 
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-    const containerStyles = {
-      position: 'relative' as const,
-      ...cssStyles,
-      ...assignInlineVars(vars),
-    };
+    const inlineStyle = useInlineStyle(css);
+    const containerStyles = { position: 'relative' as const, ...inlineStyle };
 
     const [copied, setCopied] = useState(false);
 

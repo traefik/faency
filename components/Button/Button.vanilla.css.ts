@@ -1,7 +1,7 @@
 import { keyframes, style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { tokens } from '../../styles/tokens.css';
+import { tokens } from '@/styles/tokens.css';
 
 // Background size constants for waiting animation
 const BG_SIZES = {

@@ -1,6 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 
-import { tokens } from '../../styles/tokens.css';
+import { tokens } from '@/styles/tokens.css';
+
 import {
   ROW_LINK_ATTRIBUTE,
   ROW_LINK_CONTROL_Z_INDEX,

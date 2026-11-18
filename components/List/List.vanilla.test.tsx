@@ -3,8 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React, { createRef } from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-import { resetWarnings } from '../../utils/warnOnce';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+import { resetWarnings } from '@/utils/warnOnce';
+
 import { LiVanilla, OlVanilla, UlVanilla } from './List.vanilla';
 
 const renderWithTheme = (ui: React.ReactElement) =>

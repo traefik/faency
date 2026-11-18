@@ -1,11 +1,12 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
-import { useFieldControl } from '../Field/FieldContext';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { useFieldControl } from '@/components/Field/FieldContext';
+
 import { adornmentWrapperRecipe, inputWrapperRecipe, styledInputRecipe } from './Input.vanilla.css';
 
 type StyledInputRecipeVariants = NonNullable<RecipeVariants<typeof styledInputRecipe>>;
@@ -55,9 +56,7 @@ export const InputVanilla = React.forwardRef<InputVanillaHandle, InputVanillaPro
       'aria-invalid': ariaInvalid,
     });
     const resolvedState = control.invalid ? 'invalid' : state;
-    const { colors } = useVanillaExtractTheme();
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-    const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
+    const mergedStyles = useInlineStyle(css, style);
 
     React.useImperativeHandle(forwardedRef, () => {
       const { current } = inputRef;

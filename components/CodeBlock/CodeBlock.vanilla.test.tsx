@@ -3,7 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
 import { CodeBlockVanilla } from './CodeBlock.vanilla';
 import {
   codeContent,

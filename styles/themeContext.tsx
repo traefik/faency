@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { darkColors, lightColors } from '../colors';
-import { useIsomorphicLayoutEffect } from '../utils/useIsomorphicLayoutEffect';
+import { darkColors, lightColors } from '@/colors';
+import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
+
 import { PrimaryColor, themes } from './themes.css';
 
 export type ThemeMode = 'light' | 'dark' | 'system';

@@ -1,20 +1,20 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React, { ElementType } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+} from '@/styles/polymorphic';
 import type {
   FlexAlignSimplified,
   FlexDirection,
   FlexJustifySimplified,
   Gap,
-} from '../../styles/types';
+} from '@/styles/types';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { flexRecipe } from './Flex.vanilla.css';
 
 interface FlexOwnProps extends CSSProps {
@@ -35,15 +35,7 @@ export const FlexVanillaComponent = React.forwardRef(
   ) => {
     const Component = as || 'div';
 
-    const { colors } = useVanillaExtractTheme();
-
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
-    const mergedStyles = {
-      ...cssStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, style);
 
     const recipeClass = flexRecipe({ direction, align, justify, wrap, gap });
 

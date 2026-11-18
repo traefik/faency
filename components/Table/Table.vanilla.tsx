@@ -1,17 +1,19 @@
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
-import { CSSProps } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useInlineStyle } from '../../styles/useInlineStyle';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import {
   handleRowClick,
   mapRowLink,
   openRowLink,
   RowLinkShortcutProps,
-} from '../RowLink/RowLink.utils';
-import { RowLinkVanilla } from '../RowLink/RowLink.vanilla';
-import { rowLinkRow, rowLinkTable } from '../RowLink/RowLink.vanilla.css';
+} from '@/components/RowLink/RowLink.utils';
+import { RowLinkVanilla } from '@/components/RowLink/RowLink.vanilla';
+import { rowLinkRow, rowLinkTable } from '@/components/RowLink/RowLink.vanilla.css';
+
 import { ExpandToggleVanilla, stopEvent } from './ExpandToggle.vanilla';
 import { ARIA_SORT, SortButtonVanilla } from './SortButton.vanilla';
 import {

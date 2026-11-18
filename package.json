@@ -36,8 +36,8 @@
   "scripts": {
     "prettier": "prettier --write .",
     "build": "vite build",
-    "lint": "eslint \"./components/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint --fix \"./components/**/*.{ts,tsx}\"",
+    "lint": "eslint \"./components/**/*.{ts,tsx}\" \"./styles/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --fix \"./components/**/*.{ts,tsx}\" \"./styles/**/*.{ts,tsx}\"",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006 -h localhost",
     "storybook-docs": "storybook dev --docs",
     "build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",

@@ -1,13 +1,14 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import React from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
-import { FieldVanilla } from '../Field/Field.vanilla';
-import { FieldLabelProps, useFieldControl } from '../Field/FieldContext';
-import { LabelVanilla } from '../Label';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+import { FieldVanilla } from '@/components/Field/Field.vanilla';
+import { FieldLabelProps, useFieldControl } from '@/components/Field/FieldContext';
+import { LabelVanilla } from '@/components/Label';
+
 import {
   adornmentWrapperEnd,
   styledTextareaRecipe,
@@ -56,7 +57,6 @@ const TextareaVanillaControl = React.forwardRef<HTMLTextAreaElement, TextareaVan
     },
     forwardedRef,
   ) => {
-    const { colors } = useVanillaExtractTheme();
     const control = useFieldControl({
       id,
       disabled,
@@ -67,8 +67,7 @@ const TextareaVanillaControl = React.forwardRef<HTMLTextAreaElement, TextareaVan
     const resolvedState = control.invalid ? 'invalid' : state;
     const hasEndAdornment = Boolean(endAdornment);
 
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-    const mergedStyles = { ...cssStyles, ...style, ...assignInlineVars(vars) };
+    const mergedStyles = useInlineStyle(css, style);
 
     const textareaWrapperClass = textareaWrapperRecipe({
       state: resolvedState,

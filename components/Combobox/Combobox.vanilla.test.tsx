@@ -3,8 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React, { createRef } from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-import { InputVanillaHandle } from '../Input';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
+import { InputVanillaHandle } from '@/components/Input';
+
 import { ComboboxVanilla, ComboboxVanillaProps } from './Combobox.vanilla';
 
 const renderWithTheme = (

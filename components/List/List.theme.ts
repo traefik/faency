@@ -1,4 +1,4 @@
-import { darkColors, lightColors } from '../../colors';
+import { darkColors, lightColors } from '@/colors';
 
 // listItemFocusBorder follows the primary color, so it is set in themes.css.ts.
 export const listLightTheme = {

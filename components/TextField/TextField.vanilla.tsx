@@ -6,10 +6,11 @@ import {
 } from '@radix-ui/react-icons';
 import React from 'react';
 
-import { FieldVanilla } from '../Field/Field.vanilla';
-import { FieldLabelProps, useFieldContext } from '../Field/FieldContext';
-import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '../Input';
-import { Tooltip } from '../Tooltip';
+import { FieldVanilla } from '@/components/Field/Field.vanilla';
+import { FieldLabelProps, useFieldContext } from '@/components/Field/FieldContext';
+import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '@/components/Input';
+import { Tooltip } from '@/components/Tooltip';
+
 import { adornmentButton, adornmentGroup, invalidIcon } from './TextField.vanilla.css';
 
 // TYPES

@@ -1,7 +1,8 @@
 import { style } from '@vanilla-extract/css';
 
-import { breakpoints } from '../../styles/breakpoints.css';
-import { tokens } from '../../styles/tokens.css';
+import { breakpoints } from '@/styles/breakpoints.css';
+import { tokens } from '@/styles/tokens.css';
+
 import { HANDLE_WIDTH } from './SplitLayout.constants';
 
 export const root = style({

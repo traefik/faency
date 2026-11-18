@@ -1,15 +1,15 @@
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+} from '@/styles/polymorphic';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { buttonSwitchContainer, buttonSwitchItem } from './ButtonSwitch.vanilla.css';
 
 // Container Component
@@ -39,15 +39,7 @@ const ButtonSwitchContainerVanillaImpl = forwardRef(
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = (as || 'div') as any;
-    const { colors } = useVanillaExtractTheme();
-
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
-    const mergedStyles = {
-      ...cssStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, style);
 
     if (as) {
       return (
@@ -101,15 +93,7 @@ const ButtonSwitchItemVanillaImpl = forwardRef(
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = (as || 'button') as any;
-    const { colors } = useVanillaExtractTheme();
-
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
-    const mergedStyles = {
-      ...cssStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, style);
 
     if (as) {
       return (

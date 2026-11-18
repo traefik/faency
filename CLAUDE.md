@@ -16,7 +16,7 @@ Faency is a React component library and design system for Traefik Labs, built wi
 - `yarn patch-package` - Apply necessary patches to Stitches after installation
 - `yarn storybook` - Start Storybook development server at http://localhost:6006
 - `yarn build` - Build the library for production
-- `yarn lint` - Lint TypeScript/React files in components directory
+- `yarn lint` - Lint TypeScript/React files in components and styles directories
 - `yarn lint:fix` - Auto-fix linting issues
 - `yarn test` - Run Jest tests in watch mode
 - `yarn test:ci` - Run tests in CI mode (silent, non-watch)
@@ -120,13 +120,13 @@ When working with vanilla-extract components during the migration:
 
 ```tsx
 // ❌ Wrong - mixing Stitches and vanilla-extract
-import { Box } from '../Box';
-import { Label } from '../Label';
+import { Box } from '@/components/Box';
+import { Label } from '@/components/Label';
 <Box css={css}>...</Box>;
 
 // ✅ Correct - use vanilla versions or plain HTML
-import { BoxVanilla } from '../Box';
-import { LabelVanilla } from '../Label';
+import { BoxVanilla } from '@/components/Box';
+import { LabelVanilla } from '@/components/Label';
 <BoxVanilla css={css}>...</BoxVanilla>;
 ```
 
@@ -148,12 +148,12 @@ interface MyComponentProps {
 }
 
 // Usage in component
-const { style: rootCssStyles, vars: rootVars } = processCSSProp(rootCss, colors);
+const rootStyle = useInlineStyle(rootCss);
 ```
 
 **When to use each:**
 
-- `css?: CSSProps['css']` - For props that pass directly to `processCSSProp()`
+- `css?: CSSProps['css']` - For props that pass directly to `useInlineStyle()`
 - `extends CSSProps` - For components that have a `css` prop on the interface
 
 **Property Name Flexibility:**
@@ -202,7 +202,7 @@ import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
 import { ComponentVanilla } from './Component.vanilla';
 
 describe('ComponentVanilla', () => {

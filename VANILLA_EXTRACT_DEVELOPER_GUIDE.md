@@ -104,10 +104,19 @@ See any vanilla-extract component for the complete implementation pattern:
 **Required imports:**
 
 ```tsx
-import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
+// In the component, after destructuring `className`, `css` and `style`:
+const mergedStyles = useInlineStyle(css, style);
+
+return <Component className={cx(recipeClass, className)} style={mergedStyles} {...props} />;
 ```
+
+`cx` joins class names and skips empty ones. Use it rather than template strings or `.join(' ')`.
+
+`useInlineStyle` resolves the `css` prop's tokens, merges `style` over it and assigns the inline vars. Don't repeat that merge by hand with `processCSSProp` and `assignInlineVars`.
 
 **Result - both APIs work identically:**
 
@@ -198,13 +207,12 @@ Create `ComponentName.vanilla.css.ts` alongside your component.
 
 Create `ComponentName.vanilla.tsx` with these required steps:
 
-1. Import `CSSProps`, `processCSSProp` from `styles/cssProps`
-2. Import `useVanillaExtractTheme` from `styles/themeContext`
-3. Import `assignInlineVars` from `@vanilla-extract/dynamic`
-4. Add `CSSProps` to component interface
-5. Process `css` prop with `processCSSProp(css, colors)`
-6. Merge styles with `assignInlineVars(vars)`
-7. Set `displayName` to match component name
+1. Import `CSSProps` from `styles/cssProps`
+2. Import `useInlineStyle` from `styles/useInlineStyle` and `cx` from `styles/cx`
+3. Add `CSSProps` to component interface
+4. Pass `useInlineStyle(css, style)` to the `style` prop
+5. Pass `cx(recipeClass, className)` to the `className` prop
+6. Set `displayName` to match component name
 
 **Examples:** [Box.vanilla.tsx](components/Box/Box.vanilla.tsx) (simple), [Button.vanilla.tsx](components/Button/Button.vanilla.tsx) (variants), [Badge.vanilla.tsx](components/Badge/Badge.vanilla.tsx) (polymorphic), [Text.vanilla.tsx](components/Text/Text.vanilla.tsx) (theme tokens)
 
@@ -378,7 +386,7 @@ Component theme tokens are co-located with the component and merged into the glo
 3. **Merge into [styles/themes.css.ts](styles/themes.css.ts):**
 
    ```typescript
-   import { badgeLightTheme, badgeDarkTheme } from '../components/Badge/Badge.theme.css';
+   import { badgeLightTheme, badgeDarkTheme } from '@/components/Badge/Badge.theme.css';
 
    const lightSemanticColors = {
      // ... other colors ...
@@ -448,7 +456,7 @@ See [`components/Badge/Badge.vanilla.tsx`](components/Badge/Badge.vanilla.tsx) f
 ### Accessing Theme in Components
 
 ```tsx
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+import { useVanillaExtractTheme } from '@/styles/themeContext';
 
 const { colors, resolvedTheme } = useVanillaExtractTheme();
 ```
@@ -476,9 +484,8 @@ Use theme tokens from [styles/tokens.css.ts](styles/tokens.css.ts) instead of ha
 Follow the pattern in vanilla components (see [Button.vanilla.tsx](components/Button/Button.vanilla.tsx)):
 
 1. Add `CSSProps` to component interface
-2. Import and use `processCSSProp(css, colors)` from `useVanillaExtractTheme()`
-3. Destructure both `css` AND `style` props
-4. Merge styles with `assignInlineVars(vars)`
+2. Destructure both `css` AND `style` props
+3. Pass `useInlineStyle(css, style)` to the element's `style` prop
 
 ### TypeScript Errors
 
@@ -580,9 +587,8 @@ Use this checklist for each component migration:
 - [ ] Create `ComponentName.vanilla.css.ts` with styles and recipes (see [`Button.vanilla.css.ts`](components/Button/Button.vanilla.css.ts))
 - [ ] Create `ComponentName.vanilla.tsx` with React component (see [`Button.vanilla.tsx`](components/Button/Button.vanilla.tsx))
 - [ ] **REQUIRED:** Import and add `CSSProps` to component interface
-- [ ] **REQUIRED:** Import `useVanillaExtractTheme()` hook and use it to get colors
-- [ ] **REQUIRED:** Process `css` prop with `processCSSProp(css, colors)`
-- [ ] **REQUIRED:** Merge styles using `assignInlineVars(vars)` and pass to `style` prop
+- [ ] **REQUIRED:** Merge `css` and `style` with `useInlineStyle(css, style)` and pass the result to the `style` prop
+- [ ] **REQUIRED:** Combine the recipe class with the user's `className` using `cx(recipeClass, className)`
 - [ ] Apply recipes with variants correctly
 - [ ] Extract `css` and `style` props in the component destructuring
 

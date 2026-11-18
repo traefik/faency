@@ -1,8 +1,8 @@
 import { keyframes, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { breakpoints } from '../../styles/breakpoints.css';
-import { tokens } from '../../styles/tokens.css';
+import { breakpoints } from '@/styles/breakpoints.css';
+import { tokens } from '@/styles/tokens.css';
 
 const spin = keyframes({
   to: { transform: 'rotate(360deg)' },

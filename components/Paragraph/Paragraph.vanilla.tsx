@@ -1,15 +1,15 @@
-import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ElementType, forwardRef } from 'react';
 
-import { CSSProps, processCSSProp } from '../../styles/cssProps';
-import { cx } from '../../styles/cx';
+import { CSSProps } from '@/styles/cssProps';
+import { cx } from '@/styles/cx';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
   PolymorphicRef,
-} from '../../styles/polymorphic';
-import { useVanillaExtractTheme } from '../../styles/themeContext';
+} from '@/styles/polymorphic';
+import { useInlineStyle } from '@/styles/useInlineStyle';
+
 import { paragraphRecipe } from './Paragraph.vanilla.css';
 
 type ParagraphRecipeVariants = RecipeVariants<typeof paragraphRecipe>;
@@ -30,15 +30,7 @@ const ParagraphVanillaComponentImpl = forwardRef(
   ) => {
     const Component = as || 'p';
 
-    const { colors } = useVanillaExtractTheme();
-
-    const { style: cssStyles, vars } = processCSSProp(css, colors);
-
-    const mergedStyles = {
-      ...cssStyles,
-      ...style,
-      ...assignInlineVars(vars),
-    };
+    const mergedStyles = useInlineStyle(css, style);
 
     const recipeClass = paragraphRecipe({ size });
 

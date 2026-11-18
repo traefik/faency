@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
 import { FlexVanilla } from './Flex.vanilla';
 
 describe('FlexVanilla', () => {

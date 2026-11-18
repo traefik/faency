@@ -2,9 +2,11 @@ import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import React from 'react';
 
-import { VanillaExtractThemeProvider } from '../../styles/themeContext';
-import { InputVanilla } from '../Input';
-import { TextareaVanilla } from '../Textarea';
+import { VanillaExtractThemeProvider } from '@/styles/themeContext';
+
+import { InputVanilla } from '@/components/Input';
+import { TextareaVanilla } from '@/components/Textarea';
+
 import { FieldVanilla } from './Field.vanilla';
 
 describe('FieldVanilla', () => {

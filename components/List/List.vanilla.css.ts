@@ -1,8 +1,9 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { tokens } from '../../styles/tokens.css';
-import { elevationVariants } from '../Elevation/Elevation.vanilla.css';
+import { tokens } from '@/styles/tokens.css';
+
+import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
 
 const list = {
   margin: '0 0 0 8px',

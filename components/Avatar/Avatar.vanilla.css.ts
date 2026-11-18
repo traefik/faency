@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { tokens } from '../../styles/tokens.css';
+import { tokens } from '@/styles/tokens.css';
 
 const avatarRoot = style({
   alignItems: 'center',
