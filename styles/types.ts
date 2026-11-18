@@ -39,6 +39,7 @@ export type FlexJustifySimplified =
   | 'start'
   | 'center'
   | 'end'
+  | 'between'
   | 'space-between'
   | 'space-around'
   | 'space-evenly';
