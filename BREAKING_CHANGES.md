@@ -167,6 +167,53 @@ import { Badge } from 'faency';
 
 ---
 
+### DateTimePicker and DateTimePickerInput: Single Date and Inline CSS
+
+**Change:** `DateTimePickerInputVanilla` only accepts a single date, and the `css`-style props of both components apply inline styles only.
+
+|                                | Stitches                                               | Vanilla Extract                                                    |
+| ------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------ |
+| `dates.mode` on the input      | accepted, but `multiple`/`range` leave the field empty | not accepted; the field holds one date                             |
+| `css`, `inputCSS`, `pickerCSS` | Stitches CSS, including nested selectors               | inline styles only, no nested selectors such as `& input`          |
+| `inputProps` type              | not checked                                            | `InputVanillaProps`, without `css`, `onChange`, `type` and `value` |
+| HTML attributes on the root    | not passed through                                     | passed to the root `div`                                           |
+
+**Before (v12.x with Stitches):**
+
+```tsx
+<DateTimePickerInput inputCSS={{ '& input': { fontFamily: '$mono' } }} />
+```
+
+**After (v13.x with Vanilla Extract):**
+
+```ts
+// DateTimePickerInput.css.ts
+import { globalStyle, style } from '@vanilla-extract/css';
+
+export const monoInput = style({});
+
+// inputProps.className lands on the input's wrapper, so target the <input> inside it.
+globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
+```
+
+```tsx
+<DateTimePickerInput inputProps={{ className: monoInput }} />
+```
+
+**Migration Guide:**
+
+1. Remove `dates.mode` from `DateTimePickerInput`; use `DateTimePicker` directly to select several dates or a range
+2. Move nested selectors from `css`, `inputCSS` and `pickerCSS` into a class name passed through `className` or `inputProps.className`
+
+**Rationale:**
+
+- A `datetime-local` input can only hold one date, so the other modes never worked
+- Vanilla Extract styles are generated at build time, so runtime `css` props cannot hold selectors
+
+**Impact:** Low - Only code using `dates.mode` on the input or nested selectors in its `css` props needs changes
+
+---
+
 ## Components Supporting Polymorphic `as` Prop
 
 ### Layout Components
@@ -208,6 +255,8 @@ These components do not support the `as` prop because the actual form elements m
 - ❌ **Input** - Wrapper is fixed `div`, input element cannot be changed
 - ❌ **TextField** - Uses `BoxVanilla` wrapper, input element cannot be changed
 - ❌ **Textarea** - Wrapper is fixed `div`, textarea element cannot be changed
+- ❌ **DateTimePicker** - Fixed widget, root is a `div`
+- ❌ **DateTimePickerInput** - Wrapper is fixed `div`, input element cannot be changed
 
 ### Components Not Yet Migrated
 
