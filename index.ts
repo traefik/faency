@@ -62,8 +62,14 @@ export { useColorScheme } from './components/colorSchemeContext';
 export type { ComboboxVanillaProps } from './components/Combobox';
 export { ComboboxVanilla } from './components/Combobox';
 export { Container, ContainerVanilla } from './components/Container';
-export { DateTimePicker } from './components/DateTimePicker';
-export { DateTimePickerInput } from './components/DateTimePickerInput';
+export type {
+  DateTimePickerInputLabels,
+  DateTimePickerLabels,
+  DateTimePickerVanillaProps,
+} from './components/DateTimePicker';
+export { DateTimePicker, DateTimePickerVanilla } from './components/DateTimePicker';
+export type { DateTimePickerInputVanillaProps } from './components/DateTimePickerInput';
+export { DateTimePickerInput, DateTimePickerInputVanilla } from './components/DateTimePickerInput';
 export {
   Dialog,
   DialogCloseIconButton,

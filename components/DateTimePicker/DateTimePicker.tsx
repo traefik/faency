@@ -1,13 +1,16 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { DPDatesConfig, DPPropGetter, DPUserConfig, useDatePicker } from '@rehookify/datepicker';
+import { DPDatesConfig, DPPropGetter, DPUserConfig } from '@rehookify/datepicker';
 import { addMonths, addYears } from 'date-fns';
-import React, { useState } from 'react';
+import React, { MouseEvent, ReactNode, useState } from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
+import { clampToTimeRange, isOutOfRange } from './isOutOfRange';
+import { DateTimePickerLabels, DEFAULT_LABELS } from './labels';
+import { useDateTimePicker } from './useDateTimePicker';
 
 const CalendarGrid = styled('div', {
   display: 'grid',
@@ -32,20 +35,30 @@ const StyledDiv = styled('div');
 type HeaderProps = {
   centerButtonLabel: string;
   centerButtonOnClick: () => void;
+  leftButtonLabel: string;
   leftButtonProps: DPPropGetter;
+  rightButtonLabel: string;
   rightButtonProps: DPPropGetter;
 };
 
 function Header({
   centerButtonLabel,
   centerButtonOnClick,
+  leftButtonLabel,
   leftButtonProps,
+  rightButtonLabel,
   rightButtonProps,
 }: HeaderProps) {
   return (
     <Flex align="center" gap="2" css={{ px: '$2' }}>
-      <Button type="button" ghost variant="secondary" {...leftButtonProps}>
-        <ChevronLeftIcon />
+      <Button
+        type="button"
+        ghost
+        variant="secondary"
+        aria-label={leftButtonLabel}
+        {...leftButtonProps}
+      >
+        <ChevronLeftIcon aria-hidden />
       </Button>
       <Button
         type="button"
@@ -58,8 +71,14 @@ function Header({
       >
         {centerButtonLabel}
       </Button>
-      <Button type="button" ghost variant="secondary" {...rightButtonProps}>
-        <ChevronRightIcon />
+      <Button
+        type="button"
+        ghost
+        variant="secondary"
+        aria-label={rightButtonLabel}
+        {...rightButtonProps}
+      >
+        <ChevronRightIcon aria-hidden />
       </Button>
     </Flex>
   );
@@ -71,9 +90,42 @@ type CustomDPUserConfig = Omit<DPUserConfig, 'dates'> & {
   dates?: Partial<CustomDPDatesConfig>;
 };
 
+type PresetProps = {
+  children: ReactNode;
+  fromNow: (now: Date) => Date;
+  dates: CustomDPUserConfig['dates'];
+  exclude: CustomDPUserConfig['exclude'];
+  time: CustomDPUserConfig['time'];
+  onSelect: (date: Date, evt: MouseEvent<HTMLElement>) => void;
+};
+
+function Preset({ children, fromNow, dates, exclude, time, onSelect }: PresetProps) {
+  const presetDate = (now: Date) => clampToTimeRange(fromNow(now), time);
+  // Checked again on click, since a picker that stays mounted outlives this snapshot.
+  const [mountedAt, setMountedAt] = useState(() => new Date());
+
+  return (
+    <Button
+      type="button"
+      css={{ flex: '1 1 0' }}
+      variant="secondary"
+      disabled={isOutOfRange(presetDate(mountedAt), dates, exclude)}
+      onClick={(evt: MouseEvent<HTMLElement>) => {
+        const date = presetDate(new Date());
+        if (isOutOfRange(date, dates, exclude)) setMountedAt(new Date());
+        else onSelect(date, evt);
+      }}
+    >
+      {children}
+    </Button>
+  );
+}
+
 export type DateTimePickerProps = CustomDPUserConfig & {
   css?: CSS;
+  labels?: Partial<DateTimePickerLabels>;
   onFastTravelClick?: () => void;
+  onDayButtonClick?: () => void;
   onTimeButtonClick?: () => void;
   showDatePresets?: boolean;
   showTimePicker?: boolean;
@@ -86,7 +138,16 @@ export const DateTimePicker = React.forwardRef<
   DateTimePickerProps
 >(
   (
-    { css, onFastTravelClick, onTimeButtonClick, showDatePresets, showTimePicker, ...config },
+    {
+      css,
+      labels,
+      onFastTravelClick,
+      onDayButtonClick,
+      onTimeButtonClick,
+      showDatePresets,
+      showTimePicker,
+      ...config
+    },
     fowardedRef,
   ) => {
     const {
@@ -97,15 +158,30 @@ export const DateTimePicker = React.forwardRef<
         monthButton,
         nextYearsButton,
         previousYearsButton,
+        setOffset,
         subtractOffset,
         timeButton,
         yearButton,
       },
-    } = useDatePicker(config);
+    } = useDateTimePicker({
+      ...config,
+      // Picked days keep midnight or the previous time, which can fall outside the time limits.
+      onDatesChange: (d) =>
+        config.onDatesChange(d.map((date) => clampToTimeRange(date, config.time))),
+    });
 
     const [page, setPage] = useState<number>(0);
+    const mergedLabels = { ...DEFAULT_LABELS, ...labels };
 
     const { days, month, year } = calendars[0];
+
+    // Moves the calendar to the preset date too, so the selection is visible.
+    const travelTo = (date: Date, evt: MouseEvent<HTMLElement>) => {
+      config.onDatesChange([date]);
+      setOffset(date).onClick?.(evt);
+      setPage(0);
+      onFastTravelClick?.();
+    };
 
     return (
       <StyledDiv css={css} ref={fowardedRef}>
@@ -125,6 +201,8 @@ export const DateTimePicker = React.forwardRef<
                 <Header
                   centerButtonLabel={month}
                   centerButtonOnClick={() => setPage(1)}
+                  leftButtonLabel={mergedLabels.previousMonth}
+                  rightButtonLabel={mergedLabels.nextMonth}
                   leftButtonProps={subtractOffset({ months: 1 })}
                   rightButtonProps={addOffset({ months: 1 })}
                 />
@@ -151,6 +229,12 @@ export const DateTimePicker = React.forwardRef<
                       ghost={!d.selected}
                       variant={d.now || d.selected ? 'primary' : 'secondary'}
                       {...dayButton(d)}
+                      aria-selected={undefined}
+                      aria-pressed={d.selected}
+                      onClick={(evt) => {
+                        dayButton(d).onClick?.(evt);
+                        onDayButtonClick?.();
+                      }}
                       tabIndex={dayButton(d).disabled ? dayButton(d).tabIndex : 0}
                     >
                       {d.day}
@@ -166,6 +250,8 @@ export const DateTimePicker = React.forwardRef<
                 <Header
                   centerButtonLabel={year}
                   centerButtonOnClick={() => setPage(2)}
+                  leftButtonLabel={mergedLabels.previousYear}
+                  rightButtonLabel={mergedLabels.nextYear}
                   leftButtonProps={subtractOffset({ years: 1 })}
                   rightButtonProps={addOffset({ years: 1 })}
                 />
@@ -182,6 +268,8 @@ export const DateTimePicker = React.forwardRef<
                       ghost={!m.selected}
                       variant={m.now || m.selected ? 'primary' : 'secondary'}
                       {...monthButton(m)}
+                      aria-selected={undefined}
+                      aria-pressed={m.selected}
                       onClick={(evt) => {
                         setPage(0);
                         const fn = monthButton(m).onClick;
@@ -202,6 +290,8 @@ export const DateTimePicker = React.forwardRef<
                 <Header
                   centerButtonLabel={`${years[0].year} - ${years[years.length - 1].year}`}
                   centerButtonOnClick={() => setPage(0)}
+                  leftButtonLabel={mergedLabels.previousYears}
+                  rightButtonLabel={mergedLabels.nextYears}
                   leftButtonProps={previousYearsButton()}
                   rightButtonProps={nextYearsButton()}
                 />
@@ -218,6 +308,8 @@ export const DateTimePicker = React.forwardRef<
                       ghost={!y.selected}
                       variant={y.now || y.selected ? 'primary' : 'secondary'}
                       {...yearButton(y)}
+                      aria-selected={undefined}
+                      aria-pressed={y.selected}
                       onClick={(evt) => {
                         setPage(0);
                         const fn = yearButton(y).onClick;
@@ -253,6 +345,8 @@ export const DateTimePicker = React.forwardRef<
                         ghost={!t.selected}
                         variant={t.now || t.selected ? 'primary' : 'secondary'}
                         {...timeButton(t)}
+                        aria-selected={undefined}
+                        aria-pressed={t.selected}
                         onClick={(evt) => {
                           const fn = timeButton(t).onClick;
                           if (typeof fn !== 'undefined') fn(evt);
@@ -271,40 +365,34 @@ export const DateTimePicker = React.forwardRef<
 
           {showDatePresets ? (
             <Flex gap="2">
-              <Button
-                type="button"
-                css={{ flex: '1 1 0' }}
-                variant="secondary"
-                onClick={() => {
-                  config.onDatesChange([addMonths(new Date(), 1)]);
-                  if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                }}
+              <Preset
+                fromNow={(d) => addMonths(d, 1)}
+                dates={config.dates}
+                exclude={config.exclude}
+                time={config.time}
+                onSelect={travelTo}
               >
                 Now + 1 M
-              </Button>
-              <Button
-                type="button"
-                css={{ flex: '1 1 0' }}
-                variant="secondary"
-                onClick={() => {
-                  config.onDatesChange([addMonths(new Date(), 3)]);
-                  if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                }}
+              </Preset>
+              <Preset
+                fromNow={(d) => addMonths(d, 3)}
+                dates={config.dates}
+                exclude={config.exclude}
+                time={config.time}
+                onSelect={travelTo}
               >
                 Now + 3 M
-              </Button>
+              </Preset>
               {showTimePicker ? (
-                <Button
-                  type="button"
-                  css={{ flex: '1 1 0' }}
-                  variant="secondary"
-                  onClick={() => {
-                    config.onDatesChange([addYears(new Date(), 1)]);
-                    if (typeof onFastTravelClick !== 'undefined') onFastTravelClick();
-                  }}
+                <Preset
+                  fromNow={(d) => addYears(d, 1)}
+                  dates={config.dates}
+                  exclude={config.exclude}
+                  time={config.time}
+                  onSelect={travelTo}
                 >
                   Now + 1 Y
-                </Button>
+                </Preset>
               ) : undefined}
             </Flex>
           ) : undefined}
