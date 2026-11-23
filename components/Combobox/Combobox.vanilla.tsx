@@ -5,7 +5,11 @@ import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
-import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '@/components/Input/Input.vanilla';
+import {
+  InputVanilla,
+  InputVanillaHandle,
+  InputVanillaProps,
+} from '@/components/Input/Input.vanilla';
 
 import {
   comboboxAnchor,

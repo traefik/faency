@@ -31,7 +31,7 @@ export interface StitchesMedia {
 type StitchesPropsToExclude = 'true' | 'false' | StitchesMedia;
 
 export function modifyVariantsForStory<ComponentVariants, ComponentProps>(
-  component: (props: ComponentProps) => JSX.Element
+  component: (props: ComponentProps) => JSX.Element,
 ) {
   type StoryFnVariants = {
     [Property in keyof ComponentVariants]: Exclude<

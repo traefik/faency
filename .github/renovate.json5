@@ -1,16 +1,7 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: [
-    "config:recommended",
-    "helpers:pinGitHubActionDigests"
-  ],
-  enabledManagers: [
-    "custom.regex",
-    "dockerfile",
-    "github-actions",
-    "npm",
-    "nvm"
-  ],
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: ['config:recommended', 'helpers:pinGitHubActionDigests'],
+  enabledManagers: ['custom.regex', 'dockerfile', 'github-actions', 'npm', 'nvm'],
   customManagers: [
     {
       customType: 'regex',
@@ -36,68 +27,68 @@
       maxRequestsPerSecond: 8,
     },
   ],
-  labels: ["area/infrastructure", "status/2-needs-review"],
+  labels: ['area/infrastructure', 'status/2-needs-review'],
   minimumReleaseAge: '3 days',
   packageRules: [
     {
       groupName: 'all non-major dependencies',
       groupSlug: 'all-minor-patch',
-      matchManagers: [ 'npm' ],
-      matchUpdateTypes: [ 'minor', 'patch' ],
+      matchManagers: ['npm'],
+      matchUpdateTypes: ['minor', 'patch'],
     },
     // Node.js: .nvmrc tracks the latest Node used to develop and release Faency.
     {
       groupName: 'Node.js',
       groupSlug: 'nodejs',
-      matchManagers: [ 'nvm' ],
+      matchManagers: ['nvm'],
     },
     // @types/node follows the Node major in .nvmrc. Raise this cap in the same PR as a major Node upgrade.
     {
-      matchManagers: [ 'npm' ],
-      matchPackageNames: [ '@types/node' ],
+      matchManagers: ['npm'],
+      matchPackageNames: ['@types/node'],
       allowedVersions: '<25.0.0',
     },
     // engines.node is the minimum Node for apps that install Faency, so it is raised by hand,
     // only when Faency needs a newer Node, not every time .nvmrc moves.
     {
-      matchManagers: [ 'npm' ],
-      matchDepTypes: [ 'engines' ],
+      matchManagers: ['npm'],
+      matchDepTypes: ['engines'],
       enabled: false,
     },
     // Github Actions.
     {
       groupName: 'GitHub actions',
       groupSlug: 'gh-actions',
-      matchManagers: [ 'github-actions' ],
+      matchManagers: ['github-actions'],
       rangeStrategy: 'replace',
     },
     // @radix-ui/colors v3 ships color scales as hex values instead of hsl(),
     // which breaks our theming utilities that parse/manipulate HSL channels.
     // Keep pinned at 2.x until we migrate our color handling to support the new format.
     {
-      matchManagers: [ 'npm' ],
-      matchPackageNames: [ '@radix-ui/colors' ],
+      matchManagers: ['npm'],
+      matchPackageNames: ['@radix-ui/colors'],
       allowedVersions: '<3.0.0',
     },
     // @stitches/react is no longer maintained and won't support newer TypeScript versions.
     // Keep TypeScript pinned until we complete the vanilla-extract migration and drop Stitches entirely.
     {
-      matchManagers: [ 'npm' ],
-      matchPackageNames: [ 'typescript' ],
+      matchManagers: ['npm'],
+      matchPackageNames: ['typescript'],
       enabled: false,
     },
     // @types/react 18.3+ introduces breaking type changes incompatible with @stitches/react.
     // Keep pinned at 18.2.x until the vanilla-extract migration is complete and Stitches is dropped.
     {
-      matchManagers: [ 'npm' ],
-      matchPackageNames: [ '@types/react', '@types/react-dom' ],
+      matchManagers: ['npm'],
+      matchPackageNames: ['@types/react', '@types/react-dom'],
       enabled: false,
     },
     // React 19 is not yet supported across all consumers of Faency. Keep pinned at 18.x
     // until downstream projects are ready to upgrade.
     {
-      matchManagers: [ 'npm' ],
-      matchPackageNames: [ 'react', 'react-dom' ],
+      matchManagers: ['npm'],
+      matchPackageNames: ['react', 'react-dom'],
       allowedVersions: '<19.0.0',
     },
     // vite-plugin-dts v5 splits its implementation into a separate `unplugin-dts` package
@@ -107,10 +98,10 @@
     // so v5 fails to type-check with "has no default export". Keep pinned at 4.x until we
     // migrate moduleResolution.
     {
-      matchManagers: [ 'npm' ],
-      matchPackageNames: [ 'vite-plugin-dts' ],
+      matchManagers: ['npm'],
+      matchPackageNames: ['vite-plugin-dts'],
       allowedVersions: '<5.0.0',
-    }
+    },
   ],
   semanticCommits: 'enabled',
 }

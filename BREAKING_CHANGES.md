@@ -1,14 +1,16 @@
-# Breaking Changes for v13.0.0
+# Breaking Changes for v14.0.0
 
-This document tracks breaking changes that will be introduced when migrating from Stitches to Vanilla Extract as the default styling system.
+This document tracks breaking changes that will be introduced when Vanilla Extract replaces Stitches as the styling system.
 
 ## Overview
 
-These changes will occur in **v13.0.0** when we make Vanilla Extract the default export and deprecate Stitches versions. Users will need to update their code when upgrading.
+These changes will occur in the next major release (**v14.0.0** at the time of writing), when the Vanilla Extract versions take over the plain component names and Stitches is removed. Users will need to update their code when upgrading.
 
-**Current Version:** v12.x (Stitches-based, side-by-side with Vanilla Extract)
-**Next Major Version:** v13.0.0 (Vanilla Extract only - complete migration with breaking changes)
-**Current Status:** In development - migrating components to Vanilla Extract
+**Current Version:** v13.x (Stitches components, with `*Vanilla` versions exported side by side)
+**Next Major Version:** v14.0.0 (Vanilla Extract only)
+**Current Status:** In development - migrating components to Vanilla Extract (see [VANILLA_EXTRACT_MIGRATION.md](./VANILLA_EXTRACT_MIGRATION.md))
+
+Most items below can already be tested today by switching to the `*Vanilla` export of a component.
 
 ---
 
@@ -18,40 +20,53 @@ These changes will occur in **v13.0.0** when we make Vanilla Extract the default
 
 **Change:** `asChild` prop replaced with polymorphic `as` prop across all applicable components
 
-**Before (v12.x with Stitches):**
+**Before (v13.x with Stitches):**
 
 ```tsx
-import { Badge } from 'faency';
+import { Badge } from '@traefik-labs/faency';
 
-// Using asChild with a child element
 <Badge asChild variant="success">
   <a href="/profile">Link Badge</a>
 </Badge>;
 ```
 
-**After (v13.x with Vanilla Extract):**
+**After (v14.x with Vanilla Extract):**
 
 ```tsx
-import { Badge } from 'faency';
+import { Badge } from '@traefik-labs/faency';
 
-// Using as prop directly
 <Badge as="a" href="/profile" variant="success">
   Link Badge
 </Badge>;
 ```
 
+The same applies to the Radix-based parts that render an element. `as` also takes a component, and the Radix behavior is applied to it:
+
+```tsx
+// Before
+<PopoverTrigger asChild>
+  <Button variant="primary">Open</Button>
+</PopoverTrigger>
+
+// After
+<PopoverTrigger as={Button} variant="primary">
+  Open
+</PopoverTrigger>
+```
+
 **Migration Guide:**
 
-1. Replace `asChild` with `as="elementType"`
+1. Replace `asChild` with `as="elementType"` (or `as={Component}`)
 2. Move the child element's props to the component itself
 3. Remove the wrapper element and move children to the component's children
+
+**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor. The other DropdownMenu and Popover parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
 
 **Rationale:**
 
 - More ergonomic API (no wrapper element needed)
 - Better TypeScript support (element-specific props are typed correctly)
 - Consistent polymorphic pattern across all components
-- Simpler implementation without Radix UI Slot dependency
 
 **Impact:** Medium - Common pattern for components rendered as links or buttons
 
@@ -72,7 +87,7 @@ import { Badge } from 'faency';
 
 `name`, `required`, `disabled`, `value` and `defaultValue` work the same, and the select still submits its value with a form.
 
-**Before (v12.x with Stitches):**
+**Before (v13.x with Stitches):**
 
 ```tsx
 <Select value={type} onChange={(event) => setType(event.target.value)}>
@@ -84,7 +99,7 @@ import { Badge } from 'faency';
 </Select>
 ```
 
-**After (v13.x with Vanilla Extract):**
+**After (v14.x with Vanilla Extract):**
 
 ```tsx
 <Select value={type} onValueChange={setType} placeholder="Pick a type">
@@ -143,13 +158,13 @@ import { Badge } from 'faency';
 | Large thumb inset | `2px`                                 | `3px`, scaled like the size     |
 | Focus ring        | on any focus, including mouse clicks  | on keyboard focus only          |
 
-**Before (v12.x with Stitches):**
+**Before (v13.x with Stitches):**
 
 ```tsx
 <Switch />
 ```
 
-**After (v13.x with Vanilla Extract):**
+**After (v14.x with Vanilla Extract):**
 
 ```tsx
 <Switch css={{ m: '$2' }} />
@@ -164,6 +179,72 @@ import { Badge } from 'faency';
 - Components should not add space outside their own box, and the margin applied to one size only
 
 **Impact:** Low - Layouts with a default-size switch get 8px tighter around it
+
+### AriaTr: `asChild` Removed
+
+**Change:** `AriaTr` no longer accepts `asChild`. Use `href` (with `linkAs` for a router link component) to make a row a link.
+
+```tsx
+// Before
+<AriaTr asChild>
+  <a href="/item/1">…</a>
+</AriaTr>
+
+// After
+<AriaTr href="/item/1">…</AriaTr>
+<AriaTr href="/item/1" linkAs={RouterLink}>…</AriaTr>
+```
+
+`AriaTr` also throws in more cases: a row with a `fullColSpan` cell can no longer use `emptyFirstColumn` or `collapsedContent`, since those add cells next to it.
+
+**Impact:** Low
+
+### Components That Lost the `as` Prop
+
+Stitches `styled` components accepted `as`. These vanilla versions render fixed elements:
+
+- **Ul, Ol, Li** - always `ul`, `ol`, `li`
+- **Table parts** (`Table`, `Thead`, `Tbody`, `Tfoot`, `Tr`, `Th`, `Td`, `Caption`) - always the matching table element
+
+**Migration:** Use the semantic element the component renders, or wrap it.
+
+### Changed Default Elements
+
+- **Blockquote** - renders `<blockquote>` instead of `<span>`. Pass `as="span"` to keep the old element.
+
+### Paragraph: Text Variants Removed
+
+**Change:** Paragraph only accepts `size`. The Text variants it used to forward (`weight`, `variant`, `gradient`, `transform`, `noWrap`) are gone.
+
+**Migration:** Use `css`/`className`, or wrap the content in `Text`.
+
+### Flex: `align` Values Removed
+
+The `align` values `space-evenly`, `space-between` and `space-around` are removed. They were never valid for `align-items`, so only TypeScript is affected: delete them.
+
+The same applies to `Li`, which takes the Flex layout props.
+
+### Input and TextField: `className` and `style` Target the Wrapper
+
+**Change:** In Stitches, `className` and `style` landed on the inner `<input>`; now they land on the wrapper `<div>` (as `css` already did).
+
+**Migration:** Update selectors to target the wrapper, or use `& > input` in your stylesheet.
+
+### Avatar: Wrapper `<div>` Removed
+
+**Change:** Avatar no longer renders a wrapper `<div>` around the avatar. `css`, `style`, `className` and `ref` all target the avatar element, and `width`, `height` and `position` passed through `css` are no longer overridden.
+
+**Migration:** Update selectors or tests that expected the wrapper, and drop any `width`/`height` from `css` that relied on being ignored.
+
+### Removed Style Exports
+
+- `panelStyles` → use `<Panel>`
+- `elevationVariants` → use `<Elevation>` or `<Card elevation>`
+
+### Visual Changes
+
+- **Panel** no longer has a box shadow (Dropdown and Popover set their own elevation, so they are unaffected)
+- **Badge** `alphaBg` uses the `A3` color step instead of `A6`
 
 ---
 
@@ -197,31 +278,37 @@ import { Badge } from 'faency';
 
 ### Layout Components
 
-- ✅ **Box** - Full polymorphic support (default: `div`)
-- ✅ **Container** - Full polymorphic support (default: `div`)
-- ✅ **Flex** - Full polymorphic support (default: `div`)
-- ✅ **Grid** - Full polymorphic support (default: `div`)
-- ✅ **Panel** - Full polymorphic support (default: `div`)
-- ✅ **Elevation** - Full polymorphic support (default: `div`)
-- ✅ **Card** - Full polymorphic support with smart defaults (default: `button` when `interactive`, otherwise `div`)
+- ✅ **Box** - default: `div`
+- ✅ **Container** - default: `div`
+- ✅ **Flex** - default: `div`
+- ✅ **Grid** - default: `div`
+- ✅ **Panel** - default: `div`
+- ✅ **Elevation** - default: `div`
+- ✅ **Card** - default: `button` when `interactive`, otherwise `div`
+- ✅ **Skeleton** - default: `div`
+- ✅ **Image** - default: `img`
 
 ### Typography Components
 
-- ✅ **Text** - Full polymorphic support (default: `span`)
-- ✅ **Heading** - Full polymorphic support (default: `h1`)
-- ✅ **Paragraph** - Full polymorphic support (default: `p`)
-- ✅ **Blockquote** - Full polymorphic support (default: `blockquote`)
-- ✅ **Label** - Full polymorphic support (default: `label`)
+- ✅ **Text** - default: `span`
+- ✅ **H1–H6** - default: the matching heading element
+- ✅ **Paragraph** - default: `p`
+- ✅ **Blockquote** - default: `blockquote`
+- ✅ **Label** - default: `label`
 
 ### Interactive Components
 
-- ✅ **Badge** - Full polymorphic support (default: `span`)
-- ✅ **Button** - Full polymorphic support (default: `button`)
-- ✅ **IconButton** - Full polymorphic support (default: `button`)
-- ✅ **Bubble** - Full polymorphic support (default: `div`)
-- ✅ **ButtonSwitch** (Container & Item) - Full polymorphic support with conditional rendering
-  - Container default: uses Radix `ToggleGroup.Root` when no `as` prop, otherwise renders as custom element with `role="group"`
-  - Item default: uses Radix `ToggleGroup.Item` when no `as` prop, otherwise renders as custom element with `role="radio"`
+- ✅ **Badge** - default: `button` when `interactive`, otherwise `span`
+- ✅ **Button** - default: `button`
+- ✅ **IconButton** - default: `button`
+- ✅ **Bubble** - default: `div`
+- ✅ **ButtonSwitch** (Container & Item) - conditional rendering, see below
+- ✅ **DropdownMenuTrigger** - default: `button`, keeps the Radix trigger behavior on the `as` element
+- ✅ **DropdownMenuItem** - default: `div`, keeps the Radix menu item behavior on the `as` element
+  - The other DropdownMenu parts take neither `as` nor `asChild`
+- ✅ **PopoverTrigger** / **PopoverClose** - default: `button`, keeps the Radix behavior on the `as` element
+- ✅ **PopoverAnchor** - default: `div`
+  - `PopoverContent` takes neither `as` nor `asChild`
 
 ---
 
@@ -232,13 +319,17 @@ import { Badge } from 'faency';
 These components do not support the `as` prop because the actual form elements must remain fixed for proper functionality and browser compatibility:
 
 - ❌ **Input** - Wrapper is fixed `div`, input element cannot be changed
-- ❌ **TextField** - Uses `BoxVanilla` wrapper, input element cannot be changed
+- ❌ **TextField** - Built on `Field` and `Input`, input element cannot be changed
 - ❌ **Textarea** - Wrapper is fixed `div`, textarea element cannot be changed
+
+### Fixed-Element Components
+
+- ❌ **Ul, Ol, Li** and **Table parts** - see [Components That Lost the `as` Prop](#components-that-lost-the-as-prop)
+- ❌ **AriaTable parts**, **Avatar**, **CodeBlock**, **Field**, **AccessibleIcon**
 
 ### Components Not Yet Migrated
 
-- ⏳ **AriaTable** - Not yet migrated to Vanilla Extract
-- Additional components may be added as migration continues
+See the "Not migrated yet" list in [VANILLA_EXTRACT_MIGRATION.md](./VANILLA_EXTRACT_MIGRATION.md#phase-3-component-migration-). Entries are added here as they are migrated.
 
 ---
 
@@ -293,34 +384,27 @@ Card component has intelligent default element selection:
 
 ### Theme Provider Requirement
 
-**Change:** `VanillaExtractThemeProvider` required at app root
+**Change:** `VanillaExtractThemeProvider` is required at the app root. Vanilla components throw outside it.
 
-**Before (v12.x with Stitches):**
-
-```tsx
-import { FaencyProvider } from 'faency';
-
-<FaencyProvider>
-  <App />
-</FaencyProvider>;
-```
-
-**After (v13.x with Vanilla Extract):**
+This already applies today to any `*Vanilla` component. `FaencyProvider` is still needed next to it (it provides the Radix Tooltip provider and the color scheme context):
 
 ```tsx
-import { VanillaExtractThemeProvider } from 'faency';
+import { FaencyProvider, VanillaExtractThemeProvider } from '@traefik-labs/faency';
 
-<VanillaExtractThemeProvider defaultTheme="light">
-  <App />
+<VanillaExtractThemeProvider defaultTheme="system" primaryColor="blue">
+  <FaencyProvider>
+    <App />
+  </FaencyProvider>
 </VanillaExtractThemeProvider>;
 ```
 
-**Migration Guide:**
+**Props:**
 
-1. Replace `FaencyProvider` with `VanillaExtractThemeProvider`
-2. Add `defaultTheme` prop (either `"light"` or `"dark"`)
-3. Optional: Add `forcedTheme` prop to override user preference
-4. Optional: Add `primaryColor` prop to set the primary color theme
+- `defaultTheme`: `"light"`, `"dark"` or `"system"` (default `"system"`)
+- `forcedTheme`: `"light"` or `"dark"`, overrides the user preference
+- `primaryColor`: `neon`, `blue`, `orange`, `red`, `green`, `deepBlue` or `grayBlue` (default `blue`)
+
+The provider applies the theme class to `document.body`, so the Stitches `darkTheme`/`lightTheme` classes are no longer needed. What happens to `FaencyProvider` in v14.0.0 is still open (see [Questions & Considerations](#questions--considerations)).
 
 **Rationale:**
 
@@ -337,63 +421,80 @@ import { VanillaExtractThemeProvider } from 'faency';
 
 ### CSS Prop Processing
 
-**Change:** Internal implementation change (no user-facing API change)
-
-**Status:** No breaking change - CSS prop API remains identical
+**Change:** The `css` prop is now converted to inline styles at runtime instead of a generated class. Plain properties and whole-value tokens keep working:
 
 ```tsx
-// Both versions support the same API
 <Badge css={{ px: '$4', py: '$6', bc: '$blue6' }} />
-
-// Also supports full property names
 <Badge css={{ padding: '$4', backgroundColor: '$blue6' }} />
 ```
 
-**Note:** This is maintained for backward compatibility. The `css` prop continues to support token-based styling with both abbreviated and full property names.
+**No longer supported in `css`** (TypeScript does not flag these, they are silently ignored or left as-is):
+
+- Nested selectors and pseudo-classes/elements (`'&:hover'`, `'& > *'`, `'&::before'`)
+- Media keys (`@bp1`–`@bp4`, `@hover`, `@motion`, `@dark`, `@light`)
+- Tokens inside a longer value (`'1px solid $gray6'`, `'$2 $3'`, `'calc($2 + 4px)'`, `'-$2'`)
+- Scale-prefixed tokens (`'$colors$primary'`) and locals (`$$var`)
+- Vendor prefixes added by Stitches utils (`userSelect`, `appearance`, `backgroundClip`)
+
+**Specificity:** `css` values are inline styles, so a stylesheet class can't override them without `!important`.
+
+**Migration:** Move selectors, media queries and compound values into a `className` backed by your own stylesheet (or vanilla-extract `style()`).
+
+### Responsive Variants
+
+**Change:** Variant props no longer accept responsive objects such as `size={{ '@initial': '1', '@bp2': '2' }}`. Pass a single value and switch it in your own code or stylesheet.
+
+### Components as Selectors
+
+**Change:** Components no longer expose a Stitches selector (`` `& ${Button}` ``, `.className`, `.selector`, `toString()`). Target your own class or a data attribute instead.
+
+### Stitches Exports Removed
+
+`styled`, `css`, `keyframes`, `createTheme`, `globalCss`, `getCssText`, `darkTheme`, `lightTheme`, `config`, and the `CSS` and `VariantProps` types are removed. Vanilla equivalents: `vanillaTokens`, `vanillaThemes`, `vanillaLightTheme`, `vanillaDarkTheme`, `CSSProps`.
 
 ---
 
 ## Migration Timeline
 
-### Phase 1: Side-by-Side (Current - v12.x)
+### Side-by-Side (Current - v13.x)
 
 - Both Stitches and Vanilla Extract versions exported
 - No breaking changes
 - Users can opt-in to `*Vanilla` components
-- This allows users to test Vanilla Extract versions before migration
+- New components are vanilla-only and already use the `Vanilla` suffix
 - Components have `.vanilla.tsx` suffix in source
 - **Currently in this phase** - actively migrating components
 
-### Phase 2: Vanilla Extract Only (v13.0.0 - Future)
+### Vanilla Extract Only (v14.0.0 - Future)
 
-- **Complete switch to Vanilla Extract**
 - Remove all Stitches code and dependencies
-- Remove `.vanilla` suffix from filenames and exports
-- All components use Vanilla Extract only
+- Remove `.vanilla` suffix from filenames and `Vanilla` suffix from exports
 - Breaking changes documented above take effect
 - Expected bundle size reduction
 
-**Migration Steps (when upgrading to v13.0.0):**
+**Migration Steps (when upgrading to v14.0.0):**
 
-1. Update imports: `import { Badge } from 'faency'` (remove `Vanilla` suffix)
-2. Replace `FaencyProvider` with `VanillaExtractThemeProvider`
+1. Update imports: `import { Badge } from '@traefik-labs/faency'` (remove `Vanilla` suffix)
+2. Add `VanillaExtractThemeProvider` at the app root
 3. Update `asChild` usage to `as` prop pattern
 4. Rewrite `Select` options and change handlers for the Radix-based `Select`
-5. Test all components in your application
-6. Update TypeScript types if using component type references
+5. Move `css` selectors, media queries and compound token values to classes
+6. Apply the component-specific changes listed above
+7. Update TypeScript types if using component type references
+8. Test all components in your application
 
 ---
 
-## Changelog Template for v13.0.0
+## Changelog Template for v14.0.0
+
+Release notes are generated by semantic-release; use this as the body of the breaking commit or to edit the GitHub release.
 
 ```markdown
-## [13.0.0] - YYYY-MM-DD
+## [14.0.0] - YYYY-MM-DD
 
 ### BREAKING CHANGES
 
 #### Polymorphic Components: `asChild` → `as` Prop
-
-Layout, typography, and interactive components now use polymorphic `as` prop
 
 - **Changed:** Replaced `asChild` prop with polymorphic `as` prop for better TypeScript support and ergonomics
   - Before: `<Badge asChild><a href="#">Link</a></Badge>`
@@ -424,47 +525,35 @@ Layout, typography, and interactive components now use polymorphic `as` prop
 
 #### Theme Provider
 
-- **Changed:** Requires `VanillaExtractThemeProvider` instead of `FaencyProvider`
-  - Before: `<FaencyProvider><App /></FaencyProvider>`
-  - After: `<VanillaExtractThemeProvider defaultTheme="light"><App /></VanillaExtractThemeProvider>`
+- **Changed:** Requires `VanillaExtractThemeProvider` at the app root
   - See [Migration Guide](./BREAKING_CHANGES.md#provider-changes)
+
+#### CSS Prop
+
+- **Changed:** `css` is applied as inline styles; selectors, media keys and tokens inside compound values are no longer supported
+  - See [Migration Guide](./BREAKING_CHANGES.md#css-prop-processing)
 
 #### Component Exports
 
-- **Changed:** Removed `.vanilla` suffix from all component exports
-  - Before: `import { BadgeVanilla } from 'faency'`
-  - After: `import { Badge } from 'faency'`
-  - All components now use Vanilla Extract by default
+- **Changed:** Removed `Vanilla` suffix from all component exports
+  - Before: `import { BadgeVanilla } from '@traefik-labs/faency'`
+  - After: `import { Badge } from '@traefik-labs/faency'`
+- **Removed:** Stitches exports (`styled`, `css`, `keyframes`, `globalCss`, …), `panelStyles`, `elevationVariants`
 
-### Added
+#### Component APIs
 
-- Polymorphic `as` prop for layout, typography, and interactive components with full TypeScript support
-- Better performance with build-time CSS generation via Vanilla Extract
-- Improved TypeScript inference for element-specific props
-- Smart default element selection (e.g., Card defaults to button when interactive)
-- Conditional rendering pattern for Radix-based components (ButtonSwitch)
+- See [Component API Changes](./BREAKING_CHANGES.md#component-api-changes) for per-component changes
 
 ### Removed
 
-- **Complete removal of Stitches styling system**
-- Removed `@stitches/react` dependency
-- Removed all `*.themes.ts` files
-- Removed `stitches.config.ts`
-- Removed `@radix-ui/react-slot` dependency (replaced with polymorphic pattern)
-- Removed `.vanilla` suffix from component exports
-- Removed `FaencyProvider` (replaced with `VanillaExtractThemeProvider`)
-
-### Performance
-
-- Build-time CSS generation for faster runtime performance
-- Reduced JavaScript payload with static CSS extraction
+- Stitches styling system, `@stitches/react` dependency, `stitches.config.ts` and all `*.themes.ts` files
 ```
 
 ---
 
 ## Communication Plan
 
-### Before v13.0.0 Release
+### Before v14.0.0 Release
 
 1. **Documentation:**
    - Update README with migration guide
@@ -483,10 +572,10 @@ Layout, typography, and interactive components now use polymorphic `as` prop
    - Integration tests for migration paths
    - Performance benchmarks
 
-### After v13.0.0 Release
+### After v14.0.0 Release
 
 1. **Support Period:**
-   - Maintain v12.x branch for critical bug fixes
+   - Maintain v13.x branch for critical bug fixes
    - Community support in GitHub issues
    - Dedicated migration support channel
 
@@ -501,28 +590,30 @@ Layout, typography, and interactive components now use polymorphic `as` prop
 
 ### Should we provide a codemod?
 
-For changes like `asChild` → `as` and `FaencyProvider` → `VanillaExtractThemeProvider`, a codemod could automate migration:
-
-```bash
-npx @faency/migrate
-```
+For changes like `asChild` → `as` and the `Vanilla` suffix, a codemod could automate migration:
 
 **Potential transformations:**
 
 1. Replace `asChild` pattern with `as` prop
-2. Update provider imports and usage
+2. Add the theme provider
 3. Remove `Vanilla` suffix from component imports
 4. Update component type references
 
 **Decision:** TBD - To be evaluated based on migration complexity
+
+### What happens to `FaencyProvider`?
+
+It currently provides the Radix Tooltip provider and the color scheme context. Options: keep it, fold its contents into `VanillaExtractThemeProvider`, or remove it once Tooltip is migrated.
+
+**Decision:** TBD
 
 ### Should we maintain a compatibility layer?
 
 A temporary compatibility shim could ease migration:
 
 ```tsx
-// Compatibility mode (deprecated, to be removed in v14.0.0)
-import { Badge } from 'faency/compat';
+// Compatibility mode (deprecated, to be removed in v15.0.0)
+import { Badge } from '@traefik-labs/faency/compat';
 
 <Badge asChild>
   <a href="#">Link</a>
@@ -543,5 +634,5 @@ This document should be updated as:
 - User feedback is received
 - Edge cases are discovered
 
-**Last Updated:** 2026-01-02
+**Last Updated:** 2026-11-18
 **Status:** Work in Progress - Component migration ongoing

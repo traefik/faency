@@ -53,6 +53,9 @@ export const flexRecipe = recipe({
       end: {
         justifyContent: 'flex-end',
       },
+      between: {
+        justifyContent: 'space-between',
+      },
       ['space-evenly']: {
         justifyContent: 'space-evenly',
       },
