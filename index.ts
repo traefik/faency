@@ -1,9 +1,21 @@
 export { AccessibleIcon, AccessibleIconVanilla } from './components/AccessibleIcon';
+export type {
+  AccordionContentVanillaProps,
+  AccordionHeadingLevel,
+  AccordionItemVanillaProps,
+  AccordionRootVanillaProps,
+  AccordionTriggerVanillaProps,
+  AccordionVanillaSize,
+} from './components/Accordion';
 export {
   AccordionContent,
+  AccordionContentVanilla,
   AccordionItem,
+  AccordionItemVanilla,
   AccordionRoot,
+  AccordionRootVanilla,
   AccordionTrigger,
+  AccordionTriggerVanilla,
 } from './components/Accordion';
 export { Alert } from './components/Alert';
 export type {
@@ -50,7 +62,8 @@ export {
   ButtonSwitchItemVanilla,
 } from './components/ButtonSwitch';
 export { Card, CardVanilla } from './components/Card';
-export { Checkbox } from './components/Checkbox';
+export type { CheckboxVanillaProps } from './components/Checkbox';
+export { Checkbox, CheckboxVanilla } from './components/Checkbox';
 export type {
   CodeBlockCopyErrorHandler,
   CodeBlockLanguage,
@@ -168,12 +181,23 @@ export {
   PopoverPortal,
   PopoverTrigger,
 } from './components/Popover';
-export { Radio, RadioGroup } from './components/Radio';
+export type { RadioGroupVanillaProps, RadioVanillaProps } from './components/Radio';
+export { Radio, RadioGroup, RadioGroupVanilla, RadioVanilla } from './components/Radio';
+export type {
+  RadioAccordionContentVanillaProps,
+  RadioAccordionItemVanillaProps,
+  RadioAccordionRootVanillaProps,
+  RadioAccordionTriggerVanillaProps,
+} from './components/RadioAccordion';
 export {
   RadioAccordionContent,
+  RadioAccordionContentVanilla,
   RadioAccordionItem,
+  RadioAccordionItemVanilla,
   RadioAccordionRoot,
+  RadioAccordionRootVanilla,
   RadioAccordionTrigger,
+  RadioAccordionTriggerVanilla,
 } from './components/RadioAccordion';
 export type { RowLinkProps } from './components/RowLink';
 export { RowLink, rowLinkRowStyles, rowLinkTableStyles } from './components/RowLink';

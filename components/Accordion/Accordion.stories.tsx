@@ -6,12 +6,19 @@ import React, { useState } from 'react';
 import { VariantProps } from '../../stitches.config';
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
 import { Badge } from '../Badge';
-import { Box } from '../Box';
+import { Box, BoxVanilla } from '../Box';
 import { Button } from '../Button';
 import { Dialog, DialogContent, DialogOverlay, DialogPortal, DialogTrigger } from '../Dialog';
-import { Flex } from '../Flex';
+import { Flex, FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
 import { Text } from '../Text';
 import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from '.';
+import {
+  AccordionContentVanilla,
+  AccordionItemVanilla,
+  AccordionRootVanilla,
+  AccordionTriggerVanilla,
+} from './Accordion.vanilla';
 
 type AccordionVariants = VariantProps<typeof AccordionRoot>;
 
@@ -210,5 +217,56 @@ InsideModal.argTypes = {
     options: ['small', 'medium', 'large'],
   },
 };
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla gap={6}>
+    <BoxVanilla css={{ width: 300 }}>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <AccordionRoot type="multiple" defaultValue={['item-1']}>
+        <AccordionItem value="item-1">
+          <AccordionTrigger size="medium">Default icon</AccordionTrigger>
+          <AccordionContent size="medium">Item1 Content</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger customIcon={<BookmarkIcon />}>Custom icon</AccordionTrigger>
+          <AccordionContent>Item2 Content</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger noIcon size="large">
+            No icon
+          </AccordionTrigger>
+          <AccordionContent size="large">Item3 Content</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-4">
+          <AccordionTrigger disabled>Disabled</AccordionTrigger>
+        </AccordionItem>
+      </AccordionRoot>
+    </BoxVanilla>
+    <BoxVanilla css={{ width: 300 }}>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <AccordionRootVanilla type="multiple" defaultValue={['item-1']}>
+        <AccordionItemVanilla value="item-1">
+          <AccordionTriggerVanilla size="medium">Default icon</AccordionTriggerVanilla>
+          <AccordionContentVanilla size="medium">Item1 Content</AccordionContentVanilla>
+        </AccordionItemVanilla>
+        <AccordionItemVanilla value="item-2">
+          <AccordionTriggerVanilla customIcon={<BookmarkIcon />}>
+            Custom icon
+          </AccordionTriggerVanilla>
+          <AccordionContentVanilla>Item2 Content</AccordionContentVanilla>
+        </AccordionItemVanilla>
+        <AccordionItemVanilla value="item-3">
+          <AccordionTriggerVanilla noIcon size="large">
+            No icon
+          </AccordionTriggerVanilla>
+          <AccordionContentVanilla size="large">Item3 Content</AccordionContentVanilla>
+        </AccordionItemVanilla>
+        <AccordionItemVanilla value="item-4">
+          <AccordionTriggerVanilla disabled>Disabled</AccordionTriggerVanilla>
+        </AccordionItemVanilla>
+      </AccordionRootVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
+);
 
 export default Component;
