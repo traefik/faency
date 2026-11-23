@@ -6,6 +6,8 @@ import { resolveColor } from '@/styles/resolveColor';
 import { useVanillaExtractTheme } from '@/styles/themeContext';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
+import { TooltipVanilla } from '@/components/Tooltip/Tooltip.vanilla';
+
 import {
   caption,
   captionLabel,
@@ -38,7 +40,6 @@ export type MeterVanillaProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'chil
     size?: 'small' | 'medium' | 'large';
   };
 
-// TODO: replace the native `title` on segments with TooltipVanilla once it exists.
 export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
   (
     {
@@ -101,17 +102,26 @@ export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
           </div>
         )}
         <div className={trackRecipe({ size })} {...ariaProps}>
-          {items.map((s, i) => (
-            <div
-              key={i}
-              className={segment}
-              title={s.label}
-              style={{
-                width: `${widths[i]}%`,
-                backgroundColor: s.color && resolveColor(s.color, colors),
-              }}
-            />
-          ))}
+          {items.map((s, i) => {
+            const bar = (
+              <div
+                key={i}
+                className={segment}
+                style={{
+                  width: `${widths[i]}%`,
+                  backgroundColor: s.color && resolveColor(s.color, colors),
+                }}
+              />
+            );
+
+            return s.label ? (
+              <TooltipVanilla key={i} content={s.label}>
+                {bar}
+              </TooltipVanilla>
+            ) : (
+              bar
+            );
+          })}
         </div>
       </div>
     );

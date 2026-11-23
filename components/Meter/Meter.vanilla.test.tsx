@@ -1,13 +1,20 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React from 'react';
 
 import { VanillaExtractThemeProvider } from '@/styles/themeContext';
 
+import { FaencyProvider } from '@/components/FaencyProvider';
+
 import { MeterVanilla } from './Meter.vanilla';
 
 const renderWithTheme = (ui: React.ReactElement) =>
-  render(<VanillaExtractThemeProvider>{ui}</VanillaExtractThemeProvider>);
+  render(
+    <VanillaExtractThemeProvider>
+      <FaencyProvider>{ui}</FaencyProvider>
+    </VanillaExtractThemeProvider>,
+  );
 
 const segmentsOf = (container: HTMLElement) =>
   Array.from(container.querySelector('[role]')!.children) as HTMLElement[];
@@ -153,13 +160,49 @@ describe('MeterVanilla', () => {
       expect(screen.getByRole('img', { name: 'Responses: 2xx: 3, 5xx: 1' })).toBeInTheDocument();
     });
 
-    it('shows segment labels as tooltips', () => {
-      const { container } = renderWithTheme(
-        <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
-      );
+    describe('tooltips', () => {
+      const { ResizeObserver } = window;
+      const { matches } = Element.prototype;
 
-      expect(segmentsOf(container)[0]).toHaveAttribute('title', '2xx: 3');
-      expect(segmentsOf(container)[1]).not.toHaveAttribute('title');
+      beforeAll(() => {
+        // The shared mock calls back inside observe(), which floating-ui answers by observing again.
+        window.ResizeObserver = class {
+          observe() {}
+          unobserve() {}
+          disconnect() {}
+        };
+        // nwsapi 2.2.27 recurses without end on these pseudo-classes, which floating-ui queries.
+        Element.prototype.matches = function (this: Element, selector: string) {
+          return /:(modal|popover-open|fullscreen)\b/.test(selector)
+            ? false
+            : matches.call(this, selector);
+        };
+      });
+
+      afterAll(() => {
+        window.ResizeObserver = ResizeObserver;
+        Element.prototype.matches = matches;
+      });
+
+      it('shows a segment label as a tooltip on hover', async () => {
+        const { container } = renderWithTheme(
+          <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
+        );
+
+        await userEvent.hover(segmentsOf(container)[0]);
+
+        expect(await screen.findByRole('tooltip')).toHaveTextContent('2xx: 3');
+      });
+
+      it('gives unlabelled segments no tooltip', () => {
+        const { container } = renderWithTheme(
+          <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
+        );
+
+        expect(segmentsOf(container)[0]).toHaveAttribute('data-state', 'closed');
+        expect(segmentsOf(container)[1]).not.toHaveAttribute('data-state');
+        expect(segmentsOf(container)[0]).not.toHaveAttribute('title');
+      });
     });
 
     it('treats a single segment as a meter', () => {
