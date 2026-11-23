@@ -35,6 +35,7 @@ import { SwitchVanilla } from '@/components/Switch/Switch.vanilla';
 import { CaptionVanilla, ThVanilla } from '@/components/Table/Table.vanilla';
 import { TextVanilla } from '@/components/Text/Text.vanilla';
 import { TextareaVanilla } from '@/components/Textarea/Textarea.vanilla';
+import { TooltipContentVanilla } from '@/components/Tooltip/Tooltip.vanilla';
 
 // Checked by `yarn typecheck`: each @ts-expect-error fails the build if its line stops erroring.
 describe('component variant props', () => {
@@ -70,9 +71,10 @@ describe('component variant props', () => {
       <DropdownMenuContentVanilla key="dropdown-menu-content" elevation={2} />,
       <PopoverContentVanilla key="popover-content" elevation={2} />,
       <AlertVanilla key="alert" variant="info" elevation={2} />,
+      <TooltipContentVanilla key="tooltip-content" multiline />,
     ];
 
-    expect(elements).toHaveLength(30);
+    expect(elements).toHaveLength(31);
   });
 
   it('reject invalid variants', () => {
@@ -145,8 +147,10 @@ describe('component variant props', () => {
       <AlertVanilla key="alert" variant="nope" />,
       // @ts-expect-error Card's own variant is not exposed
       <AlertVanilla key="alert-card-variant" variant="inner" />,
+      // @ts-expect-error unknown multiline value
+      <TooltipContentVanilla key="tooltip-content" multiline="yes" />,
     ];
 
-    expect(elements).toHaveLength(34);
+    expect(elements).toHaveLength(35);
   });
 });

@@ -311,6 +311,8 @@ The same applies to `Li`, which takes the Flex layout props.
 - ✅ **PopoverTrigger** / **PopoverClose** - default: `button`, keeps the Radix behavior on the `as` element
 - ✅ **PopoverAnchor** - default: `div`
   - `PopoverContent` takes neither `as` nor `asChild`
+- ✅ **TooltipTrigger** - default: `button`, keeps the Radix trigger behavior on the `as` element
+  - `TooltipContent` takes neither `as` nor `asChild`, and its arrow is no longer wrapped in a `<div>`
 
 ---
 

@@ -556,7 +556,7 @@ globalStyle(`${skeleton}:not(:empty) > *`, { visibility: 'hidden' });
 
 #### Mixing Stitches and vanilla-extract components
 
-**CRITICAL:** Never mix systems. Always use vanilla-extract versions inside vanilla components (see [TextField.vanilla.tsx](components/TextField/TextField.vanilla.tsx), which builds on `FieldVanilla` and `InputVanilla`). When no vanilla version exists yet, use plain HTML elements. Known exception: TextField still uses the Stitches `Tooltip`, which has no vanilla version yet.
+**CRITICAL:** Never mix systems. Always use vanilla-extract versions inside vanilla components (see [TextField.vanilla.tsx](components/TextField/TextField.vanilla.tsx), which builds on `FieldVanilla` and `InputVanilla`). When no vanilla version exists yet, use plain HTML elements.
 
 #### Props typed as `CSSProps` require `as any` in tests
 
