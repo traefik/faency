@@ -86,16 +86,34 @@ export type {
 export { DateTimePicker, DateTimePickerVanilla } from './components/DateTimePicker';
 export type { DateTimePickerInputVanillaProps } from './components/DateTimePickerInput';
 export { DateTimePickerInput, DateTimePickerInputVanilla } from './components/DateTimePickerInput';
+export type {
+  DialogCloseIconButtonVanillaProps,
+  DialogClosePrimitiveVanillaProps,
+  DialogContentVanillaProps,
+  DialogDescriptionVanillaProps,
+  DialogOverlayVanillaProps,
+  DialogTitleVanillaProps,
+  DialogTriggerVanillaProps,
+} from './components/Dialog';
 export {
   Dialog,
   DialogCloseIconButton,
+  DialogCloseIconButtonVanilla,
   DialogClosePrimitive,
+  DialogClosePrimitiveVanilla,
   DialogContent,
+  DialogContentVanilla,
   DialogDescription,
+  DialogDescriptionVanilla,
   DialogOverlay,
+  DialogOverlayVanilla,
   DialogPortal,
+  DialogPortalVanilla,
   DialogTitle,
+  DialogTitleVanilla,
   DialogTrigger,
+  DialogTriggerVanilla,
+  DialogVanilla,
   StyledContent,
 } from './components/Dialog';
 export type {

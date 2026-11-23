@@ -3,17 +3,32 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 import { useState } from 'react';
 
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { Text } from '../Text';
+import { Box, BoxVanilla } from '../Box';
+import { Button, ButtonVanilla } from '../Button';
+import { Flex, FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
+import { Text, TextVanilla } from '../Text';
 import {
   Dialog,
+  DialogClosePrimitive,
   DialogContent,
+  DialogDescription,
   DialogOverlay,
   DialogPortal,
+  DialogTitle,
   DialogTrigger,
   StyledContent,
 } from './Dialog';
+import {
+  DialogClosePrimitiveVanilla,
+  DialogContentVanilla,
+  DialogDescriptionVanilla,
+  DialogOverlayVanilla,
+  DialogPortalVanilla,
+  DialogTitleVanilla,
+  DialogTriggerVanilla,
+  DialogVanilla,
+} from './Dialog.vanilla';
 
 const Component: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
@@ -108,5 +123,91 @@ export const NoCloseIcon: StoryFn<typeof Dialog> = () => {
     </Dialog>
   );
 };
+
+const LOREM =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla gap={9}>
+    <BoxVanilla>
+      <H3Vanilla css={{ mb: '$3' }}>Stitches Version</H3Vanilla>
+      <FlexVanilla gap={3}>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>Open dialog</Button>
+          </DialogTrigger>
+          <DialogPortal>
+            <DialogOverlay />
+            <DialogContent>
+              <Flex direction="column" gap={3}>
+                <DialogTitle asChild>
+                  <Text size={2} weight="bold" as="h3">
+                    Hello, World!
+                  </Text>
+                </DialogTitle>
+                <DialogDescription asChild>
+                  <Text>{LOREM}</Text>
+                </DialogDescription>
+                <DialogClosePrimitive asChild>
+                  <Button css={{ alignSelf: 'flex-end' }}>Done</Button>
+                </DialogClosePrimitive>
+              </Flex>
+            </DialogContent>
+          </DialogPortal>
+        </Dialog>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="secondary">No close icon</Button>
+          </DialogTrigger>
+          <DialogPortal>
+            <DialogOverlay />
+            <StyledContent aria-describedby={undefined}>
+              <DialogTitle asChild>
+                <Text size={2} weight="bold" as="h3">
+                  Press Escape to close.
+                </Text>
+              </DialogTitle>
+            </StyledContent>
+          </DialogPortal>
+        </Dialog>
+      </FlexVanilla>
+    </BoxVanilla>
+    <BoxVanilla>
+      <H3Vanilla css={{ mb: '$3' }}>Vanilla Extract Version</H3Vanilla>
+      <FlexVanilla gap={3}>
+        <DialogVanilla>
+          <DialogTriggerVanilla as={ButtonVanilla}>Open dialog</DialogTriggerVanilla>
+          <DialogPortalVanilla>
+            <DialogOverlayVanilla />
+            <DialogContentVanilla>
+              <FlexVanilla direction="column" gap={3}>
+                <DialogTitleVanilla as={TextVanilla} size="2" weight="bold">
+                  Hello, World!
+                </DialogTitleVanilla>
+                <DialogDescriptionVanilla as={TextVanilla}>{LOREM}</DialogDescriptionVanilla>
+                <DialogClosePrimitiveVanilla as={ButtonVanilla} css={{ alignSelf: 'flex-end' }}>
+                  Done
+                </DialogClosePrimitiveVanilla>
+              </FlexVanilla>
+            </DialogContentVanilla>
+          </DialogPortalVanilla>
+        </DialogVanilla>
+        <DialogVanilla>
+          <DialogTriggerVanilla as={ButtonVanilla} variant="secondary">
+            No close icon
+          </DialogTriggerVanilla>
+          <DialogPortalVanilla>
+            <DialogOverlayVanilla />
+            <DialogContentVanilla noCloseIcon aria-describedby={undefined}>
+              <DialogTitleVanilla as={TextVanilla} size="2" weight="bold">
+                Press Escape to close.
+              </DialogTitleVanilla>
+            </DialogContentVanilla>
+          </DialogPortalVanilla>
+        </DialogVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
+);
 
 export default Component;

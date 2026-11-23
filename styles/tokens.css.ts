@@ -181,6 +181,8 @@ export const tokens = createThemeContract({
     tooltipContentBg: null,
     tooltipText: null,
 
+    dialogBackground: null,
+
     listItemHoverBg: null,
     listItemActiveBg: null,
     listItemFocusBorder: null,

@@ -25,6 +25,7 @@ import {
   codeBlockLightTheme,
 } from '@/components/CodeBlock/CodeBlock.theme.css';
 import { comboboxDarkTheme, comboboxLightTheme } from '@/components/Combobox/Combobox.theme.css';
+import { dialogDarkTheme, dialogLightTheme } from '@/components/Dialog/Dialog.theme.css';
 import { headingDarkTheme, headingLightTheme } from '@/components/Heading/Heading.theme.css';
 import {
   iconButtonDarkTheme,
@@ -409,6 +410,7 @@ const lightSemanticColors = {
   ...checkboxLightTheme,
   ...radioLightTheme,
   ...accordionLightTheme,
+  ...dialogLightTheme,
   meterTrackBg: lightColors.grayA3,
   tooltipContentBg: tokens.colors.primary,
   tooltipText: 'white',
@@ -603,6 +605,7 @@ const darkSemanticColors = {
   ...checkboxDarkTheme,
   ...radioDarkTheme,
   ...accordionDarkTheme,
+  ...dialogDarkTheme,
   meterTrackBg: darkColors.grayA3,
   tooltipContentBg: tokens.colors.primary,
   tooltipText: darkColors.deepBlue2,
