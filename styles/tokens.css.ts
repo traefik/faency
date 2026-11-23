@@ -188,6 +188,33 @@ export const tokens = createThemeContract({
     switchThumb: null,
     switchInvalidBorder: null,
 
+    checkboxIcon: null,
+    checkboxBg: null,
+    checkboxBorder: null,
+    checkboxCheckedBg: null,
+    checkboxCheckedIcon: null,
+    checkboxCheckedHoverBg: null,
+    checkboxHoverBg: null,
+    checkboxHoverBorder: null,
+    checkboxFocusBorder: null,
+    checkboxDisabledBg: null,
+    checkboxDisabledBorder: null,
+    checkboxDisabledIcon: null,
+    checkboxInvalidBorder: null,
+
+    radioIndicator: null,
+    radioBorder: null,
+    radioHoverBorder: null,
+    radioFocusBorder: null,
+    radioDisabledBg: null,
+    radioIndicatorDisabledBg: null,
+    radioInvalidBorder: null,
+
+    accordionHoverShadow: null,
+    accordionActiveShadow: null,
+    accordionText: null,
+    accordionLabel: null,
+
     // Semantic tones
     toneSuccessSolid: null,
     toneSuccessText: null,

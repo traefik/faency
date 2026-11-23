@@ -28,12 +28,26 @@ interface FlexOwnProps extends CSSProps {
   gap?: Gap;
 }
 
-export type FlexProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, FlexOwnProps>;
-type FlexComponent = PolymorphicComponent<'div', FlexProps<ElementType>>;
+export type FlexVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
+  C,
+  FlexOwnProps
+>;
+type FlexComponent = PolymorphicComponent<'div', FlexVanillaProps<ElementType>>;
 
 export const FlexVanillaComponent = React.forwardRef(
   <C extends ElementType = 'div'>(
-    { as, className, css, style, direction, align, justify, wrap, gap, ...props }: FlexProps<C>,
+    {
+      as,
+      className,
+      css,
+      style,
+      direction,
+      align,
+      justify,
+      wrap,
+      gap,
+      ...props
+    }: FlexVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'div';

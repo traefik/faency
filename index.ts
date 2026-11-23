@@ -1,9 +1,21 @@
 export { AccessibleIcon, AccessibleIconVanilla } from './components/AccessibleIcon';
+export type {
+  AccordionContentVanillaProps,
+  AccordionHeadingLevel,
+  AccordionItemVanillaProps,
+  AccordionRootVanillaProps,
+  AccordionTriggerVanillaProps,
+  AccordionVanillaSize,
+} from './components/Accordion';
 export {
   AccordionContent,
+  AccordionContentVanilla,
   AccordionItem,
+  AccordionItemVanilla,
   AccordionRoot,
+  AccordionRootVanilla,
   AccordionTrigger,
+  AccordionTriggerVanilla,
 } from './components/Accordion';
 export { Alert } from './components/Alert';
 export type {
@@ -38,6 +50,7 @@ export type { BadgeVanillaProps } from './components/Badge';
 export { Badge, BADGE_COLORS_VANILLA, BadgeVanilla } from './components/Badge';
 export type { BlockquoteVanillaProps } from './components/Blockquote';
 export { Blockquote, BlockquoteVanilla } from './components/Blockquote';
+export type { BoxVanillaProps } from './components/Box';
 export { Box, BoxVanilla } from './components/Box';
 export type { BubbleVanillaProps } from './components/Bubble';
 export { Bubble, BubbleVanilla } from './components/Bubble';
@@ -50,7 +63,8 @@ export {
   ButtonSwitchItemVanilla,
 } from './components/ButtonSwitch';
 export { Card, CardVanilla } from './components/Card';
-export { Checkbox } from './components/Checkbox';
+export type { CheckboxVanillaProps } from './components/Checkbox';
+export { Checkbox, CheckboxVanilla } from './components/Checkbox';
 export type {
   CodeBlockCopyErrorHandler,
   CodeBlockLanguage,
@@ -61,6 +75,7 @@ export { CodeBlock, CodeBlockVanilla } from './components/CodeBlock';
 export { useColorScheme } from './components/colorSchemeContext';
 export type { ComboboxVanillaProps } from './components/Combobox';
 export { ComboboxVanilla } from './components/Combobox';
+export type { ContainerVanillaProps } from './components/Container';
 export { Container, ContainerVanilla } from './components/Container';
 export type {
   DateTimePickerInputLabels,
@@ -82,18 +97,40 @@ export {
   DialogTrigger,
   StyledContent,
 } from './components/Dialog';
+export type {
+  DropdownMenuCheckboxItemVanillaProps,
+  DropdownMenuContentVanillaProps,
+  DropdownMenuGroupVanillaProps,
+  DropdownMenuItemVanillaProps,
+  DropdownMenuLabelVanillaProps,
+  DropdownMenuRadioGroupVanillaProps,
+  DropdownMenuRadioItemVanillaProps,
+  DropdownMenuSeparatorVanillaProps,
+  DropdownMenuTriggerVanillaProps,
+} from './components/DropdownMenu';
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
+  DropdownMenuCheckboxItemVanilla,
   DropdownMenuContent,
+  DropdownMenuContentVanilla,
   DropdownMenuGroup,
+  DropdownMenuGroupVanilla,
   DropdownMenuItem,
+  DropdownMenuItemVanilla,
   DropdownMenuLabel,
+  DropdownMenuLabelVanilla,
   DropdownMenuPortal,
+  DropdownMenuPortalVanilla,
   DropdownMenuRadioGroup,
+  DropdownMenuRadioGroupVanilla,
   DropdownMenuRadioItem,
+  DropdownMenuRadioItemVanilla,
   DropdownMenuSeparator,
+  DropdownMenuSeparatorVanilla,
   DropdownMenuTrigger,
+  DropdownMenuTriggerVanilla,
+  DropdownMenuVanilla,
 } from './components/DropdownMenu';
 export { Elevation, ElevationVanilla, elevationVariants } from './components/Elevation';
 export { FaencyProvider } from './components/FaencyProvider';
@@ -104,7 +141,9 @@ export type {
   FieldVanillaProps,
 } from './components/Field';
 export { Field, FieldVanilla, useFieldControl } from './components/Field';
+export type { FlexVanillaProps } from './components/Flex';
 export { Flex, FlexVanilla } from './components/Flex';
+export type { GridVanillaProps } from './components/Grid';
 export { Grid, GridVanilla } from './components/Grid';
 export type {
   H1VanillaProps,
@@ -166,20 +205,43 @@ export { Overlay } from './components/Overlay';
 export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export type { ParagraphVanillaProps } from './components/Paragraph';
 export { Paragraph, ParagraphVanilla } from './components/Paragraph';
+export type {
+  PopoverAnchorVanillaProps,
+  PopoverCloseVanillaProps,
+  PopoverContentVanillaProps,
+  PopoverTriggerVanillaProps,
+} from './components/Popover';
 export {
   Popover,
   PopoverAnchor,
+  PopoverAnchorVanilla,
   PopoverClose,
+  PopoverCloseVanilla,
   PopoverContent,
+  PopoverContentVanilla,
   PopoverPortal,
+  PopoverPortalVanilla,
   PopoverTrigger,
+  PopoverTriggerVanilla,
+  PopoverVanilla,
 } from './components/Popover';
-export { Radio, RadioGroup } from './components/Radio';
+export type { RadioGroupVanillaProps, RadioVanillaProps } from './components/Radio';
+export { Radio, RadioGroup, RadioGroupVanilla, RadioVanilla } from './components/Radio';
+export type {
+  RadioAccordionContentVanillaProps,
+  RadioAccordionItemVanillaProps,
+  RadioAccordionRootVanillaProps,
+  RadioAccordionTriggerVanillaProps,
+} from './components/RadioAccordion';
 export {
   RadioAccordionContent,
+  RadioAccordionContentVanilla,
   RadioAccordionItem,
+  RadioAccordionItemVanilla,
   RadioAccordionRoot,
+  RadioAccordionRootVanilla,
   RadioAccordionTrigger,
+  RadioAccordionTriggerVanilla,
 } from './components/RadioAccordion';
 export type { RowLinkProps } from './components/RowLink';
 export { RowLink, rowLinkRowStyles, rowLinkTableStyles } from './components/RowLink';

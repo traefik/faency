@@ -16,15 +16,15 @@ const containerClass = withVariantKeys(containerRecipe);
 
 interface ContainerOwnProps extends RecipeVariantProps<typeof containerRecipe>, CSSProps {}
 
-export type ContainerProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
+export type ContainerVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
   C,
   ContainerOwnProps
 >;
-type ContainerComponent = PolymorphicComponent<'div', ContainerProps<ElementType>>;
+type ContainerComponent = PolymorphicComponent<'div', ContainerVanillaProps<ElementType>>;
 
 export const ContainerVanillaComponent = React.forwardRef(
   <C extends ElementType = 'div'>(
-    { as, className, css, style, size, noGutter, ...props }: ContainerProps<C>,
+    { as, className, css, style, size, noGutter, ...props }: ContainerVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'div';

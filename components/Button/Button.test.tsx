@@ -8,7 +8,7 @@ describe('Button', () => {
     const { getByRole } = render(
       <Button asChild>
         <UnstyledLink href="https://traefik.io">Link</UnstyledLink>
-      </Button>
+      </Button>,
     );
 
     expect(getByRole('link')).toBeInTheDocument();

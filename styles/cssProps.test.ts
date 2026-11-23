@@ -38,3 +38,30 @@ describe('processCSSProp colors', () => {
     });
   });
 });
+
+describe('processCSSProp fonts', () => {
+  it.each([
+    ['$3', '14px'],
+    ['$4', '16px'],
+    ['3', '14px'],
+    ['$0', '11px'],
+    ['0', '0'],
+    [0, 0],
+    ['14px', '14px'],
+    ['1.5rem', '1.5rem'],
+    [15, 15],
+  ])('maps fontSize %p to %p', (value, expected) => {
+    expect(processCSSProp({ fontSize: value }).style).toEqual({ fontSize: expected });
+  });
+
+  it.each([
+    ['$medium', '500'],
+    ['medium', '500'],
+    ['$regular', '400'],
+    [600, 600],
+    ['600', '600'],
+    ['normal', 'normal'],
+  ])('maps fontWeight %p to %p', (value, expected) => {
+    expect(processCSSProp({ fontWeight: value }).style).toEqual({ fontWeight: expected });
+  });
+});

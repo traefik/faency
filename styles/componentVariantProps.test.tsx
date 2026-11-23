@@ -1,5 +1,10 @@
 import React from 'react';
 
+import {
+  AccordionContentVanilla,
+  AccordionRootVanilla,
+  AccordionTriggerVanilla,
+} from '@/components/Accordion/Accordion.vanilla';
 import { AriaCaptionVanilla, AriaThVanilla } from '@/components/AriaTable/AriaTable.vanilla';
 import { AvatarVanilla } from '@/components/Avatar/Avatar.vanilla';
 import { BadgeVanilla } from '@/components/Badge/Badge.vanilla';
@@ -7,7 +12,9 @@ import { BlockquoteVanilla } from '@/components/Blockquote/Blockquote.vanilla';
 import { BubbleVanilla } from '@/components/Bubble/Bubble.vanilla';
 import { ButtonVanilla } from '@/components/Button/Button.vanilla';
 import { CardVanilla } from '@/components/Card/Card.vanilla';
+import { CheckboxVanilla } from '@/components/Checkbox/Checkbox.vanilla';
 import { ContainerVanilla } from '@/components/Container/Container.vanilla';
+import { DropdownMenuContentVanilla } from '@/components/DropdownMenu/DropdownMenu.vanilla';
 import { ElevationVanilla } from '@/components/Elevation/Elevation.vanilla';
 import { H1Vanilla } from '@/components/Heading/Heading.vanilla';
 import { IconButtonVanilla } from '@/components/IconButton/IconButton.vanilla';
@@ -15,6 +22,12 @@ import { InputVanilla } from '@/components/Input/Input.vanilla';
 import { LabelVanilla } from '@/components/Label/Label.vanilla';
 import { LiVanilla } from '@/components/List/List.vanilla';
 import { ParagraphVanilla } from '@/components/Paragraph/Paragraph.vanilla';
+import { PopoverContentVanilla } from '@/components/Popover/Popover.vanilla';
+import { RadioVanilla } from '@/components/Radio/Radio.vanilla';
+import {
+  RadioAccordionRootVanilla,
+  RadioAccordionTriggerVanilla,
+} from '@/components/RadioAccordion/RadioAccordion.vanilla';
 import { SelectVanilla } from '@/components/Select/Select.vanilla';
 import { SkeletonVanilla } from '@/components/Skeleton/Skeleton.vanilla';
 import { SwitchVanilla } from '@/components/Switch/Switch.vanilla';
@@ -46,9 +59,18 @@ describe('component variant props', () => {
       <LiVanilla key="li" elevation={2} />,
       <SelectVanilla key="select" size="small" variant="ghost" state="invalid" />,
       <SwitchVanilla key="switch" size={2} />,
+      <CheckboxVanilla key="checkbox" size="large" />,
+      <RadioVanilla key="radio" value="a" size={2} />,
+      <AccordionRootVanilla key="accordion" type="single" elevation={2} />,
+      <AccordionTriggerVanilla key="accordion-trigger" size="large" />,
+      <AccordionContentVanilla key="accordion-content" size="medium" />,
+      <RadioAccordionRootVanilla key="radio-accordion" elevation={2} />,
+      <RadioAccordionTriggerVanilla key="radio-accordion-trigger" size="large" />,
+      <DropdownMenuContentVanilla key="dropdown-menu-content" elevation={2} />,
+      <PopoverContentVanilla key="popover-content" elevation={2} />,
     ];
 
-    expect(elements).toHaveLength(20);
+    expect(elements).toHaveLength(29);
   });
 
   it('reject invalid variants', () => {
@@ -103,8 +125,22 @@ describe('component variant props', () => {
       <SelectVanilla key="select" size="huge" />,
       // @ts-expect-error size outside the recipe keys
       <SwitchVanilla key="switch" size={9} />,
+      // @ts-expect-error unknown size
+      <CheckboxVanilla key="checkbox" size="huge" />,
+      // @ts-expect-error size outside the recipe keys
+      <RadioVanilla key="radio" value="a" size={9} />,
+      // @ts-expect-error elevation outside the recipe keys
+      <AccordionRootVanilla key="accordion" type="single" elevation={9} />,
+      // @ts-expect-error unknown size
+      <AccordionTriggerVanilla key="accordion-trigger" size="huge" />,
+      // @ts-expect-error unknown size
+      <RadioAccordionTriggerVanilla key="radio-accordion-trigger" size="huge" />,
+      // @ts-expect-error elevation outside the recipe keys
+      <DropdownMenuContentVanilla key="dropdown-menu-content" elevation={9} />,
+      // @ts-expect-error elevation outside the recipe keys
+      <PopoverContentVanilla key="popover-content" elevation={9} />,
     ];
 
-    expect(elements).toHaveLength(25);
+    expect(elements).toHaveLength(32);
   });
 });
