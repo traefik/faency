@@ -361,7 +361,8 @@ export {
   TooltipTriggerVanilla,
   TooltipVanilla,
 } from './components/Tooltip';
-export { VisuallyHidden } from './components/VisuallyHidden';
+export type { VisuallyHiddenVanillaProps } from './components/VisuallyHidden';
+export { VisuallyHidden, VisuallyHiddenVanilla } from './components/VisuallyHidden';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
 export { Portal } from '@radix-ui/react-portal';
 

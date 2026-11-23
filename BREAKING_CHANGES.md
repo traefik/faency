@@ -60,7 +60,7 @@ The same applies to the Radix-based parts that render an element. `as` also take
 2. Move the child element's props to the component itself
 3. Remove the wrapper element and move children to the component's children
 
-**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor. The other DropdownMenu and Popover parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
+**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, VisuallyHidden. The other DropdownMenu and Popover parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
 
 **Rationale:**
 
@@ -341,6 +341,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - ✅ **Paragraph** - default: `p`
 - ✅ **Blockquote** - default: `blockquote`
 - ✅ **Label** - default: `label`
+- ✅ **VisuallyHidden** - default: `span`, keeps the hiding styles on the `as` element
 
 ### Interactive Components
 

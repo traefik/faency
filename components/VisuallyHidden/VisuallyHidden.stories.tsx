@@ -4,9 +4,14 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
 import { styled } from '../../stitches.config';
+import { BoxVanilla } from '../Box/Box.vanilla';
 import { Card } from '../Card';
+import { FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
 import { Caption, Table } from '../Table';
+import { TextVanilla } from '../Text';
 import { VisuallyHidden } from './VisuallyHidden';
+import { VisuallyHiddenVanilla } from './VisuallyHidden.vanilla';
 
 const FlexButton = styled('button', {
   m: 0,
@@ -59,5 +64,51 @@ export const AsChild: StoryFn<typeof VisuallyHidden> = (args) => (
 AsChild.args = {
   asChild: true,
 };
+
+const COLUMN_WIDTH = 240;
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={4}>
+    <FlexVanilla gap={4}>
+      <BoxVanilla css={{ width: 160 }} />
+      <H3Vanilla css={{ width: COLUMN_WIDTH }}>Stitches</H3Vanilla>
+      <H3Vanilla css={{ width: COLUMN_WIDTH }}>Vanilla Extract</H3Vanilla>
+    </FlexVanilla>
+    <FlexVanilla gap={4} align="center">
+      <TextVanilla size="1" variant="subtle" css={{ width: 160 }}>
+        Button text
+      </TextVanilla>
+      <BoxVanilla css={{ width: COLUMN_WIDTH }}>
+        <FlexButton>
+          <GearIcon />
+          <VisuallyHidden>Settings</VisuallyHidden>
+        </FlexButton>
+      </BoxVanilla>
+      <BoxVanilla css={{ width: COLUMN_WIDTH }}>
+        <FlexButton>
+          <GearIcon />
+          <VisuallyHiddenVanilla>Settings</VisuallyHiddenVanilla>
+        </FlexButton>
+      </BoxVanilla>
+    </FlexVanilla>
+    <FlexVanilla gap={4} align="center">
+      <TextVanilla size="1" variant="subtle" css={{ width: 160 }}>
+        asChild / as
+      </TextVanilla>
+      <BoxVanilla css={{ width: COLUMN_WIDTH }}>
+        <Table css={{ minHeight: 50, border: '1px dashed $hiContrast' }}>
+          <VisuallyHidden asChild>
+            <Caption>Hidden visually</Caption>
+          </VisuallyHidden>
+        </Table>
+      </BoxVanilla>
+      <BoxVanilla css={{ width: COLUMN_WIDTH }}>
+        <Table css={{ minHeight: 50, border: '1px dashed $hiContrast' }}>
+          <VisuallyHiddenVanilla as={Caption}>Hidden visually</VisuallyHiddenVanilla>
+        </Table>
+      </BoxVanilla>
+    </FlexVanilla>
+  </FlexVanilla>
+);
 
 export default Component;
