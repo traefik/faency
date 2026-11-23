@@ -60,7 +60,7 @@ The same applies to the Radix-based parts that render an element. `as` also take
 2. Move the child element's props to the component itself
 3. Remove the wrapper element and move children to the component's children
 
-**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, VisuallyHidden. `DialogContent` and the other DropdownMenu and Popover parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
+**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, VisuallyHidden. `DialogContent`, `SidePanel` and the other DropdownMenu and Popover parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
 
 **Rationale:**
 

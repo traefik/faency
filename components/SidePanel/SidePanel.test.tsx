@@ -38,6 +38,15 @@ describe('SidePanel', () => {
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
+  it('should open with defaultOpen when open is not set', async () => {
+    const { onOpenChange } = renderPanel({ open: undefined, defaultOpen: true });
+
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
   it('should have no accessibility violations', async () => {
     renderPanel({ description: 'The details of the item' });
     expect(await axe(document.body)).toHaveNoViolations();

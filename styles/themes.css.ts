@@ -44,6 +44,10 @@ import {
   segmentedControlLightTheme,
 } from '@/components/SegmentedControl/SegmentedControl.theme.css';
 import { selectDarkTheme, selectLightTheme } from '@/components/Select/Select.theme.css';
+import {
+  sidePanelDarkTheme,
+  sidePanelLightTheme,
+} from '@/components/SidePanel/SidePanel.theme.css';
 import { skeletonDarkTheme, skeletonLightTheme } from '@/components/Skeleton/Skeleton.theme.css';
 import { switchDarkTheme, switchLightTheme } from '@/components/Switch/Switch.theme.css';
 import {
@@ -411,6 +415,7 @@ const lightSemanticColors = {
   ...radioLightTheme,
   ...accordionLightTheme,
   ...dialogLightTheme,
+  ...sidePanelLightTheme,
   meterTrackBg: lightColors.grayA3,
   tooltipContentBg: tokens.colors.primary,
   tooltipText: 'white',
@@ -606,6 +611,7 @@ const darkSemanticColors = {
   ...radioDarkTheme,
   ...accordionDarkTheme,
   ...dialogDarkTheme,
+  ...sidePanelDarkTheme,
   meterTrackBg: darkColors.grayA3,
   tooltipContentBg: tokens.colors.primary,
   tooltipText: darkColors.deepBlue2,

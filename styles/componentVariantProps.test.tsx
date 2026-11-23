@@ -31,6 +31,7 @@ import {
   RadioAccordionTriggerVanilla,
 } from '@/components/RadioAccordion/RadioAccordion.vanilla';
 import { SelectVanilla } from '@/components/Select/Select.vanilla';
+import { SidePanelVanilla } from '@/components/SidePanel/SidePanel.vanilla';
 import { SkeletonVanilla } from '@/components/Skeleton/Skeleton.vanilla';
 import { SwitchVanilla } from '@/components/Switch/Switch.vanilla';
 import { CaptionVanilla, ThVanilla } from '@/components/Table/Table.vanilla';
@@ -74,9 +75,10 @@ describe('component variant props', () => {
       <AlertVanilla key="alert" variant="info" elevation={2} />,
       <TooltipContentVanilla key="tooltip-content" multiline />,
       <DialogContentVanilla key="dialog-content" elevation={3} />,
+      <SidePanelVanilla key="side-panel" side="left" onOpenChange={() => {}} />,
     ];
 
-    expect(elements).toHaveLength(32);
+    expect(elements).toHaveLength(33);
   });
 
   it('reject invalid variants', () => {
@@ -153,8 +155,10 @@ describe('component variant props', () => {
       <TooltipContentVanilla key="tooltip-content" multiline="yes" />,
       // @ts-expect-error elevation outside the recipe keys
       <DialogContentVanilla key="dialog-content" elevation={9} />,
+      // @ts-expect-error unknown side
+      <SidePanelVanilla key="side-panel" side="center" onOpenChange={() => {}} />,
     ];
 
-    expect(elements).toHaveLength(36);
+    expect(elements).toHaveLength(37);
   });
 });

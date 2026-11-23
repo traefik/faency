@@ -2,11 +2,21 @@
 import { Meta, StoryFn } from '@storybook/react-vite';
 import { useState } from 'react';
 
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { Dialog, DialogContent, DialogOverlay, DialogPortal } from '../Dialog';
-import { Text } from '../Text';
+import { Box, BoxVanilla } from '../Box';
+import { Button, ButtonVanilla } from '../Button';
+import {
+  Dialog,
+  DialogContent,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTitleVanilla,
+} from '../Dialog';
+import { Flex, FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
+import { Text, TextVanilla } from '../Text';
 import { SidePanel } from './SidePanel';
+import { SidePanelVanilla } from './SidePanel.vanilla';
 
 const Component: Meta<typeof SidePanel> = {
   title: 'Components/SidePanel',
@@ -129,5 +139,86 @@ CombinedWithModal.args = {
   side: 'right',
   noCloseIcon: true,
 };
+
+const SIDES = ['right', 'left', 'top', 'bottom'] as const;
+type Side = (typeof SIDES)[number];
+
+const LOREM =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+const StitchesSidePanels = () => {
+  const [side, setSide] = useState<Side>('right');
+  const [open, setOpen] = useState(false);
+
+  return (
+    <FlexVanilla gap={3}>
+      {SIDES.map((s) => (
+        <Button
+          key={s}
+          variant="secondary"
+          onClick={() => {
+            setSide(s);
+            setOpen(true);
+          }}
+        >
+          {s}
+        </Button>
+      ))}
+      <SidePanel side={side} description={LOREM} open={open} onOpenChange={setOpen}>
+        <Flex direction="column" gap={3}>
+          <DialogTitle asChild>
+            <Text size={2} weight="bold" as="h3">
+              Hello, World!
+            </Text>
+          </DialogTitle>
+          <Text>{LOREM}</Text>
+        </Flex>
+      </SidePanel>
+    </FlexVanilla>
+  );
+};
+
+const VanillaSidePanels = () => {
+  const [side, setSide] = useState<Side>('right');
+  const [open, setOpen] = useState(false);
+
+  return (
+    <FlexVanilla gap={3}>
+      {SIDES.map((s) => (
+        <ButtonVanilla
+          key={s}
+          variant="secondary"
+          onClick={() => {
+            setSide(s);
+            setOpen(true);
+          }}
+        >
+          {s}
+        </ButtonVanilla>
+      ))}
+      <SidePanelVanilla side={side} description={LOREM} open={open} onOpenChange={setOpen}>
+        <FlexVanilla direction="column" gap={3}>
+          <DialogTitleVanilla as={TextVanilla} size="2" weight="bold">
+            Hello, World!
+          </DialogTitleVanilla>
+          <TextVanilla>{LOREM}</TextVanilla>
+        </FlexVanilla>
+      </SidePanelVanilla>
+    </FlexVanilla>
+  );
+};
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla gap={9}>
+    <BoxVanilla>
+      <H3Vanilla css={{ mb: '$3' }}>Stitches Version</H3Vanilla>
+      <StitchesSidePanels />
+    </BoxVanilla>
+    <BoxVanilla>
+      <H3Vanilla css={{ mb: '$3' }}>Vanilla Extract Version</H3Vanilla>
+      <VanillaSidePanels />
+    </BoxVanilla>
+  </FlexVanilla>
+);
 
 export default Component;

@@ -289,7 +289,8 @@ export {
   SelectSeparatorVanilla,
   SelectVanilla,
 } from './components/Select';
-export { SidePanel } from './components/SidePanel';
+export type { SidePanelVanillaProps } from './components/SidePanel';
+export { SidePanel, SidePanelVanilla } from './components/SidePanel';
 export type { SkeletonVanillaProps } from './components/Skeleton';
 export { Skeleton, SkeletonVanilla } from './components/Skeleton';
 export type { SpinnerVanillaProps } from './components/Spinner';

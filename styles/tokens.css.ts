@@ -183,6 +183,8 @@ export const tokens = createThemeContract({
 
     dialogBackground: null,
 
+    sidePanelBackground: null,
+
     listItemHoverBg: null,
     listItemActiveBg: null,
     listItemFocusBorder: null,
