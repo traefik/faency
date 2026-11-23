@@ -17,7 +17,8 @@ export {
   AccordionTrigger,
   AccordionTriggerVanilla,
 } from './components/Accordion';
-export { Alert } from './components/Alert';
+export type { AlertVanillaProps } from './components/Alert';
+export { Alert, AlertVanilla } from './components/Alert';
 export type {
   AriaCaptionVanillaProps,
   AriaTableSectionVanillaProps,

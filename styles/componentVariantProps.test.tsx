@@ -5,6 +5,7 @@ import {
   AccordionRootVanilla,
   AccordionTriggerVanilla,
 } from '@/components/Accordion/Accordion.vanilla';
+import { AlertVanilla } from '@/components/Alert/Alert.vanilla';
 import { AriaCaptionVanilla, AriaThVanilla } from '@/components/AriaTable/AriaTable.vanilla';
 import { AvatarVanilla } from '@/components/Avatar/Avatar.vanilla';
 import { BadgeVanilla } from '@/components/Badge/Badge.vanilla';
@@ -68,9 +69,10 @@ describe('component variant props', () => {
       <RadioAccordionTriggerVanilla key="radio-accordion-trigger" size="large" />,
       <DropdownMenuContentVanilla key="dropdown-menu-content" elevation={2} />,
       <PopoverContentVanilla key="popover-content" elevation={2} />,
+      <AlertVanilla key="alert" variant="info" elevation={2} />,
     ];
 
-    expect(elements).toHaveLength(29);
+    expect(elements).toHaveLength(30);
   });
 
   it('reject invalid variants', () => {
@@ -139,8 +141,12 @@ describe('component variant props', () => {
       <DropdownMenuContentVanilla key="dropdown-menu-content" elevation={9} />,
       // @ts-expect-error elevation outside the recipe keys
       <PopoverContentVanilla key="popover-content" elevation={9} />,
+      // @ts-expect-error unknown variant
+      <AlertVanilla key="alert" variant="nope" />,
+      // @ts-expect-error Card's own variant is not exposed
+      <AlertVanilla key="alert-card-variant" variant="inner" />,
     ];
 
-    expect(elements).toHaveLength(32);
+    expect(elements).toHaveLength(34);
   });
 });

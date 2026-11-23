@@ -245,6 +245,7 @@ The same applies to `Li`, which takes the Flex layout props.
 
 - **Panel** no longer has a box shadow (Dropdown and Popover set their own elevation, so they are unaffected)
 - **Badge** `alphaBg` uses the `A3` color step instead of `A6`
+- **Alert** `gray` variant ring uses `gray9` (the neutral tone) instead of `slate9`
 
 ---
 
@@ -285,6 +286,7 @@ The same applies to `Li`, which takes the Flex layout props.
 - ✅ **Panel** - default: `div`
 - ✅ **Elevation** - default: `div`
 - ✅ **Card** - default: `button` when `interactive`, otherwise `div`
+- ✅ **Alert** - same defaults as Card
 - ✅ **Skeleton** - default: `div`
 - ✅ **Image** - default: `img`
 
