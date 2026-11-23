@@ -31,9 +31,7 @@ describe('AvatarVanilla', () => {
 
   it('should render fallback when no image source', () => {
     const { container } = renderWithTheme(<AvatarVanilla fallback="AB" />);
-    const wrapper = container.firstChild;
-
-    expect(wrapper).toHaveTextContent('AB');
+    expect(container.firstChild).toHaveTextContent('AB');
   });
 
   it('should apply size variants', () => {
@@ -75,77 +73,62 @@ describe('AvatarVanilla', () => {
     expect(container.firstChild).toBeInTheDocument();
   });
 
+  it('should render the avatar as the root element, without a wrapper', () => {
+    const { container } = renderWithTheme(<AvatarVanilla fallback="AB" />);
+    const avatarRoot = container.firstChild as HTMLElement;
+
+    expect(avatarRoot.tagName).toBe('SPAN');
+    expect(avatarRoot).toHaveTextContent('AB');
+  });
+
   it('should render with custom className and keep the recipe classes', () => {
     const { container: plain } = renderWithTheme(<AvatarVanilla />);
-    const recipeClass = (plain.firstChild?.firstChild as HTMLElement).className;
+    const recipeClass = (plain.firstChild as HTMLElement).className;
 
     const { container } = renderWithTheme(<AvatarVanilla className="custom-avatar" />);
-    const avatarRoot = container.firstChild?.firstChild as HTMLElement;
+    const avatarRoot = container.firstChild as HTMLElement;
 
     expect(recipeClass).not.toBe('');
     expect(avatarRoot.className).toBe(`${recipeClass} custom-avatar`);
   });
 
-  it('should apply the style prop to the avatar, not the wrapper', () => {
-    const { container } = renderWithTheme(<AvatarVanilla style={{ border: '2px solid red' }} />);
-    const wrapper = container.firstChild as HTMLElement;
-    const avatarRoot = wrapper.firstChild as HTMLElement;
-
-    expect(avatarRoot.style.border).toBe('2px solid red');
-    expect(wrapper.style.border).toBe('');
-  });
-
-  it('should apply CSS prop styles', () => {
-    const { container } = renderWithTheme(<AvatarVanilla css={{ padding: '$4', margin: '$2' }} />);
-    const wrapper = container.firstChild as HTMLElement;
-
-    expect(wrapper.style.padding).toBe('20px');
-    expect(wrapper.style.margin).toBe('8px');
-  });
-
-  it('should apply css to the wrapper and style to the avatar', () => {
+  it('should apply css and style to the avatar, style winning on conflicts', () => {
     const { container } = renderWithTheme(
       <AvatarVanilla
-        css={{ padding: '$4', margin: '$2' }}
+        css={{ padding: '$4', margin: '$2', alignSelf: 'center' }}
         style={{ border: '1px solid blue', padding: '30px' }}
       />,
     );
-    const wrapper = container.firstChild as HTMLElement;
-    const avatarRoot = wrapper.firstChild as HTMLElement;
+    const avatarRoot = container.firstChild as HTMLElement;
 
-    expect(wrapper.style.padding).toBe('20px');
-    expect(wrapper.style.margin).toBe('8px');
+    expect(avatarRoot.style.margin).toBe('8px');
+    expect(avatarRoot.style.alignSelf).toBe('center');
     expect(avatarRoot.style.border).toBe('1px solid blue');
     expect(avatarRoot.style.padding).toBe('30px');
   });
 
-  it('should apply wrapper styles including custom css', () => {
-    const { container } = renderWithTheme(<AvatarVanilla css={{ padding: '$4' }} />);
-    const wrapper = container.firstChild as HTMLElement;
-    const avatarRoot = wrapper.firstChild as HTMLElement;
+  it('should honour width and height passed through css', () => {
+    const { container } = renderWithTheme(
+      <AvatarVanilla css={{ width: '50px', height: '50px' }} />,
+    );
+    const avatarRoot = container.firstChild as HTMLElement;
 
-    expect(wrapper).toBeInTheDocument();
-    expect(avatarRoot).toBeInTheDocument();
-
-    expect(wrapper.style.padding).toBe('20px');
-    const styleAttr = wrapper.getAttribute('style');
-    expect(styleAttr).toContain('position');
-    expect(styleAttr).toContain('padding: 20px');
+    expect(avatarRoot.style.width).toBe('50px');
+    expect(avatarRoot.style.height).toBe('50px');
   });
 
-  it('should forward ref correctly', () => {
+  it('should forward ref to the avatar root', () => {
     const ref = React.createRef<HTMLSpanElement>();
-    renderWithTheme(<AvatarVanilla ref={ref} />);
+    const { container } = renderWithTheme(<AvatarVanilla ref={ref} />);
 
-    expect(ref.current).not.toBeNull();
+    expect(ref.current).toBe(container.firstChild);
   });
 
   it('should pass through HTML attributes', () => {
     const { container } = renderWithTheme(
       <AvatarVanilla data-testid="test-avatar" aria-label="Test Avatar" />,
     );
-    const wrapper = container.firstChild;
-    const avatarRoot = wrapper?.firstChild as HTMLElement;
+    const avatarRoot = container.firstChild as HTMLElement;
 
     expect(avatarRoot.getAttribute('data-testid')).toBe('test-avatar');
     expect(avatarRoot.getAttribute('aria-label')).toBe('Test Avatar');

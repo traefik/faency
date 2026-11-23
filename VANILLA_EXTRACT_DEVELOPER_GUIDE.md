@@ -39,6 +39,7 @@ styles/
 ├── resolveColor.ts        # Resolves `$token` color strings to vanilla tokens
 ├── breakpoints.css.ts     # Media queries matching the Stitches breakpoints
 ├── polymorphic.ts         # Reusable polymorphic component types
+├── createPolymorphicPart.tsx # Factory for Radix parts that take `as`
 ├── types.ts               # Shared prop types (spacing, size tokens, …)
 ├── textVariants.css.ts    # Shared text variant definitions (DRY)
 ├── utils.css.ts           # Utility recipes
@@ -193,7 +194,16 @@ The root [index.ts](index.ts) uses explicit named exports (no `export *`), so ea
 
 **Re-exported Radix parts.** Parts re-exported unwrapped (e.g. `export const PopoverVanilla = PopoverPrimitive.Root`) don't get a `…VanillaProps` alias; consumers can use `React.ComponentProps<typeof PopoverVanilla>`. Add a `…VanillaProps` type once the part is wrapped (e.g. gains `css`, `className` or extra behavior).
 
-**Radix parts that render an element** (triggers, items, anchors) take the polymorphic `as` prop instead of exposing `asChild`; internally they pass `asChild` to the Radix primitive and render the `as` element inside it, so the Radix behavior lands on that element. See [Popover.vanilla.tsx](components/Popover/Popover.vanilla.tsx) and [DropdownMenu.vanilla.tsx](components/DropdownMenu/DropdownMenu.vanilla.tsx). Parts that don't take `as` omit `asChild` from their props.
+**Radix parts that render an element** (triggers, items, anchors) take the polymorphic `as` prop instead of exposing `asChild`; internally they pass `asChild` to the Radix primitive and render the `as` element inside it, so the Radix behavior lands on that element. Build them with [`createPolymorphicPart`](styles/createPolymorphicPart.tsx) instead of writing the `forwardRef` by hand; it also handles `css`/`style` and an optional base class:
+
+```tsx
+export const DropdownMenuItemVanilla = createPolymorphicPart<'div', DropdownMenuItemOwnProps>(
+  DropdownMenuPrimitive.Item,
+  { displayName: 'DropdownMenuItemVanilla', className: dropdownMenuItem },
+);
+```
+
+See [Popover.vanilla.tsx](components/Popover/Popover.vanilla.tsx) and [DropdownMenu.vanilla.tsx](components/DropdownMenu/DropdownMenu.vanilla.tsx). Parts that don't take `as` omit `asChild` from their props.
 
 #### Recipe Naming
 

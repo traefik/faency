@@ -13,5 +13,5 @@ module.exports = new Proxy(
       }
       return target[prop];
     },
-  }
+  },
 );

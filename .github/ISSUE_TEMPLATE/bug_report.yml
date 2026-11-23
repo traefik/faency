@@ -66,7 +66,7 @@ body:
   - type: textarea
     attributes:
       label: If applicable, please paste the log output in DEBUG level
-      description: "`--log.level=DEBUG` switch."
+      description: '`--log.level=DEBUG` switch.'
       placeholder: Paste your output here.
     validations:
       required: false

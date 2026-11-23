@@ -16,10 +16,7 @@ export const NavigationTreeDrawer = ({
   ...props
 }: NavigationTreeDrawerProps & NavigationDrawerProps) => {
   const parentCtx = useNavigationTree();
-  const contextValue = useMemo(
-    () => ({ ...parentCtx, fullWidth }),
-    [parentCtx, fullWidth],
-  );
+  const contextValue = useMemo(() => ({ ...parentCtx, fullWidth }), [parentCtx, fullWidth]);
 
   return (
     <NavigationTreeContext.Provider value={contextValue}>

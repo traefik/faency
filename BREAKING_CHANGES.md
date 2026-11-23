@@ -230,6 +230,12 @@ The same applies to `Li`, which takes the Flex layout props.
 
 **Migration:** Update selectors to target the wrapper, or use `& > input` in your stylesheet.
 
+### Avatar: Wrapper `<div>` Removed
+
+**Change:** Avatar no longer renders a wrapper `<div>` around the avatar. `css`, `style`, `className` and `ref` all target the avatar element, and `width`, `height` and `position` passed through `css` are no longer overridden.
+
+**Migration:** Update selectors or tests that expected the wrapper, and drop any `width`/`height` from `css` that relied on being ignored.
+
 ### Removed Style Exports
 
 - `panelStyles` → use `<Panel>`

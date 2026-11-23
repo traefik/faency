@@ -2,13 +2,10 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CheckIcon } from '@radix-ui/react-icons';
 import React, { ElementType, forwardRef } from 'react';
 
+import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import {
-  PolymorphicComponent,
-  PolymorphicComponentProps,
-  PolymorphicRef,
-} from '@/styles/polymorphic';
+import { PolymorphicComponentProps } from '@/styles/polymorphic';
 import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
@@ -30,35 +27,10 @@ export const DropdownMenuPortalVanilla = DropdownMenuPrimitive.Portal;
 export type DropdownMenuTriggerVanillaProps<C extends ElementType = 'button'> =
   PolymorphicComponentProps<C, CSSProps>;
 
-type DropdownMenuTriggerVanillaComponent = PolymorphicComponent<
-  'button',
-  DropdownMenuTriggerVanillaProps<ElementType>
->;
-
-const DropdownMenuTriggerVanillaComponentImpl = forwardRef(
-  <C extends ElementType = 'button'>(
-    { as, css, style, children, ...props }: DropdownMenuTriggerVanillaProps<C>,
-    ref?: PolymorphicRef<C>,
-  ) => {
-    const Component: ElementType | undefined = as;
-
-    return (
-      <DropdownMenuPrimitive.Trigger
-        ref={ref}
-        asChild={Component !== undefined}
-        style={useInlineStyle(css, style)}
-        {...props}
-      >
-        {Component !== undefined ? <Component>{children}</Component> : children}
-      </DropdownMenuPrimitive.Trigger>
-    );
-  },
+export const DropdownMenuTriggerVanilla = createPolymorphicPart<'button'>(
+  DropdownMenuPrimitive.Trigger,
+  { displayName: 'DropdownMenuTriggerVanilla' },
 );
-
-DropdownMenuTriggerVanillaComponentImpl.displayName = 'DropdownMenuTriggerVanilla';
-
-export const DropdownMenuTriggerVanilla =
-  DropdownMenuTriggerVanillaComponentImpl as DropdownMenuTriggerVanillaComponent;
 
 type DropdownMenuContentVariants = RecipeVariantProps<typeof dropdownMenuContentRecipe>;
 
@@ -86,44 +58,17 @@ DropdownMenuContentVanilla.displayName = 'DropdownMenuContentVanilla';
 type DropdownMenuItemOwnProps = Pick<
   DropdownMenuPrimitive.DropdownMenuItemProps,
   'disabled' | 'onSelect' | 'textValue'
-> &
-  CSSProps;
+>;
 
 export type DropdownMenuItemVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
   C,
-  DropdownMenuItemOwnProps
+  DropdownMenuItemOwnProps & CSSProps
 >;
 
-type DropdownMenuItemVanillaComponent = PolymorphicComponent<
-  'div',
-  DropdownMenuItemVanillaProps<ElementType>
->;
-
-const DropdownMenuItemVanillaComponentImpl = forwardRef(
-  <C extends ElementType = 'div'>(
-    { as, className, css, style, children, ...props }: DropdownMenuItemVanillaProps<C>,
-    ref?: PolymorphicRef<C>,
-  ) => {
-    const Component: ElementType | undefined = as;
-
-    return (
-      <DropdownMenuPrimitive.Item
-        ref={ref}
-        asChild={Component !== undefined}
-        className={cx(dropdownMenuItem, className)}
-        style={useInlineStyle(css, style)}
-        {...props}
-      >
-        {Component !== undefined ? <Component>{children}</Component> : children}
-      </DropdownMenuPrimitive.Item>
-    );
-  },
+export const DropdownMenuItemVanilla = createPolymorphicPart<'div', DropdownMenuItemOwnProps>(
+  DropdownMenuPrimitive.Item,
+  { displayName: 'DropdownMenuItemVanilla', className: dropdownMenuItem },
 );
-
-DropdownMenuItemVanillaComponentImpl.displayName = 'DropdownMenuItemVanilla';
-
-export const DropdownMenuItemVanilla =
-  DropdownMenuItemVanillaComponentImpl as DropdownMenuItemVanillaComponent;
 
 export type DropdownMenuCheckboxItemVanillaProps = Omit<
   DropdownMenuPrimitive.DropdownMenuCheckboxItemProps,

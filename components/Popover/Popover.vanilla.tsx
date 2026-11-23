@@ -1,13 +1,10 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import React, { ElementType, forwardRef } from 'react';
 
+import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import {
-  PolymorphicComponent,
-  PolymorphicComponentProps,
-  PolymorphicRef,
-} from '@/styles/polymorphic';
+import { PolymorphicComponentProps } from '@/styles/polymorphic';
 import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
@@ -22,104 +19,27 @@ export const PopoverPortalVanilla = PopoverPrimitive.Portal;
 export type PopoverTriggerVanillaProps<C extends ElementType = 'button'> =
   PolymorphicComponentProps<C, CSSProps>;
 
-type PopoverTriggerVanillaComponent = PolymorphicComponent<
-  'button',
-  PopoverTriggerVanillaProps<ElementType>
->;
-
-const PopoverTriggerVanillaComponentImpl = forwardRef(
-  <C extends ElementType = 'button'>(
-    { as, css, style, children, ...props }: PopoverTriggerVanillaProps<C>,
-    ref?: PolymorphicRef<C>,
-  ) => {
-    const Component: ElementType | undefined = as;
-
-    return (
-      <PopoverPrimitive.Trigger
-        ref={ref}
-        asChild={Component !== undefined}
-        style={useInlineStyle(css, style)}
-        {...props}
-      >
-        {Component !== undefined ? <Component>{children}</Component> : children}
-      </PopoverPrimitive.Trigger>
-    );
-  },
-);
-
-PopoverTriggerVanillaComponentImpl.displayName = 'PopoverTriggerVanilla';
-
-export const PopoverTriggerVanilla =
-  PopoverTriggerVanillaComponentImpl as PopoverTriggerVanillaComponent;
+export const PopoverTriggerVanilla = createPolymorphicPart<'button'>(PopoverPrimitive.Trigger, {
+  displayName: 'PopoverTriggerVanilla',
+});
 
 export type PopoverCloseVanillaProps<C extends ElementType = 'button'> = PolymorphicComponentProps<
   C,
   CSSProps
 >;
 
-type PopoverCloseVanillaComponent = PolymorphicComponent<
-  'button',
-  PopoverCloseVanillaProps<ElementType>
->;
-
-const PopoverCloseVanillaComponentImpl = forwardRef(
-  <C extends ElementType = 'button'>(
-    { as, css, style, children, ...props }: PopoverCloseVanillaProps<C>,
-    ref?: PolymorphicRef<C>,
-  ) => {
-    const Component: ElementType | undefined = as;
-
-    return (
-      <PopoverPrimitive.Close
-        ref={ref}
-        asChild={Component !== undefined}
-        style={useInlineStyle(css, style)}
-        {...props}
-      >
-        {Component !== undefined ? <Component>{children}</Component> : children}
-      </PopoverPrimitive.Close>
-    );
-  },
-);
-
-PopoverCloseVanillaComponentImpl.displayName = 'PopoverCloseVanilla';
-
-export const PopoverCloseVanilla = PopoverCloseVanillaComponentImpl as PopoverCloseVanillaComponent;
+export const PopoverCloseVanilla = createPolymorphicPart<'button'>(PopoverPrimitive.Close, {
+  displayName: 'PopoverCloseVanilla',
+});
 
 export type PopoverAnchorVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
   C,
   CSSProps
 >;
 
-type PopoverAnchorVanillaComponent = PolymorphicComponent<
-  'div',
-  PopoverAnchorVanillaProps<ElementType>
->;
-
-const PopoverAnchorVanillaComponentImpl = forwardRef(
-  <C extends ElementType = 'div'>(
-    { as, css, style, children, ...props }: PopoverAnchorVanillaProps<C>,
-    ref?: PolymorphicRef<C>,
-  ) => {
-    const Component: ElementType | undefined = as;
-
-    return (
-      <PopoverPrimitive.Anchor
-        ref={ref}
-        asChild={Component !== undefined}
-        style={useInlineStyle(css, style)}
-        {...props}
-      >
-        {Component !== undefined ? <Component>{children}</Component> : children}
-      </PopoverPrimitive.Anchor>
-    );
-  },
-);
-
-PopoverAnchorVanillaComponentImpl.displayName = 'PopoverAnchorVanilla';
-
-export const PopoverAnchorVanilla =
-  PopoverAnchorVanillaComponentImpl as PopoverAnchorVanillaComponent;
+export const PopoverAnchorVanilla = createPolymorphicPart<'div'>(PopoverPrimitive.Anchor, {
+  displayName: 'PopoverAnchorVanilla',
+});
 
 type PopoverContentVariants = RecipeVariantProps<typeof popoverContentRecipe>;
 

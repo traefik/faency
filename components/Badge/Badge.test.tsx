@@ -8,7 +8,7 @@ describe('Badge', () => {
     const { getByRole } = render(
       <Badge asChild interactive>
         <UnstyledLink href="https://traefik.io">Link</UnstyledLink>
-      </Badge>
+      </Badge>,
     );
 
     expect(getByRole('link')).toBeInTheDocument();

@@ -130,14 +130,14 @@ const fontWeightMap: Record<string, string> = {
   bold: '700',
 };
 
-// Accepts `$token` and, for backward compatibility, the bare token name; anything else is kept as is.
+// Accepts `$token`, plus bare token names (backward compat) except '0', which is valid CSS as is.
 function applyFontToken(
   style: React.CSSProperties,
   property: 'fontSize' | 'fontWeight',
   value: string | number,
   map: Record<string, string>,
 ): void {
-  const key = typeof value === 'string' ? processToken(value) : undefined;
+  const key = typeof value === 'string' && value !== '0' ? processToken(value) : undefined;
   (style as any)[property] = (key !== undefined && map[key]) || value;
 }
 
