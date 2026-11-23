@@ -202,7 +202,8 @@ export {
   NavigationTreeDrawer,
   NavigationTreeItem,
 } from './components/NavigationTree';
-export { Overlay } from './components/Overlay';
+export type { OverlayVanillaProps } from './components/Overlay';
+export { Overlay, OverlayVanilla } from './components/Overlay';
 export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export type { ParagraphVanillaProps } from './components/Paragraph';
 export { Paragraph, ParagraphVanilla } from './components/Paragraph';
