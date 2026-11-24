@@ -199,11 +199,21 @@ export type { LiVanillaProps, OlVanillaProps, UlVanillaProps } from './component
 export { Li, LiVanilla, Ol, OlVanilla, Ul, UlVanilla } from './components/List';
 export type { MeterSegmentVanilla, MeterVanillaProps } from './components/Meter';
 export { MeterVanilla } from './components/Meter';
+export type {
+  NavigationContainerVanillaProps,
+  NavigationDrawerVanillaProps,
+  NavigationItemVanillaProps,
+  NavigationLinkVanillaProps,
+} from './components/Navigation';
 export {
   NavigationContainer,
+  NavigationContainerVanilla,
   NavigationDrawer,
+  NavigationDrawerVanilla,
   NavigationItem,
+  NavigationItemVanilla,
   NavigationLink,
+  NavigationLinkVanilla,
 } from './components/Navigation';
 export {
   NavigationMenu,

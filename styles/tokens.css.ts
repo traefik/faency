@@ -222,6 +222,19 @@ export const tokens = createThemeContract({
     accordionText: null,
     accordionLabel: null,
 
+    navButtonBg: null,
+    navButtonHoverBg: null,
+    navButtonHoverBg2: null,
+    navButtonFocusBg: null,
+    navButtonFocusBg2: null,
+    navButtonFocusBorder: null,
+    navButtonActiveBg: null,
+    navButtonActiveBg2: null,
+    navButtonText: null,
+    navButtonHoverText: null,
+    navButtonFocusText: null,
+    navButtonActiveText: null,
+
     // Semantic tones
     toneSuccessSolid: null,
     toneSuccessText: null,

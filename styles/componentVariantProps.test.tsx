@@ -23,6 +23,10 @@ import { IconButtonVanilla } from '@/components/IconButton/IconButton.vanilla';
 import { InputVanilla } from '@/components/Input/Input.vanilla';
 import { LabelVanilla } from '@/components/Label/Label.vanilla';
 import { LiVanilla } from '@/components/List/List.vanilla';
+import {
+  NavigationDrawerVanilla,
+  NavigationItemVanilla,
+} from '@/components/Navigation/Navigation.vanilla';
 import { ParagraphVanilla } from '@/components/Paragraph/Paragraph.vanilla';
 import { PopoverContentVanilla } from '@/components/Popover/Popover.vanilla';
 import { RadioVanilla } from '@/components/Radio/Radio.vanilla';
@@ -76,9 +80,11 @@ describe('component variant props', () => {
       <TooltipContentVanilla key="tooltip-content" multiline />,
       <DialogContentVanilla key="dialog-content" elevation={3} />,
       <SidePanelVanilla key="side-panel" side="left" onOpenChange={() => {}} />,
+      <NavigationDrawerVanilla key="navigation-drawer" elevation={2} fullWidth />,
+      <NavigationItemVanilla key="navigation-item" active />,
     ];
 
-    expect(elements).toHaveLength(33);
+    expect(elements).toHaveLength(35);
   });
 
   it('reject invalid variants', () => {
@@ -157,8 +163,12 @@ describe('component variant props', () => {
       <DialogContentVanilla key="dialog-content" elevation={9} />,
       // @ts-expect-error unknown side
       <SidePanelVanilla key="side-panel" side="center" onOpenChange={() => {}} />,
+      // @ts-expect-error elevation outside the recipe keys
+      <NavigationDrawerVanilla key="navigation-drawer" elevation={9} />,
+      // @ts-expect-error active is a boolean
+      <NavigationItemVanilla key="navigation-item" active="yes" />,
     ];
 
-    expect(elements).toHaveLength(37);
+    expect(elements).toHaveLength(39);
   });
 });

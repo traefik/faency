@@ -9,7 +9,10 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { Badge } from '../Badge';
+import { Badge, BadgeVanilla } from '../Badge';
+import { BoxVanilla } from '../Box';
+import { FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
 import { Text } from '../Text';
 import {
   NavigationContainer,
@@ -18,6 +21,12 @@ import {
   NavigationDrawerVariants,
   NavigationItem,
 } from './Navigation';
+import {
+  NavigationContainerVanilla,
+  NavigationDrawerVanilla,
+  NavigationItemVanilla,
+  NavigationLinkVanilla,
+} from './Navigation.vanilla';
 
 const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/Navigation',
@@ -166,5 +175,90 @@ export const MultiSection: StoryFn<typeof NavigationDrawerForStory> = MultipleSe
 MultiSection.args = {
   elevation: 1,
 };
+
+const badgeCss = {
+  height: '$3',
+  borderRadius: '$pill',
+  fontSize: '$0',
+  color: '$hiContrast',
+};
+
+const StitchesSample = ({ fullWidth }: { fullWidth?: boolean }) => {
+  const { navigationHandlerProps } = useNavigationSample();
+
+  return (
+    <NavigationDrawer fullWidth={fullWidth}>
+      <NavigationItem {...navigationHandlerProps('/')} startAdornment={<DashboardIcon />}>
+        Dashboard
+      </NavigationItem>
+      <NavigationItem {...navigationHandlerProps('/profile')} startAdornment={<PersonIcon />}>
+        Profile
+      </NavigationItem>
+      <NavigationItem
+        {...navigationHandlerProps('/settings')}
+        startAdornment={<GearIcon />}
+        endAdornment={<Badge css={badgeCss}>99+</Badge>}
+      >
+        Settings
+      </NavigationItem>
+      <NavigationContainer>
+        <NavigationItem as="a" href="#help" startAdornment={<QuestionMarkCircledIcon />}>
+          Help (link)
+        </NavigationItem>
+      </NavigationContainer>
+    </NavigationDrawer>
+  );
+};
+
+const VanillaSample = ({ fullWidth }: { fullWidth?: boolean }) => {
+  const { navigationHandlerProps } = useNavigationSample();
+
+  return (
+    <NavigationDrawerVanilla fullWidth={fullWidth}>
+      <NavigationItemVanilla {...navigationHandlerProps('/')} startAdornment={<DashboardIcon />}>
+        Dashboard
+      </NavigationItemVanilla>
+      <NavigationItemVanilla
+        {...navigationHandlerProps('/profile')}
+        startAdornment={<PersonIcon />}
+      >
+        Profile
+      </NavigationItemVanilla>
+      <NavigationItemVanilla
+        {...navigationHandlerProps('/settings')}
+        startAdornment={<GearIcon />}
+        endAdornment={<BadgeVanilla css={badgeCss}>99+</BadgeVanilla>}
+      >
+        Settings
+      </NavigationItemVanilla>
+      <NavigationContainerVanilla>
+        <NavigationLinkVanilla href="#help" startAdornment={<QuestionMarkCircledIcon />}>
+          Help (link)
+        </NavigationLinkVanilla>
+      </NavigationContainerVanilla>
+    </NavigationDrawerVanilla>
+  );
+};
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={6}>
+    {[false, true].map((fullWidth) => (
+      <FlexVanilla key={String(fullWidth)} gap={6}>
+        <BoxVanilla css={{ width: 260 }}>
+          <H3Vanilla css={{ marginBottom: '16px' }}>
+            Stitches Version{fullWidth ? ' (fullWidth)' : ''}
+          </H3Vanilla>
+          <StitchesSample fullWidth={fullWidth} />
+        </BoxVanilla>
+        <BoxVanilla css={{ width: 260 }}>
+          <H3Vanilla css={{ marginBottom: '16px' }}>
+            Vanilla Extract Version{fullWidth ? ' (fullWidth)' : ''}
+          </H3Vanilla>
+          <VanillaSample fullWidth={fullWidth} />
+        </BoxVanilla>
+      </FlexVanilla>
+    ))}
+  </FlexVanilla>
+);
 
 export default Component;
