@@ -5,7 +5,7 @@ import { BoxVanilla } from '@/components/Box/Box.vanilla';
 import { BubbleVanilla } from '@/components/Bubble/Bubble.vanilla';
 import { ButtonVanilla } from '@/components/Button/Button.vanilla';
 import { H1Vanilla } from '@/components/Heading/Heading.vanilla';
-import { PopoverTriggerVanilla } from '@/components/Popover/Popover.vanilla';
+import { PopoverAnchorVanilla, PopoverTriggerVanilla } from '@/components/Popover/Popover.vanilla';
 import { TextVanilla } from '@/components/Text/Text.vanilla';
 
 // Checked by `yarn typecheck`: each @ts-expect-error fails the build if its line stops erroring.
@@ -18,9 +18,10 @@ describe('polymorphic component props', () => {
       <BoxVanilla key="box-ref" as="input" ref={(el: HTMLInputElement | null) => el} />,
       <H1Vanilla key="h1-as-span" as="span" />,
       <PopoverTriggerVanilla key="trigger-as-a" as="a" href="/docs" />,
+      <PopoverAnchorVanilla key="anchor-virtual-ref" virtualRef={{ current: null }} />,
     ];
 
-    expect(elements).toHaveLength(6);
+    expect(elements).toHaveLength(7);
   });
 
   it('reject props the rendered element does not have', () => {
