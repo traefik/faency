@@ -5,32 +5,49 @@ import {
   DPTimeConfig,
   DPTimeLimit,
 } from '@rehookify/datepicker';
-import { addDays, endOfDay, isAfter, isBefore, isSameDay, startOfDay } from 'date-fns';
+import { eachDayOfInterval, endOfDay, isAfter, isBefore, isSameDay, startOfDay } from 'date-fns';
 
 type DateLimits = Partial<Pick<DPDatesConfig, 'minDate' | 'maxDate'>> | undefined;
 
-// Mirrors how @rehookify/datepicker disables a day: the day's midnight against the limits.
+// Like @rehookify/datepicker: the limits lose their time of day and are swapped when reversed.
+const getDayLimits = (dates: DateLimits) => {
+  let min = dates?.minDate && startOfDay(dates.minDate);
+  let max = dates?.maxDate && startOfDay(dates.maxDate);
+  if (min && max && isAfter(min, max)) [min, max] = [max, min];
+  return { min, max };
+};
+
+// Mirrors how @rehookify/datepicker disables a day: the day against the limits' days.
 export const isOutOfRange = (
   date: Date,
   dates: DateLimits,
   exclude: DPExcludeConfig | undefined,
 ) => {
   const day = startOfDay(date);
+  const { min, max } = getDayLimits(dates);
   return (
-    (!!dates?.minDate && isBefore(day, dates.minDate)) ||
-    (!!dates?.maxDate && isAfter(day, dates.maxDate)) ||
+    (!!min && isBefore(day, min)) ||
+    (!!max && isAfter(day, max)) ||
     !!exclude?.day?.includes(day.getDay() as DPDayInteger) ||
     !!exclude?.date?.some((d) => isSameDay(d, day))
   );
 };
 
+// Whether a range from one date to another would include a day the calendar disables.
+export const rangeHasUnavailableDay = (
+  from: Date,
+  to: Date,
+  dates: DateLimits,
+  exclude: DPExcludeConfig | undefined,
+) => {
+  const [start, end] = isAfter(from, to) ? [to, from] : [from, to];
+  return eachDayOfInterval({ start, end }).some((day) => isOutOfRange(day, dates, exclude));
+};
+
 // The first and last moments isOutOfRange accepts, for an input's min and max attributes.
 export const getDateBounds = (dates: DateLimits) => {
-  const { minDate, maxDate } = dates ?? {};
-  return {
-    min: minDate && (+startOfDay(minDate) === +minDate ? minDate : startOfDay(addDays(minDate, 1))),
-    max: maxDate && endOfDay(maxDate),
-  };
+  const { min, max } = getDayLimits(dates);
+  return { min, max: max && endOfDay(max) };
 };
 
 const toMinutes = (t?: DPTimeLimit) => (t?.h != null && t?.m != null ? t.h * 60 + t.m : undefined);

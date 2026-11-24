@@ -162,11 +162,16 @@ describe('DateTimePickerInputVanilla', () => {
     );
     const input = getInput(container);
 
-    expect(input).toHaveAttribute('min', '2026-11-20T00:00');
+    // Like the calendar, the limits count whole days: Nov 19 is allowed despite minDate's 12:00.
+    expect(input).toHaveAttribute('min', '2026-11-19T00:00');
     expect(input).toHaveAttribute('max', '2026-12-31T23:59');
 
-    fireEvent.change(input, { target: { value: '2026-11-19T15:00' } });
+    fireEvent.change(input, { target: { value: '2026-11-18T15:00' } });
     expect(onChange).toHaveBeenLastCalledWith([], { rejected: true });
+    fireEvent.change(input, { target: { value: '2026-11-19T08:00' } });
+    expect(onChange).toHaveBeenLastCalledWith([new Date(2026, 10, 19, 8, 0)], {
+      rejected: false,
+    });
     fireEvent.change(input, { target: { value: '2026-11-25T15:00' } });
     expect(onChange).toHaveBeenLastCalledWith([], { rejected: true });
     fireEvent.change(input, { target: { value: '2026-11-26T15:00' } });

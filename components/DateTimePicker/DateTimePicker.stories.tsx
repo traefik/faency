@@ -178,4 +178,34 @@ export const Comparison: StoryFn = () => (
   </FlexVanilla>
 );
 
+const ModeExample = ({
+  mode,
+}: {
+  mode: NonNullable<NonNullable<DateTimePickerVanillaProps['dates']>['mode']>;
+}): JSX.Element => {
+  const [dates, setDates] = useState<Date[]>([]);
+
+  return (
+    <BoxVanilla css={{ width: COLUMN_WIDTH }}>
+      <H3Vanilla css={{ marginBottom: '16px' }}>{mode}</H3Vanilla>
+      <DateTimePickerVanilla
+        calendar={{ startDay: 1 }}
+        dates={{ mode }}
+        onDatesChange={setDates}
+        selectedDates={dates}
+      />
+      <SelectedDates dates={dates} />
+    </BoxVanilla>
+  );
+};
+
+/** `dates.mode` is supported by the Vanilla Extract version only. */
+export const VanillaSelectionModes: StoryFn = () => (
+  <FlexVanilla gap={6} wrap="wrap">
+    <ModeExample mode="single" />
+    <ModeExample mode="multiple" />
+    <ModeExample mode="range" />
+  </FlexVanilla>
+);
+
 export default Component;

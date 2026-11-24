@@ -264,6 +264,123 @@ describe('DateTimePickerVanilla', () => {
     expect(onDayButtonClick).toHaveBeenCalledTimes(1);
   });
 
+  it('should select several days in multiple mode', async () => {
+    const onDatesChange = jest.fn();
+    renderWithTheme(<Picker dates={{ mode: 'multiple' }} onDatesChange={onDatesChange} />);
+
+    await userEvent.click(visiblePage().getByRole('button', { name: '20' }));
+    await userEvent.click(visiblePage().getByRole('button', { name: '24' }));
+
+    expect(onDatesChange).toHaveBeenLastCalledWith([
+      new Date(2026, 10, 20),
+      new Date(2026, 10, 24),
+    ]);
+    expect(visiblePage().getByRole('button', { name: '20' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    expect(visiblePage().getByRole('button', { name: '24' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+  });
+
+  it('should remove a day on a second click in multiple mode', async () => {
+    const onDatesChange = jest.fn();
+    renderWithTheme(<Picker dates={{ mode: 'multiple' }} onDatesChange={onDatesChange} />);
+
+    await userEvent.click(visiblePage().getByRole('button', { name: '20' }));
+    await userEvent.click(visiblePage().getByRole('button', { name: '24' }));
+    await userEvent.click(visiblePage().getByRole('button', { name: '20' }));
+
+    expect(onDatesChange).toHaveBeenLastCalledWith([new Date(2026, 10, 24)]);
+    expect(visiblePage().getByRole('button', { name: '20' })).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    );
+  });
+
+  it('should keep a selected day on a second click when toggle is off', async () => {
+    const onDatesChange = jest.fn();
+    renderWithTheme(
+      <Picker dates={{ mode: 'multiple', toggle: false }} onDatesChange={onDatesChange} />,
+    );
+
+    await userEvent.click(visiblePage().getByRole('button', { name: '20' }));
+    await userEvent.click(visiblePage().getByRole('button', { name: '20' }));
+
+    expect(onDatesChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should select a range and mark the days inside it', async () => {
+    const onDatesChange = jest.fn();
+    renderWithTheme(<Picker dates={{ mode: 'range' }} onDatesChange={onDatesChange} />);
+
+    await userEvent.click(visiblePage().getByRole('button', { name: '20' }));
+    await userEvent.click(visiblePage().getByRole('button', { name: '24' }));
+
+    expect(onDatesChange).toHaveBeenLastCalledWith([
+      new Date(2026, 10, 20),
+      new Date(2026, 10, 24),
+    ]);
+    // Recipes are mocked in Jest: a day inside the range is a filled (non-ghost) secondary button.
+    const inside = visiblePage().getByRole('button', { name: '22 in selected range' });
+    expect(inside).toHaveClass('ghost-boolean-false', 'variant-string-secondary');
+    expect(inside).toHaveAttribute('aria-pressed', 'false');
+    const outside = visiblePage().getByRole('button', { name: '25' });
+    expect(outside).toHaveClass('ghost-boolean-true');
+  });
+
+  it('should start a new range instead of crossing an excluded day', async () => {
+    const onDatesChange = jest.fn();
+    renderWithTheme(
+      <Picker
+        dates={{ mode: 'range' }}
+        exclude={{ date: [new Date(2026, 10, 22)] }}
+        onDatesChange={onDatesChange}
+      />,
+    );
+
+    await userEvent.click(visiblePage().getByRole('button', { name: '20' }));
+    await userEvent.click(visiblePage().getByRole('button', { name: '24' }));
+
+    expect(onDatesChange).toHaveBeenLastCalledWith([new Date(2026, 10, 24)]);
+  });
+
+  it('should hide the presets in range mode', () => {
+    renderWithTheme(<Picker dates={{ mode: 'range' }} showDatePresets showTimePicker />);
+
+    expect(screen.queryByRole('button', { name: 'Now + 1 M' })).not.toBeInTheDocument();
+  });
+
+  it('should have no accessibility violations with a selected range', async () => {
+    const { container } = renderWithTheme(
+      <Picker
+        dates={{ mode: 'range' }}
+        selectedDates={[new Date(2026, 10, 20), new Date(2026, 10, 24)]}
+      />,
+    );
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('should replace a multiple selection with the preset date', async () => {
+    const onDatesChange = jest.fn();
+    renderWithTheme(
+      <Picker
+        dates={{ mode: 'multiple' }}
+        showDatePresets
+        onDatesChange={onDatesChange}
+        selectedDates={[new Date(2026, 10, 20), new Date(2026, 10, 24)]}
+      />,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Now + 1 M' }));
+
+    const [[dates]] = onDatesChange.mock.calls;
+    expect(dates).toHaveLength(1);
+  });
+
   it('should only show the yearly preset with the time picker', () => {
     renderWithTheme(<Picker showDatePresets />);
 

@@ -13,6 +13,7 @@ import {
   useInteractions,
 } from '@floating-ui/react';
 import { CalendarIcon } from '@radix-ui/react-icons';
+import { DPDatesConfig, DPUserConfig } from '@rehookify/datepicker';
 import { format, isValid, parse } from 'date-fns';
 import React, { MouseEventHandler, Ref, useMemo, useRef, useState } from 'react';
 
@@ -21,10 +22,7 @@ import { cx } from '@/styles/cx';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { CardVanilla } from '@/components/Card/Card.vanilla';
-import {
-  DateTimePickerConfig,
-  DateTimePickerVanilla,
-} from '@/components/DateTimePicker/DateTimePicker.vanilla';
+import { DateTimePickerVanilla } from '@/components/DateTimePicker/DateTimePicker.vanilla';
 import {
   getDateBounds,
   isOutOfRange,
@@ -52,7 +50,10 @@ const FORMAT = "yyyy-MM-dd'T'HH:mm";
 // The format holds every date field, so parse only needs a fixed reference date.
 const REFERENCE_DATE = new Date(0);
 
-type DateTimePickerInputConfig = Omit<DateTimePickerConfig, 'onDatesChange' | 'selectedDates'>;
+// A datetime-local input holds one date, so the picker's dates.mode is left out.
+type DateTimePickerInputConfig = Omit<DPUserConfig, 'dates' | 'onDatesChange' | 'selectedDates'> & {
+  dates?: Partial<Omit<DPDatesConfig, 'mode'>>;
+};
 
 interface DateTimePickerInputVanillaOwnProps extends CSSProps {
   inputCSS?: CSSProps['css'];

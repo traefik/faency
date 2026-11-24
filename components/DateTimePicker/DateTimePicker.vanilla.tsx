@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { DPDatesConfig, DPExcludeConfig, DPPropGetter, DPUserConfig } from '@rehookify/datepicker';
+import { DPExcludeConfig, DPPropGetter, DPUserConfig } from '@rehookify/datepicker';
 import { addMonths, addYears } from 'date-fns';
 import React, { MouseEvent, ReactNode, useState } from 'react';
 
@@ -24,9 +24,10 @@ import {
   timeColumnInner,
   timeLabel,
   timeList,
+  visuallyHidden,
   weekDay,
 } from './DateTimePicker.vanilla.css';
-import { clampToTimeRange, isOutOfRange } from './isOutOfRange';
+import { clampToTimeRange, isOutOfRange, rangeHasUnavailableDay } from './isOutOfRange';
 import { DateTimePickerLabels, DEFAULT_LABELS } from './labels';
 import { useDateTimePicker } from './useDateTimePicker';
 
@@ -84,21 +85,35 @@ type CellProps = {
   children: ReactNode;
   kind: 'day' | 'month' | 'year' | 'time';
   now: boolean;
+  /** A day between the start and end of a range, or in the range being chosen. */
+  inRange?: boolean;
+  /** Read after the day for screen readers, e.g. for a day inside the selected range. */
+  description?: string;
   outside?: boolean;
   propGetter: DPPropGetter;
   selected: boolean;
   onAfterClick?: () => void;
 };
 
-function Cell({ children, kind, now, outside, propGetter, selected, onAfterClick }: CellProps) {
+function Cell({
+  children,
+  kind,
+  now,
+  inRange,
+  description,
+  outside,
+  propGetter,
+  selected,
+  onAfterClick,
+}: CellProps) {
   const { onClick, ...getterProps } = propGetter;
 
   return (
     <ButtonVanilla
       type="button"
       className={cellRecipe({ kind, now: now && !selected, outside })}
-      ghost={!selected}
-      variant={now || selected ? 'primary' : 'secondary'}
+      ghost={!selected && !inRange}
+      variant={selected || (now && !inRange) ? 'primary' : 'secondary'}
       {...getterProps}
       // aria-selected is not allowed on role="button"; aria-pressed carries the same state.
       aria-selected={undefined}
@@ -110,22 +125,17 @@ function Cell({ children, kind, now, outside, propGetter, selected, onAfterClick
       tabIndex={getterProps.disabled ? getterProps.tabIndex : 0}
     >
       {children}
+      {description ? <span className={visuallyHidden}>{` ${description}`}</span> : null}
     </ButtonVanilla>
   );
 }
 
-type DateTimePickerDatesConfig = Omit<DPDatesConfig, 'mode'>;
-
-export type DateTimePickerConfig = Omit<DPUserConfig, 'dates'> & {
-  dates?: Partial<DateTimePickerDatesConfig>;
-};
-
 type PresetProps = {
   children: ReactNode;
   fromNow: (now: Date) => Date;
-  dates: Partial<DateTimePickerDatesConfig> | undefined;
+  dates: DPUserConfig['dates'];
   exclude: DPExcludeConfig | undefined;
-  time: DateTimePickerConfig['time'];
+  time: DPUserConfig['time'];
   onSelect: (date: Date, evt: MouseEvent<HTMLElement>) => void;
 };
 
@@ -156,13 +166,14 @@ interface DateTimePickerVanillaOwnProps extends CSSProps {
   onFastTravelClick?: () => void;
   onDayButtonClick?: () => void;
   onTimeButtonClick?: () => void;
+  /** Not shown in range mode, where a single date cannot complete a range. */
   showDatePresets?: boolean;
   showTimePicker?: boolean;
 }
 
-export type DateTimePickerVanillaProps = DateTimePickerConfig &
+export type DateTimePickerVanillaProps = DPUserConfig &
   DateTimePickerVanillaOwnProps &
-  Omit<React.HTMLAttributes<HTMLDivElement>, keyof DateTimePickerConfig>;
+  Omit<React.HTMLAttributes<HTMLDivElement>, keyof DPUserConfig>;
 
 export const DateTimePickerVanilla = React.forwardRef<HTMLDivElement, DateTimePickerVanillaProps>(
   (
@@ -206,14 +217,28 @@ export const DateTimePickerVanilla = React.forwardRef<HTMLDivElement, DateTimePi
       },
     } = useDateTimePicker({
       calendar,
-      dates,
+      // In multiple mode, clicking a selected day removes it unless dates.toggle says otherwise.
+      dates: dates?.mode === 'multiple' ? { toggle: true, ...dates } : dates,
       exclude,
       focusDate,
       locale,
       offsetDate,
       onOffsetChange,
       // Picked days keep midnight or the previous time, which can fall outside the time limits.
-      onDatesChange: (d) => onDatesChange(d.map((date) => clampToTimeRange(date, timeConfig))),
+      onDatesChange: (d) => {
+        const next = d.map((date) => clampToTimeRange(date, timeConfig));
+        // A range may not include a disabled day: the click that would cross one starts a new range.
+        if (
+          dates?.mode === 'range' &&
+          next.length === 2 &&
+          rangeHasUnavailableDay(next[0], next[1], dates, exclude)
+        ) {
+          const clicked = d.findIndex((date) => !selectedDates.some((s) => +s === +date));
+          onDatesChange([next[clicked === -1 ? 1 : clicked]]);
+          return;
+        }
+        onDatesChange(next);
+      },
       selectedDates,
       time: timeConfig,
       years: yearsConfig,
@@ -258,6 +283,8 @@ export const DateTimePickerVanilla = React.forwardRef<HTMLDivElement, DateTimePi
                       key={d.$date.toString()}
                       kind="day"
                       now={d.now}
+                      inRange={d.range !== '' && !d.selected && !d.disabled}
+                      description={d.range === 'in-range' ? mergedLabels.inRange : undefined}
                       outside={!d.disabled && !d.inCurrentMonth && !d.selected}
                       propGetter={dayButton(d)}
                       onAfterClick={onDayButtonClick}
@@ -343,7 +370,7 @@ export const DateTimePickerVanilla = React.forwardRef<HTMLDivElement, DateTimePi
             ) : undefined}
           </div>
 
-          {showDatePresets ? (
+          {showDatePresets && dates?.mode !== 'range' ? (
             <div className={presets}>
               <Preset
                 fromNow={(d) => addMonths(d, 1)}

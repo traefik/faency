@@ -160,8 +160,8 @@ export const VanillaUnavailableDate: StoryFn = () => {
   return (
     <FieldVanilla
       label="Start date"
-      description="Type a date before tomorrow to see the error."
-      error={rejected ? 'Pick a date from tomorrow on.' : undefined}
+      description="Type a date before today to see the error."
+      error={rejected ? 'Pick a date from today on.' : undefined}
     >
       <DateTimePickerInputVanilla
         calendar={{ startDay: 1 }}
@@ -240,7 +240,7 @@ export const Comparison: StoryFn = () => {
   return (
     <FlexVanilla direction="column" gap={4}>
       <TextVanilla size="2" variant="subtle">
-        Every row allows dates from tomorrow on. Click an input to open its picker.
+        Every row allows dates from today on. Click an input to open its picker.
       </TextVanilla>
       <FlexVanilla gap={4}>
         <BoxVanilla css={{ width: LABEL_WIDTH }} />
