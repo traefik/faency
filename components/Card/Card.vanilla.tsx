@@ -29,7 +29,7 @@ export type CardVanillaProps<C extends ElementType = 'div'> = PolymorphicCompone
   CardOwnProps
 >;
 
-type CardVanillaComponent = PolymorphicComponent<'div', CardVanillaProps<ElementType>>;
+type CardVanillaComponent = PolymorphicComponent<'div', CardOwnProps>;
 
 const CardVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'div'>(

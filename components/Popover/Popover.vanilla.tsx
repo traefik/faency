@@ -32,14 +32,17 @@ export const PopoverCloseVanilla = createPolymorphicPart<'button'>(PopoverPrimit
   displayName: 'PopoverCloseVanilla',
 });
 
+type PopoverAnchorOwnProps = Pick<PopoverPrimitive.PopoverAnchorProps, 'virtualRef'>;
+
 export type PopoverAnchorVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
   C,
-  CSSProps
+  PopoverAnchorOwnProps & CSSProps
 >;
 
-export const PopoverAnchorVanilla = createPolymorphicPart<'div'>(PopoverPrimitive.Anchor, {
-  displayName: 'PopoverAnchorVanilla',
-});
+export const PopoverAnchorVanilla = createPolymorphicPart<'div', PopoverAnchorOwnProps>(
+  PopoverPrimitive.Anchor,
+  { displayName: 'PopoverAnchorVanilla' },
+);
 
 type PopoverContentVariants = RecipeVariantProps<typeof popoverContentRecipe>;
 

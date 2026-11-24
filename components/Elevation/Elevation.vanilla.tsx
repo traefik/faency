@@ -25,7 +25,7 @@ export type ElevationVanillaProps<C extends ElementType = 'div'> = PolymorphicCo
   ElevationOwnProps
 >;
 
-type ElevationVanillaComponent = PolymorphicComponent<'div', ElevationVanillaProps<ElementType>>;
+type ElevationVanillaComponent = PolymorphicComponent<'div', ElevationOwnProps>;
 
 const ElevationVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'div'>(

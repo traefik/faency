@@ -2,7 +2,7 @@ import React, { ElementType, forwardRef } from 'react';
 
 import { CSSProps } from './cssProps';
 import { cx } from './cx';
-import { PolymorphicComponent, PolymorphicComponentProps } from './polymorphic';
+import { PolymorphicComponent } from './polymorphic';
 import { useInlineStyle } from './useInlineStyle';
 
 type PartImplProps = CSSProps & {
@@ -34,8 +34,5 @@ export function createPolymorphicPart<
 
   Part.displayName = options.displayName;
 
-  return Part as unknown as PolymorphicComponent<
-    DefaultAs,
-    PolymorphicComponentProps<ElementType, OwnProps & CSSProps>
-  >;
+  return Part as unknown as PolymorphicComponent<DefaultAs, OwnProps & CSSProps>;
 }

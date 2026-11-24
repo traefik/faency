@@ -23,10 +23,7 @@ export type IconButtonVanillaProps<C extends ElementType = 'button'> = Polymorph
   IconButtonOwnProps
 >;
 
-type IconButtonVanillaComponent = PolymorphicComponent<
-  'button',
-  IconButtonVanillaProps<ElementType>
->;
+type IconButtonVanillaComponent = PolymorphicComponent<'button', IconButtonOwnProps>;
 
 const IconButtonVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'button'>(
