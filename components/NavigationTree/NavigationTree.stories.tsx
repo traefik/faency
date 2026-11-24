@@ -9,7 +9,15 @@ import {
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
+import { BoxVanilla } from '../Box';
+import { FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
 import { NavigationTreeDrawer } from '.';
+import {
+  NavigationTreeContainerVanilla,
+  NavigationTreeDrawerVanilla,
+  NavigationTreeItemVanilla,
+} from './NavigationTree.vanilla';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 import { NavigationTreeItem } from './NavigationTreeItem';
 
@@ -148,5 +156,79 @@ const FullWidthStory: StoryFn<typeof NavigationTreeContainer> = (args) => {
 export const FullWidth: StoryFn<typeof NavigationTreeContainer> = FullWidthStory.bind({});
 
 FullWidth.args = {};
+
+const useRoute = () => {
+  const [currentRoute, setCurrentRoute] = useState('one-one');
+
+  return (route: string) => ({
+    active: route === currentRoute,
+    onClick: () => setCurrentRoute(route),
+  });
+};
+
+const StitchesTree = ({ fullWidth }: { fullWidth: boolean }) => {
+  const navigationHandlerProps = useRoute();
+
+  return (
+    <NavigationTreeDrawer fullWidth={fullWidth}>
+      <NavigationTreeContainer fullWidth={fullWidth}>
+        <NavigationTreeItem label="One" subtitle="/one" defaultExpanded>
+          <NavigationTreeItem {...navigationHandlerProps('one-one')} label="One.One" />
+          <NavigationTreeItem label="One.Two" nestedChildrenLevel={2} defaultExpanded>
+            <NavigationTreeItem
+              {...navigationHandlerProps('one-two-one')}
+              startAdornment={<ArchiveIcon />}
+              label="One.Two.One"
+            />
+          </NavigationTreeItem>
+        </NavigationTreeItem>
+        <NavigationTreeItem {...navigationHandlerProps('two')} label="Two" subtitle="/two" />
+      </NavigationTreeContainer>
+    </NavigationTreeDrawer>
+  );
+};
+
+const VanillaTree = ({ fullWidth }: { fullWidth: boolean }) => {
+  const navigationHandlerProps = useRoute();
+
+  return (
+    <NavigationTreeDrawerVanilla fullWidth={fullWidth}>
+      <NavigationTreeContainerVanilla>
+        <NavigationTreeItemVanilla label="One" subtitle="/one" defaultExpanded>
+          <NavigationTreeItemVanilla {...navigationHandlerProps('one-one')} label="One.One" />
+          <NavigationTreeItemVanilla label="One.Two" defaultExpanded>
+            <NavigationTreeItemVanilla
+              {...navigationHandlerProps('one-two-one')}
+              startAdornment={<ArchiveIcon />}
+              label="One.Two.One"
+            />
+          </NavigationTreeItemVanilla>
+        </NavigationTreeItemVanilla>
+        <NavigationTreeItemVanilla {...navigationHandlerProps('two')} label="Two" subtitle="/two" />
+      </NavigationTreeContainerVanilla>
+    </NavigationTreeDrawerVanilla>
+  );
+};
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={6}>
+    {[false, true].map((fullWidth) => (
+      <FlexVanilla key={String(fullWidth)} gap={6}>
+        <BoxVanilla css={{ width: 260 }}>
+          <H3Vanilla css={{ marginBottom: '16px' }}>
+            Stitches Version{fullWidth ? ' (fullWidth)' : ''}
+          </H3Vanilla>
+          <StitchesTree fullWidth={fullWidth} />
+        </BoxVanilla>
+        <BoxVanilla css={{ width: 260 }}>
+          <H3Vanilla css={{ marginBottom: '16px' }}>
+            Vanilla Extract Version{fullWidth ? ' (fullWidth)' : ''}
+          </H3Vanilla>
+          <VanillaTree fullWidth={fullWidth} />
+        </BoxVanilla>
+      </FlexVanilla>
+    ))}
+  </FlexVanilla>
+);
 
 export default Component;

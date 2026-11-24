@@ -225,10 +225,18 @@ export {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from './components/NavigationMenu';
+export type {
+  NavigationTreeContainerVanillaProps,
+  NavigationTreeDrawerVanillaProps,
+  NavigationTreeItemVanillaProps,
+} from './components/NavigationTree';
 export {
   NavigationTreeContainer,
+  NavigationTreeContainerVanilla,
   NavigationTreeDrawer,
+  NavigationTreeDrawerVanilla,
   NavigationTreeItem,
+  NavigationTreeItemVanilla,
 } from './components/NavigationTree';
 export type { OverlayVanillaProps } from './components/Overlay';
 export { Overlay, OverlayVanilla } from './components/Overlay';

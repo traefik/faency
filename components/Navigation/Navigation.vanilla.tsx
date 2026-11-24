@@ -91,7 +91,7 @@ NavigationDrawerVanillaImpl.displayName = 'NavigationDrawerVanilla';
 export const NavigationDrawerVanilla =
   NavigationDrawerVanillaImpl as NavigationDrawerVanillaComponent;
 
-interface NavigationItemOwnProps extends CSSProps {
+export interface NavigationItemOwnProps extends CSSProps {
   active?: boolean;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
