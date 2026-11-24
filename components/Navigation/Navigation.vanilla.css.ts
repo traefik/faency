@@ -6,7 +6,9 @@ import { tokens } from '@/styles/tokens.css';
 
 import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
 
-const overlay = (color: string) => `linear-gradient(${color}, ${color})`;
+// State colors stack over `background-color`, so a custom base color keeps the hover, focus and active layers.
+const layers = (tint: string, color: string) =>
+  `linear-gradient(${tint}, ${tint}), linear-gradient(${color}, ${color})`;
 
 const negativeSpace1 = `calc(${tokens.space['1']} * -1)`;
 
@@ -46,8 +48,7 @@ const navigationItem = style({
     '&:focus': {
       color: tokens.colors.navButtonFocusText,
       boxShadow: `inset 0 0 0 2px ${tokens.colors.navButtonFocusBorder}`,
-      backgroundColor: tokens.colors.navButtonFocusBg,
-      backgroundImage: overlay(tokens.colors.navButtonFocusBg2),
+      backgroundImage: layers(tokens.colors.navButtonFocusBg2, tokens.colors.navButtonFocusBg),
     },
   },
 
@@ -56,8 +57,7 @@ const navigationItem = style({
       selectors: {
         '&:hover': {
           color: tokens.colors.navButtonHoverText,
-          backgroundColor: tokens.colors.navButtonHoverBg,
-          backgroundImage: overlay(tokens.colors.navButtonHoverBg2),
+          backgroundImage: layers(tokens.colors.navButtonHoverBg2, tokens.colors.navButtonHoverBg),
         },
       },
     },
@@ -66,8 +66,7 @@ const navigationItem = style({
 
 const navigationItemActive = style({
   color: tokens.colors.navButtonActiveText,
-  backgroundColor: tokens.colors.navButtonActiveBg,
-  backgroundImage: overlay(tokens.colors.navButtonActiveBg2),
+  backgroundImage: layers(tokens.colors.navButtonActiveBg2, tokens.colors.navButtonActiveBg),
 
   selectors: {
     '&:focus': {

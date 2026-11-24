@@ -338,14 +338,14 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 
 **Change:** `NavigationItemVanilla` draws its hover, focus and active backgrounds on the item itself instead of on `::before` and `::after`, and takes any element or component in `as`.
 
-|                                | Stitches `NavigationItem`              | Vanilla Extract `NavigationItemVanilla`                     |
-| ------------------------------ | -------------------------------------- | ----------------------------------------------------------- |
-| Hover, focus and active colors | two layers on `::before` and `::after` | `background-color` and `background-image` on the item       |
-| `as`                           | `'a'` or `'button'`                    | any element or component, e.g. a router `Link`              |
-| `aria-current="page"`          | on an active item with `as="a"`        | on any active item that is not a `<button>`                 |
-| Active state in the DOM        | a generated class                      | a `data-active` attribute                                   |
-| Adornment and label wrappers   | `<div>`                                | `<span>`, valid inside a `<button>`                         |
-| Focus ring                     | partly covered by the focus background | drawn above the focus background, so it looks a bit crisper |
+|                                | Stitches `NavigationItem`              | Vanilla Extract `NavigationItemVanilla`                            |
+| ------------------------------ | -------------------------------------- | ------------------------------------------------------------------ |
+| Hover, focus and active colors | two layers on `::before` and `::after` | `background-image` layers on the item, over its `background-color` |
+| `as`                           | `'a'` or `'button'`                    | any element or component, e.g. a router `Link`                     |
+| `aria-current="page"`          | on an active item with `as="a"`        | on any active item that is not a `<button>`                        |
+| Active state in the DOM        | a generated class                      | a `data-active` attribute                                          |
+| Adornment and label wrappers   | `<div>`                                | `<span>`, valid inside a `<button>`                                |
+| Focus ring                     | partly covered by the focus background | drawn above the focus background, so it looks a bit crisper        |
 
 `NavigationDrawer` with `fullWidth` still squares the corners of its items and drops their focus ring, now without touching any pseudo-element.
 
@@ -375,7 +375,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 ```
 
 ```css
-/* `background` also resets the primary tint layer */
+/* `background` replaces both state layers at once */
 .myItem:hover {
   background: hotpink;
 }
@@ -389,7 +389,8 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 1. Move styles that target `::before` or `::after` of an item to the item itself. Use the `background` shorthand to replace both layers at once
 2. Target active items with `[data-active]` instead of the Stitches variant class
 3. Wrapping a router link in `NavigationItem` is no longer needed: pass it to `as`
-4. Set state-dependent colors through `className`, not `css`: `css` is applied inline and would override hover, focus and active too
+4. Change the base color with `background-color`, through `css` or `className`: the hover, focus and active layers stay on top of it. Avoid the `background` shorthand in `css`, which would remove them
+5. Change a state color with a `className` that targets `:hover`, `:focus` or `[data-active]`, since `css` cannot target states
 
 **Rationale:**
 
