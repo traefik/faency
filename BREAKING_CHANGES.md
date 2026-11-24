@@ -274,6 +274,50 @@ The same applies to `Li`, which takes the Flex layout props.
 
 ---
 
+### DateTimePicker and DateTimePickerInput: Inline CSS
+
+**Change:** The `css`-style props of both components apply inline styles only, and the input's `inputProps` are typed.
+
+|                                | Stitches                                 | Vanilla Extract                                                    |
+| ------------------------------ | ---------------------------------------- | ------------------------------------------------------------------ |
+| `css`, `inputCSS`, `pickerCSS` | Stitches CSS, including nested selectors | inline styles only, no nested selectors such as `& input`          |
+| `inputProps` type              | not checked                              | `InputVanillaProps`, without `css`, `onChange`, `type` and `value` |
+| HTML attributes on the root    | not passed through                       | passed to the root `div`                                           |
+
+**Before (v12.x with Stitches):**
+
+```tsx
+<DateTimePickerInput inputCSS={{ '& input': { fontFamily: '$mono' } }} />
+```
+
+**After (v13.x with Vanilla Extract):**
+
+```ts
+// DateTimePickerInput.css.ts
+import { globalStyle, style } from '@vanilla-extract/css';
+
+export const monoInput = style({});
+
+// inputProps.className lands on the input's wrapper, so target the <input> inside it.
+globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
+```
+
+```tsx
+<DateTimePickerInput inputProps={{ className: monoInput }} />
+```
+
+**Migration Guide:**
+
+1. Move nested selectors from `css`, `inputCSS` and `pickerCSS` into a class name passed through `className` or `inputProps.className`
+
+**Rationale:**
+
+- Vanilla Extract styles are generated at build time, so runtime `css` props cannot hold selectors
+
+**Impact:** Low - Only code using nested selectors in the `css` props needs changes
+
+---
+
 ## Components Supporting Polymorphic `as` Prop
 
 ### Layout Components
@@ -321,6 +365,8 @@ These components do not support the `as` prop because the actual form elements m
 - ❌ **Input** - Wrapper is fixed `div`, input element cannot be changed
 - ❌ **TextField** - Built on `Field` and `Input`, input element cannot be changed
 - ❌ **Textarea** - Wrapper is fixed `div`, textarea element cannot be changed
+- ❌ **DateTimePicker** - Fixed widget, root is a `div`
+- ❌ **DateTimePickerInput** - Wrapper is fixed `div`, input element cannot be changed
 
 ### Fixed-Element Components
 
