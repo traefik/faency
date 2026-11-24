@@ -29,7 +29,7 @@ export type GridVanillaProps<C extends ElementType = 'div'> = PolymorphicCompone
   C,
   GridOwnProps
 >;
-type GridComponent = PolymorphicComponent<'div', GridVanillaProps<ElementType>>;
+type GridComponent = PolymorphicComponent<'div', GridOwnProps>;
 
 export const GridVanillaComponent = React.forwardRef(
   <C extends ElementType = 'div'>(

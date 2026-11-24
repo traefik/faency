@@ -13,7 +13,7 @@ import { box } from './Box.vanilla.css';
 
 export type BoxVanillaProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
 
-type BoxComponent = PolymorphicComponent<'div', BoxVanillaProps<ElementType>>;
+type BoxComponent = PolymorphicComponent<'div', CSSProps>;
 
 const BoxVanillaComponent = forwardRef(
   <C extends ElementType = 'div'>(

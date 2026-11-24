@@ -37,7 +37,7 @@ function createHeadingComponent<C extends ElementType>(
   baseStyle: string,
   displayName: string,
 ) {
-  type HeadingComponent = PolymorphicComponent<C, HeadingProps<ElementType>>;
+  type HeadingComponent = PolymorphicComponent<C, HeadingOwnProps>;
 
   const HeadingImpl = forwardRef(
     <E extends ElementType = C>(

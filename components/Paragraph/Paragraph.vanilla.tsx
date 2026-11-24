@@ -23,7 +23,7 @@ export type ParagraphVanillaProps<C extends ElementType = 'p'> = PolymorphicComp
   ParagraphOwnProps
 >;
 
-type ParagraphVanillaComponent = PolymorphicComponent<'p', ParagraphVanillaProps<ElementType>>;
+type ParagraphVanillaComponent = PolymorphicComponent<'p', ParagraphOwnProps>;
 
 const ParagraphVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'p'>(

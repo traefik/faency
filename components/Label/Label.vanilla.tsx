@@ -23,7 +23,7 @@ export type LabelVanillaProps<C extends ElementType = 'label'> = PolymorphicComp
   LabelOwnProps
 >;
 
-type LabelVanillaComponent = PolymorphicComponent<'label', LabelVanillaProps<ElementType>>;
+type LabelVanillaComponent = PolymorphicComponent<'label', LabelOwnProps>;
 
 const LabelVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'label'>(

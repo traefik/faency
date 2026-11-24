@@ -25,7 +25,7 @@ export type BadgeVanillaProps<C extends ElementType = 'span'> = PolymorphicCompo
   BadgeOwnProps
 >;
 
-type BadgeVanillaComponent = PolymorphicComponent<'span', BadgeVanillaProps<ElementType>>;
+type BadgeVanillaComponent = PolymorphicComponent<'span', BadgeOwnProps>;
 
 const BadgeVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'span'>(

@@ -30,7 +30,7 @@ export type ButtonSwitchContainerVanillaProps<C extends ElementType = 'div'> =
 
 type ButtonSwitchContainerVanillaComponent = PolymorphicComponent<
   'div',
-  ButtonSwitchContainerVanillaProps<ElementType>
+  ButtonSwitchContainerOwnProps
 >;
 
 const ButtonSwitchContainerVanillaImpl = forwardRef(
@@ -82,10 +82,7 @@ interface ButtonSwitchItemOwnProps extends CSSProps {
 export type ButtonSwitchItemVanillaProps<C extends ElementType = 'button'> =
   PolymorphicComponentProps<C, ButtonSwitchItemOwnProps>;
 
-type ButtonSwitchItemVanillaComponent = PolymorphicComponent<
-  'button',
-  ButtonSwitchItemVanillaProps<ElementType>
->;
+type ButtonSwitchItemVanillaComponent = PolymorphicComponent<'button', ButtonSwitchItemOwnProps>;
 
 const ButtonSwitchItemVanillaImpl = forwardRef(
   <C extends ElementType = 'button'>(

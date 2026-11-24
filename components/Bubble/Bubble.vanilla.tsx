@@ -21,7 +21,7 @@ export type BubbleVanillaProps<C extends ElementType = 'div'> = PolymorphicCompo
   BubbleOwnProps
 >;
 
-type BubbleVanillaComponent = PolymorphicComponent<'div', BubbleVanillaProps<ElementType>>;
+type BubbleVanillaComponent = PolymorphicComponent<'div', BubbleOwnProps>;
 
 const BubbleVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'div'>(

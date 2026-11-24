@@ -20,7 +20,7 @@ export type ContainerVanillaProps<C extends ElementType = 'div'> = PolymorphicCo
   C,
   ContainerOwnProps
 >;
-type ContainerComponent = PolymorphicComponent<'div', ContainerVanillaProps<ElementType>>;
+type ContainerComponent = PolymorphicComponent<'div', ContainerOwnProps>;
 
 export const ContainerVanillaComponent = React.forwardRef(
   <C extends ElementType = 'div'>(

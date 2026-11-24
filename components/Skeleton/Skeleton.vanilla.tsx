@@ -21,7 +21,7 @@ export type SkeletonVanillaProps<C extends ElementType = 'div'> = PolymorphicCom
   SkeletonVanillaOwnProps
 >;
 
-type SkeletonVanillaComponent = PolymorphicComponent<'div', SkeletonVanillaProps<ElementType>>;
+type SkeletonVanillaComponent = PolymorphicComponent<'div', SkeletonVanillaOwnProps>;
 
 const SkeletonVanillaImpl = forwardRef(
   <C extends ElementType = 'div'>(

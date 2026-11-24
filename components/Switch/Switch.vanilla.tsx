@@ -34,7 +34,7 @@ export type SwitchVanillaProps<C extends ElementType = 'button'> = PolymorphicCo
   SwitchVanillaOwnProps
 >;
 
-type SwitchVanillaComponent = PolymorphicComponent<'button', SwitchVanillaProps<ElementType>>;
+type SwitchVanillaComponent = PolymorphicComponent<'button', SwitchVanillaOwnProps>;
 
 const SwitchVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'button'>(

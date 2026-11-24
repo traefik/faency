@@ -21,7 +21,7 @@ interface BlockquoteOwnProps extends BlockquoteRecipeVariants, CSSProps {}
 export type BlockquoteVanillaProps<C extends ElementType = 'blockquote'> =
   PolymorphicComponentProps<C, BlockquoteOwnProps>;
 
-type BlockquoteComponent = PolymorphicComponent<'blockquote', BlockquoteVanillaProps<ElementType>>;
+type BlockquoteComponent = PolymorphicComponent<'blockquote', BlockquoteOwnProps>;
 
 const BlockquoteVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'blockquote'>(

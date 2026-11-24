@@ -23,7 +23,7 @@ export type TextVanillaProps<C extends ElementType = 'span'> = PolymorphicCompon
   TextOwnProps
 >;
 
-type TextComponent = PolymorphicComponent<'span', TextVanillaProps<ElementType>>;
+type TextComponent = PolymorphicComponent<'span', TextOwnProps>;
 
 const TextVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'span'>(
