@@ -22,6 +22,9 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Setup safe-chain
+        uses: ./.github/actions/setup-safe-chain
+
       - name: enable corepack
         run: |
           npm install -g corepack@${COREPACK_VERSION}
@@ -32,9 +35,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
-
-      - name: Setup safe-chain
-        uses: ./.github/actions/setup-safe-chain
 
       - name: Install
         run: yarn install
