@@ -1,0 +1,19 @@
+name: Setup safe-chain
+description: Installs the pinned Aikido safe-chain installer after checking its checksum.
+
+runs:
+  using: composite
+  steps:
+    - name: Install safe-chain
+      shell: bash
+      env:
+        # Not SAFE_CHAIN_VERSION, which selects the legacy binaries.
+        # npm, not github-releases: the AikidoSec IP allow list rejects Renovate's token.
+        # renovate: datasource=npm depName=@aikidosec/safe-chain
+        SAFE_CHAIN_INSTALLER_VERSION: 1.5.29
+        SAFE_CHAIN_INSTALLER_SHA512: d971d3eb64c26871fb133747377816d74be12e911bc400b4651f368dad909fb7f6e535f95d5751f23dac3f0fd47f2ac142dffc4d2c434de9a6cdaf34b502bc73
+      run: |
+        set -euo pipefail
+        curl -fsSL "https://github.com/AikidoSec/safe-chain/releases/download/${SAFE_CHAIN_INSTALLER_VERSION}/install-safe-chain.sh" -o "$RUNNER_TEMP/install-safe-chain.sh"
+        echo "${SAFE_CHAIN_INSTALLER_SHA512}  $RUNNER_TEMP/install-safe-chain.sh" | sha512sum -c -
+        sh "$RUNNER_TEMP/install-safe-chain.sh" --ci
