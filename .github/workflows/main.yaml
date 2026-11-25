@@ -12,6 +12,8 @@ permissions:
 
 env:
   SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72 # 3 days
+  # renovate: datasource=npm depName=corepack
+  COREPACK_VERSION: 0.36.0
 
 jobs:
   faency:
@@ -25,17 +27,19 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Setup safe-chain
+        uses: ./.github/actions/setup-safe-chain
+
       - name: enable corepack
-        run: corepack enable
+        run: |
+          npm install -g corepack@${COREPACK_VERSION}
+          corepack enable
 
       - name: Setup node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: yarn
-
-      - name: Setup safe-chain
-        uses: ./.github/actions/setup-safe-chain
 
       - name: Config git
         run: |

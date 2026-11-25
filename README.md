@@ -81,9 +81,10 @@ const App = () => (
 docker run -it --rm -v $(pwd):/usr/local/src/ -v faency-node-modules:/usr/local/src/node_modules -w /usr/local/src/ -p 6006:6006 -p 24678:24678 node:$(sed 's/^v//' .nvmrc) bash
 ```
 
-- Enable Corepack, so `yarn` runs the Yarn version set in `package.json`
+- Install and enable Corepack (no longer bundled with Node since v25), so `yarn` runs the Yarn version set in `package.json`
 
 ```sh
+npm install -g corepack
 corepack enable
 ```
 
