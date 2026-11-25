@@ -17,7 +17,8 @@ export {
   AccordionTrigger,
   AccordionTriggerVanilla,
 } from './components/Accordion';
-export { Alert } from './components/Alert';
+export type { AlertVanillaProps } from './components/Alert';
+export { Alert, AlertVanilla } from './components/Alert';
 export type {
   AriaCaptionVanillaProps,
   AriaTableSectionVanillaProps,
@@ -344,7 +345,22 @@ export {
   ToastVanilla,
   useToast,
 } from './components/Toast';
-export { Tooltip, TooltipContent, TooltipRoot, TooltipTrigger } from './components/Tooltip';
+export type {
+  TooltipContentVanillaProps,
+  TooltipTriggerVanillaProps,
+  TooltipVanillaProps,
+} from './components/Tooltip';
+export {
+  Tooltip,
+  TooltipContent,
+  TooltipContentVanilla,
+  TooltipPortalVanilla,
+  TooltipRoot,
+  TooltipRootVanilla,
+  TooltipTrigger,
+  TooltipTriggerVanilla,
+  TooltipVanilla,
+} from './components/Tooltip';
 export { VisuallyHidden } from './components/VisuallyHidden';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
 export { Portal } from '@radix-ui/react-portal';

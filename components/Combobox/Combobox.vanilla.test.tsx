@@ -33,29 +33,6 @@ const Controlled = (props: Partial<ComboboxVanillaProps>) => {
 const optionNames = () => screen.getAllByRole('option').map((option) => option.textContent);
 
 describe('ComboboxVanilla', () => {
-  const { ResizeObserver } = window;
-  const { matches } = Element.prototype;
-
-  beforeAll(() => {
-    // The shared mock calls back inside observe(), which floating-ui answers by observing again.
-    window.ResizeObserver = class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    };
-    // nwsapi 2.2.27 recurses without end on these pseudo-classes, which floating-ui queries.
-    Element.prototype.matches = function (this: Element, selector: string) {
-      return /:(modal|popover-open|fullscreen)\b/.test(selector)
-        ? false
-        : matches.call(this, selector);
-    };
-  });
-
-  afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
-    Element.prototype.matches = matches;
-  });
-
   it('renders a closed combobox', () => {
     renderWithTheme(<Services />);
 

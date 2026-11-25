@@ -178,6 +178,9 @@ export const tokens = createThemeContract({
 
     meterTrackBg: null,
 
+    tooltipContentBg: null,
+    tooltipText: null,
+
     listItemHoverBg: null,
     listItemActiveBg: null,
     listItemFocusBorder: null,

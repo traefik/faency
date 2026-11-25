@@ -9,7 +9,7 @@ import React from 'react';
 import { FieldVanilla } from '@/components/Field/Field.vanilla';
 import { FieldLabelProps, useFieldContext } from '@/components/Field/FieldContext';
 import { InputVanilla, InputVanillaHandle, InputVanillaProps } from '@/components/Input';
-import { Tooltip } from '@/components/Tooltip';
+import { TooltipVanilla } from '@/components/Tooltip/Tooltip.vanilla';
 
 import { adornmentButton, adornmentGroup, invalidIcon } from './TextField.vanilla.css';
 
@@ -113,7 +113,7 @@ export const TextFieldVanilla = React.forwardRef<
       <>
         {invalid && <ExclamationTriangleIcon className={invalidIcon} aria-hidden />}
         {isPasswordType && (
-          <Tooltip content={passwordAction}>
+          <TooltipVanilla content={passwordAction}>
             <button
               type="button"
               className={adornmentButton}
@@ -122,10 +122,10 @@ export const TextFieldVanilla = React.forwardRef<
             >
               <PasswordVisibilityToggleIcon aria-hidden />
             </button>
-          </Tooltip>
+          </TooltipVanilla>
         )}
         {clearable && !clearDisabled && (
-          <Tooltip content="Clear">
+          <TooltipVanilla content="Clear">
             <button
               type="button"
               className={adornmentButton}
@@ -134,7 +134,7 @@ export const TextFieldVanilla = React.forwardRef<
             >
               <CrossCircledIcon aria-hidden />
             </button>
-          </Tooltip>
+          </TooltipVanilla>
         )}
       </>
     );

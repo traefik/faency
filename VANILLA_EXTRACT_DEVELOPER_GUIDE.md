@@ -70,7 +70,8 @@ The theme system is integrated with Storybook at the global level in [`.storyboo
 - `VanillaExtractThemeProvider` applies the theme class for the resolved theme and primary color to `document.body`
 - Props: `defaultTheme` (`'light' | 'dark' | 'system'`, default `'system'`), `forcedTheme`, `primaryColor` (default `'blue'`)
 - Every vanilla component needs it: `useInlineStyle` calls `useVanillaExtractTheme()`, which throws outside the provider
-- `FaencyProvider` is still needed alongside it (Radix Tooltip provider and color scheme context)
+- It also mounts the Radix Tooltip provider, so vanilla tooltips work without `FaencyProvider`; tests only need `VanillaExtractThemeProvider`
+- `FaencyProvider` is still needed alongside it for the color scheme context used by Stitches components
 - Storybook's dark mode toggle controls the theme globally; individual stories don't need their own providers
 
 ---
@@ -556,7 +557,7 @@ globalStyle(`${skeleton}:not(:empty) > *`, { visibility: 'hidden' });
 
 #### Mixing Stitches and vanilla-extract components
 
-**CRITICAL:** Never mix systems. Always use vanilla-extract versions inside vanilla components (see [TextField.vanilla.tsx](components/TextField/TextField.vanilla.tsx), which builds on `FieldVanilla` and `InputVanilla`). When no vanilla version exists yet, use plain HTML elements. Known exception: TextField still uses the Stitches `Tooltip`, which has no vanilla version yet.
+**CRITICAL:** Never mix systems. Always use vanilla-extract versions inside vanilla components (see [TextField.vanilla.tsx](components/TextField/TextField.vanilla.tsx), which builds on `FieldVanilla` and `InputVanilla`). When no vanilla version exists yet, use plain HTML elements.
 
 #### Props typed as `CSSProps` require `as any` in tests
 

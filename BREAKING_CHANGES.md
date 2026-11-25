@@ -245,6 +245,7 @@ The same applies to `Li`, which takes the Flex layout props.
 
 - **Panel** no longer has a box shadow (Dropdown and Popover set their own elevation, so they are unaffected)
 - **Badge** `alphaBg` uses the `A3` color step instead of `A6`
+- **Alert** `gray` variant ring uses `gray9` (the neutral tone) instead of `slate9`
 
 ---
 
@@ -329,6 +330,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - ✅ **Panel** - default: `div`
 - ✅ **Elevation** - default: `div`
 - ✅ **Card** - default: `button` when `interactive`, otherwise `div`
+- ✅ **Alert** - same defaults as Card
 - ✅ **Skeleton** - default: `div`
 - ✅ **Image** - default: `img`
 
@@ -353,6 +355,8 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - ✅ **PopoverTrigger** / **PopoverClose** - default: `button`, keeps the Radix behavior on the `as` element
 - ✅ **PopoverAnchor** - default: `div`
   - `PopoverContent` takes neither `as` nor `asChild`
+- ✅ **TooltipTrigger** - default: `button`, keeps the Radix trigger behavior on the `as` element
+  - `TooltipContent` takes neither `as` nor `asChild`, and its arrow is no longer wrapped in a `<div>`
 
 ---
 
@@ -432,7 +436,7 @@ Card component has intelligent default element selection:
 
 **Change:** `VanillaExtractThemeProvider` is required at the app root. Vanilla components throw outside it.
 
-This already applies today to any `*Vanilla` component. `FaencyProvider` is still needed next to it (it provides the Radix Tooltip provider and the color scheme context):
+This already applies today to any `*Vanilla` component. It also mounts the Radix Tooltip provider, so vanilla tooltips don't need `FaencyProvider`. `FaencyProvider` is still needed next to it for the color scheme context used by Stitches components:
 
 ```tsx
 import { FaencyProvider, VanillaExtractThemeProvider } from '@traefik-labs/faency';
@@ -649,7 +653,7 @@ For changes like `asChild` → `as` and the `Vanilla` suffix, a codemod could au
 
 ### What happens to `FaencyProvider`?
 
-It currently provides the Radix Tooltip provider and the color scheme context. Options: keep it, fold its contents into `VanillaExtractThemeProvider`, or remove it once Tooltip is migrated.
+It currently provides the Radix Tooltip provider and the color scheme context. `VanillaExtractThemeProvider` now mounts the Tooltip provider too, so only the color scheme context is left. Options: keep it, fold the color scheme context into `VanillaExtractThemeProvider`, or remove it once the Stitches components are gone.
 
 **Decision:** TBD
 

@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React from 'react';
 
@@ -153,13 +154,40 @@ describe('MeterVanilla', () => {
       expect(screen.getByRole('img', { name: 'Responses: 2xx: 3, 5xx: 1' })).toBeInTheDocument();
     });
 
-    it('shows segment labels as tooltips', () => {
-      const { container } = renderWithTheme(
-        <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
-      );
+    describe('tooltips', () => {
+      it('shows a segment label as a tooltip on hover', async () => {
+        const { container } = renderWithTheme(
+          <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
+        );
 
-      expect(segmentsOf(container)[0]).toHaveAttribute('title', '2xx: 3');
-      expect(segmentsOf(container)[1]).not.toHaveAttribute('title');
+        await userEvent.hover(segmentsOf(container)[0]);
+
+        expect(await screen.findByRole('tooltip')).toHaveTextContent('2xx: 3');
+      });
+
+      it('shows a segment label as a tooltip on keyboard focus', async () => {
+        const { container } = renderWithTheme(
+          <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
+        );
+
+        await userEvent.tab();
+
+        expect(segmentsOf(container)[0]).toHaveFocus();
+        expect(await screen.findByRole('tooltip')).toHaveTextContent('2xx: 3');
+      });
+
+      it('gives unlabelled segments no tooltip and no tab stop', () => {
+        const { container } = renderWithTheme(
+          <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
+        );
+        const [labelled, unlabelled] = segmentsOf(container);
+
+        expect(labelled).toHaveAttribute('data-state', 'closed');
+        expect(labelled).toHaveAttribute('tabindex', '0');
+        expect(labelled).not.toHaveAttribute('title');
+        expect(unlabelled).not.toHaveAttribute('data-state');
+        expect(unlabelled).not.toHaveAttribute('tabindex');
+      });
     });
 
     it('treats a single segment as a meter', () => {

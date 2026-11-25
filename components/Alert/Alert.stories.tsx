@@ -3,9 +3,13 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
 import { modifyVariantsForStory } from '../../utils/modifyVariantsForStory';
-import { H2 } from '../Heading';
+import { BoxVanilla } from '../Box/Box.vanilla';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H2, H3Vanilla } from '../Heading';
 import { Text } from '../Text';
+import { TextVanilla } from '../Text/Text.vanilla';
 import { Alert, AlertProps, AlertVariants } from './Alert';
+import { AlertVanilla } from './Alert.vanilla';
 
 const AlertWrapper = (props: AlertProps): JSX.Element => <Alert {...props} />;
 
@@ -39,5 +43,44 @@ Variants.argTypes = {
     options: ['gray', 'info', 'success', 'warning', 'error'],
   },
 };
+
+const variants = ['gray', 'info', 'success', 'warning', 'error'] as const;
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={6}>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        {variants.map((variant) => (
+          <Alert key={variant} variant={variant}>
+            <Text>{variant}</Text>
+          </Alert>
+        ))}
+        <Alert variant="info" elevation={3}>
+          <Text>info, elevation 3</Text>
+        </Alert>
+        <Alert variant="success" interactive>
+          <Text>success, interactive</Text>
+        </Alert>
+      </FlexVanilla>
+    </BoxVanilla>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <FlexVanilla direction="column" gap={3}>
+        {variants.map((variant) => (
+          <AlertVanilla key={variant} variant={variant}>
+            <TextVanilla>{variant}</TextVanilla>
+          </AlertVanilla>
+        ))}
+        <AlertVanilla variant="info" elevation={3}>
+          <TextVanilla>info, elevation 3</TextVanilla>
+        </AlertVanilla>
+        <AlertVanilla variant="success" interactive>
+          <TextVanilla>success, interactive</TextVanilla>
+        </AlertVanilla>
+      </FlexVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
+);
 
 export default Component;

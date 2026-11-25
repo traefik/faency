@@ -1,3 +1,4 @@
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { darkColors, lightColors } from '@/colors';
@@ -146,7 +147,11 @@ export function VanillaExtractThemeProvider({
     setPrimaryColor,
   };
 
-  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={contextValue}>
+      <TooltipProvider>{children}</TooltipProvider>
+    </ThemeContext.Provider>
+  );
 }
 
 export function useVanillaExtractTheme() {
