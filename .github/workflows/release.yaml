@@ -7,6 +7,8 @@ on:
 
 env:
   SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72 # 3 days
+  # renovate: datasource=npm depName=corepack
+  COREPACK_VERSION: 0.36.0
 
 permissions: {}
 
@@ -27,7 +29,9 @@ jobs:
           persist-credentials: false
 
       - name: enable corepack
-        run: corepack enable
+        run: |
+          npm install -g corepack@${COREPACK_VERSION}
+          corepack enable
 
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0

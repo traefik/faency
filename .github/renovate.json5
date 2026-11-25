@@ -46,7 +46,7 @@
     {
       matchManagers: ['npm'],
       matchPackageNames: ['@types/node'],
-      allowedVersions: '<25.0.0',
+      allowedVersions: '<27.0.0',
     },
     // engines.node is the minimum Node for apps that install Faency, so it is raised by hand,
     // only when Faency needs a newer Node, not every time .nvmrc moves.
