@@ -22,6 +22,7 @@ import { H1Vanilla } from '@/components/Heading/Heading.vanilla';
 import { IconButtonVanilla } from '@/components/IconButton/IconButton.vanilla';
 import { InputVanilla } from '@/components/Input/Input.vanilla';
 import { LabelVanilla } from '@/components/Label/Label.vanilla';
+import { LinkVanilla } from '@/components/Link/Link.vanilla';
 import { LiVanilla } from '@/components/List/List.vanilla';
 import {
   NavigationDrawerVanilla,
@@ -86,9 +87,10 @@ describe('component variant props', () => {
       <NavigationItemVanilla key="navigation-item" active />,
       <NavigationTreeDrawerVanilla key="navigation-tree-drawer" elevation={2} fullWidth />,
       <NavigationMenuContentVanilla key="navigation-menu-content" elevation={2} />,
+      <LinkVanilla key="link" variant="primary" />,
     ];
 
-    expect(elements).toHaveLength(37);
+    expect(elements).toHaveLength(38);
   });
 
   it('reject invalid variants', () => {
@@ -175,8 +177,10 @@ describe('component variant props', () => {
       <NavigationTreeDrawerVanilla key="navigation-tree-drawer" elevation={9} />,
       // @ts-expect-error elevation outside the recipe keys
       <NavigationMenuContentVanilla key="navigation-menu-content" elevation={9} />,
+      // @ts-expect-error unknown variant
+      <LinkVanilla key="link" variant="red" />,
     ];
 
-    expect(elements).toHaveLength(41);
+    expect(elements).toHaveLength(42);
   });
 });

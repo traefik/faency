@@ -7,6 +7,7 @@ import { VanillaExtractThemeProvider } from '@/styles/themeContext';
 jest.mock('./NavigationTree.vanilla.css', () => ({
   navigationTreeNested: 'navigationTreeNested',
   navigationTreeItemExpandable: 'navigationTreeItemExpandable',
+  navigationTreeItemFullWidth: 'navigationTreeItemFullWidth',
   navigationTreeLabel: 'navigationTreeLabel',
   navigationTreeLabelIndented: 'navigationTreeLabelIndented',
   navigationTreeDepth: 'var(--tree-depth)',
@@ -222,6 +223,11 @@ describe('NavigationTreeVanilla', () => {
     expect(depthOf(/Parent/)).toBe('0');
     expect(depthOf(/^Child/)).toBe('1');
     expect(depthOf(/Grandchild/)).toBe('2');
+    ['Parent', 'Child', 'Grandchild'].forEach((name) => {
+      expect(screen.getByRole('button', { name: new RegExp(`^${name}`) })).toHaveClass(
+        'navigationTreeItemFullWidth',
+      );
+    });
     expect(
       screen.getByRole('button', { name: /Grandchild/ }).parentElement?.parentElement,
     ).not.toHaveClass('navigationTreeNested');
@@ -244,7 +250,9 @@ describe('NavigationTreeVanilla', () => {
       </NavigationTreeDrawerVanilla>,
     );
 
-    expect(screen.getByRole('button', { name: /Item/ }).style.paddingLeft).toBe('');
+    const item = screen.getByRole('button', { name: /Item/ });
+    expect(item.style.paddingLeft).toBe('');
+    expect(item).not.toHaveClass('navigationTreeItemFullWidth');
   });
 
   it('passes the navigation item props through', () => {

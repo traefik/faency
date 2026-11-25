@@ -235,6 +235,22 @@ export const tokens = createThemeContract({
     navButtonFocusText: null,
     navButtonActiveText: null,
 
+    linkBlue: null,
+    linkBlueTextDecoration: null,
+    linkBlueFocusOutline: null,
+    linkContrast: null,
+    linkContrastTextDecoration: null,
+    linkContrastHoverTextDecoration: null,
+    linkContrastFocusOutline: null,
+    linkSubtle: null,
+    linkSubtleTextDecoration: null,
+    linkSubtleHoverTextDecoration: null,
+    linkSubtleFocusOutline: null,
+    linkPrimary: null,
+    linkPrimaryTextDecoration: null,
+    linkPrimaryHoverTextDecoration: null,
+    linkPrimaryFocusOutline: null,
+
     // Semantic tones
     toneSuccessSolid: null,
     toneSuccessText: null,

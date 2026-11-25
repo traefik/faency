@@ -8,7 +8,7 @@ import { BoxVanilla } from '../Box';
 import { Container } from '../Container';
 import { FlexVanilla } from '../Flex';
 import { H3Vanilla } from '../Heading';
-import { Link } from '../Link';
+import { Link, LinkVanilla } from '../Link';
 import { NavigationItem, NavigationLinkVanilla } from '../Navigation';
 import { Text, TextVanilla } from '../Text';
 import {
@@ -123,10 +123,10 @@ const VanillaMenu = () => (
           <TextVanilla css={{ cursor: 'pointer' }}>Links</TextVanilla>
         </NavigationMenuTriggerVanilla>
         <NavigationMenuContentVanilla css={{ display: 'flex', flexDirection: 'column', gap: '$1' }}>
-          <NavigationMenuLinkVanilla as={Link} href="#">
+          <NavigationMenuLinkVanilla as={LinkVanilla} href="#">
             A link
           </NavigationMenuLinkVanilla>
-          <NavigationMenuLinkVanilla as={Link} href="#">
+          <NavigationMenuLinkVanilla as={LinkVanilla} href="#">
             Another link
           </NavigationMenuLinkVanilla>
         </NavigationMenuContentVanilla>

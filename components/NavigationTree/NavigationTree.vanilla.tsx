@@ -36,6 +36,7 @@ import {
   navigationTreeDepth,
   navigationTreeFullWidthIndent,
   navigationTreeItemExpandable,
+  navigationTreeItemFullWidth,
   navigationTreeLabel,
   navigationTreeLabelIndented,
   navigationTreeNested,
@@ -205,7 +206,11 @@ const NavigationTreeItemVanillaImpl = forwardRef(
       <div>
         <NavigationItemVanilla
           ref={ref}
-          className={cx(isExpandable && navigationTreeItemExpandable, className)}
+          className={cx(
+            isExpandable && navigationTreeItemExpandable,
+            fullWidth && navigationTreeItemFullWidth,
+            className,
+          )}
           css={{ ...indentCss, ...css }}
           style={indentStyle}
           aria-expanded={isExpandable ? isExpanded : undefined}

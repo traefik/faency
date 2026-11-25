@@ -405,15 +405,15 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 
 **Change:** `NavigationTreeItemVanilla` is built on `NavigationItemVanilla`, so the [Navigation changes](#navigation-item-backgrounds-as-and-active-state) apply to it too. It also changes how nesting and full width work.
 
-|                                    | Stitches `NavigationTree*`                                                                    | Vanilla Extract `NavigationTree*Vanilla`                                                 |
-| ---------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Depth in full width                | set by hand with `nestedChildrenLevel` on the parent item                                     | computed from the nesting; `nestedChildrenLevel` is removed                              |
-| Full width highlight               | `::before`/`::after` pulled left by `nestedChildrenLevel × 20px`, content indented by padding | the item spans the whole row and indents its own content with `padding-left` by depth    |
-| `NavigationTreeContainer` defaults | resets `fullWidth` to `false` and the icons to chevrons                                       | inherits `fullWidth` and the icons from the drawer or container around it                |
-| Focus on expandable items          | no focus ring or background at all                                                            | ring and background on keyboard focus, none after a mouse click                          |
-| `aria-expanded`                    | not set                                                                                       | set on expandable items                                                                  |
-| `as`, `ref`                        | `as` limited to `'a'` or `'button'`, no `ref`                                                 | any element or component in `as`, `ref` forwarded to the item (also on drawer/container) |
-| Label and subtitle wrappers        | `<div>`                                                                                       | `<span>`                                                                                 |
+|                                    | Stitches `NavigationTree*`                                                                    | Vanilla Extract `NavigationTree*Vanilla`                                                                                    |
+| ---------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Depth in full width                | set by hand with `nestedChildrenLevel` on the parent item                                     | computed from the nesting; `nestedChildrenLevel` is removed                                                                 |
+| Full width highlight               | `::before`/`::after` pulled left by `nestedChildrenLevel × 20px`, content indented by padding | the item spans the whole row and indents its own content with `padding-left` by depth                                       |
+| `NavigationTreeContainer` defaults | resets `fullWidth` to `false` and the icons to chevrons                                       | inherits `fullWidth` and the icons from the drawer or container around it                                                   |
+| Focus on expandable items          | no focus ring or background at all                                                            | ring and background on keyboard focus, none after a mouse click; in full width, background only like other full width items |
+| `aria-expanded`                    | not set                                                                                       | set on expandable items                                                                                                     |
+| `as`, `ref`                        | `as` limited to `'a'` or `'button'`, no `ref`                                                 | any element or component in `as`, `ref` forwarded to the item (also on drawer/container)                                    |
+| Label and subtitle wrappers        | `<div>`                                                                                       | `<span>`                                                                                                                    |
 
 **Before (v13.x with Stitches):**
 
@@ -510,6 +510,26 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 
 ---
 
+### Link: Keyboard-Only Focus Ring
+
+**Change:** `LinkVanilla` shows its focus outline on keyboard focus only.
+
+|               | Stitches `Link`                      | Vanilla Extract `LinkVanilla` |
+| ------------- | ------------------------------------ | ----------------------------- |
+| Focus outline | on any focus, including mouse clicks | on keyboard focus only        |
+
+**Migration Guide:**
+
+1. No code change is needed
+
+**Rationale:**
+
+- Matches the keyboard-only focus ring of `Checkbox`, `Switch` and `Radio`
+
+**Impact:** Low - Visual only, the API is unchanged
+
+---
+
 ## Components Supporting Polymorphic `as` Prop
 
 ### Layout Components
@@ -534,6 +554,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - ✅ **Blockquote** - default: `blockquote`
 - ✅ **Label** - default: `label`
 - ✅ **VisuallyHidden** - default: `span`, keeps the hiding styles on the `as` element
+- ✅ **Link** - default: `a`, e.g. `as={RouterLink}`
 
 ### Interactive Components
 
@@ -849,6 +870,11 @@ Release notes are generated by semantic-release; use this as the body of the bre
 - **Changed:** `NavigationTreeContainer` inherits `fullWidth` and the icons from the drawer or container around it
 - **Changed:** Expandable items show the focus ring on keyboard focus and set `aria-expanded`
   - See [Migration Guide](./BREAKING_CHANGES.md#navigationtree-depth-full-width-and-focus)
+
+#### Link
+
+- **Changed:** The focus outline shows on keyboard focus only
+  - See [Migration Guide](./BREAKING_CHANGES.md#link-keyboard-only-focus-ring)
 
 #### NavigationMenu
 

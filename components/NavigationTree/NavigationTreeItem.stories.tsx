@@ -13,15 +13,22 @@ import {
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
+import { Badge, BadgeVanilla } from '../Badge';
+import { BoxVanilla } from '../Box';
 import { Button } from '../Button';
-import { Flex } from '../Flex';
-import { NavigationDrawer } from '../Navigation';
+import { Flex, FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
+import { NavigationDrawer, NavigationDrawerVanilla } from '../Navigation';
 import { Text } from '../Text';
+import {
+  NavigationTreeContainerVanilla,
+  NavigationTreeItemVanilla,
+} from './NavigationTree.vanilla';
 import { NavigationTreeContainer } from './NavigationTreeContainer';
 import { NavigationTreeItem } from './NavigationTreeItem';
 
 const Component: Meta<typeof NavigationTreeItem> = {
-  title: 'Components/NavigationTree',
+  title: 'Components/NavigationTreeItem',
   component: NavigationTreeItem,
   argTypes: {
     customExpandIcon: {
@@ -142,5 +149,70 @@ export const TreeItem: StoryFn<typeof NavigationTreeItem> = Template.bind({});
 TreeItem.args = {
   label: 'One.One',
 };
+
+const comparisonBadgeCss = {
+  height: '$3',
+  borderRadius: '$pill',
+  fontSize: '$0',
+  fontWeight: '$medium',
+  color: '$hiContrast',
+};
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla gap={6}>
+    <BoxVanilla css={{ width: 280 }}>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <NavigationDrawer>
+        <NavigationTreeContainer>
+          <NavigationTreeItem label="Leaf" />
+          <NavigationTreeItem label="With subtitle" subtitle="/subtitle" />
+          <NavigationTreeItem label="Start adornment" startAdornment={<GearIcon />} />
+          <NavigationTreeItem
+            label="End adornment"
+            endAdornment={<Badge css={comparisonBadgeCss}>3</Badge>}
+          />
+          <NavigationTreeItem label="Active" active />
+          <NavigationTreeItem label="Expanded" subtitle="/expanded" defaultExpanded>
+            <NavigationTreeItem label="Child" />
+            <NavigationTreeItem label="Child with icon" startAdornment={<ArchiveIcon />} />
+          </NavigationTreeItem>
+          <NavigationTreeItem
+            label="Custom icons"
+            customExpandIcon={<EyeOpenIcon />}
+            customCollapseIcon={<EyeClosedIcon />}
+          >
+            <NavigationTreeItem label="Child" />
+          </NavigationTreeItem>
+        </NavigationTreeContainer>
+      </NavigationDrawer>
+    </BoxVanilla>
+    <BoxVanilla css={{ width: 280 }}>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <NavigationDrawerVanilla>
+        <NavigationTreeContainerVanilla>
+          <NavigationTreeItemVanilla label="Leaf" />
+          <NavigationTreeItemVanilla label="With subtitle" subtitle="/subtitle" />
+          <NavigationTreeItemVanilla label="Start adornment" startAdornment={<GearIcon />} />
+          <NavigationTreeItemVanilla
+            label="End adornment"
+            endAdornment={<BadgeVanilla css={comparisonBadgeCss}>3</BadgeVanilla>}
+          />
+          <NavigationTreeItemVanilla label="Active" active />
+          <NavigationTreeItemVanilla label="Expanded" subtitle="/expanded" defaultExpanded>
+            <NavigationTreeItemVanilla label="Child" />
+            <NavigationTreeItemVanilla label="Child with icon" startAdornment={<ArchiveIcon />} />
+          </NavigationTreeItemVanilla>
+          <NavigationTreeItemVanilla
+            label="Custom icons"
+            customExpandIcon={<EyeOpenIcon />}
+            customCollapseIcon={<EyeClosedIcon />}
+          >
+            <NavigationTreeItemVanilla label="Child" />
+          </NavigationTreeItemVanilla>
+        </NavigationTreeContainerVanilla>
+      </NavigationDrawerVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
+);
 
 export default Component;

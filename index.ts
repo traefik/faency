@@ -194,7 +194,8 @@ export type { InputHandle, InputVanillaHandle, InputVanillaProps } from './compo
 export { Input, InputVanilla } from './components/Input';
 export type { LabelVanillaProps } from './components/Label';
 export { Label, LabelVanilla } from './components/Label';
-export { Link } from './components/Link';
+export type { LinkVanillaProps } from './components/Link';
+export { Link, LinkVanilla } from './components/Link';
 export type { LiVanillaProps, OlVanillaProps, UlVanillaProps } from './components/List';
 export { Li, LiVanilla, Ol, OlVanilla, Ul, UlVanilla } from './components/List';
 export type { MeterSegmentVanilla, MeterVanillaProps } from './components/Meter';
