@@ -11,19 +11,19 @@ expect.extend(toHaveNoViolations);
 
 // Server-rendering tests run in the node environment, without a window.
 if (typeof window !== 'undefined') {
+  // A no-op: calling back inside observe() makes floating-ui observe again, without end.
   window.ResizeObserver = class ResizeObserver {
-    constructor(cb) {
-      this.cb = cb;
-    }
-    observe() {
-      this.cb([{ borderBoxSize: { inlineSize: 0, blockSize: 0 } }]);
-    }
-    unobserve() {
-      // do nothing
-    }
-    disconnect() {
-      // do nothing
-    }
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+
+  // nwsapi 2.2.27 recurses without end on these pseudo-classes, which floating-ui queries.
+  const { matches } = Element.prototype;
+  Element.prototype.matches = function (selector) {
+    return /:(modal|popover-open|fullscreen)\b/.test(selector)
+      ? false
+      : matches.call(this, selector);
   };
 
   window.DOMRect = {

@@ -70,7 +70,8 @@ The theme system is integrated with Storybook at the global level in [`.storyboo
 - `VanillaExtractThemeProvider` applies the theme class for the resolved theme and primary color to `document.body`
 - Props: `defaultTheme` (`'light' | 'dark' | 'system'`, default `'system'`), `forcedTheme`, `primaryColor` (default `'blue'`)
 - Every vanilla component needs it: `useInlineStyle` calls `useVanillaExtractTheme()`, which throws outside the provider
-- `FaencyProvider` is still needed alongside it (Radix Tooltip provider and color scheme context)
+- It also mounts the Radix Tooltip provider, so vanilla tooltips work without `FaencyProvider`; tests only need `VanillaExtractThemeProvider`
+- `FaencyProvider` is still needed alongside it for the color scheme context used by Stitches components
 - Storybook's dark mode toggle controls the theme globally; individual stories don't need their own providers
 
 ---

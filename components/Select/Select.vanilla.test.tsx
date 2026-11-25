@@ -38,22 +38,9 @@ const open = async () => {
 };
 
 describe('SelectVanilla', () => {
-  const { ResizeObserver } = window;
-  const { matches, scrollIntoView, hasPointerCapture, releasePointerCapture } = Element.prototype;
+  const { scrollIntoView, hasPointerCapture, releasePointerCapture } = Element.prototype;
 
   beforeAll(() => {
-    // The shared mock calls back inside observe(), which floating-ui answers by observing again.
-    window.ResizeObserver = class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    };
-    // nwsapi 2.2.27 recurses without end on these pseudo-classes, which floating-ui queries.
-    Element.prototype.matches = function (this: Element, selector: string) {
-      return /:(modal|popover-open|fullscreen)\b/.test(selector)
-        ? false
-        : matches.call(this, selector);
-    };
     // jsdom lacks these, and Radix Select calls them while opening.
     Element.prototype.scrollIntoView = () => {};
     Element.prototype.hasPointerCapture = () => false;
@@ -61,9 +48,7 @@ describe('SelectVanilla', () => {
   });
 
   afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
     Object.assign(Element.prototype, {
-      matches,
       scrollIntoView,
       hasPointerCapture,
       releasePointerCapture,

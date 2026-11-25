@@ -5,8 +5,6 @@ import React, { createRef } from 'react';
 
 import { VanillaExtractThemeProvider } from '@/styles/themeContext';
 
-import { FaencyProvider } from '@/components/FaencyProvider';
-
 import {
   TooltipContentVanilla,
   TooltipPortalVanilla,
@@ -19,12 +17,7 @@ import {
 const renderWithTheme = (
   ui: React.ReactElement,
   themeProps: Partial<React.ComponentProps<typeof VanillaExtractThemeProvider>> = {},
-) =>
-  render(
-    <VanillaExtractThemeProvider {...themeProps}>
-      <FaencyProvider>{ui}</FaencyProvider>
-    </VanillaExtractThemeProvider>,
-  );
+) => render(<VanillaExtractThemeProvider {...themeProps}>{ui}</VanillaExtractThemeProvider>);
 
 const TestTooltip = ({
   content = 'Tip',
@@ -35,29 +28,6 @@ const TestTooltip = ({
     <button type="button">Trigger</button>
   </TooltipVanilla>
 );
-
-const { ResizeObserver } = window;
-const { matches } = Element.prototype;
-
-beforeAll(() => {
-  // The shared mock calls back inside observe(), which floating-ui answers by observing again.
-  window.ResizeObserver = class {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  };
-  // nwsapi 2.2.27 recurses without end on these pseudo-classes, which floating-ui queries.
-  Element.prototype.matches = function (this: Element, selector: string) {
-    return /:(modal|popover-open|fullscreen)\b/.test(selector)
-      ? false
-      : matches.call(this, selector);
-  };
-});
-
-afterAll(() => {
-  window.ResizeObserver = ResizeObserver;
-  Element.prototype.matches = matches;
-});
 
 describe('TooltipVanilla', () => {
   it('renders the trigger with the tooltip closed', () => {

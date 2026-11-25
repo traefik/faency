@@ -5,16 +5,10 @@ import React from 'react';
 
 import { VanillaExtractThemeProvider } from '@/styles/themeContext';
 
-import { FaencyProvider } from '@/components/FaencyProvider';
-
 import { MeterVanilla } from './Meter.vanilla';
 
 const renderWithTheme = (ui: React.ReactElement) =>
-  render(
-    <VanillaExtractThemeProvider>
-      <FaencyProvider>{ui}</FaencyProvider>
-    </VanillaExtractThemeProvider>,
-  );
+  render(<VanillaExtractThemeProvider>{ui}</VanillaExtractThemeProvider>);
 
 const segmentsOf = (container: HTMLElement) =>
   Array.from(container.querySelector('[role]')!.children) as HTMLElement[];
@@ -161,29 +155,6 @@ describe('MeterVanilla', () => {
     });
 
     describe('tooltips', () => {
-      const { ResizeObserver } = window;
-      const { matches } = Element.prototype;
-
-      beforeAll(() => {
-        // The shared mock calls back inside observe(), which floating-ui answers by observing again.
-        window.ResizeObserver = class {
-          observe() {}
-          unobserve() {}
-          disconnect() {}
-        };
-        // nwsapi 2.2.27 recurses without end on these pseudo-classes, which floating-ui queries.
-        Element.prototype.matches = function (this: Element, selector: string) {
-          return /:(modal|popover-open|fullscreen)\b/.test(selector)
-            ? false
-            : matches.call(this, selector);
-        };
-      });
-
-      afterAll(() => {
-        window.ResizeObserver = ResizeObserver;
-        Element.prototype.matches = matches;
-      });
-
       it('shows a segment label as a tooltip on hover', async () => {
         const { container } = renderWithTheme(
           <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
@@ -194,14 +165,28 @@ describe('MeterVanilla', () => {
         expect(await screen.findByRole('tooltip')).toHaveTextContent('2xx: 3');
       });
 
-      it('gives unlabelled segments no tooltip', () => {
+      it('shows a segment label as a tooltip on keyboard focus', async () => {
         const { container } = renderWithTheme(
           <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
         );
 
-        expect(segmentsOf(container)[0]).toHaveAttribute('data-state', 'closed');
-        expect(segmentsOf(container)[1]).not.toHaveAttribute('data-state');
-        expect(segmentsOf(container)[0]).not.toHaveAttribute('title');
+        await userEvent.tab();
+
+        expect(segmentsOf(container)[0]).toHaveFocus();
+        expect(await screen.findByRole('tooltip')).toHaveTextContent('2xx: 3');
+      });
+
+      it('gives unlabelled segments no tooltip and no tab stop', () => {
+        const { container } = renderWithTheme(
+          <MeterVanilla segments={[{ value: 3, label: '2xx: 3' }, { value: 1 }]} />,
+        );
+        const [labelled, unlabelled] = segmentsOf(container);
+
+        expect(labelled).toHaveAttribute('data-state', 'closed');
+        expect(labelled).toHaveAttribute('tabindex', '0');
+        expect(labelled).not.toHaveAttribute('title');
+        expect(unlabelled).not.toHaveAttribute('data-state');
+        expect(unlabelled).not.toHaveAttribute('tabindex');
       });
     });
 

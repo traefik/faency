@@ -107,6 +107,7 @@ export const MeterVanilla = forwardRef<HTMLDivElement, MeterVanillaProps>(
               <div
                 key={i}
                 className={segment}
+                tabIndex={s.label ? 0 : undefined}
                 style={{
                   width: `${widths[i]}%`,
                   backgroundColor: s.color && resolveColor(s.color, colors),

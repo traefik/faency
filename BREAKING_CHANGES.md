@@ -390,7 +390,7 @@ Card component has intelligent default element selection:
 
 **Change:** `VanillaExtractThemeProvider` is required at the app root. Vanilla components throw outside it.
 
-This already applies today to any `*Vanilla` component. `FaencyProvider` is still needed next to it (it provides the Radix Tooltip provider and the color scheme context):
+This already applies today to any `*Vanilla` component. It also mounts the Radix Tooltip provider, so vanilla tooltips don't need `FaencyProvider`. `FaencyProvider` is still needed next to it for the color scheme context used by Stitches components:
 
 ```tsx
 import { FaencyProvider, VanillaExtractThemeProvider } from '@traefik-labs/faency';
@@ -607,7 +607,7 @@ For changes like `asChild` → `as` and the `Vanilla` suffix, a codemod could au
 
 ### What happens to `FaencyProvider`?
 
-It currently provides the Radix Tooltip provider and the color scheme context. Options: keep it, fold its contents into `VanillaExtractThemeProvider`, or remove it once Tooltip is migrated.
+It currently provides the Radix Tooltip provider and the color scheme context. `VanillaExtractThemeProvider` now mounts the Tooltip provider too, so only the color scheme context is left. Options: keep it, fold the color scheme context into `VanillaExtractThemeProvider`, or remove it once the Stitches components are gone.
 
 **Decision:** TBD
 
