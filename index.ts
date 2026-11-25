@@ -215,15 +215,33 @@ export {
   NavigationLink,
   NavigationLinkVanilla,
 } from './components/Navigation';
+export type {
+  NavigationMenuContentVanillaProps,
+  NavigationMenuIndicatorVanillaProps,
+  NavigationMenuItemVanillaProps,
+  NavigationMenuLinkVanillaProps,
+  NavigationMenuListVanillaProps,
+  NavigationMenuTriggerVanillaProps,
+  NavigationMenuVanillaProps,
+  NavigationMenuViewportVanillaProps,
+} from './components/NavigationMenu';
 export {
   NavigationMenu,
   NavigationMenuContent,
+  NavigationMenuContentVanilla,
   NavigationMenuIndicator,
+  NavigationMenuIndicatorVanilla,
   NavigationMenuItem,
+  NavigationMenuItemVanilla,
   NavigationMenuLink,
+  NavigationMenuLinkVanilla,
   NavigationMenuList,
+  NavigationMenuListVanilla,
   NavigationMenuTrigger,
+  NavigationMenuTriggerVanilla,
+  NavigationMenuVanilla,
   NavigationMenuViewport,
+  NavigationMenuViewportVanilla,
 } from './components/NavigationMenu';
 export type {
   NavigationTreeContainerVanillaProps,

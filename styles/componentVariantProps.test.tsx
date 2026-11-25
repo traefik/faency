@@ -27,6 +27,7 @@ import {
   NavigationDrawerVanilla,
   NavigationItemVanilla,
 } from '@/components/Navigation/Navigation.vanilla';
+import { NavigationMenuContentVanilla } from '@/components/NavigationMenu/NavigationMenu.vanilla';
 import { NavigationTreeDrawerVanilla } from '@/components/NavigationTree/NavigationTree.vanilla';
 import { ParagraphVanilla } from '@/components/Paragraph/Paragraph.vanilla';
 import { PopoverContentVanilla } from '@/components/Popover/Popover.vanilla';
@@ -84,9 +85,10 @@ describe('component variant props', () => {
       <NavigationDrawerVanilla key="navigation-drawer" elevation={2} fullWidth />,
       <NavigationItemVanilla key="navigation-item" active />,
       <NavigationTreeDrawerVanilla key="navigation-tree-drawer" elevation={2} fullWidth />,
+      <NavigationMenuContentVanilla key="navigation-menu-content" elevation={2} />,
     ];
 
-    expect(elements).toHaveLength(36);
+    expect(elements).toHaveLength(37);
   });
 
   it('reject invalid variants', () => {
@@ -171,8 +173,10 @@ describe('component variant props', () => {
       <NavigationItemVanilla key="navigation-item" active="yes" />,
       // @ts-expect-error elevation outside the recipe keys
       <NavigationTreeDrawerVanilla key="navigation-tree-drawer" elevation={9} />,
+      // @ts-expect-error elevation outside the recipe keys
+      <NavigationMenuContentVanilla key="navigation-menu-content" elevation={9} />,
     ];
 
-    expect(elements).toHaveLength(40);
+    expect(elements).toHaveLength(41);
   });
 });

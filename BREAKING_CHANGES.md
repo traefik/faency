@@ -60,7 +60,7 @@ The same applies to the Radix-based parts that render an element. `as` also take
 2. Move the child element's props to the component itself
 3. Remove the wrapper element and move children to the component's children
 
-**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, TabsTrigger, VisuallyHidden. `DialogContent`, `SidePanel` and the other DropdownMenu, Popover and Tabs parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
+**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuList, NavigationMenuItem, NavigationMenuViewport, NavigationMenuIndicator, TabsTrigger, VisuallyHidden. `DialogContent`, `SidePanel` and the other DropdownMenu, Popover, NavigationMenu and Tabs parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
 
 **Rationale:**
 
@@ -454,6 +454,62 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 
 ---
 
+### NavigationMenu: `as` on Every Part and Scoped List Styles
+
+**Change:** The NavigationMenu parts that render an element take `as` instead of `asChild`, and the list styles apply to the menu's own list and items only.
+
+|                                          | Stitches `NavigationMenu*`                                     | Vanilla Extract `NavigationMenu*Vanilla`           |
+| ---------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------- |
+| Trigger, Link                            | `asChild`                                                      | `as`, the Radix behavior lands on the `as` element |
+| List, Item, Viewport, Indicator          | plain Radix parts: `asChild`, no `css`                         | `as` and `css`, no `asChild`                       |
+| Root, Content                            | `asChild`                                                      | neither `as` nor `asChild`                         |
+| List reset (no margin, padding, bullets) | every `ul` inside the menu, including lists inside the content | `NavigationMenuList` only                          |
+| Inline, `position: relative` list item   | every `li` inside the menu                                     | `NavigationMenuItem` only                          |
+| `elevation` on `NavigationMenuTrigger`   | accepted, no effect                                            | removed                                            |
+
+**Before (v13.x with Stitches):**
+
+```tsx
+<NavigationMenuContent>
+  <NavigationMenuLink asChild>
+    <Link href="/docs">Docs</Link>
+  </NavigationMenuLink>
+  <NavigationMenuLink>
+    <NavigationItem startAdornment={<GearIcon />}>Settings</NavigationItem>
+  </NavigationMenuLink>
+</NavigationMenuContent>
+```
+
+**After (v14.x with Vanilla Extract):**
+
+```tsx
+<NavigationMenuContent>
+  <NavigationMenuLink as={Link} href="/docs">
+    Docs
+  </NavigationMenuLink>
+  <NavigationMenuLink as={NavigationLink} href="/settings" startAdornment={<GearIcon />}>
+    Settings
+  </NavigationMenuLink>
+</NavigationMenuContent>
+```
+
+**Migration Guide:**
+
+1. Replace `asChild` on Trigger, Link, List, Item, Viewport and Indicator with `as`, and move the child's props to the part
+2. Remove `asChild` from the Root and Content
+3. A navigation item inside a link (`<NavigationMenuLink><NavigationItem>`) rendered a `<button>` inside an `<a>`: use `as={NavigationLink}` with `href` instead
+4. Add your own reset to plain `ul` and `li` placed inside the content if they relied on the menu's reset
+5. Remove `elevation` from `NavigationMenuTrigger`
+
+**Rationale:**
+
+- Same `as` API as the other Radix-based components
+- Lists inside the content keep their normal styling
+
+**Impact:** Low - Only code using `asChild` on the parts, or plain lists inside the content
+
+---
+
 ## Components Supporting Polymorphic `as` Prop
 
 ### Layout Components
@@ -506,6 +562,11 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - ✅ **NavigationTreeContainer** - default: `div`
 - ✅ **NavigationTreeDrawer** - default: `nav`
 - ✅ **NavigationTreeItem** - default: `button`, passed to its `NavigationItem`
+- ✅ **NavigationMenuTrigger** - default: `button`, keeps the Radix trigger behavior on the `as` element
+- ✅ **NavigationMenuLink** - default: `a`, keeps the Radix link behavior on the `as` element
+- ✅ **NavigationMenuList** / **NavigationMenuItem** - default: `ul` / `li`
+- ✅ **NavigationMenuViewport** / **NavigationMenuIndicator** - default: `div`
+  - `NavigationMenu` (root) and `NavigationMenuContent` take neither `as` nor `asChild`
 
 ---
 
@@ -789,6 +850,13 @@ Release notes are generated by semantic-release; use this as the body of the bre
 - **Changed:** Expandable items show the focus ring on keyboard focus and set `aria-expanded`
   - See [Migration Guide](./BREAKING_CHANGES.md#navigationtree-depth-full-width-and-focus)
 
+#### NavigationMenu
+
+- **Changed:** Trigger, Link, List, Item, Viewport and Indicator take `as` instead of `asChild`; Root and Content take neither
+- **Changed:** The list reset applies to `NavigationMenuList` and `NavigationMenuItem` only, not to every `ul` and `li` in the menu
+- **Removed:** `elevation` on `NavigationMenuTrigger`, which had no effect
+  - See [Migration Guide](./BREAKING_CHANGES.md#navigationmenu-as-on-every-part-and-scoped-list-styles)
+
 #### Theme Provider
 
 - **Changed:** Requires `VanillaExtractThemeProvider` at the app root
@@ -901,5 +969,5 @@ This document should be updated as:
 - User feedback is received
 - Edge cases are discovered
 
-**Last Updated:** 2026-11-24
+**Last Updated:** 2026-11-25
 **Status:** Work in Progress - Component migration ongoing
