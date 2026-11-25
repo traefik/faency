@@ -1,30 +1,10 @@
-import { ComponentPropsWithRef, ElementType } from 'react';
+import { ComponentPropsWithRef, ElementType, ReactElement } from 'react';
 
-/**
- * Extracts the correct ref type for any element type.
- * @example PolymorphicRef<'button'> → React.Ref<HTMLButtonElement>
- */
 export type PolymorphicRef<C extends ElementType> = ComponentPropsWithRef<C>['ref'];
 
 /**
- * Creates a polymorphic component props type that merges:
- * - The 'as' prop for element type selection
- * - Custom component props
- * - Native HTML/SVG props for the selected element
- *
- * @template C - The element type (defaults to 'div')
- * @template Props - Custom component props to merge
- *
- * @example
- * // Simple usage with just CSSProps
- * type BoxProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
- *
- * // Usage with custom props
- * interface ButtonOwnProps extends CSSProps {
- *   variant?: 'primary' | 'secondary';
- *   size?: 'small' | 'medium' | 'large';
- * }
- * type ButtonProps<C extends ElementType = 'button'> = PolymorphicComponentProps<C, ButtonOwnProps>;
+ * `as`, the component's own props, and the native props of the `as` element.
+ * @example type BoxProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, CSSProps>;
  */
 export type PolymorphicComponentProps<C extends ElementType, Props = object> = {
   as?: C;
@@ -32,19 +12,10 @@ export type PolymorphicComponentProps<C extends ElementType, Props = object> = {
   Omit<ComponentPropsWithRef<C>, keyof Props | 'as'>;
 
 /**
- * Type for a polymorphic component function signature.
- * Use this for the final exported component type after casting from forwardRef.
- *
- * @template C - The default element type
- * @template Props - The component's props type (should use PolymorphicComponentProps)
- *
- * @example
- * type BoxComponent = PolymorphicComponent<'div', BoxProps>;
- *
- * const BoxImpl = forwardRef(...);
- * export const Box = BoxImpl as BoxComponent;
+ * Exported type of a polymorphic component: allowed props follow the `as` element.
+ * @example export const Box = BoxImpl as PolymorphicComponent<'div', CSSProps>;
  */
-export type PolymorphicComponent<
-  C extends ElementType = 'div',
-  Props extends PolymorphicComponentProps<any, any> = PolymorphicComponentProps<C>,
-> = <E extends ElementType = C>(props: Props & { as?: E }) => React.ReactElement | null;
+export type PolymorphicComponent<C extends ElementType = 'div', OwnProps = object> = {
+  <E extends ElementType = C>(props: PolymorphicComponentProps<E, OwnProps>): ReactElement | null;
+  displayName?: string;
+};

@@ -32,7 +32,7 @@ export type FlexVanillaProps<C extends ElementType = 'div'> = PolymorphicCompone
   C,
   FlexOwnProps
 >;
-type FlexComponent = PolymorphicComponent<'div', FlexVanillaProps<ElementType>>;
+type FlexComponent = PolymorphicComponent<'div', FlexOwnProps>;
 
 export const FlexVanillaComponent = React.forwardRef(
   <C extends ElementType = 'div'>(

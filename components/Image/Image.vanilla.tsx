@@ -16,7 +16,7 @@ export type ImageVanillaProps<C extends ElementType = 'img'> = PolymorphicCompon
   CSSProps
 >;
 
-type ImageVanillaComponent = PolymorphicComponent<'img', ImageVanillaProps<ElementType>>;
+type ImageVanillaComponent = PolymorphicComponent<'img', CSSProps>;
 
 const ImageVanillaImpl = forwardRef(
   <C extends ElementType = 'img'>(

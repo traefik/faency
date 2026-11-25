@@ -15,12 +15,14 @@ import {
 } from '@floating-ui/react';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { DPUserConfig } from '@rehookify/datepicker';
-import { format, parse } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import React, { MouseEventHandler, Ref, useMemo, useRef, useState } from 'react';
 
 import { CSS, styled, VariantProps } from '../../stitches.config';
 import { Card } from '../Card';
 import { DateTimePicker } from '../DateTimePicker';
+import { getDateBounds, isOutOfRange, isTimeOutOfRange } from '../DateTimePicker/isOutOfRange';
+import { DateTimePickerInputLabels, DEFAULT_INPUT_LABELS } from '../DateTimePicker/labels';
 import { Input, InputHandle } from '../Input';
 
 const StyledWrapper = styled('div', {
@@ -82,10 +84,19 @@ const StyledWrapper = styled('div', {
   },
 });
 
+// The format holds every date field, so parse only needs a fixed reference date.
+const REFERENCE_DATE = new Date(0);
+
+const StyledPopup = styled('div', {
+  zIndex: '$max',
+});
+
 export type DateTimePickerInputProps = Omit<DPUserConfig, 'onDatesChange' | 'selectedDates'> & {
   inputCSS?: CSS;
   inputProps?: Omit<typeof Input, 'css' | 'onChange' | 'ref' | 'value'>;
-  onChange?: (d: Date[]) => void;
+  labels?: Partial<DateTimePickerInputLabels>;
+  /** `rejected` is true when a typed date falls outside the allowed dates or times. */
+  onChange?: (d: Date[], details: { rejected: boolean }) => void;
   pickerCSS?: CSS;
   pickerPlacement?: Placement;
   showDatePresets?: boolean;
@@ -102,6 +113,7 @@ export const DateTimePickerInput = React.forwardRef<
     {
       inputCSS,
       inputProps,
+      labels,
       onChange,
       pickerCSS,
       pickerPlacement,
@@ -114,6 +126,10 @@ export const DateTimePickerInput = React.forwardRef<
     const formatStr = "yyyy-MM-dd'T'HH:mm";
 
     const arrowRef = useRef(null);
+    const mergedLabels = { ...DEFAULT_INPUT_LABELS, ...labels };
+    const bounds = getDateBounds(pickerProps.dates);
+
+    const { min: inputMin, max: inputMax } = (inputProps ?? {}) as { min?: string; max?: string };
 
     const [inputValue, setInputValue] = useState<string>('');
     const [selectedDates, setSelectedDates] = useState<Date[]>([]);
@@ -139,55 +155,75 @@ export const DateTimePickerInput = React.forwardRef<
     });
 
     const click = useClick(context);
-    const dismiss = useDismiss(context);
+    const firefoxPatchRef = useRef<HTMLDivElement>(null);
+    // The patch toggles the picker itself, so pressing it must not also count as an outside press.
+    const dismiss = useDismiss(context, {
+      outsidePress: (evt) => !firefoxPatchRef.current?.contains(evt.target as Node),
+    });
     const role = useRole(context);
 
     const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss, role]);
     const { onClick: onFirefoxPatchClick } = getReferenceProps();
 
+    const isUnavailable = (d: Date) =>
+      isOutOfRange(d, pickerProps.dates, pickerProps.exclude) ||
+      isTimeOutOfRange(d, pickerProps.time);
+    const parseDates = (value: string) =>
+      value
+        .split(',')
+        .map((d) => d.trim())
+        .filter(Boolean)
+        .map((d) => parse(d, formatStr, REFERENCE_DATE))
+        .filter((d) => isValid(d));
+
     return (
       <StyledWrapper ref={fowardedRef}>
         <Input
           startAdornment={<CalendarIcon aria-hidden />}
-          {...getReferenceProps()}
           {...inputProps}
+          {...getReferenceProps(inputProps as unknown as React.HTMLProps<Element>)}
           css={{ '& input::-webkit-calendar-picker-indicator': { display: 'none' }, ...inputCSS }}
           onChange={(evt) => {
             const value = evt.currentTarget.value;
             setInputValue(value);
-            try {
-              const newDates = (value as string)
-                .split(',')
-                .map((d) => parse(d.trim(), formatStr, new Date()));
-              setSelectedDates(newDates);
-              if (onChange) onChange(newDates);
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            } catch (err) {
-              // empty
-            }
+            const newDates = parseDates(value);
+            const accepted = newDates.filter((d) => !isUnavailable(d));
+            setSelectedDates(accepted);
+            if (onChange) onChange(accepted, { rejected: accepted.length < newDates.length });
           }}
           ref={refs.setReference as Ref<InputHandle>}
+          min={bounds.min ? format(bounds.min, formatStr) : inputMin}
+          max={bounds.max ? format(bounds.max, formatStr) : inputMax}
           type="datetime-local"
           value={inputValue}
         />
         <div
+          ref={firefoxPatchRef}
           className="firefox-patch"
           onClick={onFirefoxPatchClick as MouseEventHandler<HTMLDivElement>}
         />
         {isPickerOpen && (
           <FloatingFocusManager context={context} initialFocus={-1} modal={false}>
             {/* refs.setFloating is a stable callback ref from floating-ui */}
-            <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+            <StyledPopup
+              ref={refs.setFloating}
+              aria-label={mergedLabels.dialog}
+              style={floatingStyles}
+              {...getFloatingProps()}
+            >
               <Card>
                 <DateTimePicker
                   {...pickerProps}
                   css={pickerCSS}
+                  labels={mergedLabels}
                   onDatesChange={(d) => {
                     setSelectedDates(d);
                     setInputValue(d.map((date) => format(date, formatStr)).join(', '));
-                    if (onChange) onChange(d);
+                    if (onChange) onChange(d, { rejected: false });
                   }}
                   onFastTravelClick={() => setIsPickerOpen(false)}
+                  // With the time picker, a time is still to pick after the day, so stay open.
+                  onDayButtonClick={showTimePicker ? undefined : () => setIsPickerOpen(false)}
                   onTimeButtonClick={() => setIsPickerOpen(false)}
                   selectedDates={selectedDates}
                   showDatePresets={showDatePresets}
@@ -195,7 +231,7 @@ export const DateTimePickerInput = React.forwardRef<
                 />
               </Card>
               <FloatingArrow ref={arrowRef} context={context} fill="var(--colors-01dp)" />
-            </div>
+            </StyledPopup>
           </FloatingFocusManager>
         )}
       </StyledWrapper>

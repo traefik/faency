@@ -16,7 +16,7 @@ export type PanelVanillaProps<C extends ElementType = 'div'> = PolymorphicCompon
   CSSProps
 >;
 
-type PanelVanillaComponent = PolymorphicComponent<'div', PanelVanillaProps<ElementType>>;
+type PanelVanillaComponent = PolymorphicComponent<'div', CSSProps>;
 
 const PanelVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'div'>(
