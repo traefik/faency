@@ -4,7 +4,7 @@ import { recipe } from '@vanilla-extract/recipes';
 import { tokens } from '@/styles/tokens.css';
 
 import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
-import { navigationItemRecipe } from '@/components/Navigation/Navigation.vanilla.css';
+import { navigationItem } from '@/components/Navigation/Navigation.vanilla.css';
 import { panelStyle } from '@/components/Panel/Panel.vanilla.css';
 
 export const navigationMenuList = style({
@@ -49,6 +49,6 @@ export const navigationMenuContentRecipe = recipe({
 
 // Menu items stack without the gap they have in a drawer; `:where` keeps it easy to override.
 globalStyle(
-  `:where(${navigationMenuContentRecipe.classNames.base}) > ${navigationItemRecipe.classNames.base}`,
+  `:where(${navigationMenuContentRecipe.classNames.base}) > ${navigationItem}`,
   { marginTop: 0 },
 );

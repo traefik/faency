@@ -18,7 +18,7 @@ export const navigationContainer = style({
   flexDirection: 'column',
 });
 
-const navigationItem = style({
+export const navigationItem = style({
   position: 'relative',
   display: 'flex',
   boxSizing: 'border-box',
@@ -50,6 +50,14 @@ const navigationItem = style({
       boxShadow: `inset 0 0 0 2px ${tokens.colors.navButtonFocusBorder}`,
       backgroundImage: layers(tokens.colors.navButtonFocusBg2, tokens.colors.navButtonFocusBg),
     },
+    // `data-active` also comes from Radix when the item is the `as` of a NavigationMenuLink; `:where` lets hover and focus layers win.
+    '&:where([data-active])': {
+      color: tokens.colors.navButtonActiveText,
+      backgroundImage: layers(tokens.colors.navButtonActiveBg2, tokens.colors.navButtonActiveBg),
+    },
+    '&:where([data-active]):focus': {
+      color: tokens.colors.navButtonActiveText,
+    },
   },
 
   '@media': {
@@ -59,44 +67,11 @@ const navigationItem = style({
           color: tokens.colors.navButtonHoverText,
           backgroundImage: layers(tokens.colors.navButtonHoverBg2, tokens.colors.navButtonHoverBg),
         },
-      },
-    },
-  },
-});
-
-const navigationItemActive = style({
-  color: tokens.colors.navButtonActiveText,
-  backgroundImage: layers(tokens.colors.navButtonActiveBg2, tokens.colors.navButtonActiveBg),
-
-  selectors: {
-    '&:focus': {
-      color: tokens.colors.navButtonActiveText,
-    },
-  },
-
-  '@media': {
-    [breakpoints.hover]: {
-      selectors: {
-        '&:hover': {
+        '&:where([data-active]):hover': {
           color: tokens.colors.navButtonActiveText,
         },
       },
     },
-  },
-});
-
-export const navigationItemRecipe = recipe({
-  base: navigationItem,
-
-  variants: {
-    active: {
-      true: navigationItemActive,
-      false: {},
-    },
-  },
-
-  defaultVariants: {
-    active: false,
   },
 });
 
@@ -135,7 +110,7 @@ export const navigationItemEnd = style([
 ]);
 
 globalStyle(
-  `${navigationItem}:focus > ${navigationItemDimmed}, ${navigationItem}:hover > ${navigationItemDimmed}, ${navigationItemActive} > ${navigationItemDimmed}`,
+  `${navigationItem}:focus > ${navigationItemDimmed}, ${navigationItem}:hover > ${navigationItemDimmed}, ${navigationItem}[data-active] > ${navigationItemDimmed}`,
   { opacity: 1 },
 );
 

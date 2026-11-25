@@ -13,9 +13,9 @@ import { useInlineStyle } from '@/styles/useInlineStyle';
 import {
   navigationContainer,
   navigationDrawerRecipe,
+  navigationItem,
   navigationItemEnd,
   navigationItemLabel,
-  navigationItemRecipe,
   navigationItemStart,
 } from './Navigation.vanilla.css';
 
@@ -121,7 +121,7 @@ const NavigationItemVanillaImpl = forwardRef(
         type={isButton ? 'button' : undefined}
         aria-current={active && !isButton ? 'page' : undefined}
         data-active={active ? '' : undefined}
-        className={cx(navigationItemRecipe({ active }), className)}
+        className={cx(navigationItem, className)}
         style={mergedStyles}
         {...props}
       >

@@ -2,7 +2,7 @@ import { createVar, globalStyle, style } from '@vanilla-extract/css';
 
 import { tokens } from '@/styles/tokens.css';
 
-import { navigationItemRecipe } from '@/components/Navigation/Navigation.vanilla.css';
+import { navigationItem } from '@/components/Navigation/Navigation.vanilla.css';
 
 export const navigationTreeNested = style({
   paddingLeft: tokens.space['4'],
@@ -34,11 +34,11 @@ export const navigationTreeFullWidthIndent = `calc(${tokens.space['3']} + ${navi
 export const navigationTreeItemFullWidth = style({});
 
 // Same as the items of a full width drawer, at any depth; the extra class beats the item's own radius and focus ring.
-globalStyle(`${navigationTreeItemFullWidth}${navigationItemRecipe.classNames.base}`, {
+globalStyle(`${navigationTreeItemFullWidth}${navigationItem}`, {
   borderRadius: 0,
 });
 
-globalStyle(`${navigationTreeItemFullWidth}${navigationItemRecipe.classNames.base}:focus`, {
+globalStyle(`${navigationTreeItemFullWidth}${navigationItem}:focus`, {
   border: 'none',
   boxShadow: 'none',
 });

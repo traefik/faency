@@ -133,6 +133,7 @@ describe('NavigationMenuVanilla', () => {
     expect(linkRef.current).toBe(link);
     expect(link).toHaveAttribute('href', '/guides');
     expect(link).toHaveAttribute('aria-current', 'page');
+    expect(link).toHaveAttribute('data-active', '');
     expect(link.querySelector('a')).not.toBeInTheDocument();
   });
 

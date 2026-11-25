@@ -185,7 +185,7 @@ describe('NavigationItemVanilla', () => {
     expect(screen.getByRole('button', { name: 'Menu' })).not.toHaveAttribute('aria-current');
   });
 
-  it('should expose the active state as a data attribute and class', () => {
+  it('should expose the active state as a data attribute', () => {
     renderWithTheme(
       <>
         <NavigationItemVanilla active>Active</NavigationItemVanilla>
@@ -197,7 +197,6 @@ describe('NavigationItemVanilla', () => {
 
     expect(active).toHaveAttribute('data-active', '');
     expect(inactive).not.toHaveAttribute('data-active');
-    expect(active.className).not.toBe(inactive.className);
     expect(active).not.toHaveAttribute('active');
   });
 
