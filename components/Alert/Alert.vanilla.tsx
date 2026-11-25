@@ -24,15 +24,14 @@ export type AlertVanillaProps<C extends ElementType = 'div'> = PolymorphicCompon
   AlertOwnProps
 >;
 
-type AlertVanillaComponent = PolymorphicComponent<'div', AlertVanillaProps<ElementType>>;
-
 const AlertVanillaComponentImpl = forwardRef(
-  <C extends ElementType = 'div'>(
-    { variant, className, ...props }: AlertVanillaProps<C>,
-    ref?: PolymorphicRef<C>,
+  // Not generic: TS can't match a generic `as` against CardVanilla's; the export cast types `as`.
+  (
+    { variant, className, ...props }: AlertVanillaProps<ElementType>,
+    ref?: PolymorphicRef<ElementType>,
   ) => <CardVanilla ref={ref} className={cx(alertClass({ variant }), className)} {...props} />,
 );
 
 AlertVanillaComponentImpl.displayName = 'AlertVanilla';
 
-export const AlertVanilla = AlertVanillaComponentImpl as AlertVanillaComponent;
+export const AlertVanilla = AlertVanillaComponentImpl as PolymorphicComponent<'div', AlertOwnProps>;
