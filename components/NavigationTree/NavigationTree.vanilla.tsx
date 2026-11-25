@@ -22,10 +22,13 @@ import {
 import { FlexVanilla } from '@/components/Flex/Flex.vanilla';
 import {
   NavigationContainerVanilla,
+  NavigationContainerVanillaProps,
+  NavigationDrawerOwnProps,
   NavigationDrawerVanilla,
   NavigationDrawerVanillaProps,
   NavigationItemOwnProps,
   NavigationItemVanilla,
+  NavigationItemVanillaProps,
 } from '@/components/Navigation/Navigation.vanilla';
 import { TextVanilla } from '@/components/Text/Text.vanilla';
 
@@ -65,7 +68,7 @@ export type NavigationTreeContainerVanillaProps<C extends ElementType = 'div'> =
 
 type NavigationTreeContainerVanillaComponent = PolymorphicComponent<
   'div',
-  NavigationTreeContainerVanillaProps<ElementType>
+  NavigationTreeContainerOwnProps
 >;
 
 const NavigationTreeContainerVanillaImpl = forwardRef(
@@ -90,7 +93,10 @@ const NavigationTreeContainerVanillaImpl = forwardRef(
 
     return (
       <NavigationTreeContext.Provider value={contextValue}>
-        <NavigationContainerVanilla ref={ref} {...props} />
+        <NavigationContainerVanilla
+          ref={ref}
+          {...(props as NavigationContainerVanillaProps<ElementType>)}
+        />
       </NavigationTreeContext.Provider>
     );
   },
@@ -104,10 +110,7 @@ export const NavigationTreeContainerVanilla =
 export type NavigationTreeDrawerVanillaProps<C extends ElementType = 'nav'> =
   NavigationDrawerVanillaProps<C>;
 
-type NavigationTreeDrawerVanillaComponent = PolymorphicComponent<
-  'nav',
-  NavigationTreeDrawerVanillaProps<ElementType>
->;
+type NavigationTreeDrawerVanillaComponent = PolymorphicComponent<'nav', NavigationDrawerOwnProps>;
 
 const NavigationTreeDrawerVanillaImpl = forwardRef(
   <C extends ElementType = 'nav'>(
@@ -122,7 +125,11 @@ const NavigationTreeDrawerVanillaImpl = forwardRef(
 
     return (
       <NavigationTreeContext.Provider value={contextValue}>
-        <NavigationDrawerVanilla ref={ref} fullWidth={fullWidth} {...props} />
+        <NavigationDrawerVanilla
+          ref={ref}
+          fullWidth={fullWidth}
+          {...(props as NavigationDrawerVanillaProps<ElementType>)}
+        />
       </NavigationTreeContext.Provider>
     );
   },
@@ -147,7 +154,7 @@ export type NavigationTreeItemVanillaProps<C extends ElementType = 'button'> =
 
 type NavigationTreeItemVanillaComponent = PolymorphicComponent<
   'button',
-  NavigationTreeItemVanillaProps<ElementType>
+  NavigationTreeItemOwnProps
 >;
 
 const NavigationTreeItemVanillaImpl = forwardRef(
@@ -202,7 +209,7 @@ const NavigationTreeItemVanillaImpl = forwardRef(
           css={{ ...indentCss, ...css }}
           style={indentStyle}
           aria-expanded={isExpandable ? isExpanded : undefined}
-          {...props}
+          {...(props as NavigationItemVanillaProps<ElementType>)}
           startAdornment={startAdornment || (isExpandable ? expandIcon : null)}
           onClick={isExpandable ? () => setIsExpanded((expanded) => !expanded) : onClick}
         >

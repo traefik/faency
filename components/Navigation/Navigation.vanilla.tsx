@@ -24,10 +24,7 @@ const navigationDrawerClass = withVariantKeys(navigationDrawerRecipe);
 export type NavigationContainerVanillaProps<C extends ElementType = 'div'> =
   PolymorphicComponentProps<C, CSSProps>;
 
-type NavigationContainerVanillaComponent = PolymorphicComponent<
-  'div',
-  NavigationContainerVanillaProps<ElementType>
->;
+type NavigationContainerVanillaComponent = PolymorphicComponent<'div', CSSProps>;
 
 const NavigationContainerVanillaImpl = forwardRef(
   <C extends ElementType = 'div'>(
@@ -55,17 +52,14 @@ export const NavigationContainerVanilla =
 
 type NavigationDrawerVariants = RecipeVariantProps<typeof navigationDrawerRecipe>;
 
-interface NavigationDrawerOwnProps extends NavigationDrawerVariants, CSSProps {}
+export interface NavigationDrawerOwnProps extends NavigationDrawerVariants, CSSProps {}
 
 export type NavigationDrawerVanillaProps<C extends ElementType = 'nav'> = PolymorphicComponentProps<
   C,
   NavigationDrawerOwnProps
 >;
 
-type NavigationDrawerVanillaComponent = PolymorphicComponent<
-  'nav',
-  NavigationDrawerVanillaProps<ElementType>
->;
+type NavigationDrawerVanillaComponent = PolymorphicComponent<'nav', NavigationDrawerOwnProps>;
 
 const NavigationDrawerVanillaImpl = forwardRef(
   <C extends ElementType = 'nav'>(
@@ -100,10 +94,7 @@ export interface NavigationItemOwnProps extends CSSProps {
 export type NavigationItemVanillaProps<C extends ElementType = 'button'> =
   PolymorphicComponentProps<C, NavigationItemOwnProps>;
 
-type NavigationItemVanillaComponent = PolymorphicComponent<
-  'button',
-  NavigationItemVanillaProps<ElementType>
->;
+type NavigationItemVanillaComponent = PolymorphicComponent<'button', NavigationItemOwnProps>;
 
 const NavigationItemVanillaImpl = forwardRef(
   <C extends ElementType = 'button'>(

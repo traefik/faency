@@ -22,9 +22,10 @@ import {
 const renderWithTheme = (ui: React.ReactElement) =>
   render(<VanillaExtractThemeProvider>{ui}</VanillaExtractThemeProvider>);
 
-const RouterLink = React.forwardRef<HTMLAnchorElement, { to: string; children?: React.ReactNode }>(
-  ({ to, ...props }, ref) => <a ref={ref} href={to} {...props} />,
-);
+const RouterLink = React.forwardRef<
+  HTMLAnchorElement,
+  { to: string } & Omit<React.ComponentPropsWithoutRef<'a'>, 'href'>
+>(({ to, ...props }, ref) => <a ref={ref} href={to} {...props} />);
 RouterLink.displayName = 'RouterLink';
 
 describe('NavigationTreeVanilla', () => {
