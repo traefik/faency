@@ -120,6 +120,7 @@ export const tokens = createThemeContract({
     inputPlaceholder: null,
     inputDisabledText: null,
     inputInvalidBorder: null,
+    inputInvalidHoverTint: null,
 
     selectBg: null,
     selectBorder: null,
@@ -139,6 +140,7 @@ export const tokens = createThemeContract({
     textareaPlaceholder: null,
     textareaDisabledText: null,
     textareaInvalidBorder: null,
+    textareaInvalidHoverTint: null,
 
     buttonPrimaryText: null,
     buttonPrimaryFocusBorder: null,

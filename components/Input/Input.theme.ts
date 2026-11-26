@@ -12,6 +12,7 @@ export const inputLightTheme = {
   inputPlaceholder: 'hsla(0, 0%, 0%, 0.498)', // $blackA10
   inputDisabledText: tinycolor('black').setAlpha(0.35).toHslString(),
   inputInvalidBorder: 'hsl(358, 75%, 59%)', // $red9
+  inputInvalidHoverTint: tinycolor('hsl(358, 75%, 59%)').setAlpha(0.05).toHslString(),
 };
 
 export const inputDarkTheme = {
@@ -24,4 +25,5 @@ export const inputDarkTheme = {
   inputPlaceholder: 'hsla(0, 0%, 100%, 0.455)', // $whiteA10
   inputDisabledText: tinycolor('white').setAlpha(0.35).toHslString(),
   inputInvalidBorder: 'hsl(358, 75%, 59%)', // $red9
+  inputInvalidHoverTint: tinycolor('hsl(358, 75%, 59%)').setAlpha(0.05).toHslString(),
 };

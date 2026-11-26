@@ -12,6 +12,7 @@ export const textareaLightTheme = {
   textareaPlaceholder: 'hsla(0, 0%, 0%, 0.498)', // $blackA10
   textareaDisabledText: tinycolor('black').setAlpha(0.35).toHslString(),
   textareaInvalidBorder: 'hsl(358, 75%, 59%)', // $red9
+  textareaInvalidHoverTint: tinycolor('hsl(358, 75%, 59%)').setAlpha(0.05).toHslString(),
 };
 
 export const textareaDarkTheme = {
@@ -24,4 +25,5 @@ export const textareaDarkTheme = {
   textareaPlaceholder: 'hsla(0, 0%, 100%, 0.455)', // $whiteA10
   textareaDisabledText: tinycolor('white').setAlpha(0.35).toHslString(),
   textareaInvalidBorder: 'hsl(358, 75%, 59%)', // $red9
+  textareaInvalidHoverTint: tinycolor('hsl(358, 75%, 59%)').setAlpha(0.05).toHslString(),
 };

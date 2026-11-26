@@ -1,6 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 export const wrapper = style({
@@ -23,14 +24,6 @@ globalStyle(`${input} input::-webkit-calendar-picker-indicator`, {
   display: 'none',
 });
 
-const pseudoLayer = {
-  boxSizing: 'border-box',
-  content: '""',
-  position: 'absolute',
-  inset: 0,
-  pointerEvents: 'none',
-} as const;
-
 // Firefox has no way to hide its native picker button, so cover it with a click target.
 export const firefoxPatch = style({
   display: 'none',
@@ -42,34 +35,17 @@ export const firefoxPatch = style({
       position: 'absolute',
       right: '17px',
       top: '6px',
-      background: tokens.colors.inputBg,
-      selectors: {
-        '&::before': pseudoLayer,
-        '&::after': pseudoLayer,
-      },
+      backgroundColor: tokens.colors.inputBg,
     },
   },
 });
 
-globalStyle(`${wrapper}:hover ${firefoxPatch}::before`, {
+globalStyle(`${wrapper}:hover ${firefoxPatch}`, {
   '@supports': {
     '(-moz-appearance: none)': {
       '@media': {
         [breakpoints.hover]: {
-          backgroundColor: tokens.colors.inputHoverBg,
-        },
-      },
-    },
-  },
-});
-
-globalStyle(`${wrapper}:hover ${firefoxPatch}::after`, {
-  '@supports': {
-    '(-moz-appearance: none)': {
-      '@media': {
-        [breakpoints.hover]: {
-          backgroundColor: tokens.colors.primary,
-          opacity: 0.05,
+          backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.inputHoverBg),
         },
       },
     },
