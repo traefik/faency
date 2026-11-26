@@ -35,6 +35,7 @@ export const tokens = createThemeContract({
   colors: {
     // Semantic colors
     primary: null,
+    primaryTint: null,
     contentBg: null,
     hiContrast: null,
     loContrast: null,

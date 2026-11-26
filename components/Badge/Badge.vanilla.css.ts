@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 const baseBadge = style({
@@ -38,24 +39,15 @@ const interactiveBadge = style([
   baseBadge,
   {
     selectors: {
-      '&::before': {
-        boxSizing: 'border-box',
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        borderRadius: 'inherit',
-      },
       '&:focus-visible': {
         outline: `2px solid ${tokens.colors.primary}`,
       },
       '&:hover': {
         cursor: 'pointer',
+        backgroundImage: stateLayers(tokens.colors.badgeInteractiveBackgroundHover),
       },
-      '&:hover::before': {
-        backgroundColor: tokens.colors.badgeInteractiveBackgroundHover,
-      },
-      '&:active::before': {
-        backgroundColor: tokens.colors.badgeInteractiveBackgroundActive,
+      '&:active': {
+        backgroundImage: stateLayers(tokens.colors.badgeInteractiveBackgroundActive),
       },
     },
   },
