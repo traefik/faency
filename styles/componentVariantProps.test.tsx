@@ -15,6 +15,7 @@ import { ButtonVanilla } from '@/components/Button/Button.vanilla';
 import { CardVanilla } from '@/components/Card/Card.vanilla';
 import { CheckboxVanilla } from '@/components/Checkbox/Checkbox.vanilla';
 import { ContainerVanilla } from '@/components/Container/Container.vanilla';
+import { DialogContentVanilla } from '@/components/Dialog/Dialog.vanilla';
 import { DropdownMenuContentVanilla } from '@/components/DropdownMenu/DropdownMenu.vanilla';
 import { ElevationVanilla } from '@/components/Elevation/Elevation.vanilla';
 import { H1Vanilla } from '@/components/Heading/Heading.vanilla';
@@ -30,6 +31,7 @@ import {
   RadioAccordionTriggerVanilla,
 } from '@/components/RadioAccordion/RadioAccordion.vanilla';
 import { SelectVanilla } from '@/components/Select/Select.vanilla';
+import { SidePanelVanilla } from '@/components/SidePanel/SidePanel.vanilla';
 import { SkeletonVanilla } from '@/components/Skeleton/Skeleton.vanilla';
 import { SwitchVanilla } from '@/components/Switch/Switch.vanilla';
 import { CaptionVanilla, ThVanilla } from '@/components/Table/Table.vanilla';
@@ -72,9 +74,11 @@ describe('component variant props', () => {
       <PopoverContentVanilla key="popover-content" elevation={2} />,
       <AlertVanilla key="alert" variant="info" elevation={2} />,
       <TooltipContentVanilla key="tooltip-content" multiline />,
+      <DialogContentVanilla key="dialog-content" elevation={3} />,
+      <SidePanelVanilla key="side-panel" side="left" onOpenChange={() => {}} />,
     ];
 
-    expect(elements).toHaveLength(31);
+    expect(elements).toHaveLength(33);
   });
 
   it('reject invalid variants', () => {
@@ -149,8 +153,12 @@ describe('component variant props', () => {
       <AlertVanilla key="alert-card-variant" variant="inner" />,
       // @ts-expect-error unknown multiline value
       <TooltipContentVanilla key="tooltip-content" multiline="yes" />,
+      // @ts-expect-error elevation outside the recipe keys
+      <DialogContentVanilla key="dialog-content" elevation={9} />,
+      // @ts-expect-error unknown side
+      <SidePanelVanilla key="side-panel" side="center" onOpenChange={() => {}} />,
     ];
 
-    expect(elements).toHaveLength(35);
+    expect(elements).toHaveLength(37);
   });
 });

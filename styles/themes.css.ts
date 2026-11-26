@@ -25,6 +25,7 @@ import {
   codeBlockLightTheme,
 } from '@/components/CodeBlock/CodeBlock.theme.css';
 import { comboboxDarkTheme, comboboxLightTheme } from '@/components/Combobox/Combobox.theme.css';
+import { dialogDarkTheme, dialogLightTheme } from '@/components/Dialog/Dialog.theme.css';
 import { headingDarkTheme, headingLightTheme } from '@/components/Heading/Heading.theme.css';
 import {
   iconButtonDarkTheme,
@@ -43,6 +44,10 @@ import {
   segmentedControlLightTheme,
 } from '@/components/SegmentedControl/SegmentedControl.theme.css';
 import { selectDarkTheme, selectLightTheme } from '@/components/Select/Select.theme.css';
+import {
+  sidePanelDarkTheme,
+  sidePanelLightTheme,
+} from '@/components/SidePanel/SidePanel.theme.css';
 import { skeletonDarkTheme, skeletonLightTheme } from '@/components/Skeleton/Skeleton.theme.css';
 import { switchDarkTheme, switchLightTheme } from '@/components/Switch/Switch.theme.css';
 import {
@@ -409,6 +414,8 @@ const lightSemanticColors = {
   ...checkboxLightTheme,
   ...radioLightTheme,
   ...accordionLightTheme,
+  ...dialogLightTheme,
+  ...sidePanelLightTheme,
   meterTrackBg: lightColors.grayA3,
   tooltipContentBg: tokens.colors.primary,
   tooltipText: 'white',
@@ -603,6 +610,8 @@ const darkSemanticColors = {
   ...checkboxDarkTheme,
   ...radioDarkTheme,
   ...accordionDarkTheme,
+  ...dialogDarkTheme,
+  ...sidePanelDarkTheme,
   meterTrackBg: darkColors.grayA3,
   tooltipContentBg: tokens.colors.primary,
   tooltipText: darkColors.deepBlue2,

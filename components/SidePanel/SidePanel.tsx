@@ -64,7 +64,9 @@ const StyledContent = styled(DialogPrimitive.Content, {
     side: {
       top: {
         $$transformValue: 'translate3d(0,-100%,0)',
-        width: '100%',
+        left: 0,
+        right: 0,
+        width: 'auto',
         height: 250,
         bottom: 'auto',
       },
@@ -75,7 +77,9 @@ const StyledContent = styled(DialogPrimitive.Content, {
       },
       bottom: {
         $$transformValue: 'translate3d(0,100%,0)',
-        width: '100%',
+        left: 0,
+        right: 0,
+        width: 'auto',
         height: 250,
         bottom: 0,
         top: 'auto',
@@ -137,7 +141,7 @@ export const SidePanel = React.forwardRef<React.ElementRef<typeof StyledContent>
       closeLabel = 'Close',
       children,
       onOpenChange,
-      open = false,
+      open,
       defaultOpen = false,
       ...props
     },

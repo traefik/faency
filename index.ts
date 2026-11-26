@@ -86,16 +86,34 @@ export type {
 export { DateTimePicker, DateTimePickerVanilla } from './components/DateTimePicker';
 export type { DateTimePickerInputVanillaProps } from './components/DateTimePickerInput';
 export { DateTimePickerInput, DateTimePickerInputVanilla } from './components/DateTimePickerInput';
+export type {
+  DialogCloseIconButtonVanillaProps,
+  DialogClosePrimitiveVanillaProps,
+  DialogContentVanillaProps,
+  DialogDescriptionVanillaProps,
+  DialogOverlayVanillaProps,
+  DialogTitleVanillaProps,
+  DialogTriggerVanillaProps,
+} from './components/Dialog';
 export {
   Dialog,
   DialogCloseIconButton,
+  DialogCloseIconButtonVanilla,
   DialogClosePrimitive,
+  DialogClosePrimitiveVanilla,
   DialogContent,
+  DialogContentVanilla,
   DialogDescription,
+  DialogDescriptionVanilla,
   DialogOverlay,
+  DialogOverlayVanilla,
   DialogPortal,
+  DialogPortalVanilla,
   DialogTitle,
+  DialogTitleVanilla,
   DialogTrigger,
+  DialogTriggerVanilla,
+  DialogVanilla,
   StyledContent,
 } from './components/Dialog';
 export type {
@@ -202,7 +220,8 @@ export {
   NavigationTreeDrawer,
   NavigationTreeItem,
 } from './components/NavigationTree';
-export { Overlay } from './components/Overlay';
+export type { OverlayVanillaProps } from './components/Overlay';
+export { Overlay, OverlayVanilla } from './components/Overlay';
 export { Panel, panelStyles, PanelVanilla } from './components/Panel';
 export type { ParagraphVanillaProps } from './components/Paragraph';
 export { Paragraph, ParagraphVanilla } from './components/Paragraph';
@@ -270,7 +289,8 @@ export {
   SelectSeparatorVanilla,
   SelectVanilla,
 } from './components/Select';
-export { SidePanel } from './components/SidePanel';
+export type { SidePanelVanillaProps } from './components/SidePanel';
+export { SidePanel, SidePanelVanilla } from './components/SidePanel';
 export type { SkeletonVanillaProps } from './components/Skeleton';
 export { Skeleton, SkeletonVanilla } from './components/Skeleton';
 export type { SpinnerVanillaProps } from './components/Spinner';
@@ -361,7 +381,8 @@ export {
   TooltipTriggerVanilla,
   TooltipVanilla,
 } from './components/Tooltip';
-export { VisuallyHidden } from './components/VisuallyHidden';
+export type { VisuallyHiddenVanillaProps } from './components/VisuallyHidden';
+export { VisuallyHidden, VisuallyHiddenVanilla } from './components/VisuallyHidden';
 export { AspectRatio } from '@radix-ui/react-aspect-ratio';
 export { Portal } from '@radix-ui/react-portal';
 
