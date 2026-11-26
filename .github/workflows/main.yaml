@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 env:
   SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 72 # 3 days
   # renovate: datasource=npm depName=corepack
@@ -40,11 +44,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
-
-      - name: Config git
-        run: |
-          git config --local user.email "30906710+traefiker@users.noreply.github.com"
-          git config --local user.name "traefiker"
 
       - name: Install dependencies
         env:
