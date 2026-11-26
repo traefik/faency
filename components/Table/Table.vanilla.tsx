@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -32,10 +32,6 @@ import {
 } from './Table.vanilla.css';
 import { TableSortProps } from './useTableSort';
 
-const captionClass = withVariantKeys(captionRecipe);
-const tableClass = withVariantKeys(tableRecipe);
-const thClass = withVariantKeys(thRecipe);
-
 type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
 type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
 type TrRecipeVariants = RecipeVariantProps<typeof trRecipe>;
@@ -53,7 +49,7 @@ export const TableVanilla = forwardRef<HTMLTableElement, TableVanillaProps>(
     return (
       <table
         ref={ref}
-        className={cx(tableClass(variants), rowLinkTable, className)}
+        className={cx(tableRecipe(variants), rowLinkTable, className)}
         style={useInlineStyle(css, style)}
         {...props}
       />
@@ -74,7 +70,7 @@ export const CaptionVanilla = forwardRef<HTMLTableCaptionElement, CaptionVanilla
     return (
       <caption
         ref={ref}
-        className={cx(captionClass(variants), className)}
+        className={cx(captionRecipe(variants), className)}
         style={useInlineStyle(css, style)}
         {...props}
       />
@@ -118,7 +114,7 @@ export const ThVanilla = forwardRef<HTMLTableCellElement, ThVanillaProps>(
       <th
         ref={ref}
         aria-sort={sort && ARIA_SORT[sort]}
-        className={cx(thClass(variants), className)}
+        className={cx(thRecipe(variants), className)}
         style={useInlineStyle(css, style)}
         {...props}
       >
@@ -222,7 +218,7 @@ export const TrVanilla = forwardRef<HTMLTableRowElement, TrVanillaProps>(
           {...props}
         >
           {emptyFirstColumn &&
-            (tableHead ? <td className={cx(thClass(), emptyHeaderCell)} /> : <TdVanilla />)}
+            (tableHead ? <td className={cx(thRecipe(), emptyHeaderCell)} /> : <TdVanilla />)}
           {collapsible && (
             <TdVanilla className={toggleCell} onClick={stopEvent}>
               <ExpandToggleVanilla

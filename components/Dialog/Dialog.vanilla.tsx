@@ -6,7 +6,7 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -15,8 +15,6 @@ import {
 } from '@/components/IconButton/IconButton.vanilla';
 
 import { dialogCloseButton, dialogContentRecipe, dialogOverlay } from './Dialog.vanilla.css';
-
-const dialogContentClass = withVariantKeys(dialogContentRecipe);
 
 export const DialogVanilla = DialogPrimitive.Root;
 export const DialogPortalVanilla = DialogPrimitive.Portal;
@@ -106,7 +104,7 @@ export const DialogContentVanilla = forwardRef<HTMLDivElement, DialogContentVani
     return (
       <DialogPrimitive.Content
         ref={ref}
-        className={cx(dialogContentClass(variants), className)}
+        className={cx(dialogContentRecipe(variants), className)}
         style={useInlineStyle(css, style)}
         {...props}
       >

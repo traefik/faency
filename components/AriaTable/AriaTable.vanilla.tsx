@@ -11,7 +11,7 @@ import React, {
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
 
@@ -55,10 +55,6 @@ import {
   fullColSpanCell,
 } from './AriaTable.vanilla.css';
 
-const captionClass = withVariantKeys(captionRecipe);
-const tableClass = withVariantKeys(tableRecipe);
-const thClass = withVariantKeys(thRecipe);
-
 type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
 type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
 type TrRecipeVariants = RecipeVariantProps<typeof trRecipe>;
@@ -81,7 +77,7 @@ export const AriaTableVanilla = forwardRef<HTMLDivElement, AriaTableVanillaProps
         ref={ref}
         role="table"
         className={cx(
-          tableClass(variants),
+          tableRecipe(variants),
           ariaTable,
           hasCollapsibleChildren && collapsibleTable,
           rowLinkTable,
@@ -107,7 +103,7 @@ export const AriaCaptionVanilla = forwardRef<HTMLDivElement, AriaCaptionVanillaP
     return (
       <div
         ref={ref}
-        className={cx(captionClass(variants), className)}
+        className={cx(captionRecipe(variants), className)}
         style={useInlineStyle(css, style)}
         {...props}
       />
@@ -153,7 +149,7 @@ export const AriaThVanilla = forwardRef<HTMLSpanElement, AriaThVanillaProps>(
         ref={ref}
         role="columnheader"
         aria-sort={sort && ARIA_SORT[sort]}
-        className={cx(thClass(variants), ariaCell, className)}
+        className={cx(thRecipe(variants), ariaCell, className)}
         style={useInlineStyle(css, style)}
         {...props}
       >
@@ -324,7 +320,7 @@ export const AriaTrVanilla = forwardRef<HTMLDivElement, AriaTrVanillaProps>(
         >
           {emptyFirstColumn &&
             (tableHead ? (
-              <span role="cell" className={cx(thClass(), ariaCell, emptyHeaderCell)} />
+              <span role="cell" className={cx(thRecipe(), ariaCell, emptyHeaderCell)} />
             ) : (
               <AriaTdVanilla />
             ))}

@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { type RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { badgeRecipe, interactiveBadgeRecipe } from './Badge.vanilla.css';
@@ -29,26 +29,16 @@ type BadgeVanillaComponent = PolymorphicComponent<'span', BadgeOwnProps>;
 
 const BadgeVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'span'>(
-    {
-      as,
-      interactive,
-      className,
-      css,
-      style,
-      size,
-      variant,
-      alphaBg,
-      borderless,
-      ...props
-    }: BadgeVanillaProps<C>,
+    { as, interactive, className, css, style, ...rest }: BadgeVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || (interactive ? 'button' : 'span');
+    const [variants, props] = splitVariants(badgeRecipe, rest);
 
     const mergedStyles = useInlineStyle(css, style);
 
     const recipe = interactive ? interactiveBadgeRecipe : badgeRecipe;
-    const recipeClass = recipe({ size, variant, alphaBg, borderless });
+    const recipeClass = recipe(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

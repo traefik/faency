@@ -6,7 +6,7 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -18,8 +18,6 @@ import {
   dropdownMenuRadioIndicator,
   dropdownMenuSeparator,
 } from './DropdownMenu.vanilla.css';
-
-const dropdownMenuContentClass = withVariantKeys(dropdownMenuContentRecipe);
 
 export const DropdownMenuVanilla = DropdownMenuPrimitive.Root;
 export const DropdownMenuPortalVanilla = DropdownMenuPrimitive.Portal;
@@ -50,7 +48,7 @@ export const DropdownMenuContentVanilla = forwardRef<
   return (
     <DropdownMenuPrimitive.Content
       ref={ref}
-      className={cx(dropdownMenuContentClass(variants), className)}
+      className={cx(dropdownMenuContentRecipe(variants), className)}
       style={useInlineStyle(css, style)}
       {...props}
     />

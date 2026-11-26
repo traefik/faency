@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { splitVariants } from '@/styles/recipeVariants';
 import type {
   FlexAlignSimplified,
   FlexDirection,
@@ -17,8 +17,6 @@ import type {
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { flexRecipe } from './Flex.vanilla.css';
-
-const flexClass = withVariantKeys(flexRecipe);
 
 interface FlexOwnProps extends CSSProps {
   direction?: FlexDirection;
@@ -44,7 +42,7 @@ export const FlexVanillaComponent = React.forwardRef(
 
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = flexClass(variants);
+    const recipeClass = flexRecipe(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

@@ -7,12 +7,10 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { labelRecipe } from './Label.vanilla.css';
-
-const labelClass = withVariantKeys(labelRecipe);
 
 type LabelRecipeVariants = RecipeVariantProps<typeof labelRecipe>;
 
@@ -34,7 +32,7 @@ const LabelVanillaComponentImpl = forwardRef(
     const [variants, props] = splitVariants(labelRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = labelClass(variants);
+    const recipeClass = labelRecipe(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

@@ -55,6 +55,12 @@ describe('splitVariants', () => {
     expect(props).toEqual({ type: 'submit', onClick });
   });
 
+  it('passes numeric variants as string keys', () => {
+    const [variants] = splitVariants(recipe, { size: 2, flat: false });
+
+    expect(variants).toEqual({ size: '2', flat: false });
+  });
+
   it('keeps variants out of the rest type', () => {
     const [, props] = splitVariants(recipe, { flat: true, id: 'a' });
     // @ts-expect-error flat went to the recipe

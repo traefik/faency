@@ -3,13 +3,10 @@ import React, { forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { avatarFallbackRecipe, avatarImage, avatarRecipe } from './Avatar.vanilla.css';
-
-const avatarClass = withVariantKeys(avatarRecipe);
-const avatarFallbackClass = withVariantKeys(avatarFallbackRecipe);
 
 type AvatarRecipeVariants = RecipeVariantProps<typeof avatarRecipe>;
 
@@ -34,12 +31,12 @@ const AvatarVanillaComponent = forwardRef<
   return (
     <AvatarPrimitive.Root
       ref={ref}
-      className={cx(avatarClass(variants), className)}
+      className={cx(avatarRecipe(variants), className)}
       style={useInlineStyle(css, style)}
       {...props}
     >
       <AvatarPrimitive.Image className={avatarImage} alt={alt} src={src} />
-      <AvatarPrimitive.Fallback className={avatarFallbackClass({ size: variants.size })}>
+      <AvatarPrimitive.Fallback className={avatarFallbackRecipe({ size: variants.size })}>
         {fallback}
       </AvatarPrimitive.Fallback>
     </AvatarPrimitive.Root>

@@ -7,13 +7,11 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { splitVariants } from '@/styles/recipeVariants';
 import type { Gap, GridAlign, GridFlow, GridJustify } from '@/styles/types';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { gridRecipe } from './Grid.vanilla.css';
-
-const gridClass = withVariantKeys(gridRecipe);
 
 interface GridOwnProps extends CSSProps {
   align?: GridAlign;
@@ -47,7 +45,7 @@ export const GridVanillaComponent = React.forwardRef(
 
     const mergedStyles = useInlineStyle(css, { ...dynamicStyles, ...style });
 
-    const recipeClass = gridClass(variants);
+    const recipeClass = gridRecipe(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

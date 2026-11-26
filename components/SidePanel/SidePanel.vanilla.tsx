@@ -3,15 +3,13 @@ import React, { forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { DialogCloseIconButtonVanilla } from '@/components/Dialog/Dialog.vanilla';
 import { VisuallyHiddenVanilla } from '@/components/VisuallyHidden/VisuallyHidden.vanilla';
 
 import { sidePanelContentRecipe, sidePanelOverlay } from './SidePanel.vanilla.css';
-
-const sidePanelContentClass = withVariantKeys(sidePanelContentRecipe);
 
 type SidePanelContentVariants = RecipeVariantProps<typeof sidePanelContentRecipe>;
 
@@ -53,7 +51,7 @@ export const SidePanelVanilla = forwardRef<HTMLDivElement, SidePanelVanillaProps
           {!noOverlay && <DialogPrimitive.Overlay className={sidePanelOverlay} />}
           <DialogPrimitive.Content
             ref={ref}
-            className={cx(sidePanelContentClass(variants), className)}
+            className={cx(sidePanelContentRecipe(variants), className)}
             style={useInlineStyle(css, style)}
             {...props}
           >

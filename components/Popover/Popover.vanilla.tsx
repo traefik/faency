@@ -5,13 +5,10 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { popoverArrowRecipe, popoverContentRecipe } from './Popover.vanilla.css';
-
-const popoverContentClass = withVariantKeys(popoverContentRecipe);
-const popoverArrowClass = withVariantKeys(popoverArrowRecipe);
 
 export const PopoverVanilla = PopoverPrimitive.Root;
 export const PopoverPortalVanilla = PopoverPrimitive.Portal;
@@ -63,14 +60,14 @@ export const PopoverContentVanilla = forwardRef<HTMLDivElement, PopoverContentVa
       <PopoverPrimitive.Content
         ref={ref}
         sideOffset={0}
-        className={cx(popoverContentClass(variants), className)}
+        className={cx(popoverContentRecipe(variants), className)}
         style={contentStyle}
         {...props}
       >
         {children}
         {!hideArrow && (
           <PopoverPrimitive.Arrow
-            className={popoverArrowClass(variants)}
+            className={popoverArrowRecipe(variants)}
             style={arrowStyle}
             width={11}
             height={5}

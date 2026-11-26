@@ -7,13 +7,10 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { cardRecipe, interactiveCardRecipe } from './Card.vanilla.css';
-
-const cardClass = withVariantKeys(cardRecipe);
-const interactiveCardClass = withVariantKeys(interactiveCardRecipe);
 
 type CardRecipeVariants = RecipeVariantProps<typeof cardRecipe>;
 
@@ -33,24 +30,15 @@ type CardVanillaComponent = PolymorphicComponent<'div', CardOwnProps>;
 
 const CardVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'div'>(
-    {
-      as,
-      className,
-      css,
-      style,
-      elevation,
-      variant,
-      active,
-      interactive,
-      ...props
-    }: CardVanillaProps<C>,
+    { as, className, css, style, interactive, ...rest }: CardVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || (interactive ? 'button' : 'div');
+    const [variants, props] = splitVariants(cardRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipe = interactive ? interactiveCardClass : cardClass;
-    const recipeClass = recipe({ elevation, variant, active });
+    const recipe = interactive ? interactiveCardRecipe : cardRecipe;
+    const recipeClass = recipe(variants);
 
     const additionalProps = interactive && !as ? { tabIndex: 0 } : {};
 

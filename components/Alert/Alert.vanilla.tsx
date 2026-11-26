@@ -7,13 +7,11 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 
 import { CardVanilla, CardVanillaProps } from '@/components/Card/Card.vanilla';
 
 import { alertRecipe } from './Alert.vanilla.css';
-
-const alertClass = withVariantKeys(alertRecipe);
 
 type AlertOwnProps = Pick<CardVanillaProps, 'elevation' | 'active' | 'interactive'> &
   RecipeVariantProps<typeof alertRecipe> &
@@ -29,7 +27,7 @@ const AlertVanillaComponentImpl = forwardRef(
   ({ className, ...rest }: AlertVanillaProps<ElementType>, ref?: PolymorphicRef<ElementType>) => {
     const [variants, props] = splitVariants(alertRecipe, rest);
 
-    return <CardVanilla ref={ref} className={cx(alertClass(variants), className)} {...props} />;
+    return <CardVanilla ref={ref} className={cx(alertRecipe(variants), className)} {...props} />;
   },
 );
 

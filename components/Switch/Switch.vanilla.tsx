@@ -8,14 +8,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { useFieldControl } from '@/components/Field/FieldContext';
 
 import { switchRecipe, switchThumb } from './Switch.vanilla.css';
-
-const switchClass = withVariantKeys(switchRecipe);
 
 type SwitchRecipeVariants = RecipeVariantProps<typeof switchRecipe>;
 
@@ -60,7 +58,7 @@ const SwitchVanillaComponentImpl = forwardRef(
   ) => {
     const [variants, props] = splitVariants(switchRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
-    const recipeClass = switchClass(variants);
+    const recipeClass = switchRecipe(variants);
 
     const control = useFieldControl({
       id,

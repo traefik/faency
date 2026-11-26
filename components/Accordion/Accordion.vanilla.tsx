@@ -4,7 +4,7 @@ import React from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -18,8 +18,6 @@ import {
   accordionTriggerLabelRecipe,
   accordionTriggerRecipe,
 } from './Accordion.vanilla.css';
-
-const accordionRootClass = withVariantKeys(accordionRootRecipe);
 
 type RootRecipeVariants = RecipeVariantProps<typeof accordionRootRecipe>;
 type TriggerRecipeVariants = RecipeVariantProps<typeof accordionTriggerRecipe>;
@@ -45,7 +43,7 @@ export const AccordionRootVanilla = React.forwardRef<
   return (
     <AccordionPrimitive.Root
       {...props}
-      className={cx(accordionRootClass(variants), className)}
+      className={cx(accordionRootRecipe(variants), className)}
       style={mergedStyles}
       ref={forwardedRef}
     />

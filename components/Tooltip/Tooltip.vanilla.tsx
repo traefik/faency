@@ -5,14 +5,12 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { TextVanilla } from '@/components/Text/Text.vanilla';
 
 import { tooltipArrow, tooltipContentRecipe } from './Tooltip.vanilla.css';
-
-const tooltipContentClass = withVariantKeys(tooltipContentRecipe);
 
 export const TooltipRootVanilla = TooltipPrimitive.Root;
 export const TooltipPortalVanilla = TooltipPrimitive.Portal;
@@ -41,7 +39,7 @@ export const TooltipContentVanilla = forwardRef<HTMLDivElement, TooltipContentVa
         side="top"
         align="center"
         sideOffset={5}
-        className={cx(tooltipContentClass(variants), className)}
+        className={cx(tooltipContentRecipe(variants), className)}
         style={useInlineStyle(css, style)}
         {...props}
       >
