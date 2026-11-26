@@ -47,8 +47,10 @@ export const navigationItem = style({
     },
     '&:focus': {
       color: tokens.colors.navButtonFocusText,
-      boxShadow: `inset 0 0 0 2px ${tokens.colors.navButtonFocusBorder}`,
       backgroundImage: layers(tokens.colors.navButtonFocusBg2, tokens.colors.navButtonFocusBg),
+    },
+    '&:focus-visible': {
+      boxShadow: `inset 0 0 0 2px ${tokens.colors.navButtonFocusBorder}`,
     },
     // `data-active` also comes from Radix when the item is the `as` of a NavigationMenuLink; `:where` lets hover and focus layers win.
     '&:where([data-active])': {
