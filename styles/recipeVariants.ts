@@ -12,7 +12,7 @@ type VariantKey<R extends RecipeFn> = keyof NonNullable<Parameters<R>[0]>;
 // Distributes over unions so discriminated props (e.g. Accordion's `type`) survive.
 type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
 
-// Numeric variants become string keys, as in withVariantKeys.
+// Numbers become string keys: compound variants match with ===, so 2 must become '2'.
 export const splitVariants = <
   R extends RecipeFn & { variants: () => PropertyKey[] },
   P extends Record<string, unknown>,
@@ -35,20 +35,3 @@ export const splitVariants = <
 
   return [variants as NonNullable<Parameters<R>[0]>, rest as DistributiveOmit<P, VariantKey<R>>];
 };
-
-// Compound variants match with ===, so 2 must become '2'.
-export const withVariantKeys =
-  <R extends RecipeFn>(recipe: R) =>
-  (options?: RecipeVariantProps<R>): string => {
-    let normalized: Record<string, unknown> | undefined;
-
-    for (const key in options) {
-      const value = options[key];
-      if (typeof value === 'number') {
-        if (!normalized) normalized = { ...options };
-        normalized[key] = String(value);
-      }
-    }
-
-    return recipe(normalized ?? options);
-  };

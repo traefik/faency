@@ -531,9 +531,9 @@ Take the variant props out with `splitVariants` instead of listing them by hand.
   const recipeClass = myComponentRecipe(variants);
 ```
 
-When you pass hand-picked or defaulted values to a recipe with numeric keys instead, wrap it once with `withVariantKeys` and call the wrapper. Calling the raw recipe with a number is a type error, which `yarn typecheck` reports.
+When you call a recipe with hand-picked or defaulted values instead, pass the string key (`size: '2'`). Passing a number there is a type error, which `yarn typecheck` reports.
 
-Because of the loose polymorphic typing, a broken variant type does not cause errors. Add a valid line and an invalid `@ts-expect-error` line (e.g. `variant="nope"`) for each new component to [styles/componentVariantProps.test.tsx](styles/componentVariantProps.test.tsx), which `yarn typecheck` checks in CI.
+A broken variant type silently drops the variant props instead of failing. Add a valid line and an invalid `@ts-expect-error` line (e.g. `variant="nope"`) for each new component to [styles/componentVariantProps.test.tsx](styles/componentVariantProps.test.tsx), which `yarn typecheck` checks in CI.
 
 #### Invalid selector error for child elements
 
