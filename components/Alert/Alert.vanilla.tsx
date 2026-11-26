@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 
 import { CardVanilla, CardVanillaProps } from '@/components/Card/Card.vanilla';
 
@@ -26,10 +26,11 @@ export type AlertVanillaProps<C extends ElementType = 'div'> = PolymorphicCompon
 
 const AlertVanillaComponentImpl = forwardRef(
   // Not generic: TS can't match a generic `as` against CardVanilla's; the export cast types `as`.
-  (
-    { variant, className, ...props }: AlertVanillaProps<ElementType>,
-    ref?: PolymorphicRef<ElementType>,
-  ) => <CardVanilla ref={ref} className={cx(alertClass({ variant }), className)} {...props} />,
+  ({ className, ...rest }: AlertVanillaProps<ElementType>, ref?: PolymorphicRef<ElementType>) => {
+    const [variants, props] = splitVariants(alertRecipe, rest);
+
+    return <CardVanilla ref={ref} className={cx(alertClass(variants), className)} {...props} />;
+  },
 );
 
 AlertVanillaComponentImpl.displayName = 'AlertVanilla';

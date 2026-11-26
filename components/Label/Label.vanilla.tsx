@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { labelRecipe } from './Label.vanilla.css';
@@ -27,25 +27,14 @@ type LabelVanillaComponent = PolymorphicComponent<'label', LabelOwnProps>;
 
 const LabelVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'label'>(
-    {
-      as,
-      className,
-      css,
-      style,
-      size,
-      weight,
-      variant,
-      gradient,
-      transform,
-      noWrap,
-      ...props
-    }: LabelVanillaProps<C>,
+    { as, className, css, style, ...rest }: LabelVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'label';
+    const [variants, props] = splitVariants(labelRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = labelClass({ size, weight, variant, gradient, transform, noWrap });
+    const recipeClass = labelClass(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

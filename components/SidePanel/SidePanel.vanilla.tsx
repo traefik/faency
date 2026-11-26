@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { DialogCloseIconButtonVanilla } from '@/components/Dialog/Dialog.vanilla';
@@ -30,7 +30,6 @@ export type SidePanelVanillaProps = Omit<DialogPrimitive.DialogContentProps, 'as
 export const SidePanelVanilla = forwardRef<HTMLDivElement, SidePanelVanillaProps>(
   (
     {
-      side,
       description,
       noOverlay = false,
       noCloseIcon = false,
@@ -42,30 +41,34 @@ export const SidePanelVanilla = forwardRef<HTMLDivElement, SidePanelVanillaProps
       css,
       style,
       children,
-      ...props
+      ...rest
     },
     ref,
-  ) => (
-    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
-      <DialogPrimitive.Portal>
-        {!noOverlay && <DialogPrimitive.Overlay className={sidePanelOverlay} />}
-        <DialogPrimitive.Content
-          ref={ref}
-          className={cx(sidePanelContentClass({ side }), className)}
-          style={useInlineStyle(css, style)}
-          {...props}
-        >
-          {description ? (
-            <VisuallyHiddenVanilla as={DialogPrimitive.Description}>
-              {description}
-            </VisuallyHiddenVanilla>
-          ) : null}
-          {children}
-          {!noCloseIcon && <DialogCloseIconButtonVanilla aria-label={closeLabel} />}
-        </DialogPrimitive.Content>
-      </DialogPrimitive.Portal>
-    </DialogPrimitive.Root>
-  ),
+  ) => {
+    const [variants, props] = splitVariants(sidePanelContentRecipe, rest);
+
+    return (
+      <DialogPrimitive.Root open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
+        <DialogPrimitive.Portal>
+          {!noOverlay && <DialogPrimitive.Overlay className={sidePanelOverlay} />}
+          <DialogPrimitive.Content
+            ref={ref}
+            className={cx(sidePanelContentClass(variants), className)}
+            style={useInlineStyle(css, style)}
+            {...props}
+          >
+            {description ? (
+              <VisuallyHiddenVanilla as={DialogPrimitive.Description}>
+                {description}
+              </VisuallyHiddenVanilla>
+            ) : null}
+            {children}
+            {!noCloseIcon && <DialogCloseIconButtonVanilla aria-label={closeLabel} />}
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
+    );
+  },
 );
 
 SidePanelVanilla.displayName = 'SidePanelVanilla';

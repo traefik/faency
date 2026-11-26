@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { avatarFallbackRecipe, avatarImage, avatarRecipe } from './Avatar.vanilla.css';
@@ -28,19 +28,23 @@ export type AvatarVanillaProps = Omit<
 const AvatarVanillaComponent = forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   AvatarVanillaProps
->(({ alt, src, fallback, size, variant, shape, css, style, className, ...props }, ref) => (
-  <AvatarPrimitive.Root
-    ref={ref}
-    className={cx(avatarClass({ size, variant, shape }), className)}
-    style={useInlineStyle(css, style)}
-    {...props}
-  >
-    <AvatarPrimitive.Image className={avatarImage} alt={alt} src={src} />
-    <AvatarPrimitive.Fallback className={avatarFallbackClass({ size })}>
-      {fallback}
-    </AvatarPrimitive.Fallback>
-  </AvatarPrimitive.Root>
-));
+>(({ alt, src, fallback, css, style, className, ...rest }, ref) => {
+  const [variants, props] = splitVariants(avatarRecipe, rest);
+
+  return (
+    <AvatarPrimitive.Root
+      ref={ref}
+      className={cx(avatarClass(variants), className)}
+      style={useInlineStyle(css, style)}
+      {...props}
+    >
+      <AvatarPrimitive.Image className={avatarImage} alt={alt} src={src} />
+      <AvatarPrimitive.Fallback className={avatarFallbackClass({ size: variants.size })}>
+        {fallback}
+      </AvatarPrimitive.Fallback>
+    </AvatarPrimitive.Root>
+  );
+});
 
 AvatarVanillaComponent.displayName = 'AvatarVanilla';
 

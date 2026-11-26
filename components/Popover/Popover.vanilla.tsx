@@ -5,7 +5,7 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { popoverArrowRecipe, popoverContentRecipe } from './Popover.vanilla.css';
@@ -54,7 +54,8 @@ export type PopoverContentVanillaProps = Omit<PopoverPrimitive.PopoverContentPro
   };
 
 export const PopoverContentVanilla = forwardRef<HTMLDivElement, PopoverContentVanillaProps>(
-  ({ elevation, hideArrow, arrowCss, className, css, style, children, ...props }, ref) => {
+  ({ hideArrow, arrowCss, className, css, style, children, ...rest }, ref) => {
+    const [variants, props] = splitVariants(popoverContentRecipe, rest);
     const contentStyle = useInlineStyle(css, style);
     const arrowStyle = useInlineStyle(arrowCss);
 
@@ -62,14 +63,14 @@ export const PopoverContentVanilla = forwardRef<HTMLDivElement, PopoverContentVa
       <PopoverPrimitive.Content
         ref={ref}
         sideOffset={0}
-        className={cx(popoverContentClass({ elevation }), className)}
+        className={cx(popoverContentClass(variants), className)}
         style={contentStyle}
         {...props}
       >
         {children}
         {!hideArrow && (
           <PopoverPrimitive.Arrow
-            className={popoverArrowClass({ elevation })}
+            className={popoverArrowClass(variants)}
             style={arrowStyle}
             width={11}
             height={5}

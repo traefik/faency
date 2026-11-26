@@ -5,7 +5,7 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { TextVanilla } from '@/components/Text/Text.vanilla';
@@ -32,30 +32,34 @@ export type TooltipContentVanillaProps = Omit<
   RecipeVariantProps<typeof tooltipContentRecipe>;
 
 export const TooltipContentVanilla = forwardRef<HTMLDivElement, TooltipContentVanillaProps>(
-  ({ multiline, className, css, style, children, ...props }, ref) => (
-    <TooltipPrimitive.Content
-      ref={ref}
-      side="top"
-      align="center"
-      sideOffset={5}
-      className={cx(tooltipContentClass({ multiline }), className)}
-      style={useInlineStyle(css, style)}
-      {...props}
-    >
-      {typeof children === 'string' ? (
-        <TextVanilla
-          size="1"
-          as="p"
-          css={{ color: 'currentColor', lineHeight: multiline ? '20px' : undefined }}
-        >
-          {children}
-        </TextVanilla>
-      ) : (
-        children
-      )}
-      <TooltipPrimitive.Arrow className={tooltipArrow} offset={5} width={11} height={5} />
-    </TooltipPrimitive.Content>
-  ),
+  ({ className, css, style, children, ...rest }, ref) => {
+    const [variants, props] = splitVariants(tooltipContentRecipe, rest);
+
+    return (
+      <TooltipPrimitive.Content
+        ref={ref}
+        side="top"
+        align="center"
+        sideOffset={5}
+        className={cx(tooltipContentClass(variants), className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      >
+        {typeof children === 'string' ? (
+          <TextVanilla
+            size="1"
+            as="p"
+            css={{ color: 'currentColor', lineHeight: variants.multiline ? '20px' : undefined }}
+          >
+            {children}
+          </TextVanilla>
+        ) : (
+          children
+        )}
+        <TooltipPrimitive.Arrow className={tooltipArrow} offset={5} width={11} height={5} />
+      </TooltipPrimitive.Content>
+    );
+  },
 );
 
 TooltipContentVanilla.displayName = 'TooltipContentVanilla';

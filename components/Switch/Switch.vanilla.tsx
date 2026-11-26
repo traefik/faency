@@ -8,7 +8,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { useFieldControl } from '@/components/Field/FieldContext';
@@ -43,7 +43,6 @@ const SwitchVanillaComponentImpl = forwardRef(
       className,
       css,
       style,
-      size,
       id,
       checked,
       defaultChecked,
@@ -55,12 +54,13 @@ const SwitchVanillaComponentImpl = forwardRef(
       'aria-describedby': ariaDescribedBy,
       'aria-invalid': ariaInvalid,
       'aria-labelledby': ariaLabelledBy,
-      ...props
+      ...rest
     }: SwitchVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
+    const [variants, props] = splitVariants(switchRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
-    const recipeClass = switchClass({ size });
+    const recipeClass = switchClass(variants);
 
     const control = useFieldControl({
       id,

@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { blockquoteRecipe } from './Blockquote.vanilla.css';
@@ -25,25 +25,14 @@ type BlockquoteComponent = PolymorphicComponent<'blockquote', BlockquoteOwnProps
 
 const BlockquoteVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'blockquote'>(
-    {
-      as,
-      className,
-      css,
-      style,
-      size,
-      weight,
-      variant,
-      gradient,
-      transform,
-      noWrap,
-      ...props
-    }: BlockquoteVanillaProps<C>,
+    { as, className, css, style, ...rest }: BlockquoteVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = (as || 'blockquote') as ElementType;
+    const [variants, props] = splitVariants(blockquoteRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = blockquoteClass({ size, weight, variant, gradient, transform, noWrap });
+    const recipeClass = blockquoteClass(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

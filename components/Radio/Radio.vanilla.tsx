@@ -3,7 +3,7 @@ import React from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { useFieldControl } from '@/components/Field/FieldContext';
@@ -79,13 +79,14 @@ export type RadioVanillaProps = Omit<
 export const RadioVanilla = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioVanillaProps
->(({ size, className, css, style, ...props }, forwardedRef) => {
+>(({ className, css, style, ...rest }, forwardedRef) => {
+  const [variants, props] = splitVariants(radioRecipe, rest);
   const mergedStyles = useInlineStyle(css, style);
 
   return (
     <RadioGroupPrimitive.Item
       {...props}
-      className={cx(radioClass({ size }), className)}
+      className={cx(radioClass(variants), className)}
       style={mergedStyles}
       ref={forwardedRef}
     >

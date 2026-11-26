@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { containerRecipe } from './Container.vanilla.css';
@@ -24,14 +24,15 @@ type ContainerComponent = PolymorphicComponent<'div', ContainerOwnProps>;
 
 export const ContainerVanillaComponent = React.forwardRef(
   <C extends ElementType = 'div'>(
-    { as, className, css, style, size, noGutter, ...props }: ContainerVanillaProps<C>,
+    { as, className, css, style, ...rest }: ContainerVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'div';
+    const [variants, props] = splitVariants(containerRecipe, rest);
 
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = containerClass({ size, noGutter });
+    const recipeClass = containerClass(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

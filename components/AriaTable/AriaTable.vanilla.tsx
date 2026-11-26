@@ -11,7 +11,7 @@ import React, {
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 import { useIsomorphicLayoutEffect } from '@/utils/useIsomorphicLayoutEffect';
 
@@ -73,21 +73,25 @@ export type AriaTableVanillaProps = React.HTMLAttributes<HTMLDivElement> &
   };
 
 export const AriaTableVanilla = forwardRef<HTMLDivElement, AriaTableVanillaProps>(
-  ({ elevation, hasCollapsibleChildren = false, className, css, style, ...props }, ref) => (
-    <div
-      ref={ref}
-      role="table"
-      className={cx(
-        tableClass({ elevation }),
-        ariaTable,
-        hasCollapsibleChildren && collapsibleTable,
-        rowLinkTable,
-        className,
-      )}
-      style={useInlineStyle(css, style)}
-      {...props}
-    />
-  ),
+  ({ hasCollapsibleChildren = false, className, css, style, ...rest }, ref) => {
+    const [variants, props] = splitVariants(tableRecipe, rest);
+
+    return (
+      <div
+        ref={ref}
+        role="table"
+        className={cx(
+          tableClass(variants),
+          ariaTable,
+          hasCollapsibleChildren && collapsibleTable,
+          rowLinkTable,
+          className,
+        )}
+        style={useInlineStyle(css, style)}
+        {...props}
+      />
+    );
+  },
 );
 
 AriaTableVanilla.displayName = 'AriaTableVanilla';
@@ -97,20 +101,18 @@ export type AriaCaptionVanillaProps = React.HTMLAttributes<HTMLDivElement> &
   CaptionRecipeVariants;
 
 export const AriaCaptionVanilla = forwardRef<HTMLDivElement, AriaCaptionVanillaProps>(
-  (
-    { size, weight, variant, gradient, transform, noWrap, className, css, style, ...props },
-    ref,
-  ) => (
-    <div
-      ref={ref}
-      className={cx(
-        captionClass({ size, weight, variant, gradient, transform, noWrap }),
-        className,
-      )}
-      style={useInlineStyle(css, style)}
-      {...props}
-    />
-  ),
+  ({ className, css, style, ...rest }, ref) => {
+    const [variants, props] = splitVariants(captionRecipe, rest);
+
+    return (
+      <div
+        ref={ref}
+        className={cx(captionClass(variants), className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      />
+    );
+  },
 );
 
 AriaCaptionVanilla.displayName = 'AriaCaptionVanilla';
@@ -143,46 +145,28 @@ export type AriaThVanillaProps = React.HTMLAttributes<HTMLSpanElement> &
   TableSortProps;
 
 export const AriaThVanilla = forwardRef<HTMLSpanElement, AriaThVanillaProps>(
-  (
-    {
-      size,
-      weight,
-      variant,
-      gradient,
-      transform,
-      noWrap,
-      align,
-      sort,
-      onSort,
-      className,
-      css,
-      style,
-      children,
-      ...props
-    },
-    ref,
-  ) => (
-    <span
-      ref={ref}
-      role="columnheader"
-      aria-sort={sort && ARIA_SORT[sort]}
-      className={cx(
-        thClass({ size, weight, variant, gradient, transform, noWrap, align }),
-        ariaCell,
-        className,
-      )}
-      style={useInlineStyle(css, style)}
-      {...props}
-    >
-      {onSort ? (
-        <SortButtonVanilla sort={sort} onSort={onSort}>
-          {children}
-        </SortButtonVanilla>
-      ) : (
-        children
-      )}
-    </span>
-  ),
+  ({ sort, onSort, className, css, style, children, ...rest }, ref) => {
+    const [variants, props] = splitVariants(thRecipe, rest);
+
+    return (
+      <span
+        ref={ref}
+        role="columnheader"
+        aria-sort={sort && ARIA_SORT[sort]}
+        className={cx(thClass(variants), ariaCell, className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      >
+        {onSort ? (
+          <SortButtonVanilla sort={sort} onSort={onSort}>
+            {children}
+          </SortButtonVanilla>
+        ) : (
+          children
+        )}
+      </span>
+    );
+  },
 );
 
 AriaThVanilla.displayName = 'AriaThVanilla';
@@ -242,14 +226,15 @@ const FullColSpanCell = forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpa
 FullColSpanCell.displayName = 'FullColSpanCell';
 
 export const AriaTdVanilla = forwardRef<HTMLSpanElement, AriaTdVanillaProps>(
-  ({ fullColSpan = false, subtle, align, className, css, style, ...props }, ref) => {
+  ({ fullColSpan = false, className, css, style, ...rest }, ref) => {
+    const [variants, props] = splitVariants(tdRecipe, rest);
     const Cell = fullColSpan ? FullColSpanCell : 'span';
 
     return (
       <Cell
         ref={ref}
         role="cell"
-        className={cx(tdRecipe({ subtle, align }), ariaCell, className)}
+        className={cx(tdRecipe(variants), ariaCell, className)}
         style={useInlineStyle(css, style)}
         {...props}
       />

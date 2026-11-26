@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { type RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { skeletonRecipe } from './Skeleton.vanilla.css';
@@ -25,13 +25,14 @@ type SkeletonVanillaComponent = PolymorphicComponent<'div', SkeletonVanillaOwnPr
 
 const SkeletonVanillaImpl = forwardRef(
   <C extends ElementType = 'div'>(
-    { as, className, css, style, variant, ...props }: SkeletonVanillaProps<C>,
+    { as, className, css, style, ...rest }: SkeletonVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'div';
+    const [variants, props] = splitVariants(skeletonRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = skeletonRecipe({ variant });
+    const recipeClass = skeletonRecipe(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />
