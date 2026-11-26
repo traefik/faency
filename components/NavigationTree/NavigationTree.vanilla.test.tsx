@@ -11,7 +11,6 @@ jest.mock('./NavigationTree.vanilla.css', () => ({
   navigationTreeLabel: 'navigationTreeLabel',
   navigationTreeLabelIndented: 'navigationTreeLabelIndented',
   navigationTreeDepth: 'var(--tree-depth)',
-  navigationTreeFullWidthIndent: 'calc(16px + var(--tree-depth) * 20px)',
 }));
 
 import {

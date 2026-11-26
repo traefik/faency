@@ -144,15 +144,20 @@ export const navigationDrawerRecipe = recipe({
   },
 });
 
-// Defined after the item so these win over its radius and focus ring at equal specificity.
-globalStyle(`${navigationDrawerFullWidth} > *, ${navigationDrawerFullWidth} > div > *`, {
+export const navigationItemFullWidth = style({});
+
+// Children of a full width drawer, or items flagged full width at any depth; defined after the item so they win over its radius and focus ring.
+const fullWidthItems = [
+  `${navigationDrawerFullWidth} > *`,
+  `${navigationDrawerFullWidth} > div > *`,
+  `${navigationItemFullWidth}${navigationItem}`,
+];
+
+globalStyle(fullWidthItems.join(', '), {
   borderRadius: 0,
 });
 
-globalStyle(
-  `${navigationDrawerFullWidth} > *:focus, ${navigationDrawerFullWidth} > div > *:focus`,
-  {
-    border: 'none',
-    boxShadow: 'none',
-  },
-);
+globalStyle(fullWidthItems.map((selector) => `${selector}:focus`).join(', '), {
+  border: 'none',
+  boxShadow: 'none',
+});

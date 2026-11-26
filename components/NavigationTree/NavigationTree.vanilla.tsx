@@ -34,7 +34,6 @@ import { TextVanilla } from '@/components/Text/Text.vanilla';
 
 import {
   navigationTreeDepth,
-  navigationTreeFullWidthIndent,
   navigationTreeItemExpandable,
   navigationTreeItemFullWidth,
   navigationTreeLabel,
@@ -62,6 +61,27 @@ interface NavigationTreeIconProps {
   fullWidth?: boolean;
 }
 
+const useNavigationTreeSettings = ({
+  defaultCollapseIcon,
+  defaultExpandIcon,
+  fullWidth,
+}: NavigationTreeIconProps): NavigationTreeContextValue => {
+  const context = useContext(NavigationTreeContext);
+  const collapseIcon = defaultCollapseIcon ?? context.defaultCollapseIcon;
+  const expandIcon = defaultExpandIcon ?? context.defaultExpandIcon;
+  const isFullWidth = fullWidth ?? context.fullWidth;
+
+  return useMemo(
+    () => ({
+      defaultCollapseIcon: collapseIcon,
+      defaultExpandIcon: expandIcon,
+      fullWidth: isFullWidth,
+      depth: context.depth,
+    }),
+    [collapseIcon, expandIcon, isFullWidth, context.depth],
+  );
+};
+
 interface NavigationTreeContainerOwnProps extends NavigationTreeIconProps, CSSProps {}
 
 export type NavigationTreeContainerVanillaProps<C extends ElementType = 'div'> =
@@ -75,22 +95,18 @@ type NavigationTreeContainerVanillaComponent = PolymorphicComponent<
 const NavigationTreeContainerVanillaImpl = forwardRef(
   <C extends ElementType = 'div'>(
     {
-      defaultCollapseIcon: defaultCollapseIconProp,
-      defaultExpandIcon: defaultExpandIconProp,
-      fullWidth: fullWidthProp,
+      defaultCollapseIcon,
+      defaultExpandIcon,
+      fullWidth,
       ...props
     }: NavigationTreeContainerVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
-    const parentContext = useContext(NavigationTreeContext);
-    const defaultCollapseIcon = defaultCollapseIconProp ?? parentContext.defaultCollapseIcon;
-    const defaultExpandIcon = defaultExpandIconProp ?? parentContext.defaultExpandIcon;
-    const fullWidth = fullWidthProp ?? parentContext.fullWidth;
-    const { depth } = parentContext;
-    const contextValue = useMemo(
-      () => ({ defaultCollapseIcon, defaultExpandIcon, fullWidth, depth }),
-      [defaultCollapseIcon, defaultExpandIcon, fullWidth, depth],
-    );
+    const contextValue = useNavigationTreeSettings({
+      defaultCollapseIcon,
+      defaultExpandIcon,
+      fullWidth,
+    });
 
     return (
       <NavigationTreeContext.Provider value={contextValue}>
@@ -166,40 +182,35 @@ const NavigationTreeItemVanillaImpl = forwardRef(
       children,
       onClick,
       defaultExpanded = false,
-      defaultCollapseIcon: defaultCollapseIconProp,
-      defaultExpandIcon: defaultExpandIconProp,
+      defaultCollapseIcon,
+      defaultExpandIcon,
       customCollapseIcon,
       customExpandIcon,
-      fullWidth: fullWidthProp,
+      fullWidth,
       startAdornment,
       className,
-      css,
       style,
       ...props
     }: NavigationTreeItemVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
-    const context = useContext(NavigationTreeContext);
-    const defaultCollapseIcon = defaultCollapseIconProp ?? context.defaultCollapseIcon;
-    const defaultExpandIcon = defaultExpandIconProp ?? context.defaultExpandIcon;
-    const fullWidth = fullWidthProp ?? context.fullWidth;
+    const settings = useNavigationTreeSettings({
+      defaultCollapseIcon,
+      defaultExpandIcon,
+      fullWidth,
+    });
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
     // eslint-disable-next-line @eslint-react/no-children-to-array
     const isExpandable = Children.toArray(children).length > 0;
 
     const expandIcon = isExpanded
-      ? customCollapseIcon || defaultCollapseIcon
-      : customExpandIcon || defaultExpandIcon;
+      ? customCollapseIcon || settings.defaultCollapseIcon
+      : customExpandIcon || settings.defaultExpandIcon;
 
-    const childContext = useMemo(
-      () => ({ defaultCollapseIcon, defaultExpandIcon, fullWidth, depth: context.depth + 1 }),
-      [defaultCollapseIcon, defaultExpandIcon, fullWidth, context.depth],
-    );
+    const childContext = useMemo(() => ({ ...settings, depth: settings.depth + 1 }), [settings]);
 
-    // In full width, the item spans the whole row and indents its own content by depth.
-    const indentCss = fullWidth ? { paddingLeft: navigationTreeFullWidthIndent } : undefined;
-    const indentStyle = fullWidth
-      ? { ...assignInlineVars({ [navigationTreeDepth]: String(context.depth) }), ...style }
+    const itemStyle = settings.fullWidth
+      ? { ...assignInlineVars({ [navigationTreeDepth]: String(settings.depth) }), ...style }
       : style;
 
     return (
@@ -208,11 +219,10 @@ const NavigationTreeItemVanillaImpl = forwardRef(
           ref={ref}
           className={cx(
             isExpandable && navigationTreeItemExpandable,
-            fullWidth && navigationTreeItemFullWidth,
+            settings.fullWidth && navigationTreeItemFullWidth,
             className,
           )}
-          css={{ ...indentCss, ...css }}
-          style={indentStyle}
+          style={itemStyle}
           aria-expanded={isExpandable ? isExpanded : undefined}
           {...(props as NavigationItemVanillaProps<ElementType>)}
           startAdornment={startAdornment || (isExpandable ? expandIcon : null)}
@@ -242,7 +252,9 @@ const NavigationTreeItemVanillaImpl = forwardRef(
         </NavigationItemVanilla>
         {isExpanded && (
           <NavigationTreeContext.Provider value={childContext}>
-            <NavigationContainerVanilla className={fullWidth ? undefined : navigationTreeNested}>
+            <NavigationContainerVanilla
+              className={settings.fullWidth ? undefined : navigationTreeNested}
+            >
               {children}
             </NavigationContainerVanilla>
           </NavigationTreeContext.Provider>

@@ -1,8 +1,11 @@
-import { createVar, globalStyle, style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 
 import { tokens } from '@/styles/tokens.css';
 
-import { navigationItem } from '@/components/Navigation/Navigation.vanilla.css';
+import {
+  navigationItem,
+  navigationItemFullWidth,
+} from '@/components/Navigation/Navigation.vanilla.css';
 
 export const navigationTreeNested = style({
   paddingLeft: tokens.space['4'],
@@ -29,16 +32,14 @@ export const navigationTreeLabelIndented = style({
 
 export const navigationTreeDepth = createVar();
 
-export const navigationTreeFullWidthIndent = `calc(${tokens.space['3']} + ${navigationTreeDepth} * ${tokens.space['4']})`;
-
-export const navigationTreeItemFullWidth = style({});
-
-// Same as the items of a full width drawer, at any depth; the extra class beats the item's own radius and focus ring.
-globalStyle(`${navigationTreeItemFullWidth}${navigationItem}`, {
-  borderRadius: 0,
-});
-
-globalStyle(`${navigationTreeItemFullWidth}${navigationItem}:focus`, {
-  border: 'none',
-  boxShadow: 'none',
-});
+// The item spans the whole row and indents its own content by depth.
+export const navigationTreeItemFullWidth = style([
+  navigationItemFullWidth,
+  {
+    selectors: {
+      [`&${navigationItem}`]: {
+        paddingLeft: `calc(${tokens.space['3']} + ${navigationTreeDepth} * ${tokens.space['4']})`,
+      },
+    },
+  },
+]);
