@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
+import { recipe } from '@vanilla-extract/recipes';
 
 import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
@@ -112,5 +112,3 @@ export const iconButtonRecipe = recipe({
     size: '2',
   },
 });
-
-export type IconButtonRecipeVariants = RecipeVariants<typeof iconButtonRecipe>;
