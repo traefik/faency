@@ -2,6 +2,7 @@ import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
 import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 export const segmentedControlRecipe = recipe({
@@ -50,9 +51,6 @@ export const segmentedControlItemRecipe = recipe({
       '& + &': {
         borderLeft: `1px solid ${tokens.colors.segmentedControlBorder}`,
       },
-      '&:hover:not([data-state="checked"]):not([data-disabled])': {
-        backgroundColor: tokens.colors.segmentedControlHoverBg,
-      },
       '&[data-state="checked"]': {
         backgroundColor: tokens.colors.segmentedControlActiveBg,
         color: tokens.colors.segmentedControlActiveText,
@@ -68,6 +66,13 @@ export const segmentedControlItemRecipe = recipe({
     },
 
     '@media': {
+      [breakpoints.hover]: {
+        selectors: {
+          '&:hover:not([data-state="checked"]):not([data-disabled])': {
+            backgroundImage: stateLayers(tokens.colors.segmentedControlHoverBg),
+          },
+        },
+      },
       [breakpoints.motion]: {
         transition: 'none',
       },

@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 export const comboboxAnchor = style({
@@ -39,7 +40,7 @@ export const comboboxOptionRecipe = recipe({
 
     selectors: {
       '&[data-highlighted]': {
-        backgroundColor: tokens.colors.comboboxOptionHighlightBg,
+        backgroundImage: stateLayers(tokens.colors.comboboxOptionHighlightBg),
       },
     },
   },

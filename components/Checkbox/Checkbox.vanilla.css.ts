@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 export const checkboxIndicator = style({
@@ -74,10 +75,10 @@ export const checkboxRecipe = recipe({
       '(any-hover: hover)': {
         selectors: {
           '&[data-state=checked]:hover, &[data-state=indeterminate]:hover': {
-            backgroundColor: tokens.colors.checkboxCheckedHoverBg,
+            backgroundImage: stateLayers(tokens.colors.checkboxCheckedHoverBg),
           },
           '&[data-state=unchecked]:hover': {
-            backgroundColor: tokens.colors.checkboxHoverBg,
+            backgroundImage: stateLayers(tokens.colors.checkboxHoverBg),
             boxShadow: `inset 0 0 0 1px ${tokens.colors.checkboxHoverBorder}`,
           },
         },

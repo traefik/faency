@@ -1,6 +1,8 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import {
   colorVariants,
   gradientVariants,
@@ -130,17 +132,21 @@ export const trRecipe = recipe({
   variants: {
     interactive: {
       true: {
-        selectors: {
-          '&:hover': {
-            backgroundColor: tokens.colors.tableHoverBackground,
-            cursor: 'pointer',
+        '@media': {
+          [breakpoints.hover]: {
+            selectors: {
+              '&:hover': {
+                backgroundImage: stateLayers(tokens.colors.tableHoverBackground),
+                cursor: 'pointer',
+              },
+            },
           },
         },
       },
     },
     active: {
       true: {
-        backgroundColor: tokens.colors.tableHoverBackground,
+        backgroundImage: stateLayers(tokens.colors.tableHoverBackground),
         color: tokens.colors.tableActiveText,
         fontWeight: tokens.fontWeights.semiBold,
       },

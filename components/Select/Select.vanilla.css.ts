@@ -188,7 +188,7 @@ export const selectItemRecipe = recipe({
 
     selectors: {
       '&[data-highlighted]': {
-        backgroundColor: tokens.colors.comboboxOptionHighlightBg,
+        backgroundImage: stateLayers(tokens.colors.comboboxOptionHighlightBg),
       },
       '&[data-disabled]': {
         color: tokens.colors.textSubtle,
