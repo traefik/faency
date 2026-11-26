@@ -60,7 +60,7 @@ The same applies to the Radix-based parts that render an element. `as` also take
 2. Move the child element's props to the component itself
 3. Remove the wrapper element and move children to the component's children
 
-**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, VisuallyHidden. `DialogContent`, `SidePanel` and the other DropdownMenu and Popover parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
+**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, TabsTrigger, VisuallyHidden. `DialogContent`, `SidePanel` and the other DropdownMenu, Popover and Tabs parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
 
 **Rationale:**
 
@@ -377,6 +377,8 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - ✅ **DialogTrigger** / **DialogClosePrimitive** - default: `button`, keeps the Radix behavior on the `as` element
 - ✅ **DialogTitle** - default: `h2`; **DialogDescription** - default: `p`; **DialogOverlay** - default: `div`
   - `DialogContent` and `DialogCloseIconButton` take neither `as` nor `asChild`
+- ✅ **TabsTrigger** - default: `button`, keeps the Radix tab behavior on the `as` element
+  - `TabsContainer`, `TabsList` and `TabsContent` take neither `as` nor `asChild`
 
 ---
 

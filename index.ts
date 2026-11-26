@@ -340,7 +340,22 @@ export {
   TrVanilla,
   useTableSort,
 } from './components/Table';
-export { TabsContainer, TabsContent, TabsList, TabsTrigger } from './components/Tabs';
+export type {
+  TabsContainerVanillaProps,
+  TabsContentVanillaProps,
+  TabsListVanillaProps,
+  TabsTriggerVanillaProps,
+} from './components/Tabs';
+export {
+  TabsContainer,
+  TabsContainerVanilla,
+  TabsContent,
+  TabsContentVanilla,
+  TabsList,
+  TabsListVanilla,
+  TabsTrigger,
+  TabsTriggerVanilla,
+} from './components/Tabs';
 export type { TextVanillaProps } from './components/Text';
 export { Text, TextVanilla } from './components/Text';
 export type { TextareaVanillaProps } from './components/Textarea';

@@ -2,9 +2,18 @@
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
-import { H2 } from '../Heading';
+import { BoxVanilla } from '../Box/Box.vanilla';
+import { FlexVanilla } from '../Flex/Flex.vanilla';
+import { H2, H3Vanilla } from '../Heading';
 import { Text } from '../Text';
+import { TextVanilla } from '../Text/Text.vanilla';
 import { TabsContainer, TabsContent, TabsList, TabsTrigger } from './Tabs';
+import {
+  TabsContainerVanilla,
+  TabsContentVanilla,
+  TabsListVanilla,
+  TabsTriggerVanilla,
+} from './Tabs.vanilla';
 
 const Component: Meta<typeof TabsContainer> = {
   title: 'Components/Tabs',
@@ -74,5 +83,50 @@ export const Basic: StoryFn<typeof TabsContainer> = () => {
     </TabsContainer>
   );
 };
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla direction="column" gap={9}>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <TabsContainer defaultValue="tab1">
+        <TabsList aria-label="Stitches tabs">
+          <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+          <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+          <TabsTrigger value="tab3" disabled>
+            Disabled
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="tab1">
+          <Text css={{ lineHeight: '24px', mt: '$3' }}>Tab 1 content</Text>
+        </TabsContent>
+        <TabsContent value="tab2">
+          <Text css={{ lineHeight: '24px', mt: '$3' }}>Tab 2 content</Text>
+        </TabsContent>
+      </TabsContainer>
+    </BoxVanilla>
+    <BoxVanilla>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <TabsContainerVanilla defaultValue="tab1">
+        <TabsListVanilla aria-label="Vanilla Extract tabs">
+          <TabsTriggerVanilla value="tab1">Tab 1</TabsTriggerVanilla>
+          <TabsTriggerVanilla value="tab2">Tab 2</TabsTriggerVanilla>
+          <TabsTriggerVanilla value="tab3" disabled>
+            Disabled
+          </TabsTriggerVanilla>
+        </TabsListVanilla>
+        <TabsContentVanilla value="tab1">
+          <TextVanilla as="p" css={{ lineHeight: '24px', mt: '$3' }}>
+            Tab 1 content
+          </TextVanilla>
+        </TabsContentVanilla>
+        <TabsContentVanilla value="tab2">
+          <TextVanilla as="p" css={{ lineHeight: '24px', mt: '$3' }}>
+            Tab 2 content
+          </TextVanilla>
+        </TabsContentVanilla>
+      </TabsContainerVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
+);
 
 export default Component;
