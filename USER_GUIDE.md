@@ -475,20 +475,20 @@ With vanilla extract in your app, add one `globalStyle` rule per mode holding al
 ```ts
 // app.css.ts
 import { globalStyle } from '@vanilla-extract/css';
-import { vanillaThemes, vanillaTokens } from '@traefik-labs/faency';
+import { themes, tokens } from '@traefik-labs/faency/vanilla';
 
-globalStyle(`body.${vanillaThemes.light.blue}`, {
+globalStyle(`body.${themes.light.blue}`, {
   vars: {
-    [vanillaTokens.colors.buttonRedBg]: '#b42318',
-    [vanillaTokens.colors.cardBackground]: '#f8f9fb',
-    [vanillaTokens.colors.textSubtle]: 'hsla(210, 40%, 20%, 0.62)',
+    [tokens.colors.buttonRedBg]: '#b42318',
+    [tokens.colors.cardBackground]: '#f8f9fb',
+    [tokens.colors.textSubtle]: 'hsla(210, 40%, 20%, 0.62)',
   },
 });
-globalStyle(`body.${vanillaThemes.dark.blue}`, {
+globalStyle(`body.${themes.dark.blue}`, {
   vars: {
-    [vanillaTokens.colors.buttonRedBg]: '#f97066',
-    [vanillaTokens.colors.cardBackground]: 'hsl(210, 55%, 12%)',
-    [vanillaTokens.colors.textSubtle]: 'hsla(210, 40%, 90%, 0.62)',
+    [tokens.colors.buttonRedBg]: '#f97066',
+    [tokens.colors.cardBackground]: 'hsl(210, 55%, 12%)',
+    [tokens.colors.textSubtle]: 'hsla(210, 40%, 90%, 0.62)',
   },
 });
 ```
@@ -511,6 +511,92 @@ const useTokenOverrides = () => {
   }, [resolvedTheme]);
 };
 ```
+
+### Writing Your Own Styles with Vanilla Extract
+
+`styled`, `css`, `globalCss`, `keyframes`, `createTheme`, `getCssText` and `config` come from Stitches and go away with it. Their replacements are the [vanilla-extract](https://vanilla-extract.style) functions, written in your app's `.css.ts` files and turned into a static stylesheet at build time.
+
+1. Install `@vanilla-extract/css` (and `@vanilla-extract/recipes` for variants) plus the bundler plugin for your app: `@vanilla-extract/vite-plugin`, `@vanilla-extract/next-plugin`, `@vanilla-extract/webpack-plugin`…
+2. In `.css.ts` files, import from `@traefik-labs/faency/vanilla`, not from `@traefik-labs/faency`. It holds only the design system values and helpers, so your build does not load React or the components.
+
+`@traefik-labs/faency/vanilla` exports:
+
+| Export                                           | What it is                                                                          |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| `tokens`                                         | Every token as a CSS variable, such as `tokens.colors.primary` or `tokens.space[2]` |
+| `themes`, `lightTheme`, `darkTheme`              | Theme classes, `themes.<mode>.<primaryColor>`                                       |
+| `breakpoints`                                    | Media queries, such as `breakpoints.bp2`                                            |
+| `lightColors`, `darkColors`                      | Raw color values, such as `lightColors.orange11`                                    |
+| `styleRule`, `globalStyleRules`, `keyframesRule` | Convert a Stitches-style object for `style()`, `globalStyle()` and `keyframes()`    |
+| `resolveTokens`                                  | Replaces `$token` references in a single CSS value                                  |
+
+`styleRule()` accepts what a Stitches `styled()` or `css()` object did: the utils (`px`, `bc`, `size`…), `$token` values (also inside longer values, such as `'1px solid $gray6'` or `'-$2'`), nested `&` selectors and `@bp1`-style breakpoints. A nested selector must target the element being styled (`&:hover`, `.parent &`): vanilla-extract does not allow styling children from a `style()`, so give those their own `globalStyle()`.
+
+vanilla-extract moves every `@media` rule after the plain rules of the same file. Within one selector the helpers keep the Stitches order for the same property: a later `color` still overrides an earlier `@bp1` `color`. A media rule still wins over a later plain rule in other cases: across selectors of equal specificity, or between a shorthand and its longhands (a later `padding` does not override an earlier `@bp1` `paddingLeft`). When a plain rule must override a media rule, set the same property, or give the rule a more specific selector.
+
+A `vars` block sets CSS variables. Its values have no property to pick a token scale from, so `$name` is looked up in the colors; write other tokens with their scale, such as `{ vars: { '--gap': '$space$2' } }`.
+
+```ts
+// TransformableContainer.css.ts
+import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyleRules, styleRule } from '@traefik-labs/faency/vanilla';
+
+export const container = style(
+  styleRule({
+    height: '24px',
+    px: '$2',
+    overflow: 'hidden',
+    '&:hover': { bc: '$primary' },
+    '@bp2': { height: '32px' },
+  }),
+);
+
+globalStyleRules({
+  [`${container} > div`]: { transition: 'transform 150ms ease 50ms' },
+  [`${container}:hover > div`]: { transform: 'translateY(-24px)' },
+}).forEach(([selector, rule]) => globalStyle(selector, rule));
+```
+
+```tsx
+// TransformableContainer.tsx
+import { FlexVanilla } from '@traefik-labs/faency';
+
+import { container } from './TransformableContainer.css';
+
+export const TransformableContainer = (props) => <FlexVanilla className={container} {...props} />;
+```
+
+Variants that used to be Stitches `variants` become a `recipe()`, and each variant style can go through `styleRule()` too:
+
+```ts
+import { recipe } from '@vanilla-extract/recipes';
+import { styleRule } from '@traefik-labs/faency/vanilla';
+
+export const label = recipe({
+  base: styleRule({ fontWeight: '$regular', mb: '$2' }),
+  variants: { tone: { danger: styleRule({ c: '$red11' }) } },
+});
+```
+
+Global styles and keyframes:
+
+```ts
+// app.css.ts
+import { globalStyle, keyframes, style } from '@vanilla-extract/css';
+import { globalStyleRules, keyframesRule } from '@traefik-labs/faency/vanilla';
+
+globalStyleRules({
+  body: { bc: '$contentBg', fontFamily: '$rubik' },
+  'html, body, #__next': { height: '100vh' },
+  a: { textDecoration: 'none' },
+}).forEach(([selector, rule]) => globalStyle(selector, rule));
+
+const scroll = keyframes(keyframesRule({ from: { mt: 0 }, to: { mt: '-$5' } }));
+
+export const scrolling = style({ animation: `${scroll} 10s linear infinite` });
+```
+
+Outside `.css.ts` files, the tokens and colors are also exported from the main entry as `vanillaTokens`, `vanillaThemes`, `vanillaLightTheme` and `vanillaDarkTheme`. Use `vanillaTokens.colors.orange[11]` where a CSS value is accepted (it follows the theme), and `lightColors` / `darkColors` from `@traefik-labs/faency/vanilla` where a raw color is needed, such as a canvas chart.
 
 ---
 

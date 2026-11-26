@@ -43,6 +43,7 @@ styles/
 ├── cssProps.ts + useInlineStyle.ts (Stitches-like `css` prop)
 ├── polymorphic.ts (`as` prop types)
 ├── utils.css.ts (utility recipes)
+├── styleRule.ts (Stitches-style objects → vanilla-extract rules, for consumers)
 └── index.ts (main exports)
 components/X/X.theme.ts (component tokens, merged into themes.css.ts)
 ```
@@ -77,6 +78,8 @@ AccessibleIcon, Accordion, Alert, AriaTable, Avatar, Badge, Blockquote, Box, Bub
 **Vanilla-only (new components, no Stitches version):**
 
 Combobox, Meter, SegmentedControl, Spinner, SplitLayout, Toast
+
+**Utility functions:** the Stitches `styled`, `css`, `globalCss`, `keyframes`, `createTheme`, `getCssText` and `config` exports are replaced by vanilla-extract in the consumer's `.css.ts` files, with the `@traefik-labs/faency/vanilla` entry point (`vanilla.ts`: tokens, themes, breakpoints, raw colors, `styleRule`, `globalStyleRules`, `keyframesRule`). See [BREAKING_CHANGES.md](./BREAKING_CHANGES.md#stitches-exports-removed).
 
 **Not migrated yet:**
 

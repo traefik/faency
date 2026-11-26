@@ -15,6 +15,13 @@
   "module": "dist/index.js",
   "type": "module",
   "modulesDir": "dist",
+  "typesVersions": {
+    "*": {
+      "vanilla": [
+        "./dist/vanilla.d.ts"
+      ]
+    }
+  },
   "exports": {
     ".": {
       "import": {
@@ -24,6 +31,16 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
+      }
+    },
+    "./vanilla": {
+      "import": {
+        "types": "./dist/vanilla.d.ts",
+        "default": "./dist/vanilla.js"
+      },
+      "require": {
+        "types": "./dist/vanilla.d.cts",
+        "default": "./dist/vanilla.cjs"
       }
     },
     "./style.css": "./dist/faency.css",

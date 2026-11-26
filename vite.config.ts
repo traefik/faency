@@ -34,18 +34,21 @@ export default defineConfig({
         'stories/**',
       ],
       afterBuild: (emittedFiles) => {
-        // CJS consumers resolve the entry's types from index.d.cts.
-        const [entryTypes] = Array.from(emittedFiles.keys())
-          .filter((path) => path.endsWith('/index.d.ts'))
-          .sort((a, b) => a.split('/').length - b.split('/').length);
-        if (!entryTypes) throw new Error('index.d.ts was not emitted; cannot write index.d.cts');
-        writeFileSync(entryTypes.replace(/\.d\.ts$/, '.d.cts'), emittedFiles.get(entryTypes)!);
+        // CJS consumers resolve each entry's types from its .d.cts.
+        ['index', 'vanilla'].forEach((entry) => {
+          const [entryTypes] = Array.from(emittedFiles.keys())
+            .filter((path) => path.endsWith(`/${entry}.d.ts`))
+            .sort((a, b) => a.split('/').length - b.split('/').length);
+          if (!entryTypes)
+            throw new Error(`${entry}.d.ts was not emitted; cannot write ${entry}.d.cts`);
+          writeFileSync(entryTypes.replace(/\.d\.ts$/, '.d.cts'), emittedFiles.get(entryTypes)!);
+        });
       },
     }),
   ],
   build: {
     lib: {
-      entry: './index.ts',
+      entry: { index: './index.ts', vanilla: './vanilla.ts' },
       name: 'Faency',
       formats: ['es', 'cjs'],
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
