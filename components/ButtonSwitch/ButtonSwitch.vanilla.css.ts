@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 export const buttonSwitchContainer = style({
@@ -10,6 +11,8 @@ export const buttonSwitchContainer = style({
   gap: tokens.space['1'],
 });
 
+const HOVER_LAYER = 'rgba(255, 255, 255, 0.15)';
+
 export const buttonSwitchItem = style({
   display: 'inline-flex',
   backgroundColor: tokens.colors.buttonSwitchOffBg,
@@ -19,36 +22,16 @@ export const buttonSwitchItem = style({
   justifyContent: 'center',
   fontWeight: 600,
   border: 'none',
+  borderRadius: tokens.radii['3'],
   position: 'relative',
 
   selectors: {
-    '&::before': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-      borderRadius: tokens.radii['3'],
-    },
-    '&::after': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-      borderRadius: tokens.radii['3'],
-    },
     '&:focus-visible': {
-      borderRadius: tokens.radii['3'],
-    },
-    '&:focus-visible::before': {
-      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    },
-    '&:focus-visible::after': {
-      opacity: 0.15,
+      backgroundImage: stateLayers(HOVER_LAYER),
     },
     '&[data-state=on]': {
       backgroundColor: tokens.colors.buttonSwitchActiveBg,
       color: tokens.colors.buttonSwitchActiveColor,
-      borderRadius: tokens.radii['3'],
     },
   },
 
@@ -57,12 +40,7 @@ export const buttonSwitchItem = style({
       selectors: {
         '&:hover': {
           cursor: 'pointer',
-        },
-        '&:hover::before': {
-          backgroundColor: 'rgba(255, 255, 255, 0.15)',
-        },
-        '&:hover::after': {
-          opacity: 0.05,
+          backgroundImage: stateLayers(HOVER_LAYER),
         },
       },
     },

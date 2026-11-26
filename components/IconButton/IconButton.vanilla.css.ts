@@ -1,9 +1,12 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
-// Base button styles (matching BUTTON_BASE_STYLES from Button component)
+const HOVER_LAYER = 'rgba(255, 255, 255, 0.15)';
+const PRESSED_LAYER = 'rgba(0, 0, 0, 0.15)';
+
 const baseIconButton = style({
   // Reset
   appearance: 'none',
@@ -29,37 +32,17 @@ const baseIconButton = style({
   textDecoration: 'none',
   backgroundColor: 'transparent',
 
-  // Pseudo-elements for hover/active effects
   selectors: {
-    '&::before': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-      borderRadius: 'inherit',
-    },
-    '&::after': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-      borderRadius: 'inherit',
-    },
     '&:disabled': {
       pointerEvents: 'none',
       opacity: 0.5,
     },
     '&:focus-visible': {
       outline: '2px solid currentColor',
+      backgroundImage: stateLayers(HOVER_LAYER),
     },
-    '&:focus-visible::before': {
-      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    },
-    '&:focus-visible::after': {
-      opacity: 0.15,
-    },
-    '&:active::before': {
-      backgroundColor: 'rgba(0, 0, 0, 0.15)',
+    '&:active': {
+      backgroundImage: stateLayers(PRESSED_LAYER),
     },
   },
 
@@ -68,12 +51,7 @@ const baseIconButton = style({
       selectors: {
         '&:hover': {
           cursor: 'pointer',
-        },
-        '&:hover::before': {
-          backgroundColor: 'rgba(255, 255, 255, 0.15)',
-        },
-        '&:hover::after': {
-          opacity: 0.05,
+          backgroundImage: stateLayers(HOVER_LAYER),
         },
       },
     },

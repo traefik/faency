@@ -45,12 +45,6 @@ export const checkboxRecipe = recipe({
     overflow: 'hidden',
 
     selectors: {
-      '&::before': {
-        boxSizing: 'border-box',
-      },
-      '&::after': {
-        boxSizing: 'border-box',
-      },
       '&[data-state=checked], &[data-state=indeterminate]': {
         backgroundColor: tokens.colors.checkboxCheckedBg,
         boxShadow: 'inset 0 0 0 1px transparent',
