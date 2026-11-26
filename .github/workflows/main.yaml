@@ -46,12 +46,38 @@ jobs:
           git config --local user.email "30906710+traefiker@users.noreply.github.com"
           git config --local user.name "traefiker"
 
-      - name: Deploy
-        uses: bitovi/github-actions-storybook-to-github-pages@ddd9d35f670cceedd2bfc444be681001b0709730 # v1.0.4
+      - name: Install dependencies
         env:
           NODE_ENV: production
+        run: yarn workspaces focus --all && yarn patch-package
+
+      - name: Build Storybook
+        env:
+          NODE_ENV: production
+        run: yarn build-storybook
+
+      # Artifacts are scoped to the run, not the attempt: a re-run would otherwise
+      # find the previous attempt's artifact too and deploy-pages would refuse.
+      - name: Upload Storybook
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
-          install_command: yarn workspaces focus --all && yarn patch-package
-          build_command: yarn build-storybook
           path: storybook-static
-          checkout: false
+          name: github-pages-${{ github.run_attempt }}
+
+      # The artifact is sometimes not listed yet right after upload, so retry once.
+      - name: Deploy to GitHub Pages
+        id: deploy
+        continue-on-error: true
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
+
+      - name: Wait before retrying deploy
+        if: steps.deploy.outcome == 'failure'
+        run: sleep 30
+
+      - name: Retry deploy to GitHub Pages
+        if: steps.deploy.outcome == 'failure'
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
