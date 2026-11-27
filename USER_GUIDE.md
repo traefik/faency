@@ -532,7 +532,7 @@ const useTokenOverrides = () => {
 
 `styleRule()` accepts what a Stitches `styled()` or `css()` object did: the utils (`px`, `bc`, `size`…), `$token` values (also inside longer values, such as `'1px solid $gray6'` or `'-$2'`), nested `&` selectors and `@bp1`-style breakpoints. A nested selector must target the element being styled (`&:hover`, `.parent &`): vanilla-extract does not allow styling children from a `style()`, so give those their own `globalStyle()`.
 
-vanilla-extract moves every `@media` rule after the plain rules of the same file. Within one selector the helpers keep the Stitches order for the same property: a later `color` still overrides an earlier `@bp1` `color`. A media rule still wins over a later plain rule in other cases: across selectors of equal specificity, or between a shorthand and its longhands (a later `padding` does not override an earlier `@bp1` `paddingLeft`). When a plain rule must override a media rule, set the same property, or give the rule a more specific selector.
+Breakpoints follow the vanilla-extract model: vanilla-extract writes every `@media` rule after the plain rules, so a breakpoint overrides the plain declarations of the same selector, whatever order they are written in. `{ '@bp1': { color: 'red' }, color: 'blue' }` is red at bp1, while Stitches made the later `color` win and the breakpoint dead. To override a breakpoint, set the property inside the breakpoint, or use a more specific selector.
 
 A `vars` block sets CSS variables. Its values have no property to pick a token scale from, so `$name` is looked up in the colors; write other tokens with their scale, such as `{ vars: { '--gap': '$space$2' } }`.
 

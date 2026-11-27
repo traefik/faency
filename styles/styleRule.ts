@@ -101,8 +101,15 @@ const scaleProperties: Record<Exclude<Scale, 'colors'>, string[]> = {
     'paddingInline',
     'paddingInlineStart',
     'paddingInlineEnd',
-    'scrollMargin',
-    'scrollPadding',
+    ...['scrollMargin', 'scrollPadding'].flatMap((name) => [
+      name,
+      ...['Top', 'Right', 'Bottom', 'Left', 'X', 'Y'].map((side) => `${name}${side}`),
+      ...['Block', 'Inline'].flatMap((axis) => [
+        `${name}${axis}`,
+        `${name}${axis}Start`,
+        `${name}${axis}End`,
+      ]),
+    ]),
   ],
   sizes: [
     'width',
@@ -118,6 +125,8 @@ const scaleProperties: Record<Exclude<Scale, 'colors'>, string[]> = {
     'minInlineSize',
     'maxInlineSize',
     'flexBasis',
+    'gridTemplateColumns',
+    'gridTemplateRows',
   ],
   fonts: ['fontFamily'],
   fontSizes: ['fontSize'],
@@ -192,9 +201,13 @@ const expandDeclaration = (property: string, value: string | number): Declaratio
   return Object.fromEntries(properties.map((name) => [name, resolved]));
 };
 
+// A key set again moves to the end, so `{ pl: '$3', padding: 0 }` keeps `padding` last and it wins.
 const mergeDeclarations = (into: Record<string, any>, declarations: Declarations) => {
   const { vars, ...rest } = declarations;
-  Object.assign(into, rest);
+  Object.entries(rest).forEach(([property, value]) => {
+    delete into[property];
+    into[property] = value;
+  });
   if (vars && Object.keys(vars).length > 0) {
     into.vars = { ...into.vars, ...(vars as Record<string, string>) };
   }
@@ -326,27 +339,11 @@ const target = (rule: QueryTarget, media: string[]): Record<string, any> => {
   return rule['@media'][query];
 };
 
-// vanilla-extract emits `@media` after the base styles, so a later base declaration must clear the
-// earlier media declarations of the same property to keep the source order of the cascade.
-const applyBlock = (rule: QueryTarget, media: string[], declarations: Declarations) => {
-  const queryRules = rule['@media'];
-  if (media.length === 0 && queryRules) {
-    const { vars, ...rest } = declarations;
-    Object.entries(queryRules).forEach(([query, queryRule]) => {
-      Object.keys(rest).forEach((property) => delete queryRule[property]);
-      if (vars && queryRule.vars) {
-        Object.keys(vars).forEach((varName) => delete queryRule.vars[varName]);
-        if (Object.keys(queryRule.vars).length === 0) delete queryRule.vars;
-      }
-      if (Object.keys(queryRule).length === 0) delete queryRules[query];
-    });
-    if (Object.keys(queryRules).length === 0) delete rule['@media'];
-  }
-  mergeDeclarations(target(rule, media), declarations);
-};
-
 /**
  * Converts a Stitches-style object to a vanilla-extract `StyleRule`, for `style()` and `recipe()`.
+ *
+ * As in vanilla-extract, a breakpoint overrides the plain declarations of the same selector, whatever
+ * order they are written in.
  *
  * Nested selectors must target the styled element itself (`&:hover`, `.parent &`), as vanilla-extract
  * requires; style children with `globalStyle(`${className} > div`, …)` instead.
@@ -356,12 +353,12 @@ export const styleRule = (input: FaencyStyle): StyleRule => {
 
   toBlocks(input, '&').forEach(({ selector, media, declarations }) => {
     if (selector === '&') {
-      applyBlock(rule, media, declarations);
+      mergeDeclarations(target(rule, media), declarations);
       return;
     }
     rule.selectors ??= {};
     rule.selectors[selector] ??= {};
-    applyBlock(rule.selectors[selector], media, declarations);
+    mergeDeclarations(target(rule.selectors[selector], media), declarations);
   });
 
   return rule as StyleRule;
@@ -391,7 +388,7 @@ export const globalStyleRules = (
       const previous = rules[rules.length - 1];
       const rule: QueryTarget = previous?.[0] === block.selector ? previous[1] : {};
       if (rule !== previous?.[1]) rules.push([block.selector, rule]);
-      applyBlock(rule, block.media, block.declarations);
+      mergeDeclarations(target(rule, block.media), block.declarations);
     });
   });
 

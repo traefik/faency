@@ -570,6 +570,8 @@ const Container = (props) => <Flex className={container} {...props} />;
 
 `styleRule()` cannot style children (`'& > div'`, `'&:hover span'`): vanilla-extract requires a `style()` selector to target the element itself. Give those their own `globalStyle()`, as in the user guide example.
 
+Breakpoints now always override the plain declarations of the same selector, as vanilla-extract writes `@media` rules last. With Stitches, a plain declaration written after a breakpoint won and made the breakpoint dead: `{ '@bp1': { color: 'red' }, color: 'blue' }` was blue everywhere, and is now red at bp1. Remove such dead breakpoints when migrating.
+
 ---
 
 ## Migration Timeline

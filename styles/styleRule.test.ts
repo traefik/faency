@@ -1,4 +1,7 @@
+import { defaultThemeMap } from '@stitches/react';
+
 import { globalStyleRules, keyframesRule, resolveTokens, styleRule } from './styleRule';
+import { tokens } from './tokens.css';
 
 jest.mock('./tokens.css', () => ({
   tokens: {
@@ -69,6 +72,26 @@ describe('resolveTokens', () => {
   it('should only search an explicit scale', () => {
     expect(resolveTokens('color', '$space$primary')).toBe('$space$primary');
     expect(resolveTokens('color', '$unknown$primary')).toBe('$unknown$primary');
+  });
+
+  it('should map properties to the same scales as Stitches', () => {
+    const sampleTokens: Record<string, string> = {
+      colors: 'primary',
+      fonts: 'rubik',
+      space: '2',
+      sizes: '2',
+      fontSizes: '3',
+      fontWeights: 'medium',
+      radii: '3',
+      zIndices: 'max',
+    };
+    Object.entries(defaultThemeMap)
+      .filter(([, scale]) => scale in sampleTokens)
+      .forEach(([property, scale]) => {
+        const name = sampleTokens[scale];
+        const expected = (tokens as unknown as Record<string, Record<string, string>>)[scale][name];
+        expect([property, resolveTokens(property, `$${name}`)]).toEqual([property, expected]);
+      });
   });
 
   it('should leave unknown tokens and plain values untouched', () => {
@@ -191,28 +214,19 @@ describe('styleRule', () => {
     });
   });
 
-  it('should let a later base block override earlier media styles', () => {
-    expect(
-      styleRule({
-        color: 'red',
-        '@bp1': { color: 'blue', opacity: 0.5, vars: { '--a': '1', '--b': '2' } },
-        '&': { color: 'green', vars: { '--a': '3' } },
-      }),
-    ).toEqual({
-      color: 'green',
-      vars: { '--a': '3' },
-      '@media': { '(min-width: 520px)': { opacity: 0.5, vars: { '--b': '2' } } },
-    });
-    expect(styleRule({ color: 'red', '@bp1': { color: 'blue' }, '&': { color: 'green' } })).toEqual(
-      { color: 'green' },
-    );
+  it('should let breakpoints override plain declarations, whatever the order', () => {
+    const expected = {
+      color: 'blue',
+      '@media': { '(min-width: 520px)': { color: 'red' } },
+    };
+    expect(styleRule({ '@bp1': { color: 'red' }, color: 'blue' })).toEqual(expected);
+    expect(styleRule({ '@bp1': { color: 'red' }, '&': { color: 'blue' } })).toEqual(expected);
   });
 
-  it('should only override media declarations of the same property', () => {
-    expect(styleRule({ '@bp1': { paddingLeft: '8px' }, '&': { padding: 0 } })).toEqual({
-      padding: 0,
-      '@media': { '(min-width: 520px)': { paddingLeft: '8px' } },
-    });
+  it('should move a property set again to the end', () => {
+    const rule = styleRule({ p: '$2', pl: '$3', padding: 0 });
+    expect(rule).toEqual({ paddingLeft: 'var(--space-3)', padding: 0 });
+    expect(Object.keys(rule)).toEqual(['paddingLeft', 'padding']);
   });
 
   it('should reject a nested negated media query', () => {
@@ -303,18 +317,16 @@ describe('globalStyleRules', () => {
     ]);
   });
 
-  it('should let a later base block override earlier media styles', () => {
-    expect(
-      globalStyleRules({
-        body: { color: 'red', '@bp1': { color: 'blue' }, '&': { color: 'green' } },
-      }),
-    ).toEqual([['body', { color: 'green' }]]);
-  });
-
   it('should skip null selectors', () => {
     expect(globalStyleRules({ body: null, a: undefined, p: { m: 0 } })).toEqual([
       ['p', { margin: 0 }],
     ]);
+  });
+
+  it('should let breakpoints override plain declarations, whatever the order', () => {
+    expect(
+      globalStyleRules({ body: { '@bp1': { color: 'red' }, '&': { color: 'blue' } } }),
+    ).toEqual([['body', { color: 'blue', '@media': { '(min-width: 520px)': { color: 'red' } } }]]);
   });
 
   it('should nest descendant selectors', () => {
