@@ -60,7 +60,7 @@ The same applies to the Radix-based parts that render an element. `as` also take
 2. Move the child element's props to the component itself
 3. Remove the wrapper element and move children to the component's children
 
-**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, TabsTrigger, VisuallyHidden. `DialogContent`, `SidePanel` and the other DropdownMenu, Popover and Tabs parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
+**Affected:** Badge, Button, Label (no longer built on Radix `Label.Root`), DialogTrigger, DialogClosePrimitive, DialogTitle, DialogDescription, DialogOverlay, DropdownMenuTrigger, DropdownMenuItem, PopoverTrigger, PopoverClose, PopoverAnchor, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuList, NavigationMenuItem, NavigationMenuViewport, NavigationMenuIndicator, TabsTrigger, VisuallyHidden. `DialogContent`, `SidePanel` and the other DropdownMenu, Popover, NavigationMenu and Tabs parts no longer accept `asChild` at all. `RowLink` keeps `asChild`.
 
 **Rationale:**
 
@@ -334,6 +334,204 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 
 ---
 
+### Navigation: Item Backgrounds, `as` and Active State
+
+**Change:** `NavigationItemVanilla` draws its hover, focus and active backgrounds on the item itself instead of on `::before` and `::after`, and takes any element or component in `as`.
+
+|                                | Stitches `NavigationItem`                                              | Vanilla Extract `NavigationItemVanilla`                  |
+| ------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------------- |
+| Hover, focus and active colors | two layers on `::before` and `::after`, drawn over the label and icons | `background-image` layers on the item, under its content |
+| `as`                           | `'a'` or `'button'`                                                    | any element or component, e.g. a router `Link`           |
+| `aria-current="page"`          | on an active item with `as="a"`                                        | on any active item that is not a `<button>`              |
+| Active state in the DOM        | a generated class                                                      | a `data-active` attribute                                |
+| Adornment and label wrappers   | `<div>`                                                                | `<span>`, valid inside a `<button>`                      |
+| Focus background and ring      | on any focus, including mouse clicks                                   | on keyboard focus only                                   |
+
+`NavigationDrawer` with `fullWidth` still squares the corners of its items, and now keeps their keyboard focus ring.
+
+**Before (v13.x with Stitches):**
+
+```tsx
+<NavigationItem as="a" href="/settings" active>
+  Settings
+</NavigationItem>
+```
+
+```css
+.myItem:hover::before {
+  background-color: hotpink;
+}
+.myItem:hover::after {
+  background-color: transparent;
+}
+```
+
+**After (v14.x with Vanilla Extract):**
+
+```tsx
+<NavigationItem as={Link} to="/settings" active>
+  Settings
+</NavigationItem>
+```
+
+```css
+/* `background` replaces both state layers at once */
+.myItem:hover {
+  background: hotpink;
+}
+.myItem[data-active] {
+  background: hotpink;
+}
+```
+
+**Migration Guide:**
+
+1. Move styles that target `::before` or `::after` of an item to the item itself. Use the `background` shorthand to replace both layers at once
+2. Target active items with `[data-active]` instead of the Stitches variant class
+3. Wrapping a router link in `NavigationItem` is no longer needed: pass it to `as`
+4. Change the base color with `background-color`, through `css` or `className`: the hover, focus and active layers stay on top of it. Avoid the `background` shorthand in `css`, which would remove them
+5. Change a state color with a `className` that targets `:hover`, `:focus-visible` or `[data-active]`, since `css` cannot target states. Retarget `:focus` rules to `:focus-visible`. A `:hover` or `:focus-visible` rule ties with the library's, so load it after Faency or make it more specific, e.g. `.sidebar .myItem:hover`
+
+**Rationale:**
+
+- Overriding a color takes one rule on the item, without knowing its internal layers
+- Routing libraries work without a wrapper
+
+**Impact:** Low - Only apps that style the item pseudo-elements or relied on `as` being limited to `a` and `button`
+
+---
+
+### NavigationTree: Depth, Full Width and Focus
+
+**Change:** `NavigationTreeItemVanilla` is built on `NavigationItemVanilla`, so the [Navigation changes](#navigation-item-backgrounds-as-and-active-state) apply to it too. It also changes how nesting and full width work.
+
+|                                    | Stitches `NavigationTree*`                                                                    | Vanilla Extract `NavigationTree*Vanilla`                                                 |
+| ---------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Depth in full width                | set by hand with `nestedChildrenLevel` on the parent item                                     | computed from the nesting; `nestedChildrenLevel` is removed                              |
+| Full width highlight               | `::before`/`::after` pulled left by `nestedChildrenLevel × 20px`, content indented by padding | the item spans the whole row and indents its own content with `padding-left` by depth    |
+| `NavigationTreeContainer` defaults | resets `fullWidth` to `false` and the icons to chevrons                                       | inherits `fullWidth` and the icons from the drawer or container around it                |
+| Focus on expandable items          | no focus ring or background at all                                                            | ring and background on keyboard focus, like every item                                   |
+| `onClick` on expandable items      | replaced by the toggle                                                                        | called after the toggle                                                                  |
+| `aria-expanded`, `aria-controls`   | not set                                                                                       | set on expandable items                                                                  |
+| `as`, `ref`                        | `as` limited to `'a'` or `'button'`, no `ref`                                                 | any element or component in `as`, `ref` forwarded to the item (also on drawer/container) |
+| Label and subtitle wrappers        | `<div>`                                                                                       | `<span>`                                                                                 |
+
+**Before (v13.x with Stitches):**
+
+```tsx
+<NavigationTreeDrawer fullWidth>
+  <NavigationTreeItem label="Two">
+    <NavigationTreeItem label="Two.Two" nestedChildrenLevel={2}>
+      <NavigationTreeItem label="Two.Two.One" />
+    </NavigationTreeItem>
+  </NavigationTreeItem>
+</NavigationTreeDrawer>
+```
+
+**After (v14.x with Vanilla Extract):**
+
+```tsx
+<NavigationTreeDrawer fullWidth>
+  <NavigationTreeItem label="Two">
+    <NavigationTreeItem label="Two.Two">
+      <NavigationTreeItem label="Two.Two.One" />
+    </NavigationTreeItem>
+  </NavigationTreeItem>
+</NavigationTreeDrawer>
+```
+
+**Migration Guide:**
+
+1. Remove `nestedChildrenLevel`
+2. Where a `NavigationTreeContainer` sits in a `fullWidth` drawer and relied on being reset to `fullWidth={false}`, pass `fullWidth={false}` to it
+3. In full width, a `css` or `style` `paddingLeft` on an item replaces its depth indent
+
+**Rationale:**
+
+- A wrong `nestedChildrenLevel` left the highlight short of the drawer edge
+- Keyboard users can see which expandable item has focus, and screen readers announce whether it is open and what it controls
+
+**Impact:** Low - Remove `nestedChildrenLevel`. An `onClick` on an expandable item now also runs on every toggle, so check it does nothing meant for leaf items only, such as navigating. The rest is visual or additive
+
+---
+
+### NavigationMenu: `as` on Every Part and Scoped List Styles
+
+**Change:** The NavigationMenu parts that render an element take `as` instead of `asChild`, and the list styles apply to the menu's own list and items only.
+
+|                                          | Stitches `NavigationMenu*`                                     | Vanilla Extract `NavigationMenu*Vanilla`           |
+| ---------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------- |
+| Trigger, Link                            | `asChild`                                                      | `as`, the Radix behavior lands on the `as` element |
+| List, Item, Viewport, Indicator          | plain Radix parts: `asChild`, no `css`                         | `as` and `css`, no `asChild`                       |
+| Root, Content                            | `asChild`                                                      | neither `as` nor `asChild`                         |
+| List reset (no margin, padding, bullets) | every `ul` inside the menu, including lists inside the content | `NavigationMenuList` only                          |
+| Inline, `position: relative` list item   | every `li` inside the menu                                     | `NavigationMenuItem` only                          |
+| `elevation` on `NavigationMenuTrigger`   | accepted, no effect                                            | removed                                            |
+
+**Before (v13.x with Stitches):**
+
+```tsx
+<NavigationMenuContent>
+  <NavigationMenuLink asChild>
+    <Link href="/docs">Docs</Link>
+  </NavigationMenuLink>
+  <NavigationMenuLink>
+    <NavigationItem startAdornment={<GearIcon />}>Settings</NavigationItem>
+  </NavigationMenuLink>
+</NavigationMenuContent>
+```
+
+**After (v14.x with Vanilla Extract):**
+
+```tsx
+<NavigationMenuContent>
+  <NavigationMenuLink as={Link} href="/docs">
+    Docs
+  </NavigationMenuLink>
+  <NavigationMenuLink as={NavigationLink} href="/settings" startAdornment={<GearIcon />}>
+    Settings
+  </NavigationMenuLink>
+</NavigationMenuContent>
+```
+
+**Migration Guide:**
+
+1. Replace `asChild` on Trigger, Link, List, Item, Viewport and Indicator with `as`, and move the child's props to the part
+2. Remove `asChild` from the Root and Content
+3. A navigation item inside a link (`<NavigationMenuLink><NavigationItem>`) rendered a `<button>` inside an `<a>`: use `as={NavigationLink}` with `href` instead
+4. Add your own reset to plain `ul` and `li` placed inside the content if they relied on the menu's reset
+5. Remove `elevation` from `NavigationMenuTrigger`
+
+**Rationale:**
+
+- Same `as` API as the other Radix-based components
+- Lists inside the content keep their normal styling
+
+**Impact:** Low - Only code using `asChild` on the parts, or plain lists inside the content
+
+---
+
+### Link: Keyboard-Only Focus Ring
+
+**Change:** `LinkVanilla` shows its focus outline on keyboard focus only.
+
+|               | Stitches `Link`                      | Vanilla Extract `LinkVanilla` |
+| ------------- | ------------------------------------ | ----------------------------- |
+| Focus outline | on any focus, including mouse clicks | on keyboard focus only        |
+
+**Migration Guide:**
+
+1. No code change is needed
+2. Inside `LinkVanilla`, only `TextVanilla` inherits the link color; a Stitches `Text` keeps its own color, so migrate both together
+
+**Rationale:**
+
+- Matches the keyboard-only focus ring of `Checkbox`, `Switch` and `Radio`
+
+**Impact:** Low - Visual only, the API is unchanged
+
+---
+
 ## Components Supporting Polymorphic `as` Prop
 
 ### Layout Components
@@ -358,6 +556,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - ✅ **Blockquote** - default: `blockquote`
 - ✅ **Label** - default: `label`
 - ✅ **VisuallyHidden** - default: `span`, keeps the hiding styles on the `as` element
+- ✅ **Link** - default: `a`, e.g. `as={RouterLink}`
 
 ### Interactive Components
 
@@ -379,6 +578,18 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
   - `DialogContent` and `DialogCloseIconButton` take neither `as` nor `asChild`
 - ✅ **TabsTrigger** - default: `button`, keeps the Radix tab behavior on the `as` element
   - `TabsContainer`, `TabsList` and `TabsContent` take neither `as` nor `asChild`
+- ✅ **NavigationContainer** - default: `div`
+- ✅ **NavigationDrawer** - default: `nav`
+- ✅ **NavigationItem** - default: `button`, adds `type="button"` only when it renders a `<button>`
+  - `NavigationLink` always renders `a`; use `NavigationItem as={Link}` for a router link
+- ✅ **NavigationTreeContainer** - default: `div`
+- ✅ **NavigationTreeDrawer** - default: `nav`
+- ✅ **NavigationTreeItem** - default: `button`, passed to its `NavigationItem`
+- ✅ **NavigationMenuTrigger** - default: `button`, keeps the Radix trigger behavior on the `as` element
+- ✅ **NavigationMenuLink** - default: `a`, keeps the Radix link behavior on the `as` element
+- ✅ **NavigationMenuList** / **NavigationMenuItem** - default: `ul` / `li`
+- ✅ **NavigationMenuViewport** / **NavigationMenuIndicator** - default: `div`
+  - `NavigationMenu` (root) and `NavigationMenuContent` take neither `as` nor `asChild`
 
 ---
 
@@ -649,6 +860,32 @@ Release notes are generated by semantic-release; use this as the body of the bre
   - Migration: use `<DialogContent noCloseIcon>`
   - See [Migration Guide](./BREAKING_CHANGES.md#dialog-styledcontent-removed)
 
+#### Navigation
+
+- **Changed:** `NavigationItem` draws its hover, focus and active backgrounds on the item instead of `::before`/`::after`, marks active items with `data-active`, and shows its focus background and ring on keyboard focus only
+- **Changed:** `NavigationItem` takes any element or component in `as`, and sets `aria-current="page"` on any active item that is not a `<button>`
+  - Migration: move pseudo-element overrides to the item itself
+  - See [Migration Guide](./BREAKING_CHANGES.md#navigation-item-backgrounds-as-and-active-state)
+
+#### NavigationTree
+
+- **Removed:** `nestedChildrenLevel` on `NavigationTreeItem`; the depth is computed from the nesting
+- **Changed:** `NavigationTreeContainer` inherits `fullWidth` and the icons from the drawer or container around it
+- **Changed:** Expandable items show the focus ring on keyboard focus, set `aria-expanded` and `aria-controls`, and call `onClick` after toggling
+  - See [Migration Guide](./BREAKING_CHANGES.md#navigationtree-depth-full-width-and-focus)
+
+#### Link
+
+- **Changed:** The focus outline shows on keyboard focus only
+  - See [Migration Guide](./BREAKING_CHANGES.md#link-keyboard-only-focus-ring)
+
+#### NavigationMenu
+
+- **Changed:** Trigger, Link, List, Item, Viewport and Indicator take `as` instead of `asChild`; Root and Content take neither
+- **Changed:** The list reset applies to `NavigationMenuList` and `NavigationMenuItem` only, not to every `ul` and `li` in the menu
+- **Removed:** `elevation` on `NavigationMenuTrigger`, which had no effect
+  - See [Migration Guide](./BREAKING_CHANGES.md#navigationmenu-as-on-every-part-and-scoped-list-styles)
+
 #### Theme Provider
 
 - **Changed:** Requires `VanillaExtractThemeProvider` at the app root
@@ -761,5 +998,5 @@ This document should be updated as:
 - User feedback is received
 - Edge cases are discovered
 
-**Last Updated:** 2026-11-18
+**Last Updated:** 2026-11-25
 **Status:** Work in Progress - Component migration ongoing

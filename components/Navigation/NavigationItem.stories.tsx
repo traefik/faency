@@ -8,8 +8,16 @@ import {
 import { Meta, StoryFn } from '@storybook/react-vite';
 import React from 'react';
 
-import { Badge } from '../Badge';
+import { Badge, BadgeVanilla } from '../Badge';
+import { BoxVanilla } from '../Box';
+import { FlexVanilla } from '../Flex';
+import { H3Vanilla } from '../Heading';
 import { NavigationDrawer, NavigationItem } from './Navigation';
+import {
+  NavigationDrawerVanilla,
+  NavigationItemVanilla,
+  NavigationLinkVanilla,
+} from './Navigation.vanilla';
 
 const Component: Meta<typeof NavigationDrawer> = {
   title: 'Components/NavigationItem',
@@ -91,6 +99,74 @@ export const LinkProps: StoryFn<typeof NavigationItem> = () => (
       Navigation Item
     </NavigationItem>
   </NavigationDrawer>
+);
+
+const comparisonBadgeCss = {
+  height: '$3',
+  borderRadius: '$pill',
+  fontSize: '$0',
+  fontWeight: '$medium',
+  color: '$hiContrast',
+};
+
+export const Comparison: StoryFn = () => (
+  <FlexVanilla gap={6}>
+    <BoxVanilla css={{ width: 260 }}>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Stitches Version</H3Vanilla>
+      <NavigationDrawer>
+        <NavigationItem>No adornment</NavigationItem>
+        <NavigationItem startAdornment={<DashboardIcon />}>Start adornment</NavigationItem>
+        <NavigationItem
+          startAdornment={<GearIcon />}
+          endAdornment={<Badge css={comparisonBadgeCss}>12</Badge>}
+        >
+          Both adornments
+        </NavigationItem>
+        <NavigationItem startAdornment={<PersonIcon />} active>
+          Active
+        </NavigationItem>
+        <NavigationItem as="a" href="#link" startAdornment={<QuestionMarkCircledIcon />}>
+          Link
+        </NavigationItem>
+        <NavigationItem
+          as="a"
+          href="#active-link"
+          startAdornment={<QuestionMarkCircledIcon />}
+          active
+        >
+          Active link
+        </NavigationItem>
+      </NavigationDrawer>
+    </BoxVanilla>
+    <BoxVanilla css={{ width: 260 }}>
+      <H3Vanilla css={{ marginBottom: '16px' }}>Vanilla Extract Version</H3Vanilla>
+      <NavigationDrawerVanilla>
+        <NavigationItemVanilla>No adornment</NavigationItemVanilla>
+        <NavigationItemVanilla startAdornment={<DashboardIcon />}>
+          Start adornment
+        </NavigationItemVanilla>
+        <NavigationItemVanilla
+          startAdornment={<GearIcon />}
+          endAdornment={<BadgeVanilla css={comparisonBadgeCss}>12</BadgeVanilla>}
+        >
+          Both adornments
+        </NavigationItemVanilla>
+        <NavigationItemVanilla startAdornment={<PersonIcon />} active>
+          Active
+        </NavigationItemVanilla>
+        <NavigationLinkVanilla href="#link" startAdornment={<QuestionMarkCircledIcon />}>
+          Link
+        </NavigationLinkVanilla>
+        <NavigationLinkVanilla
+          href="#active-link"
+          startAdornment={<QuestionMarkCircledIcon />}
+          active
+        >
+          Active link
+        </NavigationLinkVanilla>
+      </NavigationDrawerVanilla>
+    </BoxVanilla>
+  </FlexVanilla>
 );
 
 export default Component;

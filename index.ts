@@ -194,31 +194,68 @@ export type { InputHandle, InputVanillaHandle, InputVanillaProps } from './compo
 export { Input, InputVanilla } from './components/Input';
 export type { LabelVanillaProps } from './components/Label';
 export { Label, LabelVanilla } from './components/Label';
-export { Link } from './components/Link';
+export type { LinkVanillaProps } from './components/Link';
+export { Link, LinkVanilla } from './components/Link';
 export type { LiVanillaProps, OlVanillaProps, UlVanillaProps } from './components/List';
 export { Li, LiVanilla, Ol, OlVanilla, Ul, UlVanilla } from './components/List';
 export type { MeterSegmentVanilla, MeterVanillaProps } from './components/Meter';
 export { MeterVanilla } from './components/Meter';
+export type {
+  NavigationContainerVanillaProps,
+  NavigationDrawerVanillaProps,
+  NavigationItemVanillaProps,
+  NavigationLinkVanillaProps,
+} from './components/Navigation';
 export {
   NavigationContainer,
+  NavigationContainerVanilla,
   NavigationDrawer,
+  NavigationDrawerVanilla,
   NavigationItem,
+  NavigationItemVanilla,
   NavigationLink,
+  NavigationLinkVanilla,
 } from './components/Navigation';
+export type {
+  NavigationMenuContentVanillaProps,
+  NavigationMenuIndicatorVanillaProps,
+  NavigationMenuItemVanillaProps,
+  NavigationMenuLinkVanillaProps,
+  NavigationMenuListVanillaProps,
+  NavigationMenuTriggerVanillaProps,
+  NavigationMenuVanillaProps,
+  NavigationMenuViewportVanillaProps,
+} from './components/NavigationMenu';
 export {
   NavigationMenu,
   NavigationMenuContent,
+  NavigationMenuContentVanilla,
   NavigationMenuIndicator,
+  NavigationMenuIndicatorVanilla,
   NavigationMenuItem,
+  NavigationMenuItemVanilla,
   NavigationMenuLink,
+  NavigationMenuLinkVanilla,
   NavigationMenuList,
+  NavigationMenuListVanilla,
   NavigationMenuTrigger,
+  NavigationMenuTriggerVanilla,
+  NavigationMenuVanilla,
   NavigationMenuViewport,
+  NavigationMenuViewportVanilla,
 } from './components/NavigationMenu';
+export type {
+  NavigationTreeContainerVanillaProps,
+  NavigationTreeDrawerVanillaProps,
+  NavigationTreeItemVanillaProps,
+} from './components/NavigationTree';
 export {
   NavigationTreeContainer,
+  NavigationTreeContainerVanilla,
   NavigationTreeDrawer,
+  NavigationTreeDrawerVanilla,
   NavigationTreeItem,
+  NavigationTreeItemVanilla,
 } from './components/NavigationTree';
 export type { OverlayVanillaProps } from './components/Overlay';
 export { Overlay, OverlayVanilla } from './components/Overlay';

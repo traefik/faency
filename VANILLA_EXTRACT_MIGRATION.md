@@ -73,7 +73,7 @@ See the [Developer Guide](./VANILLA_EXTRACT_DEVELOPER_GUIDE.md#architecture-over
 
 **Migrated (Stitches and `*Vanilla` versions exported side by side):**
 
-AccessibleIcon, Accordion, Alert, AriaTable, Avatar, Badge, Blockquote, Box, Bubble, Button, ButtonSwitch, Card, Checkbox, CodeBlock, Container, Dialog, DropdownMenu, Elevation, Field, Flex, Grid, Heading (H1–H6), IconButton, Image, Input, Label, List (Ul, Ol, Li), Overlay, Panel, Paragraph, Popover, Radio, RadioAccordion, RowLink (vanilla version not exported), Select, SidePanel, Skeleton, Switch, Table, Tabs, Text, TextField, Textarea, Tooltip, VisuallyHidden
+AccessibleIcon, Accordion, Alert, AriaTable, Avatar, Badge, Blockquote, Box, Bubble, Button, ButtonSwitch, Card, Checkbox, CodeBlock, Container, Dialog, DropdownMenu, Elevation, Field, Flex, Grid, Heading (H1–H6), IconButton, Image, Input, Label, Link, List (Ul, Ol, Li), Navigation, NavigationMenu, NavigationTree, Overlay, Panel, Paragraph, Popover, Radio, RadioAccordion, RowLink (vanilla version not exported), Select, SidePanel, Skeleton, Switch, Table, Tabs, Text, TextField, Textarea, Tooltip, VisuallyHidden
 
 **Vanilla-only (new components, no Stitches version):**
 
@@ -83,7 +83,7 @@ Combobox, Meter, SegmentedControl, Spinner, SplitLayout, Toast
 
 **Not migrated yet:**
 
-DateTimePicker, DateTimePickerInput, Link, Navigation, NavigationMenu, NavigationTree
+DateTimePicker, DateTimePickerInput
 
 **For Each Component:**
 

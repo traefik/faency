@@ -22,7 +22,14 @@ import { H1Vanilla } from '@/components/Heading/Heading.vanilla';
 import { IconButtonVanilla } from '@/components/IconButton/IconButton.vanilla';
 import { InputVanilla } from '@/components/Input/Input.vanilla';
 import { LabelVanilla } from '@/components/Label/Label.vanilla';
+import { LinkVanilla } from '@/components/Link/Link.vanilla';
 import { LiVanilla } from '@/components/List/List.vanilla';
+import {
+  NavigationDrawerVanilla,
+  NavigationItemVanilla,
+} from '@/components/Navigation/Navigation.vanilla';
+import { NavigationMenuContentVanilla } from '@/components/NavigationMenu/NavigationMenu.vanilla';
+import { NavigationTreeDrawerVanilla } from '@/components/NavigationTree/NavigationTree.vanilla';
 import { ParagraphVanilla } from '@/components/Paragraph/Paragraph.vanilla';
 import { PopoverContentVanilla } from '@/components/Popover/Popover.vanilla';
 import { RadioVanilla } from '@/components/Radio/Radio.vanilla';
@@ -76,9 +83,14 @@ describe('component variant props', () => {
       <TooltipContentVanilla key="tooltip-content" multiline />,
       <DialogContentVanilla key="dialog-content" elevation={3} />,
       <SidePanelVanilla key="side-panel" side="left" onOpenChange={() => {}} />,
+      <NavigationDrawerVanilla key="navigation-drawer" elevation={2} fullWidth />,
+      <NavigationItemVanilla key="navigation-item" active />,
+      <NavigationTreeDrawerVanilla key="navigation-tree-drawer" elevation={2} fullWidth />,
+      <NavigationMenuContentVanilla key="navigation-menu-content" elevation={2} />,
+      <LinkVanilla key="link" variant="primary" />,
     ];
 
-    expect(elements).toHaveLength(33);
+    expect(elements).toHaveLength(38);
   });
 
   it('reject invalid variants', () => {
@@ -157,8 +169,18 @@ describe('component variant props', () => {
       <DialogContentVanilla key="dialog-content" elevation={9} />,
       // @ts-expect-error unknown side
       <SidePanelVanilla key="side-panel" side="center" onOpenChange={() => {}} />,
+      // @ts-expect-error elevation outside the recipe keys
+      <NavigationDrawerVanilla key="navigation-drawer" elevation={9} />,
+      // @ts-expect-error active is a boolean
+      <NavigationItemVanilla key="navigation-item" active="yes" />,
+      // @ts-expect-error elevation outside the recipe keys
+      <NavigationTreeDrawerVanilla key="navigation-tree-drawer" elevation={9} />,
+      // @ts-expect-error elevation outside the recipe keys
+      <NavigationMenuContentVanilla key="navigation-menu-content" elevation={9} />,
+      // @ts-expect-error unknown variant
+      <LinkVanilla key="link" variant="red" />,
     ];
 
-    expect(elements).toHaveLength(37);
+    expect(elements).toHaveLength(42);
   });
 });
