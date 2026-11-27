@@ -5,7 +5,7 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -14,8 +14,6 @@ import {
   navigationMenuList,
   navigationMenuTrigger,
 } from './NavigationMenu.vanilla.css';
-
-const navigationMenuContentClass = withVariantKeys(navigationMenuContentRecipe);
 
 export type NavigationMenuVanillaProps = Omit<
   NavigationMenuPrimitive.NavigationMenuProps,
@@ -84,14 +82,18 @@ export type NavigationMenuContentVanillaProps = Omit<
 export const NavigationMenuContentVanilla = forwardRef<
   HTMLDivElement,
   NavigationMenuContentVanillaProps
->(({ elevation, className, css, style, ...props }, ref) => (
-  <NavigationMenuPrimitive.Content
-    ref={ref}
-    className={cx(navigationMenuContentClass({ elevation }), className)}
-    style={useInlineStyle(css, style)}
-    {...props}
-  />
-));
+>(({ className, css, style, ...rest }, ref) => {
+  const [variants, props] = splitVariants(navigationMenuContentRecipe, rest);
+
+  return (
+    <NavigationMenuPrimitive.Content
+      ref={ref}
+      className={cx(navigationMenuContentRecipe(variants), className)}
+      style={useInlineStyle(css, style)}
+      {...props}
+    />
+  );
+});
 
 NavigationMenuContentVanilla.displayName = 'NavigationMenuContentVanilla';
 

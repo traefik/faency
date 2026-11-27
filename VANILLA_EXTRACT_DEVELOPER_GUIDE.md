@@ -175,7 +175,7 @@ The complete naming pattern (see [Text.vanilla.tsx](components/Text/Text.vanilla
 
 **Key Points:**
 
-- Use `RecipeVariantProps<typeof recipe>` for variant types and wrap recipes with numeric keys in `withVariantKeys()` (see [Variant props missing or not type-checked](#variant-props-missing-or-not-type-checked))
+- Use `RecipeVariantProps<typeof recipe>` for variant types and `splitVariants(recipe, rest)` to pass them to the recipe (see [Variant props missing or not type-checked](#variant-props-missing-or-not-type-checked))
 - Internal implementation uses `ComponentImpl` suffix
 - Exported component name is `ComponentVanilla`
 - Exported props type is `ComponentVanillaProps`
@@ -523,15 +523,17 @@ type MyComponentVariants = RecipeVariantProps<typeof myComponentRecipe>;
 interface MyComponentOwnProps extends MyComponentVariants, CSSProps {}
 ```
 
-When a variant has numeric keys, wrap the recipe once with `withVariantKeys` and call the wrapper. It turns numbers into their string keys, since recipes match compound variants with `===` and `2` would not match `'2'`. Calling the raw recipe with a number is a type error, which `yarn typecheck` reports:
+Take the variant props out with `splitVariants` instead of listing them by hand. It reads the variant names from the recipe, so a variant added later reaches the class and never lands on the DOM. It also turns numbers into their string keys, since recipes match compound variants with `===` and `2` would not match `'2'`:
 
 ```tsx
-const myComponentClass = withVariantKeys(myComponentRecipe);
-
-const recipeClass = myComponentClass({ size, variant });
+({ as, className, css, style, ...rest }: MyComponentVanillaProps<C>, ref) => {
+  const [variants, props] = splitVariants(myComponentRecipe, rest);
+  const recipeClass = myComponentRecipe(variants);
 ```
 
-Because of the loose polymorphic typing, a broken variant type does not cause errors. Add a valid line and an invalid `@ts-expect-error` line (e.g. `variant="nope"`) for each new component to [styles/componentVariantProps.test.tsx](styles/componentVariantProps.test.tsx), which `yarn typecheck` checks in CI.
+When you call a recipe with hand-picked or defaulted values instead, pass the string key (`size: '2'`). Passing a number there is a type error, which `yarn typecheck` reports.
+
+A broken variant type silently drops the variant props instead of failing. Add a valid line and an invalid `@ts-expect-error` line (e.g. `variant="nope"`) for each new component to [styles/componentVariantProps.test.tsx](styles/componentVariantProps.test.tsx), which `yarn typecheck` checks in CI.
 
 #### Invalid selector error for child elements
 

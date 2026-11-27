@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -18,8 +18,6 @@ import {
   navigationItemLabel,
   navigationItemStart,
 } from './Navigation.vanilla.css';
-
-const navigationDrawerClass = withVariantKeys(navigationDrawerRecipe);
 
 export type NavigationContainerVanillaProps<C extends ElementType = 'div'> =
   PolymorphicComponentProps<C, CSSProps>;
@@ -63,16 +61,17 @@ type NavigationDrawerVanillaComponent = PolymorphicComponent<'nav', NavigationDr
 
 const NavigationDrawerVanillaImpl = forwardRef(
   <C extends ElementType = 'nav'>(
-    { as, elevation, fullWidth, className, css, style, ...props }: NavigationDrawerVanillaProps<C>,
+    { as, className, css, style, ...rest }: NavigationDrawerVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'nav';
+    const [variants, props] = splitVariants(navigationDrawerRecipe, rest);
     const mergedStyles = useInlineStyle(css, style);
 
     return (
       <Component
         ref={ref}
-        className={cx(navigationDrawerClass({ elevation, fullWidth }), className)}
+        className={cx(navigationDrawerRecipe(variants), className)}
         style={mergedStyles}
         {...props}
       />

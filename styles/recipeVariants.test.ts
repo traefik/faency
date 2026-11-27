@@ -1,4 +1,4 @@
-import { RecipeVariantProps, withVariantKeys } from './recipeVariants';
+import { RecipeVariantProps, splitVariants } from './recipeVariants';
 
 type Recipe = (options?: { size?: '1' | '2'; tone?: 'neutral'; flat?: boolean }) => string;
 type Props = RecipeVariantProps<Recipe>;
@@ -17,24 +17,32 @@ describe('RecipeVariantProps', () => {
 
 type RecipeOptions = { size?: '1' | '2'; flat?: boolean };
 
-describe('withVariantKeys', () => {
-  it('passes numeric variants to the recipe as string keys', () => {
-    const recipe = jest.fn<string, [RecipeOptions?]>(() => 'class');
-    const wrapped = withVariantKeys(recipe);
+describe('splitVariants', () => {
+  const recipe = Object.assign(
+    jest.fn<string, [RecipeOptions?]>(() => 'class'),
+    {
+      variants: () => ['size', 'flat'],
+    },
+  );
 
-    expect(wrapped({ size: 2, flat: true })).toBe('class');
-    expect(recipe).toHaveBeenLastCalledWith({ size: '2', flat: true });
+  it('separates recipe variants from the other props', () => {
+    const onClick = () => {};
+    const [variants, props] = splitVariants(recipe, { size: '1', type: 'submit', onClick });
+
+    expect(variants).toEqual({ size: '1' });
+    expect(props).toEqual({ type: 'submit', onClick });
   });
 
-  it('passes options through untouched when no value is a number', () => {
-    const recipe = jest.fn<string, [RecipeOptions?]>(() => 'class');
-    const wrapped = withVariantKeys(recipe);
-    const options = { size: '1' as const, flat: false };
+  it('passes numeric variants as string keys', () => {
+    const [variants] = splitVariants(recipe, { size: 2, flat: false });
 
-    wrapped(options);
-    expect(recipe.mock.lastCall?.[0]).toBe(options);
+    expect(variants).toEqual({ size: '2', flat: false });
+  });
 
-    wrapped();
-    expect(recipe).toHaveBeenLastCalledWith(undefined);
+  it('keeps variants out of the rest type', () => {
+    const [, props] = splitVariants(recipe, { flat: true, id: 'a' });
+    // @ts-expect-error flat went to the recipe
+    expect(props.flat).toBeUndefined();
+    expect(props.id).toBe('a');
   });
 });

@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode, useId, useState } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -32,10 +32,6 @@ import {
 } from './Table.vanilla.css';
 import { TableSortProps } from './useTableSort';
 
-const captionClass = withVariantKeys(captionRecipe);
-const tableClass = withVariantKeys(tableRecipe);
-const thClass = withVariantKeys(thRecipe);
-
 type TableRecipeVariants = RecipeVariantProps<typeof tableRecipe>;
 type CaptionRecipeVariants = RecipeVariantProps<typeof captionRecipe>;
 type TrRecipeVariants = RecipeVariantProps<typeof trRecipe>;
@@ -47,14 +43,18 @@ export type TableVanillaProps = React.TableHTMLAttributes<HTMLTableElement> &
   TableRecipeVariants;
 
 export const TableVanilla = forwardRef<HTMLTableElement, TableVanillaProps>(
-  ({ elevation, className, css, style, ...props }, ref) => (
-    <table
-      ref={ref}
-      className={cx(tableClass({ elevation }), rowLinkTable, className)}
-      style={useInlineStyle(css, style)}
-      {...props}
-    />
-  ),
+  ({ className, css, style, ...rest }, ref) => {
+    const [variants, props] = splitVariants(tableRecipe, rest);
+
+    return (
+      <table
+        ref={ref}
+        className={cx(tableRecipe(variants), rowLinkTable, className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      />
+    );
+  },
 );
 
 TableVanilla.displayName = 'TableVanilla';
@@ -64,20 +64,18 @@ export type CaptionVanillaProps = React.HTMLAttributes<HTMLTableCaptionElement> 
   CaptionRecipeVariants;
 
 export const CaptionVanilla = forwardRef<HTMLTableCaptionElement, CaptionVanillaProps>(
-  (
-    { size, weight, variant, gradient, transform, noWrap, className, css, style, ...props },
-    ref,
-  ) => (
-    <caption
-      ref={ref}
-      className={cx(
-        captionClass({ size, weight, variant, gradient, transform, noWrap }),
-        className,
-      )}
-      style={useInlineStyle(css, style)}
-      {...props}
-    />
-  ),
+  ({ className, css, style, ...rest }, ref) => {
+    const [variants, props] = splitVariants(captionRecipe, rest);
+
+    return (
+      <caption
+        ref={ref}
+        className={cx(captionRecipe(variants), className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      />
+    );
+  },
 );
 
 CaptionVanilla.displayName = 'CaptionVanilla';
@@ -109,44 +107,27 @@ export type ThVanillaProps = Omit<React.ThHTMLAttributes<HTMLTableCellElement>, 
   TableSortProps;
 
 export const ThVanilla = forwardRef<HTMLTableCellElement, ThVanillaProps>(
-  (
-    {
-      size,
-      weight,
-      variant,
-      gradient,
-      transform,
-      noWrap,
-      align,
-      sort,
-      onSort,
-      className,
-      css,
-      style,
-      children,
-      ...props
-    },
-    ref,
-  ) => (
-    <th
-      ref={ref}
-      aria-sort={sort && ARIA_SORT[sort]}
-      className={cx(
-        thClass({ size, weight, variant, gradient, transform, noWrap, align }),
-        className,
-      )}
-      style={useInlineStyle(css, style)}
-      {...props}
-    >
-      {onSort ? (
-        <SortButtonVanilla sort={sort} onSort={onSort}>
-          {children}
-        </SortButtonVanilla>
-      ) : (
-        children
-      )}
-    </th>
-  ),
+  ({ sort, onSort, className, css, style, children, ...rest }, ref) => {
+    const [variants, props] = splitVariants(thRecipe, rest);
+
+    return (
+      <th
+        ref={ref}
+        aria-sort={sort && ARIA_SORT[sort]}
+        className={cx(thRecipe(variants), className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      >
+        {onSort ? (
+          <SortButtonVanilla sort={sort} onSort={onSort}>
+            {children}
+          </SortButtonVanilla>
+        ) : (
+          children
+        )}
+      </th>
+    );
+  },
 );
 
 ThVanilla.displayName = 'ThVanilla';
@@ -156,14 +137,18 @@ export type TdVanillaProps = Omit<React.TdHTMLAttributes<HTMLTableCellElement>, 
   TdRecipeVariants;
 
 export const TdVanilla = forwardRef<HTMLTableCellElement, TdVanillaProps>(
-  ({ subtle, align, className, css, style, ...props }, ref) => (
-    <td
-      ref={ref}
-      className={cx(tdRecipe({ subtle, align }), className)}
-      style={useInlineStyle(css, style)}
-      {...props}
-    />
-  ),
+  ({ className, css, style, ...rest }, ref) => {
+    const [variants, props] = splitVariants(tdRecipe, rest);
+
+    return (
+      <td
+        ref={ref}
+        className={cx(tdRecipe(variants), className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      />
+    );
+  },
 );
 
 TdVanilla.displayName = 'TdVanilla';
@@ -233,7 +218,7 @@ export const TrVanilla = forwardRef<HTMLTableRowElement, TrVanillaProps>(
           {...props}
         >
           {emptyFirstColumn &&
-            (tableHead ? <td className={cx(thClass(), emptyHeaderCell)} /> : <TdVanilla />)}
+            (tableHead ? <td className={cx(thRecipe(), emptyHeaderCell)} /> : <TdVanilla />)}
           {collapsible && (
             <TdVanilla className={toggleCell} onClick={stopEvent}>
               <ExpandToggleVanilla

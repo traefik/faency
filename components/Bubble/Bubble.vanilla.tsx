@@ -7,7 +7,7 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { type RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { bubbleRecipe } from './Bubble.vanilla.css';
@@ -25,14 +25,15 @@ type BubbleVanillaComponent = PolymorphicComponent<'div', BubbleOwnProps>;
 
 const BubbleVanillaComponentImpl = forwardRef(
   <C extends ElementType = 'div'>(
-    { as, className, css, style, size, variant, noAnimation, ...props }: BubbleVanillaProps<C>,
+    { as, className, css, style, ...rest }: BubbleVanillaProps<C>,
     ref?: PolymorphicRef<C>,
   ) => {
     const Component = as || 'div';
+    const [variants, props] = splitVariants(bubbleRecipe, rest);
 
     const mergedStyles = useInlineStyle(css, style);
 
-    const recipeClass = bubbleRecipe({ size, variant, noAnimation });
+    const recipeClass = bubbleRecipe(variants);
 
     return (
       <Component ref={ref} className={cx(recipeClass, className)} style={mergedStyles} {...props} />

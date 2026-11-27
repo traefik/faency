@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
+import { splitVariants } from '@/styles/recipeVariants';
 import { resolveColor } from '@/styles/resolveColor';
 import { useVanillaExtractTheme } from '@/styles/themeContext';
 import { useInlineStyle } from '@/styles/useInlineStyle';
@@ -21,7 +22,8 @@ export type SpinnerVanillaProps = Omit<
   };
 
 export const SpinnerVanilla = forwardRef<HTMLSpanElement, SpinnerVanillaProps>(
-  ({ size, color, label = 'Loading', className, css, style, ...props }, ref) => {
+  ({ color, label = 'Loading', className, css, style, ...rest }, ref) => {
+    const [variants, props] = splitVariants(spinnerRecipe, rest);
     const { colors } = useVanillaExtractTheme();
     const inlineStyle = useInlineStyle(css, style);
     const colorStyle = color ? { color: resolveColor(color, colors) } : undefined;
@@ -30,7 +32,7 @@ export const SpinnerVanilla = forwardRef<HTMLSpanElement, SpinnerVanillaProps>(
       <span
         ref={ref}
         role="status"
-        className={cx(spinnerRecipe({ size }), className)}
+        className={cx(spinnerRecipe(variants), className)}
         style={{ ...colorStyle, ...inlineStyle }}
         {...props}
       >

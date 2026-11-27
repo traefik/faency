@@ -1,5 +1,5 @@
 import { keyframes, style } from '@vanilla-extract/css';
-import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
+import { recipe } from '@vanilla-extract/recipes';
 
 import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
@@ -315,5 +315,3 @@ export const buttonRecipe = recipe({
     variant: 'primary',
   },
 });
-
-export type ButtonRecipeVariants = RecipeVariants<typeof buttonRecipe>;

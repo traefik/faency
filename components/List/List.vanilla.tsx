@@ -14,7 +14,7 @@ import React, {
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import type {
   FlexAlignSimplified,
   FlexDirection,
@@ -27,9 +27,6 @@ import { warnOnce } from '@/utils/warnOnce';
 import { flexRecipe } from '@/components/Flex/Flex.vanilla.css';
 
 import { controlsWrapper, itemButton, itemText, liRecipe, ol, ul } from './List.vanilla.css';
-
-const flexClass = withVariantKeys(flexRecipe);
-const liClass = withVariantKeys(liRecipe);
 
 const ListVanillaContext = createContext({ interactive: false });
 
@@ -126,24 +123,9 @@ const splitNestedLists = (children: ReactNode) => {
 };
 
 export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
-  (
-    {
-      controls,
-      disabled,
-      elevation,
-      align,
-      justify,
-      direction,
-      gap,
-      wrap,
-      className,
-      css,
-      style,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ controls, disabled, className, css, style, children, ...rest }, ref) => {
+    const [liVariants, liProps] = splitVariants(liRecipe, rest);
+    const [flexVariants, props] = splitVariants(flexRecipe, liProps);
     const { interactive } = useContext(ListVanillaContext);
     const inlineStyle = useInlineStyle(css, style);
     const { content, nestedLists } = splitNestedLists(children);
@@ -161,18 +143,13 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
     });
 
     return (
-      <li
-        ref={ref}
-        className={cx(liClass({ elevation }), className)}
-        style={inlineStyle}
-        {...props}
-      >
+      <li ref={ref} className={cx(liRecipe(liVariants), className)} style={inlineStyle} {...props}>
         {interactive ? (
           <button
             ref={setContentRef}
             type="button"
             disabled={disabled}
-            className={cx(flexClass({ align, justify, direction, gap, wrap }), itemButton)}
+            className={cx(flexRecipe(flexVariants), itemButton)}
           >
             {content}
           </button>
@@ -180,7 +157,11 @@ export const LiVanilla = forwardRef<HTMLLIElement, LiVanillaProps>(
           <span
             ref={setContentRef}
             className={cx(
-              flexClass({ align: align ?? 'center', justify, direction, gap: gap ?? 1, wrap }),
+              flexRecipe({
+                ...flexVariants,
+                align: flexVariants.align ?? 'center',
+                gap: flexVariants.gap ?? 1,
+              }),
               itemText,
             )}
           >

@@ -5,7 +5,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testPathIgnorePatterns: ['/node_modules/', '/__tests__/utils'],
   transform: {
-    '\\.css\\.ts$': '<rootDir>/jest.cssTransform.cjs',
+    '\\.css\\.ts$': '<rootDir>/jest.cssTransform.mjs',
     '\\.(js|jsx|tsx?)$': 'babel-jest',
   },
   moduleNameMapper: {

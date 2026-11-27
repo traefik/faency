@@ -4,7 +4,7 @@ import React from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import type { RecipeVariantProps } from '@/styles/recipeVariants';
+import { type RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { useFieldControl } from '@/components/Field/FieldContext';
@@ -36,16 +36,16 @@ export const CheckboxVanilla = React.forwardRef<
     {
       id,
       disabled,
-      size,
       className,
       css,
       style,
       'aria-describedby': ariaDescribedBy,
       'aria-invalid': ariaInvalid,
-      ...props
+      ...rest
     },
     forwardedRef,
   ) => {
+    const [variants, props] = splitVariants(checkboxRecipe, rest);
     const control = useFieldControl({
       id,
       disabled,
@@ -62,7 +62,7 @@ export const CheckboxVanilla = React.forwardRef<
         disabled={control.disabled}
         aria-describedby={control['aria-describedby']}
         aria-invalid={control['aria-invalid']}
-        className={cx(checkboxRecipe({ size }), className)}
+        className={cx(checkboxRecipe(variants), className)}
         style={mergedStyles}
         ref={forwardedRef}
       >

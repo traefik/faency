@@ -6,7 +6,7 @@ import { createPolymorphicPart } from '@/styles/createPolymorphicPart';
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
 import { PolymorphicComponentProps } from '@/styles/polymorphic';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -15,8 +15,6 @@ import {
 } from '@/components/IconButton/IconButton.vanilla';
 
 import { dialogCloseButton, dialogContentRecipe, dialogOverlay } from './Dialog.vanilla.css';
-
-const dialogContentClass = withVariantKeys(dialogContentRecipe);
 
 export const DialogVanilla = DialogPrimitive.Root;
 export const DialogPortalVanilla = DialogPrimitive.Portal;
@@ -98,28 +96,23 @@ export type DialogContentVanillaProps = Omit<DialogPrimitive.DialogContentProps,
 
 export const DialogContentVanilla = forwardRef<HTMLDivElement, DialogContentVanillaProps>(
   (
-    {
-      elevation,
-      closeLabel = 'Close',
-      noCloseIcon = false,
-      className,
-      css,
-      style,
-      children,
-      ...props
-    },
+    { closeLabel = 'Close', noCloseIcon = false, className, css, style, children, ...rest },
     ref,
-  ) => (
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cx(dialogContentClass({ elevation }), className)}
-      style={useInlineStyle(css, style)}
-      {...props}
-    >
-      {children}
-      {!noCloseIcon && <DialogCloseIconButtonVanilla aria-label={closeLabel} />}
-    </DialogPrimitive.Content>
-  ),
+  ) => {
+    const [variants, props] = splitVariants(dialogContentRecipe, rest);
+
+    return (
+      <DialogPrimitive.Content
+        ref={ref}
+        className={cx(dialogContentRecipe(variants), className)}
+        style={useInlineStyle(css, style)}
+        {...props}
+      >
+        {children}
+        {!noCloseIcon && <DialogCloseIconButtonVanilla aria-label={closeLabel} />}
+      </DialogPrimitive.Content>
+    );
+  },
 );
 
 DialogContentVanilla.displayName = 'DialogContentVanilla';

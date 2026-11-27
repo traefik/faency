@@ -25,7 +25,10 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config) {
-    config.plugins = config.plugins || [];
+    // The library's type emission (vite.config.ts) has no place in a Storybook build.
+    config.plugins = (config.plugins || []).filter(
+      (plugin) => !(plugin && 'name' in plugin && plugin.name === 'vite:dts'),
+    );
     config.plugins.push(vanillaExtractPlugin());
     return config;
   },

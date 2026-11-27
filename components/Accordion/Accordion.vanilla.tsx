@@ -4,7 +4,7 @@ import React from 'react';
 
 import { CSSProps } from '@/styles/cssProps';
 import { cx } from '@/styles/cx';
-import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
+import { RecipeVariantProps, splitVariants } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import {
@@ -18,8 +18,6 @@ import {
   accordionTriggerLabelRecipe,
   accordionTriggerRecipe,
 } from './Accordion.vanilla.css';
-
-const accordionRootClass = withVariantKeys(accordionRootRecipe);
 
 type RootRecipeVariants = RecipeVariantProps<typeof accordionRootRecipe>;
 type TriggerRecipeVariants = RecipeVariantProps<typeof accordionTriggerRecipe>;
@@ -38,13 +36,14 @@ export type AccordionRootVanillaProps =
 export const AccordionRootVanilla = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   AccordionRootVanillaProps
->(({ elevation, className, css, style, ...props }, forwardedRef) => {
+>(({ className, css, style, ...rest }, forwardedRef) => {
+  const [variants, props] = splitVariants(accordionRootRecipe, rest);
   const mergedStyles = useInlineStyle(css, style);
 
   return (
     <AccordionPrimitive.Root
       {...props}
-      className={cx(accordionRootClass({ elevation }), className)}
+      className={cx(accordionRootRecipe(variants), className)}
       style={mergedStyles}
       ref={forwardedRef}
     />
@@ -90,7 +89,8 @@ export type AccordionTriggerBaseVanillaProps = Omit<
 export const AccordionTriggerBaseVanilla = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   AccordionTriggerBaseVanillaProps
->(({ headingLevel = 3, size, className, css, style, ...props }, forwardedRef) => {
+>(({ headingLevel = 3, className, css, style, ...rest }, forwardedRef) => {
+  const [variants, props] = splitVariants(accordionTriggerRecipe, rest);
   const mergedStyles = useInlineStyle(css, style);
   const Heading = headingLevel === 'none' ? 'div' : (`h${headingLevel}` as const);
 
@@ -99,7 +99,7 @@ export const AccordionTriggerBaseVanilla = React.forwardRef<
       <Heading>
         <AccordionPrimitive.Trigger
           {...props}
-          className={cx(accordionTriggerRecipe({ size }), className)}
+          className={cx(accordionTriggerRecipe(variants), className)}
           style={mergedStyles}
           ref={forwardedRef}
         />
@@ -145,7 +145,8 @@ export type AccordionContentVanillaProps = Omit<
 export const AccordionContentVanilla = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   AccordionContentVanillaProps
->(({ children, size, className, css, style, ...props }, forwardedRef) => {
+>(({ children, className, css, style, ...rest }, forwardedRef) => {
+  const [variants, props] = splitVariants(accordionContentWrapperRecipe, rest);
   const mergedStyles = useInlineStyle(css, style);
 
   return (
@@ -155,7 +156,7 @@ export const AccordionContentVanilla = React.forwardRef<
       style={mergedStyles}
       ref={forwardedRef}
     >
-      <div className={accordionContentWrapperRecipe({ size })}>{children}</div>
+      <div className={accordionContentWrapperRecipe(variants)}>{children}</div>
     </AccordionPrimitive.Content>
   );
 });

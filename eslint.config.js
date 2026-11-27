@@ -73,5 +73,9 @@ export default [
       '@eslint-react/no-create-ref': 'off',
     },
   },
+  {
+    files: ['**/*.cjs'],
+    languageOptions: { sourceType: 'commonjs', globals: globals.node },
+  },
   ...storybook.configs['flat/recommended'],
 ];
