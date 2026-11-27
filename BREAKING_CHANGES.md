@@ -338,16 +338,16 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 
 **Change:** `NavigationItemVanilla` draws its hover, focus and active backgrounds on the item itself instead of on `::before` and `::after`, and takes any element or component in `as`.
 
-|                                | Stitches `NavigationItem`              | Vanilla Extract `NavigationItemVanilla`                            |
-| ------------------------------ | -------------------------------------- | ------------------------------------------------------------------ |
-| Hover, focus and active colors | two layers on `::before` and `::after` | `background-image` layers on the item, over its `background-color` |
-| `as`                           | `'a'` or `'button'`                    | any element or component, e.g. a router `Link`                     |
-| `aria-current="page"`          | on an active item with `as="a"`        | on any active item that is not a `<button>`                        |
-| Active state in the DOM        | a generated class                      | a `data-active` attribute                                          |
-| Adornment and label wrappers   | `<div>`                                | `<span>`, valid inside a `<button>`                                |
-| Focus ring                     | on any focus, including mouse clicks   | on keyboard focus only, drawn above the focus background           |
+|                                | Stitches `NavigationItem`                                              | Vanilla Extract `NavigationItemVanilla`                  |
+| ------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------------- |
+| Hover, focus and active colors | two layers on `::before` and `::after`, drawn over the label and icons | `background-image` layers on the item, under its content |
+| `as`                           | `'a'` or `'button'`                                                    | any element or component, e.g. a router `Link`           |
+| `aria-current="page"`          | on an active item with `as="a"`                                        | on any active item that is not a `<button>`              |
+| Active state in the DOM        | a generated class                                                      | a `data-active` attribute                                |
+| Adornment and label wrappers   | `<div>`                                                                | `<span>`, valid inside a `<button>`                      |
+| Focus background and ring      | on any focus, including mouse clicks                                   | on keyboard focus only                                   |
 
-`NavigationDrawer` with `fullWidth` still squares the corners of its items and drops their focus ring, now without touching any pseudo-element.
+`NavigationDrawer` with `fullWidth` still squares the corners of its items, and now keeps their keyboard focus ring.
 
 **Before (v13.x with Stitches):**
 
@@ -390,7 +390,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 2. Target active items with `[data-active]` instead of the Stitches variant class
 3. Wrapping a router link in `NavigationItem` is no longer needed: pass it to `as`
 4. Change the base color with `background-color`, through `css` or `className`: the hover, focus and active layers stay on top of it. Avoid the `background` shorthand in `css`, which would remove them
-5. Change a state color with a `className` that targets `:hover`, `:focus` or `[data-active]`, since `css` cannot target states
+5. Change a state color with a `className` that targets `:hover`, `:focus-visible` or `[data-active]`, since `css` cannot target states. Retarget `:focus` rules to `:focus-visible`. A `:hover` or `:focus-visible` rule ties with the library's, so load it after Faency or make it more specific, e.g. `.sidebar .myItem:hover`
 
 **Rationale:**
 
@@ -405,15 +405,16 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 
 **Change:** `NavigationTreeItemVanilla` is built on `NavigationItemVanilla`, so the [Navigation changes](#navigation-item-backgrounds-as-and-active-state) apply to it too. It also changes how nesting and full width work.
 
-|                                    | Stitches `NavigationTree*`                                                                    | Vanilla Extract `NavigationTree*Vanilla`                                                                                    |
-| ---------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Depth in full width                | set by hand with `nestedChildrenLevel` on the parent item                                     | computed from the nesting; `nestedChildrenLevel` is removed                                                                 |
-| Full width highlight               | `::before`/`::after` pulled left by `nestedChildrenLevel × 20px`, content indented by padding | the item spans the whole row and indents its own content with `padding-left` by depth                                       |
-| `NavigationTreeContainer` defaults | resets `fullWidth` to `false` and the icons to chevrons                                       | inherits `fullWidth` and the icons from the drawer or container around it                                                   |
-| Focus on expandable items          | no focus ring or background at all                                                            | ring and background on keyboard focus, none after a mouse click; in full width, background only like other full width items |
-| `aria-expanded`                    | not set                                                                                       | set on expandable items                                                                                                     |
-| `as`, `ref`                        | `as` limited to `'a'` or `'button'`, no `ref`                                                 | any element or component in `as`, `ref` forwarded to the item (also on drawer/container)                                    |
-| Label and subtitle wrappers        | `<div>`                                                                                       | `<span>`                                                                                                                    |
+|                                    | Stitches `NavigationTree*`                                                                    | Vanilla Extract `NavigationTree*Vanilla`                                                 |
+| ---------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Depth in full width                | set by hand with `nestedChildrenLevel` on the parent item                                     | computed from the nesting; `nestedChildrenLevel` is removed                              |
+| Full width highlight               | `::before`/`::after` pulled left by `nestedChildrenLevel × 20px`, content indented by padding | the item spans the whole row and indents its own content with `padding-left` by depth    |
+| `NavigationTreeContainer` defaults | resets `fullWidth` to `false` and the icons to chevrons                                       | inherits `fullWidth` and the icons from the drawer or container around it                |
+| Focus on expandable items          | no focus ring or background at all                                                            | ring and background on keyboard focus, like every item                                   |
+| `onClick` on expandable items      | replaced by the toggle                                                                        | called after the toggle                                                                  |
+| `aria-expanded`, `aria-controls`   | not set                                                                                       | set on expandable items                                                                  |
+| `as`, `ref`                        | `as` limited to `'a'` or `'button'`, no `ref`                                                 | any element or component in `as`, `ref` forwarded to the item (also on drawer/container) |
+| Label and subtitle wrappers        | `<div>`                                                                                       | `<span>`                                                                                 |
 
 **Before (v13.x with Stitches):**
 
@@ -448,9 +449,9 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 **Rationale:**
 
 - A wrong `nestedChildrenLevel` left the highlight short of the drawer edge
-- Keyboard users can see which expandable item has focus, and screen readers announce whether it is open
+- Keyboard users can see which expandable item has focus, and screen readers announce whether it is open and what it controls
 
-**Impact:** Low - Remove `nestedChildrenLevel`; the rest is visual or additive
+**Impact:** Low - Remove `nestedChildrenLevel`, and check that `onClick` on expandable items does not also navigate unintentionally; the rest is visual or additive
 
 ---
 
@@ -521,6 +522,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 **Migration Guide:**
 
 1. No code change is needed
+2. Inside `LinkVanilla`, only `TextVanilla` inherits the link color; a Stitches `Text` keeps its own color, so migrate both together
 
 **Rationale:**
 
@@ -857,9 +859,10 @@ Release notes are generated by semantic-release; use this as the body of the bre
 - **Removed:** `StyledContent`
   - Migration: use `<DialogContent noCloseIcon>`
   - See [Migration Guide](./BREAKING_CHANGES.md#dialog-styledcontent-removed)
+
 #### Navigation
 
-- **Changed:** `NavigationItem` draws its hover, focus and active backgrounds on the item instead of `::before`/`::after`, marks active items with `data-active`, and shows its focus ring on keyboard focus only
+- **Changed:** `NavigationItem` draws its hover, focus and active backgrounds on the item instead of `::before`/`::after`, marks active items with `data-active`, and shows its focus background and ring on keyboard focus only
 - **Changed:** `NavigationItem` takes any element or component in `as`, and sets `aria-current="page"` on any active item that is not a `<button>`
   - Migration: move pseudo-element overrides to the item itself
   - See [Migration Guide](./BREAKING_CHANGES.md#navigation-item-backgrounds-as-and-active-state)
@@ -868,7 +871,7 @@ Release notes are generated by semantic-release; use this as the body of the bre
 
 - **Removed:** `nestedChildrenLevel` on `NavigationTreeItem`; the depth is computed from the nesting
 - **Changed:** `NavigationTreeContainer` inherits `fullWidth` and the icons from the drawer or container around it
-- **Changed:** Expandable items show the focus ring on keyboard focus and set `aria-expanded`
+- **Changed:** Expandable items show the focus ring on keyboard focus, set `aria-expanded` and `aria-controls`, and call `onClick` after toggling
   - See [Migration Guide](./BREAKING_CHANGES.md#navigationtree-depth-full-width-and-focus)
 
 #### Link

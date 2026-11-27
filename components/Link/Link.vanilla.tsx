@@ -7,10 +7,12 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/styles/polymorphic';
-import { RecipeVariantProps } from '@/styles/recipeVariants';
+import { RecipeVariantProps, withVariantKeys } from '@/styles/recipeVariants';
 import { useInlineStyle } from '@/styles/useInlineStyle';
 
 import { linkRecipe } from './Link.vanilla.css';
+
+const linkClass = withVariantKeys(linkRecipe);
 
 interface LinkOwnProps extends RecipeVariantProps<typeof linkRecipe>, CSSProps {}
 
@@ -31,7 +33,7 @@ const LinkVanillaImpl = forwardRef(
     return (
       <Component
         ref={ref}
-        className={cx(linkRecipe({ variant }), className)}
+        className={cx(linkClass({ variant }), className)}
         style={useInlineStyle(css, style)}
         {...props}
       />

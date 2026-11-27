@@ -47,7 +47,7 @@ describe('NavigationTreeVanilla', () => {
     expect(screen.getByText('Bold').nodeName).toBe('STRONG');
   });
 
-  it('toggles nested children and aria-expanded when an expandable item is clicked', () => {
+  it('toggles nested children, aria-expanded and aria-controls when an expandable item is clicked', () => {
     renderWithTheme(
       <NavigationTreeContainerVanilla>
         <NavigationTreeItemVanilla label="Parent">
@@ -58,14 +58,20 @@ describe('NavigationTreeVanilla', () => {
     const parent = screen.getByRole('button', { name: /Parent/ });
 
     expect(parent).toHaveAttribute('aria-expanded', 'false');
+    expect(parent).not.toHaveAttribute('aria-controls');
     expect(screen.queryByRole('button', { name: /Child/ })).not.toBeInTheDocument();
 
     fireEvent.click(parent);
     expect(parent).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('button', { name: /Child/ })).toBeInTheDocument();
+    const child = screen.getByRole('button', { name: /Child/ });
+    expect(child.parentElement?.parentElement).toHaveAttribute(
+      'id',
+      parent.getAttribute('aria-controls'),
+    );
 
     fireEvent.click(parent);
     expect(screen.queryByRole('button', { name: /Child/ })).not.toBeInTheDocument();
+    expect(parent).not.toHaveAttribute('aria-controls');
   });
 
   it('does not set aria-expanded on a leaf item', () => {
@@ -84,7 +90,7 @@ describe('NavigationTreeVanilla', () => {
     expect(screen.getByRole('button', { name: /Child/ })).toBeInTheDocument();
   });
 
-  it('calls onClick for a leaf item but toggles (does not call onClick) for an expandable item', () => {
+  it('calls onClick for a leaf item, and after toggling for an expandable item', () => {
     const onLeafClick = jest.fn();
     const onParentClick = jest.fn();
 
@@ -101,7 +107,7 @@ describe('NavigationTreeVanilla', () => {
     expect(onLeafClick).toHaveBeenCalledTimes(1);
 
     fireEvent.click(screen.getByRole('button', { name: /Parent/ }));
-    expect(onParentClick).not.toHaveBeenCalled();
+    expect(onParentClick).toHaveBeenCalledTimes(1);
     expect(screen.getByRole('button', { name: /Child/ })).toBeInTheDocument();
   });
 

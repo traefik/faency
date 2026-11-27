@@ -7,6 +7,7 @@ import React, {
   forwardRef,
   ReactNode,
   useContext,
+  useId,
   useMemo,
   useState,
 } from 'react';
@@ -34,7 +35,6 @@ import { TextVanilla } from '@/components/Text/Text.vanilla';
 
 import {
   navigationTreeDepth,
-  navigationTreeItemExpandable,
   navigationTreeItemFullWidth,
   navigationTreeLabel,
   navigationTreeLabelIndented,
@@ -200,6 +200,7 @@ const NavigationTreeItemVanillaImpl = forwardRef(
       fullWidth,
     });
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+    const nestedId = useId();
     // eslint-disable-next-line @eslint-react/no-children-to-array
     const isExpandable = Children.toArray(children).length > 0;
 
@@ -217,16 +218,16 @@ const NavigationTreeItemVanillaImpl = forwardRef(
       <div>
         <NavigationItemVanilla
           ref={ref}
-          className={cx(
-            isExpandable && navigationTreeItemExpandable,
-            settings.fullWidth && navigationTreeItemFullWidth,
-            className,
-          )}
+          className={cx(settings.fullWidth && navigationTreeItemFullWidth, className)}
           style={itemStyle}
           aria-expanded={isExpandable ? isExpanded : undefined}
+          aria-controls={isExpandable && isExpanded ? nestedId : undefined}
           {...(props as NavigationItemVanillaProps<ElementType>)}
           startAdornment={startAdornment || (isExpandable ? expandIcon : null)}
-          onClick={isExpandable ? () => setIsExpanded((expanded) => !expanded) : onClick}
+          onClick={(event: React.MouseEvent<HTMLElement>) => {
+            if (isExpandable) setIsExpanded((expanded) => !expanded);
+            onClick?.(event);
+          }}
         >
           <FlexVanilla
             as="span"
@@ -253,6 +254,7 @@ const NavigationTreeItemVanillaImpl = forwardRef(
         {isExpanded && (
           <NavigationTreeContext.Provider value={childContext}>
             <NavigationContainerVanilla
+              id={nestedId}
               className={settings.fullWidth ? undefined : navigationTreeNested}
             >
               {children}

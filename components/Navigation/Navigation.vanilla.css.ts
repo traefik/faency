@@ -45,19 +45,17 @@ export const navigationItem = style({
     '&:first-child': {
       marginTop: 0,
     },
-    '&:focus': {
-      color: tokens.colors.navButtonFocusText,
-      backgroundImage: layers(tokens.colors.navButtonFocusBg2, tokens.colors.navButtonFocusBg),
-    },
-    '&:focus-visible': {
-      boxShadow: `inset 0 0 0 2px ${tokens.colors.navButtonFocusBorder}`,
-    },
     // `data-active` also comes from Radix when the item is the `as` of a NavigationMenuLink; `:where` lets hover and focus layers win.
     '&:where([data-active])': {
       color: tokens.colors.navButtonActiveText,
       backgroundImage: layers(tokens.colors.navButtonActiveBg2, tokens.colors.navButtonActiveBg),
     },
-    '&:where([data-active]):focus': {
+    '&:focus-visible': {
+      color: tokens.colors.navButtonFocusText,
+      backgroundImage: layers(tokens.colors.navButtonFocusBg2, tokens.colors.navButtonFocusBg),
+      boxShadow: `inset 0 0 0 2px ${tokens.colors.navButtonFocusBorder}`,
+    },
+    '&:where([data-active]):focus-visible': {
       color: tokens.colors.navButtonActiveText,
     },
   },
@@ -112,7 +110,7 @@ export const navigationItemEnd = style([
 ]);
 
 globalStyle(
-  `${navigationItem}:focus > ${navigationItemDimmed}, ${navigationItem}:hover > ${navigationItemDimmed}, ${navigationItem}[data-active] > ${navigationItemDimmed}`,
+  `${navigationItem}:focus-visible > ${navigationItemDimmed}, ${navigationItem}:hover > ${navigationItemDimmed}, ${navigationItem}[data-active] > ${navigationItemDimmed}`,
   { opacity: 1 },
 );
 
@@ -148,18 +146,14 @@ export const navigationDrawerRecipe = recipe({
 
 export const navigationItemFullWidth = style({});
 
-// Children of a full width drawer, or items flagged full width at any depth; defined after the item so they win over its radius and focus ring.
-const fullWidthItems = [
-  `${navigationDrawerFullWidth} > *`,
-  `${navigationDrawerFullWidth} > div > *`,
-  `${navigationItemFullWidth}${navigationItem}`,
-];
-
-globalStyle(fullWidthItems.join(', '), {
-  borderRadius: 0,
-});
-
-globalStyle(fullWidthItems.map((selector) => `${selector}:focus`).join(', '), {
-  border: 'none',
-  boxShadow: 'none',
-});
+// Children of a full width drawer, or items flagged full width at any depth.
+globalStyle(
+  [
+    `${navigationDrawerFullWidth} > *`,
+    `${navigationDrawerFullWidth} > div > *`,
+    `${navigationItemFullWidth}${navigationItem}`,
+  ].join(', '),
+  {
+    borderRadius: 0,
+  },
+);

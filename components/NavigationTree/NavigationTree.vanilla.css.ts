@@ -11,16 +11,6 @@ export const navigationTreeNested = style({
   paddingLeft: tokens.space['4'],
 });
 
-// Keeps the keyboard focus ring; a mouse click only expands the item, so it shows no focus state.
-export const navigationTreeItemExpandable = style({
-  selectors: {
-    '&:focus:not(:focus-visible)': {
-      boxShadow: 'none',
-      backgroundImage: 'none',
-    },
-  },
-});
-
 export const navigationTreeLabel = style({
   width: '100%',
   color: 'inherit',
