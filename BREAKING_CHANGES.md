@@ -522,7 +522,55 @@ The provider applies the theme class to `document.body`, so the Stitches `darkTh
 
 ### Stitches Exports Removed
 
-`styled`, `css`, `keyframes`, `createTheme`, `globalCss`, `getCssText`, `darkTheme`, `lightTheme`, `config`, and the `CSS` and `VariantProps` types are removed. Vanilla equivalents: `vanillaTokens`, `vanillaThemes`, `vanillaLightTheme`, `vanillaDarkTheme`, `CSSProps`.
+`styled`, `css`, `keyframes`, `createTheme`, `globalCss`, `getCssText`, `darkTheme`, `lightTheme`, `config`, and the `CSS` and `VariantProps` types are removed.
+
+Their replacements are the vanilla-extract functions, used in your app's `.css.ts` files with the values and helpers from `@traefik-labs/faency/vanilla`, available today. Your app needs the vanilla-extract bundler plugin. See [Writing Your Own Styles with Vanilla Extract](./USER_GUIDE.md#writing-your-own-styles-with-vanilla-extract).
+
+| Stitches export                              | Replacement                                                                                                                                                                                                                                       |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `styled(Component, styles)`                  | `style(styleRule(styles))` in a `.css.ts` file, passed as `className`; `variants` become a `recipe()`                                                                                                                                             |
+| `css(styles)`                                | `style(styleRule(styles))`                                                                                                                                                                                                                        |
+| `globalCss(rules)`                           | `globalStyleRules(rules).forEach(([selector, rule]) => globalStyle(selector, rule))`                                                                                                                                                              |
+| `keyframes(frames)`                          | `keyframes(keyframesRule(frames))`                                                                                                                                                                                                                |
+| `createTheme(…)`                             | `globalStyle` with `vars` on the theme class, see [Using and Overriding Vanilla Extract Tokens](./USER_GUIDE.md#using-and-overriding-vanilla-extract-tokens-in-your-app) (vanilla-extract `createTheme(tokens, …)` needs a value for every token) |
+| `lightTheme(primary)` / `darkTheme(primary)` | `VanillaExtractThemeProvider`, or the classes in `themes.light[primary]` / `themes.dark[primary]`                                                                                                                                                 |
+| `getCssText()`                               | Nothing: import `@traefik-labs/faency/style.css` and your own static CSS; no `<style>` tag for SSR                                                                                                                                                |
+| `config.theme.colors.orange11`               | `tokens.colors.orange[11]` (CSS variable) or `lightColors.orange11` / `darkColors.orange11` (raw value)                                                                                                                                           |
+| `config.theme.<scale>`                       | `tokens.<scale>`, such as `tokens.space[2]`                                                                                                                                                                                                       |
+| `config.media`                               | `breakpoints`                                                                                                                                                                                                                                     |
+| `config.utils`                               | Applied by `styleRule()`, `globalStyleRules()` and `keyframesRule()`                                                                                                                                                                              |
+| `CSS` type                                   | `FaencyStyle` for `styleRule()` input; `CSSProps['css']` for the `css` prop                                                                                                                                                                       |
+| `VariantProps<typeof Component>`             | `RecipeVariants<typeof recipe>` from `@vanilla-extract/recipes`, or `ComponentProps<typeof Component>`                                                                                                                                            |
+
+```tsx
+// Before
+import { Flex, styled } from '@traefik-labs/faency';
+
+const Container = styled(Flex, {
+  px: '$2',
+  bc: '$contentBg',
+  '&:hover': { c: '$primary' },
+});
+
+// After: Container.css.ts
+import { style } from '@vanilla-extract/css';
+import { styleRule } from '@traefik-labs/faency/vanilla';
+
+export const container = style(
+  styleRule({ px: '$2', bc: '$contentBg', '&:hover': { c: '$primary' } }),
+);
+
+// After: Container.tsx
+import { Flex } from '@traefik-labs/faency';
+
+import { container } from './Container.css';
+
+const Container = (props) => <Flex className={container} {...props} />;
+```
+
+`styleRule()` cannot style children (`'& > div'`, `'&:hover span'`): vanilla-extract requires a `style()` selector to target the element itself. Give those their own `globalStyle()`, as in the user guide example.
+
+Breakpoints now always override the plain declarations of the same selector, as vanilla-extract writes `@media` rules last. With Stitches, a plain declaration written after a breakpoint won and made the breakpoint dead: `{ '@bp1': { color: 'red' }, color: 'blue' }` was blue everywhere, and is now red at bp1. Remove such dead breakpoints when migrating.
 
 ---
 
@@ -617,6 +665,7 @@ Release notes are generated by semantic-release; use this as the body of the bre
   - Before: `import { BadgeVanilla } from '@traefik-labs/faency'`
   - After: `import { Badge } from '@traefik-labs/faency'`
 - **Removed:** Stitches exports (`styled`, `css`, `keyframes`, `globalCss`, …), `panelStyles`, `elevationVariants`, `overlayStyles`
+  - Use vanilla-extract with `@traefik-labs/faency/vanilla`, see [Migration Guide](./BREAKING_CHANGES.md#stitches-exports-removed)
 
 #### Component APIs
 
