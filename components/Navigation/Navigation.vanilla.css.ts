@@ -2,13 +2,10 @@ import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
-
-// State colors stack over `background-color`, so a custom base color keeps the hover, focus and active layers.
-const layers = (tint: string, color: string) =>
-  `linear-gradient(${tint}, ${tint}), linear-gradient(${color}, ${color})`;
 
 const negativeSpace1 = `calc(${tokens.space['1']} * -1)`;
 
@@ -48,11 +45,14 @@ export const navigationItem = style({
     // `data-active` also comes from Radix when the item is the `as` of a NavigationMenuLink; `:where` lets hover and focus layers win.
     '&:where([data-active])': {
       color: tokens.colors.navButtonActiveText,
-      backgroundImage: layers(tokens.colors.navButtonActiveBg2, tokens.colors.navButtonActiveBg),
+      backgroundImage: stateLayers(
+        tokens.colors.navButtonActiveBg2,
+        tokens.colors.navButtonActiveBg,
+      ),
     },
     '&:focus-visible': {
       color: tokens.colors.navButtonFocusText,
-      backgroundImage: layers(tokens.colors.navButtonFocusBg2, tokens.colors.navButtonFocusBg),
+      backgroundImage: stateLayers(tokens.colors.navButtonFocusBg2, tokens.colors.navButtonFocusBg),
       boxShadow: `inset 0 0 0 2px ${tokens.colors.navButtonFocusBorder}`,
     },
     '&:where([data-active]):focus-visible': {
@@ -65,7 +65,10 @@ export const navigationItem = style({
       selectors: {
         '&:hover': {
           color: tokens.colors.navButtonHoverText,
-          backgroundImage: layers(tokens.colors.navButtonHoverBg2, tokens.colors.navButtonHoverBg),
+          backgroundImage: stateLayers(
+            tokens.colors.navButtonHoverBg2,
+            tokens.colors.navButtonHoverBg,
+          ),
         },
         '&:where([data-active]):hover': {
           color: tokens.colors.navButtonActiveText,

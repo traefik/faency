@@ -116,6 +116,18 @@ export const selectTriggerRecipe = recipe({
             boxShadow: `inset 0 0 0 2px ${tokens.colors.selectInvalidBorder}, ${FOCUS_SHADOW}`,
           },
         },
+        '@media': {
+          [breakpoints.hover]: {
+            selectors: {
+              '&:hover': {
+                backgroundImage: stateLayers(
+                  tokens.colors.selectInvalidHoverTint,
+                  tokens.colors.selectHoverBg,
+                ),
+              },
+            },
+          },
+        },
       },
     },
   },

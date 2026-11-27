@@ -5,8 +5,8 @@ import { breakpoints } from '@/styles/breakpoints.css';
 import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
-// Lets Alert add an inset ring without replacing the elevation shadow.
-export const cardRing = createVar();
+// Lets Alert add an inset ring without replacing the elevation shadow. Not inherited, so nested cards don't draw it.
+export const cardRing = createVar({ syntax: '*', inherits: false });
 const ring = fallbackVar(cardRing, '0 0 #0000');
 
 const elevationVariants = {
@@ -96,12 +96,13 @@ const interactiveCardBase = style([
       },
     },
     selectors: {
-      '&:active': {
+      // `:hover:active` outranks the hover rule, which comes later inside its media query.
+      '&:active, &:hover:active': {
         outline: `1px solid ${tokens.colors.cardActiveBorder}`,
         backgroundImage: stateLayers(tokens.colors.cardActiveBackground),
       },
       // Beats the hover and active outlines.
-      '&:focus, &:focus:hover, &:focus:active': {
+      '&:focus-visible, &:focus-visible:hover, &:focus-visible:active': {
         outline: `2px solid ${tokens.colors.primary}`,
       },
     },
@@ -126,6 +127,17 @@ export const interactiveCardRecipe = recipe({
       true: {
         outline: `1px solid ${tokens.colors.cardActiveBorder}`,
         backgroundImage: stateLayers(tokens.colors.cardActiveBackground),
+        // Same media query as the base hover, so this later rule replaces it.
+        '@media': {
+          [breakpoints.hover]: {
+            selectors: {
+              '&:hover': {
+                outline: `1px solid ${tokens.colors.cardActiveBorder}`,
+                backgroundImage: stateLayers(tokens.colors.cardActiveBackground),
+              },
+            },
+          },
+        },
       },
     },
   },

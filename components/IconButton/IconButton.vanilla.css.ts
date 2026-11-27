@@ -41,7 +41,8 @@ const baseIconButton = style({
       outline: '2px solid currentColor',
       backgroundImage: stateLayers(HOVER_LAYER),
     },
-    '&:active': {
+    // `:hover:active` outranks the hover rules, which come later inside their media query.
+    '&:active, &:hover:active': {
       backgroundImage: stateLayers(PRESSED_LAYER),
     },
   },

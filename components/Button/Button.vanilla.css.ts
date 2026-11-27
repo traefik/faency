@@ -56,7 +56,8 @@ const baseButton = style({
       boxShadow: `inset 0 0 0 2px ${tokens.colors.focusOutline}`,
       backgroundImage: stateLayers(HOVER_LAYER),
     },
-    '&:active': {
+    // `:hover:active` outranks the hover rules, which come later inside their media query.
+    '&:active, &:hover:active': {
       backgroundImage: stateLayers(PRESSED_LAYER),
     },
   },

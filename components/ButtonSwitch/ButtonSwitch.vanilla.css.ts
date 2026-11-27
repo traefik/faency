@@ -22,16 +22,17 @@ export const buttonSwitchItem = style({
   justifyContent: 'center',
   fontWeight: 600,
   border: 'none',
-  borderRadius: tokens.radii['3'],
   position: 'relative',
 
   selectors: {
     '&:focus-visible': {
+      borderRadius: tokens.radii['3'],
       backgroundImage: stateLayers(HOVER_LAYER),
     },
     '&[data-state=on]': {
       backgroundColor: tokens.colors.buttonSwitchActiveBg,
       color: tokens.colors.buttonSwitchActiveColor,
+      borderRadius: tokens.radii['3'],
     },
   },
 
@@ -40,6 +41,7 @@ export const buttonSwitchItem = style({
       selectors: {
         '&:hover': {
           cursor: 'pointer',
+          borderRadius: tokens.radii['3'],
           backgroundImage: stateLayers(HOVER_LAYER),
         },
       },

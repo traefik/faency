@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyle, GlobalStyleRule, style } from '@vanilla-extract/css';
 
 import { breakpoints } from '@/styles/breakpoints.css';
 import { stateLayers } from '@/styles/stateLayers';
@@ -40,14 +40,32 @@ export const firefoxPatch = style({
   },
 });
 
-globalStyle(`${wrapper}:hover ${firefoxPatch}`, {
-  '@supports': {
-    '(-moz-appearance: none)': {
-      '@media': {
-        [breakpoints.hover]: {
-          backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.inputHoverBg),
-        },
-      },
-    },
-  },
-});
+const inFirefox = (rule: GlobalStyleRule) => ({ '@supports': { '(-moz-appearance: none)': rule } });
+const onHover = (rule: GlobalStyleRule) => inFirefox({ '@media': { [breakpoints.hover]: rule } });
+
+// Direct child only: adornments render inside the same wrapper and may hold inputs of their own.
+const field = `${input} > input`;
+
+globalStyle(
+  `${wrapper}:hover ${firefoxPatch}`,
+  onHover({ backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.inputHoverBg) }),
+);
+
+globalStyle(
+  `${wrapper}:hover:has(${field}[aria-invalid="true"]) ${firefoxPatch}`,
+  onHover({
+    backgroundImage: stateLayers(tokens.colors.inputInvalidHoverTint, tokens.colors.inputHoverBg),
+  }),
+);
+
+// Dimmed like the Input wrapper, and not clickable, so it can't open the picker.
+globalStyle(
+  `${wrapper}:has(${field}:disabled) ${firefoxPatch}`,
+  inFirefox({ opacity: 0.7, pointerEvents: 'none' }),
+);
+
+// Declared after the invalid rule, with the same specificity, so it wins.
+globalStyle(
+  `${wrapper}:hover:has(${field}:disabled) ${firefoxPatch}`,
+  onHover({ backgroundImage: 'none' }),
+);

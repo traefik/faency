@@ -549,9 +549,15 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 | `Card` state outline    | on `::before`                                   | on the element                                                          |
 | `Alert` ring            | inset `box-shadow` on `::before`                | inset `box-shadow` on the element, before the elevation shadow          |
 
-The `Input` and `Textarea` wrappers also lose a `:focus-visible` background that never showed, since the wrapper cannot take focus.
+The `Input` and `Textarea` wrappers also lose a `:focus-visible` background that never showed, since the wrapper cannot take focus. Their hover tint is now drawn under the inner control, so it no longer shows while the browser autofills the field or while a ghost field is focused, both of which paint an opaque background on the control.
 
-The `Checkbox` and `SegmentedControlItem` hover, the highlighted `Combobox` option, `DropdownMenuItem` and `SelectItem`, and the interactive and active `Tr` backgrounds were a `background-color` and are now layers too, so a custom background no longer hides them. The interactive `Tr` and `SegmentedControlItem` hovers now only apply on devices that can hover, and the `SegmentedControlItem` hover no longer fades in.
+On devices that can hover, `Button`, `IconButton`, interactive `Card` and interactive `Li` now show their pressed color while held, where the hover color used to win. An interactive `Card` with `active` keeps its active look on hover, and its focus ring only shows for keyboard focus (`:focus-visible`), so a mouse click no longer leaves it. The same goes for the interactive `Li` focus ring.
+
+In Firefox, the `DateTimePickerInput` patch over the native picker button follows the field: a red hover tint when invalid, and dimmed with no hover and no click when disabled. These states need `:has()` (Firefox 121 and later).
+
+An invalid `SelectTrigger` now gets the same red hover tint as an invalid `Input`, from the new `selectInvalidHoverTint` theme token, instead of the primary tint.
+
+The `Checkbox` and `SegmentedControlItem` hover, the highlighted `Combobox` option, `DropdownMenuItem` and `SelectItem`, and the interactive and active `Tr` backgrounds were a `background-color` and are now layers too, so a custom background no longer hides them. The interactive `Badge`, `Tr` and `SegmentedControlItem` hovers now only apply on devices that can hover, and the `SegmentedControlItem` hover no longer fades in.
 
 A `box-shadow` set on an `Alert` through `css` or `className` now replaces its ring too.
 

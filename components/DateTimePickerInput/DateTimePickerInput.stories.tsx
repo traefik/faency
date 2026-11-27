@@ -11,6 +11,7 @@ import { FieldVanilla } from '../Field/Field.vanilla';
 import { Flex } from '../Flex';
 import { FlexVanilla } from '../Flex/Flex.vanilla';
 import { H3Vanilla } from '../Heading';
+import { InputVanillaProps } from '../Input/Input.vanilla';
 import { Label } from '../Label';
 import { Text, TextVanilla } from '../Text';
 import {
@@ -178,7 +179,13 @@ type ComparisonProps = Pick<
   'labels' | 'showDatePresets' | 'showTimePicker' | 'time'
 >;
 
-const COMPARISON_STATES: { label: string; props: ComparisonProps }[] = [
+type ComparisonInputProps = Pick<InputVanillaProps, 'disabled' | 'state'>;
+
+const COMPARISON_STATES: {
+  label: string;
+  props: ComparisonProps;
+  inputProps?: ComparisonInputProps;
+}[] = [
   { label: 'Base', props: {} },
   { label: 'With time picker and presets', props: { showTimePicker: true, showDatePresets: true } },
   {
@@ -186,6 +193,8 @@ const COMPARISON_STATES: { label: string; props: ComparisonProps }[] = [
     props: { showTimePicker: true, time: { minTime: { h: 9, m: 0 }, maxTime: { h: 18, m: 0 } } },
   },
   { label: 'Custom labels (popup and arrow buttons)', props: { labels: CUSTOM_LABELS } },
+  { label: 'Disabled', props: {}, inputProps: { disabled: true } },
+  { label: 'Invalid', props: {}, inputProps: { state: 'invalid' } },
 ];
 
 const LABEL_WIDTH = 180;
@@ -201,6 +210,7 @@ const ComparisonRow = ({
   label,
   minDate,
   props,
+  inputProps,
 }: (typeof COMPARISON_STATES)[number] & { minDate: Date }): JSX.Element => {
   const [stitchesDates, setStitchesDates] = useState<Date[]>([]);
   const [vanillaDates, setVanillaDates] = useState<Date[]>([]);
@@ -213,6 +223,8 @@ const ComparisonRow = ({
       <BoxVanilla css={{ width: COLUMN_WIDTH }}>
         <DateTimePickerInput
           {...props}
+          // The Stitches `inputProps` type is the Input component itself, not its props.
+          inputProps={inputProps as DateTimePickerInputProps['inputProps']}
           calendar={{ startDay: 1 }}
           dates={{ minDate }}
           inputCSS={{ width: '100%' }}
@@ -223,6 +235,7 @@ const ComparisonRow = ({
       <BoxVanilla css={{ width: COLUMN_WIDTH }}>
         <DateTimePickerInputVanilla
           {...props}
+          inputProps={inputProps}
           calendar={{ startDay: 1 }}
           dates={{ minDate }}
           inputCSS={{ width: '100%' }}

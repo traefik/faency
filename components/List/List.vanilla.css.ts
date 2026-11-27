@@ -99,10 +99,11 @@ export const itemButton = style([
       '&:disabled': {
         opacity: 0.5,
       },
-      '&:focus, &:focus-visible': {
+      '&:focus-visible': {
         boxShadow: `inset 0 0 0 2px ${tokens.colors.listItemFocusBorder}`,
       },
-      '&:enabled:active': {
+      // `:hover:active` outranks the hover rule, which comes later inside its media query.
+      '&:enabled:active, &:enabled:hover:active': {
         backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.listItemActiveBg),
       },
     },
