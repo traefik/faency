@@ -451,7 +451,7 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - A wrong `nestedChildrenLevel` left the highlight short of the drawer edge
 - Keyboard users can see which expandable item has focus, and screen readers announce whether it is open and what it controls
 
-**Impact:** Low - Remove `nestedChildrenLevel`, and check that `onClick` on expandable items does not also navigate unintentionally; the rest is visual or additive
+**Impact:** Low - Remove `nestedChildrenLevel`. An `onClick` on an expandable item now also runs on every toggle, so check it does nothing meant for leaf items only, such as navigating. The rest is visual or additive
 
 ---
 
