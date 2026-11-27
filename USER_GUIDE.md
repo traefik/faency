@@ -70,7 +70,6 @@ For Vanilla Extract components, use the `VanillaExtractThemeProvider`:
 
 ```tsx
 import React from 'react';
-import '@traefik-labs/faency/style.css';
 import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
 import { BoxVanilla, BadgeVanilla } from '@traefik-labs/faency';
 
@@ -95,13 +94,22 @@ Stitches components use runtime CSS-in-JS, so no separate CSS imports are needed
 
 #### For Vanilla Extract Components (Migration in Progress)
 
-Vanilla Extract components require importing the static CSS file. Add this import to your application's entry point (e.g., `App.tsx` or `index.tsx`):
+In the ES module build, each Vanilla Extract component imports its own CSS file. A bundler such as Vite or webpack picks these up, so there is nothing to import and only the styles of the components you use end up in your app.
+
+If you load the CommonJS build (`require`), or want all styles in one file with a fixed order, import the full stylesheet in your entry point (e.g., `App.tsx` or `index.tsx`) instead:
 
 ```tsx
 import '@traefik-labs/faency/style.css';
 ```
 
-This CSS file contains all the styles for Vanilla Extract components (components with `Vanilla` suffix like `BadgeVanilla`, `BoxVanilla`, etc.). Without this import, these components will render as unstyled elements.
+Use one or the other: importing `style.css` alongside the ES module build loads the same styles twice.
+
+Node can't load `.css` imports, so tools that run the ES module build in Node without a bundler need to hand Faency to their bundler:
+
+- **Vitest**: inline the package with `test.server.deps.inline: ['@traefik-labs/faency']`.
+- **Server-side rendering**: make sure your framework bundles `@traefik-labs/faency` rather than loading it as an external Node module.
+
+Jest loads the CommonJS build by default, which has no CSS imports, so it needs no change.
 
 ## Theming
 

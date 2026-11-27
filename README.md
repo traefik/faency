@@ -50,13 +50,7 @@ const MyComponent = () => <Container>{children}</Container>;
 
 For better performance with static CSS, you can use the new Vanilla Extract components (many components are available, more being migrated).
 
-1. Import the CSS file in your app's entry point:
-
-```jsx
-import '@traefik-labs/faency/style.css';
-```
-
-2. Wrap your app with the VanillaExtractThemeProvider:
+Wrap your app with the VanillaExtractThemeProvider:
 
 ```jsx
 import { VanillaExtractThemeProvider } from '@traefik-labs/faency';
@@ -71,7 +65,7 @@ const App = () => (
 );
 ```
 
-> **Note**: Vanilla Extract components use static CSS generated at build time, providing better performance than runtime CSS-in-JS. CSS is automatically included when you import components - no separate CSS import needed. Components with the `Vanilla` suffix (e.g., `BadgeVanilla`, `BoxVanilla`) are available. Not all components have Vanilla Extract versions yet - check the component documentation or use the Stitches version if a Vanilla version is not available.
+> **Note**: Vanilla Extract components use static CSS generated at build time, providing better performance than runtime CSS-in-JS. With the ES module build, each component imports its own CSS, so your bundler only includes the styles of the components you use. CommonJS consumers import `@traefik-labs/faency/style.css` instead; see the [User Guide](./USER_GUIDE.md#import-styles). Components with the `Vanilla` suffix (e.g., `BadgeVanilla`, `BoxVanilla`) are available. Not all components have Vanilla Extract versions yet - check the component documentation or use the Stitches version if a Vanilla version is not available.
 
 ## How to contribute
 
