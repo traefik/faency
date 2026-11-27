@@ -1,5 +1,138 @@
 import { Meta } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
 
 <Meta title="Introduction" />
 
-# Welcome to Faency Design System
+# Welcome to Faency
+
+Faency is the React component library and design system of [Traefik Labs](https://traefik.io). Its components are built on [Radix UI Primitives](https://www.radix-ui.com/primitives) and styled with [vanilla-extract](https://vanilla-extract.style/), so their styles are static CSS generated at build time rather than injected at runtime.
+
+The vanilla-extract components carry a `Vanilla` suffix, such as `ButtonVanilla` or `BoxVanilla`. This guide covers only them.
+
+## Installation
+
+```sh
+npm install @traefik-labs/faency
+# or
+yarn add @traefik-labs/faency
+```
+
+Faency needs React 18 or later as a peer dependency.
+
+## Set up the theme provider
+
+Wrap your app with `VanillaExtractThemeProvider`. It sets the theme class on `<body>`, so every component, including popups rendered at the end of `<body>`, gets the theme tokens.
+
+```tsx
+import { BadgeVanilla, BoxVanilla, VanillaExtractThemeProvider } from '@traefik-labs/faency';
+
+const App = () => (
+  <VanillaExtractThemeProvider defaultTheme="system" primaryColor="blue">
+    <BoxVanilla css={{ p: '$4' }}>
+      <BadgeVanilla variant="blue">Hello Faency!</BadgeVanilla>
+    </BoxVanilla>
+  </VanillaExtractThemeProvider>
+);
+```
+
+- `defaultTheme`: initial mode, `'light'`, `'dark'` or `'system'` (default).
+- `primaryColor`: initial primary color, `'blue'` by default.
+- `forcedTheme`: `'light'` or `'dark'`, locks the theme and ignores the user's mode.
+
+## Styles
+
+With the ES module build, each component imports its own CSS file. Your bundler (Vite, webpack…) picks these up, so there is nothing to import, and only the styles of the components you use end up in your app.
+
+If you load the CommonJS build (`require`), or want every style in one file, import the full stylesheet once in your entry point instead:
+
+```tsx
+import '@traefik-labs/faency/style.css';
+```
+
+Use one or the other: importing `style.css` alongside the ES module build loads the same styles twice.
+
+Node can't load `.css` imports, so tools that run Faency in Node without a bundler need to hand it to their bundler:
+
+- **Vitest**: add `test.server.deps.inline: ['@traefik-labs/faency']` to your config.
+- **Server-side rendering**: make sure your framework bundles `@traefik-labs/faency` rather than loading it as an external Node module.
+
+Jest loads the CommonJS build, which has no CSS imports, so it needs no change.
+
+## Use components
+
+```tsx
+import { ButtonVanilla, CardVanilla, FlexVanilla, TextVanilla } from '@traefik-labs/faency';
+
+const Welcome = () => (
+  <CardVanilla>
+    <FlexVanilla direction="column" gap={3}>
+      <TextVanilla size="5" weight="medium">
+        Welcome back
+      </TextVanilla>
+      <TextVanilla variant="subtle">Your routes are up to date.</TextVanilla>
+      <FlexVanilla gap={2}>
+        <ButtonVanilla>Open dashboard</ButtonVanilla>
+        <ButtonVanilla variant="secondary">Dismiss</ButtonVanilla>
+      </FlexVanilla>
+    </FlexVanilla>
+  </CardVanilla>
+);
+```
+
+Many components also take an `as` prop to render a different element. Each component's page in the sidebar shows its variants and props.
+
+## The `css` prop
+
+Every component takes a `css` prop for one-off styles. It accepts design tokens with a `$` prefix and shorthands for common properties:
+
+```tsx
+<BoxVanilla css={{ p: '$4', bc: '$contentBg', c: '$hiContrast', br: '$2' }}>Content</BoxVanilla>
+```
+
+- Spacing: `p`, `px`, `py`, `pt`, `pr`, `pb`, `pl` for padding, and the same with `m` for margin.
+- Colors: `bc` for `background-color`, `c` for `color`.
+- Flexbox: `fd` (`flex-direction`), `ai` (`align-items`), `jc` (`justify-content`), `fg` (`flex-grow`), `fs` (`flex-shrink`).
+- Text and shape: `ta` (`text-align`), `lh` (`line-height`), `br` (`border-radius`).
+
+Spacing tokens go from `$1` (4px) to `$9`. See <LinkTo kind="Theme System/Semantic Tokens">Semantic Tokens</LinkTo> for the color tokens, such as `$primary`, `$contentBg`, `$toneDangerText` or `$chartSeries1`.
+
+## Theming
+
+Faency has light and dark themes and seven primary colors: `neon`, `blue`, `orange`, `red`, `green`, `deepBlue` and `grayBlue`.
+
+Read and change them at runtime with `useVanillaExtractTheme`:
+
+```tsx
+import { ButtonVanilla, useVanillaExtractTheme } from '@traefik-labs/faency';
+
+const ThemeToggle = () => {
+  const { resolvedTheme, setMode, setPrimaryColor } = useVanillaExtractTheme();
+
+  return (
+    <>
+      <ButtonVanilla onClick={() => setMode(resolvedTheme === 'dark' ? 'light' : 'dark')}>
+        Switch to {resolvedTheme === 'dark' ? 'light' : 'dark'}
+      </ButtonVanilla>
+      <ButtonVanilla variant="secondary" onClick={() => setPrimaryColor('orange')}>
+        Orange
+      </ButtonVanilla>
+    </>
+  );
+};
+```
+
+To use a token outside the `css` prop, for example in a chart library, read it from `vanillaTokens`, which holds each token as a CSS variable reference:
+
+```tsx
+import { vanillaTokens } from '@traefik-labs/faency';
+
+<path fill={vanillaTokens.colors.primary} />;
+```
+
+To restyle a token across your app, see <LinkTo kind="Theme System/Token Overrides">Token Overrides</LinkTo>.
+
+## Learn more
+
+- [User Guide](https://github.com/traefik/faency/blob/master/USER_GUIDE.md): theming, tokens and TypeScript in depth.
+- [Breaking Changes](https://github.com/traefik/faency/blob/master/BREAKING_CHANGES.md): where the vanilla-extract components differ from the Stitches ones, and how to migrate.
+- [GitHub repository](https://github.com/traefik/faency): source code and issues.
