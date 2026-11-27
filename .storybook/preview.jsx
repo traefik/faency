@@ -66,6 +66,9 @@ export const parameters = {
   },
   darkMode: {
     stylePreview: true,
+    // The addon caches both themes in localStorage; passing them refreshes a copy saved by an older Storybook.
+    dark: themes.dark,
+    light: themes.light,
   },
   docs: {
     container: (context) => {
