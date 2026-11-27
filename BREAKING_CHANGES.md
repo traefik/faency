@@ -260,6 +260,7 @@ The same applies to `Li`, which takes the Flex layout props.
 
 - **Panel** no longer has a box shadow (Dropdown and Popover set their own elevation, so they are unaffected)
 - **Badge** `alphaBg` uses the `A3` color step instead of `A6`
+- **Badge** interactive hover and active backgrounds are stronger (8% and 15% instead of 5% and 10%), and lighten instead of darken in dark mode
 - **Alert** `gray` variant ring uses `gray9` (the neutral tone) instead of `slate9`
 
 ---
@@ -529,6 +530,52 @@ globalStyle(`${monoInput} input`, { fontFamily: 'monospace' });
 - Matches the keyboard-only focus ring of `Checkbox`, `Switch` and `Radio`
 
 **Impact:** Low - Visual only, the API is unchanged
+
+---
+
+### State Backgrounds: Layers Instead of Pseudo-Elements
+
+**Change:** Hover and active backgrounds are drawn as `background-image` layers on the element itself, over its `background-color`, instead of on `::before` and `::after`.
+
+**Affected:** `AccordionTrigger`, interactive `Badge`, `Button`, `ButtonSwitch`, `Card` (and so `Alert`), `Checkbox` hover, highlighted `Combobox` option, `DropdownMenuItem` and `SelectItem`, `IconButton`, interactive `Li`, `SegmentedControlItem` hover, `SelectTrigger`, interactive and active `Tr`, the wrapper of `Input` and `Textarea` (and so `TextField` and `DateTimePickerInput`)
+
+|                         | Before                                          | After                                                                   |
+| ----------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
+| Hover and active colors | `::before`, plus a 5% primary tint on `::after` | `background-image` layers on the element                                |
+| Primary tint            | `primary` at `opacity: 0.05`                    | the `primaryTint` theme token                                           |
+| Invalid hover tint      | `inputInvalidBorder` at `opacity: 0.05`         | the `inputInvalidHoverTint` and `textareaInvalidHoverTint` theme tokens |
+| Text over the state     | covered by the semi-transparent layer           | drawn above the background, unchanged color                             |
+| Disabled invalid field  | red hover tint                                  | no hover, like any disabled field                                       |
+| `Card` state outline    | on `::before`                                   | on the element                                                          |
+| `Alert` ring            | inset `box-shadow` on `::before`                | inset `box-shadow` on the element, before the elevation shadow          |
+
+The `Input` and `Textarea` wrappers also lose a `:focus-visible` background that never showed, since the wrapper cannot take focus. Their hover tint is now drawn under the inner control, so it no longer shows while the browser autofills the field or while a ghost field is focused, both of which paint an opaque background on the control.
+
+On devices that can hover, `Button`, `IconButton`, interactive `Card` and interactive `Li` now show their pressed color while held, where the hover color used to win. An interactive `Card` with `active` keeps its active look on hover, and its focus ring only shows for keyboard focus (`:focus-visible`), so a mouse click no longer leaves it. The same goes for the interactive `Li` focus ring.
+
+In Firefox, the `DateTimePickerInput` patch over the native picker button follows the field: a red hover tint when invalid, and dimmed with no hover and no click when disabled. These states need `:has()` (Firefox 121 and later).
+
+An invalid `SelectTrigger` now gets the same red hover tint as an invalid `Input`, from the new `selectInvalidHoverTint` theme token, instead of the primary tint.
+
+The `Checkbox` and `SegmentedControlItem` hover, the highlighted `Combobox` option, `DropdownMenuItem` and `SelectItem`, and the interactive and active `Tr` backgrounds were a `background-color` and are now layers too, so a custom background no longer hides them. The interactive `Badge`, `Tr` and `SegmentedControlItem` hovers now only apply on devices that can hover, and the `SegmentedControlItem` hover no longer fades in.
+
+A `box-shadow` set on an `Alert` through `css` or `className` now replaces its ring too.
+
+`Button` still uses `::after` for the `waiting` stripes, which no longer fade while the button has keyboard focus.
+
+**Migration Guide:**
+
+1. Move overrides that target `::before` or `::after` of these components to the element itself
+2. Change the base color with `background-color`, through `css` or `className`: the state layers stay on top of it. Avoid the `background` shorthand in `css`, which would remove them
+3. Change a state color with a `className` that sets `background-image` on `:hover` or `:active`, since `css` cannot target states
+
+**Rationale:**
+
+- A custom base color keeps the hover and active states
+- Overriding a state is one rule on the element, not on an internal pseudo-element
+- Frees `::before` and `::after` for consumers
+
+**Impact:** Low - Visual only, unless an app styles these pseudo-elements
 
 ---
 
@@ -885,6 +932,12 @@ Release notes are generated by semantic-release; use this as the body of the bre
 - **Changed:** The list reset applies to `NavigationMenuList` and `NavigationMenuItem` only, not to every `ul` and `li` in the menu
 - **Removed:** `elevation` on `NavigationMenuTrigger`, which had no effect
   - See [Migration Guide](./BREAKING_CHANGES.md#navigationmenu-as-on-every-part-and-scoped-list-styles)
+
+#### State Backgrounds
+
+- **Changed:** `AccordionTrigger`, interactive `Badge`, `Button`, `ButtonSwitch`, `Card`, `Alert`, `Checkbox`, `Combobox` options, `DropdownMenuItem`, `IconButton`, interactive `Li`, `SegmentedControlItem`, `SelectItem`, `SelectTrigger`, `Tr` and the `Input` and `Textarea` wrappers draw hover and active backgrounds as `background-image` layers instead of `::before`/`::after`; `Card` outlines and the `Alert` ring move to the element
+  - Migration: move pseudo-element overrides to the element itself
+  - See [Migration Guide](./BREAKING_CHANGES.md#state-backgrounds-layers-instead-of-pseudo-elements)
 
 #### Theme Provider
 

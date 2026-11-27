@@ -1,6 +1,7 @@
 import { keyframes, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
@@ -82,13 +83,6 @@ export const accordionTriggerRecipe = recipe({
     transition: 'opacity 200ms ease-out',
 
     selectors: {
-      '&::before': {
-        borderRadius: 'inherit',
-        boxSizing: 'border-box',
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-      },
       '&:focus': {
         boxShadow: `inset 0 0 0 1px ${tokens.colors.accordionActiveShadow}`,
       },
@@ -99,9 +93,7 @@ export const accordionTriggerRecipe = recipe({
         selectors: {
           '&:not([disabled]):hover': {
             cursor: 'pointer',
-          },
-          '&:not([disabled]):hover::before': {
-            backgroundColor: tokens.colors.accordionHoverShadow,
+            backgroundImage: stateLayers(tokens.colors.accordionHoverShadow),
           },
         },
       },

@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
@@ -49,7 +50,7 @@ export const dropdownMenuItem = style({
 
   selectors: {
     '&[data-highlighted]': {
-      backgroundColor: tokens.colors.blue['9'],
+      backgroundImage: stateLayers(tokens.colors.blue['9']),
       color: 'white',
     },
     '&[data-disabled]': {

@@ -1,6 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 import { elevationVariants } from '@/components/Elevation/Elevation.vanilla.css';
@@ -77,19 +78,6 @@ export const itemText = style([
   },
 ]);
 
-const itemLayer = {
-  borderRadius: 'inherit',
-  boxSizing: 'border-box',
-  content: '""',
-  position: 'absolute',
-  inset: 0,
-} as const;
-
-const primaryTint = {
-  backgroundColor: tokens.colors.primary,
-  opacity: 0.05,
-};
-
 export const itemButton = style([
   itemContent,
   {
@@ -107,19 +95,17 @@ export const itemButton = style([
     position: 'relative',
 
     selectors: {
-      '&::before': itemLayer,
-      '&::after': itemLayer,
       // No pointer-events: none, or clicks would fall through to the <li> and fire its onClick.
       '&:disabled': {
         opacity: 0.5,
       },
-      '&:focus, &:focus-visible': {
+      '&:focus-visible': {
         boxShadow: `inset 0 0 0 2px ${tokens.colors.listItemFocusBorder}`,
       },
-      '&:enabled:active::before': {
-        backgroundColor: tokens.colors.listItemActiveBg,
+      // `:hover:active` outranks the hover rule, which comes later inside its media query.
+      '&:enabled:active, &:enabled:hover:active': {
+        backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.listItemActiveBg),
       },
-      '&:enabled:active::after': primaryTint,
     },
 
     '@media': {
@@ -127,11 +113,8 @@ export const itemButton = style([
         selectors: {
           '&:enabled:hover': {
             cursor: 'pointer',
+            backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.listItemHoverBg),
           },
-          '&:enabled:hover::before': {
-            backgroundColor: tokens.colors.listItemHoverBg,
-          },
-          '&:enabled:hover::after': primaryTint,
         },
       },
     },

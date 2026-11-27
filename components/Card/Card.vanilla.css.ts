@@ -1,42 +1,40 @@
-import { style } from '@vanilla-extract/css';
+import { createVar, fallbackVar, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
-// Elevation variants matching Elevation component
+// Lets Alert add an inset ring without replacing the elevation shadow. Not inherited, so nested cards don't draw it.
+export const cardRing = createVar({ syntax: '*', inherits: false });
+const ring = fallbackVar(cardRing, '0 0 #0000');
+
 const elevationVariants = {
   0: {
-    boxShadow: 'none',
+    boxShadow: ring,
   },
   1: {
     backgroundColor: tokens.colors['01dp'],
-    boxShadow:
-      '0 1px 5px 0 hsla(0, 0%, 0%, 0.2), 0 3px 1px -2px hsla(0, 0%, 0%, 0.12), 0 2px 2px 0 hsla(0, 0%, 0%, 0.14)',
+    boxShadow: `${ring}, 0 1px 5px 0 hsla(0, 0%, 0%, 0.2), 0 3px 1px -2px hsla(0, 0%, 0%, 0.12), 0 2px 2px 0 hsla(0, 0%, 0%, 0.14)`,
   },
   2: {
     backgroundColor: tokens.colors['02dp'],
-    boxShadow:
-      '0 2px 4px -1px hsla(0, 0%, 0%, 0.2), 0 1px 10px 0 hsla(0, 0%, 0%, 0.12), 0 4px 5px 0 hsla(0, 0%, 0%, 0.14)',
+    boxShadow: `${ring}, 0 2px 4px -1px hsla(0, 0%, 0%, 0.2), 0 1px 10px 0 hsla(0, 0%, 0%, 0.12), 0 4px 5px 0 hsla(0, 0%, 0%, 0.14)`,
   },
   3: {
     backgroundColor: tokens.colors['03dp'],
-    boxShadow:
-      '0 3px 5px -1px hsla(0, 0%, 0%, 0.2), 0 1px 18px 0 hsla(0, 0%, 0%, 0.12), 0 6px 10px 0 hsla(0, 0%, 0%, 0.14)',
+    boxShadow: `${ring}, 0 3px 5px -1px hsla(0, 0%, 0%, 0.2), 0 1px 18px 0 hsla(0, 0%, 0%, 0.12), 0 6px 10px 0 hsla(0, 0%, 0%, 0.14)`,
   },
   4: {
     backgroundColor: tokens.colors['04dp'],
-    boxShadow:
-      '0 7px 8px -4px hsla(0, 0%, 0%, 0.2), 0 5px 22px 4px hsla(0, 0%, 0%, 0.12), 0 12px 17px 2px hsla(0, 0%, 0%, 0.14)',
+    boxShadow: `${ring}, 0 7px 8px -4px hsla(0, 0%, 0%, 0.2), 0 5px 22px 4px hsla(0, 0%, 0%, 0.12), 0 12px 17px 2px hsla(0, 0%, 0%, 0.14)`,
   },
   5: {
     backgroundColor: tokens.colors['05dp'],
-    boxShadow:
-      '0 11px 15px -7px hsla(0, 0%, 0%, 0.2), 0 9px 46px 8px hsla(0, 0%, 0%, 0.12), 0 24px 38px 3px hsla(0, 0%, 0%, 0.14)',
+    boxShadow: `${ring}, 0 11px 15px -7px hsla(0, 0%, 0%, 0.2), 0 9px 46px 8px hsla(0, 0%, 0%, 0.12), 0 24px 38px 3px hsla(0, 0%, 0%, 0.14)`,
   },
 } as const;
 
-// Base card styles
 const cardBase = style({
   appearance: 'none',
   border: 'none',
@@ -54,18 +52,6 @@ const cardBase = style({
   color: 'inherit',
   borderRadius: tokens.radii['3'],
   position: 'relative',
-
-  '::before': {
-    boxSizing: 'border-box',
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    borderRadius: tokens.radii['3'],
-    pointerEvents: 'none',
-  },
 });
 
 export const cardRecipe = recipe({
@@ -79,15 +65,13 @@ export const cardRecipe = recipe({
       },
       ghost: {
         backgroundColor: 'transparent',
-        boxShadow: 'none',
+        boxShadow: ring,
       },
     },
     active: {
       true: {
-        '::before': {
-          outline: `1px solid ${tokens.colors.cardActiveBorder}`,
-          backgroundColor: tokens.colors.cardActiveBackground,
-        },
+        outline: `1px solid ${tokens.colors.cardActiveBorder}`,
+        backgroundImage: stateLayers(tokens.colors.cardActiveBackground),
       },
     },
   },
@@ -97,7 +81,6 @@ export const cardRecipe = recipe({
   },
 });
 
-// Interactive card styles (for button element)
 const interactiveCardBase = style([
   cardBase,
   {
@@ -106,21 +89,21 @@ const interactiveCardBase = style([
         selectors: {
           '&:hover': {
             cursor: 'pointer',
-          },
-          '&:hover::before': {
             outline: `1px solid ${tokens.colors.cardHoverBorder}`,
-            backgroundColor: tokens.colors.cardHoverBackground,
+            backgroundImage: stateLayers(tokens.colors.cardHoverBackground),
           },
         },
       },
     },
     selectors: {
-      '&:focus': {
-        outline: `2px solid ${tokens.colors.primary}`,
-      },
-      '&:active::before': {
+      // `:hover:active` outranks the hover rule, which comes later inside its media query.
+      '&:active, &:hover:active': {
         outline: `1px solid ${tokens.colors.cardActiveBorder}`,
-        backgroundColor: tokens.colors.cardActiveBackground,
+        backgroundImage: stateLayers(tokens.colors.cardActiveBackground),
+      },
+      // Beats the hover and active outlines.
+      '&:focus-visible, &:focus-visible:hover, &:focus-visible:active': {
+        outline: `2px solid ${tokens.colors.primary}`,
       },
     },
   },
@@ -137,14 +120,23 @@ export const interactiveCardRecipe = recipe({
       },
       ghost: {
         backgroundColor: 'transparent',
-        boxShadow: 'none',
+        boxShadow: ring,
       },
     },
     active: {
       true: {
-        '::before': {
-          outline: `1px solid ${tokens.colors.cardActiveBorder}`,
-          backgroundColor: tokens.colors.cardActiveBackground,
+        outline: `1px solid ${tokens.colors.cardActiveBorder}`,
+        backgroundImage: stateLayers(tokens.colors.cardActiveBackground),
+        // Same media query as the base hover, so this later rule replaces it.
+        '@media': {
+          [breakpoints.hover]: {
+            selectors: {
+              '&:hover': {
+                outline: `1px solid ${tokens.colors.cardActiveBorder}`,
+                backgroundImage: stateLayers(tokens.colors.cardActiveBackground),
+              },
+            },
+          },
         },
       },
     },

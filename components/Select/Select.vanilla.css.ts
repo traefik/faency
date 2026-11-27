@@ -2,20 +2,12 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 const FOCUS_SHADOW =
   '0 1px 5px 0 hsla(0, 0%, 0%, 0.2), 0 3px 1px -2px hsla(0, 0%, 0%, 0.12), 0 2px 2px 0 hsla(0, 0%, 0%, 0.14)';
 const CARET_WIDTH = '15px';
-
-const triggerLayer = {
-  boxSizing: 'border-box',
-  content: '""',
-  position: 'absolute',
-  inset: 0,
-  pointerEvents: 'none',
-  borderRadius: 'inherit',
-} as const;
 
 const triggerSize = (height: string, radius: string, fontSize: string, space: string) => ({
   height,
@@ -49,8 +41,6 @@ export const selectTriggerRecipe = recipe({
     cursor: 'default',
 
     selectors: {
-      '&::before': triggerLayer,
-      '&::after': triggerLayer,
       '&[data-placeholder]': {
         color: tokens.colors.selectPlaceholder,
       },
@@ -67,12 +57,8 @@ export const selectTriggerRecipe = recipe({
     '@media': {
       [breakpoints.hover]: {
         selectors: {
-          '&:hover::before': {
-            backgroundColor: tokens.colors.selectHoverBg,
-          },
-          '&:hover::after': {
-            backgroundColor: tokens.colors.primary,
-            opacity: 0.05,
+          '&:hover': {
+            backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.selectHoverBg),
           },
         },
       },
@@ -128,6 +114,18 @@ export const selectTriggerRecipe = recipe({
         selectors: {
           '&:focus-visible': {
             boxShadow: `inset 0 0 0 2px ${tokens.colors.selectInvalidBorder}, ${FOCUS_SHADOW}`,
+          },
+        },
+        '@media': {
+          [breakpoints.hover]: {
+            selectors: {
+              '&:hover': {
+                backgroundImage: stateLayers(
+                  tokens.colors.selectInvalidHoverTint,
+                  tokens.colors.selectHoverBg,
+                ),
+              },
+            },
           },
         },
       },
@@ -202,7 +200,7 @@ export const selectItemRecipe = recipe({
 
     selectors: {
       '&[data-highlighted]': {
-        backgroundColor: tokens.colors.comboboxOptionHighlightBg,
+        backgroundImage: stateLayers(tokens.colors.comboboxOptionHighlightBg),
       },
       '&[data-disabled]': {
         color: tokens.colors.textSubtle,

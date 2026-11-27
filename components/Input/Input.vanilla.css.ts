@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 // CONSTANTS
@@ -278,39 +279,11 @@ const inputWrapperBase = style({
   backgroundColor: tokens.colors.inputBg,
   color: tokens.colors.inputPlaceholder,
 
-  selectors: {
-    '&::before': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: '0',
-      pointerEvents: 'none',
-    },
-    '&::after': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: '0',
-      pointerEvents: 'none',
-    },
-    '&:focus-visible::before': {
-      backgroundColor: tokens.colors.inputFocusBg,
-    },
-    '&:focus-visible::after': {
-      backgroundColor: tokens.colors.primary,
-      opacity: '0.15',
-    },
-  },
-
   '@media': {
     [breakpoints.hover]: {
       selectors: {
-        '&:hover::before': {
-          backgroundColor: tokens.colors.inputHoverBg,
-        },
-        '&:hover::after': {
-          backgroundColor: tokens.colors.primary,
-          opacity: '0.05',
+        '&:hover': {
+          backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.inputHoverBg),
         },
       },
     },
@@ -320,6 +293,23 @@ const inputWrapperBase = style({
 export const inputWrapperRecipe = recipe({
   base: inputWrapperBase,
   variants: {
+    state: {
+      invalid: {
+        '@media': {
+          [breakpoints.hover]: {
+            selectors: {
+              '&:hover': {
+                backgroundImage: stateLayers(
+                  tokens.colors.inputInvalidHoverTint,
+                  tokens.colors.inputHoverBg,
+                ),
+              },
+            },
+          },
+        },
+      },
+    },
+    // After `state`, so a disabled invalid input has no hover either.
     disabled: {
       true: {
         opacity: '0.7',
@@ -327,24 +317,8 @@ export const inputWrapperRecipe = recipe({
         '@media': {
           [breakpoints.hover]: {
             selectors: {
-              '&:hover::before': {
-                backgroundColor: 'inherit',
-              },
-              '&:hover::after': {
-                backgroundColor: 'inherit',
-              },
-            },
-          },
-        },
-      },
-    },
-    state: {
-      invalid: {
-        '@media': {
-          [breakpoints.hover]: {
-            selectors: {
-              '&:hover::after': {
-                backgroundColor: tokens.colors.inputInvalidBorder,
+              '&:hover': {
+                backgroundImage: 'none',
               },
             },
           },
@@ -354,27 +328,12 @@ export const inputWrapperRecipe = recipe({
     size: {
       small: {
         borderRadius: tokens.radii['2'],
-        selectors: {
-          '&::before, &::after': {
-            borderRadius: tokens.radii['2'],
-          },
-        },
       },
       medium: {
         borderRadius: tokens.radii['3'],
-        selectors: {
-          '&::before, &::after': {
-            borderRadius: tokens.radii['3'],
-          },
-        },
       },
       large: {
         borderRadius: tokens.radii['3'],
-        selectors: {
-          '&::before, &::after': {
-            borderRadius: tokens.radii['3'],
-          },
-        },
       },
     },
   },

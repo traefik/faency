@@ -35,6 +35,7 @@ export const tokens = createThemeContract({
   colors: {
     // Semantic colors
     primary: null,
+    primaryTint: null,
     contentBg: null,
     hiContrast: null,
     loContrast: null,
@@ -119,6 +120,7 @@ export const tokens = createThemeContract({
     inputPlaceholder: null,
     inputDisabledText: null,
     inputInvalidBorder: null,
+    inputInvalidHoverTint: null,
 
     selectBg: null,
     selectBorder: null,
@@ -128,6 +130,7 @@ export const tokens = createThemeContract({
     selectPlaceholder: null,
     selectDisabledText: null,
     selectInvalidBorder: null,
+    selectInvalidHoverTint: null,
 
     textareaBg: null,
     textareaBorder: null,
@@ -138,6 +141,7 @@ export const tokens = createThemeContract({
     textareaPlaceholder: null,
     textareaDisabledText: null,
     textareaInvalidBorder: null,
+    textareaInvalidHoverTint: null,
 
     buttonPrimaryText: null,
     buttonPrimaryFocusBorder: null,

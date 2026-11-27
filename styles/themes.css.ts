@@ -444,6 +444,7 @@ const lightSemanticColors = {
 export const lightThemeBlue = createTheme(tokens, {
   colors: {
     primary: lightColors.blue9, // Set primary to the actual color value
+    primaryTint: tinycolor(lightColors.blue9).setAlpha(0.05).toHslString(),
     ...lightSemanticColors,
     ...getButtonLightColors('blue'),
     ...getButtonSwitchLightColors('blue'),
@@ -464,6 +465,7 @@ export const lightThemeBlue = createTheme(tokens, {
 export const lightThemeNeon = createTheme(tokens, {
   colors: {
     primary: lightColors.neon9, // Set primary to the actual color value
+    primaryTint: tinycolor(lightColors.neon9).setAlpha(0.05).toHslString(),
     ...lightSemanticColors,
     ...getButtonLightColors('neon'),
     ...getButtonSwitchLightColors('neon'),
@@ -484,6 +486,7 @@ export const lightThemeNeon = createTheme(tokens, {
 export const lightThemeOrange = createTheme(tokens, {
   colors: {
     primary: lightColors.orange9, // Set primary to the actual color value
+    primaryTint: tinycolor(lightColors.orange9).setAlpha(0.05).toHslString(),
     ...lightSemanticColors,
     ...getButtonLightColors('orange'),
     ...getButtonSwitchLightColors('orange'),
@@ -504,6 +507,7 @@ export const lightThemeOrange = createTheme(tokens, {
 export const lightThemeRed = createTheme(tokens, {
   colors: {
     primary: lightColors.red9, // Set primary to the actual color value
+    primaryTint: tinycolor(lightColors.red9).setAlpha(0.05).toHslString(),
     ...lightSemanticColors,
     ...getButtonLightColors('red'),
     ...getButtonSwitchLightColors('red'),
@@ -524,6 +528,7 @@ export const lightThemeRed = createTheme(tokens, {
 export const lightThemeGreen = createTheme(tokens, {
   colors: {
     primary: lightColors.green9, // Set primary to the actual color value
+    primaryTint: tinycolor(lightColors.green9).setAlpha(0.05).toHslString(),
     ...lightSemanticColors,
     ...getButtonLightColors('green'),
     ...getButtonSwitchLightColors('green'),
@@ -544,6 +549,7 @@ export const lightThemeGreen = createTheme(tokens, {
 export const lightThemeDeepBlue = createTheme(tokens, {
   colors: {
     primary: lightColors.deepBlue9, // Set primary to the actual color value
+    primaryTint: tinycolor(lightColors.deepBlue9).setAlpha(0.05).toHslString(),
     ...lightSemanticColors,
     ...getButtonLightColors('deepBlue'),
     ...getButtonSwitchLightColors('deepBlue'),
@@ -564,6 +570,7 @@ export const lightThemeDeepBlue = createTheme(tokens, {
 export const lightThemeGrayBlue = createTheme(tokens, {
   colors: {
     primary: lightColors.grayBlue9, // Set primary to the actual color value
+    primaryTint: tinycolor(lightColors.grayBlue9).setAlpha(0.05).toHslString(),
     ...lightSemanticColors,
     ...getButtonLightColors('grayBlue'),
     ...getButtonSwitchLightColors('grayBlue'),
@@ -660,6 +667,7 @@ const darkSemanticColors = {
 export const darkThemeBlue = createTheme(tokens, {
   colors: {
     primary: darkColors.blue9, // Set primary to the actual color value
+    primaryTint: tinycolor(darkColors.blue9).setAlpha(0.05).toHslString(),
     ...darkSemanticColors,
     ...getButtonDarkColors('blue'),
     ...getButtonSwitchDarkColors('blue'),
@@ -680,6 +688,7 @@ export const darkThemeBlue = createTheme(tokens, {
 export const darkThemeNeon = createTheme(tokens, {
   colors: {
     primary: darkColors.neon9, // Set primary to the actual color value
+    primaryTint: tinycolor(darkColors.neon9).setAlpha(0.05).toHslString(),
     ...darkSemanticColors,
     ...getButtonDarkColors('neon'),
     ...getButtonSwitchDarkColors('neon'),
@@ -700,6 +709,7 @@ export const darkThemeNeon = createTheme(tokens, {
 export const darkThemeOrange = createTheme(tokens, {
   colors: {
     primary: darkColors.orange9, // Set primary to the actual color value
+    primaryTint: tinycolor(darkColors.orange9).setAlpha(0.05).toHslString(),
     ...darkSemanticColors,
     ...getButtonDarkColors('orange'),
     ...getButtonSwitchDarkColors('orange'),
@@ -720,6 +730,7 @@ export const darkThemeOrange = createTheme(tokens, {
 export const darkThemeRed = createTheme(tokens, {
   colors: {
     primary: darkColors.red9, // Set primary to the actual color value
+    primaryTint: tinycolor(darkColors.red9).setAlpha(0.05).toHslString(),
     ...darkSemanticColors,
     ...getButtonDarkColors('red'),
     ...getButtonSwitchDarkColors('red'),
@@ -740,6 +751,7 @@ export const darkThemeRed = createTheme(tokens, {
 export const darkThemeGreen = createTheme(tokens, {
   colors: {
     primary: darkColors.green9, // Set primary to the actual color value
+    primaryTint: tinycolor(darkColors.green9).setAlpha(0.05).toHslString(),
     ...darkSemanticColors,
     ...getButtonDarkColors('green'),
     ...getButtonSwitchDarkColors('green'),
@@ -760,6 +772,7 @@ export const darkThemeGreen = createTheme(tokens, {
 export const darkThemeDeepBlue = createTheme(tokens, {
   colors: {
     primary: darkColors.deepBlue9, // Set primary to the actual color value
+    primaryTint: tinycolor(darkColors.deepBlue9).setAlpha(0.05).toHslString(),
     ...darkSemanticColors,
     ...getButtonDarkColors('deepBlue'),
     ...getButtonSwitchDarkColors('deepBlue'),
@@ -780,6 +793,7 @@ export const darkThemeDeepBlue = createTheme(tokens, {
 export const darkThemeGrayBlue = createTheme(tokens, {
   colors: {
     primary: darkColors.grayBlue9, // Set primary to the actual color value
+    primaryTint: tinycolor(darkColors.grayBlue9).setAlpha(0.05).toHslString(),
     ...darkSemanticColors,
     ...getButtonDarkColors('grayBlue'),
     ...getButtonSwitchDarkColors('grayBlue'),

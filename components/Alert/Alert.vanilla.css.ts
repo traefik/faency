@@ -2,11 +2,10 @@ import { recipe } from '@vanilla-extract/recipes';
 
 import { tokens } from '@/styles/tokens.css';
 
-// CardVanilla's `::before` overlay carries the ring, leaving the element's box-shadow to elevation.
+import { cardRing } from '@/components/Card/Card.vanilla.css';
+
 const ring = (color: string) => ({
-  '::before': {
-    boxShadow: `inset 0 0 0 1px ${color}`,
-  },
+  vars: { [cardRing]: `inset 0 0 0 1px ${color}` },
 });
 
 export const alertRecipe = recipe({

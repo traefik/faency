@@ -9,6 +9,7 @@ const fromInputTheme = (input: typeof inputLightTheme) => ({
   selectPlaceholder: input.inputPlaceholder,
   selectDisabledText: input.inputDisabledText,
   selectInvalidBorder: input.inputInvalidBorder,
+  selectInvalidHoverTint: input.inputInvalidHoverTint,
 });
 
 export const selectLightTheme = fromInputTheme(inputLightTheme);

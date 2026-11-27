@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 // CONSTANTS
@@ -90,15 +91,6 @@ export const styledTextareaRecipe = recipe({
             boxShadow: `inset 0 0 0 2px ${tokens.colors.textareaInvalidBorder}, inset 0 0 0 100px ${tokens.colors.textareaBg}, ${FOCUS_SHADOW}`,
           },
         },
-        '@media': {
-          [breakpoints.hover]: {
-            selectors: {
-              '&:hover::after': {
-                backgroundColor: tokens.colors.textareaInvalidBorder,
-              },
-            },
-          },
-        },
       },
     },
     cursor: {
@@ -172,40 +164,11 @@ const textareaWrapperBase = style({
   color: tokens.colors.textareaPlaceholder,
   borderRadius: tokens.radii['3'],
 
-  selectors: {
-    '&::before': {
-      boxSizing: 'border-box',
-      borderRadius: 'inherit',
-      content: '""',
-      position: 'absolute',
-      inset: '0',
-      pointerEvents: 'none',
-    },
-    '&::after': {
-      boxSizing: 'border-box',
-      borderRadius: 'inherit',
-      content: '""',
-      position: 'absolute',
-      inset: '0',
-      pointerEvents: 'none',
-    },
-    '&:focus-visible::before': {
-      backgroundColor: tokens.colors.textareaFocusBg,
-    },
-    '&:focus-visible::after': {
-      backgroundColor: tokens.colors.primary,
-      opacity: '0.15',
-    },
-  },
   '@media': {
     [breakpoints.hover]: {
       selectors: {
-        '&:hover::before': {
-          backgroundColor: tokens.colors.textareaHoverBg,
-        },
-        '&:hover::after': {
-          backgroundColor: tokens.colors.primary,
-          opacity: '0.05',
+        '&:hover': {
+          backgroundImage: stateLayers(tokens.colors.primaryTint, tokens.colors.textareaHoverBg),
         },
       },
     },
@@ -215,6 +178,23 @@ const textareaWrapperBase = style({
 export const textareaWrapperRecipe = recipe({
   base: textareaWrapperBase,
   variants: {
+    state: {
+      invalid: {
+        '@media': {
+          [breakpoints.hover]: {
+            selectors: {
+              '&:hover': {
+                backgroundImage: stateLayers(
+                  tokens.colors.textareaInvalidHoverTint,
+                  tokens.colors.textareaHoverBg,
+                ),
+              },
+            },
+          },
+        },
+      },
+    },
+    // After `state`, so a disabled invalid textarea has no hover either.
     disabled: {
       true: {
         opacity: '0.7',
@@ -222,24 +202,8 @@ export const textareaWrapperRecipe = recipe({
         '@media': {
           [breakpoints.hover]: {
             selectors: {
-              '&:hover::before': {
-                backgroundColor: 'inherit',
-              },
-              '&:hover::after': {
-                backgroundColor: 'inherit',
-              },
-            },
-          },
-        },
-      },
-    },
-    state: {
-      invalid: {
-        '@media': {
-          [breakpoints.hover]: {
-            selectors: {
-              '&:hover::after': {
-                backgroundColor: tokens.colors.textareaInvalidBorder,
+              '&:hover': {
+                backgroundImage: 'none',
               },
             },
           },

@@ -1,16 +1,15 @@
 import { keyframes, style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
-// Background size constants for waiting animation
 const BG_SIZES = {
   small: tokens.sizes['8'],
   medium: tokens.sizes['9'],
   large: tokens.sizes['10'],
 };
 
-// Keyframe animation for waiting state
 const backgroundSlide = keyframes({
   '100%': { transform: `translateX(${tokens.sizes['9']})` },
 });
@@ -23,7 +22,9 @@ const backgroundSlideLarge = keyframes({
   '100%': { transform: `translateX(${tokens.sizes['10']})` },
 });
 
-// Base button styles
+const HOVER_LAYER = 'rgba(255, 255, 255, 0.15)';
+const PRESSED_LAYER = 'rgba(0, 0, 0, 0.15)';
+
 const baseButton = style({
   // Reset
   appearance: 'none',
@@ -46,35 +47,18 @@ const baseButton = style({
   fontVariantNumeric: 'tabular-nums',
   lineHeight: '1',
 
-  // Pseudo-elements for hover/active effects
   selectors: {
-    '&::before': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-    },
-    '&::after': {
-      boxSizing: 'border-box',
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-    },
     '&:disabled': {
       pointerEvents: 'none',
       opacity: 0.5,
     },
     '&:focus-visible': {
       boxShadow: `inset 0 0 0 2px ${tokens.colors.focusOutline}`,
+      backgroundImage: stateLayers(HOVER_LAYER),
     },
-    '&:focus-visible::before': {
-      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    },
-    '&:focus-visible::after': {
-      opacity: 0.15,
-    },
-    '&:active::before': {
-      backgroundColor: 'rgba(0, 0, 0, 0.15)',
+    // `:hover:active` outranks the hover rules, which come later inside their media query.
+    '&:active, &:hover:active': {
+      backgroundImage: stateLayers(PRESSED_LAYER),
     },
   },
 
@@ -83,12 +67,7 @@ const baseButton = style({
       selectors: {
         '&:hover': {
           cursor: 'pointer',
-        },
-        '&:hover::before': {
-          backgroundColor: 'rgba(255, 255, 255, 0.15)',
-        },
-        '&:hover::after': {
-          opacity: 0.05,
+          backgroundImage: stateLayers(HOVER_LAYER),
         },
       },
     },
@@ -137,8 +116,8 @@ export const buttonRecipe = recipe({
         '@media': {
           '(hover: hover)': {
             selectors: {
-              '&:hover::after': {
-                backgroundColor: tokens.colors.primary,
+              '&:hover': {
+                backgroundImage: stateLayers(tokens.colors.primaryTint, HOVER_LAYER),
               },
             },
           },
@@ -159,8 +138,8 @@ export const buttonRecipe = recipe({
         '@media': {
           '(hover: hover)': {
             selectors: {
-              '&:hover::after': {
-                backgroundColor: tokens.colors.primary,
+              '&:hover': {
+                backgroundImage: stateLayers(tokens.colors.primaryTint, HOVER_LAYER),
               },
             },
           },
@@ -194,6 +173,10 @@ export const buttonRecipe = recipe({
         pointerEvents: 'none',
         selectors: {
           '&::after': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
             left: '-100%',
             width: '200%',
             backgroundSize: BG_SIZES.medium,
@@ -231,7 +214,6 @@ export const buttonRecipe = recipe({
   },
 
   compoundVariants: [
-    // Primary + Ghost
     {
       variants: { variant: 'primary', ghost: true },
       style: {
@@ -249,7 +231,6 @@ export const buttonRecipe = recipe({
         },
       },
     },
-    // Primary + Active
     {
       variants: { variant: 'primary', state: 'active' },
       style: {
@@ -258,7 +239,6 @@ export const buttonRecipe = recipe({
         boxShadow: 'inset 0 0 0 2px white',
       },
     },
-    // Secondary + Waiting
     {
       variants: { variant: 'secondary', state: 'waiting' },
       style: {
@@ -266,7 +246,6 @@ export const buttonRecipe = recipe({
         color: 'transparent',
       },
     },
-    // Secondary + Ghost
     {
       variants: { variant: 'secondary', ghost: true },
       style: {
@@ -275,7 +254,6 @@ export const buttonRecipe = recipe({
         boxShadow: 'none',
       },
     },
-    // Red + Waiting
     {
       variants: { variant: 'red', state: 'waiting' },
       style: {
@@ -283,7 +261,6 @@ export const buttonRecipe = recipe({
         color: 'transparent',
       },
     },
-    // Red + Active
     {
       variants: { variant: 'red', state: 'active' },
       style: {
@@ -292,7 +269,6 @@ export const buttonRecipe = recipe({
         boxShadow: 'inset 0 0 0 2px white',
       },
     },
-    // Red + Ghost
     {
       variants: { variant: 'red', ghost: true },
       style: {
@@ -310,7 +286,6 @@ export const buttonRecipe = recipe({
         },
       },
     },
-    // Small + Waiting (specific animation)
     {
       variants: { size: 'small', state: 'waiting' },
       style: {
@@ -322,7 +297,6 @@ export const buttonRecipe = recipe({
         },
       },
     },
-    // Large + Waiting (specific animation)
     {
       variants: { size: 'large', state: 'waiting' },
       style: {

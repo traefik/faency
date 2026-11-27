@@ -1,6 +1,8 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { breakpoints } from '@/styles/breakpoints.css';
+import { stateLayers } from '@/styles/stateLayers';
 import { tokens } from '@/styles/tokens.css';
 
 const baseBadge = style({
@@ -37,25 +39,27 @@ const baseBadge = style({
 const interactiveBadge = style([
   baseBadge,
   {
+    // The layers fill the padding box only, so they don't tint the border; the base color still does.
+    backgroundRepeat: 'no-repeat',
+
     selectors: {
-      '&::before': {
-        boxSizing: 'border-box',
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        borderRadius: 'inherit',
-      },
       '&:focus-visible': {
         outline: `2px solid ${tokens.colors.primary}`,
       },
-      '&:hover': {
-        cursor: 'pointer',
+      // `:hover:active` outranks the hover rule, which comes later inside its media query.
+      '&:active, &:hover:active': {
+        backgroundImage: stateLayers(tokens.colors.badgeInteractiveBackgroundActive),
       },
-      '&:hover::before': {
-        backgroundColor: tokens.colors.badgeInteractiveBackgroundHover,
-      },
-      '&:active::before': {
-        backgroundColor: tokens.colors.badgeInteractiveBackgroundActive,
+    },
+
+    '@media': {
+      [breakpoints.hover]: {
+        selectors: {
+          '&:hover': {
+            cursor: 'pointer',
+            backgroundImage: stateLayers(tokens.colors.badgeInteractiveBackgroundHover),
+          },
+        },
       },
     },
   },

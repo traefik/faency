@@ -82,4 +82,14 @@ export const WithCount: StoryFn<SegmentedControlVanillaProps> = (args) => (
   </SegmentedControlVanilla>
 );
 
+export const DisabledItem: StoryFn<SegmentedControlVanillaProps> = (args) => (
+  <SegmentedControlVanilla {...args} aria-label="Environment" defaultValue="staging">
+    <SegmentedControlItemVanilla value="dev">Dev</SegmentedControlItemVanilla>
+    <SegmentedControlItemVanilla value="staging">Staging</SegmentedControlItemVanilla>
+    <SegmentedControlItemVanilla value="production" disabled>
+      Production
+    </SegmentedControlItemVanilla>
+  </SegmentedControlVanilla>
+);
+
 export default Component;
