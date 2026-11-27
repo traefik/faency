@@ -25,13 +25,25 @@ const injectCss = () => {
       isLib = Boolean(config.build.lib);
     },
     generateBundle(this: any, { format }, bundle) {
-      if (!isLib || format !== 'es') return;
+      if (!isLib) return;
+
+      // `*.css.ts.vanilla.css` is a vanilla-extract virtual module id: the consumer's plugin would try to rebuild it.
+      const rename = (fileName: string) =>
+        fileName.replace(/\.css\.ts\.vanilla\.css$/, '.styles.css');
+      const cssSources = new Map<string, string>();
+      for (const asset of Object.values<any>(bundle)) {
+        if (asset.type !== 'asset' || rename(asset.fileName) === asset.fileName) continue;
+        cssSources.set(asset.fileName, asset.source);
+        delete bundle[asset.fileName];
+        this.emitFile({ type: 'asset', fileName: rename(asset.fileName), source: asset.source });
+      }
+      if (format !== 'es') return;
 
       for (const chunk of Object.values<any>(bundle)) {
         if (chunk.type !== 'chunk' || !chunk.viteMetadata?.importedCss.size) continue;
         const imports = Array.from<string>(chunk.viteMetadata.importedCss)
           .map((css) => {
-            const path = posix.relative(posix.dirname(chunk.fileName), css);
+            const path = posix.relative(posix.dirname(chunk.fileName), rename(css));
             return `import '${path.startsWith('.') ? path : `./${path}`}';`;
           })
           .join('');
@@ -62,7 +74,7 @@ const injectCss = () => {
         type: 'asset',
         fileName: 'faency.css',
         source: Array.from(new Set(order))
-          .map((css) => bundle[css].source)
+          .map((css) => cssSources.get(css))
           .join('\n'),
       });
     },
@@ -109,7 +121,9 @@ export default defineConfig({
       entry: './index.ts',
       name: 'Faency',
       formats: ['es', 'cjs'],
-      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
+      // Drop `.css` from compiled `.css.ts` modules: the consumer's vanilla-extract plugin would recompile any `.css.js`.
+      fileName: (format, entryName) =>
+        `${entryName.replace(/\.css$/, '.styles')}.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rolldownOptions: {
       external: (id: string) => {
